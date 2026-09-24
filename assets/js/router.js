@@ -12,7 +12,8 @@ import {
   renderExpertisePage,
   renderValuePartnershipsPage,
   renderContactPage,
-  renderAcademyPage
+  renderAcademyPage,
+  renderGoogleFormRegistration
 } from './pages.js';
 import {
   submitAcademyEnrollment,
@@ -27,8 +28,11 @@ import {
   addCourseFile,
   toggleCourseStatus,
   sendCourseChatMessage,
-  sendStaffMessage
+  sendStaffMessage,
+  downloadRealFile
 } from './moodle.js';
+import { authService } from './auth.js';
+import { cmsService } from './cms.js';
 
 class Router {
   constructor() {
@@ -67,7 +71,12 @@ class Router {
       'build-impact': renderContactPage,
       'contact': renderContactPage,
 
-      // أكاديمية SHAT ونظام المودل
+      // استمارة تسجيل الدورات التدريبية (Google Form)
+      'register-course': renderGoogleFormRegistration,
+      'registration': renderGoogleFormRegistration,
+      'admissions': renderGoogleFormRegistration,
+
+      // أكاديمية SHAT ونظام المودل وكلاس روم
       'academy': renderAcademyPage,
       'moodle': renderAcademyPage,
       'moodle-chat': renderAcademyPage
@@ -204,51 +213,268 @@ class Router {
     }
 
     // ========================================================
-    // MOODLE LMS INTERACTIONS (نظام المودل والأكاديمية)
+    // MOODLE & GOOGLE CLASSROOM LMS INTERACTIONS
     // ========================================================
 
-    // 3. Moodle Role Tabs (Student, Teacher, Admin, Corporate, Verify)
-    const moodleRoleButtons = document.querySelectorAll('.moodle-role-btn');
-    const moodlePanes = document.querySelectorAll('.moodle-tab-pane');
-    moodleRoleButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const targetTab = btn.getAttribute('data-tab');
-        moodleRoleButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+    // 1. Google Classroom Sub-Navigation Tabs
+    const classroomTabs = document.querySelectorAll('.classroom-nav-tab');
+    const classroomPanes = document.querySelectorAll('.classroom-pane');
 
-        moodlePanes.forEach(pane => {
-          if (pane.id === targetTab) {
+    classroomTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const targetPaneId = 'pane-' + tab.getAttribute('data-classroom-tab');
+        classroomTabs.forEach(t => {
+          t.classList.remove('active');
+          t.style.borderBottomColor = 'transparent';
+          t.style.color = 'var(--text-secondary)';
+          t.style.fontWeight = '600';
+        });
+        tab.classList.add('active');
+        tab.style.borderBottomColor = 'var(--shat-green-600)';
+        tab.style.color = 'var(--shat-green-700)';
+        tab.style.fontWeight = '700';
+
+        classroomPanes.forEach(pane => {
+          if (pane.id === targetPaneId) {
             pane.style.display = 'block';
-            pane.style.animation = 'fadeIn 0.25s ease forwards';
+            pane.classList.add('active');
+            pane.style.animation = 'fadeIn 0.2s ease forwards';
           } else {
             pane.style.display = 'none';
+            pane.classList.remove('active');
           }
         });
       });
     });
 
-    // 4. Direct File Download (Google Drive CDN simulation)
-    document.querySelectorAll('.btn-direct-download').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const fileName = btn.getAttribute('data-file') || 'ملف تدريبي';
-        const originalText = btn.innerHTML;
-        btn.innerHTML = '<span>⏳ جارٍ التنزيل...</span>';
+    // 2. REAL FILE DOWNLOAD ENGINE (Physical browser download of genuine materials)
+    document.querySelectorAll('.btn-trigger-real-download, .btn-direct-download').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const fileName = btn.getAttribute('data-file') || 'دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf';
+        const originalHtml = btn.innerHTML;
+
+        btn.innerHTML = '<span>⏳ جارٍ التنزيل الفعلي...</span>';
         btn.disabled = true;
 
         setTimeout(() => {
-          btn.innerHTML = '<span>✓ تم التحميل</span>';
-          setTimeout(() => {
-            btn.innerHTML = originalText;
-            btn.disabled = false;
-          }, 2000);
+          // Trigger actual browser download
+          downloadRealFile(fileName);
 
-          // Simulated safe file download trigger
-          alert(`✓ تم تحميل « ${fileName} » بنجاح مباشرة من سحابة Google Drive التابعة لمنصة شات.`);
-        }, 800);
+          btn.innerHTML = '<span>✓ تم التحميل لجهازك</span>';
+          setTimeout(() => {
+            btn.innerHTML = originalHtml;
+            btn.disabled = false;
+          }, 2200);
+        }, 500);
       });
     });
 
-    // 5. Teacher Portal: Direct Training File Uploader
+    // 3. Quick Stream Announcement Poster
+    const btnPostAnnounce = document.getElementById('btn-post-stream-announce');
+    const inputAnnounce = document.getElementById('stream-quick-announce');
+    const streamFeed = document.getElementById('classroom-stream-feed');
+
+    if (btnPostAnnounce && inputAnnounce && streamFeed) {
+      btnPostAnnounce.addEventListener('click', () => {
+        const text = inputAnnounce.value.trim();
+        if (!text) return;
+
+        const user = authService.getCurrentUser() || { name: 'المستخدم', avatarLetter: 'ش' };
+        const newCard = document.createElement('div');
+        newCard.style.cssText = 'background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 20px; box-shadow: var(--shadow-sm); animation: fadeIn 0.3s ease;';
+        newCard.innerHTML = `
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: #ecfdf5; border: 1px solid #10b981; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #047857;">
+              ${user.avatarLetter || user.name.charAt(0)}
+            </div>
+            <div>
+              <strong style="color: var(--shat-navy-950); font-size: 0.95rem; display: block;">${user.name}</strong>
+              <span style="font-size: 0.76rem; color: var(--text-muted);">الآن • منشور ساحة المشاركات</span>
+            </div>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; margin: 0;">
+            ${text}
+          </p>
+        `;
+        streamFeed.prepend(newCard);
+        inputAnnounce.value = '';
+      });
+    }
+
+    // 4. Google Form Course Application Wizard (#/register-course)
+    const gformApp = document.getElementById('google-form-course-application');
+    const gformReceipt = document.getElementById('gform-success-receipt');
+    const gformReceiptCode = document.getElementById('gform-receipt-code');
+    const btnSubmitAnother = document.getElementById('btn-submit-another-gform');
+
+    if (gformApp) {
+      gformApp.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const submitBtn = document.getElementById('btn-submit-gform');
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = '... جارٍ الإرسال والتسجيل';
+        }
+
+        const formData = {
+          fullName: document.getElementById('gform-name')?.value.trim() || '',
+          email: document.getElementById('gform-email')?.value.trim() || '',
+          phone: document.getElementById('gform-phone')?.value.trim() || '',
+          organization: document.getElementById('gform-org')?.value.trim() || 'متدرب مستقل',
+          jobTitle: document.getElementById('gform-job')?.value.trim() || '',
+          courseTrack: document.querySelector('input[name="gform-course"]:checked')?.value || 'دبلوم CHS',
+          trainingMode: document.querySelector('input[name="gform-mode"]:checked')?.value || 'افتراضي',
+          experience: document.getElementById('gform-exp')?.value.trim() || ''
+        };
+
+        const newApp = cmsService.submitApplication(formData);
+
+        setTimeout(() => {
+          gformApp.style.display = 'none';
+          if (gformReceipt) gformReceipt.style.display = 'block';
+          if (gformReceiptCode) gformReceiptCode.textContent = newApp.id;
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 600);
+      });
+    }
+
+    if (btnSubmitAnother && gformApp && gformReceipt) {
+      btnSubmitAnother.addEventListener('click', () => {
+        gformApp.reset();
+        gformReceipt.style.display = 'none';
+        gformApp.style.display = 'flex';
+        const submitBtn = document.getElementById('btn-submit-gform');
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'إرسال الاستمارة (Submit)';
+        }
+      });
+    }
+
+    // 5. Admin Staff Management
+    const btnToggleAddStaff = document.getElementById('btn-toggle-add-staff');
+    const boxAddStaff = document.getElementById('box-add-staff-form');
+    const btnCancelAddStaff = document.getElementById('btn-cancel-add-staff');
+    const formAddStaff = document.getElementById('form-create-staff-member');
+
+    if (btnToggleAddStaff && boxAddStaff) {
+      btnToggleAddStaff.addEventListener('click', () => {
+        const isHidden = boxAddStaff.style.display === 'none';
+        boxAddStaff.style.display = isHidden ? 'block' : 'none';
+      });
+    }
+
+    if (btnCancelAddStaff && boxAddStaff) {
+      btnCancelAddStaff.addEventListener('click', () => {
+        boxAddStaff.style.display = 'none';
+      });
+    }
+
+    if (formAddStaff) {
+      formAddStaff.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('new-staff-name')?.value.trim();
+        const username = document.getElementById('new-staff-username')?.value.trim();
+        const email = document.getElementById('new-staff-email')?.value.trim();
+        const password = document.getElementById('new-staff-password')?.value;
+        const phone = document.getElementById('new-staff-phone')?.value.trim();
+        const role = document.getElementById('new-staff-role')?.value || 'instructor';
+
+        if (!name || !username || !email || !password) return;
+
+        authService.addStaffMember({ name, username, email, password, phone, role });
+        alert(`✓ تم تعيين الموظف « ${name} » بصلاحية (${authService.getRoleTitle(role)}) بنجاح!`);
+        formAddStaff.reset();
+        if (boxAddStaff) boxAddStaff.style.display = 'none';
+
+        // Re-render Moodle page to reflect updated staff list
+        router.handleRouting(true);
+      });
+    }
+
+    // Staff Role changes & Delete actions
+    document.querySelectorAll('.staff-role-change').forEach(select => {
+      select.addEventListener('change', () => {
+        const username = select.getAttribute('data-username');
+        const newRole = select.value;
+        authService.updateStaffRole(username, newRole);
+        alert(`✓ تم تحديث صلاحية الموظف (${username}) إلى: ${authService.getRoleTitle(newRole)}.`);
+      });
+    });
+
+    document.querySelectorAll('.btn-delete-staff').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const username = btn.getAttribute('data-username');
+        if (confirm(`هل أنت متأكد من رغبتك في حذف الموظف (${username}) من النظام؟`)) {
+          authService.deleteStaffMember(username);
+          alert('✓ تم حذف الموظف بنجاح.');
+          router.handleRouting(true);
+        }
+      });
+    });
+
+    // 6. Admin Admissions Approval / Rejection
+    document.querySelectorAll('.btn-approve-admission').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const appId = btn.getAttribute('data-appid');
+        cmsService.updateApplicationStatus(appId, 'approved');
+        const row = btn.closest('tr');
+        if (row) {
+          const pill = row.querySelector('.status-pill');
+          if (pill) {
+            pill.className = 'status-pill active';
+            pill.textContent = '✓ مقبول وتم التسكين';
+          }
+        }
+        alert(`✓ تم قبول الطلب [${appId}] بنجاح، وتسكين الطالب في كلاس روم المودل وإرسال إشعار الترحيب.`);
+      });
+    });
+
+    document.querySelectorAll('.btn-reject-admission').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const appId = btn.getAttribute('data-appid');
+        cmsService.updateApplicationStatus(appId, 'rejected');
+        const row = btn.closest('tr');
+        if (row) {
+          const pill = row.querySelector('.status-pill');
+          if (pill) {
+            pill.className = 'status-pill';
+            pill.textContent = '✗ مرفوض';
+          }
+        }
+        alert(`تم تحديث حالة الطلب [${appId}] إلى مرفوض.`);
+      });
+    });
+
+    // 7. Admin Site CMS Editor Form (Like Lotus Flowers Store pattern)
+    const cmsForm = document.getElementById('form-site-cms-editor');
+    if (cmsForm) {
+      cmsForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const heroTitle = document.getElementById('cms-hero-title')?.value.trim();
+        const heroSubtitle = document.getElementById('cms-hero-subtitle')?.value.trim();
+        const companyMotto = document.getElementById('cms-motto')?.value.trim();
+        const companyTagline = document.getElementById('cms-tagline')?.value.trim();
+        const phone = document.getElementById('cms-phone')?.value.trim();
+        const email = document.getElementById('cms-email')?.value.trim();
+        const address = document.getElementById('cms-address')?.value.trim();
+
+        cmsService.saveCMSData({
+          heroTitle,
+          heroSubtitle,
+          companyMotto,
+          companyTagline,
+          phone,
+          email,
+          address
+        });
+
+        alert('✓ تم حفظ كافة تعديلات نصوص وبيانات الموقع بنجاح، وتطبيقها فوراً على المنصة!');
+      });
+    }
+
+    // 8. Teacher Training File Uploader
     const uploadForm = document.getElementById('teacher-file-upload-form');
     const dropzone = document.getElementById('teacher-dropzone');
     const fileInput = document.getElementById('teacher-file-input');
@@ -271,7 +497,6 @@ class Router {
         e.preventDefault();
         const courseSelect = document.getElementById('upload-course-select');
         const titleInput = document.getElementById('upload-file-title');
-        const typeSelect = document.getElementById('upload-type-select');
         const progressContainer = document.getElementById('upload-progress-container');
         const progressBar = document.getElementById('upload-progress-bar');
         const submitBtn = uploadForm.querySelector('button[type="submit"]');
@@ -293,98 +518,25 @@ class Router {
                 const newFile = {
                   name: titleInput.value,
                   size: (Math.random() * 8 + 1).toFixed(1) + ' MB',
-                  type: typeSelect.value,
+                  type: 'PDF',
                   driveLink: 'https://drive.google.com/file/d/shat-cloud/' + Date.now()
                 };
 
                 addCourseFile(courseSelect.value, newFile);
 
-                // Add to student files list if visible
-                const studentFilesList = document.getElementById('student-files-list');
-                if (studentFilesList) {
-                  const card = document.createElement('div');
-                  card.className = 'file-download-card';
-                  card.style.animation = 'fadeIn 0.3s ease';
-                  card.innerHTML = `
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                      <span style="font-size: 1.6rem;">📄</span>
-                      <div>
-                        <div style="font-weight: 700; font-size: 0.92rem; color: var(--shat-navy-950);">${newFile.name}</div>
-                        <div style="font-size: 0.78rem; color: var(--text-muted);">${newFile.type} • ${newFile.size} • رُفع للتو بواسطة المدرب • Google Drive CDN</div>
-                      </div>
-                    </div>
-                    <button class="file-download-btn btn-direct-download" data-file="${newFile.name}">
-                      <span>📥 تحميل مباشر</span>
-                    </button>
-                  `;
-                  studentFilesList.prepend(card);
-
-                  // Re-bind download button
-                  card.querySelector('.btn-direct-download').addEventListener('click', function() {
-                    alert(`✓ تم تحميل « ${newFile.name} » بنجاح.`);
-                  });
-                }
-
-                alert(`✓ تم رفع الملف « ${newFile.name} » بنجاح وتخزينه في سحابة Google Drive التابعة للدورة، وأصبح متاحاً للطلاب فوراً!`);
+                alert(`✓ تم رفع الملف « ${newFile.name} » بنجاح وتخزينه في سحابة Google Drive التابعة للدورة، وأصبح متاحاً للتحميل الفوري للطلاب!`);
                 uploadForm.reset();
                 progressContainer.style.display = 'none';
                 if (submitBtn) submitBtn.disabled = false;
+                router.handleRouting(true);
               }, 400);
             }
-          }, 200);
+          }, 150);
         }
       });
     }
 
-    // 6. Admin Portal: Course Active / Inactive Toggle & Floating Save Panel
-    const courseToggles = document.querySelectorAll('.admin-course-toggle');
-    const savePanel = document.getElementById('admin-floating-save-panel');
-    const saveConfirmBtn = document.getElementById('save-panel-confirm-btn');
-    const saveDiscardBtn = document.getElementById('save-panel-discard-btn');
-
-    let pendingToggles = {};
-
-    courseToggles.forEach(toggle => {
-      toggle.addEventListener('change', () => {
-        const cId = toggle.getAttribute('data-course-id');
-        pendingToggles[cId] = toggle.checked;
-
-        // Update indicator text next to switch
-        const statusText = toggle.closest('div').querySelector('.status-indicator-text');
-        if (statusText) {
-          if (toggle.checked) {
-            statusText.textContent = 'مفعل (نشط)';
-            statusText.style.color = '#1b5e20';
-          } else {
-            statusText.textContent = 'معطل مؤقتاً';
-            statusText.style.color = '#991b1b';
-          }
-        }
-
-        // Show NameThatUI Save Panel
-        if (savePanel) savePanel.classList.add('show');
-      });
-    });
-
-    if (saveConfirmBtn) {
-      saveConfirmBtn.addEventListener('click', () => {
-        Object.keys(pendingToggles).forEach(cId => {
-          toggleCourseStatus(cId, pendingToggles[cId]);
-        });
-        pendingToggles = {};
-        if (savePanel) savePanel.classList.remove('show');
-        alert('✓ تم حفظ وتطبيق حالة الدورات في النظام بنجاح!');
-      });
-    }
-
-    if (saveDiscardBtn) {
-      saveDiscardBtn.addEventListener('click', () => {
-        pendingToggles = {};
-        if (savePanel) savePanel.classList.remove('show');
-      });
-    }
-
-    // 7. Student-Teacher Chat (NameThatUI: Chat Bubble + Status Dot)
+    // 9. Student-Teacher Chat
     const studentChatSend = document.getElementById('student-chat-send');
     const studentChatInput = document.getElementById('student-chat-input');
     const studentChatThread = document.getElementById('student-chat-thread');
@@ -395,8 +547,6 @@ class Router {
       if (!text) return;
 
       const timeNow = new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' });
-
-      // Outgoing bubble
       const msgRow = document.createElement('div');
       msgRow.className = 'chat-message-row outgoing';
       msgRow.innerHTML = `
@@ -415,7 +565,7 @@ class Router {
         replyRow.className = 'chat-message-row incoming';
         replyRow.innerHTML = `
           <div class="chat-bubble">
-            <strong>د. أسامة المنصور:</strong> مرحباً أحمد، تم استلام استفسارك بخصوص (${text}). سأقوم بالرد التفصيلي ومراجعة ملفاتك خلال ساعات العمل اليوم.
+            <strong>د. أسامة المنصور:</strong> مرحباً، تم استلام استفسارك بخصوص (${text}). سأقوم بالرد التفصيلي ومراجعة ملفاتك خلال ساعات العمل اليوم.
             <span class="chat-bubble-time">${new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' })}</span>
           </div>
         `;
@@ -428,76 +578,6 @@ class Router {
       studentChatSend.addEventListener('click', sendStudentMsg);
       studentChatInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') sendStudentMsg();
-      });
-    }
-
-    // 8. Staff Internal Chat
-    const staffChatSend = document.getElementById('staff-chat-send');
-    const staffChatInput = document.getElementById('staff-chat-input');
-    const staffChatThread = document.getElementById('staff-chat-thread');
-
-    function sendStaffMsg() {
-      if (!staffChatInput || !staffChatThread) return;
-      const text = staffChatInput.value.trim();
-      if (!text) return;
-
-      const timeNow = new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' });
-      const msgRow = document.createElement('div');
-      msgRow.className = 'chat-message-row outgoing';
-      msgRow.innerHTML = `
-        <div class="chat-bubble">
-          <strong>أنت:</strong> ${text}
-          <span class="chat-bubble-time">${timeNow} ✓✓</span>
-        </div>
-      `;
-      staffChatThread.appendChild(msgRow);
-      staffChatInput.value = '';
-      staffChatThread.scrollTop = staffChatThread.scrollHeight;
-    }
-
-    if (staffChatSend && staffChatInput) {
-      staffChatSend.addEventListener('click', sendStaffMsg);
-      staffChatInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') sendStaffMsg();
-      });
-    }
-
-    // 9. Corporate Training Registration Form
-    const corporateForm = document.getElementById('corporate-training-form');
-    if (corporateForm) {
-      corporateForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const submitBtn = corporateForm.querySelector('button[type="submit"]');
-        if (submitBtn) {
-          submitBtn.disabled = true;
-          submitBtn.textContent = '... جارٍ الإرسال والتأكيد';
-        }
-
-        const corpData = {
-          companyName: document.getElementById('corp-company-name')?.value || '',
-          sector: document.getElementById('corp-sector')?.value || '',
-          traineesCount: document.getElementById('corp-trainees-count')?.value || '1',
-          program: document.getElementById('corp-target-program')?.value || '',
-          contactPerson: document.getElementById('corp-contact-name')?.value || '',
-          email: document.getElementById('corp-contact-email')?.value || '',
-          phone: document.getElementById('corp-contact-phone')?.value || '',
-          notes: document.getElementById('corp-notes')?.value || ''
-        };
-
-        await submitConsultation({
-          fullName: corpData.contactPerson,
-          email: corpData.email,
-          organization: `${corpData.companyName} (${corpData.sector})`,
-          serviceType: `Corporate Training: ${corpData.program} (${corpData.traineesCount} Trainees)`,
-          details: `Phone: ${corpData.phone} | Notes: ${corpData.notes}`
-        });
-
-        alert('✓ تم إرسال طلب تدريب المؤسسة بنجاح! سيتواصل معكم مستشار التدريب في شركة شات للتنمية عبر واتساب أو البريد لتنسيق تفاصيل الحقائب ومواعيد الجلسات.');
-        corporateForm.reset();
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'إرسال طلب تدريب المؤسسات وتأكيد الحجز';
-        }
       });
     }
 
@@ -539,3 +619,4 @@ class Router {
 }
 
 export const router = new Router();
+

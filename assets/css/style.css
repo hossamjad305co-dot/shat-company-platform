@@ -2734,3 +2734,40 @@ input:checked + .switch-slider:before {
     font-size: 0.7rem;
   }
 }
+
+/* ========================================================
+   Google Classroom & Moodle LMS Design System
+   ======================================================== */
+.classroom-nav-tab {
+  transition: all 0.2s ease;
+}
+
+.classroom-nav-tab:hover {
+  background: #f8fafc !important;
+  color: var(--shat-green-700) !important;
+}
+
+.classroom-pane {
+  animation: fadeIn 0.25s ease forwards;
+}
+
+.gform-question-card {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gform-question-card:focus-within {
+  border-color: #10b981 !important;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.12) !important;
+}
+
+@media (max-width: 900px) {
+  .classroom-stream-grid,
+  .classroom-chat-grid,
+  .classroom-grades-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .gate-roles-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+

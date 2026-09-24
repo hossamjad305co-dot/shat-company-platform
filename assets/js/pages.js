@@ -1,4 +1,6 @@
 import { authService } from './auth.js';
+import { cmsService } from './cms.js';
+import { moodleStore, getMoodleCourses } from './moodle.js';
 // Shat Company Platform - Page Rendering Engine
 // All pages render dedicated views without numeric prefixes in section names.
 
@@ -729,522 +731,1112 @@ export function renderContactPage(t) {
 }
 
 export function renderAcademyPage(t) {
-  const ac = t.academy;
+  const ac = t.academy || {};
   const user = authService.getCurrentUser();
   const isLoggedIn = authService.isLoggedIn();
+  const courses = getMoodleCourses();
 
   // 1. GATE VIEW: If user is NOT logged in, require login first!
   if (!isLoggedIn) {
     return `
-      <!-- Gated Academy Banner -->
-      <div class="academy-hero" style="background: radial-gradient(circle at center, #0c2b54 0%, #06152b 100%); padding: 50px 0;">
-        <div class="container" style="text-align: center;">
-          <div class="academy-hero-badge" style="margin: 0 auto 16px;">
-            <span>🔐</span>
-            <span>بوابة مغلقة • نظام المودل المؤسسي</span>
+      <!-- University LMS Entrance Header -->
+      <div class="moodle-lms-header-bar" style="background: #ffffff; border-bottom: 2px solid var(--shat-green-600); padding: 16px 0; box-shadow: var(--shadow-sm);">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 44px; height: 44px; border-radius: 10px; background: var(--shat-green-50); border: 1.5px solid var(--shat-green-500); display: flex; align-items: center; justify-content: center; font-size: 1.6rem;">
+              🎓
+            </div>
+            <div>
+              <div style="font-size: 1.25rem; font-weight: 800; color: var(--shat-navy-950);">
+                منظومة المودل وكلاس روم الأكاديمية
+              </div>
+              <div style="font-size: 0.8rem; color: var(--shat-green-700); font-weight: 600;">
+                SHAT Development & Growth • University LMS Portal
+              </div>
+            </div>
           </div>
-          <h1 class="academy-hero-title" style="font-size: 2.1rem; color: #ffffff;">
-            منظومة المودل للأكاديمية والتدريب
-          </h1>
-          <p class="academy-hero-desc" style="color: rgba(255,255,255,0.85); max-width: 680px; margin: 10px auto 0;">
-            مساحة تعليمية متقدمة مخصصة للطلاب، المدربين، ومسؤولي الإدارة في شركة شات للتنمية والتطوير.
-          </p>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="status-pill active" style="background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0;">
+              ☁️ سحابة Google Drive المؤسسية متصلة
+            </span>
+          </div>
         </div>
       </div>
 
-      <div class="container" style="padding: 40px 16px 80px; max-width: 820px; margin: 0 auto;">
-        <!-- Access Gate Card -->
-        <div style="background: #ffffff; border: 1.5px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 40px 24px; text-align: center; box-shadow: var(--shadow-lg);">
-          <div style="width: 78px; height: 78px; border-radius: 50%; background: var(--shat-green-50); border: 2px solid var(--shat-green-500); display: flex; align-items: center; justify-content: center; font-size: 2.4rem; margin: 0 auto 18px;">
-            🎓
+      <div class="container" style="padding: 40px 16px 80px; max-width: 860px; margin: 0 auto;">
+        <!-- Gated Login Card -->
+        <div style="background: #ffffff; border: 1.5px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 40px 24px; text-align: center; box-shadow: var(--shadow-md);">
+          <div style="width: 72px; height: 72px; border-radius: 50%; background: #ecfdf5; border: 2px solid #10b981; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; margin: 0 auto 16px;">
+            🔐
           </div>
-          <h2 style="font-size: 1.55rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 10px;">
-            يرجى تسجيل الدخول للوصول إلى نظام المودل
+          <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 8px;">
+            تسجيل الدخول إلى منظومة المودل الأكاديمي
           </h2>
-          <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px; max-width: 580px; margin-left: auto; margin-right: auto;">
-            تتيح لك المنصة الدخول المخصص حسب صلاحيات حسابك المسجل:
+          <p style="font-size: 0.94rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px; max-width: 600px; margin-left: auto; margin-right: auto;">
+            يرجى تسجيل الدخول للوصول إلى كلاس روم الدورات، حقائب التدريب المباشرة على Google Drive، والتواصل مع هيئة التدريس حسب نوع حسابك:
           </p>
 
           <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 28px; text-align: start;" class="gate-roles-grid">
             <div style="background: #f8fafc; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 16px;">
-              <div style="font-size: 1.4rem; margin-bottom: 6px;">🎓</div>
+              <div style="font-size: 1.4rem; margin-bottom: 4px;">🎓</div>
               <strong style="font-size: 0.92rem; color: var(--shat-navy-950); display: block;">حساب الطالب</strong>
-              <span style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; display: block; margin-top: 4px;">
-                عرض المقررات، نسبة الإنجاز، تحميل ملفات Google Drive مباشرة، وشات الأستاذ.
+              <span style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; display: block; margin-top: 4px;">
+                عرض الدروس، تحميل ملفات Google Drive مباشرة، تسليم التكليفات، ومحادثة المدرب.
               </span>
             </div>
 
             <div style="background: #f8fafc; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 16px;">
-              <div style="font-size: 1.4rem; margin-bottom: 6px;">👨‍🏫</div>
+              <div style="font-size: 1.4rem; margin-bottom: 4px;">👨‍🏫</div>
               <strong style="font-size: 0.92rem; color: var(--shat-navy-950); display: block;">حساب المدرس</strong>
-              <span style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; display: block; margin-top: 4px;">
-                رفع الحقائب والملفات مباشرة للمنصة ودرايف، متابعة الحضور، والرد على استفسارات الطلاب.
+              <span style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; display: block; margin-top: 4px;">
+                رفع الحقائب السحابية لدرايف، متابعة الحضور، وتصحيح التكليفات والتفاعل المباشر.
               </span>
             </div>
 
             <div style="background: #f8fafc; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 16px;">
-              <div style="font-size: 1.4rem; margin-bottom: 6px;">⚙️</div>
+              <div style="font-size: 1.4rem; margin-bottom: 4px;">⚙️</div>
               <strong style="font-size: 0.92rem; color: var(--shat-navy-950); display: block;">حساب الإدارة</strong>
-              <span style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; display: block; margin-top: 4px;">
-                تفعيل وإيقاف الكورسات، لوحة الحفظ العائمة، وإدارة شات وبريد الموظفين الداخلي.
+              <span style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; display: block; margin-top: 4px;">
+                إدارة الموظفين والصلاحيات، قبول طلبات التسجيل، وتعديل محتوى الموقع بالكامل (CMS).
               </span>
             </div>
           </div>
 
           <div style="display: flex; flex-direction: column; gap: 12px; max-width: 440px; margin: 0 auto;">
-            <button type="button" class="btn-cta" id="btn-gate-open-auth" style="padding: 13px; font-size: 1rem; border-radius: var(--radius-full);">
-              <span>📱 تسجيل الدخول برقم واتساب (WaForge) أو Google</span>
+            <button type="button" class="btn-cta" id="btn-gate-open-auth" style="padding: 13px; font-size: 1rem; border-radius: var(--radius-full); font-weight: 700;">
+              <span>🔑 الدخول باسم المستخدم وكلمة المرور / واتساب OTP</span>
             </button>
             <span style="font-size: 0.8rem; color: var(--text-muted);">
-              يصلك رمز التحقق الفوري OTP مباشرة عبر واتساب
+              حسابات تجريبية سريعة متوفرة داخل نافذة الدخول بنقرة واحدة (admin, instructor, student)
             </span>
           </div>
         </div>
 
-        <!-- Corporate Registration Form for External Companies -->
-        <div style="margin-top: 36px; background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 32px; box-shadow: var(--shadow-sm);">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
-            <div>
-              <span class="status-pill active">🏢 تعاقدات الشركات والمؤسسات</span>
-              <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--shat-navy-950); margin-top: 6px;">
-                هل تمثل شركة أو منظمة وترغب في تدريب كوادركم؟
-              </h3>
+        <!-- Google Form Course Registration Direct Card -->
+        <div style="margin-top: 32px; background: #ffffff; border: 1.5px solid #d1fae5; border-radius: var(--radius-xl); padding: 28px; box-shadow: var(--shadow-sm); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="status-pill active" style="background: #ecfdf5; color: #047857;">📝 تسجيل جديد</span>
+              <strong style="font-size: 1.15rem; color: var(--shat-navy-950);">لست مسجلاً بعد في دورات الأكاديمية؟</strong>
             </div>
-            <a href="https://forms.google.com" target="_blank" rel="noopener" class="btn-secondary" style="padding: 6px 14px; font-size: 0.8rem;">
-              <span>فتح Google Form المباشر ↗</span>
-            </a>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin: 6px 0 0; max-width: 520px;">
+              يمكن للمتدربين وممثلي المنظمات والشركات التسجيل فوراً في الدورات والبرامج الجديدة عبر نموذج Google Form المعتمد.
+            </p>
           </div>
-
-          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
-            يمكن للمؤسسات والمنظمات التقدم بطلب تدريب جماعي مخصص دون الحاجة لتسجيل دخول مسبق:
-          </p>
-
-          <form id="corporate-training-form">
-            <div class="grid-2">
-              <div class="form-group">
-                <label class="form-label" style="font-weight: 700; font-size: 0.86rem;">اسم الشركة أو المنظمة *</label>
-                <input type="text" id="corp-company-name" class="form-input" required placeholder="...">
-              </div>
-              <div class="form-group">
-                <label class="form-label" style="font-weight: 700; font-size: 0.86rem;">عدد المتدربين *</label>
-                <input type="number" id="corp-trainees-count" class="form-input" required placeholder="مثال: 20">
-              </div>
-            </div>
-            <div class="grid-2">
-              <div class="form-group">
-                <label class="form-label" style="font-weight: 700; font-size: 0.86rem;">رقم هاتف / واتساب للتواصل *</label>
-                <input type="tel" id="corp-contact-phone" class="form-input" required placeholder="+972592879621" dir="ltr">
-              </div>
-              <div class="form-group">
-                <label class="form-label" style="font-weight: 700; font-size: 0.86rem;">البريد الإلكتروني المؤسسي *</label>
-                <input type="email" id="corp-contact-email" class="form-input" required placeholder="name@domain.com">
-              </div>
-            </div>
-            <button type="submit" class="btn-cta" style="width: 100%; margin-top: 8px; padding: 10px;">
-              إرسال طلب تدريب المؤسسة وتأكيد الحجز
-            </button>
-          </form>
+          <a href="#/register-course" class="btn-cta" style="padding: 10px 20px; font-size: 0.9rem; text-decoration: none; border-radius: var(--radius-full);">
+            فتح نموذج التسجيل (Google Form) ↗
+          </a>
         </div>
       </div>
     `;
   }
 
-  // 2. LOGGED-IN VIEW: User is verified! Show ONLY their role-permitted view!
+  // 2. LOGGED-IN VIEW: University LMS / Google Classroom UI
   const userRole = user.role || 'student';
+  const activeCourse = courses[0] || {};
+  const staffMembers = authService.getSystemStaff();
+  const applications = cmsService.getApplications();
+  const cmsData = cmsService.getCMSData();
 
   return `
-    <!-- Executive Logged-in Header -->
-    <div class="academy-hero" style="padding: 40px 0 30px;">
-      <div class="container">
-        <div class="breadcrumb-trail" style="margin-bottom: 16px; opacity: 0.85;">
-          <a href="#/discover" style="color: #a7f3d0;">${t.nav.s01 || 'اكتشف SHAT'}</a>
-          <span class="breadcrumb-separator" style="color: rgba(255,255,255,0.4);">/</span>
-          <span style="color: #ffffff;">نظام المودل المؤسسي</span>
+    <!-- Google Classroom / University Top Bar -->
+    <div class="moodle-lms-classroom-header" style="background: #ffffff; border-bottom: 1px solid var(--border-subtle); padding: 14px 0; box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 40;">
+      <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div style="width: 44px; height: 44px; border-radius: 10px; background: #f0fdf4; border: 1.5px solid #10b981; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+            🎓
+          </div>
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <strong style="font-size: 1.15rem; color: var(--shat-navy-950);">SHAT Moodle • كلاس روم الأكاديمية</strong>
+              <span class="status-pill active" style="font-size: 0.72rem; padding: 2px 8px; background: #e0f2fe; color: #0369a1; border-color: #bae6fd;">
+                الفصل التدريبي 2026
+              </span>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 10px; margin-top: 2px;">
+              <span>المقرر النشط: <strong>${activeCourse.title || 'دبلوم المعيار الإنساني CHS'}</strong></span>
+              <span>•</span>
+              <span style="color: #059669; font-weight: 600;">☁️ متصل بسحابة Google Drive</span>
+            </div>
+          </div>
         </div>
 
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
-          <div>
-            <div class="academy-hero-badge" style="margin-bottom: 8px;">
-              <span>★</span>
-              <span>نظام المودل للأكاديمية والتدريب</span>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <!-- User Profile Chip -->
+          <div style="display: flex; align-items: center; gap: 8px; background: #f8fafc; border: 1px solid var(--border-subtle); padding: 6px 12px; border-radius: var(--radius-full);">
+            <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--shat-green-600); color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.82rem;">
+              ${user.avatarLetter || user.name.charAt(0)}
             </div>
-            <h1 class="academy-hero-title" style="font-size: 1.85rem; margin-bottom: 4px;">
-              مرحباً بك، ${user.name}
-            </h1>
-            <p class="academy-hero-desc" style="margin: 0; font-size: 0.92rem;">
-              صلاحية الحساب النشط: <strong>${user.roleTitle}</strong> • مساحة العمل المؤسسية
-            </p>
+            <div style="text-align: start;">
+              <div style="font-size: 0.82rem; font-weight: 700; color: var(--shat-navy-950);">${user.name}</div>
+              <div style="font-size: 0.72rem; color: var(--shat-green-700); font-weight: 600;">${user.roleTitle}</div>
+            </div>
           </div>
 
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <button type="button" class="btn-secondary" id="btn-moodle-logout" style="background: rgba(255,255,255,0.12); color: #ffffff; border-color: rgba(255,255,255,0.3); padding: 8px 16px; font-size: 0.82rem; border-radius: var(--radius-full);">
-              تسجيل الخروج
+          <a href="#/register-course" class="btn-secondary" style="padding: 6px 12px; font-size: 0.78rem; text-decoration: none; border-radius: var(--radius-full);" title="تسجيل متدرب جديد">
+            📝 نموذج Google Form
+          </a>
+
+          <button type="button" class="btn-secondary" id="btn-moodle-logout" style="padding: 6px 12px; font-size: 0.78rem; border-radius: var(--radius-full); color: #dc2626; border-color: #fecaca; background: #fff5f5;">
+            خروج
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Classroom Sub-Navigation Tabs Bar (Moodle & Google Classroom Style) -->
+    <div style="background: #ffffff; border-bottom: 2px solid var(--border-subtle);">
+      <div class="container" style="display: flex; gap: 4px; overflow-x: auto; padding: 0 16px;">
+        <button class="classroom-nav-tab active" data-classroom-tab="stream" style="padding: 14px 18px; font-size: 0.88rem; font-weight: 700; border: none; background: none; cursor: pointer; color: var(--shat-green-700); border-bottom: 3px solid var(--shat-green-600); display: flex; align-items: center; gap: 6px; white-space: nowrap;">
+          <span>📢</span>
+          <span>ساحة المشاركات (Stream)</span>
+        </button>
+
+        <button class="classroom-nav-tab" data-classroom-tab="classwork" style="padding: 14px 18px; font-size: 0.88rem; font-weight: 600; border: none; background: none; cursor: pointer; color: var(--text-secondary); border-bottom: 3px solid transparent; display: flex; align-items: center; gap: 6px; white-space: nowrap;">
+          <span>📚</span>
+          <span>الواجب الدراسي والمقررات (Classwork)</span>
+        </button>
+
+        <button class="classroom-nav-tab" data-classroom-tab="drive-folder" style="padding: 14px 18px; font-size: 0.88rem; font-weight: 600; border: none; background: none; cursor: pointer; color: var(--text-secondary); border-bottom: 3px solid transparent; display: flex; align-items: center; gap: 6px; white-space: nowrap;">
+          <span>📁</span>
+          <span>سحابة Google Drive (Class Drive)</span>
+        </button>
+
+        <button class="classroom-nav-tab" data-classroom-tab="chat-room" style="padding: 14px 18px; font-size: 0.88rem; font-weight: 600; border: none; background: none; cursor: pointer; color: var(--text-secondary); border-bottom: 3px solid transparent; display: flex; align-items: center; gap: 6px; white-space: nowrap;">
+          <span>💬</span>
+          <span>المحادثة والساعات المكتبية (Chat)</span>
+        </button>
+
+        <button class="classroom-nav-tab" data-classroom-tab="grades-cert" style="padding: 14px 18px; font-size: 0.88rem; font-weight: 600; border: none; background: none; cursor: pointer; color: var(--text-secondary); border-bottom: 3px solid transparent; display: flex; align-items: center; gap: 6px; white-space: nowrap;">
+          <span>📊</span>
+          <span>الدرجات والشهادة (Grades)</span>
+        </button>
+
+        ${userRole === 'instructor' ? `
+          <button class="classroom-nav-tab" data-classroom-tab="instructor-upload" style="padding: 14px 18px; font-size: 0.88rem; font-weight: 700; border: none; background: none; cursor: pointer; color: #047857; border-bottom: 3px solid transparent; display: flex; align-items: center; gap: 6px; white-space: nowrap;">
+            <span>📤</span>
+            <span>رفع الحقائب لدرايف</span>
+          </button>
+        ` : ''}
+
+        ${userRole === 'admin' ? `
+          <button class="classroom-nav-tab" data-classroom-tab="admin-staff" style="padding: 14px 18px; font-size: 0.88rem; font-weight: 700; border: none; background: none; cursor: pointer; color: #1e3a8a; border-bottom: 3px solid transparent; display: flex; align-items: center; gap: 6px; white-space: nowrap;">
+            <span>👥</span>
+            <span>إدارة الموظفين والصلاحيات</span>
+          </button>
+
+          <button class="classroom-nav-tab" data-classroom-tab="admin-admissions" style="padding: 14px 18px; font-size: 0.88rem; font-weight: 700; border: none; background: none; cursor: pointer; color: #7c2d12; border-bottom: 3px solid transparent; display: flex; align-items: center; gap: 6px; white-space: nowrap;">
+            <span>📋</span>
+            <span>طلبات Google Form (${applications.length})</span>
+          </button>
+
+          <button class="classroom-nav-tab" data-classroom-tab="admin-cms" style="padding: 14px 18px; font-size: 0.88rem; font-weight: 700; border: none; background: none; cursor: pointer; color: #065f46; border-bottom: 3px solid transparent; display: flex; align-items: center; gap: 6px; white-space: nowrap;">
+            <span>🛠️</span>
+            <span>محرر الموقع الحي (CMS)</span>
+          </button>
+        ` : ''}
+      </div>
+    </div>
+
+    <!-- Main Classroom Body Container -->
+    <div class="container" style="padding: 30px 16px 80px; max-width: 1200px;">
+
+      <!-- ==========================================
+           TAB 1: STREAM (ساحة المشاركات)
+           ========================================== -->
+      <div class="classroom-pane active" id="pane-stream">
+        <!-- Course Classroom Hero Banner -->
+        <div style="background: linear-gradient(135deg, #059669 0%, #047857 100%); border-radius: var(--radius-lg); padding: 32px 28px; color: #ffffff; margin-bottom: 24px; position: relative; overflow: hidden; box-shadow: var(--shadow-sm);">
+          <div style="position: relative; z-index: 2;">
+            <span style="background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: var(--radius-full); font-size: 0.82rem; font-weight: 600;">
+              الكود الأكاديمي: SHAT-CHS-2026 • معتمد من CHS Alliance
+            </span>
+            <h1 style="font-size: 1.85rem; font-weight: 800; margin: 10px 0 6px; color: #ffffff;">
+              ${activeCourse.title || 'دبلوم المعيار الإنساني الأساسي (CHS) وإدارة الاستجابة'}
+            </h1>
+            <p style="margin: 0; font-size: 0.95rem; opacity: 0.92; max-width: 680px;">
+              المدرب الرئيسي: <strong>${activeCourse.instructor || 'د. أسامة المنصور'}</strong> • الساعات المعتمدة: 60 ساعة تدريبية معتمدة دولياً
+            </p>
+          </div>
+          <div style="position: absolute; left: 24px; bottom: 20px; opacity: 0.15; font-size: 6rem; line-height: 1;">
+            🎓
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 320px 1fr; gap: 24px;" class="classroom-stream-grid">
+          <!-- Left Column: Upcoming Work & Drive Link -->
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 20px; box-shadow: var(--shadow-sm);">
+              <h3 style="font-size: 0.98rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
+                <span>المواعيد القادمة</span>
+                <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">هذا الأسبوع</span>
+              </h3>
+              <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.84rem;">
+                <div style="padding: 10px; background: #f8fafc; border-radius: var(--radius-sm); border-right: 3px solid #10b981;">
+                  <strong style="color: var(--shat-navy-950); display: block;">تسليم مصفوفة المساءلة AAP</strong>
+                  <span style="color: var(--text-muted); font-size: 0.76rem;">الخميس القادم • الساعة 11:59 م</span>
+                </div>
+                <div style="padding: 10px; background: #f8fafc; border-radius: var(--radius-sm); border-right: 3px solid #0284c7;">
+                  <strong style="color: var(--shat-navy-950); display: block;">جلسة المراجعة التفاعلية عبر الإنترنت</strong>
+                  <span style="color: var(--text-muted); font-size: 0.76rem;">السبت القادم • الساعة 06:00 م</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Direct Download Card -->
+            <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 20px; box-shadow: var(--shadow-sm);">
+              <h3 style="font-size: 0.98rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 12px;">
+                📂 تحميل سريع للحقيبة التدريبية
+              </h3>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px;">
+                انقر للتحميل الفعلي المباشر لملف دليل المعيار الإنساني الأساسي بصيغة PDF لجهازك فوراً:
+              </p>
+              <button class="btn-cta btn-trigger-real-download" data-file="دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf" style="width: 100%; padding: 10px; font-size: 0.84rem; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <span>📥</span>
+                <span>تحميل الدليل المعتمد (PDF)</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Column: Stream Posts Feed -->
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <!-- New Announcement Box -->
+            <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 18px; box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 12px;">
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--shat-navy-900);">
+                ${user.avatarLetter || user.name.charAt(0)}
+              </div>
+              <input type="text" placeholder="أعلن عن شيء لصفك التدريبي..." style="flex: 1; border: 1px solid var(--border-subtle); border-radius: var(--radius-full); padding: 10px 16px; font-size: 0.88rem; outline: none; background: #f8fafc;" id="stream-quick-announce">
+              <button class="btn-secondary" id="btn-post-stream-announce" style="padding: 8px 16px; font-size: 0.82rem; border-radius: var(--radius-full);">نشر</button>
+            </div>
+
+            <!-- Announcements Feed -->
+            <div id="classroom-stream-feed" style="display: flex; flex-direction: column; gap: 14px;">
+              <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 20px; box-shadow: var(--shadow-sm);">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background: #ecfdf5; border: 1px solid #10b981; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #047857;">
+                    أ
+                  </div>
+                  <div>
+                    <strong style="color: var(--shat-navy-950); font-size: 0.95rem; display: block;">د. أسامة المنصور (مدرب المساق)</strong>
+                    <span style="font-size: 0.76rem; color: var(--text-muted);">أمس في 04:30 م • منشور تدريبي معتمد</span>
+                  </div>
+                </div>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px;">
+                  أهلاً بكم جميعاً. تم رفع مصفوفة التقييم والامتثال المؤسسي بصيغة Excel على سحابة Google Drive التابعة للصف، كما تم إرفاقها أدناه للتحميل الفعلي المباشر. يرجى تنزيلها وتعبئة الحقول المطلوبة.
+                </p>
+                <div style="border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 12px; display: flex; justify-content: space-between; align-items: center; background: #f8fafc;">
+                  <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 1.5rem;">📊</span>
+                    <div>
+                      <div style="font-weight: 700; font-size: 0.86rem; color: var(--shat-navy-950);">مصفوفة_تقييم_الامتثال_المؤسسي_CHS.xlsx</div>
+                      <div style="font-size: 0.74rem; color: var(--text-muted);">Excel Spreadsheet • 1.2 MB • Google Drive</div>
+                    </div>
+                  </div>
+                  <button class="btn-secondary btn-trigger-real-download" data-file="مصفوفة_تقييم_الامتثال_المؤسسي_CHS.xlsx" style="padding: 6px 12px; font-size: 0.8rem;">
+                    📥 تحميل مباشر
+                  </button>
+                </div>
+              </div>
+
+              <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 20px; box-shadow: var(--shadow-sm);">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background: #eff6ff; border: 1px solid #3b82f6; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #1d4ed8;">
+                    ش
+                  </div>
+                  <div>
+                    <strong style="color: var(--shat-navy-950); font-size: 0.95rem; display: block;">إدارة الأكاديمية (SHAT Academic Office)</strong>
+                    <span style="font-size: 0.76rem; color: var(--text-muted);">منذ يومين • إعلان إداري</span>
+                  </div>
+                </div>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 12px;">
+                  نرحب بجميع المتدربين والمنظمات الشريكة الملتحقين بالدفعة الحالية. يمكنكم تنزيل وثيقة الحقيبة الكاملة أو تصفح مجلد Google Drive المشترك من التبويبات بالأعلى.
+                </p>
+                <div style="border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 12px; display: flex; justify-content: space-between; align-items: center; background: #f8fafc;">
+                  <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 1.5rem;">📄</span>
+                    <div>
+                      <div style="font-weight: 700; font-size: 0.86rem; color: var(--shat-navy-950);">دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf</div>
+                      <div style="font-size: 0.74rem; color: var(--text-muted);">PDF Document • 4.8 MB • معتمد</div>
+                    </div>
+                  </div>
+                  <button class="btn-secondary btn-trigger-real-download" data-file="دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf" style="padding: 6px 12px; font-size: 0.8rem;">
+                    📥 تحميل مباشر
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           TAB 2: CLASSWORK (الواجب الدراسي والمقررات)
+           ========================================== -->
+      <div class="classroom-pane" id="pane-classwork" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <h2 style="font-size: 1.45rem; font-weight: 800; color: var(--shat-navy-950);">موضوعات ووحدات المنهج التدريبي</h2>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">الوحدات الأكاديمية والتكليفات والملفات المباشرة للتحميل لجهازك</p>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <a href="https://drive.google.com" target="_blank" rel="noopener" class="btn-secondary" style="padding: 8px 14px; font-size: 0.82rem; border-radius: var(--radius-full);">
+              📁 فتح مجلد Drive المشترك ↗
+            </a>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <!-- Topic Unit 1 -->
+          <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm);">
+            <div style="background: #f8fafc; padding: 16px 20px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+              <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--shat-navy-950); margin: 0;">
+                الوحدة الأولى: الإطار المفاهيمي ومعايير الجودة والمساءلة الدولية
+              </h3>
+              <span class="status-pill active">✓ مكتملة (100%)</span>
+            </div>
+            <div style="padding: 18px 20px; display: flex; flex-direction: column; gap: 12px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <span style="font-size: 1.4rem;">📄</span>
+                  <div>
+                    <div style="font-weight: 700; font-size: 0.88rem; color: var(--shat-navy-950);">دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf</div>
+                    <div style="font-size: 0.74rem; color: var(--text-muted);">المرجع الأساسي للوحدة • PDF • 4.8 MB</div>
+                  </div>
+                </div>
+                <button class="btn-cta btn-trigger-real-download" data-file="دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf" style="padding: 6px 14px; font-size: 0.8rem;">
+                  📥 تحميل مباشر
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Topic Unit 2 -->
+          <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm);">
+            <div style="background: #f8fafc; padding: 16px 20px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+              <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--shat-navy-950); margin: 0;">
+                الوحدة الثانية: أدوات المساءلة للجهات المتضررة (AAP Framework)
+              </h3>
+              <span class="status-pill active">● جارية الآن (75%)</span>
+            </div>
+            <div style="padding: 18px 20px; display: flex; flex-direction: column; gap: 12px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <span style="font-size: 1.4rem;">📊</span>
+                  <div>
+                    <div style="font-weight: 700; font-size: 0.88rem; color: var(--shat-navy-950);">مصفوفة_تقييم_الامتثال_المؤسسي_CHS.xlsx</div>
+                    <div style="font-size: 0.74rem; color: var(--text-muted);">تمرين تطبيقي على قياس الامتثال • Excel • 1.2 MB</div>
+                  </div>
+                </div>
+                <button class="btn-cta btn-trigger-real-download" data-file="مصفوفة_تقييم_الامتثال_المؤسسي_CHS.xlsx" style="padding: 6px 14px; font-size: 0.8rem;">
+                  📥 تحميل مباشر
+                </button>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <span style="font-size: 1.4rem;">📑</span>
+                  <div>
+                    <div style="font-weight: 700; font-size: 0.88rem; color: var(--shat-navy-950);">حقيبة_أدوات_المساءلة_للجهات_المتضررة_AAP.docx</div>
+                    <div style="font-size: 0.74rem; color: var(--text-muted);">نماذج وقوائم التحقق الميدانية • Word • 2.4 MB</div>
+                  </div>
+                </div>
+                <button class="btn-cta btn-trigger-real-download" data-file="حقيبة_أدوات_المساءلة_للجهات_المتضررة_AAP.docx" style="padding: 6px 14px; font-size: 0.8rem;">
+                  📥 تحميل مباشر
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Topic Unit 3 -->
+          <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm);">
+            <div style="background: #f8fafc; padding: 16px 20px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+              <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--shat-navy-950); margin: 0;">
+                الوحدة الثالثة: صون السلامة والحماية من الاستغلال والانتهاك (PSEA)
+              </h3>
+              <span class="status-pill" style="background: #f1f5f9; color: var(--text-muted);">قيد الإعداد للأسبوع القادم</span>
+            </div>
+            <div style="padding: 18px 20px; display: flex; flex-direction: column; gap: 12px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <span style="font-size: 1.4rem;">📄</span>
+                  <div>
+                    <div style="font-weight: 700; font-size: 0.88rem; color: var(--shat-navy-950);">إطار_سياسات_الحماية_وصون_السلامة_PSEA.pdf</div>
+                    <div style="font-size: 0.74rem; color: var(--text-muted);">سياسات وإجراءات الإبلاغ الآمن • PDF • 3.5 MB</div>
+                  </div>
+                </div>
+                <button class="btn-cta btn-trigger-real-download" data-file="إطار_سياسات_الحماية_وصون_السلامة_PSEA.pdf" style="padding: 6px 14px; font-size: 0.8rem;">
+                  📥 تحميل مباشر
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           TAB 3: GOOGLE DRIVE REPOSITORY (سحابة درايف)
+           ========================================== -->
+      <div class="classroom-pane" id="pane-drive-folder" style="display: none;">
+        <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm); margin-bottom: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 18px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div style="font-size: 2.2rem;">☁️</div>
+              <div>
+                <h2 style="font-size: 1.3rem; font-weight: 800; color: var(--shat-navy-950); margin: 0;">
+                  مستودع Google Drive المشترك لشركة شات
+                </h2>
+                <div style="font-size: 0.82rem; color: var(--shat-green-700); font-weight: 600;">
+                  سحابة رسمية موثقة • مزامنة فورية لكافة حقائب التدريب
+                </div>
+              </div>
+            </div>
+
+            <!-- Download All Button -->
+            <button class="btn-cta btn-trigger-real-download" data-file="الحقيبة_التدريبية_الشاملة_CHS_2026.docx" style="padding: 9px 18px; font-size: 0.86rem; border-radius: var(--radius-full); display: flex; align-items: center; gap: 8px;">
+              <span>⚡</span>
+              <span>تحميل الحزمة الشاملة فوراً لجهازك</span>
+            </button>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;">
+            <!-- Drive File 1 -->
+            <div style="border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 16px; background: #f8fafc; display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                  <span style="font-size: 1.5rem;">📄</span>
+                  <span class="status-pill active" style="font-size: 0.7rem; padding: 1px 6px;">PDF معتمد</span>
+                </div>
+                <strong style="font-size: 0.9rem; color: var(--shat-navy-950); display: block; margin-bottom: 4px;">
+                  دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf
+                </strong>
+                <span style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 12px;">
+                  الحجم: 4.8 MB • تم التحقق عبر Google Drive CDN
+                </span>
+              </div>
+              <button class="btn-secondary btn-trigger-real-download" data-file="دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf" style="width: 100%; padding: 8px; font-size: 0.82rem; font-weight: 700;">
+                📥 تحميل مباشر لجهازك
+              </button>
+            </div>
+
+            <!-- Drive File 2 -->
+            <div style="border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 16px; background: #f8fafc; display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                  <span style="font-size: 1.5rem;">📊</span>
+                  <span class="status-pill active" style="font-size: 0.7rem; padding: 1px 6px; background: #ecfdf5; color: #047857;">Excel تطبيق</span>
+                </div>
+                <strong style="font-size: 0.9rem; color: var(--shat-navy-950); display: block; margin-bottom: 4px;">
+                  مصفوفة_تقييم_الامتثال_المؤسسي_CHS.xlsx
+                </strong>
+                <span style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 12px;">
+                  الحجم: 1.2 MB • جدول التقييم التفاعلي الكامل
+                </span>
+              </div>
+              <button class="btn-secondary btn-trigger-real-download" data-file="مصفوفة_تقييم_الامتثال_المؤسسي_CHS.xlsx" style="width: 100%; padding: 8px; font-size: 0.82rem; font-weight: 700;">
+                📥 تحميل مباشر لجهازك
+              </button>
+            </div>
+
+            <!-- Drive File 3 -->
+            <div style="border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 16px; background: #f8fafc; display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                  <span style="font-size: 1.5rem;">📑</span>
+                  <span class="status-pill active" style="font-size: 0.7rem; padding: 1px 6px; background: #eff6ff; color: #1e40af;">Word وثيقة</span>
+                </div>
+                <strong style="font-size: 0.9rem; color: var(--shat-navy-950); display: block; margin-bottom: 4px;">
+                  حقيبة_أدوات_المساءلة_للجهات_المتضررة_AAP.docx
+                </strong>
+                <span style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 12px;">
+                  الحجم: 2.4 MB • خطة المساءلة المجتمعية المعتمدة
+                </span>
+              </div>
+              <button class="btn-secondary btn-trigger-real-download" data-file="حقيبة_أدوات_المساءلة_للجهات_المتضررة_AAP.docx" style="width: 100%; padding: 8px; font-size: 0.82rem; font-weight: 700;">
+                📥 تحميل مباشر لجهازك
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           TAB 4: CHAT ROOM & OFFICE HOURS
+           ========================================== -->
+      <div class="classroom-pane" id="pane-chat-room" style="display: none;">
+        <div style="display: grid; grid-template-columns: 280px 1fr; gap: 20px;" class="classroom-chat-grid">
+          <!-- Chat Channels -->
+          <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 16px; box-shadow: var(--shadow-sm);">
+            <h3 style="font-size: 0.95rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 12px;">قنوات المحادثة الأكاديمية</h3>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <div style="padding: 10px 12px; background: #ecfdf5; border-radius: var(--radius-sm); border-right: 3px solid #059669; font-weight: 700; font-size: 0.86rem; color: #065f46; cursor: pointer;">
+                💬 شات المساق العام (د. أسامة)
+              </div>
+              <div style="padding: 10px 12px; background: #f8fafc; border-radius: var(--radius-sm); font-size: 0.86rem; color: var(--text-secondary); cursor: pointer;">
+                👥 نقاشات مجموعات العمل
+              </div>
+              <div style="padding: 10px 12px; background: #f8fafc; border-radius: var(--radius-sm); font-size: 0.86rem; color: var(--text-secondary); cursor: pointer;">
+                💼 الدعم الفني والأكاديمي
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Chat Window -->
+          <div class="chat-window-card" style="box-shadow: var(--shadow-sm);">
+            <div class="chat-header">
+              <div class="chat-user-info">
+                <div class="chat-avatar"><span>أ</span><span class="status-dot online pulse"></span></div>
+                <div>
+                  <div style="font-size: 0.95rem; font-weight: 800; color: var(--shat-navy-950);">د. أسامة المنصور</div>
+                  <div style="font-size: 0.75rem; color: var(--shat-green-700); font-weight: 600;">مدرب المساق (متصل ومتاح للرد)</div>
+                </div>
+              </div>
+              <span class="meta-tag">ساعات مكتبية مفتوحة</span>
+            </div>
+
+            <div class="chat-thread-container" id="student-chat-thread" style="height: 340px;">
+              <div class="chat-message-row incoming">
+                <div class="chat-bubble">
+                  أهلاً بك يا ${user.name}. تم رفع مصفوفة التقييم والامتثال المحدثة. يرجى مراجعتها وتنزيلها من تبويب ملفات Drive والبدء بحل التمارين.
+                  <span class="chat-bubble-time">10:15 ص</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="chat-input-bar">
+              <input type="text" class="chat-input-field" id="student-chat-input" placeholder="اكتب استفسارك للمدرب هنا...">
+              <button class="chat-send-btn" id="student-chat-send" title="إرسال">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           TAB 5: GRADES & CERTIFICATE (الدرجات والشهادة)
+           ========================================== -->
+      <div class="classroom-pane" id="pane-grades-cert" style="display: none;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;" class="classroom-grades-grid">
+          <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm);">
+            <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 16px;">
+              سجل الإنجاز والدرجات التراكمية
+            </h3>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+              <div>
+                <span class="status-pill active">نسبة الإنجاز: 75%</span>
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">
+                  تم اجتياز 4 تكليفات من أصل 6 بنجاح
+                </div>
+              </div>
+              <div class="progress-ring-box" title="75%">
+                <svg class="progress-ring-svg" width="70" height="70">
+                  <circle class="progress-ring-bg" stroke-width="6" fill="transparent" r="28" cx="35" cy="35"/>
+                  <circle class="progress-ring-fill" stroke-width="6" stroke-dasharray="175.9" stroke-dashoffset="44" fill="transparent" r="28" cx="35" cy="35"/>
+                </svg>
+                <span class="progress-ring-label">75%</span>
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.86rem;">
+              <div style="display: flex; justify-content: space-between; padding: 10px; background: #f8fafc; border-radius: 6px;">
+                <span>اختبار الوحدة 1 (CHS Foundations)</span>
+                <strong style="color: #047857;">95 / 100 ✓</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; padding: 10px; background: #f8fafc; border-radius: 6px;">
+                <span>تمرين مصفوفة المساءلة AAP</span>
+                <strong style="color: #047857;">90 / 100 ✓</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; padding: 10px; background: #f8fafc; border-radius: 6px;">
+                <span>نسبة الحضور والتفاعل الحي</span>
+                <strong style="color: #047857;">92% ✓</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Digital Certificate Card -->
+          <div style="background: #ffffff; border: 1.5px solid #bbf7d0; border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                <span class="status-pill active" style="background: #ecfdf5; color: #047857;">🏆 شهادة التخرج المعتمدة</span>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">كود التحقق: SHAT-CERT-2026</span>
+              </div>
+              <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 8px;">
+                شهادة إتمام دبلوم المعيار الإنساني الأساسي
+              </h3>
+              <p style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">
+                تمنح هذه الشهادة رسمياً بعد استكمال متطلبات الدورة بنسبة حضور لا تقل عن 80% وتسليم كافة التمارين العملية الميدانية.
+              </p>
+            </div>
+            <button class="btn-cta btn-trigger-real-download" data-file="شهادة_تخرج_معتمدة_SHAT_2026.pdf" style="width: 100%; padding: 11px; font-weight: 700; font-size: 0.88rem;">
+              📥 تحميل الشهادة الرسمية بصيغة PDF لجهازك
             </button>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="container moodle-portal-wrap">
+      <!-- ==========================================
+           TAB 6: INSTRUCTOR DRIVE UPLOADER (للمدرس)
+           ========================================== -->
+      ${userRole === 'instructor' ? `
+        <div class="classroom-pane" id="pane-instructor-upload" style="display: none;">
+          <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 28px; box-shadow: var(--shadow-sm); max-width: 760px; margin: 0 auto;">
+            <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 6px;">
+              📤 رفع حقيبة تدريبية جديدة إلى Google Drive والمنصة
+            </h2>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
+              الملفات المرفوعة يتم حفظها فوراً في سحابة Google Drive التابعة للصف التدريبي وتتاح للطلاب للتنزيل المباشر.
+            </p>
 
-      <!-- ========================================================
-           PORTAL 1: STUDENT VIEW (واجهة الطالب الحصرية)
-           ======================================================== -->
-      ${userRole === 'student' ? `
-        <div class="moodle-tab-pane" style="display: block;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
-            <div>
-              <h2 style="font-size: 1.45rem; font-weight: 800; color: var(--shat-navy-950);">مساحتي التعليمية المقررة</h2>
-              <p style="font-size: 0.92rem; color: var(--text-muted);">تحميل ملفات التدريب مباشرة من Google Drive والتواصل المباشر مع أستاذ المساق</p>
-            </div>
-            <span class="status-pill active">● جلسة طالب نشطة</span>
-          </div>
-
-          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;" class="moodle-student-grid">
-            <!-- Courses & Drive Files -->
-            <div style="display: flex; flex-direction: column; gap: 20px;">
-              <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm);">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
-                  <div>
-                    <span class="status-pill active">● مسجل • دورة جارية</span>
-                    <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--shat-navy-950); margin-top: 8px;">
-                      دبلوم المعيار الإنساني الأساسي (CHS) وإدارة الاستجابة
-                    </h3>
-                    <div style="display: flex; align-items: center; gap: 8px; margin-top: 6px; font-size: 0.85rem; color: var(--text-secondary);">
-                      <span>المدرب: <strong>د. أسامة المنصور</strong></span>
-                      <span class="status-dot online pulse"></span>
-                      <span style="color: var(--shat-green-700); font-weight: 600;">متصل الآن</span>
-                    </div>
-                  </div>
-
-                  <div class="progress-ring-box" title="نسبة الإنجاز: 75%">
-                    <svg class="progress-ring-svg" width="72" height="72">
-                      <circle class="progress-ring-bg" stroke-width="6" fill="transparent" r="28" cx="36" cy="36"/>
-                      <circle class="progress-ring-fill" stroke-width="6" stroke-dasharray="175.9" stroke-dashoffset="44" fill="transparent" r="28" cx="36" cy="36"/>
-                    </svg>
-                    <span class="progress-ring-label">75%</span>
-                  </div>
-                </div>
-
-                <div style="margin-bottom: 20px;">
-                  <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px;">
-                    <span>إكمال 4 من 6 وحدات تدريبية</span>
-                    <span>75% مكتمل</span>
-                  </div>
-                  <div class="progress-bar-track">
-                    <div class="progress-bar-fill" style="width: 75%;"></div>
-                  </div>
-                </div>
-
-                <!-- Direct Drive File Downloads -->
-                <div style="border-top: 1px solid var(--border-subtle); padding-top: 18px;">
-                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-                    <h4 style="font-size: 1rem; font-weight: 800; color: var(--shat-navy-900);">
-                      📂 ملفات وحقائب التدريب (تحميل مباشر من Google Drive)
-                    </h4>
-                    <span class="meta-tag">سحابة Google Drive مؤمنة</span>
-                  </div>
-
-                  <div style="display: flex; flex-direction: column; gap: 10px;" id="student-files-list">
-                    <div class="file-download-card">
-                      <div style="display: flex; align-items: center; gap: 12px;">
-                        <span style="font-size: 1.6rem;">📄</span>
-                        <div>
-                          <div style="font-weight: 700; font-size: 0.92rem; color: var(--shat-navy-950);">دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf</div>
-                          <div style="font-size: 0.78rem; color: var(--text-muted);">PDF • 4.8 MB • متاح للتحميل الفوري</div>
-                        </div>
-                      </div>
-                      <button class="file-download-btn btn-direct-download" data-file="دليل CHS 2026">
-                        <span>📥 تحميل مباشر</span>
-                      </button>
-                    </div>
-
-                    <div class="file-download-card">
-                      <div style="display: flex; align-items: center; gap: 12px;">
-                        <span style="font-size: 1.6rem;">📊</span>
-                        <div>
-                          <div style="font-weight: 700; font-size: 0.92rem; color: var(--shat-navy-950);">حقيبة_أدوات_المساءلة_للجهات_المتضررة_AAP.pptx</div>
-                          <div style="font-size: 0.78rem; color: var(--text-muted);">PowerPoint • 12.3 MB • حقيبة العرض التقديمي</div>
-                        </div>
-                      </div>
-                      <button class="file-download-btn btn-direct-download" data-file="حقيبة المساءلة AAP">
-                        <span>📥 تحميل مباشر</span>
-                      </button>
-                    </div>
-
-                    <div class="file-download-card">
-                      <div style="display: flex; align-items: center; gap: 12px;">
-                        <span style="font-size: 1.6rem;">📑</span>
-                        <div>
-                          <div style="font-weight: 700; font-size: 0.92rem; color: var(--shat-navy-950);">مصفوفة_تقييم_الامتثال_المؤسسي_CHS.xlsx</div>
-                          <div style="font-size: 0.78rem; color: var(--text-muted);">Excel • 1.2 MB • تمرين تطبيقي عملي</div>
-                        </div>
-                      </div>
-                      <button class="file-download-btn btn-direct-download" data-file="مصفوفة تقييم الامتثال">
-                        <span>📥 تحميل مباشر</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
+            <form id="teacher-file-upload-form">
+              <div class="form-group" style="margin-bottom: 14px;">
+                <label class="form-label" style="font-weight: 700; font-size: 0.86rem;">المساق التدريبي المستهدف:</label>
+                <select id="upload-course-select" class="form-select">
+                  <option value="shat-chs-master">دبلوم المعيار الإنساني الأساسي (CHS)</option>
+                  <option value="shat-psea-expert">استشارات الحماية وصون السلامة (PSEA)</option>
+                  <option value="shat-oecd-eval">الشهادة الاحترافية في التقييم OECD DAC</option>
+                </select>
               </div>
-            </div>
 
-            <!-- Student-Teacher Chat -->
-            <div>
-              <div class="chat-window-card">
-                <div class="chat-header">
-                  <div class="chat-user-info">
-                    <div class="chat-avatar">
-                      <span>أ</span>
-                      <span class="status-dot online pulse"></span>
-                    </div>
-                    <div>
-                      <div style="font-size: 0.95rem; font-weight: 800; color: var(--shat-navy-950);">د. أسامة المنصور</div>
-                      <div style="font-size: 0.75rem; color: var(--shat-green-700); font-weight: 600;">مدرب المساق (متصل)</div>
-                    </div>
-                  </div>
-                  <span class="meta-tag">شات مباشر</span>
-                </div>
-
-                <div class="chat-thread-container" id="student-chat-thread">
-                  <div class="chat-message-row incoming">
-                    <div class="chat-bubble">
-                      أهلاً بك يا ${user.name}. يرجى مراجعة ملفات مصفوفة الامتثال xlsx المرفقة للبدء بحل التقييم العملي.
-                      <span class="chat-bubble-time">10:15 ص</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="chat-input-bar">
-                  <input type="text" class="chat-input-field" id="student-chat-input" placeholder="اكتب استفسارك للمدرب...">
-                  <button class="chat-send-btn" id="student-chat-send" title="إرسال">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                  </button>
-                </div>
+              <div class="form-group" style="margin-bottom: 14px;">
+                <label class="form-label" style="font-weight: 700; font-size: 0.86rem;">عنوان الملف / اسم الحقيبة:</label>
+                <input type="text" id="upload-file-title" class="form-input" required placeholder="مثال: حقيبة_المساءلة_الميدانية_المحدثة_2026.pdf">
               </div>
-            </div>
+
+              <div class="upload-dropzone" id="teacher-dropzone" style="margin-bottom: 16px; border: 2px dashed #10b981; border-radius: var(--radius-md); padding: 28px; text-align: center; cursor: pointer; background: #f0fdf4;">
+                <div style="font-size: 2.2rem; margin-bottom: 6px;">☁️</div>
+                <div style="font-weight: 700; font-size: 0.95rem; color: var(--shat-navy-950);">اسحب الملف هنا أو انقر للاختيار</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">يتم التخزين والمزامنة السحابية الفورية</div>
+                <input type="file" id="teacher-file-input" style="display: none;">
+              </div>
+
+              <div id="upload-progress-container" style="display: none; margin-bottom: 16px;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 6px;">
+                  <span id="upload-status-text">جارٍ الرفع والمزامنة مع Google Drive...</span>
+                  <span id="upload-percent-text">100%</span>
+                </div>
+                <div class="progress-bar-track"><div class="progress-bar-fill" id="upload-progress-bar" style="width: 100%;"></div></div>
+              </div>
+
+              <button type="submit" class="btn-cta" style="width: 100%; padding: 11px; font-weight: 700;">
+                🚀 رفع الملف واعتماده فوراً للطلاب
+              </button>
+            </form>
           </div>
         </div>
       ` : ''}
 
-      <!-- ========================================================
-           PORTAL 2: INSTRUCTOR / TEACHER VIEW (واجهة المدرس الحصرية)
-           ======================================================== -->
-      ${userRole === 'instructor' ? `
-        <div class="moodle-tab-pane" style="display: block;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+      <!-- ==========================================
+           TAB 7: ADMIN STAFF MANAGEMENT (للمدير)
+           ========================================== -->
+      ${userRole === 'admin' ? `
+        <div class="classroom-pane" id="pane-admin-staff" style="display: none;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
             <div>
-              <h2 style="font-size: 1.45rem; font-weight: 800; color: var(--shat-navy-950);">بوابة إدارة المنهج والحقائب التدريبية</h2>
-              <p style="font-size: 0.92rem; color: var(--text-muted);">ارفع الملفات مباشرة لتتزامن تلقائياً مع Google Drive وتظهر فوراً للمتدربين</p>
+              <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--shat-navy-950);">إدارة الكادر والموظفين وتعيين الصلاحيات</h2>
+              <p style="font-size: 0.88rem; color: var(--text-muted);">إضافة موظفين جدد، وتحديد الأدوار: مدير، مدرب، مسؤول تسجيل وقبول، مسؤول محتوى</p>
             </div>
-            <span class="status-pill active">👨‍🏫 حساب مدرب معتمد</span>
+            <button class="btn-cta" id="btn-toggle-add-staff" style="padding: 8px 16px; font-size: 0.84rem; border-radius: var(--radius-full);">
+              + إضافة موظف جديد
+            </button>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;" class="moodle-teacher-grid">
-            <!-- Direct File Uploader -->
-            <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm);">
-              <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 16px;">
-                📤 رفع ملف أو حقيبة تدريبية جديدة
-              </h3>
-
-              <form id="teacher-file-upload-form">
-                <div class="form-group" style="margin-bottom: 14px;">
-                  <label class="form-label" style="font-weight: 700; font-size: 0.88rem;">الدورة المستهدفة:</label>
-                  <select id="upload-course-select" class="form-select">
-                    <option value="shat-chs-master">دبلوم المعيار الإنساني الأساسي (CHS)</option>
-                    <option value="shat-psea-expert">استشارات الحماية وصون السلامة (PSEA)</option>
+          <!-- Add Staff Form Drawer / Box -->
+          <div id="box-add-staff-form" style="display: none; background: #ffffff; border: 1.5px solid var(--shat-green-500); border-radius: var(--radius-lg); padding: 22px; margin-bottom: 24px; box-shadow: var(--shadow-sm);">
+            <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 14px;">بيانات الموظف الجديد والصلاحية الممنوحة</h3>
+            <form id="form-create-staff-member">
+              <div class="grid-2" style="gap: 12px; margin-bottom: 12px;">
+                <div class="form-group">
+                  <label class="form-label" style="font-weight: 700; font-size: 0.82rem;">الاسم الكامل للموظف *</label>
+                  <input type="text" id="new-staff-name" class="form-input" required placeholder="مثال: د. إياس شلبي">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" style="font-weight: 700; font-size: 0.82rem;">اسم المستخدم (Username) *</label>
+                  <input type="text" id="new-staff-username" class="form-input" required placeholder="eyas">
+                </div>
+              </div>
+              <div class="grid-2" style="gap: 12px; margin-bottom: 12px;">
+                <div class="form-group">
+                  <label class="form-label" style="font-weight: 700; font-size: 0.82rem;">البريد الإلكتروني *</label>
+                  <input type="email" id="new-staff-email" class="form-input" required placeholder="eyas@shat.com">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" style="font-weight: 700; font-size: 0.82rem;">كلمة المرور *</label>
+                  <input type="password" id="new-staff-password" class="form-input" required placeholder="••••••••">
+                </div>
+              </div>
+              <div class="grid-2" style="gap: 12px; margin-bottom: 16px;">
+                <div class="form-group">
+                  <label class="form-label" style="font-weight: 700; font-size: 0.82rem;">رقم الواتساب للتواصل</label>
+                  <input type="tel" id="new-staff-phone" class="form-input" placeholder="+972592879621" dir="ltr">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" style="font-weight: 700; font-size: 0.82rem;">الصلاحية والرتبة في النظام *</label>
+                  <select id="new-staff-role" class="form-select">
+                    <option value="instructor">👨‍🏫 مدرب معتمد (Instructor)</option>
+                    <option value="registrar">📋 مسؤول التسجيل والقبول (Registrar)</option>
+                    <option value="editor">✍️ مسؤول المحتوى والنشر (Editor)</option>
+                    <option value="admin">⚙️ مدير عام (Admin)</option>
                   </select>
                 </div>
+              </div>
+              <div style="display: flex; gap: 10px;">
+                <button type="submit" class="btn-cta" style="padding: 9px 20px; font-size: 0.86rem;">حفظ وإضافة الموظف</button>
+                <button type="button" class="btn-secondary" id="btn-cancel-add-staff" style="padding: 9px 16px; font-size: 0.86rem;">إلغاء</button>
+              </div>
+            </form>
+          </div>
 
-                <div class="form-group" style="margin-bottom: 14px;">
-                  <label class="form-label" style="font-weight: 700; font-size: 0.88rem;">عنوان الملف / الحقيبة التدريبية:</label>
-                  <input type="text" id="upload-file-title" class="form-input" required placeholder="مثال: حقيبة_تطبيقات_المساءلة_الميدانية_2026.pdf">
-                </div>
+          <!-- Staff Table -->
+          <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm);">
+            <table style="width: 100%; border-collapse: collapse; text-align: start; font-size: 0.88rem;">
+              <thead style="background: #f8fafc; border-bottom: 1px solid var(--border-subtle);">
+                <tr>
+                  <th style="padding: 12px 16px; font-weight: 700; color: var(--shat-navy-950);">الموظف</th>
+                  <th style="padding: 12px 16px; font-weight: 700; color: var(--shat-navy-950);">اسم المستخدم</th>
+                  <th style="padding: 12px 16px; font-weight: 700; color: var(--shat-navy-950);">الرتبة والصلاحية</th>
+                  <th style="padding: 12px 16px; font-weight: 700; color: var(--shat-navy-950);">بيانات الاتصال</th>
+                  <th style="padding: 12px 16px; font-weight: 700; color: var(--shat-navy-950); text-align: center;">إجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="admin-staff-table-body">
+                ${staffMembers.map(member => `
+                  <tr style="border-bottom: 1px solid var(--border-subtle);">
+                    <td style="padding: 12px 16px;">
+                      <div style="font-weight: 700; color: var(--shat-navy-950);">${member.name}</div>
+                      <div style="font-size: 0.76rem; color: var(--text-muted);">${member.email}</div>
+                    </td>
+                    <td style="padding: 12px 16px; font-family: monospace; font-size: 0.85rem; color: var(--shat-navy-900);">
+                      ${member.username}
+                    </td>
+                    <td style="padding: 12px 16px;">
+                      <select class="form-select form-select-sm staff-role-change" data-username="${member.username}" style="padding: 4px 8px; font-size: 0.8rem; border-radius: 4px;">
+                        <option value="admin" ${member.role === 'admin' ? 'selected' : ''}>⚙️ المدير العام (Admin)</option>
+                        <option value="instructor" ${member.role === 'instructor' ? 'selected' : ''}>👨‍🏫 مدرب معتمد (Instructor)</option>
+                        <option value="registrar" ${member.role === 'registrar' ? 'selected' : ''}>📋 مسؤول القبول والتسجيل (Registrar)</option>
+                        <option value="editor" ${member.role === 'editor' ? 'selected' : ''}>✍️ مسؤول المحتوى (Editor)</option>
+                        <option value="student" ${member.role === 'student' ? 'selected' : ''}>🎓 طالب / متدرب (Student)</option>
+                      </select>
+                    </td>
+                    <td style="padding: 12px 16px; font-size: 0.8rem; color: var(--text-secondary);">
+                      ${member.phone || 'غير مسجل'}
+                    </td>
+                    <td style="padding: 12px 16px; text-align: center;">
+                      ${member.username !== 'admin' ? `
+                        <button type="button" class="btn-delete-staff" data-username="${member.username}" style="background: none; border: 1px solid #fecaca; color: #dc2626; border-radius: 4px; padding: 4px 8px; font-size: 0.76rem; cursor: pointer;">
+                          حذف
+                        </button>
+                      ` : '<span style="font-size: 0.75rem; color: var(--text-muted);">رئيسي</span>'}
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-                <div class="upload-dropzone" id="teacher-dropzone" style="margin-bottom: 16px;">
-                  <div style="font-size: 2.2rem; color: var(--shat-green-600); margin-bottom: 6px;">☁️</div>
-                  <div style="font-weight: 700; font-size: 0.95rem; color: var(--shat-navy-950);">اسحب الملف هنا أو انقر للاختيار</div>
-                  <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">يتم التخزين المباشر في سحابة Google Drive التابعة للمنصة</div>
-                  <input type="file" id="teacher-file-input" style="display: none;">
-                </div>
+        <!-- ==========================================
+             TAB 8: ADMIN GOOGLE FORM ADMISSIONS (للمدير)
+             ========================================== -->
+        <div class="classroom-pane" id="pane-admin-admissions" style="display: none;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--shat-navy-950);">طلبات الالتحاق بالدورات التدريبية (Google Form Admissions)</h2>
+              <p style="font-size: 0.88rem; color: var(--text-muted);">إدارة وتسكين المتدربين والمنظمات الذين سجلوا عبر نموذج التسجيل السحابي</p>
+            </div>
+            <a href="#/register-course" target="_blank" class="btn-secondary" style="padding: 8px 16px; font-size: 0.82rem; border-radius: var(--radius-full);">
+              🔗 فتح نموذج Google Form المباشر ↗
+            </a>
+          </div>
 
-                <div id="upload-progress-container" style="display: none; margin-bottom: 16px;">
-                  <div style="display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 6px;">
-                    <span id="upload-status-text">جارٍ الرفع والمزامنة مع Google Drive...</span>
-                    <span id="upload-percent-text">100%</span>
-                  </div>
-                  <div class="progress-bar-track">
-                    <div class="progress-bar-fill" id="upload-progress-bar" style="width: 100%;"></div>
-                  </div>
-                </div>
+          <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); overflow-x: auto; box-shadow: var(--shadow-sm);">
+            <table style="width: 100%; border-collapse: collapse; text-align: start; font-size: 0.86rem;">
+              <thead style="background: #f8fafc; border-bottom: 1px solid var(--border-subtle);">
+                <tr>
+                  <th style="padding: 12px 14px; font-weight: 700; color: var(--shat-navy-950);">رقم الطلب والتاريخ</th>
+                  <th style="padding: 12px 14px; font-weight: 700; color: var(--shat-navy-950);">المتقدم / المنظمة</th>
+                  <th style="padding: 12px 14px; font-weight: 700; color: var(--shat-navy-950);">المسار التدريبي</th>
+                  <th style="padding: 12px 14px; font-weight: 700; color: var(--shat-navy-950);">النمط والاتصال</th>
+                  <th style="padding: 12px 14px; font-weight: 700; color: var(--shat-navy-950);">الحالة</th>
+                  <th style="padding: 12px 14px; font-weight: 700; color: var(--shat-navy-950); text-align: center;">إجراءات الاعتماد</th>
+                </tr>
+              </thead>
+              <tbody id="admin-admissions-table-body">
+                ${applications.map(app => `
+                  <tr style="border-bottom: 1px solid var(--border-subtle);">
+                    <td style="padding: 12px 14px;">
+                      <strong style="color: var(--shat-navy-950); font-family: monospace;">${app.id}</strong>
+                      <div style="font-size: 0.74rem; color: var(--text-muted);">${new Date(app.submittedAt).toLocaleDateString('ar-SA')}</div>
+                    </td>
+                    <td style="padding: 12px 14px;">
+                      <div style="font-weight: 700; color: var(--shat-navy-950);">${app.fullName}</div>
+                      <div style="font-size: 0.76rem; color: var(--text-secondary);">${app.jobTitle || ''} • ${app.organization || 'مستقل'}</div>
+                    </td>
+                    <td style="padding: 12px 14px; font-size: 0.82rem; color: var(--shat-navy-900);">
+                      ${app.courseTrack}
+                    </td>
+                    <td style="padding: 12px 14px; font-size: 0.78rem;">
+                      <div>${app.trainingMode || 'افتراضي'}</div>
+                      <div style="color: var(--shat-green-700); font-weight: 600;">${app.phone}</div>
+                    </td>
+                    <td style="padding: 12px 14px;">
+                      <span class="status-pill ${app.status === 'approved' ? 'active' : ''}" style="font-size: 0.72rem; padding: 2px 8px;">
+                        ${app.status === 'approved' ? '✓ مقبول وتم التسكين' : (app.status === 'rejected' ? '✗ مرفوض' : '⏳ قيد المراجعة')}
+                      </span>
+                    </td>
+                    <td style="padding: 12px 14px; text-align: center;">
+                      <div style="display: flex; gap: 6px; justify-content: center;">
+                        <button class="btn-cta btn-approve-admission" data-appid="${app.id}" style="padding: 4px 10px; font-size: 0.76rem; background: #059669;">
+                          قبول
+                        </button>
+                        <button class="btn-secondary btn-reject-admission" data-appid="${app.id}" style="padding: 4px 10px; font-size: 0.76rem; color: #dc2626; border-color: #fecaca;">
+                          رفض
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-                <button type="submit" class="btn-cta" style="width: 100%; padding: 11px;">
-                  <span>🚀 رفع الملف واعتماده فوراً للطلاب</span>
-                </button>
-              </form>
+        <!-- ==========================================
+             TAB 9: ADMIN SITE CMS EDITOR (للمدير مثل لوتس)
+             ========================================== -->
+        <div class="classroom-pane" id="pane-admin-cms" style="display: none;">
+          <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 28px; box-shadow: var(--shadow-sm); max-width: 860px; margin: 0 auto;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+              <div>
+                <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--shat-navy-950); margin: 0;">
+                  🛠️ محرر محتوى نصوص الموقع والمنشورات (Live CMS Editor)
+                </h2>
+                <p style="font-size: 0.86rem; color: var(--text-muted); margin: 4px 0 0;">
+                  تعديل نصوص الصفحة الرئيسية، الشعار المؤسسي، بيانات الاتصال، ومنشورات المنصات الاجتماعية فوراً
+                </p>
+              </div>
+              <span class="status-pill active">حفظ تلقائي وفوري</span>
             </div>
 
-            <!-- Enrolled Students Roster -->
-            <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm);">
-              <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 16px;">
-                قائمة المتدربين في دوراتك
-              </h3>
-              <div style="display: flex; flex-direction: column; gap: 12px;">
-                <div style="background: #f8fafc; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 14px;">
-                  <div style="display: flex; justify-content: space-between;">
-                    <strong style="color: var(--shat-navy-950);">أحمد العتيبي</strong>
-                    <span class="status-pill active">حضور 92%</span>
-                  </div>
-                  <div style="font-size: 0.82rem; color: var(--text-muted); margin: 6px 0;">دبلوم المعيار الإنساني (CHS)</div>
-                  <div class="progress-bar-track"><div class="progress-bar-fill" style="width: 75%;"></div></div>
+            <form id="form-site-cms-editor">
+              <div class="form-group" style="margin-bottom: 14px;">
+                <label class="form-label" style="font-weight: 700; font-size: 0.86rem;">عنوان الهيدر الرئيسي (Hero Main Title):</label>
+                <input type="text" id="cms-hero-title" class="form-input" value="${cmsData.heroTitle || ''}">
+              </div>
+
+              <div class="form-group" style="margin-bottom: 14px;">
+                <label class="form-label" style="font-weight: 700; font-size: 0.86rem;">الوصف الترحيبي المؤسسي (Hero Subtitle):</label>
+                <textarea id="cms-hero-subtitle" class="form-textarea" style="min-height: 80px;">${cmsData.heroSubtitle || ''}</textarea>
+              </div>
+
+              <div class="grid-2" style="gap: 14px; margin-bottom: 14px;">
+                <div class="form-group">
+                  <label class="form-label" style="font-weight: 700; font-size: 0.86rem;">شعار الشركة اللفظي (Company Motto):</label>
+                  <input type="text" id="cms-motto" class="form-input" value="${cmsData.companyMotto || ''}">
                 </div>
-                <div style="background: #f8fafc; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 14px;">
-                  <div style="display: flex; justify-content: space-between;">
-                    <strong style="color: var(--shat-navy-950);">سارة محمود</strong>
-                    <span class="status-pill active">حضور 88%</span>
-                  </div>
-                  <div style="font-size: 0.82rem; color: var(--text-muted); margin: 6px 0;">برنامج استشارات الحماية (PSEA)</div>
-                  <div class="progress-bar-track"><div class="progress-bar-fill" style="width: 40%;"></div></div>
+                <div class="form-group">
+                  <label class="form-label" style="font-weight: 700; font-size: 0.86rem;">الشعار المؤسسي الفرعي (Tagline):</label>
+                  <input type="text" id="cms-tagline" class="form-input" value="${cmsData.companyTagline || ''}">
                 </div>
               </div>
-            </div>
+
+              <div class="grid-3" style="gap: 12px; margin-bottom: 20px;">
+                <div class="form-group">
+                  <label class="form-label" style="font-weight: 700; font-size: 0.86rem;">رقم الهاتف / واتساب:</label>
+                  <input type="text" id="cms-phone" class="form-input" value="${cmsData.phone || '+972 59 287 9621'}" dir="ltr">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" style="font-weight: 700; font-size: 0.86rem;">البريد الإلكتروني:</label>
+                  <input type="email" id="cms-email" class="form-input" value="${cmsData.email || 'shat.company26@gmail.com'}">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" style="font-weight: 700; font-size: 0.86rem;">العنوان ونطاق العمل:</label>
+                  <input type="text" id="cms-address" class="form-input" value="${cmsData.address || 'فلسطين • نطاق العمل: دولي وإقليمي'}">
+                </div>
+              </div>
+
+              <button type="submit" class="btn-cta" style="width: 100%; padding: 12px; font-weight: 700; font-size: 0.95rem;">
+                💾 حفظ وتطبيق كافة التعديلات على الموقع فوراً
+              </button>
+            </form>
           </div>
         </div>
       ` : ''}
 
-      <!-- ========================================================
-           PORTAL 3: ADMIN VIEW (واجهة الإدارة والتحكم الحصرية)
-           ======================================================== -->
-      ${userRole === 'admin' ? `
-        <div class="moodle-tab-pane" style="display: block;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
-            <div>
-              <h2 style="font-size: 1.45rem; font-weight: 800; color: var(--shat-navy-950);">لوحة الإدارة والتحكم الأكاديمي الشامل</h2>
-              <p style="font-size: 0.92rem; color: var(--text-muted);">تحكم في تفعيل أو إلغاء تفعيل الكورسات وشات الموظفين الداخلي</p>
-            </div>
-            <span class="status-pill active">⚙️ صلاحية المدير العام</span>
-          </div>
-
-          <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 24px;" class="moodle-admin-grid">
-            <!-- Active / Inactive Course Toggles -->
-            <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm);">
-              <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 16px;">
-                إدارة الدورات: تفعيل وإلغاء تفعيل (Active / Inactive)
-              </h3>
-
-              <div style="display: flex; flex-direction: column; gap: 14px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px; background: #f8fafc; border: 1px solid var(--border-subtle); border-radius: var(--radius-md);">
-                  <div>
-                    <div style="font-weight: 800; color: var(--shat-navy-950);">دبلوم المعيار الإنساني الأساسي (CHS)</div>
-                    <div style="font-size: 0.8rem; color: var(--text-muted);">المدرب: د. أسامة المنصور</div>
-                  </div>
-                  <div style="display: flex; align-items: center; gap: 12px;">
-                    <span class="status-indicator-text" style="font-size: 0.82rem; font-weight: 700; color: #1b5e20;">مفعل (نشط)</span>
-                    <label class="switch-control">
-                      <input type="checkbox" checked class="admin-course-toggle" data-course-id="shat-chs-master">
-                      <span class="switch-slider"></span>
-                    </label>
-                  </div>
-                </div>
-
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px; background: #f8fafc; border: 1px solid var(--border-subtle); border-radius: var(--radius-md);">
-                  <div>
-                    <div style="font-weight: 800; color: var(--shat-navy-950);">برنامج استشارات الحماية (PSEA)</div>
-                    <div style="font-size: 0.8rem; color: var(--text-muted);">المدربة: أ. ندى الخالدي</div>
-                  </div>
-                  <div style="display: flex; align-items: center; gap: 12px;">
-                    <span class="status-indicator-text" style="font-size: 0.82rem; font-weight: 700; color: #1b5e20;">مفعل (نشط)</span>
-                    <label class="switch-control">
-                      <input type="checkbox" checked class="admin-course-toggle" data-course-id="shat-psea-expert">
-                      <span class="switch-slider"></span>
-                    </label>
-                  </div>
-                </div>
-
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px; background: #f8fafc; border: 1px solid var(--border-subtle); border-radius: var(--radius-md);">
-                  <div>
-                    <div style="font-weight: 800; color: var(--shat-navy-950);">الشهادة الاحترافية في التقييم OECD DAC</div>
-                    <div style="font-size: 0.8rem; color: var(--text-muted);">المدرب: م. طارق الزهراني</div>
-                  </div>
-                  <div style="display: flex; align-items: center; gap: 12px;">
-                    <span class="status-indicator-text" style="font-size: 0.82rem; font-weight: 700; color: #1b5e20;">مفعل (نشط)</span>
-                    <label class="switch-control">
-                      <input type="checkbox" checked class="admin-course-toggle" data-course-id="shat-oecd-eval">
-                      <span class="switch-slider"></span>
-                    </label>
-                  </div>
-                </div>
-
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px; background: #f8fafc; border: 1px solid var(--border-subtle); border-radius: var(--radius-md);">
-                  <div>
-                    <div style="font-weight: 800; color: var(--shat-navy-950);">دبلوم تدريب المدربين المحترفين (TOT)</div>
-                    <div style="font-size: 0.8rem; color: var(--text-muted);">المدرب: أ. عمار اليافعي</div>
-                  </div>
-                  <div style="display: flex; align-items: center; gap: 12px;">
-                    <span class="status-indicator-text" style="font-size: 0.82rem; font-weight: 700; color: #991b1b;">معطل مؤقتاً</span>
-                    <label class="switch-control">
-                      <input type="checkbox" class="admin-course-toggle" data-course-id="shat-tot-mastery">
-                      <span class="switch-slider"></span>
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Internal Staff Chat -->
-            <div>
-              <div class="chat-window-card">
-                <div class="chat-header">
-                  <div class="chat-user-info">
-                    <div class="chat-avatar"><span>💼</span><span class="status-dot online pulse"></span></div>
-                    <div>
-                      <div style="font-size: 0.95rem; font-weight: 800; color: var(--shat-navy-950);">شات وبريد الموظفين الداخلي</div>
-                      <div style="font-size: 0.75rem; color: var(--text-muted);">الإدارة • المدربون • المتابعة</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="chat-thread-container" id="staff-chat-thread">
-                  <div class="chat-message-row incoming">
-                    <div class="chat-bubble">
-                      <strong>الإدارة العامة:</strong> نرجو من كافة المدربين مراجعة تحديثات حقائب CHS و PSEA على درايف.
-                      <span class="chat-bubble-time">08:30 ص</span>
-                    </div>
-                  </div>
-                  <div class="chat-message-row outgoing">
-                    <div class="chat-bubble">
-                      <strong>د. أسامة المنصور:</strong> تم التحديث ومزامنة الرابط المباشر بنجاح.
-                      <span class="chat-bubble-time">09:15 ص ✓✓</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="chat-input-bar">
-                  <input type="text" class="chat-input-field" id="staff-chat-input" placeholder="اكتب رسالة داخلية...">
-                  <button class="chat-send-btn" id="staff-chat-send" title="إرسال">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      ` : ''}
-
-    </div>
-
-    <!-- Floating Save Panel -->
-    <div class="floating-save-panel" id="admin-floating-save-panel">
-      <div class="save-panel-text">
-        <span>⚠️</span>
-        <span>تم تعديل حالة بعض الكورسات في النظام</span>
-      </div>
-      <button type="button" class="save-panel-btn-save" id="save-panel-confirm-btn">
-        ✓ حفظ التعديلات الآن
-      </button>
-      <button type="button" class="save-panel-btn-discard" id="save-panel-discard-btn">
-        إلغاء
-      </button>
     </div>
   `;
 }
+
+// -------------------------------------------------------------
+// GOOGLE FORM STYLE COURSE REGISTRATION PAGE (#/register-course)
+// -------------------------------------------------------------
+export function renderGoogleFormRegistration(t) {
+  return `
+    <div style="background: #f0fdf4; min-height: 100vh; padding: 30px 16px 80px;">
+      <div style="max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px;">
+
+        <!-- Google Form Accent Banner -->
+        <div style="background: linear-gradient(90deg, #059669 0%, #10b981 100%); height: 10px; border-radius: 8px 8px 0 0; margin-bottom: -16px;"></div>
+
+        <!-- Google Form Title Header Card -->
+        <div style="background: #ffffff; border: 1px solid #d1fae5; border-radius: var(--radius-lg); padding: 32px 28px; box-shadow: var(--shadow-sm); border-top: 6px solid #059669;">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+            <img src="assets/logo/logo-transparent.png" alt="SHAT Logo" style="height: 38px;" onerror="this.src='assets/logo/logo-symbol.jpg'">
+            <div>
+              <div style="font-size: 0.82rem; color: var(--shat-green-700); font-weight: 700;">شركة شات للتنمية والتطوير (SHAT Development & Growth)</div>
+              <div style="font-size: 0.74rem; color: var(--text-muted);">بوابة التسجيل والقبول الأكاديمي الموحد 2026</div>
+            </div>
+          </div>
+
+          <h1 style="font-size: 1.65rem; font-weight: 800; color: var(--shat-navy-950); margin: 0 0 10px;">
+            استمارة تسجيل المتدربين والمنظمات في برامج ودبلومات شات التدريبية
+          </h1>
+
+          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; margin: 0 0 14px;">
+            نرحب بانضمامكم لبرامج بناء القدرات والاستشارات المتخصصة. يرجى تعبئة الحقول التالية بدقة لتأكيد تسجيلكم وتسكينكم في مساحة المودل وإصدار بطاقة المتدرب.
+          </p>
+
+          <div style="padding: 10px 14px; background: #ecfdf5; border-radius: var(--radius-sm); font-size: 0.82rem; color: #047857; display: flex; align-items: center; gap: 8px;">
+            <span>ℹ️</span>
+            <span>الحقول التي تحمل علامة (*) إلزامية لاستكمال التسجيل.</span>
+          </div>
+        </div>
+
+        <!-- Submission Form -->
+        <form id="google-form-course-application" style="display: flex; flex-direction: column; gap: 16px;">
+          <!-- Question 1: Full Name -->
+          <div class="gform-question-card" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 22px 24px; box-shadow: var(--shadow-sm);">
+            <label class="form-label" style="font-weight: 700; font-size: 0.95rem; color: var(--shat-navy-950); margin-bottom: 8px; display: block;">
+              1. الاسم الرباعي الكامل للمتدرب/ة (أو ممثل المنظمة) *
+            </label>
+            <input type="text" id="gform-name" class="form-input" required placeholder="إجابتك..." style="border-bottom: 2px solid var(--border-subtle); border-top: none; border-left: none; border-right: none; border-radius: 0; padding: 8px 4px; background: transparent;">
+          </div>
+
+          <!-- Question 2: Email -->
+          <div class="gform-question-card" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 22px 24px; box-shadow: var(--shadow-sm);">
+            <label class="form-label" style="font-weight: 700; font-size: 0.95rem; color: var(--shat-navy-950); margin-bottom: 8px; display: block;">
+              2. البريد الإلكتروني الرسمي للمراسلات وتفعيل حساب المودل *
+            </label>
+            <input type="email" id="gform-email" class="form-input" required placeholder="name@domain.com" style="border-bottom: 2px solid var(--border-subtle); border-top: none; border-left: none; border-right: none; border-radius: 0; padding: 8px 4px; background: transparent;">
+          </div>
+
+          <!-- Question 3: WhatsApp Phone -->
+          <div class="gform-question-card" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 22px 24px; box-shadow: var(--shadow-sm);">
+            <label class="form-label" style="font-weight: 700; font-size: 0.95rem; color: var(--shat-navy-950); margin-bottom: 8px; display: block;">
+              3. رقم الواتساب المباشر (مع رمز الدولة للتأكيد الفوري) *
+            </label>
+            <input type="tel" id="gform-phone" class="form-input" required placeholder="+972592879621" dir="ltr" value="+97259" style="border-bottom: 2px solid var(--border-subtle); border-top: none; border-left: none; border-right: none; border-radius: 0; padding: 8px 4px; background: transparent;">
+          </div>
+
+          <!-- Question 4: Organization -->
+          <div class="gform-question-card" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 22px 24px; box-shadow: var(--shadow-sm);">
+            <label class="form-label" style="font-weight: 700; font-size: 0.95rem; color: var(--shat-navy-950); margin-bottom: 8px; display: block;">
+              4. جهة العمل أو اسم المنظمة / المؤسسة (أو اكتب: متدرب مستقل) *
+            </label>
+            <input type="text" id="gform-org" class="form-input" required placeholder="إجابتك..." style="border-bottom: 2px solid var(--border-subtle); border-top: none; border-left: none; border-right: none; border-radius: 0; padding: 8px 4px; background: transparent;">
+          </div>
+
+          <!-- Question 5: Job Title -->
+          <div class="gform-question-card" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 22px 24px; box-shadow: var(--shadow-sm);">
+            <label class="form-label" style="font-weight: 700; font-size: 0.95rem; color: var(--shat-navy-950); margin-bottom: 8px; display: block;">
+              5. المسمى الوظيفي الحالي *
+            </label>
+            <input type="text" id="gform-job" class="form-input" required placeholder="مثال: منسق مشاريع، أخصائي حماية، مقيّم..." style="border-bottom: 2px solid var(--border-subtle); border-top: none; border-left: none; border-right: none; border-radius: 0; padding: 8px 4px; background: transparent;">
+          </div>
+
+          <!-- Question 6: Course Track Selection -->
+          <div class="gform-question-card" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 22px 24px; box-shadow: var(--shadow-sm);">
+            <label class="form-label" style="font-weight: 700; font-size: 0.95rem; color: var(--shat-navy-950); margin-bottom: 12px; display: block;">
+              6. اختر المسار أو البرنامج التدريبي المطلوب *
+            </label>
+            <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;">
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <input type="radio" name="gform-course" value="دبلوم المعيار الإنساني الأساسي (CHS) وإدارة الاستجابة" checked>
+                <span>دبلوم المعيار الإنساني الأساسي (CHS) وإدارة الاستجابة</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <input type="radio" name="gform-course" value="البرنامج التنفيذي في استشارات الحماية وصون السلامة (PSEA)">
+                <span>البرنامج التنفيذي في استشارات الحماية وصون السلامة (PSEA)</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <input type="radio" name="gform-course" value="الشهادة الاحترافية في التقييم التنموي المستقل (OECD DAC)">
+                <span>الشهادة الاحترافية في التقييم التنموي المستقل (OECD DAC)</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <input type="radio" name="gform-course" value="دبلوم تدريب المدربين المحترفين في القطاع الإنساني (TOT)">
+                <span>دبلوم تدريب المدربين المحترفين في القطاع الإنساني (TOT)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 7: Delivery Mode -->
+          <div class="gform-question-card" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 22px 24px; box-shadow: var(--shadow-sm);">
+            <label class="form-label" style="font-weight: 700; font-size: 0.95rem; color: var(--shat-navy-950); margin-bottom: 12px; display: block;">
+              7. نمط التدريب المفضل لك *
+            </label>
+            <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;">
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <input type="radio" name="gform-mode" value="تدريب افتراضي عبر الإنترنت (Online Interactive)" checked>
+                <span>تدريب افتراضي تفاعلي عبر الإنترنت (Zoom / Teams)</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <input type="radio" name="gform-mode" value="تدريب حضوري في القاعات التدريبية (In-Person)">
+                <span>تدريب حضوري في القاعات التدريبية التابعة للشركة</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <input type="radio" name="gform-mode" value="نمط هجين مدمج (Blended Learning)">
+                <span>نمط هجين مدمج (جلسات حضورية + ورش افتراضية)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 8: Experience -->
+          <div class="gform-question-card" style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 22px 24px; box-shadow: var(--shadow-sm);">
+            <label class="form-label" style="font-weight: 700; font-size: 0.95rem; color: var(--shat-navy-950); margin-bottom: 8px; display: block;">
+              8. عدد سنوات الخبرة أو نبذة مختصرة عن المجال:
+            </label>
+            <textarea id="gform-exp" class="form-textarea" placeholder="إجابتك..." style="min-height: 70px;"></textarea>
+          </div>
+
+          <!-- Submit Bar -->
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <button type="submit" class="btn-cta" id="btn-submit-gform" style="padding: 12px 36px; font-size: 0.95rem; font-weight: 700; border-radius: 4px;">
+              إرسال الاستمارة (Submit)
+            </button>
+            <a href="#/academy" style="color: var(--text-muted); font-size: 0.85rem; text-decoration: none;">
+              الرجوع إلى المودل
+            </a>
+          </div>
+        </form>
+
+        <!-- Confirmation Success Screen (Initially hidden) -->
+        <div id="gform-success-receipt" style="display: none; background: #ffffff; border: 1px solid #bbf7d0; border-radius: var(--radius-lg); padding: 36px 28px; box-shadow: var(--shadow-sm); border-top: 6px solid #059669; text-align: center;">
+          <div style="width: 60px; height: 60px; border-radius: 50%; background: #ecfdf5; border: 2px solid #10b981; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 16px; color: #047857;">
+            ✓
+          </div>
+          <h2 style="font-size: 1.45rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 8px;">
+            تم تسجيل استجابتك بنجاح
+          </h2>
+          <p style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 20px;">
+            شكراً لاهتمامك ببرامج شركة شات للتنمية والتطوير. تم حفظ طلبك وإرساله إلى قسم القبول والتسجيل.
+          </p>
+
+          <div style="background: #f8fafc; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 14px; max-width: 380px; margin: 0 auto 24px; text-align: start; font-size: 0.86rem;">
+            <div>رقم التتبع المرجعي: <strong id="gform-receipt-code" style="color: #047857; font-family: monospace; font-size: 1rem;"></strong></div>
+            <div style="margin-top: 4px; color: var(--text-muted); font-size: 0.78rem;">سيصلك إشعار القبول وبيانات الدخول عبر واتساب والبريد.</div>
+          </div>
+
+          <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+            <a href="#/academy" class="btn-cta" style="padding: 10px 22px; font-size: 0.88rem; text-decoration: none;">
+              الانتقال إلى نظام المودل
+            </a>
+            <button type="button" class="btn-secondary" id="btn-submit-another-gform" style="padding: 10px 18px; font-size: 0.88rem;">
+              إرسال استجابة أخرى
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  `;
+}
+

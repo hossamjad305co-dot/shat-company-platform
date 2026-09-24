@@ -350,20 +350,14 @@ class App {
     const authModal = document.getElementById('auth-modal');
     const authCloseBtn = document.getElementById('auth-modal-close-btn');
 
-    const tabWa = document.getElementById('tab-auth-whatsapp');
+    // Tab buttons & Panes
+    const tabLogin = document.getElementById('tab-auth-login');
+    const tabRegister = document.getElementById('tab-auth-register');
     const tabGoogle = document.getElementById('tab-auth-google');
-    const paneWa = document.getElementById('auth-pane-whatsapp');
+
+    const paneLogin = document.getElementById('auth-pane-login');
+    const paneRegister = document.getElementById('auth-pane-register');
     const paneGoogle = document.getElementById('auth-pane-google');
-
-    const stepPhone = document.getElementById('otp-step-phone');
-    const stepVerify = document.getElementById('otp-step-verify');
-    const waTargetDisplay = document.getElementById('wa-display-target');
-    const demoCodeAlert = document.getElementById('wa-demo-code-alert');
-
-    const btnSendOtp = document.getElementById('btn-send-wa-otp');
-    const btnVerifyOtp = document.getElementById('btn-verify-otp');
-    const btnBackPhone = document.getElementById('btn-back-phone');
-    const btnGoogleLogin = document.getElementById('btn-google-login-action');
 
     const updateAuthBtn = () => {
       const user = authService.getCurrentUser();
@@ -373,11 +367,11 @@ class App {
         authBtn.classList.add('logged-in');
         authBtn.title = `حسابك: ${user.name} (${user.roleTitle}) - انقر لتسجيل الخروج`;
       } else if (label) {
-        label.textContent = 'دخول / حسابي';
+        const signLabels = { ar: 'دخول / حسابي', en: 'Sign In / Account', fr: 'Connexion / Compte', es: 'Acceso / Mi Cuenta', it: 'Accedi / Account' };
+        label.textContent = signLabels[this.currentLang] || 'دخول / حسابي';
         authBtn.classList.remove('logged-in');
         authBtn.title = 'تسجيل الدخول إلى المنصة والمودل';
       }
-      // Re-render header to show/hide Moodle access
       const t = translations[this.currentLang] || translations.ar;
       this.renderHeader(t);
     };
@@ -388,7 +382,6 @@ class App {
       authBtn.addEventListener('click', () => {
         const user = authService.getCurrentUser();
         if (user) {
-          // Confirm logout if already logged in
           if (confirm(`أنت مسجل حالياً بصفتك: (${user.roleTitle} - ${user.name}).\nهل ترغب في تسجيل الخروج؟`)) {
             authService.logout();
             alert('✓ تم تسجيل الخروج بنجاح.');
@@ -413,7 +406,7 @@ class App {
       });
     }
 
-    // Gate button inside Moodle page (when unauthenticated user clicks to log in)
+    // Gate button inside Moodle page & Logout listeners
     document.addEventListener('click', (e) => {
       if (e.target.closest('#btn-gate-open-auth')) {
         if (authModal) authModal.classList.add('open');
@@ -423,111 +416,167 @@ class App {
         alert('✓ تم تسجيل الخروج بنجاح.');
         updateAuthBtn();
         window.location.hash = '#/discover';
+        router.handleRouting(true);
+      }
+      if (e.target.closest('#link-goto-googleform')) {
+        if (authModal) authModal.classList.remove('open');
       }
     });
 
-    // Tabs toggle
-    if (tabWa && tabGoogle && paneWa && paneGoogle) {
-      tabWa.addEventListener('click', () => {
-        tabWa.classList.add('active');
-        tabGoogle.classList.remove('active');
-        paneWa.style.display = 'block';
-        paneGoogle.style.display = 'none';
-      });
+    // Tab Switching
+    const switchTab = (activeTab, activePane) => {
+      [tabLogin, tabRegister, tabGoogle].forEach(t => t?.classList.remove('active'));
+      [paneLogin, paneRegister, paneGoogle].forEach(p => { if (p) p.style.display = 'none'; });
+      activeTab?.classList.add('active');
+      if (activePane) activePane.style.display = 'block';
+    };
 
-      tabGoogle.addEventListener('click', () => {
-        tabGoogle.classList.add('active');
-        tabWa.classList.remove('active');
-        paneGoogle.style.display = 'block';
-        paneWa.style.display = 'none';
+    if (tabLogin) tabLogin.addEventListener('click', () => switchTab(tabLogin, paneLogin));
+    if (tabRegister) tabRegister.addEventListener('click', () => switchTab(tabRegister, paneRegister));
+    if (tabGoogle) tabGoogle.addEventListener('click', () => switchTab(tabGoogle, paneGoogle));
+
+    // Demo Account Chips quick fill & login
+    document.querySelectorAll('.btn-demo-fill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const u = btn.getAttribute('data-user');
+        const p = btn.getAttribute('data-pass');
+        const idInput = document.getElementById('login-identifier');
+        const passInput = document.getElementById('login-password');
+        if (idInput && passInput) {
+          idInput.value = u;
+          passInput.value = p;
+          // Auto submit
+          const res = authService.loginWithPassword(u, p);
+          if (res.success) {
+            alert(`✓ مرحباً بك، ${res.user.name}!\nتم الدخول بصفتك: (${res.user.roleTitle}).`);
+            authModal.classList.remove('open');
+            updateAuthBtn();
+            window.location.hash = '#/academy';
+            router.handleRouting(true);
+          }
+        }
+      });
+    });
+
+    // 1. Password Login Form Submit
+    const formLogin = document.getElementById('form-password-login');
+    if (formLogin) {
+      formLogin.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const id = document.getElementById('login-identifier')?.value.trim();
+        const pass = document.getElementById('login-password')?.value;
+
+        const res = authService.loginWithPassword(id, pass);
+        if (res.success) {
+          alert(`✓ تم تسجيل الدخول بنجاح! مرحباً ${res.user.name} (${res.user.roleTitle}).`);
+          authModal.classList.remove('open');
+          updateAuthBtn();
+          window.location.hash = '#/academy';
+          router.handleRouting(true);
+        } else {
+          alert(res.error || 'بيانات الدخول غير صحيحة');
+        }
       });
     }
 
-    // Send WhatsApp OTP via WaForge
-    if (btnSendOtp) {
-      btnSendOtp.addEventListener('click', async () => {
-        const phone = document.getElementById('auth-wa-phone')?.value.trim() || '';
-        const role = document.getElementById('auth-user-role')?.value || 'student';
+    // 2. Registration Step 1: Send WhatsApp OTP
+    const btnTriggerOtp = document.getElementById('btn-trigger-reg-otp');
+    const regStepInputs = document.getElementById('reg-step-inputs');
+    const regStepVerify = document.getElementById('reg-step-verify');
+    const regDisplayPhone = document.getElementById('reg-display-phone');
+    const regDemoOtpDisplay = document.getElementById('reg-demo-otp-display');
+    const btnRegBack = document.getElementById('btn-reg-back-inputs');
 
-        if (!phone) {
-          alert('يرجى كتابة رقم واتساب كامل مع رمز الدولة (مثال: +972592879621)');
+    if (btnTriggerOtp) {
+      btnTriggerOtp.addEventListener('click', async () => {
+        const name = document.getElementById('reg-fullname')?.value.trim();
+        const phone = document.getElementById('reg-phone')?.value.trim();
+        const email = document.getElementById('reg-email')?.value.trim();
+        const password = document.getElementById('reg-password')?.value;
+        const role = document.getElementById('reg-role')?.value || 'student';
+
+        if (!name || !phone || !password) {
+          alert('يرجى ملء الاسم الكامل، رقم الواتساب، وكلمة المرور.');
           return;
         }
 
-        btnSendOtp.disabled = true;
-        btnSendOtp.textContent = '... جارٍ الإرسال عبر WaForge';
+        btnTriggerOtp.disabled = true;
+        btnTriggerOtp.textContent = '... جارٍ توليد وإرسال رمز التحقق عبر WaForge';
 
-        const res = await authService.sendWhatsAppOtp(phone, role);
+        const res = await authService.sendRegistrationOtp({ name, phone, email, password, role });
 
-        btnSendOtp.disabled = false;
-        btnSendOtp.textContent = 'إرسال رمز التحقق عبر واتساب (WaForge)';
+        btnTriggerOtp.disabled = false;
+        btnTriggerOtp.textContent = '📱 إرسال رمز التحقق OTP عبر واتساب (WaForge)';
 
-        if (stepPhone && stepVerify) {
-          stepPhone.style.display = 'none';
-          stepVerify.style.display = 'block';
-          if (waTargetDisplay) waTargetDisplay.textContent = phone;
-          if (demoCodeAlert) demoCodeAlert.textContent = `رمز التحقق الخاص بك هو: [ ${res.otpCode} ]`;
+        if (res.success) {
+          if (regStepInputs) regStepInputs.style.display = 'none';
+          if (regStepVerify) regStepVerify.style.display = 'block';
+          if (regDisplayPhone) regDisplayPhone.textContent = phone;
+          if (regDemoOtpDisplay) regDemoOtpDisplay.textContent = `رمز التحقق الخاص بك هو: [ ${res.otpCode} ]`;
 
-          document.getElementById('otp-d1')?.focus();
+          // Focus first digit
+          document.getElementById('reg-otp-1')?.focus();
+        } else {
+          alert(res.error || 'تعذر إرسال رمز التحقق، يرجى التحقق من الرقم');
         }
       });
     }
 
-    if (btnBackPhone && stepPhone && stepVerify) {
-      btnBackPhone.addEventListener('click', () => {
-        stepVerify.style.display = 'none';
-        stepPhone.style.display = 'block';
+    if (btnRegBack && regStepInputs && regStepVerify) {
+      btnRegBack.addEventListener('click', () => {
+        regStepVerify.style.display = 'none';
+        regStepInputs.style.display = 'block';
       });
     }
 
-    // OTP Input auto-advance
-    const otpInputs = [
-      document.getElementById('otp-d1'),
-      document.getElementById('otp-d2'),
-      document.getElementById('otp-d3'),
-      document.getElementById('otp-d4'),
-      document.getElementById('otp-d5'),
-      document.getElementById('otp-d6')
+    // Registration OTP inputs auto-advance
+    const regOtpDigits = [
+      document.getElementById('reg-otp-1'),
+      document.getElementById('reg-otp-2'),
+      document.getElementById('reg-otp-3'),
+      document.getElementById('reg-otp-4'),
+      document.getElementById('reg-otp-5'),
+      document.getElementById('reg-otp-6')
     ].filter(Boolean);
 
-    otpInputs.forEach((inp, idx) => {
+    regOtpDigits.forEach((inp, idx) => {
       inp.addEventListener('input', (e) => {
-        if (e.target.value.length === 1 && idx < otpInputs.length - 1) {
-          otpInputs[idx + 1].focus();
+        if (e.target.value.length === 1 && idx < regOtpDigits.length - 1) {
+          regOtpDigits[idx + 1].focus();
         }
       });
       inp.addEventListener('keydown', (e) => {
         if (e.key === 'Backspace' && !e.target.value && idx > 0) {
-          otpInputs[idx - 1].focus();
+          regOtpDigits[idx - 1].focus();
         }
       });
     });
 
-    // Verify OTP
-    if (btnVerifyOtp) {
-      btnVerifyOtp.addEventListener('click', () => {
-        const code = otpInputs.map(inp => inp.value).join('');
+    // Registration Step 2: Confirm OTP
+    const btnConfirmReg = document.getElementById('btn-confirm-reg-otp');
+    if (btnConfirmReg) {
+      btnConfirmReg.addEventListener('click', () => {
+        const code = regOtpDigits.map(inp => inp.value).join('');
         if (code.length < 6) {
           alert('يرجى إدخال الرمز المكون من 6 أرقام');
           return;
         }
 
-        const res = authService.verifyOtp(code);
+        const res = authService.verifyRegistrationOtp(code);
         if (res.success) {
-          alert(`✓ مرحباً بك! تم تسجيل الدخول بنجاح بصفتك (${res.user.roleTitle}).\nسيتم توجيهك الآن إلى واجهتك الخاصة في نظام المودل.`);
+          alert(`✓ تم التحقق بنجاح وإنشاء حسابك الرسمي في المنصة!\nمرحباً بك: ${res.user.name} (${res.user.roleTitle}).`);
           authModal.classList.remove('open');
           updateAuthBtn();
-
-          // Redirect to Moodle and trigger re-render
           window.location.hash = '#/academy';
           router.handleRouting(true);
         } else {
-          alert(res.error || 'رمز التحقق غير صحيح');
+          alert(res.error || 'رمز التحقق غير صحيح، يرجى إعادة المحاولة');
         }
       });
     }
 
-    // Google Login Action
+    // 3. Google Login
+    const btnGoogleLogin = document.getElementById('btn-google-login-action');
     if (btnGoogleLogin) {
       btnGoogleLogin.addEventListener('click', () => {
         const user = authService.loginWithGoogle();

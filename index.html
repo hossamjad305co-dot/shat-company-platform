@@ -148,74 +148,155 @@
     </div>
   </div>
 
-  <!-- WhatsApp WaForge & Google Auth Modal -->
+  <!-- Authentication Modal (Username/Password + WhatsApp OTP Registration + Google) -->
   <div class="modal-overlay" id="auth-modal" role="dialog" aria-modal="true">
-    <div class="modal-box" style="max-width: 480px;">
+    <div class="modal-box" style="max-width: 520px; padding: 28px 24px;">
       <button class="modal-close-btn" id="auth-modal-close-btn" aria-label="Close dialog">✕</button>
       <div id="auth-modal-content">
-        <h2 id="auth-modal-title" style="font-size: 1.4rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 6px;">
-          تسجيل الدخول إلى المنصة
-        </h2>
-        <p id="auth-modal-subtitle" style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 18px;">
-          الوصول إلى نظام المودل، ملفات الدورات، المحادثات، وبوابة الطالب والأستاذ
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+          <img src="assets/logo/logo-transparent.png" alt="SHAT" style="height: 34px;" onerror="this.src='assets/logo/logo-symbol.jpg'">
+          <div>
+            <h2 id="auth-modal-title" style="font-size: 1.35rem; font-weight: 800; color: var(--shat-navy-950); margin: 0;">
+              بوابة الدخول إلى المنصة والمودل
+            </h2>
+            <div style="font-size: 0.78rem; color: var(--shat-green-700); font-weight: 600;">SHAT Development & Growth LMS</div>
+          </div>
+        </div>
+
+        <p id="auth-modal-subtitle" style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 16px;">
+          الدخول ببيانات الحساب، أو التسجيل لأول مرة عبر رمز التحقق المباشر OTP
         </p>
 
-        <div class="auth-tab-row">
-          <button class="auth-tab-btn active" id="tab-auth-whatsapp">📱 رمز التحقق عبر واتساب</button>
-          <button class="auth-tab-btn" id="tab-auth-google">🌐 حساب Google</button>
+        <!-- Main Auth Navigation Tabs -->
+        <div class="auth-tab-row" style="margin-bottom: 18px; display: flex; gap: 6px; background: #f1f5f9; padding: 4px; border-radius: var(--radius-md);">
+          <button class="auth-tab-btn active" id="tab-auth-login" style="flex: 1; padding: 8px 12px; font-size: 0.85rem; font-weight: 700; border-radius: var(--radius-sm); border: none; cursor: pointer;">
+            🔑 تسجيل الدخول
+          </button>
+          <button class="auth-tab-btn" id="tab-auth-register" style="flex: 1; padding: 8px 12px; font-size: 0.85rem; font-weight: 700; border-radius: var(--radius-sm); border: none; cursor: pointer;">
+            📱 تسجيل جديد (OTP)
+          </button>
+          <button class="auth-tab-btn" id="tab-auth-google" style="padding: 8px 12px; font-size: 0.85rem; font-weight: 700; border-radius: var(--radius-sm); border: none; cursor: pointer;">
+            🌐 Google
+          </button>
         </div>
 
-        <!-- WhatsApp Tab -->
-        <div id="auth-pane-whatsapp">
-          <div id="otp-step-phone">
+        <!-- 1. PANE: Password Login (Username or Email) -->
+        <div id="auth-pane-login">
+          <form id="form-password-login">
+            <div class="form-group" style="margin-bottom: 12px;">
+              <label class="form-label" style="font-weight: 700; font-size: 0.86rem;">اسم المستخدم أو البريد الإلكتروني:</label>
+              <input type="text" id="login-identifier" class="form-input" placeholder="admin أو ahmed@shat.com" required value="admin">
+            </div>
+
             <div class="form-group" style="margin-bottom: 14px;">
-              <label class="form-label" id="auth-phone-label" style="font-weight: 700; font-size: 0.88rem;">رقم واتساب الكامل (مع رمز الدولة):</label>
-              <input type="tel" id="auth-wa-phone" class="form-input" placeholder="+972592879621" dir="ltr" value="+972592879621">
-              <span id="auth-wa-hint" style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; display: block;">
-                يتم إرسال رمز التحقق المباشر عبر بوابة WaForge API
-              </span>
+              <label class="form-label" style="font-weight: 700; font-size: 0.86rem;">كلمة المرور:</label>
+              <input type="password" id="login-password" class="form-input" placeholder="••••••••" required value="admin">
             </div>
 
-            <div class="form-group" style="margin-bottom: 18px;">
-              <label class="form-label" id="auth-role-label" style="font-weight: 700; font-size: 0.88rem;">اختر دورك في النظام:</label>
-              <select id="auth-user-role" class="form-select">
-                <option value="student">🎓 طالب / متدرب (Student)</option>
-                <option value="instructor">👨‍🏫 مدرب / أستاذ دورة (Instructor)</option>
-                <option value="admin">⚙️ مسؤول الإدارة (Admin)</option>
-              </select>
+            <!-- Quick Demo Accounts Helper -->
+            <div style="background: #f8fafc; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 10px; margin-bottom: 16px;">
+              <div style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 6px;">
+                ⚡ حسابات تجريبية سريعة جاهزة للاختبار بنقرة واحدة:
+              </div>
+              <div style="display: flex; flex-wrap: wrap; gap: 6px;" id="demo-account-chips">
+                <button type="button" class="btn-demo-fill" data-user="admin" data-pass="admin" style="background: #ffffff; border: 1px solid var(--border-subtle); padding: 4px 8px; border-radius: 4px; font-size: 0.76rem; cursor: pointer; color: #1e3a8a; font-weight: 600;">
+                  ⚙️ المدير (admin)
+                </button>
+                <button type="button" class="btn-demo-fill" data-user="instructor" data-pass="teach" style="background: #ffffff; border: 1px solid var(--border-subtle); padding: 4px 8px; border-radius: 4px; font-size: 0.76rem; cursor: pointer; color: #065f46; font-weight: 600;">
+                  👨‍🏫 مدرب (instructor)
+                </button>
+                <button type="button" class="btn-demo-fill" data-user="student" data-pass="student" style="background: #ffffff; border: 1px solid var(--border-subtle); padding: 4px 8px; border-radius: 4px; font-size: 0.76rem; cursor: pointer; color: #92400e; font-weight: 600;">
+                  🎓 طالب (student)
+                </button>
+                <button type="button" class="btn-demo-fill" data-user="registrar" data-pass="reg" style="background: #ffffff; border: 1px solid var(--border-subtle); padding: 4px 8px; border-radius: 4px; font-size: 0.76rem; cursor: pointer; color: #475569; font-weight: 600;">
+                  📋 قبول وتسجيل (registrar)
+                </button>
+              </div>
             </div>
 
-            <button type="button" class="btn-cta" id="btn-send-wa-otp" style="width: 100%; padding: 10px;">
-              إرسال رمز التحقق عبر واتساب (WaForge)
+            <button type="submit" class="btn-cta" id="btn-submit-password-login" style="width: 100%; padding: 11px; font-weight: 700;">
+              تسجيل الدخول إلى المنصة
             </button>
+          </form>
+
+          <div style="margin-top: 14px; text-align: center; border-top: 1px solid var(--border-subtle); padding-top: 12px;">
+            <a href="#/register-course" class="modal-link-btn" id="link-goto-googleform" style="font-size: 0.84rem; color: var(--shat-green-700); font-weight: 700; text-decoration: none;">
+              📝 تسجيل طالب جديد في دورة تدريبية (Google Form) ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- 2. PANE: First-Time Registration via WhatsApp OTP -->
+        <div id="auth-pane-register" style="display: none;">
+          <!-- Step 1: Fill Info & Send OTP -->
+          <div id="reg-step-inputs">
+            <div class="form-group" style="margin-bottom: 10px;">
+              <label class="form-label" style="font-weight: 700; font-size: 0.84rem;">الاسم الرباعي الكامل *</label>
+              <input type="text" id="reg-fullname" class="form-input" placeholder="مثال: أحمد عبد الله خليل" required>
+            </div>
+
+            <div class="grid-2" style="gap: 10px; margin-bottom: 10px;">
+              <div class="form-group">
+                <label class="form-label" style="font-weight: 700; font-size: 0.84rem;">رقم واتساب (مع رمز الدولة) *</label>
+                <input type="tel" id="reg-phone" class="form-input" placeholder="+972592879621" dir="ltr" required value="+97259">
+              </div>
+              <div class="form-group">
+                <label class="form-label" style="font-weight: 700; font-size: 0.84rem;">البريد الإلكتروني</label>
+                <input type="email" id="reg-email" class="form-input" placeholder="name@domain.com">
+              </div>
+            </div>
+
+            <div class="grid-2" style="gap: 10px; margin-bottom: 14px;">
+              <div class="form-group">
+                <label class="form-label" style="font-weight: 700; font-size: 0.84rem;">تعيين كلمة المرور *</label>
+                <input type="password" id="reg-password" class="form-input" placeholder="اختر كلمة مرور" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" style="font-weight: 700; font-size: 0.84rem;">نوع الحساب المطلوب</label>
+                <select id="reg-role" class="form-select">
+                  <option value="student">🎓 طالب / متدرب (Student)</option>
+                  <option value="instructor">👨‍🏫 مدرب / خبير (Instructor)</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="button" class="btn-cta" id="btn-trigger-reg-otp" style="width: 100%; padding: 11px;">
+              📱 إرسال رمز التحقق OTP عبر واتساب (WaForge)
+            </button>
+            <span style="font-size: 0.75rem; color: var(--text-muted); display: block; text-align: center; margin-top: 6px;">
+              يتم إرسال رمز أمان مكون من 6 أرقام عبر واتساب لتأكيد رقمك
+            </span>
           </div>
 
-          <div id="otp-step-verify" style="display: none;">
+          <!-- Step 2: Verify OTP -->
+          <div id="reg-step-verify" style="display: none;">
             <div style="background: #e8f5e9; border: 1px solid #c8e6c9; border-radius: var(--radius-sm); padding: 12px; margin-bottom: 14px; font-size: 0.85rem; color: #1b5e20;">
-              ✓ تم توليد رمز التحقق وإرساله إلى واتساب: <strong id="wa-display-target"></strong>
-              <div id="wa-demo-code-alert" style="margin-top: 6px; font-weight: 800; font-size: 0.95rem; color: #2e7d32;"></div>
+              ✓ تم إرسال رمز التحقق بنجاح إلى: <strong id="reg-display-phone"></strong>
+              <div id="reg-demo-otp-display" style="margin-top: 6px; font-weight: 800; font-size: 1rem; color: #166534; background: #ffffff; padding: 6px 10px; border-radius: 4px; display: inline-block;"></div>
             </div>
 
-            <label class="form-label" style="font-weight: 700; text-align: center; display: block;">أدخل رمز التحقق (6 أرقام):</label>
-            <div class="otp-box-inputs">
-              <input type="text" maxlength="1" class="otp-input-digit" id="otp-d1" autofocus>
-              <input type="text" maxlength="1" class="otp-input-digit" id="otp-d2">
-              <input type="text" maxlength="1" class="otp-input-digit" id="otp-d3">
-              <input type="text" maxlength="1" class="otp-input-digit" id="otp-d4">
-              <input type="text" maxlength="1" class="otp-input-digit" id="otp-d5">
-              <input type="text" maxlength="1" class="otp-input-digit" id="otp-d6">
+            <label class="form-label" style="font-weight: 700; text-align: center; display: block; margin-bottom: 8px;">
+              أدخل رمز التحقق (6 أرقام):
+            </label>
+            <div class="otp-box-inputs" style="display: flex; justify-content: center; gap: 8px; margin-bottom: 14px;">
+              <input type="text" maxlength="1" class="otp-input-digit" id="reg-otp-1" style="width: 42px; height: 48px; text-align: center; font-size: 1.3rem; font-weight: 800; border: 2px solid var(--border-subtle); border-radius: 8px;">
+              <input type="text" maxlength="1" class="otp-input-digit" id="reg-otp-2" style="width: 42px; height: 48px; text-align: center; font-size: 1.3rem; font-weight: 800; border: 2px solid var(--border-subtle); border-radius: 8px;">
+              <input type="text" maxlength="1" class="otp-input-digit" id="reg-otp-3" style="width: 42px; height: 48px; text-align: center; font-size: 1.3rem; font-weight: 800; border: 2px solid var(--border-subtle); border-radius: 8px;">
+              <input type="text" maxlength="1" class="otp-input-digit" id="reg-otp-4" style="width: 42px; height: 48px; text-align: center; font-size: 1.3rem; font-weight: 800; border: 2px solid var(--border-subtle); border-radius: 8px;">
+              <input type="text" maxlength="1" class="otp-input-digit" id="reg-otp-5" style="width: 42px; height: 48px; text-align: center; font-size: 1.3rem; font-weight: 800; border: 2px solid var(--border-subtle); border-radius: 8px;">
+              <input type="text" maxlength="1" class="otp-input-digit" id="reg-otp-6" style="width: 42px; height: 48px; text-align: center; font-size: 1.3rem; font-weight: 800; border: 2px solid var(--border-subtle); border-radius: 8px;">
             </div>
 
-            <button type="button" class="btn-cta" id="btn-verify-otp" style="width: 100%; padding: 10px; margin-top: 8px;">
-              تأكيد الدخول
+            <button type="button" class="btn-cta" id="btn-confirm-reg-otp" style="width: 100%; padding: 11px;">
+              ✓ تأكيد وتفعيل الحساب والدخول فوراً
             </button>
-            <button type="button" id="btn-back-phone" style="background: none; border: none; color: var(--text-muted); font-size: 0.8rem; margin-top: 10px; width: 100%; cursor: pointer;">
-              ← تعديل رقم الهاتف
+            <button type="button" id="btn-reg-back-inputs" style="background: none; border: none; color: var(--text-muted); font-size: 0.82rem; margin-top: 10px; width: 100%; cursor: pointer;">
+              ← تعديل البيانات ورقم الهاتف
             </button>
           </div>
         </div>
 
-        <!-- Google Tab -->
+        <!-- 3. PANE: Google SSO Login -->
         <div id="auth-pane-google" style="display: none; text-align: center; padding: 20px 0;">
           <p style="font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 20px;">
             تسجيل الدخول السريع الموحد بحساب Google المؤسسي
