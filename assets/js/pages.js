@@ -776,37 +776,37 @@ export function renderAcademyPage(t) {
             يرجى تسجيل الدخول للوصول إلى كلاس روم الدورات، حقائب التدريب المباشرة على Google Drive، والتواصل مع هيئة التدريس حسب نوع حسابك:
           </p>
 
-          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 28px; text-align: start;" class="gate-roles-grid">
-            <div style="background: #f8fafc; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 16px;">
-              <div style="font-size: 1.4rem; margin-bottom: 4px;">🎓</div>
-              <strong style="font-size: 0.92rem; color: var(--shat-navy-950); display: block;">حساب الطالب</strong>
-              <span style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; display: block; margin-top: 4px;">
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; text-align: start;" class="gate-roles-grid">
+            <div style="background: #f8fafc; border: 1.5px solid var(--border-subtle); border-radius: var(--radius-md); padding: 18px;">
+              <div style="font-size: 1.5rem; margin-bottom: 6px;">🎓</div>
+              <strong style="font-size: 1rem; color: var(--shat-navy-950); display: block;">حساب الطالب</strong>
+              <span style="font-size: 0.86rem; color: var(--text-secondary); line-height: 1.6; display: block; margin-top: 6px;">
                 عرض الدروس، تحميل ملفات Google Drive مباشرة، تسليم التكليفات، ومحادثة المدرب.
               </span>
             </div>
 
-            <div style="background: #f8fafc; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 16px;">
-              <div style="font-size: 1.4rem; margin-bottom: 4px;">👨‍🏫</div>
-              <strong style="font-size: 0.92rem; color: var(--shat-navy-950); display: block;">حساب المدرس</strong>
-              <span style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; display: block; margin-top: 4px;">
+            <div style="background: #f8fafc; border: 1.5px solid var(--border-subtle); border-radius: var(--radius-md); padding: 18px;">
+              <div style="font-size: 1.5rem; margin-bottom: 6px;">👨‍🏫</div>
+              <strong style="font-size: 1rem; color: var(--shat-navy-950); display: block;">حساب المدرس</strong>
+              <span style="font-size: 0.86rem; color: var(--text-secondary); line-height: 1.6; display: block; margin-top: 6px;">
                 رفع الحقائب السحابية لدرايف، متابعة الحضور، وتصحيح التكليفات والتفاعل المباشر.
               </span>
             </div>
 
-            <div style="background: #f8fafc; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 16px;">
-              <div style="font-size: 1.4rem; margin-bottom: 4px;">⚙️</div>
-              <strong style="font-size: 0.92rem; color: var(--shat-navy-950); display: block;">حساب الإدارة</strong>
-              <span style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; display: block; margin-top: 4px;">
+            <div style="background: #f8fafc; border: 1.5px solid var(--border-subtle); border-radius: var(--radius-md); padding: 18px;">
+              <div style="font-size: 1.5rem; margin-bottom: 6px;">⚙️</div>
+              <strong style="font-size: 1rem; color: var(--shat-navy-950); display: block;">حساب الإدارة</strong>
+              <span style="font-size: 0.86rem; color: var(--text-secondary); line-height: 1.6; display: block; margin-top: 6px;">
                 إدارة الموظفين والصلاحيات، قبول طلبات التسجيل، وتعديل محتوى الموقع بالكامل (CMS).
               </span>
             </div>
           </div>
 
-          <div style="display: flex; flex-direction: column; gap: 12px; max-width: 440px; margin: 0 auto;">
-            <button type="button" class="btn-cta" id="btn-gate-open-auth" style="padding: 13px; font-size: 1rem; border-radius: var(--radius-full); font-weight: 700;">
+          <div style="display: flex; flex-direction: column; gap: 12px; max-width: 460px; margin: 0 auto;">
+            <button type="button" class="btn-cta" id="btn-gate-open-auth" style="padding: 13px; font-size: 1.02rem; border-radius: var(--radius-full); font-weight: 700;">
               <span>🔑 الدخول باسم المستخدم وكلمة المرور / واتساب OTP</span>
             </button>
-            <span style="font-size: 0.8rem; color: var(--text-muted);">
+            <span style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.5;">
               حسابات تجريبية سريعة متوفرة داخل نافذة الدخول بنقرة واحدة (admin, instructor, student)
             </span>
           </div>
@@ -817,13 +817,13 @@ export function renderAcademyPage(t) {
           <div>
             <div style="display: flex; align-items: center; gap: 8px;">
               <span class="status-pill active" style="background: #ecfdf5; color: #047857;">📝 تسجيل جديد</span>
-              <strong style="font-size: 1.15rem; color: var(--shat-navy-950);">لست مسجلاً بعد في دورات الأكاديمية؟</strong>
+              <strong style="font-size: 1.18rem; color: var(--shat-navy-950);">لست مسجلاً بعد في دورات الأكاديمية؟</strong>
             </div>
-            <p style="font-size: 0.88rem; color: var(--text-muted); margin: 6px 0 0; max-width: 520px;">
+            <p style="font-size: 0.92rem; color: var(--text-secondary); margin: 6px 0 0; max-width: 540px; line-height: 1.65;">
               يمكن للمتدربين وممثلي المنظمات والشركات التسجيل فوراً في الدورات والبرامج الجديدة عبر نموذج Google Form المعتمد.
             </p>
           </div>
-          <a href="#/register-course" class="btn-cta" style="padding: 10px 20px; font-size: 0.9rem; text-decoration: none; border-radius: var(--radius-full);">
+          <a href="#/register-course" class="btn-cta" style="padding: 11px 22px; font-size: 0.92rem; text-decoration: none; border-radius: var(--radius-full);">
             فتح نموذج التسجيل (Google Form) ↗
           </a>
         </div>
