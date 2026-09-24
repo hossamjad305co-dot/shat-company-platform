@@ -683,6 +683,7 @@ class Router {
         </div>
       `;
 
+      postModal.classList.add('open');
       postModal.style.display = 'flex';
       document.body.style.overflow = 'hidden';
 
@@ -694,6 +695,7 @@ class Router {
 
     const closePostModal = () => {
       if (postModal) {
+        postModal.classList.remove('open');
         postModal.style.display = 'none';
         document.body.style.overflow = '';
       }
