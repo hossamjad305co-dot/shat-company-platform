@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGradOecd" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b" />
+      <stop offset="50%" stop-color="#312e81" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="cardGradOecd" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.04" />
+    </linearGradient>
+    <linearGradient id="accentGradOecd" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#4f46e5" />
+    </linearGradient>
+    <pattern id="gridOecd" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#818cf8" stroke-width="0.6" stroke-opacity="0.15" />
+    </pattern>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="800" height="450" fill="url(#bgGradOecd)" />
+  <rect width="800" height="450" fill="url(#gridOecd)" />
+
+  <!-- Ambient Light Orbs -->
+  <circle cx="690" cy="90" r="180" fill="#6366f1" fill-opacity="0.18" filter="blur(45px)" />
+  <circle cx="110" cy="370" r="140" fill="#818cf8" fill-opacity="0.12" filter="blur(35px)" />
+
+  <!-- Top Status Bar -->
+  <g transform="translate(48, 36)">
+    <rect width="250" height="32" rx="16" fill="#ffffff" fill-opacity="0.15" stroke="#818cf8" stroke-width="1.2" stroke-opacity="0.5" />
+    <circle cx="20" cy="16" r="5" fill="#818cf8" />
+    <text x="34" y="21" font-family="'Cairo', system-ui, sans-serif" font-size="13" font-weight="700" fill="#ffffff">التقييم المستقل • OECD DAC</text>
+
+    <!-- Post Date -->
+    <text x="704" y="21" font-family="'Cairo', system-ui, sans-serif" font-size="13" font-weight="600" fill="#c7d2fe" text-anchor="end">أغسطس 2026 • الميدان والبحوث</text>
+  </g>
+
+  <!-- Main Focal Card -->
+  <g transform="translate(48, 90)">
+    <rect width="704" height="260" rx="20" fill="url(#cardGradOecd)" stroke="#ffffff" stroke-width="1" stroke-opacity="0.18" />
+
+    <!-- Left Graphic Analytics Radar / Chart Icon -->
+    <g transform="translate(540, 40)">
+      <circle cx="65" cy="65" r="62" fill="#ffffff" fill-opacity="0.08" stroke="#818cf8" stroke-width="2" />
+      <circle cx="65" cy="65" r="48" fill="#1e1b4b" />
+      <!-- Bar Chart / Trend Graph -->
+      <rect x="42" y="70" width="8" height="20" rx="2" fill="#818cf8" />
+      <rect x="54" y="55" width="8" height="35" rx="2" fill="#6366f1" />
+      <rect x="66" y="42" width="8" height="48" rx="2" fill="#a5b4fc" />
+      <rect x="78" y="32" width="8" height="58" rx="2" fill="#34d399" />
+      <polyline points="46,65 58,50 70,38 82,28" fill="none" stroke="#fbbf24" stroke-width="2.5" />
+      <circle cx="82" cy="28" r="3.5" fill="#fbbf24" />
+    </g>
+
+    <!-- Main Title & Description -->
+    <text x="490" y="65" font-family="'Cairo', system-ui, sans-serif" font-size="24" font-weight="800" fill="#ffffff" text-anchor="end">
+      بعثات التقييم الميداني المستقل لمشاريع الأثر
+    </text>
+    <text x="490" y="100" font-family="'Cairo', system-ui, sans-serif" font-size="16" font-weight="600" fill="#a5b4fc" text-anchor="end">
+      وفق معايير منظمة التعاون الاقتصادي والتنمية (OECD DAC) ومعايير UNEG
+    </text>
+
+    <text x="490" y="140" font-family="'Cairo', system-ui, sans-serif" font-size="14" font-weight="400" fill="#e2e8f0" text-anchor="end" opacity="0.95">
+      قياس الملاءمة، الفعالية، الكفاءة، والأثر الممتد والاستدامة للمشاريع الإنسانية
+    </text>
+    <text x="490" y="165" font-family="'Cairo', system-ui, sans-serif" font-size="14" font-weight="400" fill="#e2e8f0" text-anchor="end" opacity="0.95">
+      بمنهجيات المزيج البحثي النوعي والكمي وجمع البيانات الميدانية الموثوقة.
+    </text>
+
+    <!-- Highlight Badges Inside Card -->
+    <g transform="translate(40, 195)">
+      <rect x="0" y="0" width="150" height="34" rx="8" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="1" stroke-opacity="0.2" />
+      <text x="75" y="22" font-family="'Cairo', system-ui, sans-serif" font-size="12" font-weight="700" fill="#818cf8" text-anchor="middle">📊 معايير DAC الستة</text>
+
+      <rect x="165" y="0" width="150" height="34" rx="8" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="1" stroke-opacity="0.2" />
+      <text x="240" y="22" font-family="'Cairo', system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle">🔍 مسوح ميدانية دقيقة</text>
+
+      <rect x="330" y="0" width="165" height="34" rx="8" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="1" stroke-opacity="0.2" />
+      <text x="412" y="22" font-family="'Cairo', system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle">🌐 تقارير تدقيق UNEG</text>
+    </g>
+  </g>
+
+  <!-- Bottom Brand Watermark Strip -->
+  <g transform="translate(48, 385)">
+    <text x="0" y="25" font-family="'Outfit', system-ui, sans-serif" font-size="18" font-weight="800" fill="#ffffff" letter-spacing="1">SHAT</text>
+    <text x="65" y="25" font-family="'Cairo', system-ui, sans-serif" font-size="13" font-weight="600" fill="#a5b4fc">Independent Monitoring &amp; Evaluation Unit • وحدة التقييم المستقل</text>
+
+    <!-- Social View Indicator -->
+    <g transform="translate(560, 2)">
+      <rect width="144" height="34" rx="17" fill="url(#accentGradOecd)" />
+      <text x="72" y="22" font-family="'Cairo', system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffffff" text-anchor="middle">نتائج التقييم ↗</text>
+    </g>
+  </g>
+</svg>
