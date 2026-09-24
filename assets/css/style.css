@@ -1118,6 +1118,17 @@ button, input, select, textarea {
   margin-top: auto;
 }
 
+.main-footer p,
+#footer-about-text {
+  color: var(--text-secondary) !important;
+  line-height: 1.75;
+}
+
+.main-footer h4,
+.main-footer strong {
+  color: var(--shat-navy-950) !important;
+}
+
 .footer-grid {
   display: grid;
   grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
