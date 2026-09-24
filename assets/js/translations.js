@@ -1,6 +1,8 @@
 // Shat Company Platform - Multilingual Localization Engine (AR, EN, FR, ES, IT)
 // Notice: In strict compliance with guidelines, section titles contain NO numeric prefixes.
 
+import { academyTranslations } from './academyTranslations.js';
+
 export const translations = {
   ar: {
     dir: "rtl",
@@ -3205,3 +3207,13 @@ footer: {
     }
   }
 };
+
+// Bind Academy translations across all languages
+for (const lang of Object.keys(translations)) {
+  if (academyTranslations[lang]) {
+    translations[lang].academy = academyTranslations[lang];
+    if (!translations[lang].nav) translations[lang].nav = {};
+    translations[lang].nav.academy = academyTranslations[lang].navAcademy;
+  }
+}
+
