@@ -478,11 +478,16 @@ class Router {
 
     document.getElementById('admin-post-edit-id').value = postId;
     document.getElementById('admin-post-edit-title').value = post.title || '';
-    document.getElementById('admin-post-edit-img').value = customImg || post.img || '';
-    document.getElementById('admin-post-edit-platform').value = post.platform || 'Facebook';
-    document.getElementById('admin-post-edit-tag').value = post.tag || '';
-    document.getElementById('admin-post-edit-excerpt').value = post.excerpt || '';
-    document.getElementById('admin-post-edit-fulltext').value = post.fullText || post.excerpt || '';
+    const imgEl = document.getElementById('admin-post-edit-img');
+    if (imgEl) imgEl.value = customImg || post.img || '';
+    const platformEl = document.getElementById('admin-post-edit-platform');
+    if (platformEl) platformEl.value = post.platform || 'Facebook';
+    const tagEl = document.getElementById('admin-post-edit-tag');
+    if (tagEl) tagEl.value = post.tag || '';
+    const excerptEl = document.getElementById('admin-post-edit-excerpt');
+    if (excerptEl) excerptEl.value = post.excerpt || '';
+    const fulltextEl = document.getElementById('admin-post-edit-fulltext');
+    if (fulltextEl) fulltextEl.value = post.fullText || post.excerpt || '';
 
     modal.classList.add('open');
     modal.style.display = 'flex';
