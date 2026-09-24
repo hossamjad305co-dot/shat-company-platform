@@ -1,0 +1,7 @@
+.agents
+.git
+.github
+*.log
+supabase
+copy_skills.ps1
+update_translations_with_academy.js

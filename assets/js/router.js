@@ -13,7 +13,8 @@ import {
   renderValuePartnershipsPage,
   renderContactPage,
   renderAcademyPage,
-  renderGoogleFormRegistration
+  renderGoogleFormRegistration,
+  renderCourseDetailPage
 } from './pages.js';
 import {
   submitAcademyEnrollment,
@@ -24,7 +25,13 @@ import {
 import {
   moodleStore,
   getMoodleCourses,
+  getCourseById,
   saveMoodleCourses,
+  addCustomCourse,
+  updateCourse,
+  deleteCourse,
+  getGlobalGoogleFormUrl,
+  setGlobalGoogleFormUrl,
   addCourseFile,
   toggleCourseStatus,
   sendCourseChatMessage,
@@ -98,26 +105,50 @@ class Router {
 
   handleRouting(forceRerender = false) {
     let hash = window.location.hash.replace('#/', '').replace('#', '').trim();
-    if (!hash || !this.routes[hash]) {
+    let isCourseDetail = false;
+    let courseId = null;
+
+    if (hash.startsWith('course/')) {
+      courseId = hash.replace('course/', '').split('?')[0].trim();
+      isCourseDetail = true;
+    } else if (hash.startsWith('course?') || hash.startsWith('courses?')) {
+      const searchParams = new URLSearchParams(hash.split('?')[1] || '');
+      courseId = searchParams.get('id') || searchParams.get('courseId');
+      isCourseDetail = true;
+    } else if (hash === 'course' || hash === 'courses') {
+      hash = 'academy';
+    }
+
+    if (!isCourseDetail && (!hash || !this.routes[hash])) {
       hash = 'home';
       window.location.hash = '#/home';
     }
 
-    if (!forceRerender && this.currentRoute === hash && document.getElementById('app-content')?.innerHTML !== '') {
+    const currentHashKey = isCourseDetail ? `course/${courseId}` : hash;
+    if (!forceRerender && this.currentRoute === currentHashKey && document.getElementById('app-content')?.innerHTML !== '') {
       return;
     }
 
-    this.currentRoute = hash;
+    this.currentRoute = currentHashKey;
     const t = translations[this.currentLang] || translations.ar;
-    const renderFn = this.routes[hash];
     const container = document.getElementById('app-content');
 
-    if (container && renderFn) {
+    if (container) {
       container.style.opacity = '0';
       setTimeout(() => {
-        container.innerHTML = renderFn(t);
-        this.updateActiveNavLinks(hash);
-        this.bindPageInteractions();
+        if (isCourseDetail) {
+          container.innerHTML = renderCourseDetailPage(t, courseId);
+          this.updateActiveNavLinks('academy');
+          this.bindPageInteractions();
+          this.bindCourseDetailInteractions(courseId);
+        } else {
+          const renderFn = this.routes[hash];
+          if (renderFn) {
+            container.innerHTML = renderFn(t);
+            this.updateActiveNavLinks(hash);
+            this.bindPageInteractions();
+          }
+        }
         window.scrollTo({ top: 0, behavior: 'smooth' });
         container.style.opacity = '1';
 
@@ -474,6 +505,100 @@ class Router {
       });
     }
 
+    // 7.1 Admin Course & Google Form Customizer
+    const btnToggleNewCourse = document.getElementById('btn-toggle-new-course-form');
+    const boxNewCourse = document.getElementById('box-new-course-form');
+    const btnCancelNewCourse = document.getElementById('btn-cancel-new-course');
+    const formNewCourse = document.getElementById('form-create-new-course');
+
+    if (btnToggleNewCourse && boxNewCourse) {
+      btnToggleNewCourse.addEventListener('click', () => {
+        const isHidden = boxNewCourse.style.display === 'none';
+        boxNewCourse.style.display = isHidden ? 'block' : 'none';
+      });
+    }
+
+    if (btnCancelNewCourse && boxNewCourse) {
+      btnCancelNewCourse.addEventListener('click', () => {
+        boxNewCourse.style.display = 'none';
+      });
+    }
+
+    // Save Global Google Form URL
+    const btnSaveGlobalGForm = document.getElementById('btn-save-global-gform');
+    if (btnSaveGlobalGForm) {
+      btnSaveGlobalGForm.addEventListener('click', () => {
+        const val = document.getElementById('admin-global-gform-input')?.value.trim();
+        if (val) {
+          setGlobalGoogleFormUrl(val);
+          alert('✓ تم حفظ وتحديث الرابط العام لاستمارة Google Form بنجاح!');
+        }
+      });
+    }
+
+    // Create New Course Submit
+    if (formNewCourse) {
+      formNewCourse.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const title = document.getElementById('new-course-title')?.value.trim();
+        const code = document.getElementById('new-course-code')?.value.trim();
+        const track = document.getElementById('new-course-track')?.value.trim();
+        const instructor = document.getElementById('new-course-instructor')?.value.trim();
+        const googleFormUrl = document.getElementById('new-course-gform-url')?.value.trim();
+        const driveFolderUrl = document.getElementById('new-course-drive-url')?.value.trim();
+        const duration = document.getElementById('new-course-duration')?.value.trim();
+        const schedule = document.getElementById('new-course-schedule')?.value.trim();
+        const overview = document.getElementById('new-course-overview')?.value.trim();
+
+        if (!title || !code) return;
+
+        const newCourse = addCustomCourse({
+          title,
+          code,
+          track,
+          instructor,
+          googleFormUrl: googleFormUrl || getGlobalGoogleFormUrl(),
+          driveFolderUrl: driveFolderUrl || 'https://drive.google.com/drive/folders/shat-materials',
+          duration,
+          schedule,
+          overview
+        });
+
+        alert(`✓ تم إدراج دورة « ${newCourse.title} » بنجاح في المنصة وتخصيص رابط Google Form وصفحتها المستقلة!`);
+        formNewCourse.reset();
+        if (boxNewCourse) boxNewCourse.style.display = 'none';
+        router.handleRouting(true);
+      });
+    }
+
+    // Update Individual Course Google Form & Drive Links
+    document.querySelectorAll('.btn-save-course-links').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const courseId = btn.getAttribute('data-course-id');
+        const gformVal = document.getElementById(`custom-gform-${courseId}`)?.value.trim();
+        const driveVal = document.getElementById(`custom-drive-${courseId}`)?.value.trim();
+
+        updateCourse(courseId, {
+          googleFormUrl: gformVal,
+          driveFolderUrl: driveVal
+        });
+
+        alert('✓ تم حفظ وتحديث روابط استمارة Google Form ومجلد Google Drive لهذه الدورة بنجاح!');
+      });
+    });
+
+    // Delete Course from Admin Table
+    document.querySelectorAll('.btn-delete-moodle-course').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const courseId = btn.getAttribute('data-course-id');
+        if (confirm('هل أنت متأكد من رغبتك في حذف هذه الدورة من المنصة؟')) {
+          deleteCourse(courseId);
+          alert('✓ تم حذف الدورة بنجاح.');
+          router.handleRouting(true);
+        }
+      });
+    });
+
     // 8. Teacher Training File Uploader
     const uploadForm = document.getElementById('teacher-file-upload-form');
     const dropzone = document.getElementById('teacher-dropzone');
@@ -723,6 +848,169 @@ class Router {
     if (postModal) {
       postModal.addEventListener('click', (e) => {
         if (e.target === postModal) closePostModal();
+      });
+    }
+  }
+
+  bindCourseDetailInteractions(courseId) {
+    const course = getCourseById(courseId) || getMoodleCourses()[0];
+    if (!course) return;
+
+    // 1. Course Tab switching
+    const courseTabBtns = document.querySelectorAll('.course-detail-tab-btn');
+    const coursePanes = document.querySelectorAll('.course-tab-pane');
+
+    courseTabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetTab = btn.getAttribute('data-course-tab');
+        courseTabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        coursePanes.forEach(pane => {
+          if (pane.id === 'course-pane-' + targetTab) {
+            pane.style.display = 'block';
+            pane.classList.add('active');
+          } else {
+            pane.style.display = 'none';
+            pane.classList.remove('active');
+          }
+        });
+      });
+    });
+
+    // 2. Modules accordion toggle
+    document.querySelectorAll('.module-accordion-header').forEach(hdr => {
+      hdr.addEventListener('click', () => {
+        const body = hdr.nextElementSibling;
+        if (body) {
+          const isHidden = body.style.display === 'none';
+          body.style.display = isHidden ? 'block' : 'none';
+        }
+      });
+    });
+
+    // 3. Assignment submit
+    const assignForm = document.getElementById('course-assignment-submit-form');
+    if (assignForm) {
+      assignForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('✓ تم تسليم التكليف بنجاح وإرساله للمشرف الأكاديمي لمراجعته ورصد الدرجة.');
+        assignForm.reset();
+      });
+    }
+
+    // 4. Course Chat send
+    const chatInput = document.getElementById('course-chat-input');
+    const chatSendBtn = document.getElementById('course-chat-send-btn');
+    const chatThread = document.getElementById('course-chat-thread');
+
+    const sendCourseMsg = () => {
+      if (!chatInput || !chatThread) return;
+      const text = chatInput.value.trim();
+      if (!text) return;
+
+      const user = authService.getCurrentUser() || { name: 'المتدرب' };
+      const timeNow = new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' });
+
+      sendCourseChatMessage(course.id, 'student', user.name, text);
+
+      const msgDiv = document.createElement('div');
+      msgDiv.className = 'chat-message-row outgoing';
+      msgDiv.innerHTML = `
+        <div class="chat-bubble">
+          <strong style="display: block; font-size: 0.8rem; margin-bottom: 3px;">${user.name}</strong>
+          ${text}
+          <span class="chat-bubble-time">${timeNow} ✓✓</span>
+        </div>
+      `;
+      chatThread.appendChild(msgDiv);
+      chatInput.value = '';
+      chatThread.scrollTop = chatThread.scrollHeight;
+
+      // Simulated Instructor response after 1.4s
+      setTimeout(() => {
+        const replyDiv = document.createElement('div');
+        replyDiv.className = 'chat-message-row incoming';
+        replyDiv.innerHTML = `
+          <div class="chat-bubble">
+            <strong style="display: block; font-size: 0.8rem; margin-bottom: 3px; color: #047857;">${course.instructor}</strong>
+            أهلاً بك، تم استلام سؤالك بخصوص (${text.substring(0, 32)}...). سنناقش هذه النقطة بالتفصيل، كما يمكنك مراجعة الدليل المرفق في تبويب الحقائب ومجلد Google Drive.
+            <span class="chat-bubble-time">${new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' })}</span>
+          </div>
+        `;
+        chatThread.appendChild(replyDiv);
+        chatThread.scrollTop = chatThread.scrollHeight;
+      }, 1400);
+    };
+
+    if (chatSendBtn && chatInput) {
+      chatSendBtn.addEventListener('click', sendCourseMsg);
+      chatInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') sendCourseMsg();
+      });
+    }
+
+    // 5. Instructor Upload Form for this course
+    const uploadForm = document.getElementById('course-instructor-upload-form');
+    if (uploadForm) {
+      uploadForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const title = document.getElementById('instructor-upload-title')?.value.trim();
+        const type = document.getElementById('instructor-upload-type')?.value || 'PDF';
+        const driveLink = document.getElementById('instructor-upload-drive')?.value.trim();
+
+        if (!title) return;
+
+        addCourseFile(course.id, {
+          name: title + (type === 'PDF' ? '.pdf' : type === 'XLSX' ? '.xlsx' : '.pptx'),
+          type,
+          driveLink,
+          size: (Math.random() * 5 + 1).toFixed(1) + ' MB'
+        });
+
+        alert(`✓ تم رفع المادة « ${title} » وحفظها في مجلد الدورة على Google Drive بنجاح!`);
+        uploadForm.reset();
+        router.handleRouting(true);
+      });
+    }
+
+    // 6. Admin Course Customizer Form for this course
+    const adminCourseForm = document.getElementById('form-admin-course-customizer');
+    if (adminCourseForm) {
+      adminCourseForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const title = document.getElementById('admin-course-title')?.value.trim();
+        const code = document.getElementById('admin-course-code')?.value.trim();
+        const googleFormUrl = document.getElementById('admin-course-gform')?.value.trim();
+        const driveFolderUrl = document.getElementById('admin-course-drive')?.value.trim();
+        const instructor = document.getElementById('admin-course-instructor')?.value.trim();
+        const duration = document.getElementById('admin-course-duration')?.value.trim();
+        const overview = document.getElementById('admin-course-overview')?.value.trim();
+
+        updateCourse(course.id, {
+          title,
+          code,
+          googleFormUrl,
+          driveFolderUrl,
+          instructor,
+          duration,
+          overview
+        });
+
+        alert('✓ تم حفظ وتحديث بيانات الدورة ورابط Google Form ورابط Google Drive بنجاح!');
+        router.handleRouting(true);
+      });
+    }
+
+    // 7. Delete Course Trigger
+    const btnDeleteTrigger = document.querySelector('.btn-delete-course-trigger');
+    if (btnDeleteTrigger) {
+      btnDeleteTrigger.addEventListener('click', () => {
+        if (confirm(`هل أنت متأكد من رغبتك في حذف دورة « ${course.title} » نهائياً؟`)) {
+          deleteCourse(course.id);
+          alert('✓ تم حذف الدورة من النظام.');
+          window.location.hash = '#/academy';
+        }
       });
     }
   }
