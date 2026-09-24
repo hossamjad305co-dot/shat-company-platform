@@ -85,7 +85,7 @@ class AuthService {
 
   loginWithGoogle() {
     const user = {
-      email: 'user@shatgrowth.com',
+      email: 'trainee@shat.com',
       role: 'student',
       roleTitle: 'طالب / متدرب',
       name: 'مستخدم Google',

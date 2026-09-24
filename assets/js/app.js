@@ -40,6 +40,7 @@ class App {
     this.renderHeader(t);
     this.renderFooter(t);
     this.renderModal(t);
+    this.renderAuthModalTexts();
 
     router.setLang(lang);
   }
@@ -51,9 +52,13 @@ class App {
 
     let moodleLink = '';
     if (isLoggedIn && user) {
-      let roleBadgeText = '🎓 مساحتي في المودل';
-      if (user.role === 'instructor') roleBadgeText = '👨‍🏫 بوابة التدريب (المودل)';
-      if (user.role === 'admin') roleBadgeText = '⚙️ لوحة الإدارة (المودل)';
+      let roleBadgeText = t.nav.academy || '🎓 مساحتي في المودل';
+      if (user.role === 'instructor') {
+        roleBadgeText = this.currentLang === 'ar' ? '👨‍🏫 بوابة التدريب (المودل)' : (this.currentLang === 'fr' ? '👨‍🏫 Portail Formateur' : '👨‍🏫 Trainer Portal');
+      }
+      if (user.role === 'admin') {
+        roleBadgeText = this.currentLang === 'ar' ? '⚙️ لوحة الإدارة (المودل)' : (this.currentLang === 'fr' ? '⚙️ Administration' : '⚙️ LMS Admin');
+      }
 
       moodleLink = `<a href="#/academy" class="nav-academy-badge" data-route="academy"><span>${roleBadgeText}</span></a>`;
     }
@@ -92,9 +97,30 @@ class App {
     const pillConsulting = document.getElementById('top-pill-consulting');
     if (pillConsulting) pillConsulting.textContent = t.pillConsulting;
 
+    // Auth Button Label update based on language
+    const authLabel = document.getElementById('auth-btn-label');
+    if (authLabel) {
+      if (isLoggedIn && user) {
+        if (user.role === 'student') authLabel.textContent = this.currentLang === 'ar' ? 'طالب / متدرب' : (this.currentLang === 'fr' ? 'Étudiant' : this.currentLang === 'es' ? 'Estudiante' : this.currentLang === 'it' ? 'Studente' : 'Student');
+        else if (user.role === 'instructor') authLabel.textContent = this.currentLang === 'ar' ? 'مدرب / أستاذ' : (this.currentLang === 'fr' ? 'Formateur' : this.currentLang === 'es' ? 'Formador' : this.currentLang === 'it' ? 'Docente' : 'Instructor');
+        else if (user.role === 'admin') authLabel.textContent = this.currentLang === 'ar' ? 'مسؤول الإدارة' : (this.currentLang === 'fr' ? 'Admin' : this.currentLang === 'es' ? 'Administrador' : this.currentLang === 'it' ? 'Amministratore' : 'Admin');
+        else authLabel.textContent = user.name;
+      } else {
+        const signLabels = { ar: 'دخول / حسابي', en: 'Sign In / Account', fr: 'Connexion / Compte', es: 'Acceso / Mi Cuenta', it: 'Accedi / Account' };
+        authLabel.textContent = signLabels[this.currentLang] || 'دخول / حسابي';
+      }
+    }
+
     // Mobile Drawer Links (Clean, No Numbers, Role-based Moodle)
     const mobileNavList = document.getElementById('mobile-nav-links');
     if (mobileNavList) {
+      const contactLabels = {
+        ar: 'تواصل مؤسسي مباشر:',
+        en: 'Corporate Direct Contact:',
+        fr: 'Contact Institutionnel Direct :',
+        es: 'Contacto Institucional Directo:',
+        it: 'Contatto Istituzionale Diretto:'
+      };
       mobileNavList.innerHTML = `
         <a href="#/discover" class="mobile-link" data-route="discover">${t.nav.s01 || 'اكتشف SHAT'}</a>
         <a href="#/our-story" class="mobile-link" data-route="our-story">${t.nav.s02 || 'قصتنا'}</a>
@@ -107,13 +133,13 @@ class App {
         ${isLoggedIn && user ? `
           <div style="border-top: 1px solid var(--border-subtle); margin: 6px 0; padding-top: 8px;">
             <a href="#/academy" class="mobile-link" style="color: var(--shat-green-700); font-weight: 800;">
-              🎓 ${user.roleTitle}: مساحة المودل
+              🎓 ${t.nav.academy || 'مساحة المودل'}
             </a>
           </div>
         ` : ''}
-        <div style="margin-top: 10px; padding: 12px; background: var(--shat-navy-50); border-radius: var(--radius-sm); font-size: 0.85rem; color: var(--shat-navy-900);">
-          <div style="font-weight: 700; margin-bottom: 4px;">تواصل مؤسسي سريع:</div>
-          <div>✆ +972592879621</div>
+        <div style="margin-top: 10px; padding: 12px; background: #f8fafc; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); font-size: 0.85rem; color: var(--shat-navy-900);">
+          <div style="font-weight: 700; margin-bottom: 4px;">${contactLabels[this.currentLang] || 'تواصل مؤسسي سريع:'}</div>
+          <div>✆ +972 59 287 9621</div>
           <div>✉ shat.company26@gmail.com</div>
         </div>
       `;
@@ -131,11 +157,33 @@ class App {
   }
 
   renderFooter(t) {
+    const fd = t.footerData || {};
     const footerAbout = document.getElementById('footer-about-text');
-    if (footerAbout) footerAbout.textContent = t.footer?.aboutText || 'شركة شات للتنمية والتطوير — شركة متخصصة في التدريب، بناء القدرات، الاستشارات والتطوير المؤسسي.';
+    if (footerAbout) footerAbout.textContent = fd.aboutText || t.companyTagline;
 
     const footerQuickTitle = document.getElementById('footer-quick-title');
-    if (footerQuickTitle) footerQuickTitle.textContent = 'الأقسام المؤسسية';
+    if (footerQuickTitle) footerQuickTitle.textContent = fd.quickSectionsTitle || 'الأقسام المؤسسية';
+
+    const footerStandardsTitle = document.getElementById('footer-standards-title');
+    if (footerStandardsTitle) footerStandardsTitle.textContent = fd.standardsTitle || 'المرجعيات والمعايير';
+
+    const footerContactTitle = document.getElementById('footer-contact-title');
+    if (footerContactTitle) footerContactTitle.textContent = fd.contactTitle || 'التواصل المؤسسي والشبكات';
+
+    const footerCoverageNote = document.getElementById('footer-coverage-note');
+    if (footerCoverageNote) footerCoverageNote.textContent = fd.coverageNote || '📍 فلسطين • خدماتنا تغطي النطاق الإقليمي والدولي';
+
+    const footerLegalCopy = document.getElementById('footer-legal-copy');
+    if (footerLegalCopy) footerLegalCopy.textContent = fd.legalNotice || 'جميع الحقوق محفوظة © 2026 شركة شات للتنمية والتطوير (SHAT Development & Growth).';
+
+    const footerPrivacyPledge = document.getElementById('footer-privacy-pledge');
+    if (footerPrivacyPledge) footerPrivacyPledge.textContent = fd.privacyPledge || 'ملتزمون بأعلى معايير السرية، النزاهة، وحماية البيانات المؤسسية.';
+
+    const footerInstaBtn = document.getElementById('footer-insta-btn');
+    if (footerInstaBtn) footerInstaBtn.textContent = fd.instaBtn || '📷 إنستغرام';
+
+    const footerFbBtn = document.getElementById('footer-fb-btn');
+    if (footerFbBtn) footerFbBtn.textContent = fd.fbBtn || '🌐 فيسبوك';
 
     const footerLinks = document.getElementById('footer-links');
     if (footerLinks) {
@@ -212,6 +260,89 @@ class App {
         });
       }
     }
+  }
+
+  renderAuthModalTexts() {
+    const authTitles = {
+      ar: {
+        title: "تسجيل الدخول إلى المنصة",
+        subtitle: "الوصول إلى نظام المودل، ملفات الدورات، المحادثات، وبوابة الطالب والأستاذ",
+        tabWa: "📱 رمز التحقق عبر واتساب",
+        tabGoogle: "🌐 حساب Google",
+        phoneLabel: "رقم واتساب الكامل (مع رمز الدولة):",
+        waHint: "يتم إرسال رمز التحقق المباشر عبر بوابة WaForge API",
+        roleLabel: "اختر دورك في النظام:",
+        sendBtn: "إرسال رمز التحقق عبر واتساب (WaForge)",
+        googleDesc: "تسجيل الدخول السريع الموحد بحساب Google المؤسسي",
+        googleBtn: "الدخول عبر Google"
+      },
+      en: {
+        title: "Sign In to Platform",
+        subtitle: "Access Moodle LMS, training courses, direct Drive downloads, and staff communications",
+        tabWa: "📱 WhatsApp OTP Code",
+        tabGoogle: "🌐 Google Account",
+        phoneLabel: "Full WhatsApp Number (with country code):",
+        waHint: "Instant one-time security code (OTP) sent directly via WaForge API",
+        roleLabel: "Select Your System Role:",
+        sendBtn: "Send Security OTP via WhatsApp (WaForge)",
+        googleDesc: "Seamless institutional single sign-on with verified Google Account",
+        googleBtn: "Continue with Google"
+      },
+      fr: {
+        title: "Connexion à la Plateforme",
+        subtitle: "Accédez au système Moodle, aux cours, aux téléchargements Drive et aux échanges",
+        tabWa: "📱 Code OTP WhatsApp",
+        tabGoogle: "🌐 Compte Google",
+        phoneLabel: "Numéro WhatsApp complet (avec indicatif pays) :",
+        waHint: "Code de vérification instantané envoyé via l'API WaForge",
+        roleLabel: "Sélectionnez votre rôle :",
+        sendBtn: "Envoyer le code OTP par WhatsApp",
+        googleDesc: "Connexion rapide avec votre compte Google institutionnel",
+        googleBtn: "Continuer avec Google"
+      },
+      es: {
+        title: "Iniciar Sesión en la Plataforma",
+        subtitle: "Acceda al sistema Moodle, cursos, descargas directas de Drive y chats",
+        tabWa: "📱 Código OTP por WhatsApp",
+        tabGoogle: "🌐 Cuenta Google",
+        phoneLabel: "Número completo de WhatsApp (con código de país):",
+        waHint: "Código de seguridad instantáneo enviado directamente vía WaForge API",
+        roleLabel: "Seleccione su rol en el sistema:",
+        sendBtn: "Enviar código OTP por WhatsApp",
+        googleDesc: "Inicio de sesión institucional rápido con cuenta de Google",
+        googleBtn: "Continuar con Google"
+      },
+      it: {
+        title: "Accedi alla Piattaforma",
+        subtitle: "Accedi al sistema Moodle, ai corsi, ai download diretti di Drive e alle chat",
+        tabWa: "📱 Codice OTP WhatsApp",
+        tabGoogle: "🌐 Account Google",
+        phoneLabel: "Numero WhatsApp completo (con prefisso internazionale):",
+        waHint: "Codice di sicurezza istantaneo inviato direttamente via API WaForge",
+        roleLabel: "Seleziona il tuo ruolo nel sistema:",
+        sendBtn: "Invia codice OTP via WhatsApp",
+        googleDesc: "Accesso istituzionale rapido con account Google verificato",
+        googleBtn: "Continua con Google"
+      }
+    };
+
+    const at = authTitles[this.currentLang] || authTitles.ar;
+    const titleEl = document.getElementById('auth-modal-title');
+    if (titleEl) titleEl.textContent = at.title;
+    const subEl = document.getElementById('auth-modal-subtitle');
+    if (subEl) subEl.textContent = at.subtitle;
+    const tabWa = document.getElementById('tab-auth-whatsapp');
+    if (tabWa) tabWa.textContent = at.tabWa;
+    const tabG = document.getElementById('tab-auth-google');
+    if (tabG) tabG.textContent = at.tabGoogle;
+    const phoneLbl = document.getElementById('auth-phone-label');
+    if (phoneLbl) phoneLbl.textContent = at.phoneLabel;
+    const waH = document.getElementById('auth-wa-hint');
+    if (waH) waH.textContent = at.waHint;
+    const roleLbl = document.getElementById('auth-role-label');
+    if (roleLbl) roleLbl.textContent = at.roleLabel;
+    const sendB = document.getElementById('btn-send-wa-otp');
+    if (sendB) sendB.textContent = at.sendBtn;
   }
 
   initAuthUI() {

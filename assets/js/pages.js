@@ -35,10 +35,11 @@ export function renderHomePage(t) {
           </div>
           <div class="hero-badge-col">
             <div class="hero-emblem-card">
-              <img src="assets/logo/logo-badge.jpg" alt="SHAT Development & Growth Emblem" class="hero-badge-img" onerror="this.src='assets/logo/logo-symbol.jpg'">
-              <div style="font-weight: 800; font-size: 1.1rem; color: #ffffff; margin-bottom: 4px;">${t.companyShortName}</div>
-              <div style="font-size: 0.8rem; color: #81c784;">${t.companyMotto}</div>
+              <img src="assets/logo/logo-banner.jpg" alt="SHAT Development & Growth" class="hero-badge-img" onerror="this.src='assets/logo/logo-clean.jpg'">
+              <div style="font-weight: 800; font-size: 1.15rem; color: var(--shat-navy-950); margin-bottom: 4px;">${t.companyShortName}</div>
+              <div style="font-size: 0.82rem; color: var(--shat-green-700); font-weight: 700;">${t.companyMotto}</div>
             </div>
+          </div>
           </div>
         </div>
       </div>
@@ -66,6 +67,50 @@ export function renderHomePage(t) {
         </div>
       </div>
     </div>
+
+    <!-- Corporate Social Media & Field Activities Showcase -->
+    <section class="social-showcase-section">
+      <div class="container">
+        <div class="section-intro-block" style="text-align: center; margin-bottom: 36px;">
+          <div class="hero-badge-pill" style="margin: 0 auto 12px;">
+            <span>★</span> ${t.socialSection?.badge || 'نشاطات ميدانية وفعاليات'}
+          </div>
+          <h2 class="section-intro-title" style="font-size: 2.1rem; color: var(--shat-navy-950);">
+            ${t.socialSection?.title || 'منشورات وفعاليات المنصات الرسمية'}
+          </h2>
+          <p class="section-intro-desc" style="max-width: 700px; margin: 0 auto; color: var(--text-secondary);">
+            ${t.socialSection?.subtitle || 'تابع أحدث الورش التدريبية، البعثات الميدانية، وبرامج التطوير المؤسسي المنشورة عبر قنواتنا على فيسبوك وإنستغرام.'}
+          </p>
+        </div>
+
+        <div class="social-posts-grid">
+          ${(t.socialSection?.posts || []).map(post => `
+            <article class="social-card">
+              <div class="social-card-img-wrap">
+                <img src="${post.img}" alt="${post.title}" class="social-card-img" onerror="this.src='assets/logo/logo-banner.jpg'">
+                <div class="social-platform-badge">
+                  <span>${post.platform === 'Instagram' ? '📷 Instagram' : '🌐 Facebook'}</span>
+                </div>
+              </div>
+              <div class="social-card-body">
+                <div class="social-card-meta">
+                  <span class="social-card-tag">${post.tag}</span>
+                  <span class="social-card-date">${post.date}</span>
+                </div>
+                <h3 class="social-card-title">${post.title}</h3>
+                <p class="social-card-excerpt">${post.excerpt}</p>
+                <div class="social-card-footer">
+                  <a href="${post.link}" target="_blank" rel="noopener" class="social-view-link">
+                    <span>${post.platform === 'Instagram' ? (t.socialSection?.viewInsta || 'شاهد على إنستغرام ↗') : (t.socialSection?.viewFb || 'شاهد على فيسبوك ↗')}</span>
+                  </a>
+                  <span style="font-size: 0.78rem; color: var(--text-muted);">@shat.development.growth</span>
+                </div>
+              </div>
+            </article>
+          `).join('')}
+        </div>
+      </div>
+    </section>
 
     <section class="home-hub-section">
       <div class="container">

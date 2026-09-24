@@ -96,10 +96,10 @@ export const moodleStore = {
 
   // Enrolled Students Roster (Admin / Teacher View)
   students: [
-    { id: "s1", name: "أحمد العتيبي", email: "ahmed@example.com", phone: "+966551234567", courseId: "shat-chs-master", progress: 75, status: "active", attendance: "92%" },
-    { id: "s2", name: "سارة محمود", email: "sara@example.com", phone: "+970591234567", courseId: "shat-psea-expert", progress: 40, status: "active", attendance: "88%" },
-    { id: "s3", name: "فيصل الشمري", email: "faisal@example.com", phone: "+966509876543", courseId: "shat-oecd-eval", progress: 90, status: "active", attendance: "98%" },
-    { id: "s4", name: "منى الدوسري", email: "mona@example.com", phone: "+966541122334", courseId: "shat-tot-mastery", progress: 15, status: "pending", attendance: "65%" }
+    { id: "s1", name: "أحمد خليل", email: "ahmed.k@example.com", phone: "+972599123456", courseId: "shat-chs-master", progress: 75, status: "active", attendance: "92%" },
+    { id: "s2", name: "سارة محمود", email: "sara.m@example.com", phone: "+972598234567", courseId: "shat-psea-expert", progress: 40, status: "active", attendance: "88%" },
+    { id: "s3", name: "رامي الحداد", email: "rami.h@example.com", phone: "+972597345678", courseId: "shat-oecd-eval", progress: 90, status: "active", attendance: "98%" },
+    { id: "s4", name: "مريم النجار", email: "mariam.n@example.com", phone: "+972596456789", courseId: "shat-tot-mastery", progress: 15, status: "pending", attendance: "65%" }
   ]
 };
 
