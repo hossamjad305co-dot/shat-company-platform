@@ -1,4 +1,5 @@
 // Shat Company Platform - Main Application Controller
+// Role-Based Moodle Access & Clean Typography (No Numbers)
 
 import { translations } from './translations.js';
 import { router } from './router.js';
@@ -45,17 +46,29 @@ class App {
 
   renderHeader(t) {
     const headerNav = document.getElementById('desktop-nav');
+    const user = authService.getCurrentUser();
+    const isLoggedIn = authService.isLoggedIn();
+
+    let moodleLink = '';
+    if (isLoggedIn && user) {
+      let roleBadgeText = '🎓 مساحتي في المودل';
+      if (user.role === 'instructor') roleBadgeText = '👨‍🏫 بوابة التدريب (المودل)';
+      if (user.role === 'admin') roleBadgeText = '⚙️ لوحة الإدارة (المودل)';
+
+      moodleLink = `<a href="#/academy" class="nav-academy-badge" data-route="academy"><span>${roleBadgeText}</span></a>`;
+    }
+
     if (headerNav) {
       headerNav.innerHTML = `
-        <a href="#/discover" class="nav-link" data-route="discover"><span class="nav-num-badge">01</span><span>${t.nav.s01 || 'اكتشف SHAT'}</span></a>
-        <a href="#/our-story" class="nav-link" data-route="our-story"><span class="nav-num-badge">02</span><span>${t.nav.s02 || 'قصتنا'}</span></a>
-        <a href="#/what-we-make" class="nav-link" data-route="what-we-make"><span class="nav-num-badge">03</span><span>${t.nav.s03 || 'ماذا نصنع؟'}</span></a>
-        <a href="#/tracks" class="nav-link" data-route="tracks"><span class="nav-num-badge">04</span><span>${t.nav.s04 || 'مساراتنا'}</span></a>
-        <a href="#/experiences" class="nav-link" data-route="experiences"><span class="nav-num-badge">05</span><span>${t.nav.s05 || 'تجاربنا'}</span></a>
-        <a href="#/impact" class="nav-link" data-route="impact"><span class="nav-num-badge">06</span><span>${t.nav.s06 || 'أثرنا'}</span></a>
-        <a href="#/knowledge-hub" class="nav-link" data-route="knowledge-hub"><span class="nav-num-badge">07</span><span>${t.nav.s07 || 'مساحة المعرفة'}</span></a>
-        <a href="#/build-impact" class="nav-link" data-route="build-impact"><span class="nav-num-badge">08</span><span>${t.nav.s08 || 'لنبني الأثر معًا'}</span></a>
-        <a href="#/academy" class="nav-academy-badge" data-route="academy"><span>🎓</span><span>${t.nav.academy || 'نظام المودل'}</span></a>
+        <a href="#/discover" class="nav-link" data-route="discover"><span>${t.nav.s01 || 'اكتشف SHAT'}</span></a>
+        <a href="#/our-story" class="nav-link" data-route="our-story"><span>${t.nav.s02 || 'قصتنا'}</span></a>
+        <a href="#/what-we-make" class="nav-link" data-route="what-we-make"><span>${t.nav.s03 || 'ماذا نصنع؟'}</span></a>
+        <a href="#/tracks" class="nav-link" data-route="tracks"><span>${t.nav.s04 || 'مساراتنا'}</span></a>
+        <a href="#/experiences" class="nav-link" data-route="experiences"><span>${t.nav.s05 || 'تجاربنا'}</span></a>
+        <a href="#/impact" class="nav-link" data-route="impact"><span>${t.nav.s06 || 'أثرنا'}</span></a>
+        <a href="#/knowledge-hub" class="nav-link" data-route="knowledge-hub"><span>${t.nav.s07 || 'مساحة المعرفة'}</span></a>
+        <a href="#/build-impact" class="nav-link" data-route="build-impact"><span>${t.nav.s08 || 'لنبني الأثر معًا'}</span></a>
+        ${moodleLink}
       `;
     }
 
@@ -79,29 +92,41 @@ class App {
     const pillConsulting = document.getElementById('top-pill-consulting');
     if (pillConsulting) pillConsulting.textContent = t.pillConsulting;
 
-    // Mobile Drawer Links (Numbered 01 to 08 + Moodle)
+    // Mobile Drawer Links (Clean, No Numbers, Role-based Moodle)
     const mobileNavList = document.getElementById('mobile-nav-links');
     if (mobileNavList) {
       mobileNavList.innerHTML = `
-        <a href="#/discover" class="mobile-link" data-route="discover"><span class="nav-num-badge">01</span> ${t.nav.s01 || 'اكتشف SHAT'}</a>
-        <a href="#/our-story" class="mobile-link" data-route="our-story"><span class="nav-num-badge">02</span> ${t.nav.s02 || 'قصتنا'}</a>
-        <a href="#/what-we-make" class="mobile-link" data-route="what-we-make"><span class="nav-num-badge">03</span> ${t.nav.s03 || 'ماذا نصنع؟'}</a>
-        <a href="#/tracks" class="mobile-link" data-route="tracks"><span class="nav-num-badge">04</span> ${t.nav.s04 || 'مساراتنا'}</a>
-        <a href="#/experiences" class="mobile-link" data-route="experiences"><span class="nav-num-badge">05</span> ${t.nav.s05 || 'تجاربنا'}</a>
-        <a href="#/impact" class="mobile-link" data-route="impact"><span class="nav-num-badge">06</span> ${t.nav.s06 || 'أثرنا'}</a>
-        <a href="#/knowledge-hub" class="mobile-link" data-route="knowledge-hub"><span class="nav-num-badge">07</span> ${t.nav.s07 || 'مساحة المعرفة'}</a>
-        <a href="#/build-impact" class="mobile-link" data-route="build-impact"><span class="nav-num-badge">08</span> ${t.nav.s08 || 'لنبني الأثر معًا'}</a>
-        <div style="border-top: 1px solid var(--border-subtle); margin: 6px 0; padding-top: 8px;">
-          <a href="#/academy" class="mobile-link" style="color: var(--shat-green-700); font-weight: 800;">
-            🎓 ${t.nav.academy || 'أكاديمية SHAT (نظام المودل)'}
-          </a>
-        </div>
+        <a href="#/discover" class="mobile-link" data-route="discover">${t.nav.s01 || 'اكتشف SHAT'}</a>
+        <a href="#/our-story" class="mobile-link" data-route="our-story">${t.nav.s02 || 'قصتنا'}</a>
+        <a href="#/what-we-make" class="mobile-link" data-route="what-we-make">${t.nav.s03 || 'ماذا نصنع؟'}</a>
+        <a href="#/tracks" class="mobile-link" data-route="tracks">${t.nav.s04 || 'مساراتنا'}</a>
+        <a href="#/experiences" class="mobile-link" data-route="experiences">${t.nav.s05 || 'تجاربنا'}</a>
+        <a href="#/impact" class="mobile-link" data-route="impact">${t.nav.s06 || 'أثرنا'}</a>
+        <a href="#/knowledge-hub" class="mobile-link" data-route="knowledge-hub">${t.nav.s07 || 'مساحة المعرفة'}</a>
+        <a href="#/build-impact" class="mobile-link" data-route="build-impact">${t.nav.s08 || 'لنبني الأثر معًا'}</a>
+        ${isLoggedIn && user ? `
+          <div style="border-top: 1px solid var(--border-subtle); margin: 6px 0; padding-top: 8px;">
+            <a href="#/academy" class="mobile-link" style="color: var(--shat-green-700); font-weight: 800;">
+              🎓 ${user.roleTitle}: مساحة المودل
+            </a>
+          </div>
+        ` : ''}
         <div style="margin-top: 10px; padding: 12px; background: var(--shat-navy-50); border-radius: var(--radius-sm); font-size: 0.85rem; color: var(--shat-navy-900);">
           <div style="font-weight: 700; margin-bottom: 4px;">تواصل مؤسسي سريع:</div>
           <div>✆ +972592879621</div>
           <div>✉ shat.company26@gmail.com</div>
         </div>
       `;
+    }
+
+    // Update Bottom Nav Bar: only show Moodle if logged in
+    const bottomAcademyItem = document.querySelector('.bottom-nav-item[data-route="academy"]');
+    if (bottomAcademyItem) {
+      if (isLoggedIn) {
+        bottomAcademyItem.style.display = 'flex';
+      } else {
+        bottomAcademyItem.style.display = 'none';
+      }
     }
   }
 
@@ -115,15 +140,14 @@ class App {
     const footerLinks = document.getElementById('footer-links');
     if (footerLinks) {
       footerLinks.innerHTML = `
-        <a href="#/discover">${t.nav.s01 || '01 — اكتشف SHAT'}</a>
-        <a href="#/our-story">${t.nav.s02 || '02 — قصتنا'}</a>
-        <a href="#/what-we-make">${t.nav.s03 || '03 — ماذا نصنع؟'}</a>
-        <a href="#/tracks">${t.nav.s04 || '04 — مساراتنا'}</a>
-        <a href="#/experiences">${t.nav.s05 || '05 — تجاربنا'}</a>
-        <a href="#/impact">${t.nav.s06 || '06 — أثرنا'}</a>
-        <a href="#/knowledge-hub">${t.nav.s07 || '07 — مساحة المعرفة'}</a>
-        <a href="#/build-impact">${t.nav.s08 || '08 — لنبني الأثر معًا'}</a>
-        <a href="#/academy" style="color: #a7f3d0; font-weight: 700;">🎓 أكاديمية SHAT (نظام المودل)</a>
+        <a href="#/discover">${t.nav.s01 || 'اكتشف SHAT'}</a>
+        <a href="#/our-story">${t.nav.s02 || 'قصتنا'}</a>
+        <a href="#/what-we-make">${t.nav.s03 || 'ماذا نصنع؟'}</a>
+        <a href="#/tracks">${t.nav.s04 || 'مساراتنا'}</a>
+        <a href="#/experiences">${t.nav.s05 || 'تجاربنا'}</a>
+        <a href="#/impact">${t.nav.s06 || 'أثرنا'}</a>
+        <a href="#/knowledge-hub">${t.nav.s07 || 'مساحة المعرفة'}</a>
+        <a href="#/build-impact">${t.nav.s08 || 'لنبني الأثر معًا'}</a>
       `;
     }
   }
@@ -214,18 +238,34 @@ class App {
       const user = authService.getCurrentUser();
       const label = document.getElementById('auth-btn-label');
       if (user && label) {
-        label.textContent = `${user.roleTitle}: ${user.name}`;
+        label.textContent = user.roleTitle;
         authBtn.classList.add('logged-in');
+        authBtn.title = `حسابك: ${user.name} (${user.roleTitle}) - انقر لتسجيل الخروج`;
       } else if (label) {
         label.textContent = 'دخول / حسابي';
         authBtn.classList.remove('logged-in');
+        authBtn.title = 'تسجيل الدخول إلى المنصة والمودل';
       }
+      // Re-render header to show/hide Moodle access
+      const t = translations[this.currentLang] || translations.ar;
+      this.renderHeader(t);
     };
 
     updateAuthBtn();
 
     if (authBtn && authModal) {
       authBtn.addEventListener('click', () => {
+        const user = authService.getCurrentUser();
+        if (user) {
+          // Confirm logout if already logged in
+          if (confirm(`أنت مسجل حالياً بصفتك: (${user.roleTitle} - ${user.name}).\nهل ترغب في تسجيل الخروج؟`)) {
+            authService.logout();
+            alert('✓ تم تسجيل الخروج بنجاح.');
+            updateAuthBtn();
+            window.location.hash = '#/discover';
+            return;
+          }
+        }
         authModal.classList.add('open');
       });
     }
@@ -241,6 +281,19 @@ class App {
         if (e.target === authModal) authModal.classList.remove('open');
       });
     }
+
+    // Gate button inside Moodle page (when unauthenticated user clicks to log in)
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('#btn-gate-open-auth')) {
+        if (authModal) authModal.classList.add('open');
+      }
+      if (e.target.closest('#btn-moodle-logout') || e.target.closest('#btn-portal-logout')) {
+        authService.logout();
+        alert('✓ تم تسجيل الخروج بنجاح.');
+        updateAuthBtn();
+        window.location.hash = '#/discover';
+      }
+    });
 
     // Tabs toggle
     if (tabWa && tabGoogle && paneWa && paneGoogle) {
@@ -284,7 +337,6 @@ class App {
           if (waTargetDisplay) waTargetDisplay.textContent = phone;
           if (demoCodeAlert) demoCodeAlert.textContent = `رمز التحقق الخاص بك هو: [ ${res.otpCode} ]`;
 
-          // Auto-fill first box for smooth experience
           document.getElementById('otp-d1')?.focus();
         }
       });
@@ -331,21 +383,13 @@ class App {
 
         const res = authService.verifyOtp(code);
         if (res.success) {
-          alert(`✓ مرحباً بك! تم تسجيل الدخول بنجاح بصفتك (${res.user.roleTitle}).`);
+          alert(`✓ مرحباً بك! تم تسجيل الدخول بنجاح بصفتك (${res.user.roleTitle}).\nسيتم توجيهك الآن إلى واجهتك الخاصة في نظام المودل.`);
           authModal.classList.remove('open');
           updateAuthBtn();
 
-          // If role is teacher or admin, switch to moodle view
+          // Redirect to Moodle and trigger re-render
           window.location.hash = '#/academy';
-          setTimeout(() => {
-            if (res.user.role === 'instructor') {
-              document.querySelector('[data-tab="tab-moodle-teacher"]')?.click();
-            } else if (res.user.role === 'admin') {
-              document.querySelector('[data-tab="tab-moodle-admin"]')?.click();
-            } else {
-              document.querySelector('[data-tab="tab-moodle-student"]')?.click();
-            }
-          }, 300);
+          router.handleRouting(true);
         } else {
           alert(res.error || 'رمز التحقق غير صحيح');
         }
@@ -356,10 +400,11 @@ class App {
     if (btnGoogleLogin) {
       btnGoogleLogin.addEventListener('click', () => {
         const user = authService.loginWithGoogle();
-        alert(`✓ تم تسجيل الدخول بحساب Google المؤسسي بنجاح.`);
+        alert(`✓ تم تسجيل الدخول بحساب Google المؤسسي بنجاح (${user.roleTitle}).`);
         authModal.classList.remove('open');
         updateAuthBtn();
         window.location.hash = '#/academy';
+        router.handleRouting(true);
       });
     }
   }

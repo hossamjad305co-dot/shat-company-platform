@@ -2318,35 +2318,186 @@ input:checked + .switch-slider:before {
   box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
 }
 
+
+
 /* ==========================================================================
-   RESPONSIVE DESIGN & MEDIA QUERIES (Fixes "Having to Zoom Out" issue!)
+   RESPONSIVE DESIGN & EXECUTIVE HEADER SYSTEM
+   (Guarantees all action buttons are 100% visible on all viewports without zoom!)
    ========================================================================== */
-@media (max-width: 1360px) {
+
+/* Completely hide numbers everywhere */
+.nav-num-badge {
+  display: none !important;
+}
+
+/* Base Header Layout */
+.main-header {
+  position: fixed;
+  top: 34px;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  z-index: var(--z-header);
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
+  box-shadow: 0 2px 14px rgba(10, 31, 56, 0.06);
+  display: flex;
+  align-items: center;
+  transition: all var(--transition-normal);
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 6px;
+  max-width: 100%;
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.brand-emblem {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+}
+
+.brand-text-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--shat-navy-950);
+  line-height: 1.1;
+}
+
+.brand-sub {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--shat-green-700);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0; /* NEVER ALLOW ACTIONS TO BE CRUSHED */
+}
+
+/* Action button stylings */
+.header-login-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--shat-navy-900);
+  background: #ffffff;
+  border: 1.5px solid var(--border-prominent);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.header-login-btn:hover {
+  border-color: var(--shat-green-600);
+  background: var(--shat-green-50);
+  color: var(--shat-green-800);
+}
+
+.header-login-btn.logged-in {
+  background: #f0fdf4;
+  border-color: #86efac;
+  color: #166534;
+}
+
+.lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 5px 8px;
+  background: var(--bg-surface-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--shat-navy-900);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, var(--shat-navy-900) 0%, var(--shat-navy-800) 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(10, 31, 56, 0.18);
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.btn-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(10, 31, 56, 0.25);
+}
+
+.mobile-nav-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--shat-navy-900);
+  padding: 4px;
+  cursor: pointer;
+}
+
+/* Large Desktop: Show full links */
+@media (min-width: 1240px) {
+  .desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
   .nav-link {
-    font-size: 0.78rem;
-    padding: 4px 5px;
-    gap: 2px;
-  }
-  .nav-num-badge {
-    font-size: 0.64rem;
-    padding: 1px 3px;
-  }
-  .btn-cta {
-    font-size: 0.76rem;
-    padding: 5px 10px;
-  }
-  .header-login-btn {
-    font-size: 0.76rem;
-    padding: 4px 9px;
-  }
-  .brand-emblem {
-    height: 38px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding: 5px 8px;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
   }
 }
 
-@media (max-width: 1180px) {
+/* Medium Desktop & Tablet (< 1240px): Collapse nav to hamburger to guarantee actions fit */
+@media (max-width: 1239px) {
   .desktop-nav {
-    display: none;
+    display: none !important;
   }
   .mobile-nav-toggle {
     display: flex;
@@ -2359,14 +2510,9 @@ input:checked + .switch-slider:before {
   body {
     padding-bottom: var(--bottom-nav-height);
   }
-  .floating-whatsapp-btn {
-    bottom: calc(var(--bottom-nav-height) + 16px);
-  }
-  .floating-save-panel {
-    bottom: calc(var(--bottom-nav-height) + 16px);
-  }
 }
 
+/* Tablet & Mobile Screens (<= 768px and 502px viewport) */
 @media (max-width: 768px) {
   .top-notice-bar {
     display: none;
@@ -2378,12 +2524,41 @@ input:checked + .switch-slider:before {
   #app-content {
     margin-top: var(--header-height-mobile);
   }
+  .header-container {
+    padding-left: 10px;
+    padding-right: 10px;
+    gap: 6px;
+  }
+  .brand-emblem {
+    height: 32px;
+  }
+  .brand-sub {
+    display: none;
+  }
+  .brand-name {
+    font-size: 0.95rem;
+  }
+  .header-actions {
+    gap: 4px;
+  }
+  .header-login-btn {
+    padding: 4px 7px;
+    font-size: 0.74rem;
+  }
+  .lang-btn {
+    padding: 4px 6px;
+    font-size: 0.74rem;
+  }
+  .btn-cta {
+    padding: 4px 8px;
+    font-size: 0.74rem;
+  }
   .home-hero-grid {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 24px;
   }
   .hero-main-title {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
   }
   .grid-4, .grid-3 {
     grid-template-columns: 1fr;
@@ -2391,7 +2566,23 @@ input:checked + .switch-slider:before {
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .chat-message-row {
-    max-width: 90%;
+}
+
+/* Very narrow screens (<= 440px) */
+@media (max-width: 440px) {
+  .brand-name {
+    display: none;
+  }
+  .btn-cta {
+    padding: 4px 6px;
+    font-size: 0.7rem;
+  }
+  .header-login-btn {
+    padding: 4px 6px;
+    font-size: 0.7rem;
+  }
+  .lang-btn {
+    padding: 4px 5px;
+    font-size: 0.7rem;
   }
 }
