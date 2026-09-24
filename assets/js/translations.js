@@ -31,7 +31,7 @@ export const translations = {
           "excerpt": "اختتام فعاليات البرنامج التدريبي التفاعلي حول الالتزامات التسعة للمعيار الإنساني الأساسي (CHS) بمشاركة ممثلي المنظمات الإنسانية والمحلية لتعزيز آليات المساءلة المجتمعية (AAP).",
           "fullText": "اختتمت شركة شات للتنمية والتطوير (SHAT Development & Growth) البرنامج التدريبي الميداني المتقدم حول تطبيق معايير المعيار الإنساني الأساسي (Core Humanitarian Standard - CHS). ركزت الورشة على تدريب الكوادر التنفيذية ومسؤولي البرامج في المؤسسات الشريكة على الالتزامات التسعة للجودة والمساءلة، وتصميم أدوات المساءلة المجتمعية وآليات الشكاوى والملاحظات الفعالة، ودمج معايير Sphere Handbook في خطط الاستجابة الإنسانية لضمان كرامة وأولويات المتأثرين.",
           "link": "https://www.facebook.com/shat.development.growth/",
-          "img": "assets/images/posts/post-chs-workshop.svg"
+          "img": "assets/images/posts/post-chs-workshop.svg?v=2026"
         },
         {
           "id": "post-psea",
@@ -44,7 +44,7 @@ export const translations = {
           "excerpt": "تنفيذ الجلسات الاستشارية المتقدمة لبناء وتحديث سياسات الحماية وصون السلامة وتأسيس قنوات الإبلاغ الآمنة وسرية البيانات لدى المنظمات غير الحكومية.",
           "fullText": "قدم المستشارون المتخصصون في شات للتنمية والتطوير حزمة استشارية متكاملة لعدد من المنظمات الأهلية حول تأسيس وتحديث سياسات الحماية من الاستغلال والانتهاك الجنسيين (PSEA)، والتحرش الوظيفي. شملت المخرجات صياغة ميثاق السلوك المهني، وبناء مسارات إبلاغ آمنة وسرية تضمن حماية الشهود والمبلغين، وإجراء تقييم مخاطر مؤسسي شامل ينسجم مع المعايير الدولية ومبدأ عدم الإضرار (Do No Harm).",
           "link": "https://www.instagram.com/shat.development.growth/",
-          "img": "assets/images/posts/post-psea-protection.svg"
+          "img": "assets/images/posts/post-psea-protection.svg?v=2026"
         },
         {
           "id": "post-oecd",
@@ -57,7 +57,7 @@ export const translations = {
           "excerpt": "بدء الفريق الاستشاري لشركة شات مهام التقييم الميداني المستقل للمشاريع التنموية والإنسانية لقياس الملاءمة، الأثر، الكفاءة، واستدامة التدخلات وفق أطر UNEG الدولية.",
           "fullText": "باشرت وحدة التقييم والبحوث في شركة شات تنفيذ دراسة تقييم خارجي مستقل وشامل لمشاريع التمكين الاقتصادي والمياه والإصحاح البيئي. تم تطبيق معايير لجنة المساعدات الإنمائية لمنظمة التعاون الاقتصادي والتنمية (OECD DAC) ومعايير شبكة التقييم التابعة للأمم المتحدة (UNEG). اشتمل التقييم على استبانات رقمية محكمة، ومجموعات تركيز مع المستفيدين، ومقابلات نوعية معمقة مع أصحاب المصلحة للخروج بتقرير استراتيجي وتوصيات قابلة للتنفيذ لتعزيز الأثر المستدام.",
           "link": "https://www.facebook.com/shat.development.growth/",
-          "img": "assets/images/posts/post-oecd-evaluation.svg"
+          "img": "assets/images/posts/post-oecd-evaluation.svg?v=2026"
         },
         {
           "id": "post-gov",
@@ -70,7 +70,7 @@ export const translations = {
           "excerpt": "إعادة هيكلة وحوكمة منظمات المجتمع المدني وتصميم اللوائح الإدارية والمالية وأنظمة الموارد البشرية لضمان الامتثال لمتطلبات المانحين.",
           "fullText": "أنجزت شركة شات مشروع الحوكمة الإدارية والهيكلة التنظيمية المتكاملة لشركائها من المؤسسات غير الربحية. تضمن المشروع إعداد وتحديث الأدلة التشغيلية المعيارية (SOPs)، وتطوير لوائح الموارد البشرية وإدارة المشتريات والرقابة المالية الداخلية، بما يؤهل المؤسسات للحصول على اعتمادات التدقيق الدولي ويعزز ثقة الجهات المانحة في شفافية وسلامة النظم التنظيمية.",
           "link": "https://www.instagram.com/shat.development.growth/",
-          "img": "assets/images/posts/post-institutional-dev.svg"
+          "img": "assets/images/posts/post-institutional-dev.svg?v=2026"
         },
         {
           "id": "post-moodle",
@@ -83,7 +83,7 @@ export const translations = {
           "excerpt": "تدشين نظام التعلم الإلكتروني الجامعي المتصل بسحابة Google Drive، لتمكين الطلاب والمدربين من الوصول المباشر للحقائب التدريبية والشهادات الرقمية.",
           "fullText": "أعلنت أكاديمية شات عن تدشين بوابتها التعليمية المتطورة بنظام Moodle وGoogle Classroom، موفرة تجربة تعليم تنفيذي سلسة للمتدربين وممثلي المنظمات. تتيح المنصة تحميل الحقائب والمراجع بصيغ PDF وExcel مباشرة لجهاز المتدرب، والتسليم الرقمي للتكليفات، ومتابعة الدرجات والتحقق من مصداقية الشهادات برقم تسلسلي موثق، فضلاً عن التكامل مع سحابة Google Drive المؤسسية.",
           "link": "https://www.facebook.com/shat.development.growth/",
-          "img": "assets/images/posts/post-moodle-academy.svg"
+          "img": "assets/images/posts/post-moodle-academy.svg?v=2026"
         },
         {
           "id": "post-partnerships",
@@ -96,7 +96,7 @@ export const translations = {
           "excerpt": "توقيع مذكرات تفاهم استراتيجية لتعزيز قدرات المؤسسات المحلية في فلسطين والمنطقة، ونقل الخبرات والمعايير الدولية للميدان العملي.",
           "fullText": "في إطار رؤيتها الاستراتيجية 2026، وقعت شركة شات للتنمية والتطوير مذكرات تفاهم وتحالفات مهنية مع شبكات إقليمية ومنظمات دولية رائدة في مجالات التنمية المستدامة والإغاثة الإنسانية. تهدف هذه الشراكات إلى تعزيز برامج تدريب المدربين (ToT)، وتطوير نماذج تقييم تشاركية، وتوحيد الجهود لبناء قدرات الكوادر المجتمعية استجابة للتحديات الميدانية بكفاءة عالية واحترافية مثبتة.",
           "link": "https://www.instagram.com/shat.development.growth/",
-          "img": "assets/images/posts/post-partnerships.svg"
+          "img": "assets/images/posts/post-partnerships.svg?v=2026"
         }
       ]
     },
@@ -1186,7 +1186,7 @@ footer: {
           "excerpt": "Concluding our specialized interactive masterclass on the Nine Commitments of the Core Humanitarian Standard (CHS) with regional NGO leaders, institutionalizing AAP systems.",
           "fullText": "SHAT Development & Growth successfully concluded an advanced field training program on operationalizing the Core Humanitarian Standard (CHS). The program equipped executive coordinators and program managers across partner organizations with the practical tools needed to implement the Nine Commitments, design responsive community feedback and complaints mechanisms (AAP), and embed Sphere Handbook benchmarks into field response plans.",
           "link": "https://www.facebook.com/shat.development.growth/",
-          "img": "assets/images/posts/post-chs-workshop.svg"
+          "img": "assets/images/posts/post-chs-workshop.svg?v=2026"
         },
         {
           "id": "post-psea",
@@ -1199,7 +1199,7 @@ footer: {
           "excerpt": "Delivering advanced institutional advisory to develop safeguarding frameworks, risk analysis, and confidential incident reporting channels for international entities.",
           "fullText": "Specialized consultants from SHAT Development & Growth provided an integrated advisory package to non-governmental organizations on formulating and updating policies against Sexual Exploitation, Abuse, and Harassment (PSEA). Key milestones included drafting Codes of Conduct, instituting safe confidential reporting pathways, and performing risk audits aligned with Do No Harm principles.",
           "link": "https://www.instagram.com/shat.development.growth/",
-          "img": "assets/images/posts/post-psea-protection.svg"
+          "img": "assets/images/posts/post-psea-protection.svg?v=2026"
         },
         {
           "id": "post-oecd",
@@ -1212,7 +1212,7 @@ footer: {
           "excerpt": "Deploying SHAT's expert evaluation taskforces across humanitarian sectors to rigorously measure relevance, impact, efficiency, and sustainability under UNEG guidelines.",
           "fullText": "SHAT's Evaluation and Research Unit completed an independent external evaluation examining multi-sectoral livelihoods, water, and sanitation initiatives. Grounded in OECD DAC evaluation criteria (Relevance, Coherence, Effectiveness, Efficiency, Impact, and Sustainability) and UNEG norms, the mission gathered mixed-method field data, beneficiary focus groups, and institutional interviews to deliver strategic roadmaps for sustainable impact.",
           "link": "https://www.facebook.com/shat.development.growth/",
-          "img": "assets/images/posts/post-oecd-evaluation.svg"
+          "img": "assets/images/posts/post-oecd-evaluation.svg?v=2026"
         },
         {
           "id": "post-gov",
@@ -1225,7 +1225,7 @@ footer: {
           "excerpt": "Restructuring civil society organizations, developing standard manuals, and upgrading financial and HR controls for international donor compliance.",
           "fullText": "SHAT delivered a comprehensive governance and structural modernization package for civil society organizations. The project authored standardized operating procedures (SOPs), human resource policies, and procurement matrices to ensure robust donor audit compliance and elevate institutional capacity.",
           "link": "https://www.instagram.com/shat.development.growth/",
-          "img": "assets/images/posts/post-institutional-dev.svg"
+          "img": "assets/images/posts/post-institutional-dev.svg?v=2026"
         },
         {
           "id": "post-moodle",
@@ -1238,7 +1238,7 @@ footer: {
           "excerpt": "Deploying our university-grade blended learning portal synchronized with Google Drive cloud storage, enabling real-time course downloads and certified transcripts.",
           "fullText": "SHAT Academy announced the rollout of its upgraded Moodle & Google Classroom digital portal. The infrastructure features instant local downloads of official PDF syllabi and Excel audit matrices, online assignment submissions, digital verification of credential serial numbers, and unified cloud access for students and instructors.",
           "link": "https://www.facebook.com/shat.development.growth/",
-          "img": "assets/images/posts/post-moodle-academy.svg"
+          "img": "assets/images/posts/post-moodle-academy.svg?v=2026"
         },
         {
           "id": "post-partnerships",
@@ -1251,7 +1251,7 @@ footer: {
           "excerpt": "Inking cooperative agreements to bolster local community organizations across Palestine and the wider region, transferring international standards to the frontlines.",
           "fullText": "As part of its 2026 strategic roadmap, SHAT Development & Growth executed formal memoranda of understanding with leading humanitarian networks and international development institutes. These alliances expand Training of Trainers (ToT) programs, joint evaluative research, and collaborative capacity building across Palestine and the region.",
           "link": "https://www.instagram.com/shat.development.growth/",
-          "img": "assets/images/posts/post-partnerships.svg"
+          "img": "assets/images/posts/post-partnerships.svg?v=2026"
         }
       ]
     },

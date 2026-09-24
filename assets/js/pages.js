@@ -38,7 +38,7 @@ export function renderHomePage(t) {
           <div class="hero-badge-col">
             <div class="hero-emblem-card">
               <div class="hero-emblem-badge-wrapper">
-                <img src="assets/logo/logo-badge.jpg" alt="SHAT Development & Growth" class="hero-badge-img" onerror="this.src='assets/logo/logo-clean.jpg'">
+                <img src="assets/logo/logo-badge.jpg?v=2026" alt="SHAT Development & Growth" class="hero-badge-img" onerror="this.src='assets/logo/logo-clean.jpg?v=2026'">
                 <div class="hero-verified-stamp" title="جهة معتمدة رسمياً">✓</div>
               </div>
               <div class="hero-emblem-title">${t.companyShortName}</div>
