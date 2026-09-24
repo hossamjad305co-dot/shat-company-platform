@@ -1,0 +1,72 @@
+/* Shat Company Platform - Design Tokens & Custom Properties */
+
+:root {
+  /* Brand Palette derived from Official Emblem */
+  --shat-navy-950: #06152b;
+  --shat-navy-900: #0a1f38;
+  --shat-navy-800: #0c2b54;
+  --shat-navy-700: #123d75;
+  --shat-navy-600: #1a5199;
+  --shat-navy-100: #e8f0fe;
+  --shat-navy-50:  #f0f5fc;
+
+  --shat-green-800: #1b5e20;
+  --shat-green-700: #2e7d32;
+  --shat-green-600: #388e3c;
+  --shat-green-500: #43a047;
+  --shat-green-400: #66bb6a;
+  --shat-green-100: #e8f5e9;
+  --shat-green-50:  #f1f8f3;
+
+  --shat-gold-600:  #b45309;
+  --shat-gold-500:  #d97706;
+  --shat-gold-100:  #fef3c7;
+
+  /* Surfaces & Backgrounds */
+  --bg-page: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-surface-elevated: #ffffff;
+  --bg-surface-subtle: #f1f5f9;
+  --border-subtle: #e2e8f0;
+  --border-prominent: #cbd5e1;
+
+  /* Typography */
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-inverted: #ffffff;
+
+  /* Shadows & Elevation */
+  --shadow-sm: 0 1px 3px rgba(10, 31, 56, 0.06), 0 1px 2px rgba(10, 31, 56, 0.04);
+  --shadow-md: 0 4px 12px rgba(10, 31, 56, 0.08), 0 2px 4px rgba(10, 31, 56, 0.04);
+  --shadow-lg: 0 12px 32px rgba(10, 31, 56, 0.10), 0 4px 8px rgba(10, 31, 56, 0.06);
+  --shadow-xl: 0 20px 48px rgba(10, 31, 56, 0.14), 0 6px 12px rgba(10, 31, 56, 0.08);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  /* Transition Speeds */
+  --transition-fast: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Layout Containers */
+  --max-width: 1280px;
+  --header-height: 84px;
+}
+
+/* RTL Typography */
+[dir="rtl"] {
+  --font-heading: 'Cairo', 'Tajawal', system-ui, -apple-system, sans-serif;
+  --font-body: 'Cairo', 'Tajawal', system-ui, -apple-system, sans-serif;
+}
+
+/* LTR Typography */
+[dir="ltr"] {
+  --font-heading: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+}

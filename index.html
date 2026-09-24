@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>شركة شات للتنمية والتطوير | SHAT Development & Growth</title>
+  <meta name="description" content="منصة شركة شات للتنمية والتطوير — بناء القدرات، تعزيز المؤسسات، وتطوير النتائج. حلول تدريبية واستشارية متقدمة وفق المعايير الدولية والإنسانية.">
+  <meta name="keywords" content="شات للتنمية, تدريب, استشارات مؤسسية, تقييم مشاريع, حماية وصون السلامة, المعايير الإنسانية, SHAT Development, Capacity Building, Institutional Consulting">
+  <link rel="icon" type="image/jpeg" href="assets/logo/logo-symbol.jpg">
+
+  <!-- Design Tokens & Styles -->
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Top Utility Bar -->
+  <aside class="top-notice-bar" aria-label="Company Overview and Motto">
+    <div class="container top-notice-inner">
+      <div class="top-pills">
+        <span class="top-pill" id="top-pill-training">التدريب</span>
+        <span class="top-pill consulting" id="top-pill-consulting">الاستشارات</span>
+      </div>
+      <div class="top-motto" id="top-bar-motto">
+        الإنسان • المهارات • غدٌ أكثر إشراقاً
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Navigation Header -->
+  <header class="main-header">
+    <div class="container header-container">
+      <!-- Brand Logo -->
+      <a href="#/home" class="brand-link" title="Shat Company Platform">
+        <img src="assets/logo/logo-clean.jpg" alt="SHAT Company Logo" class="brand-emblem" onerror="this.src='assets/logo/logo-symbol.jpg'">
+      </a>
+
+      <!-- Desktop Navigation Menu (Sections have NO numbers) -->
+      <nav class="desktop-nav" id="desktop-nav" aria-label="Main Navigation">
+        <!-- Injected dynamically by app.js -->
+      </nav>
+
+      <!-- Header Tools & Language Selector -->
+      <div class="header-actions">
+        <!-- Language Picker -->
+        <div class="lang-selector">
+          <button class="lang-btn" id="lang-toggle-btn" aria-haspopup="true" aria-expanded="false" title="Change Language">
+            <span id="current-lang-text">🇸🇦 العربية</span>
+            <span style="font-size: 0.75rem;">▼</span>
+          </button>
+          <div class="lang-dropdown" id="lang-dropdown-menu" role="menu">
+            <button class="lang-option" data-lang="ar" role="menuitem">
+              <span>🇸🇦 العربية</span>
+              <span style="font-size: 0.8rem; opacity: 0.7;">AR</span>
+            </button>
+            <button class="lang-option" data-lang="en" role="menuitem">
+              <span>🇬🇧 English</span>
+              <span style="font-size: 0.8rem; opacity: 0.7;">EN</span>
+            </button>
+            <button class="lang-option" data-lang="fr" role="menuitem">
+              <span>🇫🇷 Français</span>
+              <span style="font-size: 0.8rem; opacity: 0.7;">FR</span>
+            </button>
+            <button class="lang-option" data-lang="es" role="menuitem">
+              <span>🇪🇸 Español</span>
+              <span style="font-size: 0.8rem; opacity: 0.7;">ES</span>
+            </button>
+            <button class="lang-option" data-lang="it" role="menuitem">
+              <span>🇮🇹 Italiano</span>
+              <span style="font-size: 0.8rem; opacity: 0.7;">IT</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- CTA Consultation Button -->
+        <button class="btn-cta" id="header-cta-btn">
+          طلب استشارة / تدريب
+        </button>
+
+        <!-- Mobile Toggle Button -->
+        <button class="mobile-nav-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <aside id="mobile-drawer" style="position: fixed; top: 0; right: 0; bottom: 0; width: 300px; background: #ffffff; z-index: 1100; box-shadow: var(--shadow-xl); transform: translateX(100%); transition: transform 0.3s ease; padding: 24px; display: flex; flex-direction: column; overflow-y: auto;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);">
+      <span style="font-weight: 800; color: var(--shat-navy-950); font-size: 1.1rem;">القائمة</span>
+      <button id="mobile-drawer-close" style="background: transparent; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
+    </div>
+    <nav id="mobile-nav-links" style="display: flex; flex-direction: column; gap: 14px;">
+      <!-- Populated by app.js -->
+    </nav>
+  </aside>
+
+  <!-- Main Dynamic Route View Container -->
+  <main id="app-content">
+    <!-- Populated dynamically by router.js -->
+  </main>
+
+  <!-- Consultation Request Modal -->
+  <div class="modal-overlay" id="consultation-modal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <button class="modal-close-btn" id="modal-close-button" aria-label="Close dialog">✕</button>
+      <div id="consultation-modal-content">
+        <!-- Rendered by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Corporate Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+            <img src="assets/logo/logo-symbol.jpg" alt="SHAT Icon" style="height: 44px; border-radius: 8px;">
+            <span style="font-size: 1.3rem; font-weight: 800; color: #ffffff;">SHAT</span>
+          </div>
+          <p id="footer-about-text" style="font-size: 0.92rem; color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 20px;">
+            شركة شات للتنمية والتطوير — شركة متخصصة في التدريب، بناء القدرات، الاستشارات والتطوير المؤسسي.
+          </p>
+          <div style="font-size: 0.85rem; color: #81c784; font-weight: 600;">
+            Building Capacity • Strengthening Institutions • Advancing Results
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title" id="footer-quick-title">روابط سريعة</h4>
+          <nav class="footer-links-list" id="footer-links">
+            <!-- Rendered by app.js -->
+          </nav>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">المرجعيات والمعايير</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.88rem; color: rgba(255,255,255,0.7);">
+            <span>Core Humanitarian Standard</span>
+            <span>Sphere Handbook</span>
+            <span>OECD DAC Evaluation</span>
+            <span>UNEG Evaluation Norms</span>
+            <span>Human Rights-Based Approach</span>
+            <span>Protection & PSEA</span>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">التواصل المؤسسي</h4>
+          <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; color: rgba(255,255,255,0.75);">
+            <div>✉ info@shatgrowth.com</div>
+            <div>✆ +966 50 000 0000</div>
+            <div>🌐 www.shatgrowth.com</div>
+            <div>📍 المملكة العربية السعودية / دولياً</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div id="footer-legal-copy">
+          جميع الحقوق محفوظة © 2026 شركة شات للتنمية والتطوير (SHAT Development & Growth).
+        </div>
+        <div id="footer-privacy-pledge">
+          ملتزمون بأعلى معايير السرية، النزاهة، وحماية البيانات المؤسسية.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Entry Point -->
+  <script type="module" src="assets/js/app.js"></script>
+</body>
+</html>

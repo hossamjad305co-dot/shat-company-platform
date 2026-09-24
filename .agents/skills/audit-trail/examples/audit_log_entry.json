@@ -1,0 +1,16 @@
+{
+  "log_id": "AUD-99812-X",
+  "timestamp": "2026-07-06T13:51:00Z",
+  "user_id": "usr_acct_mgr_01",
+  "action": "UPDATE",
+  "table_affected": "journal_entry",
+  "record_id": "JE-2026-004",
+  "fields_changed": [
+    {
+      "field": "status",
+      "old_value": "DRAFT",
+      "new_value": "POSTED"
+    }
+  ],
+  "hash": "8a7c9f80a4e32103f1b0a8e0f9b8c7d6e5a4f3b2"
+}

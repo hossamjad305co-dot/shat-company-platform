@@ -1,0 +1,24 @@
+{
+  "id": "audit-trail",
+  "name": "Audit Trail Engine",
+  "description": "Generates immutable audit logs, tracks user activity, records transaction history, and produces compliance reports.",
+  "version": "1.0.0",
+  "categories": [
+    "Audit",
+    "ERP"
+  ],
+  "compatibility": {
+    "antigravity": ">=1.0.0",
+    "erp_systems": [
+      "SAP S/4HANA",
+      "Oracle NetSuite",
+      "Microsoft Dynamics 365",
+      "Workday Financials"
+    ]
+  },
+  "validation_rules": [
+    "Log records must be append-only and immutable",
+    "Capture user ID, timestamp, original value, and new value for every database modification",
+    "Generate unique hashes for each audit record to prevent trace tampering"
+  ]
+}

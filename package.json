@@ -1,0 +1,18 @@
+{
+  "name": "shat-company-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shat Company Platform - Institutional Development, Capacity Strengthening & Specialized Consulting",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^6.2.0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.117.1"
+  }
+}
