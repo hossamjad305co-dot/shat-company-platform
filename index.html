@@ -2,82 +2,112 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>شركة شات للتنمية والتطوير | SHAT Development & Growth</title>
-  <meta name="description" content="منصة شركة شات للتنمية والتطوير — بناء القدرات، تعزيز المؤسسات، وتطوير النتائج. حلول تدريبية واستشارية متقدمة وفق المعايير الدولية والإنسانية.">
-  <meta name="keywords" content="شات للتنمية, تدريب, استشارات مؤسسية, تقييم مشاريع, حماية وصون السلامة, المعايير الإنسانية, SHAT Development, Capacity Building, Institutional Consulting">
-  <link rel="icon" type="image/jpeg" href="assets/logo/logo-symbol.jpg">
+  <meta name="description" content="منصة شركة شات للتنمية والتطوير — بناء القدرات، تعزيز المؤسسات، وتطوير النتائج. حلول تدريبية ونظام مودل متقدم وفق المعايير الدولية والإنسانية.">
+  <meta name="keywords" content="شات للتنمية, تدريب, نظام مودل, استشارات مؤسسية, تقييم مشاريع, حماية وصون السلامة, SHAT Development, Moodle, Capacity Building">
+  <link rel="icon" type="image/png" href="assets/logo/logo-transparent.png">
 
-  <!-- Design Tokens & Styles -->
+  <!-- Lordicon for Animated Interactive Icons -->
+  <script src="https://cdn.lordicon.com/lordicon.js"></script>
+
+  <!-- Design Tokens & Stylesheets -->
   <link rel="stylesheet" href="assets/css/variables.css">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-  <!-- Top Utility Bar -->
+  <!-- VISUAL LOADING SCREEN (Header z-index: 1000, Loader z-index: 900 as required) -->
+  <div id="shat-page-loader" class="shat-loader-screen" aria-label="Loading platform">
+    <div class="loader-content">
+      <img src="assets/logo/logo-transparent.png" alt="SHAT Logo" class="loader-pulse-logo" onerror="this.src='assets/logo/logo-symbol.jpg'">
+      <div class="loader-spinner-ring"></div>
+      <div class="loader-status-text">شركة شات للتنمية والتطوير</div>
+      <div class="loader-sub-text">بناء القدرات • تعزيز المؤسسات • تطوير النتائج</div>
+    </div>
+  </div>
+
+  <!-- Top Utility Notice Bar (Fixed Top) -->
   <aside class="top-notice-bar" aria-label="Company Overview and Motto">
     <div class="container top-notice-inner">
       <div class="top-pills">
         <span class="top-pill" id="top-pill-training">التدريب</span>
         <span class="top-pill consulting" id="top-pill-consulting">الاستشارات</span>
+        <span class="top-motto" id="top-bar-motto">الإنسان • المهارات • غدٌ أكثر إشراقاً</span>
       </div>
-      <div class="top-motto" id="top-bar-motto">
-        الإنسان • المهارات • غدٌ أكثر إشراقاً
+      <div class="top-contact-quick">
+        <a href="https://wa.me/972592879621" target="_blank" rel="noopener" class="top-contact-link">
+          <span>واتساب: +972592879621</span>
+        </a>
+        <span style="opacity: 0.4;">|</span>
+        <a href="mailto:shat.company26@gmail.com" class="top-contact-link">
+          <span>shat.company26@gmail.com</span>
+        </a>
       </div>
     </div>
   </aside>
 
-  <!-- Main Navigation Header -->
-  <header class="main-header">
+  <!-- Main Navigation Header (Fixed Below Top Bar at z-index: 1000) -->
+  <header class="main-header" id="site-header">
     <div class="container header-container">
       <!-- Brand Logo -->
       <a href="#/home" class="brand-link" title="Shat Company Platform">
-        <img src="assets/logo/logo-clean.jpg" alt="SHAT Company Logo" class="brand-emblem" onerror="this.src='assets/logo/logo-symbol.jpg'">
+        <img src="assets/logo/logo-transparent.png" alt="SHAT Emblem" class="brand-emblem" onerror="this.src='assets/logo/logo-clean.jpg'">
+        <div class="brand-text-block">
+          <span class="brand-name">SHAT</span>
+          <span class="brand-sub">Development & Growth</span>
+        </div>
       </a>
 
-      <!-- Desktop Navigation Menu (Sections have NO numbers) -->
+      <!-- Desktop Navigation Menu (Numbered 01 to 08 + Academy Moodle) -->
       <nav class="desktop-nav" id="desktop-nav" aria-label="Main Navigation">
         <!-- Injected dynamically by app.js -->
       </nav>
 
       <!-- Header Tools & Language Selector -->
       <div class="header-actions">
+        <!-- Auth Button with Status Dot -->
+        <button class="header-login-btn" id="header-auth-btn" title="تسجيل الدخول / الحساب">
+          <span class="status-dot online"></span>
+          <span id="auth-btn-label">دخول / حسابي</span>
+        </button>
+
         <!-- Language Picker -->
         <div class="lang-selector">
           <button class="lang-btn" id="lang-toggle-btn" aria-haspopup="true" aria-expanded="false" title="Change Language">
             <span id="current-lang-text">🇸🇦 العربية</span>
-            <span style="font-size: 0.75rem;">▼</span>
+            <span style="font-size: 0.72rem;">▼</span>
           </button>
           <div class="lang-dropdown" id="lang-dropdown-menu" role="menu">
             <button class="lang-option" data-lang="ar" role="menuitem">
               <span>🇸🇦 العربية</span>
-              <span style="font-size: 0.8rem; opacity: 0.7;">AR</span>
+              <span style="font-size: 0.75rem; opacity: 0.7;">AR</span>
             </button>
             <button class="lang-option" data-lang="en" role="menuitem">
               <span>🇬🇧 English</span>
-              <span style="font-size: 0.8rem; opacity: 0.7;">EN</span>
+              <span style="font-size: 0.75rem; opacity: 0.7;">EN</span>
             </button>
             <button class="lang-option" data-lang="fr" role="menuitem">
               <span>🇫🇷 Français</span>
-              <span style="font-size: 0.8rem; opacity: 0.7;">FR</span>
+              <span style="font-size: 0.75rem; opacity: 0.7;">FR</span>
             </button>
             <button class="lang-option" data-lang="es" role="menuitem">
               <span>🇪🇸 Español</span>
-              <span style="font-size: 0.8rem; opacity: 0.7;">ES</span>
+              <span style="font-size: 0.75rem; opacity: 0.7;">ES</span>
             </button>
             <button class="lang-option" data-lang="it" role="menuitem">
               <span>🇮🇹 Italiano</span>
-              <span style="font-size: 0.8rem; opacity: 0.7;">IT</span>
+              <span style="font-size: 0.75rem; opacity: 0.7;">IT</span>
             </button>
           </div>
         </div>
 
         <!-- CTA Consultation Button -->
         <button class="btn-cta" id="header-cta-btn">
-          طلب استشارة / تدريب
+          طلب استشارة
         </button>
 
-        <!-- Mobile Toggle Button -->
+        <!-- Mobile Drawer Toggle -->
         <button class="mobile-nav-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -89,14 +119,17 @@
     </div>
   </header>
 
-  <!-- Mobile Drawer Menu -->
-  <aside id="mobile-drawer" style="position: fixed; top: 0; right: 0; bottom: 0; width: 300px; background: #ffffff; z-index: 1100; box-shadow: var(--shadow-xl); transform: translateX(100%); transition: transform 0.3s ease; padding: 24px; display: flex; flex-direction: column; overflow-y: auto;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);">
-      <span style="font-weight: 800; color: var(--shat-navy-950); font-size: 1.1rem;">القائمة</span>
-      <button id="mobile-drawer-close" style="background: transparent; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
+  <!-- Mobile Drawer Menu (Nav Drawer) -->
+  <aside id="mobile-drawer" style="position: fixed; top: 0; right: 0; bottom: 0; width: 310px; background: #ffffff; z-index: var(--z-drawer); box-shadow: var(--shadow-xl); transform: translateX(100%); transition: transform 0.3s ease; padding: 22px; display: flex; flex-direction: column; overflow-y: auto;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <img src="assets/logo/logo-transparent.png" alt="SHAT" style="height: 32px;" onerror="this.src='assets/logo/logo-symbol.jpg'">
+        <span style="font-weight: 800; color: var(--shat-navy-950); font-size: 1rem;">قائمة الأقسام</span>
+      </div>
+      <button id="mobile-drawer-close" style="background: transparent; border: none; font-size: 1.4rem; cursor: pointer; color: var(--text-muted);">✕</button>
     </div>
-    <nav id="mobile-nav-links" style="display: flex; flex-direction: column; gap: 14px;">
-      <!-- Populated by app.js -->
+    <nav id="mobile-nav-links" style="display: flex; flex-direction: column; gap: 10px;">
+      <!-- Populated dynamically by app.js -->
     </nav>
   </aside>
 
@@ -115,14 +148,129 @@
     </div>
   </div>
 
-  <!-- Corporate Footer -->
+  <!-- WhatsApp WaForge & Google Auth Modal -->
+  <div class="modal-overlay" id="auth-modal" role="dialog" aria-modal="true">
+    <div class="modal-box" style="max-width: 480px;">
+      <button class="modal-close-btn" id="auth-modal-close-btn" aria-label="Close dialog">✕</button>
+      <div id="auth-modal-content">
+        <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 6px;">
+          تسجيل الدخول إلى المنصة
+        </h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 18px;">
+          الوصول إلى نظام المودل، ملفات الدورات، المحادثات، وبوابة الطالب والأستاذ
+        </p>
+
+        <div class="auth-tab-row">
+          <button class="auth-tab-btn active" id="tab-auth-whatsapp">📱 رمز التحقق عبر واتساب</button>
+          <button class="auth-tab-btn" id="tab-auth-google">🌐 حساب Google</button>
+        </div>
+
+        <!-- WhatsApp Tab -->
+        <div id="auth-pane-whatsapp">
+          <div id="otp-step-phone">
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label class="form-label" style="font-weight: 700; font-size: 0.88rem;">رقم واتساب الكامل (مع رمز الدولة):</label>
+              <input type="tel" id="auth-wa-phone" class="form-input" placeholder="+972592879621" dir="ltr" value="+972592879621">
+              <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; display: block;">
+                يتم إرسال رمز التحقق المباشر عبر بوابة WaForge API
+              </span>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 18px;">
+              <label class="form-label" style="font-weight: 700; font-size: 0.88rem;">اختر دورك في النظام:</label>
+              <select id="auth-user-role" class="form-select">
+                <option value="student">🎓 طالب / متدرب (Student)</option>
+                <option value="instructor">👨‍🏫 مدرب / أستاذ دورة (Instructor)</option>
+                <option value="admin">⚙️ مسؤول الإدارة (Admin)</option>
+              </select>
+            </div>
+
+            <button type="button" class="btn-cta" id="btn-send-wa-otp" style="width: 100%; padding: 10px;">
+              إرسال رمز التحقق عبر واتساب (WaForge)
+            </button>
+          </div>
+
+          <div id="otp-step-verify" style="display: none;">
+            <div style="background: #e8f5e9; border: 1px solid #c8e6c9; border-radius: var(--radius-sm); padding: 12px; margin-bottom: 14px; font-size: 0.85rem; color: #1b5e20;">
+              ✓ تم توليد رمز التحقق وإرساله إلى واتساب: <strong id="wa-display-target"></strong>
+              <div id="wa-demo-code-alert" style="margin-top: 6px; font-weight: 800; font-size: 0.95rem; color: #2e7d32;"></div>
+            </div>
+
+            <label class="form-label" style="font-weight: 700; text-align: center; display: block;">أدخل رمز التحقق (6 أرقام):</label>
+            <div class="otp-box-inputs">
+              <input type="text" maxlength="1" class="otp-input-digit" id="otp-d1" autofocus>
+              <input type="text" maxlength="1" class="otp-input-digit" id="otp-d2">
+              <input type="text" maxlength="1" class="otp-input-digit" id="otp-d3">
+              <input type="text" maxlength="1" class="otp-input-digit" id="otp-d4">
+              <input type="text" maxlength="1" class="otp-input-digit" id="otp-d5">
+              <input type="text" maxlength="1" class="otp-input-digit" id="otp-d6">
+            </div>
+
+            <button type="button" class="btn-cta" id="btn-verify-otp" style="width: 100%; padding: 10px; margin-top: 8px;">
+              تأكيد الدخول
+            </button>
+            <button type="button" id="btn-back-phone" style="background: none; border: none; color: var(--text-muted); font-size: 0.8rem; margin-top: 10px; width: 100%; cursor: pointer;">
+              ← تعديل رقم الهاتف
+            </button>
+          </div>
+        </div>
+
+        <!-- Google Tab -->
+        <div id="auth-pane-google" style="display: none; text-align: center; padding: 20px 0;">
+          <p style="font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 20px;">
+            تسجيل الدخول السريع الموحد بحساب Google المؤسسي
+          </p>
+          <button type="button" id="btn-google-login-action" class="btn-secondary" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px; font-weight: 700;">
+            <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.15z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.15C3.25 21.37 7.34 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.26C.46 8.16 0 9.97 0 12s.46 3.84 1.26 5.42l4.02-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.25 2.63 1.26 6.58l4.02 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg>
+            <span>الدخول عبر Google</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Quick WhatsApp Button -->
+  <a href="https://wa.me/972592879621" target="_blank" rel="noopener" class="floating-whatsapp-btn" title="تواصل مباشر عبر واتساب (+972592879621)">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+    </svg>
+  </a>
+
+  <!-- NameThatUI: Bottom Navigation (Tab Bar) for Mobile -->
+  <nav class="bottom-nav-bar" id="mobile-bottom-bar" aria-label="Mobile Navigation">
+    <a href="#/home" class="bottom-nav-item active" data-route="home">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+      <span>الرئيسية</span>
+    </a>
+    <a href="#/tracks" class="bottom-nav-item" data-route="tracks">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+      <span>المسارات</span>
+    </a>
+    <a href="#/academy" class="bottom-nav-item" data-route="academy" style="color: var(--shat-green-700); font-weight: 700;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+      <span>المودل</span>
+    </a>
+    <a href="#/moodle-chat" class="bottom-nav-item" data-route="moodle-chat">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      <span>المحادثة</span>
+    </a>
+    <button class="bottom-nav-item" id="bottom-bar-menu-btn" style="background: none; border: none; cursor: pointer;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      <span>القائمة</span>
+    </button>
+  </nav>
+
+  <!-- Corporate Footer with Official Details & Socials -->
   <footer class="main-footer">
     <div class="container">
       <div class="footer-grid">
         <div>
           <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-            <img src="assets/logo/logo-symbol.jpg" alt="SHAT Icon" style="height: 44px; border-radius: 8px;">
-            <span style="font-size: 1.3rem; font-weight: 800; color: #ffffff;">SHAT</span>
+            <img src="assets/logo/logo-transparent.png" alt="SHAT Icon" style="height: 44px;" onerror="this.src='assets/logo/logo-symbol.jpg'">
+            <div>
+              <div style="font-size: 1.3rem; font-weight: 800; color: #ffffff;">SHAT</div>
+              <div style="font-size: 0.78rem; color: #81c784;">Development & Growth</div>
+            </div>
           </div>
           <p id="footer-about-text" style="font-size: 0.92rem; color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 20px;">
             شركة شات للتنمية والتطوير — شركة متخصصة في التدريب، بناء القدرات، الاستشارات والتطوير المؤسسي.
@@ -133,7 +281,7 @@
         </div>
 
         <div>
-          <h4 class="footer-col-title" id="footer-quick-title">روابط سريعة</h4>
+          <h4 class="footer-col-title" id="footer-quick-title">الأقسام المؤسسية</h4>
           <nav class="footer-links-list" id="footer-links">
             <!-- Rendered by app.js -->
           </nav>
@@ -142,22 +290,29 @@
         <div>
           <h4 class="footer-col-title">المرجعيات والمعايير</h4>
           <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.88rem; color: rgba(255,255,255,0.7);">
-            <span>Core Humanitarian Standard</span>
-            <span>Sphere Handbook</span>
-            <span>OECD DAC Evaluation</span>
+            <span>Core Humanitarian Standard (CHS)</span>
+            <span>Sphere Project Handbook</span>
+            <span>OECD DAC Evaluation Criteria</span>
             <span>UNEG Evaluation Norms</span>
-            <span>Human Rights-Based Approach</span>
-            <span>Protection & PSEA</span>
+            <span>Protection & PSEA Principles</span>
+            <span>Do No Harm Framework</span>
           </div>
         </div>
 
         <div>
-          <h4 class="footer-col-title">التواصل المؤسسي</h4>
-          <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; color: rgba(255,255,255,0.75);">
-            <div>✉ info@shatgrowth.com</div>
-            <div>✆ +966 50 000 0000</div>
-            <div>🌐 www.shatgrowth.com</div>
-            <div>📍 المملكة العربية السعودية / دولياً</div>
+          <h4 class="footer-col-title">التواصل المؤسسي والشبكات</h4>
+          <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; color: rgba(255,255,255,0.85);">
+            <div>✆ هاتف / واتساب: <a href="https://wa.me/972592879621" target="_blank" style="color: #81c784; font-weight: 700;">+972592879621</a></div>
+            <div>✉ بريد إلكتروني: <a href="mailto:shat.company26@gmail.com" style="color: #90caf9;">shat.company26@gmail.com</a></div>
+            <div style="display: flex; gap: 14px; margin-top: 10px;">
+              <a href="https://www.instagram.com/shat.development.growth/" target="_blank" rel="noopener" style="color: #ffffff; display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.1); padding: 6px 12px; border-radius: var(--radius-sm); font-size: 0.82rem;">
+                <span>📷 إنستغرام</span>
+              </a>
+              <a href="https://www.facebook.com/shat.development.growth" target="_blank" rel="noopener" style="color: #ffffff; display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.1); padding: 6px 12px; border-radius: var(--radius-sm); font-size: 0.82rem;">
+                <span>🌐 فيسبوك</span>
+              </a>
+            </div>
+            <div style="margin-top: 6px; font-size: 0.82rem; color: rgba(255,255,255,0.6);">📍 خدماتنا تغطي النطاق الإقليمي والدولي</div>
           </div>
         </div>
       </div>

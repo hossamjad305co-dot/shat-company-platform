@@ -3,6 +3,7 @@
 import { translations } from './translations.js';
 import { router } from './router.js';
 import { submitConsultation } from './supabaseClient.js';
+import { authService } from './auth.js';
 
 class App {
   constructor() {
@@ -13,7 +14,16 @@ class App {
   init() {
     this.applyLanguage(this.currentLang);
     this.bindEvents();
+    this.initAuthUI();
     router.init(this.currentLang);
+
+    // Auto-hide Visual Loading Screen (Header z-index: 1000, Loader z-index: 900)
+    const loader = document.getElementById('shat-page-loader');
+    if (loader) {
+      setTimeout(() => {
+        loader.classList.add('loaded');
+      }, 350);
+    }
   }
 
   applyLanguage(lang) {
@@ -37,87 +47,85 @@ class App {
     const headerNav = document.getElementById('desktop-nav');
     if (headerNav) {
       headerNav.innerHTML = `
-        <a href="#/home" class="nav-link">${t.nav.home}</a>
-        <a href="#/about" class="nav-link">${t.nav.about}</a>
-        <a href="#/services" class="nav-link">${t.nav.services}</a>
-        <a href="#/consulting" class="nav-link">${t.nav.consulting}</a>
-        <a href="#/delivery-model" class="nav-link">${t.nav.deliveryModel}</a>
-        <a href="#/approach" class="nav-link">${t.nav.approach}</a>
-        <a href="#/references" class="nav-link">${t.nav.references}</a>
-        <a href="#/expertise" class="nav-link">${t.nav.expertise}</a>
-        <a href="#/value-partnerships" class="nav-link">${t.nav.valuePartnerships}</a>
-        <a href="#/academy" class="nav-academy-badge">${t.nav.academy}</a>
+        <a href="#/discover" class="nav-link" data-route="discover"><span class="nav-num-badge">01</span><span>${t.nav.s01 || 'اكتشف SHAT'}</span></a>
+        <a href="#/our-story" class="nav-link" data-route="our-story"><span class="nav-num-badge">02</span><span>${t.nav.s02 || 'قصتنا'}</span></a>
+        <a href="#/what-we-make" class="nav-link" data-route="what-we-make"><span class="nav-num-badge">03</span><span>${t.nav.s03 || 'ماذا نصنع؟'}</span></a>
+        <a href="#/tracks" class="nav-link" data-route="tracks"><span class="nav-num-badge">04</span><span>${t.nav.s04 || 'مساراتنا'}</span></a>
+        <a href="#/experiences" class="nav-link" data-route="experiences"><span class="nav-num-badge">05</span><span>${t.nav.s05 || 'تجاربنا'}</span></a>
+        <a href="#/impact" class="nav-link" data-route="impact"><span class="nav-num-badge">06</span><span>${t.nav.s06 || 'أثرنا'}</span></a>
+        <a href="#/knowledge-hub" class="nav-link" data-route="knowledge-hub"><span class="nav-num-badge">07</span><span>${t.nav.s07 || 'مساحة المعرفة'}</span></a>
+        <a href="#/build-impact" class="nav-link" data-route="build-impact"><span class="nav-num-badge">08</span><span>${t.nav.s08 || 'لنبني الأثر معًا'}</span></a>
+        <a href="#/academy" class="nav-academy-badge" data-route="academy"><span>🎓</span><span>${t.nav.academy || 'نظام المودل'}</span></a>
       `;
     }
 
-    // Update Language Button
+    // Language selector current text
     const langBtnText = document.getElementById('current-lang-text');
     if (langBtnText) {
       langBtnText.innerHTML = `${t.flag} ${t.langName}`;
     }
 
-    // Update Header CTA
+    // Header CTA
     const headerCta = document.getElementById('header-cta-btn');
     if (headerCta) {
-      headerCta.textContent = t.nav.requestConsultation;
+      headerCta.textContent = t.nav.requestConsultation || 'طلب استشارة';
     }
 
-    // Update Top Notice
+    // Top Notice Pills & Motto
     const topMotto = document.getElementById('top-bar-motto');
-    if (topMotto) {
-      topMotto.textContent = t.companyMotto;
-    }
+    if (topMotto) topMotto.textContent = t.companyMotto;
     const pillTraining = document.getElementById('top-pill-training');
     if (pillTraining) pillTraining.textContent = t.pillTraining;
     const pillConsulting = document.getElementById('top-pill-consulting');
     if (pillConsulting) pillConsulting.textContent = t.pillConsulting;
 
-    // Mobile nav
+    // Mobile Drawer Links (Numbered 01 to 08 + Moodle)
     const mobileNavList = document.getElementById('mobile-nav-links');
     if (mobileNavList) {
       mobileNavList.innerHTML = `
-        <a href="#/home" class="mobile-link">${t.nav.home}</a>
-        <a href="#/about" class="mobile-link">${t.nav.about}</a>
-        <a href="#/services" class="mobile-link">${t.nav.services}</a>
-        <a href="#/consulting" class="mobile-link">${t.nav.consulting}</a>
-        <a href="#/delivery-model" class="mobile-link">${t.nav.deliveryModel}</a>
-        <a href="#/approach" class="mobile-link">${t.nav.approach}</a>
-        <a href="#/references" class="mobile-link">${t.nav.references}</a>
-        <a href="#/expertise" class="mobile-link">${t.nav.expertise}</a>
-        <a href="#/value-partnerships" class="mobile-link">${t.nav.valuePartnerships}</a>
-        <a href="#/academy" class="mobile-link" style="color: #059669; font-weight: 800;">${t.nav.academy}</a>
-        <a href="#/contact" class="mobile-link">${t.nav.contact}</a>
+        <a href="#/discover" class="mobile-link" data-route="discover"><span class="nav-num-badge">01</span> ${t.nav.s01 || 'اكتشف SHAT'}</a>
+        <a href="#/our-story" class="mobile-link" data-route="our-story"><span class="nav-num-badge">02</span> ${t.nav.s02 || 'قصتنا'}</a>
+        <a href="#/what-we-make" class="mobile-link" data-route="what-we-make"><span class="nav-num-badge">03</span> ${t.nav.s03 || 'ماذا نصنع؟'}</a>
+        <a href="#/tracks" class="mobile-link" data-route="tracks"><span class="nav-num-badge">04</span> ${t.nav.s04 || 'مساراتنا'}</a>
+        <a href="#/experiences" class="mobile-link" data-route="experiences"><span class="nav-num-badge">05</span> ${t.nav.s05 || 'تجاربنا'}</a>
+        <a href="#/impact" class="mobile-link" data-route="impact"><span class="nav-num-badge">06</span> ${t.nav.s06 || 'أثرنا'}</a>
+        <a href="#/knowledge-hub" class="mobile-link" data-route="knowledge-hub"><span class="nav-num-badge">07</span> ${t.nav.s07 || 'مساحة المعرفة'}</a>
+        <a href="#/build-impact" class="mobile-link" data-route="build-impact"><span class="nav-num-badge">08</span> ${t.nav.s08 || 'لنبني الأثر معًا'}</a>
+        <div style="border-top: 1px solid var(--border-subtle); margin: 6px 0; padding-top: 8px;">
+          <a href="#/academy" class="mobile-link" style="color: var(--shat-green-700); font-weight: 800;">
+            🎓 ${t.nav.academy || 'أكاديمية SHAT (نظام المودل)'}
+          </a>
+        </div>
+        <div style="margin-top: 10px; padding: 12px; background: var(--shat-navy-50); border-radius: var(--radius-sm); font-size: 0.85rem; color: var(--shat-navy-900);">
+          <div style="font-weight: 700; margin-bottom: 4px;">تواصل مؤسسي سريع:</div>
+          <div>✆ +972592879621</div>
+          <div>✉ shat.company26@gmail.com</div>
+        </div>
       `;
     }
   }
 
   renderFooter(t) {
     const footerAbout = document.getElementById('footer-about-text');
-    if (footerAbout) footerAbout.textContent = t.footer.aboutText;
+    if (footerAbout) footerAbout.textContent = t.footer?.aboutText || 'شركة شات للتنمية والتطوير — شركة متخصصة في التدريب، بناء القدرات، الاستشارات والتطوير المؤسسي.';
 
     const footerQuickTitle = document.getElementById('footer-quick-title');
-    if (footerQuickTitle) footerQuickTitle.textContent = t.footer.quickLinks;
+    if (footerQuickTitle) footerQuickTitle.textContent = 'الأقسام المؤسسية';
 
     const footerLinks = document.getElementById('footer-links');
     if (footerLinks) {
       footerLinks.innerHTML = `
-        <a href="#/about">${t.about.title}</a>
-        <a href="#/services">${t.services.title}</a>
-        <a href="#/consulting">${t.consultingSec.title}</a>
-        <a href="#/delivery-model">${t.deliveryModel.title}</a>
-        <a href="#/approach">${t.approach.title}</a>
-        <a href="#/references">${t.references.title}</a>
-        <a href="#/expertise">${t.expertise.title}</a>
-        <a href="#/value-partnerships">${t.valuePartnerships.title}</a>
-        <a href="#/academy" style="color: #a7f3d0; font-weight: 700;">${t.nav.academy}</a>
+        <a href="#/discover">${t.nav.s01 || '01 — اكتشف SHAT'}</a>
+        <a href="#/our-story">${t.nav.s02 || '02 — قصتنا'}</a>
+        <a href="#/what-we-make">${t.nav.s03 || '03 — ماذا نصنع؟'}</a>
+        <a href="#/tracks">${t.nav.s04 || '04 — مساراتنا'}</a>
+        <a href="#/experiences">${t.nav.s05 || '05 — تجاربنا'}</a>
+        <a href="#/impact">${t.nav.s06 || '06 — أثرنا'}</a>
+        <a href="#/knowledge-hub">${t.nav.s07 || '07 — مساحة المعرفة'}</a>
+        <a href="#/build-impact">${t.nav.s08 || '08 — لنبني الأثر معًا'}</a>
+        <a href="#/academy" style="color: #a7f3d0; font-weight: 700;">🎓 أكاديمية SHAT (نظام المودل)</a>
       `;
     }
-
-    const footerLegal = document.getElementById('footer-legal-copy');
-    if (footerLegal) footerLegal.textContent = t.footer.legalNotice;
-
-    const footerPledge = document.getElementById('footer-privacy-pledge');
-    if (footerPledge) footerPledge.textContent = t.footer.privacyPledge;
   }
 
   renderModal(t) {
@@ -125,8 +133,8 @@ class App {
     if (modalContent) {
       const ct = t.contact;
       modalContent.innerHTML = `
-        <h2 style="font-size: 1.5rem; color: var(--shat-navy-950); margin-bottom: 8px;">${ct.formTitle}</h2>
-        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 24px;">${ct.formSubtitle}</p>
+        <h2 style="font-size: 1.45rem; color: var(--shat-navy-950); margin-bottom: 8px;">${ct.formTitle}</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">${ct.formSubtitle}</p>
         <form id="modal-consultation-form">
           <div class="form-group">
             <label class="form-label">${ct.nameLabel}</label>
@@ -143,7 +151,7 @@ class App {
           <div class="form-group">
             <label class="form-label">${ct.serviceTypeLabel}</label>
             <select id="modal-c-service" class="form-select">
-              ${ct.serviceOptions.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+              ${ct.serviceOptions ? ct.serviceOptions.map(opt => `<option value="${opt}">${opt}</option>`).join('') : '<option value="تدريب">تدريب وبناء قدرات</option>'}
             </select>
           </div>
           <div class="form-group">
@@ -182,6 +190,180 @@ class App {
     }
   }
 
+  initAuthUI() {
+    const authBtn = document.getElementById('header-auth-btn');
+    const authModal = document.getElementById('auth-modal');
+    const authCloseBtn = document.getElementById('auth-modal-close-btn');
+
+    const tabWa = document.getElementById('tab-auth-whatsapp');
+    const tabGoogle = document.getElementById('tab-auth-google');
+    const paneWa = document.getElementById('auth-pane-whatsapp');
+    const paneGoogle = document.getElementById('auth-pane-google');
+
+    const stepPhone = document.getElementById('otp-step-phone');
+    const stepVerify = document.getElementById('otp-step-verify');
+    const waTargetDisplay = document.getElementById('wa-display-target');
+    const demoCodeAlert = document.getElementById('wa-demo-code-alert');
+
+    const btnSendOtp = document.getElementById('btn-send-wa-otp');
+    const btnVerifyOtp = document.getElementById('btn-verify-otp');
+    const btnBackPhone = document.getElementById('btn-back-phone');
+    const btnGoogleLogin = document.getElementById('btn-google-login-action');
+
+    const updateAuthBtn = () => {
+      const user = authService.getCurrentUser();
+      const label = document.getElementById('auth-btn-label');
+      if (user && label) {
+        label.textContent = `${user.roleTitle}: ${user.name}`;
+        authBtn.classList.add('logged-in');
+      } else if (label) {
+        label.textContent = 'دخول / حسابي';
+        authBtn.classList.remove('logged-in');
+      }
+    };
+
+    updateAuthBtn();
+
+    if (authBtn && authModal) {
+      authBtn.addEventListener('click', () => {
+        authModal.classList.add('open');
+      });
+    }
+
+    if (authCloseBtn && authModal) {
+      authCloseBtn.addEventListener('click', () => {
+        authModal.classList.remove('open');
+      });
+    }
+
+    if (authModal) {
+      authModal.addEventListener('click', (e) => {
+        if (e.target === authModal) authModal.classList.remove('open');
+      });
+    }
+
+    // Tabs toggle
+    if (tabWa && tabGoogle && paneWa && paneGoogle) {
+      tabWa.addEventListener('click', () => {
+        tabWa.classList.add('active');
+        tabGoogle.classList.remove('active');
+        paneWa.style.display = 'block';
+        paneGoogle.style.display = 'none';
+      });
+
+      tabGoogle.addEventListener('click', () => {
+        tabGoogle.classList.add('active');
+        tabWa.classList.remove('active');
+        paneGoogle.style.display = 'block';
+        paneWa.style.display = 'none';
+      });
+    }
+
+    // Send WhatsApp OTP via WaForge
+    if (btnSendOtp) {
+      btnSendOtp.addEventListener('click', async () => {
+        const phone = document.getElementById('auth-wa-phone')?.value.trim() || '';
+        const role = document.getElementById('auth-user-role')?.value || 'student';
+
+        if (!phone) {
+          alert('يرجى كتابة رقم واتساب كامل مع رمز الدولة (مثال: +972592879621)');
+          return;
+        }
+
+        btnSendOtp.disabled = true;
+        btnSendOtp.textContent = '... جارٍ الإرسال عبر WaForge';
+
+        const res = await authService.sendWhatsAppOtp(phone, role);
+
+        btnSendOtp.disabled = false;
+        btnSendOtp.textContent = 'إرسال رمز التحقق عبر واتساب (WaForge)';
+
+        if (stepPhone && stepVerify) {
+          stepPhone.style.display = 'none';
+          stepVerify.style.display = 'block';
+          if (waTargetDisplay) waTargetDisplay.textContent = phone;
+          if (demoCodeAlert) demoCodeAlert.textContent = `رمز التحقق الخاص بك هو: [ ${res.otpCode} ]`;
+
+          // Auto-fill first box for smooth experience
+          document.getElementById('otp-d1')?.focus();
+        }
+      });
+    }
+
+    if (btnBackPhone && stepPhone && stepVerify) {
+      btnBackPhone.addEventListener('click', () => {
+        stepVerify.style.display = 'none';
+        stepPhone.style.display = 'block';
+      });
+    }
+
+    // OTP Input auto-advance
+    const otpInputs = [
+      document.getElementById('otp-d1'),
+      document.getElementById('otp-d2'),
+      document.getElementById('otp-d3'),
+      document.getElementById('otp-d4'),
+      document.getElementById('otp-d5'),
+      document.getElementById('otp-d6')
+    ].filter(Boolean);
+
+    otpInputs.forEach((inp, idx) => {
+      inp.addEventListener('input', (e) => {
+        if (e.target.value.length === 1 && idx < otpInputs.length - 1) {
+          otpInputs[idx + 1].focus();
+        }
+      });
+      inp.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !e.target.value && idx > 0) {
+          otpInputs[idx - 1].focus();
+        }
+      });
+    });
+
+    // Verify OTP
+    if (btnVerifyOtp) {
+      btnVerifyOtp.addEventListener('click', () => {
+        const code = otpInputs.map(inp => inp.value).join('');
+        if (code.length < 6) {
+          alert('يرجى إدخال الرمز المكون من 6 أرقام');
+          return;
+        }
+
+        const res = authService.verifyOtp(code);
+        if (res.success) {
+          alert(`✓ مرحباً بك! تم تسجيل الدخول بنجاح بصفتك (${res.user.roleTitle}).`);
+          authModal.classList.remove('open');
+          updateAuthBtn();
+
+          // If role is teacher or admin, switch to moodle view
+          window.location.hash = '#/academy';
+          setTimeout(() => {
+            if (res.user.role === 'instructor') {
+              document.querySelector('[data-tab="tab-moodle-teacher"]')?.click();
+            } else if (res.user.role === 'admin') {
+              document.querySelector('[data-tab="tab-moodle-admin"]')?.click();
+            } else {
+              document.querySelector('[data-tab="tab-moodle-student"]')?.click();
+            }
+          }, 300);
+        } else {
+          alert(res.error || 'رمز التحقق غير صحيح');
+        }
+      });
+    }
+
+    // Google Login Action
+    if (btnGoogleLogin) {
+      btnGoogleLogin.addEventListener('click', () => {
+        const user = authService.loginWithGoogle();
+        alert(`✓ تم تسجيل الدخول بحساب Google المؤسسي بنجاح.`);
+        authModal.classList.remove('open');
+        updateAuthBtn();
+        window.location.hash = '#/academy';
+      });
+    }
+  }
+
   bindEvents() {
     // Language Dropdown Toggle
     const langBtn = document.getElementById('lang-toggle-btn');
@@ -206,7 +388,7 @@ class App {
       });
     }
 
-    // Modal Triggers
+    // Consultation Modal Triggers
     const openModalBtn = document.getElementById('header-cta-btn');
     const modalOverlay = document.getElementById('consultation-modal');
     const modalCloseBtn = document.getElementById('modal-close-button');
@@ -231,13 +413,19 @@ class App {
       });
     }
 
-    // Mobile Drawer
+    // Mobile Drawer Triggers
     const mobileToggle = document.getElementById('mobile-menu-toggle');
     const mobileDrawer = document.getElementById('mobile-drawer');
     const mobileClose = document.getElementById('mobile-drawer-close');
+    const bottomMenuBtn = document.getElementById('bottom-bar-menu-btn');
 
     if (mobileToggle && mobileDrawer) {
       mobileToggle.addEventListener('click', () => {
+        mobileDrawer.classList.toggle('open');
+      });
+    }
+    if (bottomMenuBtn && mobileDrawer) {
+      bottomMenuBtn.addEventListener('click', () => {
         mobileDrawer.classList.toggle('open');
       });
     }
