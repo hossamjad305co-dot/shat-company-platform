@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGradMoodle" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#022c22" />
+      <stop offset="50%" stop-color="#064e3b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="cardGradMoodle" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.04" />
+    </linearGradient>
+    <linearGradient id="accentGradMoodle" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+    <pattern id="gridMoodle" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.2" fill="#34d399" fill-opacity="0.1" />
+    </pattern>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bgGradMoodle)" />
+  <rect width="800" height="450" fill="url(#gridMoodle)" />
+
+  <circle cx="680" cy="90" r="170" fill="#10b981" fill-opacity="0.18" filter="blur(45px)" />
+  <circle cx="110" cy="370" r="130" fill="#34d399" fill-opacity="0.12" filter="blur(35px)" />
+
+  <g transform="translate(48, 36)">
+    <rect width="250" height="32" rx="16" fill="#ffffff" fill-opacity="0.15" stroke="#34d399" stroke-width="1.2" stroke-opacity="0.5" />
+    <circle cx="20" cy="16" r="5" fill="#34d399" />
+    <text x="34" y="21" font-family="'Cairo', system-ui, sans-serif" font-size="13" font-weight="700" fill="#ffffff">الأكاديمية الرقمية • Moodle LMS</text>
+    <text x="704" y="21" font-family="'Cairo', system-ui, sans-serif" font-size="13" font-weight="600" fill="#a7f3d0" text-anchor="end">سبتمبر 2026 • بوابة المتدربين</text>
+  </g>
+
+  <g transform="translate(48, 90)">
+    <rect width="704" height="260" rx="20" fill="url(#cardGradMoodle)" stroke="#ffffff" stroke-width="1" stroke-opacity="0.18" />
+
+    <g transform="translate(540, 40)">
+      <circle cx="65" cy="65" r="62" fill="#ffffff" fill-opacity="0.08" stroke="#34d399" stroke-width="2" />
+      <circle cx="65" cy="65" r="48" fill="#022c22" />
+      <!-- Cloud & Graduation Cap -->
+      <path d="M45 74 Q40 65 48 55 Q56 46 68 50 Q78 44 86 54 Q94 62 88 74 Z" fill="#34d399" fill-opacity="0.3" stroke="#34d399" stroke-width="1.5" />
+      <path d="M65 42 L88 54 L65 66 L42 54 Z" fill="#ffffff" />
+      <path d="M50 58 L50 72 Q65 80 80 72 L80 58" fill="none" stroke="#ffffff" stroke-width="2" />
+    </g>
+
+    <text x="490" y="65" font-family="'Cairo', system-ui, sans-serif" font-size="24" font-weight="800" fill="#ffffff" text-anchor="end">
+      إطلاق بوابة كلاس روم ومنظومة المودل الأكاديمية
+    </text>
+    <text x="490" y="100" font-family="'Cairo', system-ui, sans-serif" font-size="16" font-weight="600" fill="#6ee7b7" text-anchor="end">
+      ربط سحابي مباشر مع Google Drive وتنزيل الحقائب التدريبية فوراً
+    </text>
+
+    <text x="490" y="140" font-family="'Cairo', system-ui, sans-serif" font-size="14" font-weight="400" fill="#e2e8f0" text-anchor="end" opacity="0.95">
+      بيئة تعليم جامعي تنفيذية متكاملة للطلاب، المدربين، وإدارات البرامج التنموية
+    </text>
+    <text x="490" y="165" font-family="'Cairo', system-ui, sans-serif" font-size="14" font-weight="400" fill="#e2e8f0" text-anchor="end" opacity="0.95">
+      مع تسليم التكليفات، الساعات المكتبية، وإصدار الشهادات المعتمدة والمحققة رقمياً.
+    </text>
+
+    <g transform="translate(40, 195)">
+      <rect x="0" y="0" width="155" height="34" rx="8" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="1" stroke-opacity="0.2" />
+      <text x="77" y="22" font-family="'Cairo', system-ui, sans-serif" font-size="12" font-weight="700" fill="#34d399" text-anchor="middle">☁️ متصل بـ Google Drive</text>
+
+      <rect x="170" y="0" width="155" height="34" rx="8" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="1" stroke-opacity="0.2" />
+      <text x="247" y="22" font-family="'Cairo', system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle">📥 تحميل ملفات حقيقي</text>
+
+      <rect x="340" y="0" width="155" height="34" rx="8" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="1" stroke-opacity="0.2" />
+      <text x="417" y="22" font-family="'Cairo', system-ui, sans-serif" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle">🎓 شهادات برقم تسلسلي</text>
+    </g>
+  </g>
+
+  <g transform="translate(48, 385)">
+    <text x="0" y="25" font-family="'Outfit', system-ui, sans-serif" font-size="18" font-weight="800" fill="#ffffff" letter-spacing="1">SHAT</text>
+    <text x="65" y="25" font-family="'Cairo', system-ui, sans-serif" font-size="13" font-weight="600" fill="#a7f3d0">Executive Learning Academy Portal • أكاديمية شات للتعليم التنفيذي</text>
+
+    <g transform="translate(560, 2)">
+      <rect width="144" height="34" rx="17" fill="url(#accentGradMoodle)" />
+      <text x="72" y="22" font-family="'Cairo', system-ui, sans-serif" font-size="13" font-weight="800" fill="#022c22" text-anchor="middle">دخول الأكاديمية ↗</text>
+    </g>
+  </g>
+</svg>

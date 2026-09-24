@@ -37,11 +37,18 @@ export function renderHomePage(t) {
           </div>
           <div class="hero-badge-col">
             <div class="hero-emblem-card">
-              <img src="assets/logo/logo-banner.jpg" alt="SHAT Development & Growth" class="hero-badge-img" onerror="this.src='assets/logo/logo-clean.jpg'">
-              <div style="font-weight: 800; font-size: 1.15rem; color: var(--shat-navy-950); margin-bottom: 4px;">${t.companyShortName}</div>
-              <div style="font-size: 0.82rem; color: var(--shat-green-700); font-weight: 700;">${t.companyMotto}</div>
+              <div class="hero-emblem-badge-wrapper">
+                <img src="assets/logo/logo-badge.jpg" alt="SHAT Development & Growth" class="hero-badge-img" onerror="this.src='assets/logo/logo-clean.jpg'">
+                <div class="hero-verified-stamp" title="جهة معتمدة رسمياً">✓</div>
+              </div>
+              <div class="hero-emblem-title">${t.companyShortName}</div>
+              <div class="hero-emblem-motto">${t.companyMotto}</div>
+              <div class="hero-accreditations-strip">
+                <span class="hero-accred-pill">CHS Alliance Standard</span>
+                <span class="hero-accred-pill">OECD DAC & UNEG</span>
+                <span class="hero-accred-pill">PSEA Safeguarding</span>
+              </div>
             </div>
-          </div>
           </div>
         </div>
       </div>
@@ -73,7 +80,7 @@ export function renderHomePage(t) {
     <!-- Corporate Social Media & Field Activities Showcase -->
     <section class="social-showcase-section">
       <div class="container">
-        <div class="section-intro-block" style="text-align: center; margin-bottom: 36px;">
+        <div class="section-intro-block" style="text-align: center; margin-bottom: 28px;">
           <div class="hero-badge-pill" style="margin: 0 auto 12px;">
             <span>★</span> ${t.socialSection?.badge || 'نشاطات ميدانية وفعاليات'}
           </div>
@@ -85,11 +92,33 @@ export function renderHomePage(t) {
           </p>
         </div>
 
-        <div class="social-posts-grid">
+        <!-- Category Filter Tabs -->
+        <div class="social-filter-tabs">
+          <button type="button" class="social-filter-btn active" data-category="all">
+            <span>🏷️</span> ${t.socialSection?.filterAll || 'الكل'}
+          </button>
+          <button type="button" class="social-filter-btn" data-category="training">
+            <span>🎓</span> ${t.socialSection?.filterTraining || 'تدريب ومعايير'}
+          </button>
+          <button type="button" class="social-filter-btn" data-category="protection">
+            <span>🛡️</span> ${t.socialSection?.filterProtection || 'حماية وصون كرامة'}
+          </button>
+          <button type="button" class="social-filter-btn" data-category="evaluation">
+            <span>📊</span> ${t.socialSection?.filterEvaluation || 'تقييم ميداني'}
+          </button>
+          <button type="button" class="social-filter-btn" data-category="governance">
+            <span>⚖️</span> ${t.socialSection?.filterGovernance || 'حوكمة ونظم'}
+          </button>
+          <button type="button" class="social-filter-btn" data-category="academy">
+            <span>💻</span> ${t.socialSection?.filterAcademy || 'الأكاديمية'}
+          </button>
+        </div>
+
+        <div class="social-posts-grid" id="social-posts-grid-container">
           ${(t.socialSection?.posts || []).map(post => `
-            <article class="social-card">
+            <article class="social-card" data-category="${post.category || 'general'}" data-post-id="${post.id}">
               <div class="social-card-img-wrap">
-                <img src="${post.img}" alt="${post.title}" class="social-card-img" onerror="this.src='assets/logo/logo-banner.jpg'">
+                <img src="${post.img}" alt="${post.title}" class="social-card-img" onerror="this.src='assets/logo/logo-banner.jpg'" loading="lazy">
                 <div class="social-platform-badge">
                   <span>${post.platform === 'Instagram' ? '📷 Instagram' : '🌐 Facebook'}</span>
                 </div>
@@ -97,15 +126,18 @@ export function renderHomePage(t) {
               <div class="social-card-body">
                 <div class="social-card-meta">
                   <span class="social-card-tag">${post.tag}</span>
+                  <span class="social-card-readtime">⏱️ ${post.readTime || '3 دقائق'}</span>
                   <span class="social-card-date">${post.date}</span>
                 </div>
                 <h3 class="social-card-title">${post.title}</h3>
                 <p class="social-card-excerpt">${post.excerpt}</p>
                 <div class="social-card-footer">
-                  <a href="${post.link}" target="_blank" rel="noopener" class="social-view-link">
-                    <span>${post.platform === 'Instagram' ? (t.socialSection?.viewInsta || 'شاهد على إنستغرام ↗') : (t.socialSection?.viewFb || 'شاهد على فيسبوك ↗')}</span>
+                  <button type="button" class="btn-read-post" data-post-id="${post.id}">
+                    <span>${t.socialSection?.readArticle || 'قراءة التقرير والتفاصيل 📄'}</span>
+                  </button>
+                  <a href="${post.link}" target="_blank" rel="noopener" class="social-view-link" title="${post.platform}">
+                    <span>${post.platform === 'Instagram' ? (t.socialSection?.viewInsta || 'إنستغرام ↗') : (t.socialSection?.viewFb || 'فيسبوك ↗')}</span>
                   </a>
-                  <span style="font-size: 0.78rem; color: var(--text-muted);">@shat.development.growth</span>
                 </div>
               </div>
             </article>

@@ -615,6 +615,114 @@ class Router {
         }
       });
     }
+
+    // 11. Social Posts Category Filter & Interactive Reader Modal
+    const filterButtons = document.querySelectorAll('.social-filter-btn');
+    const postCards = document.querySelectorAll('.social-card');
+    
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cat = btn.getAttribute('data-category');
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        postCards.forEach(card => {
+          const cardCat = card.getAttribute('data-category');
+          if (cat === 'all' || cardCat === cat) {
+            card.style.display = 'flex';
+            card.style.animation = 'fadeIn 0.2s ease forwards';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Reader Modal Open
+    const postModal = document.getElementById('post-reader-modal');
+    const postContent = document.getElementById('post-reader-content');
+    const postCloseBtn = document.getElementById('post-reader-close-btn');
+
+    const openPostModal = (postId) => {
+      const posts = t.socialSection?.posts || translations.ar.socialSection?.posts || [];
+      const post = posts.find(p => p.id === postId);
+      if (!post || !postModal || !postContent) return;
+
+      postContent.innerHTML = `
+        <div class="post-reader-cover-wrap">
+          <img src="${post.img}" alt="${post.title}" class="post-reader-hero-img" onerror="this.src='assets/logo/logo-banner.jpg'">
+          <div class="post-reader-platform-badge">
+            ${post.platform === 'Instagram' ? '📷 Instagram' : '🌐 Facebook'}
+          </div>
+        </div>
+        <div class="post-reader-body">
+          <div class="post-reader-meta">
+            <span class="social-card-tag">${post.tag}</span>
+            <span class="social-card-readtime">⏱️ ${post.readTime || '3 دقائق'}</span>
+            <span class="social-card-date">📅 ${post.date}</span>
+          </div>
+          <h2 class="post-reader-title">${post.title}</h2>
+          <div class="post-reader-text">
+            <p class="post-reader-lead">${post.excerpt}</p>
+            <div class="post-reader-full-article">${post.fullText || post.excerpt}</div>
+          </div>
+          <div class="post-reader-footer">
+            <div class="post-reader-channel-info">
+              <strong>شركة شات للتنمية والتطوير</strong>
+              <span>@shat.development.growth</span>
+            </div>
+            <div class="post-reader-actions">
+              <a href="${post.link}" target="_blank" rel="noopener" class="btn-cta" style="padding: 8px 18px; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 8px;">
+                <span>${post.platform === 'Instagram' ? (t.socialSection?.viewInsta || 'مشاهدة على إنستغرام ↗') : (t.socialSection?.viewFb || 'مشاهدة على فيسبوك ↗')}</span>
+              </a>
+              <button type="button" class="btn-secondary" id="post-reader-done-btn" style="padding: 8px 16px; font-size: 0.88rem;">
+                ${t.socialSection?.closeArticle || 'إغلاق'}
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      postModal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+
+      const doneBtn = document.getElementById('post-reader-done-btn');
+      if (doneBtn) {
+        doneBtn.addEventListener('click', closePostModal);
+      }
+    };
+
+    const closePostModal = () => {
+      if (postModal) {
+        postModal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    };
+
+    document.querySelectorAll('.btn-read-post').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const postId = btn.getAttribute('data-post-id');
+        openPostModal(postId);
+      });
+    });
+
+    document.querySelectorAll('.social-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('a') || e.target.closest('button')) return;
+        const postId = card.getAttribute('data-post-id');
+        openPostModal(postId);
+      });
+    });
+
+    if (postCloseBtn) {
+      postCloseBtn.addEventListener('click', closePostModal);
+    }
+    if (postModal) {
+      postModal.addEventListener('click', (e) => {
+        if (e.target === postModal) closePostModal();
+      });
+    }
   }
 }
 
