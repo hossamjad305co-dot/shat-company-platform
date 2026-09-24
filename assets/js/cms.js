@@ -154,6 +154,79 @@ class CMSService {
     }
     return false;
   }
+
+  // --- Site Image Management & In-Place Editing (Admin Feature) ---
+  getAllCustomImages() {
+    try {
+      const saved = localStorage.getItem('shat_site_custom_images');
+      return saved ? JSON.parse(saved) : {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  getCustomImage(key, defaultUrl) {
+    const images = this.getAllCustomImages();
+    return images[key] || defaultUrl;
+  }
+
+  setCustomImage(key, url) {
+    if (!key || !url) return false;
+    const images = this.getAllCustomImages();
+    images[key] = url.trim();
+    localStorage.setItem('shat_site_custom_images', JSON.stringify(images));
+    return true;
+  }
+
+  removeCustomImage(key) {
+    const images = this.getAllCustomImages();
+    delete images[key];
+    localStorage.setItem('shat_site_custom_images', JSON.stringify(images));
+    return true;
+  }
+
+  // Preset Corporate Image Library
+  getPresetImages() {
+    return [
+      { id: 'logo-badge', name: 'شعار الشارة الرسمي المعتمد (Badge)', url: '/assets/logo/logo-badge.jpg', type: 'شعار رسمي' },
+      { id: 'logo-clean', name: 'شعار نقي عالي التباين (Clean)', url: '/assets/logo/logo-clean.jpg', type: 'شعار رسمي' },
+      { id: 'logo-banner', name: 'بانر الهوية البصرية (Banner)', url: '/assets/logo/logo-banner.jpg', type: 'شعار رسمي' },
+      { id: 'logo-trans', name: 'شعار مفرغ شفاف (Transparent)', url: '/assets/logo/logo-transparent.png', type: 'أيقونة' },
+      { id: 'post-chs', name: 'كفر ورشة معيار CHS والمساءلة الإنسانية', url: '/assets/images/posts/post-chs-workshop.svg', type: 'كفر مساق / بوست' },
+      { id: 'post-psea', name: 'كفر برنامج الحماية وصون السلامة PSEA', url: '/assets/images/posts/post-psea-protection.svg', type: 'كفر مساق / بوست' },
+      { id: 'post-oecd', name: 'كفر التقييم التنموي المستقل OECD DAC', url: '/assets/images/posts/post-oecd-evaluation.svg', type: 'كفر مساق / بوست' },
+      { id: 'post-gov', name: 'كفر الحوكمة والأدلة التشغيلية SOPs', url: '/assets/images/posts/post-institutional-dev.svg', type: 'كفر مساق / بوست' },
+      { id: 'post-moodle', name: 'كفر بوابة المودل وكلاس روم الأكاديمي', url: '/assets/images/posts/post-moodle-academy.svg', type: 'كفر مساق / بوست' },
+      { id: 'post-partnerships', name: 'كفر التحالفات والشراكات الاستراتيجية', url: '/assets/images/posts/post-partnerships.svg', type: 'كفر مساق / بوست' }
+    ];
+  }
+
+  // Social Post Update
+  updateSocialPost(postId, fields) {
+    const data = this.getCMSData();
+    const posts = data.posts || [];
+    const idx = posts.findIndex(p => p.id === postId);
+    if (idx !== -1) {
+      posts[idx] = { ...posts[idx], ...fields };
+      data.posts = posts;
+      this.saveCMSData(data);
+      return posts[idx];
+    }
+    // Also save in custom post overrides
+    const overrides = JSON.parse(localStorage.getItem('shat_post_overrides') || '{}');
+    overrides[postId] = { ...(overrides[postId] || {}), ...fields };
+    localStorage.setItem('shat_post_overrides', JSON.stringify(overrides));
+    return overrides[postId];
+  }
+
+  getPostOverride(postId) {
+    try {
+      const overrides = JSON.parse(localStorage.getItem('shat_post_overrides') || '{}');
+      return overrides[postId] || null;
+    } catch (e) {
+      return null;
+    }
+  }
 }
 
 export const cmsService = new CMSService();

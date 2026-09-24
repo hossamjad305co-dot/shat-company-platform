@@ -47,6 +47,31 @@
     </div>
   </aside>
 
+  <!-- Interactive Role & Permission Simulator Bar -->
+  <aside class="role-simulator-bar" id="role-simulator-bar" aria-label="Role and Permissions Switcher">
+    <div class="container role-simulator-inner">
+      <div class="role-simulator-status">
+        <span class="role-sim-tag">نظام الصلاحيات المؤسسي:</span>
+        <span id="role-sim-current" class="role-pill-current">👤 زائر (المواد مقفلة)</span>
+      </div>
+      <div class="role-simulator-actions">
+        <span class="role-sim-hint">اختبار فوري للصلاحيات:</span>
+        <button type="button" class="btn-role-pill" data-role="visitor" title="تصفح كزائر عادي (المواد والتحميل مقفل)">
+          👤 زائر (مقفل)
+        </button>
+        <button type="button" class="btn-role-pill" data-role="student" title="الدخول كمتدرب معتمد (تحميل المواد والتكليفات والشات مفتوح)">
+          🎓 متدرب (أحمد)
+        </button>
+        <button type="button" class="btn-role-pill" data-role="instructor" title="الدخول كمدرب معتمد (رفع المواد ومتابعة المتدربين)">
+          👨‍🏫 مدرب (د. أسامة)
+        </button>
+        <button type="button" class="btn-role-pill" data-role="admin" title="الدخول كالمدير العام (تخصيص الكورسات، تعديل الصور والمنشورات)">
+          ⚙️ مدير عام (أ. حسام)
+        </button>
+      </div>
+    </div>
+  </aside>
+
   <!-- Main Navigation Header (Fixed Below Top Bar at z-index: 1000) -->
   <header class="main-header" id="site-header">
     <div class="container header-container">
@@ -317,6 +342,151 @@
       <div id="post-reader-content">
         <!-- Rendered dynamically by router.js -->
       </div>
+    </div>
+  </div>
+
+  <!-- Academic Permissions Guard Modal (Blocks visitors from direct material downloads) -->
+  <div class="modal-overlay" id="modal-permission-guard" role="dialog" aria-modal="true">
+    <div class="modal-box" style="max-width: 580px; padding: 36px 28px; text-align: center; border-radius: var(--radius-xl); box-shadow: var(--shadow-xl); border: 2px solid #fecaca; background: #ffffff;">
+      <button class="modal-close-btn" id="btn-close-perm-guard" aria-label="Close dialog" style="position: absolute; top: 16px; inset-inline-end: 16px; background: none; border: none; font-size: 1.25rem; cursor: pointer; color: var(--text-muted);">✕</button>
+      
+      <div style="width: 70px; height: 70px; border-radius: 50%; background: #fef2f2; border: 2.5px solid #ef4444; display: flex; align-items: center; justify-content: center; color: #dc2626; margin: 0 auto 16px;">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+
+      <div style="font-size: 0.8rem; font-weight: 800; color: #dc2626; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">
+        🔒 تنبيه الصلاحيات والاعتماد الأكاديمي
+      </div>
+
+      <h3 style="font-size: 1.45rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 12px;" id="perm-guard-title">
+        المواد التدريبية المعتمدة مخصصة للمتدربين المسجلين فقط
+      </h3>
+
+      <p style="font-size: 0.94rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px;" id="perm-guard-msg">
+        وفقاً للوائح الحوكمة وضبط الجودة لشركة شات (SHAT)، لا يُسمح للزوار غير المسجلين بالتحميل المباشر للحقائب التدريبية الرسمية أو الوصول لمجلدات Google Drive المعتمدة بدون تسجيل الدخول بحساب طالب مفعل أو هيئة التدريس.
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 10px; max-width: 440px; margin: 0 auto;">
+        <button type="button" class="btn-cta btn-open-login-from-guard" style="padding: 12px; font-size: 0.92rem; justify-content: center; display: flex; align-items: center; gap: 8px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>
+          <span>تسجيل الدخول بحساب المتدرب أو المدرب</span>
+        </button>
+
+        <a href="https://forms.gle/shat-training-register-2026" target="_blank" rel="noopener" class="btn-secondary" id="perm-guard-gform-btn" style="padding: 11px; font-size: 0.9rem; justify-content: center; display: flex; align-items: center; gap: 8px; border-color: #10b981; color: #047857; text-decoration: none;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M9 12h6"/><path d="M9 16h6"/></svg>
+          <span>تقديم طلب تسجيل والتحاق بالدورة (Google Form) ↗</span>
+        </a>
+
+        <button type="button" class="btn-secondary btn-quick-student-login" style="padding: 10px; font-size: 0.85rem; justify-content: center; border-color: #93c5fd; color: #1e40af; background: #eff6ff;">
+          ⚡ دخول سريع فوري كمتدرب معتمد (أحمد خليل)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Image & Media Customizer Modal -->
+  <div class="modal-overlay" id="modal-admin-image-editor" role="dialog" aria-modal="true">
+    <div class="modal-box" style="max-width: 620px; padding: 28px; border-radius: var(--radius-xl); box-shadow: var(--shadow-xl); background: #ffffff;">
+      <button class="modal-close-btn" id="btn-close-image-editor" aria-label="Close dialog" style="position: absolute; top: 16px; inset-inline-end: 16px; background: none; border: none; font-size: 1.25rem; cursor: pointer; color: var(--text-muted);">✕</button>
+      
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 12px;">
+        <div style="width: 38px; height: 38px; border-radius: 8px; background: #eff6ff; border: 1.5px solid #3b82f6; display: flex; align-items: center; justify-content: center; color: #1d4ed8;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+        </div>
+        <div>
+          <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--shat-navy-950); margin: 0;" id="image-editor-title">
+            تعديل واستبدال الصورة
+          </h3>
+          <span style="font-size: 0.78rem; color: #2563eb; font-weight: 600;">صلاحيات المدير العام (Admin Media Controller)</span>
+        </div>
+      </div>
+
+      <!-- Live Preview Box -->
+      <div style="margin-bottom: 16px; text-align: center;">
+        <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 6px; text-align: start;">المعاينة الحية للصورة:</label>
+        <div style="height: 180px; border-radius: var(--radius-lg); overflow: hidden; background: #f8fafc; border: 2px dashed #cbd5e1; display: flex; align-items: center; justify-content: center; position: relative;">
+          <img id="image-editor-preview" src="/assets/logo/logo-badge.jpg" alt="Preview" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+        </div>
+      </div>
+
+      <!-- Input for Custom URL -->
+      <div style="margin-bottom: 16px;">
+        <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 6px;">رابط الصورة الجديد (Image URL أو مسار محلي):</label>
+        <input type="text" id="image-editor-url-input" class="form-input" style="width: 100%; font-size: 0.88rem;" dir="ltr" placeholder="https://... أو /assets/...">
+      </div>
+
+      <!-- Preset Gallery Selection -->
+      <div style="margin-bottom: 20px;">
+        <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 8px;">أو اختر من مكتبة صور المنصة الرسمية المعتمدة:</label>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; max-height: 150px; overflow-y: auto; padding: 4px;" id="image-preset-picker">
+          <!-- Injected dynamically by router.js -->
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 10px; border-top: 1px solid var(--border-subtle); padding-top: 16px;">
+        <button type="button" class="btn-secondary" id="btn-cancel-image-edit" style="padding: 9px 18px;">إلغاء</button>
+        <button type="button" class="btn-cta" id="btn-save-image-edit" style="padding: 9px 24px;">حفظ وتطبيق فوراً ✓</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Social Post Editor Modal -->
+  <div class="modal-overlay" id="modal-admin-post-editor" role="dialog" aria-modal="true">
+    <div class="modal-box" style="max-width: 640px; padding: 28px; border-radius: var(--radius-xl); box-shadow: var(--shadow-xl); background: #ffffff;">
+      <button class="modal-close-btn" id="btn-close-post-editor" aria-label="Close dialog" style="position: absolute; top: 16px; inset-inline-end: 16px; background: none; border: none; font-size: 1.25rem; cursor: pointer; color: var(--text-muted);">✕</button>
+      
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 12px;">
+        <div style="width: 38px; height: 38px; border-radius: 8px; background: #eff6ff; border: 1.5px solid #3b82f6; display: flex; align-items: center; justify-content: center; color: #1d4ed8;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <div>
+          <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--shat-navy-950); margin: 0;">
+            تعديل بيانات وصورة المنشور (Facebook / Instagram)
+          </h3>
+          <span style="font-size: 0.78rem; color: #2563eb; font-weight: 600;">لوحة تحكم المدير العام (CMS Post Editor)</span>
+        </div>
+      </div>
+
+      <form id="form-admin-post-editor">
+        <input type="hidden" id="admin-post-edit-id">
+
+        <div style="margin-bottom: 12px;">
+          <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 4px;">عنوان المنشور:</label>
+          <input type="text" id="admin-post-edit-title" class="form-input" style="width: 100%; font-size: 0.88rem;" required>
+        </div>
+
+        <div style="margin-bottom: 12px;">
+          <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 4px;">رابط صورة المنشور (Image URL):</label>
+          <div style="display: flex; gap: 8px;">
+            <input type="text" id="admin-post-edit-img" class="form-input" style="flex: 1; font-size: 0.88rem;" dir="ltr" required>
+            <button type="button" class="btn-secondary" id="btn-pick-post-preset-img" style="padding: 6px 12px; font-size: 0.8rem; white-space: nowrap;">اختيار كفر</button>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+          <div>
+            <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 4px;">المنصة:</label>
+            <select id="admin-post-edit-platform" class="form-input" style="width: 100%; font-size: 0.88rem;">
+              <option value="Facebook">فيسبوك (Facebook)</option>
+              <option value="Instagram">إنستغرام (Instagram)</option>
+            </select>
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 4px;">التصنيف والوسم:</label>
+            <input type="text" id="admin-post-edit-tag" class="form-input" style="width: 100%; font-size: 0.88rem;">
+          </div>
+        </div>
+
+        <div style="margin-bottom: 16px;">
+          <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 4px;">نص الملخص / المنشور:</label>
+          <textarea id="admin-post-edit-excerpt" class="form-input" rows="3" style="width: 100%; font-size: 0.88rem;"></textarea>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 10px; border-top: 1px solid var(--border-subtle); padding-top: 16px;">
+          <button type="button" class="btn-secondary" id="btn-cancel-post-edit" style="padding: 9px 18px;">إلغاء</button>
+          <button type="submit" class="btn-cta" style="padding: 9px 24px;">حفظ المنشور وتحديثه ✓</button>
+        </div>
+      </form>
     </div>
   </div>
 

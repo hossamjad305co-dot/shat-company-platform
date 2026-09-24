@@ -19,6 +19,9 @@ import {
 export function renderHomePage(t) {
   const courses = getMoodleCourses();
   const activeCourses = courses.filter(c => c.active !== false);
+  const isAdmin = authService.isAdmin();
+  const canDownload = authService.canDownloadMaterials();
+  const heroBadgeImg = cmsService.getCustomImage('heroBadge', '/assets/logo/logo-badge.jpg?v=2026');
 
   const sectionsList = [
     { key: "our-story", title: t.nav.s02 || "قصتنا", desc: t.about.subtitle, icon: icons.book('', 24) },
@@ -55,10 +58,17 @@ export function renderHomePage(t) {
           </div>
           <div class="hero-badge-col">
             <div class="hero-emblem-card">
-              <div class="hero-emblem-badge-wrapper">
-                <img src="/assets/logo/logo-badge.jpg?v=2026" alt="SHAT Development & Growth" class="hero-badge-img" onerror="this.src='/assets/logo/WhatsApp Image 2026-09-23 at 19.33.56 (1).jpeg'">
+              <div class="hero-emblem-badge-wrapper" style="position: relative;">
+                <img src="${heroBadgeImg}" alt="SHAT Development & Growth" class="hero-badge-img" onerror="this.src='/assets/logo/WhatsApp Image 2026-09-23 at 19.33.56 (1).jpeg'">
                 <div class="hero-verified-stamp" title="جهة معتمدة رسمياً">✓</div>
               </div>
+              ${isAdmin ? `
+                <div style="margin-top: 8px;">
+                  <button type="button" class="btn-secondary btn-edit-image-trigger" data-img-key="heroBadge" data-img-title="تعديل شعار الهوية البصرية الرئيسي" style="font-size: 0.74rem; padding: 3px 10px; border-radius: var(--radius-full); background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe;">
+                    ${icons.image('icon-inline', 13)} تغيير الشعار (مدير)
+                  </button>
+                </div>
+              ` : ''}
               <div class="hero-emblem-title">${t.companyShortName}</div>
               <div class="hero-emblem-motto">${t.companyMotto}</div>
               <div class="hero-accreditations-strip">
@@ -113,8 +123,25 @@ export function renderHomePage(t) {
         </div>
 
         <div class="courses-grid">
-          ${activeCourses.slice(0, 3).map(c => `
-            <article class="course-card">
+          ${activeCourses.slice(0, 3).map((c, idx) => {
+            const defaultCover = idx === 0 
+              ? '/assets/images/posts/post-chs-workshop.svg' 
+              : idx === 1 
+                ? '/assets/images/posts/post-psea-protection.svg' 
+                : '/assets/images/posts/post-oecd-evaluation.svg';
+            const courseCover = cmsService.getCustomImage('courseCover_' + c.id, c.coverImage || defaultCover);
+            return `
+            <article class="course-card" style="overflow: hidden;">
+              <!-- Course Visual Cover Image with Admin Edit Trigger -->
+              <div class="course-card-cover-wrap" style="position: relative; height: 160px; overflow: hidden; background: #0f172a;">
+                <img src="${courseCover}" alt="${c.title}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='${defaultCover}'">
+                ${isAdmin ? `
+                  <button type="button" class="btn-edit-image-trigger" data-img-key="courseCover_${c.id}" data-img-title="تعديل غلاف دورة: ${c.title}" style="position: absolute; top: 10px; inset-inline-end: 10px; background: rgba(255,255,255,0.92); border: 1px solid #cbd5e1; border-radius: var(--radius-sm); padding: 4px 8px; font-size: 0.72rem; font-weight: 700; color: #1e3a8a; cursor: pointer; display: flex; align-items: center; gap: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
+                    ${icons.image('icon-inline', 13)} تغيير الغلاف
+                  </button>
+                ` : ''}
+              </div>
+
               <div class="course-card-header">
                 <div class="course-card-badges">
                   <span class="course-code-badge">${c.code}</span>
@@ -162,15 +189,23 @@ export function renderHomePage(t) {
                     <span>التسجيل في الدورة (Google Form) ↗</span>
                   </a>
 
-                  <!-- Direct Real Material Download -->
-                  <button type="button" class="btn-trigger-real-download btn-secondary" data-file="${c.files && c.files[0] ? c.files[0].name : 'دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf'}" style="padding: 7px 12px; font-size: 0.78rem; width: 100%; justify-content: center;">
-                    ${icons.download('icon-inline', 15)}
-                    <span>تحميل الحقيبة المعتمدة (PDF)</span>
-                  </button>
+                  <!-- Permissions Guard Material Download -->
+                  ${canDownload ? `
+                    <button type="button" class="btn-trigger-real-download btn-secondary" data-file="${c.files && c.files[0] ? c.files[0].name : 'دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf'}" style="padding: 7px 12px; font-size: 0.78rem; width: 100%; justify-content: center;">
+                      ${icons.download('icon-inline', 15)}
+                      <span>تحميل الحقيبة المعتمدة (PDF)</span>
+                    </button>
+                  ` : `
+                    <button type="button" class="btn-guard-download btn-secondary" data-file="${c.files && c.files[0] ? c.files[0].name : 'دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf'}" data-course-title="${c.title}" style="padding: 7px 12px; font-size: 0.78rem; width: 100%; justify-content: center; background: #fffbeb; border-color: #fde68a; color: #b45309;">
+                      ${icons.lock('icon-inline', 14)}
+                      <span>تحميل الحقيبة (🔒 يتطلب حساب متدرب)</span>
+                    </button>
+                  `}
                 </div>
               </div>
             </article>
-          `).join('')}
+          `;
+          }).join('')}
         </div>
 
         <div style="margin-top: 36px; text-align: center; display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
@@ -225,8 +260,26 @@ export function renderHomePage(t) {
         </div>
 
         <div class="social-posts-grid" id="social-posts-grid-container">
-          ${(t.socialSection?.posts || []).map(post => `
-            <article class="social-card" data-category="${post.category || 'general'}" data-post-id="${post.id}">
+          ${(t.socialSection?.posts || []).map(post => {
+            const override = cmsService.getPostOverride(post.id);
+            const p = override ? { ...post, ...override } : post;
+            const postImg = cmsService.getCustomImage('postImg_' + p.id, p.img);
+            return `
+            <article class="social-card" data-category="${p.category || 'general'}" data-post-id="${p.id}">
+              ${isAdmin ? `
+                <div style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 6px 14px; display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-size: 0.72rem; color: #1e3a8a; font-weight: 700;">⚙️ تحكم المدير:</span>
+                  <div style="display: flex; gap: 6px;">
+                    <button type="button" class="btn-secondary btn-admin-edit-post" data-post-id="${p.id}" style="padding: 3px 8px; font-size: 0.72rem;">
+                      ${icons.edit('icon-inline', 12)} تعديل
+                    </button>
+                    <button type="button" class="btn-secondary btn-edit-image-trigger" data-img-key="postImg_${p.id}" data-img-title="تعديل صورة منشور: ${p.title}" style="padding: 3px 8px; font-size: 0.72rem;">
+                      ${icons.image('icon-inline', 12)} تغيير الصورة
+                    </button>
+                  </div>
+                </div>
+              ` : ''}
+
               <!-- Realistic Social Post Header -->
               <div style="padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #f1f5f9; background: #ffffff;">
                 <div style="display: flex; align-items: center; gap: 10px;">
@@ -236,30 +289,30 @@ export function renderHomePage(t) {
                       <strong style="font-size: 0.85rem; color: var(--shat-navy-950);">شركة شات للتنمية</strong>
                       <span style="color: #0284c7; font-size: 0.78rem;" title="حساب موثق">✓</span>
                     </div>
-                    <span style="font-size: 0.72rem; color: var(--text-muted);">${post.date}</span>
+                    <span style="font-size: 0.72rem; color: var(--text-muted);">${p.date}</span>
                   </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 6px;">
-                  ${post.platform === 'Instagram'
+                  ${p.platform === 'Instagram'
                     ? `<span style="display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem; font-weight: 700; color: #e1306c; background: #fdf2f8; padding: 2px 8px; border-radius: 12px;">${icons.instagram('', 14)} Instagram</span>`
                     : `<span style="display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem; font-weight: 700; color: #1877f2; background: #eff6ff; padding: 2px 8px; border-radius: 12px;">${icons.facebook('', 14)} Facebook</span>`
                   }
                 </div>
               </div>
 
-              <!-- Post Media Cover -->
-              <div class="social-card-img-wrap">
-                <img src="/${post.img.replace(/^\//, '')}" alt="${post.title}" class="social-card-img" onerror="this.src='/assets/logo/WhatsApp Image 2026-09-23 at 19.33.56 (1).jpeg'" loading="lazy">
+              <!-- Post Media Cover with Live Custom Image -->
+              <div class="social-card-img-wrap" style="position: relative;">
+                <img src="/${postImg.replace(/^\//, '')}" alt="${p.title}" class="social-card-img" onerror="this.src='/assets/logo/WhatsApp Image 2026-09-23 at 19.33.56 (1).jpeg'" loading="lazy">
               </div>
 
               <div class="social-card-body">
                 <div class="social-card-meta">
-                  <span class="social-card-tag">${post.tag}</span>
-                  <span class="social-card-readtime">${icons.clock('icon-inline', 13)} ${post.readTime || '3 دقائق'}</span>
+                  <span class="social-card-tag">${p.tag}</span>
+                  <span class="social-card-readtime">${icons.clock('icon-inline', 13)} ${p.readTime || '3 دقائق'}</span>
                 </div>
 
-                <h3 class="social-card-title">${post.title}</h3>
-                <p class="social-card-excerpt">${post.excerpt}</p>
+                <h3 class="social-card-title">${p.title}</h3>
+                <p class="social-card-excerpt">${p.excerpt}</p>
 
                 <!-- Social Engagement Indicators -->
                 <div class="social-engagement-bar">
@@ -275,16 +328,17 @@ export function renderHomePage(t) {
                 </div>
 
                 <div class="social-card-footer">
-                  <button type="button" class="btn-read-post" data-post-id="${post.id}">
+                  <button type="button" class="btn-read-post" data-post-id="${p.id}">
                     <span>${t.socialSection?.readArticle || 'قراءة التقرير والتفاصيل 📄'}</span>
                   </button>
-                  <a href="${post.link}" target="_blank" rel="noopener" class="social-view-link" title="${post.platform}">
-                    <span>${post.platform === 'Instagram' ? (t.socialSection?.viewInsta || 'إنستغرام ↗') : (t.socialSection?.viewFb || 'فيسبوك ↗')}</span>
+                  <a href="${p.link}" target="_blank" rel="noopener" class="social-view-link" title="${p.platform}">
+                    <span>${p.platform === 'Instagram' ? (t.socialSection?.viewInsta || 'إنستغرام ↗') : (t.socialSection?.viewFb || 'فيسبوك ↗')}</span>
                   </a>
                 </div>
               </div>
             </article>
-          `).join('')}
+          `;
+          }).join('')}
         </div>
       </div>
     </section>
@@ -2193,8 +2247,12 @@ export function renderCourseDetailPage(t, courseId) {
   const courses = getMoodleCourses();
   const course = courses.find(c => c.id === courseId) || courses[0] || {};
   const user = authService.getCurrentUser();
-  const isAdmin = user && user.role === 'admin';
-  const isInstructor = user && (user.role === 'instructor' || user.role === 'admin');
+  const canDownload = authService.canDownloadMaterials();
+  const isAdmin = authService.isAdmin();
+  const isInstructor = authService.isInstructor();
+  const isStudent = authService.isStudent();
+  const defaultCover = '/assets/images/posts/post-chs-workshop.svg';
+  const courseCover = cmsService.getCustomImage('courseCover_' + course.id, course.coverImage || defaultCover);
 
   return `
     <div class="course-page-wrapper">
@@ -2259,7 +2317,17 @@ export function renderCourseDetailPage(t, courseId) {
             <!-- Side Card with Custom Action Buttons -->
             <div>
               <div class="course-hero-sidecard">
-                <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 12px;">
+                <!-- Course Visual Thumbnail & Admin Edit Button -->
+                <div style="position: relative; height: 130px; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 14px; background: #0f172a;">
+                  <img src="${courseCover}" alt="${course.title}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='${defaultCover}'">
+                  ${isAdmin ? `
+                    <button type="button" class="btn-edit-image-trigger" data-img-key="courseCover_${course.id}" data-img-title="تعديل غلاف دورة: ${course.title}" style="position: absolute; top: 8px; inset-inline-end: 8px; background: rgba(255,255,255,0.95); border: 1px solid #cbd5e1; border-radius: 4px; padding: 3px 8px; font-size: 0.72rem; font-weight: 700; color: #1e3a8a; cursor: pointer; display: flex; align-items: center; gap: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
+                      ${icons.image('icon-inline', 13)} تغيير الغلاف
+                    </button>
+                  ` : ''}
+                </div>
+
+                <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px; margin-bottom: 12px;">
                   <span class="status-pill active" style="font-size: 0.78rem;">
                     ${icons.check('icon-inline', 14)} التسجيل متاح الآن
                   </span>
@@ -2268,25 +2336,39 @@ export function renderCourseDetailPage(t, courseId) {
                   </span>
                 </div>
 
-                <!-- 1. Custom Google Form Link for this Course -->
+                <!-- 1. Custom Google Form Link for this Course (Open for all) -->
                 <a href="${course.googleFormUrl || 'https://forms.gle/shat-training-register-2026'}" target="_blank" rel="noopener" class="btn-course-cta" style="padding: 13px; font-size: 0.96rem; text-align: center;" id="course-btn-gform">
                   ${icons.form('icon-inline', 20)}
                   <span>سجل في الدورة عبر Google Form ↗</span>
                 </a>
 
-                <!-- 2. Custom Google Drive Repository for this Course -->
-                <a href="${course.driveFolderUrl || 'https://drive.google.com/drive/folders/shat-materials'}" target="_blank" rel="noopener" class="btn-course-form" style="padding: 10px; font-size: 0.88rem; justify-content: center;" id="course-btn-drive">
-                  ${icons.drive('icon-inline', 18)}
-                  <span>فتح مجلد الدورة على Google Drive ↗</span>
-                </a>
+                <!-- 2. Custom Google Drive Repository (Permission Checked) -->
+                ${canDownload ? `
+                  <a href="${course.driveFolderUrl || 'https://drive.google.com/drive/folders/shat-materials'}" target="_blank" rel="noopener" class="btn-course-form" style="padding: 10px; font-size: 0.88rem; justify-content: center;" id="course-btn-drive">
+                    ${icons.drive('icon-inline', 18)}
+                    <span>فتح مجلد الدورة على Google Drive ↗</span>
+                  </a>
+                ` : `
+                  <button type="button" class="btn-course-form btn-guard-drive" data-course-title="${course.title}" style="padding: 10px; font-size: 0.85rem; justify-content: center; width: 100%; border-color: #fde68a; background: #fffbeb; color: #b45309;" id="course-btn-drive">
+                    ${icons.lock('icon-inline', 16)}
+                    <span>مجلد Google Drive (🔒 للمتدربين فقط)</span>
+                  </button>
+                `}
 
-                <!-- 3. Real Material File Download -->
-                <button type="button" class="btn-trigger-real-download btn-secondary" data-file="${course.files && course.files[0] ? course.files[0].name : 'دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf'}" style="padding: 10px; font-size: 0.85rem; justify-content: center; width: 100%;">
-                  ${icons.download('icon-inline', 18)}
-                  <span>تحميل الحقيبة التدريبية الكاملة (PDF)</span>
-                </button>
+                <!-- 3. Real Material File Download (Permission Checked) -->
+                ${canDownload ? `
+                  <button type="button" class="btn-trigger-real-download btn-secondary" data-file="${course.files && course.files[0] ? course.files[0].name : 'دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf'}" style="padding: 10px; font-size: 0.85rem; justify-content: center; width: 100%;">
+                    ${icons.download('icon-inline', 18)}
+                    <span>تحميل الحقيبة التدريبية الكاملة (PDF)</span>
+                  </button>
+                ` : `
+                  <button type="button" class="btn-guard-download btn-secondary" data-file="${course.files && course.files[0] ? course.files[0].name : 'دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf'}" data-course-title="${course.title}" style="padding: 10px; font-size: 0.85rem; justify-content: center; width: 100%; border-color: #fca5a5; background: #fef2f2; color: #dc2626;">
+                    ${icons.lock('icon-inline', 16)}
+                    <span>تحميل الحقيبة الكاملة (🔒 للمتدربين المسجلين)</span>
+                  </button>
+                `}
 
-                <div style="font-size: 0.76rem; color: var(--text-muted); text-align: center; line-height: 1.5;">
+                <div style="font-size: 0.76rem; color: var(--text-muted); text-align: center; line-height: 1.5; margin-top: 4px;">
                   ✓ تسليم شهادة معتمدة دولياً برقم تسلسلي معتمد عند اجتياز المتطلبات.
                 </div>
               </div>
@@ -2306,16 +2388,19 @@ export function renderCourseDetailPage(t, courseId) {
           <button class="course-detail-tab-btn" data-course-tab="materials">
             ${icons.drive('icon-inline', 18)}
             <span>الحقائب وملفات Google Drive (${course.files ? course.files.length : 3})</span>
+            ${!canDownload ? `<span class="locked-tab-badge">🔒 مقفل</span>` : ''}
           </button>
 
           <button class="course-detail-tab-btn" data-course-tab="assignments">
             ${icons.check('icon-inline', 18)}
             <span>التكليفات والمهام (${course.assignments ? course.assignments.length : 2})</span>
+            ${!canDownload ? `<span class="locked-tab-badge">🔒 مقفل</span>` : ''}
           </button>
 
           <button class="course-detail-tab-btn" data-course-tab="discussion">
             ${icons.chat('icon-inline', 18)}
             <span>شات واستفسارات المدرب</span>
+            ${!canDownload ? `<span class="locked-tab-badge">🔒 مقفل</span>` : ''}
           </button>
 
           <button class="course-detail-tab-btn" data-course-tab="instructor-view">
@@ -2335,7 +2420,7 @@ export function renderCourseDetailPage(t, courseId) {
       <!-- Main Course Tabs Container -->
       <div class="container" style="padding: 36px 16px 60px; max-width: 1100px;">
         
-        <!-- PANE 1: SYLLABUS & MODULES -->
+        <!-- PANE 1: SYLLABUS & MODULES (Open to all) -->
         <div class="course-tab-pane active" id="course-pane-syllabus">
           <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 32px; box-shadow: var(--shadow-sm); margin-bottom: 24px;">
             <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
@@ -2402,224 +2487,290 @@ export function renderCourseDetailPage(t, courseId) {
 
         <!-- PANE 2: MATERIALS & GOOGLE DRIVE -->
         <div class="course-tab-pane" id="course-pane-materials">
-          <!-- Drive Direct Connect Banner -->
-          <div style="background: linear-gradient(135deg, #1e3a8a 0%, #0369a1 100%); color: #ffffff; border-radius: var(--radius-xl); padding: 28px 24px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-            <div>
-              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                ${icons.drive('icon-inline', 22)}
-                <span style="background: rgba(255,255,255,0.2); padding: 3px 10px; border-radius: var(--radius-full); font-size: 0.78rem; font-weight: 700;">سحابة Google Drive الرسمية</span>
-              </div>
-              <h3 style="font-size: 1.25rem; font-weight: 800; margin: 0 0 6px; color: #ffffff;">مجلد الحقائب والملفات التدريبية للدورة</h3>
-              <p style="font-size: 0.88rem; opacity: 0.9; margin: 0; max-width: 600px;">
-                يمكن للمتدربين تصفح المجلد السحابي الكامل وتحميل ملفات المحاضرات والعروض ونماذج Excel المعتمدة مباشرة.
+          ${!canDownload ? `
+            <div class="permission-locked-card">
+              <div class="locked-icon-badge">${icons.lock('', 36)}</div>
+              <h3>الحقائب والمواد التدريبية مخصصة للمتدربين المسجلين فقط</h3>
+              <p>
+                تطبيقاً لمعايير الحوكمة وضبط الجودة والاعتماد الأكاديمي لشركة شات (SHAT)، لا يُتاح للزوار غير المسجلين تحميل الحقائب التدريبية أو تصفح مجلدات Google Drive الرسمية قبل التحقق من قيدهم الأكاديمي.
               </p>
+              <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
+                <button type="button" class="btn-cta btn-open-login-from-guard" style="display: flex; align-items: center; gap: 8px; padding: 11px 20px;">
+                  ${icons.key('icon-inline', 16)}
+                  <span>تسجيل الدخول بالمنصة</span>
+                </button>
+                <a href="${course.googleFormUrl || 'https://forms.gle/shat-training-register-2026'}" target="_blank" rel="noopener" class="btn-secondary" style="border-color: #10b981; color: #047857; text-decoration: none; display: flex; align-items: center; gap: 8px; padding: 11px 20px;">
+                  ${icons.form('icon-inline', 16)}
+                  <span>التسجيل في الدورة (Google Form) ↗</span>
+                </a>
+                <button type="button" class="btn-secondary btn-quick-student-login" style="background: #eff6ff; color: #1e40af; border-color: #93c5fd; padding: 11px 20px;">
+                  ⚡ دخول سريع كمتدرب معتمد (أحمد خليل)
+                </button>
+              </div>
             </div>
-            <a href="${course.driveFolderUrl || 'https://drive.google.com/drive/folders/shat-materials'}" target="_blank" rel="noopener" class="btn-cta" style="background: #ffffff; color: #1e3a8a !important; font-weight: 800; border-radius: var(--radius-full); padding: 11px 22px;">
-              ${icons.external('icon-inline', 18)} فتح مجلد Google Drive
-            </a>
-          </div>
-
-          <!-- Files Table -->
-          <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 24px; box-shadow: var(--shadow-sm);">
-            <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 16px;">
-              الحقائب التدريبية المتاحة للتحميل الفوري لجهازك
-            </h3>
-            <div style="display: flex; flex-direction: column; gap: 12px;">
-              ${(course.files || []).map(f => `
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding: 14px 18px; background: #f8fafc; border: 1px solid var(--border-subtle); border-radius: var(--radius-md);">
-                  <div style="display: flex; align-items: center; gap: 12px;">
-                    <div style="width: 40px; height: 40px; border-radius: 8px; background: ${f.type === 'PDF' ? '#fee2e2' : f.type === 'XLSX' ? '#dcfce7' : '#e0e7ff'}; color: ${f.type === 'PDF' ? '#dc2626' : f.type === 'XLSX' ? '#16a34a' : '#4f46e5'}; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.78rem;">
-                      ${f.type}
-                    </div>
-                    <div>
-                      <strong style="font-size: 0.95rem; color: var(--shat-navy-950); display: block;">${f.name}</strong>
-                      <span style="font-size: 0.78rem; color: var(--text-muted);">${f.size} • تحميل مباشر معتمد</span>
-                    </div>
-                  </div>
-                  <div style="display: flex; align-items: center; gap: 10px;">
-                    <button type="button" class="btn-trigger-real-download btn-secondary" data-file="${f.name}" style="padding: 7px 14px; font-size: 0.82rem;">
-                      ${icons.download('icon-inline', 15)} تحميل لجهازك
-                    </button>
-                    <a href="${f.driveLink || course.driveFolderUrl}" target="_blank" rel="noopener" class="btn-secondary" style="padding: 7px 14px; font-size: 0.82rem;" title="فتح في درايف">
-                      ${icons.drive('icon-inline', 15)} في درايف
-                    </a>
-                  </div>
+          ` : `
+            <!-- Drive Direct Connect Banner -->
+            <div style="background: linear-gradient(135deg, #1e3a8a 0%, #0369a1 100%); color: #ffffff; border-radius: var(--radius-xl); padding: 28px 24px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+              <div>
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                  ${icons.drive('icon-inline', 22)}
+                  <span style="background: rgba(255,255,255,0.2); padding: 3px 10px; border-radius: var(--radius-full); font-size: 0.78rem; font-weight: 700;">سحابة Google Drive الرسمية</span>
                 </div>
-              `).join('')}
+                <h3 style="font-size: 1.25rem; font-weight: 800; margin: 0 0 6px; color: #ffffff;">مجلد الحقائب والملفات التدريبية للدورة</h3>
+                <p style="font-size: 0.88rem; opacity: 0.9; margin: 0; max-width: 600px;">
+                  يمكن للمتدربين تصفح المجلد السحابي الكامل وتحميل ملفات المحاضرات والعروض ونماذج Excel المعتمدة مباشرة.
+                </p>
+              </div>
+              <a href="${course.driveFolderUrl || 'https://drive.google.com/drive/folders/shat-materials'}" target="_blank" rel="noopener" class="btn-cta" style="background: #ffffff; color: #1e3a8a !important; font-weight: 800; border-radius: var(--radius-full); padding: 11px 22px;">
+                ${icons.external('icon-inline', 18)} فتح مجلد Google Drive
+              </a>
             </div>
-          </div>
-        </div>
 
-        <!-- PANE 3: ASSIGNMENTS -->
-        <div class="course-tab-pane" id="course-pane-assignments">
-          <div style="display: grid; grid-template-columns: 1fr 360px; gap: 24px;" class="course-assignments-grid">
-            <div>
-              <h3 style="font-size: 1.18rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 16px;">
-                التكليفات والمهام العملية المطلوبة للاعتماد
+            <!-- Files Table -->
+            <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 24px; box-shadow: var(--shadow-sm);">
+              <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 16px;">
+                الحقائب التدريبية المتاحة للتحميل الفوري لجهازك
               </h3>
-              <div style="display: flex; flex-direction: column; gap: 14px;">
-                ${(course.assignments || []).map(a => `
-                  <div style="background: #ffffff; border: 1.5px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--shadow-sm);">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 10px;">
-                      <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--shat-navy-950); margin: 0;">${a.title}</h4>
-                      <span class="status-pill ${a.status === 'graded' ? 'active' : ''}" style="font-size: 0.74rem;">
-                        ${a.status === 'graded' ? `✓ معتمد (${a.score})` : a.status === 'submitted' ? 'قيد التصحيح' : 'بانتظار التسليم'}
-                      </span>
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+                ${(course.files || []).map(f => `
+                  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding: 14px 18px; background: #f8fafc; border: 1px solid var(--border-subtle); border-radius: var(--radius-md);">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <div style="width: 40px; height: 40px; border-radius: 8px; background: ${f.type === 'PDF' ? '#fee2e2' : f.type === 'XLSX' ? '#dcfce7' : '#e0e7ff'}; color: ${f.type === 'PDF' ? '#dc2626' : f.type === 'XLSX' ? '#16a34a' : '#4f46e5'}; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.78rem;">
+                        ${f.type}
+                      </div>
+                      <div>
+                        <strong style="font-size: 0.95rem; color: var(--shat-navy-950); display: block;">${f.name}</strong>
+                        <span style="font-size: 0.78rem; color: var(--text-muted);">${f.size} • تحميل مباشر معتمد</span>
+                      </div>
                     </div>
-                    <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
-                      ${a.description}
-                    </p>
-                    <div style="font-size: 0.78rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
-                      ${icons.clock('icon-inline', 14)}
-                      <span>الموعد النهائي: <strong>${a.deadline}</strong></span>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                      <button type="button" class="btn-trigger-real-download btn-secondary" data-file="${f.name}" style="padding: 7px 14px; font-size: 0.82rem;">
+                        ${icons.download('icon-inline', 15)} تحميل لجهازك
+                      </button>
+                      <a href="${f.driveLink || course.driveFolderUrl}" target="_blank" rel="noopener" class="btn-secondary" style="padding: 7px 14px; font-size: 0.82rem;" title="فتح في درايف">
+                        ${icons.drive('icon-inline', 15)} في درايف
+                      </a>
                     </div>
                   </div>
                 `).join('')}
               </div>
             </div>
+          `}
+        </div>
 
-            <!-- Submission Form -->
-            <div>
-              <div style="background: #ffffff; border: 1.5px solid #bbf7d0; border-radius: var(--radius-xl); padding: 22px; box-shadow: var(--shadow-sm);">
-                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
-                  <span class="status-pill active" style="font-size: 0.76rem;">تسليم الواجب</span>
-                  <strong style="font-size: 1rem; color: var(--shat-navy-950);">رفع التكليف الميداني</strong>
-                </div>
-                <form id="course-assignment-submit-form">
-                  <div style="margin-bottom: 12px;">
-                    <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 4px;">اختر التكليف:</label>
-                    <select class="form-input" style="width: 100%; font-size: 0.85rem;" required>
-                      ${(course.assignments || []).map(a => `<option value="${a.id}">${a.title}</option>`).join('')}
-                    </select>
-                  </div>
-                  <div style="margin-bottom: 12px;">
-                    <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 4px;">رابط الملف أو مجلد Google Drive:</label>
-                    <input type="url" class="form-input" placeholder="https://docs.google.com/..." style="width: 100%; font-size: 0.85rem;" required dir="ltr">
-                  </div>
-                  <div style="margin-bottom: 14px;">
-                    <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 4px;">ملاحظات للطاقم التدريبي:</label>
-                    <textarea class="form-input" rows="3" placeholder="أرفقت التقرير الميداني ومصفوفة الامتثال..." style="width: 100%; font-size: 0.85rem;"></textarea>
-                  </div>
-                  <button type="submit" class="btn-cta" style="width: 100%; padding: 10px; font-size: 0.88rem; justify-content: center;">
-                    ${icons.check('icon-inline', 16)} تسليم التكليف للمراجعة
-                  </button>
-                </form>
+        <!-- PANE 3: ASSIGNMENTS -->
+        <div class="course-tab-pane" id="course-pane-assignments">
+          ${!canDownload ? `
+            <div class="permission-locked-card">
+              <div class="locked-icon-badge">${icons.lock('', 36)}</div>
+              <h3>تسليم التكليفات والمهام متاح للطلبة المعتمدين</h3>
+              <p>
+                يجب تسجيل الدخول كمتدرب مسجل في هذا البرنامج التدريبي حتى تتمكن من رفع التكليفات والمشاريع الميدانية ورصد درجات التقييم الأكاديمي.
+              </p>
+              <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 18px;">
+                <button type="button" class="btn-cta btn-open-login-from-guard">تسجيل الدخول كطالب</button>
+                <button type="button" class="btn-secondary btn-quick-student-login">⚡ تجربة الدخول كمتدرب (أحمد)</button>
               </div>
             </div>
-          </div>
+          ` : `
+            <div style="display: grid; grid-template-columns: 1fr 360px; gap: 24px;" class="course-assignments-grid">
+              <div>
+                <h3 style="font-size: 1.18rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 16px;">
+                  التكليفات والمهام العملية المطلوبة للاعتماد
+                </h3>
+                <div style="display: flex; flex-direction: column; gap: 14px;">
+                  ${(course.assignments || []).map(a => `
+                    <div style="background: #ffffff; border: 1.5px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--shadow-sm);">
+                      <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 10px;">
+                        <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--shat-navy-950); margin: 0;">${a.title}</h4>
+                        <span class="status-pill ${a.status === 'graded' ? 'active' : ''}" style="font-size: 0.74rem;">
+                          ${a.status === 'graded' ? `✓ معتمد (${a.score})` : a.status === 'submitted' ? 'قيد التصحيح' : 'بانتظار التسليم'}
+                        </span>
+                      </div>
+                      <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
+                        ${a.description}
+                      </p>
+                      <div style="font-size: 0.78rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
+                        ${icons.clock('icon-inline', 14)}
+                        <span>الموعد النهائي: <strong>${a.deadline}</strong></span>
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+
+              <!-- Submission Form -->
+              <div>
+                <div style="background: #ffffff; border: 1.5px solid #bbf7d0; border-radius: var(--radius-xl); padding: 22px; box-shadow: var(--shadow-sm);">
+                  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                    <span class="status-pill active" style="font-size: 0.76rem;">تسليم الواجب</span>
+                    <strong style="font-size: 1rem; color: var(--shat-navy-950);">رفع التكليف الميداني</strong>
+                  </div>
+                  <form id="course-assignment-submit-form">
+                    <div style="margin-bottom: 12px;">
+                      <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 4px;">اختر التكليف:</label>
+                      <select class="form-input" style="width: 100%; font-size: 0.85rem;" required>
+                        ${(course.assignments || []).map(a => `<option value="${a.id}">${a.title}</option>`).join('')}
+                      </select>
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                      <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 4px;">رابط الملف أو مجلد Google Drive:</label>
+                      <input type="url" class="form-input" placeholder="https://docs.google.com/..." style="width: 100%; font-size: 0.85rem;" required dir="ltr">
+                    </div>
+                    <div style="margin-bottom: 14px;">
+                      <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 4px;">ملاحظات للطاقم التدريبي:</label>
+                      <textarea class="form-input" rows="3" placeholder="أرفقت التقرير الميداني ومصفوفة الامتثال..." style="width: 100%; font-size: 0.85rem;"></textarea>
+                    </div>
+                    <button type="submit" class="btn-cta" style="width: 100%; padding: 10px; font-size: 0.88rem; justify-content: center;">
+                      ${icons.check('icon-inline', 16)} تسليم التكليف للمراجعة
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          `}
         </div>
 
         <!-- PANE 4: INSTRUCTOR DISCUSSION & Q&A -->
         <div class="course-tab-pane" id="course-pane-discussion">
-          <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-sm); max-width: 860px; margin: 0 auto;">
-            <div style="background: #f8fafc; border-bottom: 1px solid var(--border-subtle); padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;">
-              <div style="display: flex; align-items: center; gap: 10px;">
-                <div class="course-instructor-avatar">
-                  ${course.instructor ? course.instructor.charAt(0) : 'د'}
-                </div>
-                <div>
-                  <strong style="font-size: 0.95rem; color: var(--shat-navy-950); display: block;">${course.instructor || 'المشرف التدريبي'}</strong>
-                  <span style="font-size: 0.76rem; color: #059669; font-weight: 700;">● متواجد الآن للرد على الاستفسارات الأكاديمية</span>
-                </div>
+          ${!canDownload ? `
+            <div class="permission-locked-card">
+              <div class="locked-icon-badge">${icons.lock('', 36)}</div>
+              <h3>غرفة الاستفسارات والتواصل مع المدرب مغلقة للزوار</h3>
+              <p>
+                المحادثة المباشرة مع المشرف الأكاديمي وهيئة التدريس مخصصة للمشاركين المسجلين في هذا المساق. يرجى تسجيل الدخول بحساب طالب للوصول إلى نقاشات الدورة.
+              </p>
+              <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 18px;">
+                <button type="button" class="btn-cta btn-open-login-from-guard">تسجيل الدخول للمحادثة</button>
+                <button type="button" class="btn-secondary btn-quick-student-login">⚡ تجربة الدخول كمتدرب (أحمد)</button>
               </div>
-              <span style="font-size: 0.78rem; color: var(--text-muted); background: #ffffff; border: 1px solid var(--border-subtle); padding: 4px 10px; border-radius: var(--radius-full);">
-                ${course.code || 'CHS-101'} Discussion
-              </span>
             </div>
-
-            <!-- Chat Messages Thread -->
-            <div id="course-chat-thread" style="height: 360px; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 12px; background: #fafaf9;">
-              ${(course.chatMessages || [
-                { sender: 'instructor', name: course.instructor || 'المدرب', text: 'مرحباً بجميع المشاركين في هذا المساق. يرجى مراجعة المواد المحملة في تبويب الحقائب ومجلد Google Drive وطرح أية استفسارات هنا.', time: '10:00 ص' }
-              ]).map(msg => `
-                <div class="chat-message-row ${msg.sender === 'student' ? 'outgoing' : 'incoming'}">
-                  <div class="chat-bubble">
-                    <strong style="display: block; font-size: 0.8rem; margin-bottom: 3px; color: ${msg.sender === 'instructor' ? '#047857' : 'inherit'};">${msg.name}</strong>
-                    ${msg.text}
-                    <span class="chat-bubble-time">${msg.time}</span>
+          ` : `
+            <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-sm); max-width: 860px; margin: 0 auto;">
+              <div style="background: #f8fafc; border-bottom: 1px solid var(--border-subtle); padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div class="course-instructor-avatar">
+                    ${course.instructor ? course.instructor.charAt(0) : 'د'}
+                  </div>
+                  <div>
+                    <strong style="font-size: 0.95rem; color: var(--shat-navy-950); display: block;">${course.instructor || 'المشرف التدريبي'}</strong>
+                    <span style="font-size: 0.76rem; color: #059669; font-weight: 700;">● متواجد الآن للرد على الاستفسارات الأكاديمية</span>
                   </div>
                 </div>
-              `).join('')}
-            </div>
+                <span style="font-size: 0.78rem; color: var(--text-muted); background: #ffffff; border: 1px solid var(--border-subtle); padding: 4px 10px; border-radius: var(--radius-full);">
+                  ${course.code || 'CHS-101'} Discussion
+                </span>
+              </div>
 
-            <!-- Chat Input Box -->
-            <div style="padding: 14px 18px; background: #ffffff; border-top: 1px solid var(--border-subtle); display: flex; gap: 10px;">
-              <input type="text" id="course-chat-input" class="form-input" placeholder="اكتب سؤالك أو استفسارك للمدرب..." style="flex: 1; font-size: 0.88rem;">
-              <button type="button" id="course-chat-send-btn" class="btn-cta" style="padding: 10px 18px; font-size: 0.88rem;">
-                ${icons.arrowLeft('icon-inline', 16)} إرسال
-              </button>
+              <!-- Chat Messages Thread -->
+              <div id="course-chat-thread" style="height: 360px; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 12px; background: #fafaf9;">
+                ${(course.chatMessages || [
+                  { sender: 'instructor', name: course.instructor || 'المدرب', text: 'مرحباً بجميع المشاركين في هذا المساق. يرجى مراجعة المواد المحملة في تبويب الحقائب ومجلد Google Drive وطرح أية استفسارات هنا.', time: '10:00 ص' }
+                ]).map(msg => `
+                  <div class="chat-message-row ${msg.sender === 'student' ? 'outgoing' : 'incoming'}">
+                    <div class="chat-bubble">
+                      <strong style="display: block; font-size: 0.8rem; margin-bottom: 3px; color: ${msg.sender === 'instructor' ? '#047857' : 'inherit'};">${msg.name}</strong>
+                      ${msg.text}
+                      <span class="chat-bubble-time">${msg.time}</span>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+
+              <!-- Chat Input Box -->
+              <div style="padding: 14px 18px; background: #ffffff; border-top: 1px solid var(--border-subtle); display: flex; gap: 10px;">
+                <input type="text" id="course-chat-input" class="form-input" placeholder="اكتب سؤالك أو استفسارك للمدرب..." style="flex: 1; font-size: 0.88rem;">
+                <button type="button" id="course-chat-send-btn" class="btn-cta" style="padding: 10px 18px; font-size: 0.88rem;">
+                  ${icons.arrowLeft('icon-inline', 16)} إرسال
+                </button>
+              </div>
             </div>
-          </div>
+          `}
         </div>
 
         <!-- PANE 5: INSTRUCTOR VIEW & TOOLS -->
         <div class="course-tab-pane" id="course-pane-instructor-view">
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;" class="instructor-view-grid">
-            <!-- Upload Material Box -->
-            <div style="background: #ffffff; border: 1.5px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 24px; box-shadow: var(--shadow-sm);">
-              <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-                ${icons.plus('icon-inline', 20)}
-                <span>رفع حقيبة تدريبية جديدة لهذا المساق</span>
-              </h3>
-              <p style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">
-                يتم رفع الملف فوراً إلى سحابة Google Drive التابعة للدورة وتضمينه في قائمة التحميل المباشر لجميع الطلاب.
+          ${!isInstructor ? `
+            <div class="permission-locked-card" style="border-color: #fed7aa; background: #fffaf5;">
+              <div class="locked-icon-badge" style="background: #ffedd5; color: #ea580c; border-color: #fdba74;">${icons.userCheck('', 36)}</div>
+              <h3>صفة المدرب وهيئة التدريس</h3>
+              <p>
+                هذا القسم مخصص للأساتذة والمشرفين الأكاديميين المعتمدين لمتابعة قوائم المتدربين المسجلين ورفع الملفات الإضافية لمجلد Google Drive الخاص بالدورة.
               </p>
-              <form id="course-instructor-upload-form">
-                <input type="hidden" id="instructor-upload-course-id" value="${course.id}">
-                <div style="margin-bottom: 12px;">
-                  <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 4px;">عنوان المادة أو الملف:</label>
-                  <input type="text" id="instructor-upload-title" class="form-input" placeholder="مثال: الدليل الإرشادي لحساب المؤشرات..." required style="width: 100%; font-size: 0.85rem;">
-                </div>
-                <div style="margin-bottom: 12px;">
-                  <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 4px;">نوع المادة:</label>
-                  <select id="instructor-upload-type" class="form-input" style="width: 100%; font-size: 0.85rem;">
-                    <option value="PDF">مستند PDF معتمد</option>
-                    <option value="XLSX">مصفوفة إكسل XLSX</option>
-                    <option value="PPTX">عرض تقديمي PPTX</option>
-                    <option value="DOCX">وثيقة Word</option>
-                  </select>
-                </div>
-                <div style="margin-bottom: 16px;">
-                  <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 4px;">رابط Google Drive المباشر للملف:</label>
-                  <input type="url" id="instructor-upload-drive" class="form-input" placeholder="${course.driveFolderUrl || 'https://drive.google.com/drive/folders/...'}" style="width: 100%; font-size: 0.85rem;" dir="ltr">
-                </div>
-                <button type="submit" class="btn-cta" style="width: 100%; padding: 10px; font-size: 0.88rem; justify-content: center;">
-                  ${icons.drive('icon-inline', 16)} رفع وحفظ الملف للمقرر
+              <div style="margin-top: 16px;">
+                <button type="button" class="btn-secondary btn-quick-instructor-login" style="background: #ecfdf5; color: #065f46; border-color: #a7f3d0; padding: 9px 20px;">
+                  ⚡ الدخول كمدرب معتمد (د. أسامة المنصور)
                 </button>
-              </form>
+              </div>
             </div>
+          ` : `
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;" class="instructor-view-grid">
+              <!-- Upload Material Box -->
+              <div style="background: #ffffff; border: 1.5px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 24px; box-shadow: var(--shadow-sm);">
+                <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                  ${icons.plus('icon-inline', 20)}
+                  <span>رفع حقيبة تدريبية جديدة لهذا المساق</span>
+                </h3>
+                <p style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">
+                  يتم حفظ الملف فوراً في سحابة Google Drive التابعة للدورة وتضمينه في قائمة التحميل المباشر لجميع الطلاب.
+                </p>
+                <form id="course-instructor-upload-form">
+                  <input type="hidden" id="instructor-upload-course-id" value="${course.id}">
+                  <div style="margin-bottom: 12px;">
+                    <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 4px;">عنوان المادة أو الملف:</label>
+                    <input type="text" id="instructor-upload-title" class="form-input" placeholder="مثال: الدليل الإرشادي لحساب المؤشرات..." required style="width: 100%; font-size: 0.85rem;">
+                  </div>
+                  <div style="margin-bottom: 12px;">
+                    <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 4px;">نوع المادة:</label>
+                    <select id="instructor-upload-type" class="form-input" style="width: 100%; font-size: 0.85rem;">
+                      <option value="PDF">مستند PDF معتمد</option>
+                      <option value="XLSX">مصفوفة إكسل XLSX</option>
+                      <option value="PPTX">عرض تقديمي PPTX</option>
+                      <option value="DOCX">وثيقة Word</option>
+                    </select>
+                  </div>
+                  <div style="margin-bottom: 16px;">
+                    <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 4px;">رابط Google Drive المباشر للملف:</label>
+                    <input type="url" id="instructor-upload-drive" class="form-input" placeholder="${course.driveFolderUrl || 'https://drive.google.com/drive/folders/...'}" style="width: 100%; font-size: 0.85rem;" dir="ltr">
+                  </div>
+                  <button type="submit" class="btn-cta" style="width: 100%; padding: 10px; font-size: 0.88rem; justify-content: center;">
+                    ${icons.drive('icon-inline', 16)} رفع وحفظ الملف للمقرر
+                  </button>
+                </form>
+              </div>
 
-            <!-- Enrolled Students Roster -->
-            <div style="background: #ffffff; border: 1.5px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 24px; box-shadow: var(--shadow-sm);">
-              <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
-                <span>قائمة المتدربين المسجلين</span>
-                <span class="status-pill active" style="font-size: 0.74rem;">24 متدرب</span>
-              </h3>
-              <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f8fafc; border-radius: var(--radius-sm);">
-                  <div>
-                    <strong style="color: var(--shat-navy-950); display: block;">أحمد العتيبي</strong>
-                    <span style="font-size: 0.74rem; color: var(--text-muted);">مسؤول الرقابة • منظمة إغاثية</span>
+              <!-- Enrolled Students Roster -->
+              <div style="background: #ffffff; border: 1.5px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 24px; box-shadow: var(--shadow-sm);">
+                <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
+                  <span>قائمة المتدربين المسجلين</span>
+                  <span class="status-pill active" style="font-size: 0.74rem;">24 متدرب</span>
+                </h3>
+                <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f8fafc; border-radius: var(--radius-sm);">
+                    <div>
+                      <strong style="color: var(--shat-navy-950); display: block;">أحمد العتيبي</strong>
+                      <span style="font-size: 0.74rem; color: var(--text-muted);">مسؤول الرقابة • منظمة إغاثية</span>
+                    </div>
+                    <span class="status-pill active" style="font-size: 0.72rem;">حضور 92%</span>
                   </div>
-                  <span class="status-pill active" style="font-size: 0.72rem;">حضور 92%</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f8fafc; border-radius: var(--radius-sm);">
-                  <div>
-                    <strong style="color: var(--shat-navy-950); display: block;">سارة محمود</strong>
-                    <span style="font-size: 0.74rem; color: var(--text-muted);">ضابطة حماية • جمعية تنموية</span>
+                  <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f8fafc; border-radius: var(--radius-sm);">
+                    <div>
+                      <strong style="color: var(--shat-navy-950); display: block;">سارة محمود</strong>
+                      <span style="font-size: 0.74rem; color: var(--text-muted);">ضابطة حماية • جمعية تنموية</span>
+                    </div>
+                    <span class="status-pill active" style="font-size: 0.72rem;">حضور 96%</span>
                   </div>
-                  <span class="status-pill active" style="font-size: 0.72rem;">حضور 96%</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f8fafc; border-radius: var(--radius-sm);">
-                  <div>
-                    <strong style="color: var(--shat-navy-950); display: block;">م. يوسف النجار</strong>
-                    <span style="font-size: 0.74rem; color: var(--text-muted);">مدير مشروع • مؤسسة أهلية</span>
+                  <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f8fafc; border-radius: var(--radius-sm);">
+                    <div>
+                      <strong style="color: var(--shat-navy-950); display: block;">م. يوسف النجار</strong>
+                      <span style="font-size: 0.74rem; color: var(--text-muted);">مدير مشروع • مؤسسة أهلية</span>
+                    </div>
+                    <span class="status-pill active" style="font-size: 0.72rem;">حضور 88%</span>
                   </div>
-                  <span class="status-pill active" style="font-size: 0.72rem;">حضور 88%</span>
                 </div>
               </div>
             </div>
-          </div>
+          `}
         </div>
 
         <!-- PANE 6: ADMIN CUSTOMIZER -->
@@ -2632,15 +2783,29 @@ export function renderCourseDetailPage(t, courseId) {
                 </div>
                 <div>
                   <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--shat-navy-950); margin: 0;">
-                    تخصيص بيانات ورابط استمارة Google Form لهذه الدورة
+                    تخصيص بيانات ورابط استمارة Google Form وغلاف هذه الدورة
                   </h3>
                   <div style="font-size: 0.8rem; color: #2563eb; font-weight: 600;">لوحة تحكم المدير والمشرف العام</div>
                 </div>
               </div>
 
               <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;">
-                يمكن للمدير تعديل رابط نموذج التسجيل الخاص بهذه الدورة (Google Form) أو مجلد Google Drive، وسيتم حفظ التعديلات فوراً وتطبيقها في جميع صفحات المنصة.
+                يمكن للمدير تعديل رابط نموذج التسجيل الخاص بهذه الدورة (Google Form) أو مجلد Google Drive، أو غلاف الصورة، وسيتم حفظ التعديلات فوراً وتطبيقها في جميع صفحات المنصة.
               </p>
+
+              <!-- Course Cover Customizer Trigger inside Admin Pane -->
+              <div style="background: #f8fafc; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 14px 18px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <img src="${courseCover}" alt="Cover" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px; border: 1px solid #cbd5e1;">
+                  <div>
+                    <strong style="font-size: 0.92rem; color: var(--shat-navy-950); display: block;">صورة وغلاف الدورة</strong>
+                    <span style="font-size: 0.78rem; color: var(--text-muted);">تعديل الكفر الظاهر في بطاقات الرئيسية وصفحة المقرر</span>
+                  </div>
+                </div>
+                <button type="button" class="btn-secondary btn-edit-image-trigger" data-img-key="courseCover_${course.id}" data-img-title="تعديل غلاف دورة: ${course.title}" style="padding: 7px 14px; font-size: 0.82rem;">
+                  ${icons.image('icon-inline', 15)} تغيير وتخصيص الغلاف ↗
+                </button>
+              </div>
 
               <form id="form-admin-course-customizer" data-course-id="${course.id}">
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 14px;">

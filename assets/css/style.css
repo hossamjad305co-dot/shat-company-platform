@@ -3422,5 +3422,123 @@ input:checked + .switch-slider:before {
   .course-hero-grid {
     grid-template-columns: 1fr !important;
   }
+  .role-simulator-inner {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+}
+
+/* Interactive Role Simulator Bar */
+.role-simulator-bar {
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 8px 0;
+  border-bottom: 2px solid #10b981;
+  font-size: 0.82rem;
+  position: relative;
+  z-index: 1010;
+}
+.role-simulator-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.role-simulator-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.role-sim-tag {
+  color: #94a3b8;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+.role-pill-current {
+  background: rgba(16, 185, 129, 0.18);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.78rem;
+}
+.role-simulator-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.role-sim-hint {
+  color: #64748b;
+  font-size: 0.74rem;
+  margin-inline-end: 4px;
+}
+.btn-role-pill {
+  background: #1e293b;
+  color: #cbd5e1;
+  border: 1px solid #334155;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.btn-role-pill:hover {
+  background: #334155;
+  color: #ffffff;
+}
+.btn-role-pill.active {
+  background: #047857;
+  color: #ffffff;
+  border-color: #10b981;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.35);
+}
+
+/* Permission Locked States & Cards */
+.permission-locked-card {
+  background: #ffffff;
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 48px 24px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  animation: fadeIn 0.25s ease;
+}
+.locked-tab-badge {
+  background: #fee2e2;
+  color: #dc2626;
+  font-size: 0.68rem;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-inline-start: 4px;
+  font-weight: 700;
+}
+.image-preset-option {
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 6px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  transition: all 0.2s ease;
+}
+.image-preset-option:hover, .image-preset-option.selected {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+.btn-edit-image-trigger {
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.btn-edit-image-trigger:hover {
+  transform: scale(1.04);
+  background: #0f172a !important;
 }
 

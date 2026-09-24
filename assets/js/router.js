@@ -94,6 +94,7 @@ class Router {
 
   init(currentLang) {
     this.currentLang = currentLang;
+    this.initGlobalModalsAndRoleBar();
     window.addEventListener('hashchange', () => this.handleRouting());
     this.handleRouting();
   }
@@ -151,6 +152,7 @@ class Router {
         }
         window.scrollTo({ top: 0, behavior: 'smooth' });
         container.style.opacity = '1';
+        this.updateRoleSimulatorStatus();
 
         // Auto select chat if accessed via #/moodle-chat
         if (hash === 'moodle-chat') {
@@ -201,6 +203,299 @@ class Router {
         item.classList.remove('active');
       }
     });
+  }
+
+  initGlobalModalsAndRoleBar() {
+    this.updateRoleSimulatorStatus();
+
+    // 1. Role Simulator Bar Buttons
+    document.querySelectorAll('.btn-role-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetRole = btn.getAttribute('data-role');
+        authService.switchRoleQuick(targetRole);
+        this.updateRoleSimulatorStatus();
+        if (window.shatApp && window.shatApp.applyLanguage) {
+          window.shatApp.applyLanguage(this.currentLang);
+        } else {
+          this.handleRouting(true);
+        }
+      });
+    });
+
+    // 2. Permission Guard Modal Close and Login Handlers
+    const guardModal = document.getElementById('modal-permission-guard');
+    const closeGuardBtn = document.getElementById('btn-close-perm-guard');
+    if (closeGuardBtn) {
+      closeGuardBtn.addEventListener('click', () => this.closePermissionGuardModal());
+    }
+    if (guardModal) {
+      guardModal.addEventListener('click', (e) => {
+        if (e.target === guardModal) this.closePermissionGuardModal();
+      });
+    }
+
+    document.querySelectorAll('.btn-open-login-from-guard').forEach(btn => {
+      btn.addEventListener('click', () => {
+        this.closePermissionGuardModal();
+        const authModal = document.getElementById('auth-modal');
+        if (authModal) {
+          authModal.classList.add('open');
+          authModal.style.display = 'flex';
+          const tabLogin = document.getElementById('tab-auth-login');
+          if (tabLogin) tabLogin.click();
+        }
+      });
+    });
+
+    document.querySelectorAll('.btn-quick-student-login').forEach(btn => {
+      btn.addEventListener('click', () => {
+        authService.switchRoleQuick('student');
+        this.closePermissionGuardModal();
+        this.updateRoleSimulatorStatus();
+        if (window.shatApp && window.shatApp.applyLanguage) {
+          window.shatApp.applyLanguage(this.currentLang);
+        } else {
+          this.handleRouting(true);
+        }
+      });
+    });
+
+    document.querySelectorAll('.btn-quick-instructor-login').forEach(btn => {
+      btn.addEventListener('click', () => {
+        authService.switchRoleQuick('instructor');
+        this.closePermissionGuardModal();
+        this.updateRoleSimulatorStatus();
+        if (window.shatApp && window.shatApp.applyLanguage) {
+          window.shatApp.applyLanguage(this.currentLang);
+        } else {
+          this.handleRouting(true);
+        }
+      });
+    });
+
+    // 3. Admin Image Editor Modal Wiring
+    const imgModal = document.getElementById('modal-admin-image-editor');
+    const closeImgBtn = document.getElementById('btn-close-image-editor');
+    const cancelImgBtn = document.getElementById('btn-cancel-image-edit');
+    const saveImgBtn = document.getElementById('btn-save-image-edit');
+    const imgUrlInput = document.getElementById('image-editor-url-input');
+    const imgPreview = document.getElementById('image-editor-preview');
+
+    if (closeImgBtn) closeImgBtn.addEventListener('click', () => this.closeImageEditor());
+    if (cancelImgBtn) cancelImgBtn.addEventListener('click', () => this.closeImageEditor());
+    if (imgModal) {
+      imgModal.addEventListener('click', (e) => {
+        if (e.target === imgModal) this.closeImageEditor();
+      });
+    }
+
+    if (imgUrlInput && imgPreview) {
+      imgUrlInput.addEventListener('input', () => {
+        imgPreview.src = imgUrlInput.value.trim() || '/assets/logo/logo-badge.jpg';
+      });
+    }
+
+    if (saveImgBtn) {
+      saveImgBtn.addEventListener('click', () => {
+        if (!this.activeImageKey) return;
+        const newUrl = imgUrlInput?.value.trim();
+        if (!newUrl) {
+          alert('يرجى تحديد أو إدخال رابط الصورة.');
+          return;
+        }
+        cmsService.setCustomImage(this.activeImageKey, newUrl);
+        alert('✓ تم حفظ وتطبيق الصورة وتحديث المنصة بنجاح!');
+        this.closeImageEditor();
+        this.handleRouting(true);
+      });
+    }
+
+    // 4. Admin Social Post Editor Modal Wiring
+    const postEditorModal = document.getElementById('modal-admin-post-editor');
+    const closePostEditorBtn = document.getElementById('btn-close-post-editor');
+    const cancelPostEditorBtn = document.getElementById('btn-cancel-post-edit');
+    const postEditorForm = document.getElementById('form-admin-post-editor');
+    const pickPostCoverBtn = document.getElementById('btn-pick-post-preset-img');
+
+    if (closePostEditorBtn) closePostEditorBtn.addEventListener('click', () => this.closePostEditor());
+    if (cancelPostEditorBtn) cancelPostEditorBtn.addEventListener('click', () => this.closePostEditor());
+    if (postEditorModal) {
+      postEditorModal.addEventListener('click', (e) => {
+        if (e.target === postEditorModal) this.closePostEditor();
+      });
+    }
+
+    if (pickPostCoverBtn) {
+      pickPostCoverBtn.addEventListener('click', () => {
+        const postId = document.getElementById('admin-post-edit-id')?.value;
+        if (postId) {
+          this.closePostEditor();
+          this.openImageEditor('postImg_' + postId, 'اختيار كفر للمنشور');
+        }
+      });
+    }
+
+    if (postEditorForm) {
+      postEditorForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const postId = document.getElementById('admin-post-edit-id')?.value;
+        const title = document.getElementById('admin-post-edit-title')?.value.trim();
+        const img = document.getElementById('admin-post-edit-img')?.value.trim();
+        const platform = document.getElementById('admin-post-edit-platform')?.value;
+        const tag = document.getElementById('admin-post-edit-tag')?.value.trim();
+        const excerpt = document.getElementById('admin-post-edit-excerpt')?.value.trim();
+        const fullText = document.getElementById('admin-post-edit-fulltext')?.value.trim();
+
+        if (!postId || !title) return;
+
+        cmsService.updateSocialPost(postId, { title, img, platform, tag, excerpt, fullText });
+        if (img) {
+          cmsService.setCustomImage('postImg_' + postId, img);
+        }
+
+        alert('✓ تم حفظ تعديلات المنشور بنجاح!');
+        this.closePostEditor();
+        this.handleRouting(true);
+      });
+    }
+  }
+
+  updateRoleSimulatorStatus() {
+    const user = authService.getCurrentUser();
+    const statusLabel = document.getElementById('role-sim-current');
+    const pills = document.querySelectorAll('.btn-role-pill');
+
+    pills.forEach(p => p.classList.remove('active'));
+
+    if (!user) {
+      if (statusLabel) statusLabel.innerHTML = '👤 زائر (المواد مقفلة)';
+      document.querySelector('.btn-role-pill[data-role="visitor"]')?.classList.add('active');
+    } else {
+      const role = user.role;
+      if (role === 'student') {
+        if (statusLabel) statusLabel.innerHTML = '🎓 متدرب (أحمد خليل - التحميل والتكليفات مفتوحة)';
+        document.querySelector('.btn-role-pill[data-role="student"]')?.classList.add('active');
+      } else if (role === 'instructor') {
+        if (statusLabel) statusLabel.innerHTML = '👨‍🏫 مدرب (د. أسامة المنصور - رفع الحقائب للطلبة)';
+        document.querySelector('.btn-role-pill[data-role="instructor"]')?.classList.add('active');
+      } else if (role === 'admin') {
+        if (statusLabel) statusLabel.innerHTML = '⚙️ مدير عام (أ. حسام جاد الله - تحكم وتعديل كامل)';
+        document.querySelector('.btn-role-pill[data-role="admin"]')?.classList.add('active');
+      } else {
+        if (statusLabel) statusLabel.innerHTML = `👤 ${user.name} (${user.roleTitle || role})`;
+      }
+    }
+  }
+
+  openPermissionGuardModal(courseTitle = '') {
+    const modal = document.getElementById('modal-permission-guard');
+    const titleEl = document.getElementById('perm-guard-title');
+    if (!modal) return;
+
+    if (courseTitle && titleEl) {
+      titleEl.textContent = `المواد والحقائب التدريبية لدورة « ${courseTitle} » مخصصة للمتدربين المسجلين`;
+    } else if (titleEl) {
+      titleEl.textContent = 'المواد التدريبية المعتمدة مخصصة للمتدربين المسجلين فقط';
+    }
+
+    modal.classList.add('open');
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  closePermissionGuardModal() {
+    const modal = document.getElementById('modal-permission-guard');
+    if (modal) {
+      modal.classList.remove('open');
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  }
+
+  openImageEditor(imgKey, title = 'تعديل واستبدال الصورة') {
+    this.activeImageKey = imgKey;
+    const modal = document.getElementById('modal-admin-image-editor');
+    const titleEl = document.getElementById('image-editor-title');
+    const urlInput = document.getElementById('image-editor-url-input');
+    const preview = document.getElementById('image-editor-preview');
+    const presetContainer = document.getElementById('image-preset-picker');
+
+    if (!modal) return;
+
+    if (titleEl) titleEl.textContent = title;
+    const currentUrl = cmsService.getCustomImage(imgKey, '/assets/logo/logo-badge.jpg');
+    if (urlInput) urlInput.value = currentUrl;
+    if (preview) preview.src = currentUrl;
+
+    if (presetContainer) {
+      const presets = cmsService.getPresetImages();
+      presetContainer.innerHTML = presets.map(p => `
+        <div class="image-preset-option" data-url="${p.url}" style="display: flex; align-items: center; gap: 8px; padding: 6px 10px; border: 1.5px solid ${p.url === currentUrl ? '#2563eb' : '#e2e8f0'}; border-radius: var(--radius-sm); cursor: pointer; background: #ffffff; transition: all 0.2s ease;">
+          <img src="${p.url}" alt="${p.name}" style="width: 36px; height: 36px; object-fit: cover; border-radius: 4px; border: 1px solid #cbd5e1;">
+          <div style="text-align: start; overflow: hidden; flex: 1;">
+            <strong style="display: block; font-size: 0.78rem; color: var(--shat-navy-950); white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">${p.name}</strong>
+            <span style="font-size: 0.68rem; color: var(--text-muted);">${p.type}</span>
+          </div>
+        </div>
+      `).join('');
+
+      presetContainer.querySelectorAll('.image-preset-option').forEach(opt => {
+        opt.addEventListener('click', () => {
+          const url = opt.getAttribute('data-url');
+          if (urlInput) urlInput.value = url;
+          if (preview) preview.src = url;
+          presetContainer.querySelectorAll('.image-preset-option').forEach(o => o.style.borderColor = '#e2e8f0');
+          opt.style.borderColor = '#2563eb';
+        });
+      });
+    }
+
+    modal.classList.add('open');
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeImageEditor() {
+    const modal = document.getElementById('modal-admin-image-editor');
+    if (modal) {
+      modal.classList.remove('open');
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  }
+
+  openPostEditor(postId) {
+    const modal = document.getElementById('modal-admin-post-editor');
+    if (!modal) return;
+
+    const t = translations[this.currentLang] || translations.ar;
+    const posts = t.socialSection?.posts || [];
+    const basePost = posts.find(p => p.id === postId) || {};
+    const override = cmsService.getPostOverride(postId) || {};
+    const post = { ...basePost, ...override };
+
+    const customImg = cmsService.getCustomImage('postImg_' + postId, post.img);
+
+    document.getElementById('admin-post-edit-id').value = postId;
+    document.getElementById('admin-post-edit-title').value = post.title || '';
+    document.getElementById('admin-post-edit-img').value = customImg || post.img || '';
+    document.getElementById('admin-post-edit-platform').value = post.platform || 'Facebook';
+    document.getElementById('admin-post-edit-tag').value = post.tag || '';
+    document.getElementById('admin-post-edit-excerpt').value = post.excerpt || '';
+    document.getElementById('admin-post-edit-fulltext').value = post.fullText || post.excerpt || '';
+
+    modal.classList.add('open');
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  closePostEditor() {
+    const modal = document.getElementById('modal-admin-post-editor');
+    if (modal) {
+      modal.classList.remove('open');
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
   }
 
   bindPageInteractions() {
@@ -282,6 +577,13 @@ class Router {
     document.querySelectorAll('.btn-trigger-real-download, .btn-direct-download').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
+        // Permission check
+        if (!authService.canDownloadMaterials()) {
+          const courseTitle = btn.getAttribute('data-course-title') || '';
+          this.openPermissionGuardModal(courseTitle);
+          return;
+        }
+
         const fileName = btn.getAttribute('data-file') || 'دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf';
         const originalHtml = btn.innerHTML;
 
@@ -289,7 +591,6 @@ class Router {
         btn.disabled = true;
 
         setTimeout(() => {
-          // Trigger actual browser download
           downloadRealFile(fileName);
 
           btn.innerHTML = '<span>✓ تم التحميل لجهازك</span>';
@@ -298,6 +599,34 @@ class Router {
             btn.disabled = false;
           }, 2200);
         }, 500);
+      });
+    });
+
+    // 2.1 Permission Guard Triggers for Visitors
+    document.querySelectorAll('.btn-guard-download, .btn-guard-drive').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const courseTitle = btn.getAttribute('data-course-title') || '';
+        this.openPermissionGuardModal(courseTitle);
+      });
+    });
+
+    // 2.2 In-Place Image Editor Triggers
+    document.querySelectorAll('.btn-edit-image-trigger').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const imgKey = btn.getAttribute('data-img-key');
+        const imgTitle = btn.getAttribute('data-img-title') || 'تعديل واستبدال الصورة';
+        this.openImageEditor(imgKey, imgTitle);
+      });
+    });
+
+    // 2.3 Admin Social Post Editor Triggers
+    document.querySelectorAll('.btn-admin-edit-post').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const postId = btn.getAttribute('data-post-id');
+        this.openPostEditor(postId);
       });
     });
 

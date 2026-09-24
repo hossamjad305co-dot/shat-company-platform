@@ -295,6 +295,46 @@ class AuthService {
     this.currentUser = null;
     localStorage.removeItem('shat_current_user');
   }
+
+  // --- Strict Granular Role & Permission Checkers ---
+  canDownloadMaterials() {
+    if (!this.isLoggedIn()) return false;
+    const role = this.currentUser?.role;
+    return ['student', 'instructor', 'admin', 'registrar', 'editor'].includes(role);
+  }
+
+  canAccessWorkspace() {
+    if (!this.isLoggedIn()) return false;
+    const role = this.currentUser?.role;
+    return ['student', 'instructor', 'admin'].includes(role);
+  }
+
+  isAdmin() {
+    return this.currentUser?.role === 'admin';
+  }
+
+  isInstructor() {
+    return this.currentUser?.role === 'instructor' || this.isAdmin();
+  }
+
+  isStudent() {
+    return this.currentUser?.role === 'student';
+  }
+
+  // Quick Switch for Interactive Testing and Verification
+  switchRoleQuick(targetRole) {
+    if (targetRole === 'visitor') {
+      this.logout();
+      return { success: true, role: 'visitor', roleTitle: 'زائر (غير مسجل)' };
+    }
+    const accounts = {
+      admin: { u: 'admin', p: 'admin' },
+      instructor: { u: 'instructor', p: 'teach' },
+      student: { u: 'student', p: 'student' }
+    };
+    const acc = accounts[targetRole] || accounts.student;
+    return this.loginWithPassword(acc.u, acc.p);
+  }
 }
 
 export const authService = new AuthService();
