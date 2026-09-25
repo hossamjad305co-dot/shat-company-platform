@@ -1,7 +1,7 @@
 // SHAT Company Platform - Supabase Integration Client
 // Manages real-time data synchronization with Supabase & offline persistent fallback
 
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.48.1';
+import { createClient } from '@supabase/supabase-js';
 
 const SUPABASE_URL = 'https://virecinrnuhpbadrswjj.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZpcmVjaW5ybnVocGJhZHJzd2pqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI1ODcxMDIsImV4cCI6MjA5ODE2MzEwMn0.b6uv8_e63j8FY4_1yXM8Qr_5UrSOrhLRBHY77x3vqE8';

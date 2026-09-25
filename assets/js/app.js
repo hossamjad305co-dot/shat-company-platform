@@ -3,6 +3,7 @@
 
 import { translations } from './translations.js';
 import { router } from './router.js';
+import { routerAdapter } from './router/index.js';
 import { submitConsultation } from './supabaseClient.js';
 import { authService } from './auth.js';
 
@@ -16,7 +17,8 @@ class App {
     this.applyLanguage(this.currentLang);
     this.bindEvents();
     this.initAuthUI();
-    router.init(this.currentLang);
+    router.initGlobalModalsAndRoleBar();
+    routerAdapter.init(this.currentLang);
 
     // Auto-hide Visual Loading Screen (Header z-index: 1000, Loader z-index: 900)
     const loader = document.getElementById('shat-page-loader');
@@ -43,6 +45,7 @@ class App {
     this.renderAuthModalTexts();
 
     router.setLang(lang);
+    routerAdapter.setLang(lang);
   }
 
   renderHeader(t) {
@@ -437,7 +440,7 @@ class App {
 
     // Demo Account Chips quick fill & login
     document.querySelectorAll('.btn-demo-fill').forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', async () => {
         const u = btn.getAttribute('data-user');
         const p = btn.getAttribute('data-pass');
         const idInput = document.getElementById('login-identifier');
@@ -446,13 +449,15 @@ class App {
           idInput.value = u;
           passInput.value = p;
           // Auto submit
-          const res = authService.loginWithPassword(u, p);
+          const res = await authService.loginWithPassword(u, p);
           if (res.success) {
-            alert(`✓ مرحباً بك، ${res.user.name}!\nتم الدخول بصفتك: (${res.user.roleTitle}).`);
+            alert(`✓ مرحباً بك، ${res.user.name}!\nتم الدخول بصفتك: (${res.user.roleTitle || res.user.role}).`);
             authModal.classList.remove('open');
             updateAuthBtn();
             window.location.hash = '#/academy';
             router.handleRouting(true);
+          } else {
+            alert(res.error || 'بيانات الدخول غير صحيحة');
           }
         }
       });
@@ -461,14 +466,14 @@ class App {
     // 1. Password Login Form Submit
     const formLogin = document.getElementById('form-password-login');
     if (formLogin) {
-      formLogin.addEventListener('submit', (e) => {
+      formLogin.addEventListener('submit', async (e) => {
         e.preventDefault();
         const id = document.getElementById('login-identifier')?.value.trim();
         const pass = document.getElementById('login-password')?.value;
 
-        const res = authService.loginWithPassword(id, pass);
+        const res = await authService.loginWithPassword(id, pass);
         if (res.success) {
-          alert(`✓ تم تسجيل الدخول بنجاح! مرحباً ${res.user.name} (${res.user.roleTitle}).`);
+          alert(`✓ تم تسجيل الدخول بنجاح! مرحباً ${res.user.name} (${res.user.roleTitle || res.user.role}).`);
           authModal.classList.remove('open');
           updateAuthBtn();
           window.location.hash = '#/academy';
@@ -579,12 +584,16 @@ class App {
     const btnGoogleLogin = document.getElementById('btn-google-login-action');
     if (btnGoogleLogin) {
       btnGoogleLogin.addEventListener('click', () => {
-        const user = authService.loginWithGoogle();
-        alert(`✓ تم تسجيل الدخول بحساب Google المؤسسي بنجاح (${user.roleTitle}).`);
-        authModal.classList.remove('open');
-        updateAuthBtn();
-        window.location.hash = '#/academy';
-        router.handleRouting(true);
+        const res = authService.loginWithGoogle();
+        if (res.success) {
+          alert(`✓ تم تسجيل الدخول بحساب Google المؤسسي بنجاح (${res.user.roleTitle || res.user.role}).`);
+          authModal.classList.remove('open');
+          updateAuthBtn();
+          window.location.hash = '#/academy';
+          router.handleRouting(true);
+        } else {
+          alert(res.error || 'المصادقة عبر Google OAuth غير مهيأة في البيئة الحالية (NOT CONFIGURED).');
+        }
       });
     }
   }

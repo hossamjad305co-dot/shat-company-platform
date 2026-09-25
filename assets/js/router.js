@@ -16,6 +16,7 @@ import {
   renderGoogleFormRegistration,
   renderCourseDetailPage
 } from './pages.js';
+import { renderUIPlayground } from './components/uiPlayground.js';
 import {
   submitAcademyEnrollment,
   submitInquiry,
@@ -86,7 +87,12 @@ class Router {
       // أكاديمية SHAT ونظام المودل وكلاس روم
       'academy': renderAcademyPage,
       'moodle': renderAcademyPage,
-      'moodle-chat': renderAcademyPage
+      'moodle-chat': renderAcademyPage,
+
+      // مختبر عناصر التصميم الداخلي (Phase 2 UI Playground)
+      'ui-playground': renderUIPlayground,
+      'playground': renderUIPlayground,
+      'design-system': renderUIPlayground
     };
     this.currentRoute = 'home';
     this.currentLang = 'ar';
@@ -220,6 +226,17 @@ class Router {
           this.handleRouting(true);
         }
       });
+    });
+
+    // 1.1 UI Playground Direction Switcher (RTL ⇄ LTR)
+    document.addEventListener('click', (e) => {
+      const toggleBtn = e.target.closest('#btn-toggle-playground-dir');
+      if (toggleBtn) {
+        const currentDir = document.documentElement.getAttribute('dir') || 'rtl';
+        const newDir = currentDir === 'rtl' ? 'ltr' : 'rtl';
+        document.documentElement.setAttribute('dir', newDir);
+        toggleBtn.textContent = newDir === 'rtl' ? '🔄 تبديل الاتجاه (RTL ⇄ LTR)' : '🔄 Switch Direction (LTR ⇄ RTL)';
+      }
     });
 
     // 2. Permission Guard Modal Close and Login Handlers
