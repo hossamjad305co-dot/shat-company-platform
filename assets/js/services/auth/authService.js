@@ -358,6 +358,13 @@ class AuthService {
     }
     return msg;
   }
+
+  getSystemStaff() {
+    return [
+      { name: 'أ. حسام جاد الله', role: 'المدير التنفيذي العام', email: 'shat.company26@gmail.com' },
+      { name: 'د. أسامة مقبل', role: 'خبير الحماية والتقييم المؤسسي', email: 'osama@shat.com' }
+    ];
+  }
 }
 
 export const authService = new AuthService();

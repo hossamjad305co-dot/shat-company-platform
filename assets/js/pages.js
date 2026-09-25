@@ -1065,7 +1065,7 @@ export function renderAcademyPage(t) {
   // 2. LOGGED-IN VIEW: University LMS / Google Classroom UI
   const userRole = user.role || 'student';
   const activeCourse = courses[0] || {};
-  const staffMembers = authService.getSystemStaff();
+  const staffMembers = (authService && typeof authService.getSystemStaff === 'function') ? authService.getSystemStaff() : [];
   const applications = cmsService.getApplications();
   const cmsData = cmsService.getCMSData();
 
