@@ -1,0 +1,36 @@
+{
+  "folders": [
+    {
+      "name": "🏢 منصة شركة شات (SHAT Platform)",
+      "path": "."
+    },
+    {
+      "name": "📚 مكتبة المهارات المركزية (Central Skills Library)",
+      "path": "C:\\Category"
+    }
+  ],
+  "settings": {
+    "files.encoding": "utf8",
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    "editor.tabSize": 2,
+    "editor.wordWrap": "on",
+    "editor.formatOnSave": true,
+    "editor.fontFamily": "'Cairo', 'Fira Code', 'Courier New', monospace",
+    "editor.fontSize": 14,
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "liveServer.settings.port": 5500,
+    "liveServer.settings.root": "/",
+    "liveServer.settings.CustomBrowser": "chrome"
+  },
+  "extensions": {
+    "recommendations": [
+      "ritwickdey.liveserver",
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint",
+      "pkief.material-icon-theme",
+      "formulahendry.auto-rename-tag",
+      "ecmel.vscode-html-css"
+    ]
+  }
+}
