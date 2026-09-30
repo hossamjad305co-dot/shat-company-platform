@@ -1,10 +1,25 @@
 // assets/js/views/academyView.js
-// Academy & LMS Course Catalog
+// Academy & LMS Course Catalog with 100% Trilingual Support (AR, EN, FR)
 import { content } from '../content.js';
 
 export function renderAcademyView(lang = 'ar') {
   const d = content[lang] || content.ar;
   const courses = d.courses;
+  const isRtl = lang === 'ar';
+  const arrow = isRtl ? '←' : '→';
+
+  const t = {
+    badge: lang === 'fr' ? 'Académie SHAT de Formation et Renforcement des Capacités' : (isRtl ? 'أكاديمية شركة شات للتدريب وبناء القدرات • SHAT Academy' : 'SHAT Academy for Capacity Development'),
+    title: lang === 'fr' ? 'Diplômes Professionnels et Cours Certifiés' : (isRtl ? 'المساقات والدبلومات المهنية المعتمدة' : 'Accredited Courses & Professional Diplomas'),
+    desc: lang === 'fr'
+      ? 'Des programmes exécutifs spécialisés alignés sur les normes humanitaires et internationales pour relier le savoir à la performance réelle.'
+      : (isRtl ? 'برامج تدريبية تخصصية وتطبيقية تعتمد على الجدارات وتحاكي المعايير الإنسانية والدولية لربط التعلم بالأداء الفعلي.' : 'Specialized and applied competency-based training programs aligned with global standards to connect learning with real-world practice.'),
+    btnApplyGeneral: lang === 'fr' ? 'Demande d’Inscription' : (isRtl ? 'تقديم طلب التحاق جديد' : 'Apply for Enrollment'),
+    levelLabel: lang === 'fr' ? 'Niveau:' : (isRtl ? 'المستوى:' : 'Level:'),
+    syllabusLabel: lang === 'fr' ? 'Modules et Axes Didactiques:' : (isRtl ? 'محاور المنهاج التدريبي:' : 'Curriculum Modules:'),
+    btnExploreFiles: lang === 'fr' ? '📖 Consulter le Cursus & Fichiers' : (isRtl ? '📖 استعراض المنهاج والملفات' : '📖 View Curriculum & Files'),
+    btnRegisterCourse: lang === 'fr' ? 'Inscription Directe' : (isRtl ? 'تسجيل فوري بالمساق' : 'Enroll Now')
+  };
 
   return `
     <div class="view-academy">
@@ -13,16 +28,14 @@ export function renderAcademyView(lang = 'ar') {
         <div class="container">
           <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px;">
             <div style="max-width: 720px;">
-              <div class="section-badge">أكاديمية شركة شات للتدريب وبناء القدرات • SHAT Academy LMS Portal</div>
-              <h1 class="section-title" style="margin-bottom: 12px;">المساقات والدبلومات المهنية المعتمدة</h1>
-              <p class="section-desc">
-                برامج تدريبية تخصصية وتطبيقية تعتمد على الجدارات وتحاكي المعايير الإنسانية والدولية لربط التعلم بالأداء الفعلي.
-              </p>
+              <div class="section-badge">${t.badge}</div>
+              <h1 class="section-title" style="margin-bottom: 12px;">${t.title}</h1>
+              <p class="section-desc">${t.desc}</p>
             </div>
             <div>
               <button class="btn-clean btn-primary btn-open-reg-modal" data-course="general">
-                <span>تقديم طلب التحاق جديد</span>
-                <span>←</span>
+                <span>${t.btnApplyGeneral}</span>
+                <span>${arrow}</span>
               </button>
             </div>
           </div>
@@ -47,12 +60,12 @@ export function renderAcademyView(lang = 'ar') {
 
                   <h3 class="bento-title" style="font-size: 1.25rem;">${c.title}</h3>
                   <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px; font-weight: 600;">
-                    المستوى: ${c.level}
+                    ${t.levelLabel} ${c.level}
                   </div>
                   <p class="bento-text" style="margin-bottom: 16px;">${c.summary}</p>
 
                   <div style="background: var(--bg-subtle); border-radius: var(--radius-xs); padding: 14px; margin-bottom: 16px; border: 1px solid var(--border-light);">
-                    <div style="font-size: 0.8rem; font-weight: 800; color: var(--shat-navy); margin-bottom: 8px;">محاور المنهاج التدريبي:</div>
+                    <div style="font-size: 0.8rem; font-weight: 800; color: var(--shat-navy); margin-bottom: 8px;">${t.syllabusLabel}</div>
                     <ul style="list-style: none; display: flex; flex-direction: column; gap: 6px;">
                       ${c.syllabus.map(s => `
                         <li style="font-size: 0.84rem; color: var(--text-secondary); display: flex; align-items: flex-start; gap: 8px;">
@@ -66,15 +79,12 @@ export function renderAcademyView(lang = 'ar') {
 
                 <div class="bento-footer" style="display: flex; gap: 8px; justify-content: space-between; flex-wrap: wrap;">
                   <a href="#/course/${c.id}" class="btn-clean btn-sm" style="background: var(--bg-subtle); color: var(--shat-navy); border: 1px solid var(--border-light); font-weight: 700;">
-                    <span>📖 استعراض المنهاج والملفات</span>
+                    <span>${t.btnExploreFiles}</span>
                   </a>
-                  <button class="btn-clean btn-primary btn-sm btn-open-reg-modal" data-course="${c.id}" style="flex: 1;">
-                    <span>طلب التسجيل</span>
-                    <span>←</span>
+                  <button class="btn-clean btn-green btn-sm btn-open-reg-modal" data-course="${c.id}">
+                    <span>${t.btnRegisterCourse}</span>
+                    <span>${arrow}</span>
                   </button>
-                  <a href="https://wa.me/972592879621?text=${encodeURIComponent('مرحباً، أود الاستفسار عن مساق: ' + c.title)}" target="_blank" rel="noopener" class="btn-clean btn-secondary btn-sm" title="واتساب">
-                    <span>💬</span>
-                  </a>
                 </div>
               </div>
             `).join('')}

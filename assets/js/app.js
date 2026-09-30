@@ -1,5 +1,6 @@
 // assets/js/app.js
 // Main Bootstrap, Dynamic Header & Footer, Mobile Bottom Nav, and Global Modal Engine
+// Fully Trilingual Support (العربية AR, English EN, Français FR)
 import { content } from './content.js';
 import { router } from './router.js';
 import { initLoadingScreen } from './components/loadingScreen.js';
@@ -14,7 +15,9 @@ class Application {
   }
 
   init() {
+    this.applyLanguage(this.currentLang);
     this.renderHeader();
+    this.renderMobileDrawer();
     this.renderFooter();
     this.renderMobileBottomNav();
     this.bindGlobalEvents();
@@ -23,8 +26,45 @@ class Application {
     // Verify session with server silently on boot
     api.getMe().then(() => {
       this.renderHeader();
+      this.renderMobileDrawer();
       this.renderMobileBottomNav();
     }).catch(() => {});
+  }
+
+  setLanguage(lang) {
+    if (!['ar', 'en', 'fr'].includes(lang)) return;
+    this.currentLang = lang;
+    localStorage.setItem('shat_platform_lang', lang);
+    this.applyLanguage(lang);
+    router.setLang(lang);
+    this.renderHeader();
+    this.renderMobileDrawer();
+    this.renderMobileBottomNav();
+    this.renderFooter();
+  }
+
+  applyLanguage(lang) {
+    document.documentElement.setAttribute('lang', lang);
+    document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+
+    const d = content[lang] || content.ar;
+    if (lang === 'ar') {
+      document.title = 'شركة شات للتنمية والتطوير | SHAT Development & Growth';
+    } else if (lang === 'fr') {
+      document.title = 'SHAT Développement & Croissance | Renforcement des Capacités & Institutions';
+    } else {
+      document.title = 'SHAT Development & Growth | Building Capacity • Strengthening Institutions';
+    }
+
+    // Dynamic Top Utility Bar Update
+    const topMotto = document.getElementById('top-bar-motto');
+    if (topMotto && d.topBar) {
+      topMotto.textContent = d.topBar.motto;
+    }
+    const topWhatsapp = document.getElementById('top-bar-whatsapp');
+    if (topWhatsapp && d.topBar) {
+      topWhatsapp.textContent = d.topBar.whatsapp;
+    }
   }
 
   renderHeader() {
@@ -32,6 +72,7 @@ class Application {
     const c = d.company;
     const nav = d.nav;
     const user = api.currentUser;
+    const isRtl = this.currentLang === 'ar';
 
     // Desktop Navigation Links
     const navContainer = document.getElementById('site-desktop-nav');
@@ -41,8 +82,8 @@ class Application {
         <a href="#/about" class="nav-link">${nav.about}</a>
         <a href="#/services" class="nav-link">${nav.services}</a>
         <a href="#/standards" class="nav-link">${nav.standards}</a>
-        <a href="#/projects" class="nav-link">${nav.projects || 'المشاريع'}</a>
-        <a href="#/news" class="nav-link">${nav.news || 'الأخبار'}</a>
+        <a href="#/projects" class="nav-link">${nav.projects || (this.currentLang === 'fr' ? 'Projets' : 'المشاريع')}</a>
+        <a href="#/news" class="nav-link">${nav.news || (this.currentLang === 'fr' ? 'Actualités' : 'الأخبار')}</a>
         <a href="#/academy" class="nav-link">${nav.academy}</a>
         <a href="#/contact" class="nav-link">${nav.contact}</a>
       `;
@@ -51,30 +92,62 @@ class Application {
     const brandEl = document.getElementById('header-brand-title');
     if (brandEl) brandEl.textContent = c.name;
     const subEl = document.getElementById('header-brand-sub');
-    if (subEl) subEl.textContent = c.nameEn;
+    if (subEl) {
+      subEl.textContent = this.currentLang === 'ar' 
+        ? c.nameEn 
+        : (this.currentLang === 'fr' ? 'SHAT Plateforme Institutionnelle' : 'SHAT Institutional Platform');
+    }
+
+    // Dynamic Language Selector Label
+    const langLabel = this.currentLang === 'ar' 
+      ? 'العربية' 
+      : (this.currentLang === 'fr' ? 'Français' : 'English');
+
+    // Language Dropdown HTML Component
+    const langPickerHtml = `
+      <div class="lang-switch-dropdown" style="position: relative; display: inline-block;">
+        <button id="btn-lang-selector" class="btn-clean btn-secondary btn-sm" style="display: flex; align-items: center; gap: 6px; font-weight: 700; padding: 6px 12px; border-radius: var(--radius-xs);" title="اختيار اللغة / Select Language / Choisir la langue">
+          <span>🌐</span>
+          <span>${langLabel}</span>
+          <span style="font-size: 0.65rem; opacity: 0.7;">▼</span>
+        </button>
+        <div id="lang-dropdown-menu" style="display: none; position: absolute; top: calc(100% + 4px); ${isRtl ? 'left: 0;' : 'right: 0;'} background: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-xs); box-shadow: var(--shadow-md); z-index: 1000; min-width: 140px; overflow: hidden; padding: 4px 0;">
+          <button class="btn-clean lang-option-btn ${this.currentLang === 'ar' ? 'active' : ''}" data-lang="ar" style="width: 100%; text-align: ${isRtl ? 'right' : 'left'}; padding: 8px 14px; font-size: 0.85rem; font-weight: ${this.currentLang === 'ar' ? '800' : '600'}; color: ${this.currentLang === 'ar' ? 'var(--shat-green)' : 'var(--shat-navy)'}; display: flex; align-items: center; gap: 8px; border: none; background: ${this.currentLang === 'ar' ? 'var(--bg-subtle)' : 'transparent'};">
+            <span>🇸🇦</span> <span>العربية</span>
+          </button>
+          <button class="btn-clean lang-option-btn ${this.currentLang === 'en' ? 'active' : ''}" data-lang="en" style="width: 100%; text-align: ${isRtl ? 'right' : 'left'}; padding: 8px 14px; font-size: 0.85rem; font-weight: ${this.currentLang === 'en' ? '800' : '600'}; color: ${this.currentLang === 'en' ? 'var(--shat-green)' : 'var(--shat-navy)'}; display: flex; align-items: center; gap: 8px; border: none; background: ${this.currentLang === 'en' ? 'var(--bg-subtle)' : 'transparent'};">
+            <span>🇬🇧</span> <span>English</span>
+          </button>
+          <button class="btn-clean lang-option-btn ${this.currentLang === 'fr' ? 'active' : ''}" data-lang="fr" style="width: 100%; text-align: ${isRtl ? 'right' : 'left'}; padding: 8px 14px; font-size: 0.85rem; font-weight: ${this.currentLang === 'fr' ? '800' : '600'}; color: ${this.currentLang === 'fr' ? 'var(--shat-green)' : 'var(--shat-navy)'}; display: flex; align-items: center; gap: 8px; border: none; background: ${this.currentLang === 'fr' ? 'var(--bg-subtle)' : 'transparent'};">
+            <span>🇫🇷</span> <span>Français</span>
+          </button>
+        </div>
+      </div>
+    `;
 
     // Header Actions (Right Side)
     const headerActions = document.getElementById('site-header-actions');
     if (headerActions) {
       if (user) {
         let portalRoute = '#/student';
-        let portalLabel = 'لوحة المتدرب';
+        let portalLabel = this.currentLang === 'ar' ? 'لوحة المتدرب' : (this.currentLang === 'fr' ? 'Portail Stagiaire' : 'Trainee Portal');
         if (user.role === 'teacher') {
           portalRoute = '#/teacher';
-          portalLabel = 'بوابة المدرب';
+          portalLabel = this.currentLang === 'ar' ? 'بوابة المدرب' : (this.currentLang === 'fr' ? 'Portail Formateur' : 'Trainer Portal');
         } else if (user.role === 'admin') {
           portalRoute = '#/admin';
-          portalLabel = 'المركز الإداري ⚙️';
+          portalLabel = this.currentLang === 'ar' ? 'المركز الإداري ⚙️' : (this.currentLang === 'fr' ? 'Centre Admin ⚙️' : 'Admin Center ⚙️');
         }
 
+        const logoutLabel = this.currentLang === 'ar' ? 'خروج' : (this.currentLang === 'fr' ? 'Quitter' : 'Logout');
+        const notifTooltip = this.currentLang === 'ar' ? 'التنبيهات المؤسسية' : (this.currentLang === 'fr' ? 'Notifications' : 'Notifications');
+
         headerActions.innerHTML = `
-          <button class="btn-clean btn-secondary btn-sm" id="btn-toggle-lang" title="تبديل اللغة / Switch Language">
-            🌐 ${this.currentLang === 'ar' ? 'English' : 'العربية'}
-          </button>
+          ${langPickerHtml}
           
-          <!-- Notifications Bell (Point 3) -->
+          <!-- Notifications Bell -->
           <div style="position: relative;">
-            <button id="btn-notifications-toggle" class="btn-clean btn-secondary btn-sm" style="position: relative; padding: 7px 11px;" title="التنبيهات المؤسسية">
+            <button id="btn-notifications-toggle" class="btn-clean btn-secondary btn-sm" style="position: relative; padding: 7px 11px;" title="${notifTooltip}">
               <span style="font-size: 1.1rem;">🔔</span>
               <span class="notification-badge-dot">3</span>
             </button>
@@ -84,12 +157,12 @@ class Application {
             <a href="${portalRoute}" class="btn-clean btn-green btn-sm" style="font-weight: 700;">
               <span>👤 ${user.fullNameAr || user.username} (${portalLabel})</span>
             </a>
-            <button id="btn-header-logout" class="btn-clean btn-sm" style="background: rgba(239, 68, 68, 0.1); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.2);" title="تسجيل الخروج">
-              خروج
+            <button id="btn-header-logout" class="btn-clean btn-sm" style="background: rgba(239, 68, 68, 0.1); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.2);" title="${logoutLabel}">
+              ${logoutLabel}
             </button>
           </div>
 
-          <button class="mobile-toggle" id="btn-mobile-menu" aria-label="فتح القائمة">
+          <button class="mobile-toggle" id="btn-mobile-menu" aria-label="Menu">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="3" y1="12" x2="21" y2="12"></line>
               <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -102,8 +175,12 @@ class Application {
         if (logoutBtn) {
           logoutBtn.onclick = async () => {
             await api.logout();
-            showToast('تم تسجيل الخروج بنجاح من المنصة.', 'info');
+            const msg = this.currentLang === 'ar' 
+              ? 'تم تسجيل الخروج بنجاح من المنصة.' 
+              : (this.currentLang === 'fr' ? 'Déconnexion réussie.' : 'Successfully logged out.');
+            showToast(msg, 'info');
             this.renderHeader();
+            this.renderMobileDrawer();
             this.renderMobileBottomNav();
             window.location.hash = '#/home';
           };
@@ -126,16 +203,14 @@ class Application {
       } else {
         // Visitor Navigation Header
         headerActions.innerHTML = `
-          <button class="btn-clean btn-secondary btn-sm" id="btn-toggle-lang" title="تبديل اللغة / Switch Language">
-            🌐 ${this.currentLang === 'ar' ? 'English' : 'العربية'}
-          </button>
+          ${langPickerHtml}
           <a href="#/login" class="btn-clean btn-sm" style="background: #FFFFFF; border: 1px solid var(--border-light); color: var(--shat-navy); font-weight: 700;">
-            تسجيل الدخول
+            ${nav.login}
           </a>
           <a href="#/contact" class="btn-clean btn-primary btn-sm">
-            طلب استشارة
+            ${nav.requestConsultation}
           </a>
-          <button class="mobile-toggle" id="btn-mobile-menu" aria-label="فتح القائمة">
+          <button class="mobile-toggle" id="btn-mobile-menu" aria-label="Menu">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="3" y1="12" x2="21" y2="12"></line>
               <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -145,17 +220,32 @@ class Application {
         `;
       }
 
-      // Rebind language toggle and mobile drawer
-      const langBtn = document.getElementById('btn-toggle-lang');
-      if (langBtn) {
-        langBtn.onclick = () => {
-          const nextLang = this.currentLang === 'ar' ? 'en' : 'ar';
-          this.currentLang = nextLang;
-          router.setLang(nextLang);
-          this.renderHeader();
-          this.renderFooter();
-          this.renderMobileBottomNav();
+      // Bind Language Dropdown Clicks
+      const langSelectorBtn = document.getElementById('btn-lang-selector');
+      const langDropdownMenu = document.getElementById('lang-dropdown-menu');
+      if (langSelectorBtn && langDropdownMenu) {
+        langSelectorBtn.onclick = (e) => {
+          e.stopPropagation();
+          const isOpen = langDropdownMenu.style.display === 'block';
+          langDropdownMenu.style.display = isOpen ? 'none' : 'block';
         };
+
+        langDropdownMenu.querySelectorAll('.lang-option-btn').forEach(btn => {
+          btn.onclick = (e) => {
+            e.stopPropagation();
+            const chosenLang = btn.getAttribute('data-lang');
+            langDropdownMenu.style.display = 'none';
+            if (chosenLang && chosenLang !== this.currentLang) {
+              this.setLanguage(chosenLang);
+            }
+          };
+        });
+
+        document.addEventListener('click', (ev) => {
+          if (!langDropdownMenu.contains(ev.target) && ev.target !== langSelectorBtn) {
+            langDropdownMenu.style.display = 'none';
+          }
+        });
       }
 
       const mobileBtn = document.getElementById('btn-mobile-menu');
@@ -164,13 +254,89 @@ class Application {
         mobileBtn.onclick = () => mobileDrawer.style.display = 'block';
       }
     }
+
+    // Localize Notifications Menu Panel Content
+    const notifHeader = document.querySelector('#notifications-dropdown-menu .notifications-header');
+    if (notifHeader && d.notifications) {
+      notifHeader.innerHTML = `
+        <span style="font-weight: 800; color: var(--shat-navy); font-size: 0.95rem;">${d.notifications.title}</span>
+        <span class="badge" style="background: var(--shat-green-tint); color: var(--shat-green); font-size: 0.75rem; font-weight: 700;">${d.notifications.badge}</span>
+      `;
+    }
+    const notifList = document.getElementById('notifications-items-list');
+    if (notifList && d.notifications?.items) {
+      const colors = ['var(--shat-green)', 'var(--shat-navy)', 'var(--shat-amber)'];
+      notifList.innerHTML = d.notifications.items.map((item, idx) => `
+        <div class="notification-item">
+          <div class="notif-dot" style="background: ${colors[idx % colors.length]};"></div>
+          <div>
+            <div style="font-weight: 700; font-size: 0.86rem; color: var(--shat-navy);">${item.title}</div>
+            <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 2px;">${item.desc}</div>
+          </div>
+        </div>
+      `).join('');
+    }
   }
 
-  // Mobile-First Bottom Navigation Bar (Point 5)
+  renderMobileDrawer() {
+    const d = content[this.currentLang] || content.ar;
+    const nav = d.nav;
+    const user = api.currentUser;
+
+    const drawerTitle = document.getElementById('mobile-drawer-title');
+    if (drawerTitle) {
+      drawerTitle.textContent = this.currentLang === 'ar' ? 'قائمة شركة شات' : (this.currentLang === 'fr' ? 'Menu SHAT' : 'SHAT Menu');
+    }
+
+    const drawerLinks = document.getElementById('mobile-drawer-links');
+    if (drawerLinks) {
+      drawerLinks.innerHTML = `
+        <!-- Language Switcher in Mobile Drawer -->
+        <div style="display: flex; gap: 6px; padding-bottom: 12px; margin-bottom: 8px; border-bottom: 1px solid var(--border-light);">
+          <button class="btn-clean mobile-lang-btn ${this.currentLang === 'ar' ? 'active' : ''}" data-lang="ar" style="flex: 1; padding: 7px 4px; font-size: 0.82rem; font-weight: 700; border-radius: var(--radius-xs); border: 1px solid ${this.currentLang === 'ar' ? 'var(--shat-green)' : 'var(--border-light)'}; background: ${this.currentLang === 'ar' ? 'var(--shat-green-tint)' : '#FFFFFF'}; color: ${this.currentLang === 'ar' ? 'var(--shat-green)' : 'var(--shat-navy)'};">🇸🇦 العربية</button>
+          <button class="btn-clean mobile-lang-btn ${this.currentLang === 'en' ? 'active' : ''}" data-lang="en" style="flex: 1; padding: 7px 4px; font-size: 0.82rem; font-weight: 700; border-radius: var(--radius-xs); border: 1px solid ${this.currentLang === 'en' ? 'var(--shat-green)' : 'var(--border-light)'}; background: ${this.currentLang === 'en' ? 'var(--shat-green-tint)' : '#FFFFFF'}; color: ${this.currentLang === 'en' ? 'var(--shat-green)' : 'var(--shat-navy)'};">🇬🇧 English</button>
+          <button class="btn-clean mobile-lang-btn ${this.currentLang === 'fr' ? 'active' : ''}" data-lang="fr" style="flex: 1; padding: 7px 4px; font-size: 0.82rem; font-weight: 700; border-radius: var(--radius-xs); border: 1px solid ${this.currentLang === 'fr' ? 'var(--shat-green)' : 'var(--border-light)'}; background: ${this.currentLang === 'fr' ? 'var(--shat-green-tint)' : '#FFFFFF'}; color: ${this.currentLang === 'fr' ? 'var(--shat-green)' : 'var(--shat-navy)'};">🇫🇷 Français</button>
+        </div>
+
+        <a href="#/home" class="nav-link">${nav.home}</a>
+        <a href="#/about" class="nav-link">${nav.about}</a>
+        <a href="#/services" class="nav-link">${nav.services}</a>
+        <a href="#/standards" class="nav-link">${nav.standards}</a>
+        <a href="#/projects" class="nav-link">${nav.projects || (this.currentLang === 'fr' ? 'Projets' : 'المشاريع')}</a>
+        <a href="#/news" class="nav-link">${nav.news || (this.currentLang === 'fr' ? 'Actualités' : 'الأخبار')}</a>
+        <a href="#/academy" class="nav-link">${nav.academy}</a>
+        <a href="#/contact" class="nav-link">${nav.contact}</a>
+        <div style="height: 1px; background: var(--border-light); margin: 6px 0;"></div>
+        ${user ? `
+          <a href="${user.role === 'teacher' ? '#/teacher' : (user.role === 'admin' ? '#/admin' : '#/student')}" class="nav-link" style="color: var(--shat-green); font-weight: 800;">
+            👤 ${user.fullNameAr || user.username}
+          </a>
+        ` : `
+          <a href="#/login" class="nav-link" style="color: var(--shat-navy);">🔑 ${nav.login}</a>
+          <a href="#/contact" class="btn-clean btn-primary btn-sm" style="margin-top: 6px;">${nav.requestConsultation}</a>
+        `}
+      `;
+
+      drawerLinks.querySelectorAll('.mobile-lang-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const selectedLang = e.currentTarget.getAttribute('data-lang');
+          if (selectedLang) {
+            this.setLanguage(selectedLang);
+            const drawer = document.getElementById('mobile-drawer-nav');
+            if (drawer) drawer.style.display = 'none';
+          }
+        });
+      });
+    }
+  }
+
+  // Mobile-First Bottom Navigation Bar
   renderMobileBottomNav() {
     const bottomNav = document.getElementById('mobile-bottom-nav');
     if (!bottomNav) return;
 
+    const d = content[this.currentLang] || content.ar;
+    const b = d.bottomNav || content.ar.bottomNav;
     const user = api.currentUser;
 
     if (!user) {
@@ -178,87 +344,84 @@ class Application {
       bottomNav.innerHTML = `
         <a href="#/home" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">🏠</span>
-          <span class="mobile-bottom-label">الرئيسية</span>
+          <span class="mobile-bottom-label">${b.home}</span>
         </a>
         <a href="#/services" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">💼</span>
-          <span class="mobile-bottom-label">الخدمات</span>
+          <span class="mobile-bottom-label">${b.services}</span>
         </a>
         <a href="#/projects" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">🎯</span>
-          <span class="mobile-bottom-label">المشاريع</span>
+          <span class="mobile-bottom-label">${b.projects}</span>
         </a>
         <a href="#/academy" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">🎓</span>
-          <span class="mobile-bottom-label">الأكاديمية</span>
+          <span class="mobile-bottom-label">${b.academy}</span>
         </a>
         <a href="#/login" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">🔑</span>
-          <span class="mobile-bottom-label">الدخول</span>
+          <span class="mobile-bottom-label">${b.login}</span>
         </a>
       `;
     } else if (user.role === 'student') {
-      // Student Bottom Navigation (Point 5: Home, Courses, Dashboard, Me)
       bottomNav.innerHTML = `
         <a href="#/home" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">🏠</span>
-          <span class="mobile-bottom-label">الرئيسية</span>
+          <span class="mobile-bottom-label">${b.home}</span>
         </a>
         <a href="#/academy" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">📚</span>
-          <span class="mobile-bottom-label">المساقات</span>
+          <span class="mobile-bottom-label">${b.courses}</span>
         </a>
         <a href="#/student" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">📊</span>
-          <span class="mobile-bottom-label">لوحتي</span>
+          <span class="mobile-bottom-label">${b.myDashboard}</span>
         </a>
         <a href="#/course/shat-chs-master" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">🎯</span>
-          <span class="mobile-bottom-label">قاعتي</span>
+          <span class="mobile-bottom-label">${b.myRoom}</span>
         </a>
         <a href="#/student" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">👤</span>
-          <span class="mobile-bottom-label">حسابي</span>
+          <span class="mobile-bottom-label">${b.profile}</span>
         </a>
       `;
     } else if (user.role === 'teacher') {
-      // Teacher Bottom Navigation
       bottomNav.innerHTML = `
         <a href="#/home" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">🏠</span>
-          <span class="mobile-bottom-label">الرئيسية</span>
+          <span class="mobile-bottom-label">${b.home}</span>
         </a>
         <a href="#/teacher" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">👨‍🏫</span>
-          <span class="mobile-bottom-label">مقرراتي</span>
+          <span class="mobile-bottom-label">${b.courses}</span>
         </a>
         <a href="#/teacher" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">✍️</span>
-          <span class="mobile-bottom-label">التصحيح</span>
+          <span class="mobile-bottom-label">${b.grading}</span>
         </a>
         <a href="#/academy" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">🎓</span>
-          <span class="mobile-bottom-label">الأكاديمية</span>
+          <span class="mobile-bottom-label">${b.academy}</span>
         </a>
       `;
     } else if (user.role === 'admin') {
-      // Admin Bottom Navigation
       bottomNav.innerHTML = `
         <a href="#/home" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">🏠</span>
-          <span class="mobile-bottom-label">الرئيسية</span>
+          <span class="mobile-bottom-label">${b.home}</span>
         </a>
         <a href="#/admin" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">📰</span>
-          <span class="mobile-bottom-label">المحتوى</span>
+          <span class="mobile-bottom-label">${b.content}</span>
         </a>
         <a href="#/admin" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">📥</span>
-          <span class="mobile-bottom-label">الطلبات</span>
+          <span class="mobile-bottom-label">${b.requests}</span>
         </a>
         <a href="#/admin" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">⚙️</span>
-          <span class="mobile-bottom-label">الإدارة</span>
+          <span class="mobile-bottom-label">${b.admin}</span>
         </a>
       `;
     }
@@ -268,6 +431,7 @@ class Application {
     const d = content[this.currentLang] || content.ar;
     const c = d.company;
     const nav = d.nav;
+    const f = d.footer || content.ar.footer;
 
     const footerContainer = document.getElementById('site-footer-content');
     if (footerContainer) {
@@ -280,45 +444,45 @@ class Application {
             </div>
             <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.7; margin-bottom: 16px;">
               ${c.motto}<br>
-              <span style="font-family: var(--font-latin); font-size: 0.8rem; color: #64748B;">${c.subMottoEn}</span>
+              <span style="font-family: var(--font-latin); font-size: 0.8rem; color: #64748B;">${c.subMottoEn || c.subMotto}</span>
             </p>
             <div style="font-size: 0.85rem; color: #CBD5E1;">
-              نطاق العمل: دولي وإقليمي • فلسطين
+              ${f.scope}
             </div>
           </div>
 
           <div>
-            <div class="footer-title">الأقسام والخدمات</div>
+            <div class="footer-title">${f.sectionsTitle}</div>
             <ul class="footer-links">
               <li><a href="#/home">${nav.home}</a></li>
               <li><a href="#/about">${nav.about}</a></li>
               <li><a href="#/services">${nav.services}</a></li>
               <li><a href="#/standards">${nav.standards}</a></li>
-              <li><a href="#/projects">${nav.projects || 'المشاريع'}</a></li>
-              <li><a href="#/news">${nav.news || 'الأخبار'}</a></li>
+              <li><a href="#/projects">${nav.projects || (this.currentLang === 'fr' ? 'Projets' : 'المشاريع')}</a></li>
+              <li><a href="#/news">${nav.news || (this.currentLang === 'fr' ? 'Actualités' : 'الأخبار')}</a></li>
             </ul>
           </div>
 
           <div>
-            <div class="footer-title">الأكاديمية والأنظمة</div>
+            <div class="footer-title">${f.academyTitle}</div>
             <ul class="footer-links">
               <li><a href="#/academy">${nav.academy}</a></li>
               <li><a href="#/delivery">${nav.delivery}</a></li>
               <li><a href="#/contact">${nav.contact}</a></li>
               <li><a href="#/admin">${nav.admin}</a></li>
-              <li><a href="https://wa.me/972592879621" target="_blank" rel="noopener">الدعم الفني المباشر</a></li>
+              <li><a href="https://wa.me/972592879621" target="_blank" rel="noopener">${f.techSupport}</a></li>
             </ul>
           </div>
 
           <div>
-            <div class="footer-title">التواصل المؤسسي</div>
+            <div class="footer-title">${f.contactTitle}</div>
             <ul class="footer-links">
-              <li style="color: #CBD5E1;">البريد: <a href="mailto:${c.email}" style="color: #FFFFFF;">${c.email}</a></li>
-              <li style="color: #CBD5E1;">الهاتف: <a href="https://wa.me/972592879621" target="_blank" rel="noopener" style="color: #4ADE80;">${c.phone}</a></li>
+              <li style="color: #CBD5E1;">${f.emailLabel} <a href="mailto:${c.email}" style="color: #FFFFFF;">${c.email}</a></li>
+              <li style="color: #CBD5E1;">${f.phoneLabel} <a href="https://wa.me/972592879621" target="_blank" rel="noopener" style="color: #4ADE80;">${c.phone}</a></li>
               <li style="margin-top: 10px;">
                 <a href="#/contact" class="btn-clean btn-green btn-sm" style="width: 100%;">
-                  <span>طلب استشارة أو تدريب</span>
-                  <span>←</span>
+                  <span>${f.requestConsultBtn}</span>
+                  <span>${this.currentLang === 'ar' ? '←' : '→'}</span>
                 </a>
               </li>
             </ul>
@@ -326,8 +490,8 @@ class Application {
         </div>
 
         <div class="footer-bottom">
-          <div>© ${c.year} ${c.name} (SHAT Development & Growth). جميع الحقوق محفوظة.</div>
-          <div>وفق أعلى المعايير الدولية والإنسانية المعتمدة.</div>
+          <div>© ${c.year} ${c.name} (${c.nameEn}). ${f.rights}</div>
+          <div>${f.standardsNotice}</div>
         </div>
       `;
     }
@@ -369,14 +533,15 @@ class Application {
       if (!modalBackdrop || !modalBody) return;
 
       const d = content[this.currentLang] || content.ar;
+      const m = d.modal || content.ar.modal;
       const foundCourse = d.courses?.find(c => c.id === courseId);
-      const courseTitle = foundCourse ? foundCourse.title : 'طلب التحاق وتدريب عام';
+      const courseTitle = foundCourse ? foundCourse.title : m.generalCourse;
 
-      if (modalTitle) modalTitle.textContent = 'طلب التحاق بمساق تدريبي معتمد';
+      if (modalTitle) modalTitle.textContent = m.title;
 
       modalBody.innerHTML = `
         <div style="margin-bottom: 16px; background: var(--bg-subtle); padding: 12px 14px; border-radius: var(--radius-xs); border: 1px solid var(--border-light);">
-          <div style="font-size: 0.78rem; font-weight: 700; color: var(--shat-green);">المساق التدريبي المختار:</div>
+          <div style="font-size: 0.78rem; font-weight: 700; color: var(--shat-green);">${m.courseSelected}</div>
           <div style="font-weight: 800; color: var(--shat-navy);">${courseTitle}</div>
         </div>
 
@@ -385,34 +550,34 @@ class Application {
           <input type="hidden" id="app-course-title" value="${courseTitle}">
 
           <div class="form-group" style="margin-bottom: 12px;">
-            <label class="form-label" style="font-weight: 700; font-size: 0.88rem;">الاسم الرباعي الكامل *</label>
-            <input type="text" id="app-fullname" class="form-input" placeholder="مثال: أحمد عبد الله خليل" required>
+            <label class="form-label" style="font-weight: 700; font-size: 0.88rem;">${m.fullName}</label>
+            <input type="text" id="app-fullname" class="form-input" placeholder="${m.fullNamePlaceholder}" required>
           </div>
 
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
             <div class="form-group">
-              <label class="form-label" style="font-weight: 700; font-size: 0.88rem;">رقم الهاتف وواتساب *</label>
+              <label class="form-label" style="font-weight: 700; font-size: 0.88rem;">${m.phone}</label>
               <input type="tel" id="app-phone" class="form-input" placeholder="+97259..." required>
             </div>
             <div class="form-group">
-              <label class="form-label" style="font-weight: 700; font-size: 0.88rem;">البريد الإلكتروني *</label>
+              <label class="form-label" style="font-weight: 700; font-size: 0.88rem;">${m.email}</label>
               <input type="email" id="app-email" class="form-input" placeholder="name@domain.com" required>
             </div>
           </div>
 
           <div class="form-group" style="margin-bottom: 12px;">
-            <label class="form-label" style="font-weight: 700; font-size: 0.88rem;">المؤسسة / جهة العمل الحالية</label>
-            <input type="text" id="app-org" class="form-input" placeholder="اسم المنظمة أو المؤسسة أو الجامعة">
+            <label class="form-label" style="font-weight: 700; font-size: 0.88rem;">${m.org}</label>
+            <input type="text" id="app-org" class="form-input" placeholder="${m.orgPlaceholder}">
           </div>
 
           <div class="form-group" style="margin-bottom: 16px;">
-            <label class="form-label" style="font-weight: 700; font-size: 0.88rem;">المؤهل العلمي أو التخصص</label>
-            <input type="text" id="app-qualification" class="form-input" placeholder="مثال: بكالوريوس إدارة أعمال / علوم إنسانية">
+            <label class="form-label" style="font-weight: 700; font-size: 0.88rem;">${m.qualification}</label>
+            <input type="text" id="app-qualification" class="form-input" placeholder="${m.qualificationPlaceholder}">
           </div>
 
           <button type="submit" class="btn-clean btn-primary btn-lg" style="width: 100%;">
-            <span>تأكيد وإرسال طلب الالتحاق</span>
-            <span>←</span>
+            <span>${m.submit}</span>
+            <span>${this.currentLang === 'ar' ? '←' : '→'}</span>
           </button>
         </form>
       `;
@@ -426,7 +591,7 @@ class Application {
           const submitBtn = enrollForm.querySelector('button[type="submit"]');
           if (submitBtn) {
             submitBtn.disabled = true;
-            submitBtn.innerHTML = `<span>جاري إرسال الطلب للخادم...</span>`;
+            submitBtn.innerHTML = `<span>${m.sending}</span>`;
           }
 
           const appData = {
@@ -441,14 +606,14 @@ class Application {
 
           try {
             const res = await api.submitApplication(appData);
-            showToast(res.message || 'تم استلام طلب تسجيلكم بنجاح! سيقوم فريق القبول والتسجيل بالتواصل معكم لتأكيد الاعتماد.', 'success');
+            showToast(res.message || m.success, 'success');
             modalBackdrop.classList.remove('open');
           } catch (err) {
-            showToast('تعذر إرسال طلب الالتحاق: ' + err.message, 'error');
+            showToast(m.error + err.message, 'error');
           } finally {
             if (submitBtn) {
               submitBtn.disabled = false;
-              submitBtn.innerHTML = `<span>تأكيد وإرسال طلب الالتحاق</span><span>←</span>`;
+              submitBtn.innerHTML = `<span>${m.submit}</span><span>${this.currentLang === 'ar' ? '←' : '→'}</span>`;
             }
           }
         });
@@ -458,6 +623,7 @@ class Application {
     // Re-render on auth updates
     window.addEventListener('shat:auth-updated', () => {
       this.renderHeader();
+      this.renderMobileDrawer();
       this.renderMobileBottomNav();
     });
   }

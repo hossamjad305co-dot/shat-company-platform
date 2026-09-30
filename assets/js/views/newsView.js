@@ -1,9 +1,26 @@
 // assets/js/views/newsView.js
-// Official News, Publications & Institutional Announcements for SHAT Company
+// Official News, Publications & Institutional Announcements for SHAT Company with 100% Trilingual Support (AR, EN, FR)
 import { api } from '../services/api/apiClient.js';
 
 export function renderNewsView(lang = 'ar') {
-  const isAr = lang === 'ar';
+  const isRtl = lang === 'ar';
+
+  const txt = (ar, en, fr) => {
+    if (lang === 'fr') return fr || en;
+    if (lang === 'en') return en;
+    return ar;
+  };
+
+  const t = {
+    badge: txt('المركز الإعلامي والمنشورات • Media Center', 'Media Center & Publications', 'Centre de Presse & Publications'),
+    title: txt('الأخبار والمنشورات الرسمية', 'Official News & Insights', 'Actualités & Publications Officielles'),
+    desc: txt(
+      'متابعة أحدث أنشطة شركة شات للتنمية والتطوير، البرامج الأكاديمية الجديدة، أوراق السياسات، والتقارير الميدانية المعتمدة.',
+      'Latest updates, academic milestones, policy briefs, and institutional reports from SHAT Development & Growth.',
+      'Suivi des actualités institutionnelles de SHAT, nouveaux cursus académiques, notes de cadrage et rapports d’évaluation.'
+    ),
+    loading: txt('جاري تحميل أحدث المنشورات المعتمدة من الخادم...', 'Loading publications from server...', 'Chargement des publications en cours...')
+  };
 
   return `
     <div class="view-news">
@@ -11,13 +28,9 @@ export function renderNewsView(lang = 'ar') {
       <section class="section" style="padding: 64px 0 40px 0; background: var(--bg-subtle); border-bottom: 1px solid var(--border-light);">
         <div class="container">
           <div style="max-width: 800px;">
-            <div class="section-badge">${isAr ? 'المركز الإعلامي والمنشورات • Media Center' : 'Media Center & Publications'}</div>
-            <h1 class="section-title" style="margin-bottom: 12px;">${isAr ? 'الأخبار والمنشورات الرسمية' : 'Official News & Insights'}</h1>
-            <p class="section-desc">
-              ${isAr
-                ? 'متابعة أحدث أنشطة شركة شات للتنمية والتطوير، البرامج الأكاديمية الجديدة، أوراق السياسات، والتقارير الميدانية المعتمدة.'
-                : 'Latest updates, academic milestones, policy briefs, and institutional reports from SHAT Development & Growth.'}
-            </p>
+            <div class="section-badge">${t.badge}</div>
+            <h1 class="section-title" style="margin-bottom: 12px;">${t.title}</h1>
+            <p class="section-desc">${t.desc}</p>
           </div>
         </div>
       </section>
@@ -27,7 +40,7 @@ export function renderNewsView(lang = 'ar') {
         <div class="container">
           <div id="news-posts-container" class="bento-grid grid-3">
             <div style="grid-column: 1 / -1; padding: 40px; text-align: center; color: var(--text-muted);">
-              جاري تحميل أحدث المنشورات المعتمدة من الخادم...
+              ${t.loading}
             </div>
           </div>
         </div>
@@ -40,6 +53,16 @@ export async function bindNewsEvents() {
   const container = document.getElementById('news-posts-container');
   if (!container) return;
 
+  const currentLang = localStorage.getItem('shat_platform_lang') || 'ar';
+  const isRtl = currentLang === 'ar';
+  const arrow = isRtl ? '←' : '→';
+
+  const txt = (ar, en, fr) => {
+    if (currentLang === 'fr') return fr || en;
+    if (currentLang === 'en') return en;
+    return ar;
+  };
+
   try {
     const res = await api.getPosts();
     const posts = res && res.posts ? res.posts.filter(p => p.status === 'published') : [];
@@ -48,8 +71,10 @@ export async function bindNewsEvents() {
       container.innerHTML = `
         <div style="grid-column: 1 / -1; text-align: center; padding: 60px 0; color: var(--text-muted);">
           <div style="font-size: 2.5rem; margin-bottom: 12px;">📰</div>
-          <h3 style="color: var(--shat-navy); margin-bottom: 8px;">لا توجد منشورات جديدة حالياً</h3>
-          <p>سيتم نشر الأخبار والمستجدات الرسمية قريباً.</p>
+          <h3 style="color: var(--shat-navy); margin-bottom: 8px;">
+            ${txt('لا توجد منشورات جديدة حالياً', 'No publications available currently', 'Aucune publication pour le moment')}
+          </h3>
+          <p>${txt('سيتم نشر الأخبار والمستجدات الرسمية قريباً.', 'Official announcements will be published shortly.', 'Les communiqués officiels seront publiés prochainement.')}</p>
         </div>
       `;
       return;
@@ -68,7 +93,7 @@ export async function bindNewsEvents() {
                 ${p.categoryLabel || p.category}
               </span>
               <span style="font-size: 0.78rem; color: var(--text-muted);">
-                📅 ${new Date(p.createdAt || Date.now()).toLocaleDateString('ar-EG')}
+                📅 ${new Date(p.createdAt || Date.now()).toLocaleDateString(currentLang === 'ar' ? 'ar-EG' : (currentLang === 'fr' ? 'fr-FR' : 'en-US'))}
               </span>
             </div>
 
@@ -84,11 +109,11 @@ export async function bindNewsEvents() {
 
         <div style="padding: 14px 20px; border-top: 1px solid var(--border-light); background: var(--bg-subtle); display: flex; justify-content: space-between; align-items: center;">
           <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">
-            بواسطة: ${p.author || 'إدارة شات'}
+            ${txt('بواسطة:', 'By:', 'Par :')} ${p.author || txt('إدارة شات', 'SHAT Admin', 'Direction SHAT')}
           </span>
           <button class="btn-clean btn-sm btn-read-post" data-post-id="${p.id}" style="color: var(--shat-green); font-weight: 800;">
-            <span>قراءة التفاصيل</span>
-            <span>←</span>
+            <span>${txt('قراءة التفاصيل', 'Read More', 'Lire l’article')}</span>
+            <span>${arrow}</span>
           </button>
         </div>
       </article>
@@ -112,8 +137,8 @@ export async function bindNewsEvents() {
               <img src="${post.coverImage || 'assets/logo/logo-banner.jpg'}" alt="${post.title}" style="width: 100%; max-height: 260px; object-fit: cover; border-radius: var(--radius-xs); margin-bottom: 14px;" onerror="this.src='assets/logo/logo-symbol.jpg'">
               <div style="display: flex; gap: 12px; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px;">
                 <span>🏷️ ${post.categoryLabel || post.category}</span>
-                <span>📅 ${new Date(post.createdAt || Date.now()).toLocaleDateString('ar-EG')}</span>
-                <span>✍️ ${post.author || 'إدارة شات'}</span>
+                <span>📅 ${new Date(post.createdAt || Date.now()).toLocaleDateString(currentLang === 'ar' ? 'ar-EG' : (currentLang === 'fr' ? 'fr-FR' : 'en-US'))}</span>
+                <span>✍️ ${post.author || 'SHAT'}</span>
               </div>
               <div style="font-size: 0.95rem; line-height: 1.8; color: var(--text-main); white-space: pre-wrap;">
                 ${post.content}
@@ -128,7 +153,7 @@ export async function bindNewsEvents() {
   } catch (err) {
     container.innerHTML = `
       <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--accent-red);">
-        فشل في جلب المنشورات من الخادم: ${err.message}
+        ${txt('فشل في جلب المنشورات من الخادم: ', 'Failed to fetch posts: ', 'Erreur de chargement des articles : ')} ${err.message}
       </div>
     `;
   }

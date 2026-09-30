@@ -123,9 +123,16 @@ class SimpleRouter {
       inquiryForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const submitBtn = inquiryForm.querySelector('button[type="submit"]');
+        const lang = this.currentLang;
+        const txt = (ar, en, fr) => {
+          if (lang === 'fr') return fr || en;
+          if (lang === 'en') return en;
+          return ar;
+        };
+
         if (submitBtn) {
           submitBtn.disabled = true;
-          submitBtn.textContent = 'جاري إرسال الطلب...';
+          submitBtn.textContent = txt('جاري إرسال الطلب...', 'Sending inquiry...', 'Envoi de la demande...');
         }
 
         const inquiryData = {
@@ -139,14 +146,19 @@ class SimpleRouter {
 
         try {
           const res = await api.submitInquiry(inquiryData);
-          showToast(res.message || 'شكراً لتواصلكم مع شركة شات للتنمية والتطوير. تم استلام طلبكم بنجاح وسيتواصل معكم فريقنا خلال 24 ساعة.', 'success');
+          const successMsg = res.message || txt(
+            'شكراً لتواصلكم مع شركة شات للتنمية والتطوير. تم استلام طلبكم بنجاح وسيتواصل معكم فريقنا خلال 24 ساعة.',
+            'Thank you for contacting SHAT Development & Growth. Your inquiry has been received and our team will contact you within 24 hours.',
+            'Merci de contacter SHAT Développement & Croissance. Votre demande a bien été reçue et notre équipe vous recontactera sous 24h.'
+          );
+          showToast(successMsg, 'success');
           inquiryForm.reset();
         } catch (err) {
-          showToast('تعذر إرسال الطلب عبر الخادم: ' + err.message, 'error');
+          showToast(txt('تعذر إرسال الطلب عبر الخادم: ', 'Failed to send inquiry to server: ', 'Échec de l\'envoi de la demande : ') + err.message, 'error');
         } finally {
           if (submitBtn) {
             submitBtn.disabled = false;
-            submitBtn.textContent = 'إرسال طلب الاستشارة أو التدريب ←';
+            submitBtn.textContent = txt('إرسال طلب الاستشارة أو التدريب ←', 'Submit Consultation / Training Request →', 'Envoyer la Demande de Consultation / Formation →');
           }
         }
       });
