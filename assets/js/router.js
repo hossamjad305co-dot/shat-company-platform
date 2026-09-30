@@ -6,6 +6,8 @@ import { renderAboutView } from './views/aboutView.js';
 import { renderServicesView } from './views/servicesView.js';
 import { renderStandardsView } from './views/standardsView.js';
 import { renderDeliveryView } from './views/deliveryView.js';
+import { renderProjectsView } from './views/projectsView.js';
+import { renderNewsView, bindNewsEvents } from './views/newsView.js';
 import { renderAcademyView } from './views/academyView.js';
 import { renderContactView } from './views/contactView.js';
 import { renderLoginView, bindLoginEvents } from './views/loginView.js';
@@ -14,6 +16,7 @@ import { renderTeacherDashboardView, bindTeacherEvents } from './views/teacherDa
 import { renderAdminView, bindAdminEvents } from './views/adminView.js';
 import { renderCourseDetailView, bindCourseDetailEvents } from './views/courseDetailView.js';
 import { renderFormsView, bindFormsEvents } from './views/formsView.js';
+import { showToast } from './components/toast.js';
 
 class SimpleRouter {
   constructor() {
@@ -24,6 +27,8 @@ class SimpleRouter {
       'services': renderServicesView,
       'standards': renderStandardsView,
       'references': renderStandardsView,
+      'projects': renderProjectsView,
+      'news': renderNewsView,
       'delivery': renderDeliveryView,
       'delivery-model': renderDeliveryView,
       'academy': renderAcademyView,
@@ -81,6 +86,17 @@ class SimpleRouter {
         link.classList.remove('active');
       }
     });
+
+    // Update bottom nav active indicator as well
+    document.querySelectorAll('.mobile-bottom-link').forEach(link => {
+      const href = link.getAttribute('href') || '';
+      const linkPath = href.replace('#/', '').replace('#', '').trim();
+      if (linkPath === path || (path === 'home' && linkPath === '')) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
   }
 
   bindInteractions(activeRoute) {
@@ -97,6 +113,8 @@ class SimpleRouter {
       bindCourseDetailEvents();
     } else if (activeRoute === 'forms') {
       bindFormsEvents();
+    } else if (activeRoute === 'news') {
+      bindNewsEvents();
     }
 
     // Consultation Inquiry Form Handler (Contact View)
@@ -121,10 +139,10 @@ class SimpleRouter {
 
         try {
           const res = await api.submitInquiry(inquiryData);
-          alert(res.message || 'شكراً لتواصلكم مع شركة شات للتنمية والتطوير. تم استلام طلبكم بنجاح وسيتواصل معكم فريقنا خلال 24 ساعة.');
+          showToast(res.message || 'شكراً لتواصلكم مع شركة شات للتنمية والتطوير. تم استلام طلبكم بنجاح وسيتواصل معكم فريقنا خلال 24 ساعة.', 'success');
           inquiryForm.reset();
         } catch (err) {
-          alert('تعذر إرسال الطلب عبر الخادم: ' + err.message);
+          showToast('تعذر إرسال الطلب عبر الخادم: ' + err.message, 'error');
         } finally {
           if (submitBtn) {
             submitBtn.disabled = false;

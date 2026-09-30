@@ -16,6 +16,8 @@ import { renderStudentDashboardView } from '../assets/js/views/studentDashboardV
 import { renderTeacherDashboardView } from '../assets/js/views/teacherDashboardView.js';
 import { renderAdminView } from '../assets/js/views/adminView.js';
 import { renderCourseDetailView } from '../assets/js/views/courseDetailView.js';
+import { renderProjectsView } from '../assets/js/views/projectsView.js';
+import { renderNewsView } from '../assets/js/views/newsView.js';
 import { renderFormsView } from '../assets/js/views/formsView.js';
 
 // Setup Mock Browser Environment for View Tests
@@ -385,6 +387,8 @@ async function runAllTests() {
     { name: 'About', html: renderAboutView('ar') },
     { name: 'Services', html: renderServicesView('ar') },
     { name: 'Standards', html: renderStandardsView('ar') },
+    { name: 'Projects', html: renderProjectsView('ar') },
+    { name: 'News', html: renderNewsView('ar') },
     { name: 'Delivery', html: renderDeliveryView('ar') },
     { name: 'Academy', html: renderAcademyView('ar') },
     { name: 'Contact', html: renderContactView('ar') },

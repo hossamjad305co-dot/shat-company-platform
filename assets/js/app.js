@@ -1,9 +1,10 @@
 // assets/js/app.js
-// Main Bootstrap & Global Modal Engine
+// Main Bootstrap, Dynamic Header & Footer, Mobile Bottom Nav, and Global Modal Engine
 import { content } from './content.js';
 import { router } from './router.js';
 import { initLoadingScreen } from './components/loadingScreen.js';
 import { api } from './services/api/apiClient.js';
+import { showToast } from './components/toast.js';
 
 class Application {
   constructor() {
@@ -15,12 +16,14 @@ class Application {
   init() {
     this.renderHeader();
     this.renderFooter();
+    this.renderMobileBottomNav();
     this.bindGlobalEvents();
     router.init();
 
     // Verify session with server silently on boot
     api.getMe().then(() => {
       this.renderHeader();
+      this.renderMobileBottomNav();
     }).catch(() => {});
   }
 
@@ -30,6 +33,7 @@ class Application {
     const nav = d.nav;
     const user = api.currentUser;
 
+    // Desktop Navigation Links
     const navContainer = document.getElementById('site-desktop-nav');
     if (navContainer) {
       navContainer.innerHTML = `
@@ -37,7 +41,8 @@ class Application {
         <a href="#/about" class="nav-link">${nav.about}</a>
         <a href="#/services" class="nav-link">${nav.services}</a>
         <a href="#/standards" class="nav-link">${nav.standards}</a>
-        <a href="#/delivery" class="nav-link">${nav.delivery}</a>
+        <a href="#/projects" class="nav-link">${nav.projects || 'المشاريع'}</a>
+        <a href="#/news" class="nav-link">${nav.news || 'الأخبار'}</a>
         <a href="#/academy" class="nav-link">${nav.academy}</a>
         <a href="#/contact" class="nav-link">${nav.contact}</a>
       `;
@@ -48,8 +53,8 @@ class Application {
     const subEl = document.getElementById('header-brand-sub');
     if (subEl) subEl.textContent = c.nameEn;
 
-    // Dynamic Header User Action Buttons
-    const headerActions = document.querySelector('.header-actions');
+    // Header Actions (Right Side)
+    const headerActions = document.getElementById('site-header-actions');
     if (headerActions) {
       if (user) {
         let portalRoute = '#/student';
@@ -59,13 +64,22 @@ class Application {
           portalLabel = 'بوابة المدرب';
         } else if (user.role === 'admin') {
           portalRoute = '#/admin';
-          portalLabel = 'لوحة الإدارة ⚙️';
+          portalLabel = 'المركز الإداري ⚙️';
         }
 
         headerActions.innerHTML = `
           <button class="btn-clean btn-secondary btn-sm" id="btn-toggle-lang" title="تبديل اللغة / Switch Language">
             🌐 ${this.currentLang === 'ar' ? 'English' : 'العربية'}
           </button>
+          
+          <!-- Notifications Bell (Point 3) -->
+          <div style="position: relative;">
+            <button id="btn-notifications-toggle" class="btn-clean btn-secondary btn-sm" style="position: relative; padding: 7px 11px;" title="التنبيهات المؤسسية">
+              <span style="font-size: 1.1rem;">🔔</span>
+              <span class="notification-badge-dot">3</span>
+            </button>
+          </div>
+
           <div style="display: flex; align-items: center; gap: 8px;">
             <a href="${portalRoute}" class="btn-clean btn-green btn-sm" style="font-weight: 700;">
               <span>👤 ${user.fullNameAr || user.username} (${portalLabel})</span>
@@ -74,6 +88,7 @@ class Application {
               خروج
             </button>
           </div>
+
           <button class="mobile-toggle" id="btn-mobile-menu" aria-label="فتح القائمة">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -87,11 +102,29 @@ class Application {
         if (logoutBtn) {
           logoutBtn.onclick = async () => {
             await api.logout();
+            showToast('تم تسجيل الخروج بنجاح من المنصة.', 'info');
             this.renderHeader();
+            this.renderMobileBottomNav();
             window.location.hash = '#/home';
           };
         }
+
+        const notifBtn = document.getElementById('btn-notifications-toggle');
+        const notifMenu = document.getElementById('notifications-dropdown-menu');
+        if (notifBtn && notifMenu) {
+          notifBtn.onclick = (e) => {
+            e.stopPropagation();
+            const isOpen = notifMenu.style.display === 'block';
+            notifMenu.style.display = isOpen ? 'none' : 'block';
+          };
+          document.addEventListener('click', (ev) => {
+            if (!notifMenu.contains(ev.target) && ev.target !== notifBtn) {
+              notifMenu.style.display = 'none';
+            }
+          });
+        }
       } else {
+        // Visitor Navigation Header
         headerActions.innerHTML = `
           <button class="btn-clean btn-secondary btn-sm" id="btn-toggle-lang" title="تبديل اللغة / Switch Language">
             🌐 ${this.currentLang === 'ar' ? 'English' : 'العربية'}
@@ -121,14 +154,113 @@ class Application {
           router.setLang(nextLang);
           this.renderHeader();
           this.renderFooter();
+          this.renderMobileBottomNav();
         };
       }
 
       const mobileBtn = document.getElementById('btn-mobile-menu');
       const mobileDrawer = document.getElementById('mobile-drawer-nav');
       if (mobileBtn && mobileDrawer) {
-        mobileBtn.onclick = () => mobileDrawer.classList.toggle('open');
+        mobileBtn.onclick = () => mobileDrawer.style.display = 'block';
       }
+    }
+  }
+
+  // Mobile-First Bottom Navigation Bar (Point 5)
+  renderMobileBottomNav() {
+    const bottomNav = document.getElementById('mobile-bottom-nav');
+    if (!bottomNav) return;
+
+    const user = api.currentUser;
+
+    if (!user) {
+      // Guest Bottom Navigation
+      bottomNav.innerHTML = `
+        <a href="#/home" class="mobile-bottom-link">
+          <span class="mobile-bottom-icon">🏠</span>
+          <span class="mobile-bottom-label">الرئيسية</span>
+        </a>
+        <a href="#/services" class="mobile-bottom-link">
+          <span class="mobile-bottom-icon">💼</span>
+          <span class="mobile-bottom-label">الخدمات</span>
+        </a>
+        <a href="#/projects" class="mobile-bottom-link">
+          <span class="mobile-bottom-icon">🎯</span>
+          <span class="mobile-bottom-label">المشاريع</span>
+        </a>
+        <a href="#/academy" class="mobile-bottom-link">
+          <span class="mobile-bottom-icon">🎓</span>
+          <span class="mobile-bottom-label">الأكاديمية</span>
+        </a>
+        <a href="#/login" class="mobile-bottom-link">
+          <span class="mobile-bottom-icon">🔑</span>
+          <span class="mobile-bottom-label">الدخول</span>
+        </a>
+      `;
+    } else if (user.role === 'student') {
+      // Student Bottom Navigation (Point 5: Home, Courses, Dashboard, Me)
+      bottomNav.innerHTML = `
+        <a href="#/home" class="mobile-bottom-link">
+          <span class="mobile-bottom-icon">🏠</span>
+          <span class="mobile-bottom-label">الرئيسية</span>
+        </a>
+        <a href="#/academy" class="mobile-bottom-link">
+          <span class="mobile-bottom-icon">📚</span>
+          <span class="mobile-bottom-label">المساقات</span>
+        </a>
+        <a href="#/student" class="mobile-bottom-link">
+          <span class="mobile-bottom-icon">📊</span>
+          <span class="mobile-bottom-label">لوحتي</span>
+        </a>
+        <a href="#/course/shat-chs-master" class="mobile-bottom-link">
+          <span class="mobile-bottom-icon">🎯</span>
+          <span class="mobile-bottom-label">قاعتي</span>
+        </a>
+        <a href="#/student" class="mobile-bottom-link">
+          <span class="mobile-bottom-icon">👤</span>
+          <span class="mobile-bottom-label">حسابي</span>
+        </a>
+      `;
+    } else if (user.role === 'teacher') {
+      // Teacher Bottom Navigation
+      bottomNav.innerHTML = `
+        <a href="#/home" class="mobile-bottom-link">
+          <span class="mobile-bottom-icon">🏠</span>
+          <span class="mobile-bottom-label">الرئيسية</span>
+        </a>
+        <a href="#/teacher" class="mobile-bottom-link">
+          <span class="mobile-bottom-icon">👨‍🏫</span>
+          <span class="mobile-bottom-label">مقرراتي</span>
+        </a>
+        <a href="#/teacher" class="mobile-bottom-link">
+          <span class="mobile-bottom-icon">✍️</span>
+          <span class="mobile-bottom-label">التصحيح</span>
+        </a>
+        <a href="#/academy" class="mobile-bottom-link">
+          <span class="mobile-bottom-icon">🎓</span>
+          <span class="mobile-bottom-label">الأكاديمية</span>
+        </a>
+      `;
+    } else if (user.role === 'admin') {
+      // Admin Bottom Navigation
+      bottomNav.innerHTML = `
+        <a href="#/home" class="mobile-bottom-link">
+          <span class="mobile-bottom-icon">🏠</span>
+          <span class="mobile-bottom-label">الرئيسية</span>
+        </a>
+        <a href="#/admin" class="mobile-bottom-link">
+          <span class="mobile-bottom-icon">📰</span>
+          <span class="mobile-bottom-label">المحتوى</span>
+        </a>
+        <a href="#/admin" class="mobile-bottom-link">
+          <span class="mobile-bottom-icon">📥</span>
+          <span class="mobile-bottom-label">الطلبات</span>
+        </a>
+        <a href="#/admin" class="mobile-bottom-link">
+          <span class="mobile-bottom-icon">⚙️</span>
+          <span class="mobile-bottom-label">الإدارة</span>
+        </a>
+      `;
     }
   }
 
@@ -156,20 +288,22 @@ class Application {
           </div>
 
           <div>
-            <div class="footer-title">الأقسام الرئيسية</div>
+            <div class="footer-title">الأقسام والخدمات</div>
             <ul class="footer-links">
               <li><a href="#/home">${nav.home}</a></li>
               <li><a href="#/about">${nav.about}</a></li>
               <li><a href="#/services">${nav.services}</a></li>
               <li><a href="#/standards">${nav.standards}</a></li>
-              <li><a href="#/delivery">${nav.delivery}</a></li>
+              <li><a href="#/projects">${nav.projects || 'المشاريع'}</a></li>
+              <li><a href="#/news">${nav.news || 'الأخبار'}</a></li>
             </ul>
           </div>
 
           <div>
-            <div class="footer-title">الأكاديمية والإدارة</div>
+            <div class="footer-title">الأكاديمية والأنظمة</div>
             <ul class="footer-links">
               <li><a href="#/academy">${nav.academy}</a></li>
+              <li><a href="#/delivery">${nav.delivery}</a></li>
               <li><a href="#/contact">${nav.contact}</a></li>
               <li><a href="#/admin">${nav.admin}</a></li>
               <li><a href="https://wa.me/972592879621" target="_blank" rel="noopener">الدعم الفني المباشر</a></li>
@@ -200,30 +334,17 @@ class Application {
   }
 
   bindGlobalEvents() {
-    // Language Switcher
-    const langBtn = document.getElementById('btn-toggle-lang');
-    if (langBtn) {
-      langBtn.addEventListener('click', () => {
-        const nextLang = this.currentLang === 'ar' ? 'en' : 'ar';
-        this.currentLang = nextLang;
-        router.setLang(nextLang);
-        this.renderHeader();
-        this.renderFooter();
-      });
-    }
-
-    // Mobile Navigation Toggle
-    const mobileBtn = document.getElementById('btn-mobile-menu');
+    // Mobile Drawer Close triggers
     const mobileDrawer = document.getElementById('mobile-drawer-nav');
-    if (mobileBtn && mobileDrawer) {
-      mobileBtn.addEventListener('click', () => {
-        mobileDrawer.classList.toggle('open');
-      });
-      mobileDrawer.addEventListener('click', (e) => {
-        if (e.target.tagName === 'A' || e.target.id === 'btn-close-mobile-drawer') {
-          mobileDrawer.classList.remove('open');
+    const closeDrawerBtn = document.getElementById('btn-close-mobile-drawer');
+
+    if (closeDrawerBtn && mobileDrawer) {
+      closeDrawerBtn.onclick = () => mobileDrawer.style.display = 'none';
+      mobileDrawer.onclick = (e) => {
+        if (e.target === mobileDrawer || e.target.tagName === 'A') {
+          mobileDrawer.style.display = 'none';
         }
-      });
+      };
     }
 
     // Global Modal Setup
@@ -251,11 +372,11 @@ class Application {
       const foundCourse = d.courses?.find(c => c.id === courseId);
       const courseTitle = foundCourse ? foundCourse.title : 'طلب التحاق وتدريب عام';
 
-      if (modalTitle) modalTitle.textContent = 'طلب التحاق بمساق تدريبي';
+      if (modalTitle) modalTitle.textContent = 'طلب التحاق بمساق تدريبي معتمد';
 
       modalBody.innerHTML = `
         <div style="margin-bottom: 16px; background: var(--bg-subtle); padding: 12px 14px; border-radius: var(--radius-xs); border: 1px solid var(--border-light);">
-          <div style="font-size: 0.78rem; font-weight: 700; color: var(--shat-green);">المساق التدريبي:</div>
+          <div style="font-size: 0.78rem; font-weight: 700; color: var(--shat-green);">المساق التدريبي المختار:</div>
           <div style="font-weight: 800; color: var(--shat-navy);">${courseTitle}</div>
         </div>
 
@@ -263,33 +384,33 @@ class Application {
           <input type="hidden" id="app-course-id" value="${courseId}">
           <input type="hidden" id="app-course-title" value="${courseTitle}">
 
-          <div class="form-group">
-            <label class="form-label">الاسم الرباعي الكامل *</label>
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label" style="font-weight: 700; font-size: 0.88rem;">الاسم الرباعي الكامل *</label>
             <input type="text" id="app-fullname" class="form-input" placeholder="مثال: أحمد عبد الله خليل" required>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
             <div class="form-group">
-              <label class="form-label">رقم الهاتف وواتساب *</label>
+              <label class="form-label" style="font-weight: 700; font-size: 0.88rem;">رقم الهاتف وواتساب *</label>
               <input type="tel" id="app-phone" class="form-input" placeholder="+97259..." required>
             </div>
             <div class="form-group">
-              <label class="form-label">البريد الإلكتروني *</label>
+              <label class="form-label" style="font-weight: 700; font-size: 0.88rem;">البريد الإلكتروني *</label>
               <input type="email" id="app-email" class="form-input" placeholder="name@domain.com" required>
             </div>
           </div>
 
-          <div class="form-group">
-            <label class="form-label">المؤسسة / جهة العمل الحالية</label>
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label" style="font-weight: 700; font-size: 0.88rem;">المؤسسة / جهة العمل الحالية</label>
             <input type="text" id="app-org" class="form-input" placeholder="اسم المنظمة أو المؤسسة أو الجامعة">
           </div>
 
-          <div class="form-group">
-            <label class="form-label">المؤهل العلمي أو التخصص</label>
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label class="form-label" style="font-weight: 700; font-size: 0.88rem;">المؤهل العلمي أو التخصص</label>
             <input type="text" id="app-qualification" class="form-input" placeholder="مثال: بكالوريوس إدارة أعمال / علوم إنسانية">
           </div>
 
-          <button type="submit" class="btn-clean btn-primary btn-lg" style="width: 100%; margin-top: 8px;">
+          <button type="submit" class="btn-clean btn-primary btn-lg" style="width: 100%;">
             <span>تأكيد وإرسال طلب الالتحاق</span>
             <span>←</span>
           </button>
@@ -320,10 +441,10 @@ class Application {
 
           try {
             const res = await api.submitApplication(appData);
-            alert(res.message || 'تم استلام طلب تسجيلكم بنجاح في قاعدة البيانات الرسمية! سيقوم فريق القبول والتسجيل بالتواصل معكم لتأكيد القبول وتفاصيل المواعيد.');
+            showToast(res.message || 'تم استلام طلب تسجيلكم بنجاح! سيقوم فريق القبول والتسجيل بالتواصل معكم لتأكيد الاعتماد.', 'success');
             modalBackdrop.classList.remove('open');
           } catch (err) {
-            alert('تعذر إرسال طلب الالتحاق للخادم: ' + err.message);
+            showToast('تعذر إرسال طلب الالتحاق: ' + err.message, 'error');
           } finally {
             if (submitBtn) {
               submitBtn.disabled = false;
@@ -334,9 +455,10 @@ class Application {
       }
     };
 
-    // Re-render header on auth change
+    // Re-render on auth updates
     window.addEventListener('shat:auth-updated', () => {
       this.renderHeader();
+      this.renderMobileBottomNav();
     });
   }
 }
