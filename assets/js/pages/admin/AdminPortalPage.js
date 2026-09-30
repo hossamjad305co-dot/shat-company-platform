@@ -36,7 +36,7 @@ export async function renderAdminPortalPage() {
   const applications = applicationService.getAllApplications();
   const courses = await courseService.getCourses();
   const media = cmsService.getMediaLibrary();
-  const auditLogs = auditService.getLogs();
+  const auditLogs = await auditService.getLogs();
 
   const publishedCount = posts.filter(p => p.status === 'published').length;
   const draftCount = posts.filter(p => p.status === 'draft').length;

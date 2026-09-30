@@ -111,6 +111,10 @@ export const applicationService = {
     }
   },
 
+  getAllApplications() {
+    return getStoredApplications();
+  },
+
   /**
    * Update registration configuration
    */

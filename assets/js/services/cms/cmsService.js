@@ -208,6 +208,14 @@ class CMSService {
     return posts.filter(p => p.status === status);
   }
 
+  getAllPosts() {
+    return getStoredPosts();
+  }
+
+  getMediaLibrary() {
+    return getStoredMedia();
+  }
+
   /**
    * Get single post by id or slug
    */
