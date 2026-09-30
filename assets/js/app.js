@@ -6,6 +6,7 @@ import { router } from './router.js';
 import { routerAdapter } from './router/index.js';
 import { submitConsultation } from './supabaseClient.js';
 import { authService } from './auth.js';
+import { ENV } from './config/env.js';
 
 class App {
   constructor() {
@@ -14,6 +15,16 @@ class App {
   }
 
   init() {
+    // Environment Gating: strictly hide simulator bar & demo chips in production
+    const roleBar = document.getElementById('role-simulator-bar');
+    if (roleBar) {
+      roleBar.style.display = ENV.features.showRoleSimulator ? 'block' : 'none';
+    }
+    const demoChipsWrapper = document.getElementById('demo-account-chips-wrapper');
+    if (demoChipsWrapper) {
+      demoChipsWrapper.style.display = ENV.features.enableDemoQuickFill ? 'block' : 'none';
+    }
+
     this.applyLanguage(this.currentLang);
     this.bindEvents();
     this.initAuthUI();

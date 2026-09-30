@@ -3542,3 +3542,245 @@ input:checked + .switch-slider:before {
   background: #0f172a !important;
 }
 
+/* ==============================================================================
+   SHAT Platform — Mobile-First & Multi-Device Responsive Architecture
+   Dedicated Mobile UX, iPhone Safe-Area Insets & Responsive Table Transformation
+   ============================================================================== */
+
+/* 1. Mobile Bottom Navigation Bar */
+.shat-mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(var(--mobile-bottom-nav-height, 64px) + var(--safe-area-bottom, 0px));
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border-subtle);
+  z-index: var(--z-sticky, 800);
+  padding-bottom: var(--safe-area-bottom, 0px);
+  box-shadow: 0 -4px 16px rgba(15, 46, 74, 0.08);
+}
+
+.bottom-nav-inner {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 4px;
+}
+
+.bottom-nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  height: 100%;
+  min-height: 44px;
+  min-width: 44px;
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  position: relative;
+  border-radius: var(--radius-sm);
+}
+
+.bottom-nav-link:hover,
+.bottom-nav-link.active {
+  color: var(--shat-green-700);
+  font-weight: 800;
+}
+
+.bottom-nav-icon {
+  font-size: 1.25rem;
+  margin-bottom: 2px;
+  line-height: 1;
+}
+
+.bottom-nav-label {
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.bottom-nav-badge {
+  position: absolute;
+  top: 4px;
+  inset-inline-end: calc(50% - 18px);
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 1px 5px;
+  border-radius: var(--radius-full);
+  min-width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #ffffff;
+}
+
+/* 2. Bottom Sheet Animations */
+@keyframes slideUpSheet {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* 3. Responsive Breakpoints & Mobile Adaptations (< 768px) */
+@media (max-width: 768px) {
+  /* Show Mobile Bottom Navigation & add safe bottom padding */
+  .shat-mobile-bottom-nav {
+    display: block;
+  }
+
+  body {
+    padding-bottom: calc(var(--mobile-bottom-nav-height, 64px) + var(--safe-area-bottom, 0px) + 12px);
+  }
+
+  /* Interactive Elements Touch Target Guarantee (>= 44px) */
+  button, 
+  .shat-btn, 
+  .btn-cta, 
+  .btn-secondary, 
+  .nav-link,
+  .form-input,
+  .shat-form-input,
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  select {
+    min-height: 44px;
+  }
+
+  /* Table-to-Card Responsive Transformation */
+  .responsive-card-table, 
+  .responsive-card-table tbody, 
+  .responsive-card-table tr, 
+  .responsive-card-table td {
+    display: block;
+    width: 100% !important;
+  }
+
+  .responsive-card-table thead {
+    display: none !important;
+  }
+
+  .responsive-card-table tr {
+    background: #ffffff;
+    border: 1.5px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    margin-bottom: 14px;
+    padding: 16px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .responsive-card-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.88rem;
+  }
+
+  .responsive-card-table td:last-child {
+    border-bottom: none;
+    padding-top: 14px;
+    justify-content: flex-end;
+  }
+
+  .responsive-card-table td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: var(--shat-navy-900);
+    font-size: 0.82rem;
+    margin-inline-end: 12px;
+    flex-shrink: 0;
+  }
+
+  /* Post Editor Mobile Split -> Tabbed Transformation */
+  .post-editor-dialog {
+    width: 100% !important;
+    height: 98vh !important;
+    max-height: 98vh !important;
+    border-radius: var(--radius-lg) !important;
+    padding: 0 !important;
+  }
+
+  .post-editor-split-container {
+    grid-template-columns: 1fr !important;
+  }
+
+  .editor-mobile-tabs {
+    display: flex !important;
+  }
+
+  #editor-form-col {
+    border-inline-end: none !important;
+    padding: 14px !important;
+  }
+
+  #preview-col {
+    display: none;
+    padding: 14px !important;
+  }
+
+  .form-row-mobile {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  /* Course Detail & Hero Mobile Adjustments */
+  .course-hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  .course-assignments-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .instructor-view-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .outcomes-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Modal Safe Areas on Mobile */
+  .shat-modal-content {
+    max-width: 100% !important;
+    margin: 8px !important;
+  }
+}
+
+/* Extra small devices (320px - 360px) */
+@media (max-width: 360px) {
+  html {
+    font-size: 14.5px;
+  }
+  .bottom-nav-label {
+    display: none;
+  }
+  .bottom-nav-icon {
+    font-size: 1.4rem;
+  }
+}
+
+

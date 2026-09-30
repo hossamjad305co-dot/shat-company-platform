@@ -10,6 +10,7 @@ import { supabase } from '../api/client.js';
 import { sessionService, SessionState } from './sessionService.js';
 import { roleService, SHAT_ROLES } from './roleService.js';
 import { profileService, maskNationalId } from './profileService.js';
+import { ENV } from '../../config/env.js';
 
 function safeGetStorage(key) {
   if (typeof localStorage === 'undefined') return null;
@@ -224,6 +225,11 @@ class AuthService {
   }
 
   tryDevProfileFallback(identifier, password) {
+    // Strictly blocked in production environments
+    if (!ENV.features.enableDemoQuickFill) {
+      return false;
+    }
+
     const key = (identifier || '').toLowerCase();
     let matchedProfile = null;
 

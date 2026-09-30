@@ -10,6 +10,8 @@ import { ErrorState } from '../components/ui/core.js';
 import { router as legacyRouter } from '../router.js';
 import { translations } from '../translations.js';
 import { renderCourseDetailPage } from '../pages.js';
+import { renderLessonViewPage, initLessonViewEvents } from '../pages/academy/LessonViewPage.js';
+import { MobileBottomNav } from '../components/navigation/MobileBottomNav.js';
 
 class RouterAdapter {
   constructor() {
@@ -30,15 +32,47 @@ class RouterAdapter {
   }
 
   async handleRouting(forceRerender = false) {
-    let hash = window.location.hash.replace('#/', '').replace('#', '').trim();
-    if (!hash) hash = 'home';
+    let fullHash = window.location.hash.replace('#/', '').replace('#', '').trim();
+    if (!fullHash) fullHash = 'home';
+
+    const [hash, queryString] = fullHash.split('?');
+    const queryParams = new URLSearchParams(queryString || '');
 
     const container = document.getElementById('app-content');
     if (!container) return;
 
-    // 1. Check Course Detail Route (#/course/:id)
+    // Render / update Mobile Bottom Nav
+    this.updateMobileBottomNav(hash);
+
+    // 1. Check Course Lesson Player Route (#/course/:courseId/lesson/:lessonId)
+    if (hash.startsWith('course/') && hash.includes('/lesson/')) {
+      const parts = hash.split('/lesson/');
+      const courseId = parts[0].replace('course/', '').trim();
+      const lessonId = parts[1] ? parts[1].trim() : 'lesson-1';
+
+      container.style.opacity = '0';
+      try {
+        const renderedHtml = await renderLessonViewPage(courseId, lessonId);
+        container.innerHTML = renderedHtml;
+        initLessonViewEvents(courseId, lessonId);
+        this.updateActiveNav('academy');
+        container.style.opacity = '1';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (err) {
+        console.error('[Lesson View Error]:', err);
+        container.innerHTML = ErrorState({
+          code: '500',
+          title: 'خطأ أثناء تحميل الدرس',
+          description: 'تعذر تحميل محتوى الدرس المطلوب، يرجى المحاولة لاحقاً.'
+        });
+        container.style.opacity = '1';
+      }
+      return;
+    }
+
+    // 2. Check Course Detail Route (#/course/:id)
     if (hash.startsWith('course/')) {
-      const courseId = hash.replace('course/', '').split('?')[0].trim();
+      const courseId = hash.replace('course/', '').trim();
       const t = translations[this.currentLang] || translations.ar;
       container.style.opacity = '0';
       setTimeout(() => {
@@ -51,7 +85,7 @@ class RouterAdapter {
       return;
     }
 
-    // 2. Check Modern Modular Routes
+    // 3. Check Modern Modular Routes
     const modularRoute = MODULAR_ROUTES[hash];
     if (modularRoute) {
       // Permission Gate Check
@@ -73,8 +107,12 @@ class RouterAdapter {
 
       container.style.opacity = '0';
       try {
-        const renderedHtml = await modularRoute.handler();
+        const paramArg = hash === 'apply' ? queryParams.get('course') || '' : undefined;
+        const renderedHtml = await modularRoute.handler(paramArg);
         container.innerHTML = renderedHtml;
+        if (typeof modularRoute.init === 'function') {
+          modularRoute.init();
+        }
         document.title = modularRoute.title;
         this.updateActiveNav(hash);
         container.style.opacity = '1';
@@ -91,7 +129,7 @@ class RouterAdapter {
       return;
     }
 
-    // 3. Fallback to Legacy Router for Unmigrated Views (About, Tracks, Experiences, Impact, Contact, Google Form)
+    // 4. Fallback to Legacy Router for Unmigrated Views (About, Tracks, Experiences, Impact, Contact, Google Form)
     if (legacyRouter.routes[hash]) {
       const t = translations[this.currentLang] || translations.ar;
       container.style.opacity = '0';
@@ -106,7 +144,7 @@ class RouterAdapter {
       return;
     }
 
-    // 4. Catch-all 404 Route
+    // 5. Catch-all 404 Route
     container.innerHTML = ErrorState({
       code: '404',
       title: 'الصفحة غير موجودة (404)',
@@ -128,6 +166,16 @@ class RouterAdapter {
         link.classList.remove('active');
       }
     });
+  }
+
+  updateMobileBottomNav(currentRoute) {
+    let root = document.getElementById('shat-mobile-bottom-nav-root');
+    if (!root) {
+      root = document.createElement('div');
+      root.id = 'shat-mobile-bottom-nav-root';
+      document.body.appendChild(root);
+    }
+    root.innerHTML = MobileBottomNav({ currentRoute });
   }
 }
 

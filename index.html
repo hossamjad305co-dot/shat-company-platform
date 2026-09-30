@@ -2,11 +2,31 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>شركة شات للتنمية والتطوير | SHAT Development & Growth</title>
   <meta name="description" content="منصة شركة شات للتنمية والتطوير — بناء القدرات، تعزيز المؤسسات، وتطوير النتائج. حلول تدريبية ونظام مودل متقدم وفق المعايير الدولية والإنسانية.">
   <meta name="keywords" content="شات للتنمية, تدريب, نظام مودل, استشارات مؤسسية, تقييم مشاريع, حماية وصون السلامة, SHAT Development, Moodle, Capacity Building">
+  
+  <!-- PWA & Mobile Web Capabilities -->
+  <meta name="theme-color" content="#0F2E4A">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SHAT Platform">
   <link rel="icon" type="image/png" href="assets/logo/logo-transparent.png">
+  <link rel="apple-touch-icon" href="assets/logo/logo-symbol.jpg">
+  <link rel="canonical" href="https://shat-company-platform.vercel.app/">
+
+  <!-- OpenGraph & Twitter Social Cards (SEO) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="شركة شات للتنمية والتطوير">
+  <meta property="og:title" content="شركة شات للتنمية والتطوير | SHAT Development & Growth">
+  <meta property="og:description" content="بناء القدرات • تعزيز المؤسسات • تطوير النتائج. منصة التدريب والاستشارات المؤسسية المعتمدة.">
+  <meta property="og:image" content="https://shat-company-platform.vercel.app/assets/logo/logo-banner.jpg">
+  <meta property="og:url" content="https://shat-company-platform.vercel.app/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="شركة شات للتنمية والتطوير | SHAT Development & Growth">
+  <meta name="twitter:description" content="بناء القدرات • تعزيز المؤسسات • تطوير النتائج. منصة التدريب والاستشارات المؤسسية المعتمدة.">
+  <meta name="twitter:image" content="https://shat-company-platform.vercel.app/assets/logo/logo-banner.jpg">
 
   <!-- Lordicon for Animated Interactive Icons -->
   <script src="https://cdn.lordicon.com/lordicon.js"></script>
@@ -48,8 +68,8 @@
     </div>
   </aside>
 
-  <!-- Interactive Role & Permission Simulator Bar -->
-  <aside class="role-simulator-bar" id="role-simulator-bar" aria-label="Role and Permissions Switcher">
+  <!-- Interactive Role & Permission Simulator Bar (Development Only) -->
+  <aside class="role-simulator-bar" id="role-simulator-bar" aria-label="Role and Permissions Switcher" style="display: none;">
     <div class="container role-simulator-inner">
       <div class="role-simulator-status">
         <span class="role-sim-tag">نظام الصلاحيات المؤسسي:</span>
@@ -214,18 +234,18 @@
           <form id="form-password-login">
             <div class="form-group" style="margin-bottom: 12px;">
               <label class="form-label" style="font-weight: 700; font-size: 0.86rem;">اسم المستخدم أو البريد الإلكتروني:</label>
-              <input type="text" id="login-identifier" class="form-input" placeholder="admin أو ahmed@shat.com" required value="admin">
+              <input type="text" id="login-identifier" class="form-input" placeholder="اسم المستخدم أو بريدك الإلكتروني" required autocomplete="username">
             </div>
 
             <div class="form-group" style="margin-bottom: 14px;">
               <label class="form-label" style="font-weight: 700; font-size: 0.86rem;">كلمة المرور:</label>
-              <input type="password" id="login-password" class="form-input" placeholder="••••••••" required value="admin">
+              <input type="password" id="login-password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
             </div>
 
-            <!-- Quick Demo Accounts Helper -->
-            <div style="background: #f8fafc; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 10px; margin-bottom: 16px;">
+            <!-- Quick Demo Accounts Helper (Visible only in Development Mode) -->
+            <div id="demo-account-chips-wrapper" style="display: none; background: #f8fafc; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 10px; margin-bottom: 16px;">
               <div style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 6px;">
-                ⚡ حسابات تجريبية سريعة جاهزة للاختبار بنقرة واحدة:
+                ⚡ حسابات تجريبية سريعة (بيئة التطوير فقط):
               </div>
               <div style="display: flex; flex-wrap: wrap; gap: 6px;" id="demo-account-chips">
                 <button type="button" class="btn-demo-fill" data-user="admin" data-pass="admin" style="background: #ffffff; border: 1px solid var(--border-subtle); padding: 4px 8px; border-radius: 4px; font-size: 0.76rem; cursor: pointer; color: #1e3a8a; font-weight: 600;">
@@ -376,14 +396,10 @@
           <span>تسجيل الدخول بحساب المتدرب أو المدرب</span>
         </button>
 
-        <a href="https://forms.gle/shat-training-register-2026" target="_blank" rel="noopener" class="btn-secondary" id="perm-guard-gform-btn" style="padding: 11px; font-size: 0.9rem; justify-content: center; display: flex; align-items: center; gap: 8px; border-color: #10b981; color: #047857; text-decoration: none;">
+        <a href="#/register-course" class="btn-secondary" id="perm-guard-gform-btn" style="padding: 12px; font-size: 0.9rem; justify-content: center; display: flex; align-items: center; gap: 8px; border-color: #10b981; color: #047857; text-decoration: none;">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M9 12h6"/><path d="M9 16h6"/></svg>
-          <span>تقديم طلب تسجيل والتحاق بالدورة (Google Form) ↗</span>
+          <span>تقديم طلب تسجيل والتحاق بالدورة ↗</span>
         </a>
-
-        <button type="button" class="btn-secondary btn-quick-student-login" style="padding: 10px; font-size: 0.85rem; justify-content: center; border-color: #93c5fd; color: #1e40af; background: #eff6ff;">
-          ⚡ دخول سريع فوري كمتدرب معتمد (أحمد خليل)
-        </button>
       </div>
     </div>
   </div>

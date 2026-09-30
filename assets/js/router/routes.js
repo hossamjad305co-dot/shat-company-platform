@@ -10,6 +10,11 @@ import { renderTeacherCourseBuilderPage } from '../pages/teacher/TeacherCourseBu
 import { renderAdminIntegrationsPage } from '../pages/admin/AdminIntegrationsPage.js';
 import { renderAdminUsersPage } from '../pages/admin/AdminUsersPage.js';
 import { renderAdminAuditLogsPage } from '../pages/admin/AdminAuditLogsPage.js';
+import { renderAdminCMSPage, initAdminCMSEvents } from '../pages/admin/AdminCMSPage.js';
+import { renderAdminApplicationsPage, initAdminApplicationsEvents } from '../pages/admin/AdminApplicationsPage.js';
+import { renderAdminSettingsPage, initAdminSettingsEvents } from '../pages/admin/AdminSettingsPage.js';
+import { renderCourseRegistrationPage, initCourseRegistrationEvents } from '../pages/company/CourseRegistrationPage.js';
+import { renderNotificationsPage, initNotificationsEvents } from '../pages/company/NotificationsPage.js';
 import { renderEmployeeCMSPage } from '../pages/employee/EmployeeCMSPage.js';
 import { renderUIPlayground } from '../components/uiPlayground.js';
 
@@ -17,6 +22,8 @@ export const MODULAR_ROUTES = {
   // Corporate Core
   'home': { handler: renderCompanyHomePage, title: 'الرئيسية | شركة شات للتنمية والتطوير', authRequired: false },
   'discover': { handler: renderCompanyHomePage, title: 'اكتشف SHAT | شركة شات', authRequired: false },
+  'apply': { handler: renderCourseRegistrationPage, init: initCourseRegistrationEvents, title: 'طلب التسجيل والالتحاق | شركة شات', authRequired: false },
+  'notifications': { handler: renderNotificationsPage, init: initNotificationsEvents, title: 'مركز التنبيهات | منصة شات', authRequired: false },
 
   // Academy LMS Core
   'academy': { handler: renderAcademyDashboardPage, title: 'أكاديمية شات | لوحة التعلم', authRequired: false },
@@ -33,6 +40,9 @@ export const MODULAR_ROUTES = {
   // Admin & Security Center
   'admin': { handler: renderAdminIntegrationsPage, title: 'لوحة الإدارة العليا | شركة شات', authRequired: true, role: 'admin' },
   'admin/users': { handler: renderAdminUsersPage, title: 'إدارة المستخدمين والصلاحيات | شركة شات', authRequired: true, role: 'admin' },
+  'admin/cms': { handler: renderAdminCMSPage, init: initAdminCMSEvents, title: 'إدارة المحتوى والمنشورات (CMS) | شركة شات', authRequired: true, role: 'admin' },
+  'admin/applications': { handler: renderAdminApplicationsPage, init: initAdminApplicationsEvents, title: 'طلبات التسجيل والقبول | شركة شات', authRequired: true, role: 'admin' },
+  'admin/settings': { handler: renderAdminSettingsPage, init: initAdminSettingsEvents, title: 'إعدادات المنصة وسياسات التسجيل | شركة شات', authRequired: true, role: 'admin' },
   'admin/integrations': { handler: renderAdminIntegrationsPage, title: 'مركز الربط السحابي | شركة شات', authRequired: true, role: 'admin' },
   'admin/audit': { handler: renderAdminAuditLogsPage, title: 'سجلات الرقابة والعمليات | شركة شات', authRequired: true, role: 'admin' },
 

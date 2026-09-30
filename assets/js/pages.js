@@ -1,6 +1,7 @@
 import { icons } from './icons.js';
 import { authService } from './auth.js';
 import { cmsService } from './cms.js';
+import { ENV } from './config/env.js';
 import {
   moodleStore,
   getMoodleCourses,
@@ -2336,10 +2337,14 @@ export function renderCourseDetailPage(t, courseId) {
                   </span>
                 </div>
 
-                <!-- 1. Custom Google Form Link for this Course (Open for all) -->
-                <a href="${course.googleFormUrl || 'https://forms.gle/shat-training-register-2026'}" target="_blank" rel="noopener" class="btn-course-cta" style="padding: 13px; font-size: 0.96rem; text-align: center;" id="course-btn-gform">
-                  ${icons.form('icon-inline', 20)}
-                  <span>سجل في الدورة عبر Google Form ↗</span>
+                <!-- 1. Course Registration: Internal SHAT Form & Google Form -->
+                <a href="#/apply?course=${course.id}" class="btn-course-cta" style="padding: 12px; font-size: 0.94rem; text-align: center; margin-bottom: 8px; text-decoration: none;" id="course-btn-apply-internal">
+                  ${icons.form('icon-inline', 18)}
+                  <span>التسجيل في الدورة (استمارة شات المباشرة)</span>
+                </a>
+
+                <a href="${course.googleFormUrl || 'https://forms.gle/shat-training-register-2026'}" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="padding: 9px; font-size: 0.82rem; text-align: center; justify-content: center; width: 100%; text-decoration: none; margin-bottom: 8px; border-color: var(--border-subtle);" id="course-btn-gform">
+                  <span>أو التقديم عبر Google Form الرسمي ↗</span>
                 </a>
 
                 <!-- 2. Custom Google Drive Repository (Permission Checked) -->
@@ -2478,6 +2483,13 @@ export function renderCourseDetailPage(t, courseId) {
                         </span>
                       `).join('')}
                     </div>
+
+                    <div style="margin-top: 14px; padding-top: 10px; border-top: 1px dashed var(--border-subtle); display: flex; justify-content: flex-end;">
+                      <a href="#/course/${course.id}/lesson/${m.id || 'chs-lesson-' + (idx + 1) + '-1'}" class="shat-btn shat-btn-primary shat-btn-sm" style="text-decoration: none; padding: 6px 16px; font-size: 0.82rem; border-radius: var(--radius-full); display: inline-flex; align-items: center; gap: 6px;">
+                        <span>دخول الدرس التفاعلي</span>
+                        <span>←</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -2499,13 +2511,15 @@ export function renderCourseDetailPage(t, courseId) {
                   ${icons.key('icon-inline', 16)}
                   <span>تسجيل الدخول بالمنصة</span>
                 </button>
-                <a href="${course.googleFormUrl || 'https://forms.gle/shat-training-register-2026'}" target="_blank" rel="noopener" class="btn-secondary" style="border-color: #10b981; color: #047857; text-decoration: none; display: flex; align-items: center; gap: 8px; padding: 11px 20px;">
+                <a href="${course.googleFormUrl || 'https://forms.gle/shat-training-register-2026'}" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="border-color: #10b981; color: #047857; text-decoration: none; display: flex; align-items: center; gap: 8px; padding: 11px 20px;">
                   ${icons.form('icon-inline', 16)}
                   <span>التسجيل في الدورة (Google Form) ↗</span>
                 </a>
-                <button type="button" class="btn-secondary btn-quick-student-login" style="background: #eff6ff; color: #1e40af; border-color: #93c5fd; padding: 11px 20px;">
-                  ⚡ دخول سريع كمتدرب معتمد (أحمد خليل)
-                </button>
+                ${ENV.features.enableDemoQuickFill ? `
+                  <button type="button" class="btn-secondary btn-quick-student-login" style="background: #eff6ff; color: #1e40af; border-color: #93c5fd; padding: 11px 20px;">
+                    ⚡ دخول سريع كمتدرب معتمد (أحمد خليل)
+                  </button>
+                ` : ''}
               </div>
             </div>
           ` : `
@@ -2569,7 +2583,9 @@ export function renderCourseDetailPage(t, courseId) {
               </p>
               <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 18px;">
                 <button type="button" class="btn-cta btn-open-login-from-guard">تسجيل الدخول كطالب</button>
-                <button type="button" class="btn-secondary btn-quick-student-login">⚡ تجربة الدخول كمتدرب (أحمد)</button>
+                ${ENV.features.enableDemoQuickFill ? `
+                  <button type="button" class="btn-secondary btn-quick-student-login">⚡ تجربة الدخول كمتدرب (أحمد)</button>
+                ` : ''}
               </div>
             </div>
           ` : `
@@ -2642,7 +2658,9 @@ export function renderCourseDetailPage(t, courseId) {
               </p>
               <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 18px;">
                 <button type="button" class="btn-cta btn-open-login-from-guard">تسجيل الدخول للمحادثة</button>
-                <button type="button" class="btn-secondary btn-quick-student-login">⚡ تجربة الدخول كمتدرب (أحمد)</button>
+                ${ENV.features.enableDemoQuickFill ? `
+                  <button type="button" class="btn-secondary btn-quick-student-login">⚡ تجربة الدخول كمتدرب (أحمد)</button>
+                ` : ''}
               </div>
             </div>
           ` : `
@@ -2698,9 +2716,11 @@ export function renderCourseDetailPage(t, courseId) {
                 هذا القسم مخصص للأساتذة والمشرفين الأكاديميين المعتمدين لمتابعة قوائم المتدربين المسجلين ورفع الملفات الإضافية لمجلد Google Drive الخاص بالدورة.
               </p>
               <div style="margin-top: 16px;">
-                <button type="button" class="btn-secondary btn-quick-instructor-login" style="background: #ecfdf5; color: #065f46; border-color: #a7f3d0; padding: 9px 20px;">
-                  ⚡ الدخول كمدرب معتمد (د. أسامة المنصور)
-                </button>
+                ${ENV.features.enableDemoQuickFill ? `
+                  <button type="button" class="btn-secondary btn-quick-instructor-login" style="background: #ecfdf5; color: #065f46; border-color: #a7f3d0; padding: 9px 20px;">
+                    ⚡ الدخول كمدرب معتمد (د. أسامة المنصور)
+                  </button>
+                ` : ''}
               </div>
             </div>
           ` : `
