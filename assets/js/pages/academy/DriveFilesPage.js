@@ -23,15 +23,27 @@ export function renderDriveFilesPage() {
   // Global listener attachment for file access requests
   window.shatDownloadFile = async (fileName) => {
     const res = await requestFileDownload(fileName);
-    if (!res.success) {
-      if (res.requireLogin) {
-        if (router && router.showPermissionGuardModal) {
-          router.showPermissionGuardModal('download');
+    if (res.success && res.downloadUrl) {
+      const a = document.createElement('a');
+      a.href = res.downloadUrl;
+      a.download = res.fileName || fileName;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => {
+        try { document.body.removeChild(a); } catch (e) {}
+      }, 500);
+    } else {
+      if (res.requireLogin || res.status === 'UNAUTHORIZED') {
+        const guard = document.getElementById('modal-permission-guard');
+        if (guard) {
+          guard.classList.add('active');
         } else {
-          alert(res.error);
+          alert(res.error || 'عذراً، يجب تسجيل الدخول بحساب طالب أو مدرب معتمد لتحميل المواد التعليمية.');
         }
       } else {
-        alert(`[${res.status}]: ${res.message}`);
+        alert(res.error || 'الملف محمي ويتطلب اعتماد التسجيل في المساق.');
       }
     }
   };

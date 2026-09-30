@@ -66,27 +66,22 @@ class App {
 
     let moodleLink = '';
     if (isLoggedIn && user) {
-      let roleBadgeText = t.nav.academy || '🎓 مساحتي في المودل';
-      if (user.role === 'instructor') {
-        roleBadgeText = this.currentLang === 'ar' ? '👨‍🏫 بوابة التدريب (المودل)' : (this.currentLang === 'fr' ? '👨‍🏫 Portail Formateur' : '👨‍🏫 Trainer Portal');
+      if (user.role === 'admin' || user.role === 'super_admin') {
+        moodleLink = `<a href="#/admin" class="nav-admin-badge" data-route="admin" style="background: linear-gradient(135deg, #0F2E4A, #1e293b); color: #86efac; border: 1.5px solid #10b981; padding: 6px 14px; border-radius: 8px; font-weight: 800; font-size: 0.84rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.25);"><span>⚙️ المركز الإداري</span></a>`;
+      } else if (user.role === 'instructor' || user.role === 'teacher') {
+        moodleLink = `<a href="#/teacher" class="nav-teacher-badge" data-route="teacher" style="background: #f0fdf4; color: #166534; border: 1.5px solid #86efac; padding: 6px 14px; border-radius: 8px; font-weight: 800; font-size: 0.84rem; text-decoration: none;"><span>👨‍🏫 بوابة المدرب</span></a>`;
+      } else {
+        moodleLink = `<a href="#/academy" class="nav-academy-badge" data-route="academy" style="background: #f0fdf4; color: #166534; border: 1.5px solid #86efac; padding: 6px 14px; border-radius: 8px; font-weight: 800; font-size: 0.84rem; text-decoration: none;"><span>🎓 لوحة التعلم</span></a>`;
       }
-      if (user.role === 'admin') {
-        roleBadgeText = this.currentLang === 'ar' ? '⚙️ لوحة الإدارة (المودل)' : (this.currentLang === 'fr' ? '⚙️ Administration' : '⚙️ LMS Admin');
-      }
-
-      moodleLink = `<a href="#/academy" class="nav-academy-badge" data-route="academy"><span>${roleBadgeText}</span></a>`;
     }
 
     if (headerNav) {
       headerNav.innerHTML = `
         <a href="#/discover" class="nav-link" data-route="discover"><span>${t.nav.s01 || 'اكتشف SHAT'}</span></a>
-        <a href="#/our-story" class="nav-link" data-route="our-story"><span>${t.nav.s02 || 'قصتنا'}</span></a>
-        <a href="#/what-we-make" class="nav-link" data-route="what-we-make"><span>${t.nav.s03 || 'ماذا نصنع؟'}</span></a>
         <a href="#/tracks" class="nav-link" data-route="tracks"><span>${t.nav.s04 || 'مساراتنا'}</span></a>
-        <a href="#/experiences" class="nav-link" data-route="experiences"><span>${t.nav.s05 || 'تجاربنا'}</span></a>
-        <a href="#/impact" class="nav-link" data-route="impact"><span>${t.nav.s06 || 'أثرنا'}</span></a>
+        <a href="#/academy" class="nav-link" data-route="academy"><span>🎓 أكاديمية التدريب</span></a>
         <a href="#/knowledge-hub" class="nav-link" data-route="knowledge-hub"><span>${t.nav.s07 || 'مساحة المعرفة'}</span></a>
-        <a href="#/build-impact" class="nav-link" data-route="build-impact"><span>${t.nav.s08 || 'لنبني الأثر معًا'}</span></a>
+        <a href="#/apply" class="nav-link" data-route="apply" style="color: var(--shat-green-700); font-weight: 700;"><span>📝 طلب التسجيل</span></a>
         ${moodleLink}
       `;
     }
@@ -486,8 +481,15 @@ class App {
         if (res.success) {
           alert(`✓ تم تسجيل الدخول بنجاح! مرحباً ${res.user.name} (${res.user.roleTitle || res.user.role}).`);
           authModal.classList.remove('open');
+          authModal.classList.remove('active');
           updateAuthBtn();
-          window.location.hash = '#/academy';
+          if (res.user.role === 'admin' || res.user.role === 'super_admin') {
+            window.location.hash = '#/admin';
+          } else if (res.user.role === 'instructor' || res.user.role === 'teacher') {
+            window.location.hash = '#/teacher';
+          } else {
+            window.location.hash = '#/academy';
+          }
           router.handleRouting(true);
         } else {
           alert(res.error || 'بيانات الدخول غير صحيحة');

@@ -68,34 +68,6 @@
     </div>
   </aside>
 
-  <!-- Interactive Role & Permission Simulator Bar (Development Only) -->
-  <aside class="role-simulator-bar" id="role-simulator-bar" aria-label="Role and Permissions Switcher" style="display: none;">
-    <div class="container role-simulator-inner">
-      <div class="role-simulator-status">
-        <span class="role-sim-tag">نظام الصلاحيات المؤسسي:</span>
-        <span id="role-sim-current" class="role-pill-current">👤 زائر (المواد مقفلة)</span>
-      </div>
-      <div class="role-simulator-actions">
-        <span class="role-sim-hint">اختبار فوري للصلاحيات:</span>
-        <button type="button" class="btn-role-pill" data-role="visitor" title="تصفح كزائر عادي (المواد والتحميل مقفل)">
-          👤 زائر (مقفل)
-        </button>
-        <button type="button" class="btn-role-pill" data-role="student" title="الدخول كمتدرب معتمد (تحميل المواد والتكليفات والشات مفتوح)">
-          🎓 متدرب (أحمد)
-        </button>
-        <button type="button" class="btn-role-pill" data-role="instructor" title="الدخول كمدرب معتمد (رفع المواد ومتابعة المتدربين)">
-          👨‍🏫 مدرب (د. أسامة)
-        </button>
-        <button type="button" class="btn-role-pill" data-role="admin" title="الدخول كالمدير العام (تخصيص الكورسات، تعديل الصور والمنشورات)">
-          ⚙️ مدير عام (أ. حسام)
-        </button>
-        <a href="#/ui-playground" class="btn-role-pill" style="text-decoration: none; background: #0F2E4A; color: #fff; border-color: #5EA02F;" title="فتح مختبر عناصر التصميم الداخلي (Phase 2 UI Playground)">
-          🎨 مختبر التصميم (Playground)
-        </a>
-      </div>
-    </div>
-  </aside>
-
   <!-- Main Navigation Header (Fixed Below Top Bar at z-index: 1000) -->
   <header class="main-header" id="site-header">
     <div class="container header-container">
@@ -129,24 +101,12 @@
           </button>
           <div class="lang-dropdown" id="lang-dropdown-menu" role="menu">
             <button class="lang-option" data-lang="ar" role="menuitem">
-              <span>🌐 العربية</span>
+              <span>🇸🇦 العربية</span>
               <span style="font-size: 0.75rem; opacity: 0.7;">AR</span>
             </button>
             <button class="lang-option" data-lang="en" role="menuitem">
               <span>🇬🇧 English</span>
               <span style="font-size: 0.75rem; opacity: 0.7;">EN</span>
-            </button>
-            <button class="lang-option" data-lang="fr" role="menuitem">
-              <span>🇫🇷 Français</span>
-              <span style="font-size: 0.75rem; opacity: 0.7;">FR</span>
-            </button>
-            <button class="lang-option" data-lang="es" role="menuitem">
-              <span>🇪🇸 Español</span>
-              <span style="font-size: 0.75rem; opacity: 0.7;">ES</span>
-            </button>
-            <button class="lang-option" data-lang="it" role="menuitem">
-              <span>🇮🇹 Italiano</span>
-              <span style="font-size: 0.75rem; opacity: 0.7;">IT</span>
             </button>
           </div>
         </div>
@@ -603,12 +563,17 @@
         </div>
       </div>
 
-      <div class="footer-bottom-bar">
+      <div class="footer-bottom-bar" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
         <div id="footer-legal-copy">
           جميع الحقوق محفوظة © 2026 شركة شات للتنمية والتطوير (SHAT Development & Growth).
         </div>
-        <div id="footer-privacy-pledge">
-          ملتزمون بأعلى معايير السرية، النزاهة، وحماية البيانات المؤسسية.
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <a href="#/admin" style="display: inline-flex; align-items: center; gap: 6px; color: var(--shat-green-700); font-weight: 700; text-decoration: none; font-size: 0.82rem; background: rgba(75, 136, 52, 0.08); padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(75, 136, 52, 0.2);">
+            <span>🔐 بوابة المركز الإداري</span>
+          </a>
+          <div id="footer-privacy-pledge" style="font-size: 0.8rem; color: var(--text-muted);">
+            ملتزمون بأعلى معايير السرية وحوكمة البيانات.
+          </div>
         </div>
       </div>
     </div>

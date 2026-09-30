@@ -22,7 +22,24 @@ function saveStoredLogs(logs) {
   }
 }
 
+export const AuditAction = Object.freeze({
+  SETTINGS_UPDATE: 'SETTINGS_UPDATE',
+  RESTORE_BACKUP: 'RESTORE_BACKUP',
+  POST_CREATE: 'POST_CREATE',
+  POST_UPDATE: 'POST_UPDATE',
+  POST_PUBLISH: 'POST_PUBLISH',
+  POST_UNPUBLISH: 'POST_UNPUBLISH',
+  POST_DELETE: 'POST_DELETE',
+  APPLICATION_APPROVED: 'APPLICATION_APPROVED',
+  APPLICATION_REJECTED: 'APPLICATION_REJECTED',
+  USER_ROLE_CHANGE: 'USER_ROLE_CHANGE'
+});
+
 export const auditService = {
+  log({ action, entity, resource, details }) {
+    return this.logAction({ action, entity: entity || resource || 'SYSTEM', details });
+  },
+
   /**
    * Log an administrative or security action
    * @param {Object} entry { action, entity, entityId, details }

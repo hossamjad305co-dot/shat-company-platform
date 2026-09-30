@@ -321,12 +321,23 @@ export async function requestFileDownload(fileIdOrName) {
     };
   }
 
-  const driveStatus = getDriveIntegrationStatus();
+  const access = requestSecureFileAccess(fileIdOrName);
+  if (access.granted) {
+    return {
+      success: true,
+      status: 'GRANTED',
+      downloadUrl: access.downloadUrl || access.directDownloadUrl,
+      directDownloadUrl: access.directDownloadUrl,
+      fileName: access.fileName,
+      actionText: access.actionText
+    };
+  }
+
   return {
     success: false,
-    status: 'NOT CONFIGURED',
-    provider: driveStatus.provider,
-    message: 'خدمة التخزين السحابي Google Drive (5TB) تعمل بنظام الوساطة الأمنية. تم إثبات الحماية والتحقق من الصلاحيات بنجاح.',
-    metadataOnly: true
+    status: access.status || 'DENIED',
+    error: access.reason || 'تعذر الحصول على رابط التحميل المباشر.',
+    requireLogin: access.requireLogin,
+    requireEnrollment: access.requireEnrollment
   };
 }

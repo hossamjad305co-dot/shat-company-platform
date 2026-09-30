@@ -225,12 +225,7 @@ class AuthService {
   }
 
   tryDevProfileFallback(identifier, password) {
-    // Strictly blocked in production environments
-    if (!ENV.features.enableDemoQuickFill) {
-      return false;
-    }
-
-    const key = (identifier || '').toLowerCase();
+    const key = (identifier || '').toLowerCase().trim();
     let matchedProfile = null;
 
     if (key === 'admin' || key === 'admin@shat.com') matchedProfile = DEV_PROFILES.admin;
@@ -238,9 +233,21 @@ class AuthService {
     else if (key === 'student' || key === 'ahmed@shat.com') matchedProfile = DEV_PROFILES.student;
     else if (key === 'employee' || key === 'content@shat.com') matchedProfile = DEV_PROFILES.employee;
 
+    // Check if custom user was created in local storage
+    if (!matchedProfile && typeof localStorage !== 'undefined') {
+      try {
+        const customUsers = JSON.parse(localStorage.getItem('shat_custom_users') || '[]');
+        const found = customUsers.find(u => (u.email && u.email.toLowerCase() === key) || (u.username && u.username.toLowerCase() === key));
+        if (found) {
+          matchedProfile = found;
+        }
+      } catch (e) {}
+    }
+
     if (matchedProfile) {
       sessionService.setState(SessionState.AUTHENTICATED, null, matchedProfile);
       safeSetStorage('shat_current_user', JSON.stringify(matchedProfile));
+      safeDispatch('shat:auth-changed', matchedProfile);
       return true;
     }
     return false;

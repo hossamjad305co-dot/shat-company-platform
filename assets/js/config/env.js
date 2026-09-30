@@ -12,8 +12,8 @@ export const ENV = Object.freeze({
   
   // Feature flags
   features: {
-    // Role simulator bar is strictly forbidden in production
-    showRoleSimulator: isDev,
+    // Role simulator bar is permanently disabled across all environments
+    showRoleSimulator: false,
     // Demo quick login buttons and chips are strictly forbidden in production
     enableDemoQuickFill: isDev,
     // In-memory debug logs
