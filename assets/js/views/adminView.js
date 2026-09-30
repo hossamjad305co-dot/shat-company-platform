@@ -1,9 +1,37 @@
 // assets/js/views/adminView.js
-// Production Executive Administration Center & CMS Post Engine for SHAT Company
+// Production Executive Administration Center, Full CMS & LMS Management Engine
+// Supports 100% Trilingual UI (AR, EN, FR), Live Post Editing, Device File Uploads & Local Device Storage
 import { api } from '../services/api/apiClient.js';
 import { showToast } from '../components/toast.js';
+import { MediaStorageService } from '../services/storage/mediaStorageService.js';
+import { content } from '../content.js';
 
 export function renderAdminView(lang = 'ar') {
+  const isRtl = lang === 'ar';
+  const txt = (ar, en, fr) => {
+    if (lang === 'fr') return fr || en;
+    if (lang === 'en') return en;
+    return ar;
+  };
+
+  const t = {
+    brandTitle: txt('إدارة شركة شات', 'SHAT Admin Center', 'Centre Admin SHAT'),
+    brandSub: txt('المركز التنفيذي الموحد', 'Enterprise Admin Center', 'Centre de Gestion Institutionnel'),
+    tabDashboard: txt('لوحة المؤشرات (Dashboard)', 'Dashboard Overview', 'Tableau de Bord'),
+    groupContent: txt('إدارة المحتوى (Content)', 'Content Management', 'Gestion de Contenu'),
+    tabPosts: txt('المنشورات والأخبار (Posts)', 'News & Publications', 'Actualités & Publications'),
+    tabMedia: txt('مكتبة الوسائط والصور (Media)', 'Media Library & Files', 'Médiathèque & Fichiers'),
+    groupAcademy: txt('الأكاديمية والتدريب (Academy)', 'Academy & Courses', 'Académie & Formations'),
+    tabCourses: txt('المقررات والمناهج (Courses)', 'Courses & Curricula', 'Cursus & Programmes'),
+    tabRoster: txt('سجل الطلاب والمدربين', 'Staff & Student Directory', 'Annuaire Étudiants & Formateurs'),
+    groupApps: txt('الطلبات والاستمارات (Applications)', 'Applications & Inquiries', 'Candidatures & Demandes'),
+    tabApplications: txt('طلبات الالتحاق (Applications)', 'Course Applications', 'Demandes d\'Inscription'),
+    tabForms: txt('نماذج Google Forms', 'Native Form Engine', 'Formulaires Intégrés'),
+    tabInquiries: txt('طلبات الاستشارات (Inquiries)', 'Consulting Inquiries', 'Demandes de Conseil'),
+    groupSettings: txt('النظام والإعدادات (Settings)', 'System & Backups', 'Système & Sauvegardes'),
+    tabHealth: txt('صحة النظام والنسخ الاحتياطي', 'System Health & Backups', 'Santé Système & Sauvegardes')
+  };
+
   return `
     <div class="admin-portal-layout" style="display: flex; min-height: 90vh; background: var(--bg-subtle); margin-top: 70px;">
       
@@ -15,8 +43,8 @@ export function renderAdminView(lang = 'ar') {
           <div style="display: flex; align-items: center; gap: 10px;">
             <img src="assets/logo/logo-transparent.png" alt="SHAT" style="height: 32px;" onerror="this.src='assets/logo/logo-symbol.jpg'">
             <div>
-              <div style="font-weight: 800; font-size: 0.95rem; color: #FFFFFF;">إدارة شركة شات</div>
-              <div style="font-size: 0.72rem; color: #94A3B8;">Enterprise Admin Center</div>
+              <div style="font-weight: 800; font-size: 0.95rem; color: #FFFFFF;">${t.brandTitle}</div>
+              <div style="font-size: 0.72rem; color: #94A3B8;">${t.brandSub}</div>
             </div>
           </div>
           <button id="btn-close-admin-sidebar" class="mobile-only" style="background: none; border: none; color: #94A3B8; font-size: 1.2rem; cursor: pointer; display: none;">✕</button>
@@ -28,66 +56,66 @@ export function renderAdminView(lang = 'ar') {
           <!-- Section: Dashboard -->
           <button class="admin-nav-item active" data-target="admin-tab-dashboard">
             <span>📊</span>
-            <span>لوحة المؤشرات (Dashboard)</span>
+            <span>${t.tabDashboard}</span>
           </button>
 
           <!-- Group: Content -->
           <div class="admin-nav-group-title" style="padding: 12px 10px 4px 10px; font-size: 0.72rem; text-transform: uppercase; color: #64748B; font-weight: 800; letter-spacing: 0.5px;">
-            إدارة المحتوى (Content)
+            ${t.groupContent}
           </div>
           <button class="admin-nav-item" data-target="admin-tab-posts">
             <span>📝</span>
-            <span>المنشورات والأخبار (Posts)</span>
+            <span>${t.tabPosts}</span>
           </button>
           <button class="admin-nav-item" data-target="admin-tab-media">
             <span>🖼️</span>
-            <span>مكتبة الصور والوسائط (Media)</span>
+            <span>${t.tabMedia}</span>
           </button>
 
           <!-- Group: Academy -->
           <div class="admin-nav-group-title" style="padding: 12px 10px 4px 10px; font-size: 0.72rem; text-transform: uppercase; color: #64748B; font-weight: 800; letter-spacing: 0.5px;">
-            الأكاديمية والتدريب (Academy)
+            ${t.groupAcademy}
           </div>
           <button class="admin-nav-item" data-target="admin-tab-courses">
             <span>🎓</span>
-            <span>المقررات والمناهج (Courses)</span>
+            <span>${t.tabCourses}</span>
           </button>
           <button class="admin-nav-item" data-target="admin-tab-roster">
             <span>👥</span>
-            <span>سجل الطلاب والمدربين</span>
+            <span>${t.tabRoster}</span>
           </button>
 
           <!-- Group: Applications -->
           <div class="admin-nav-group-title" style="padding: 12px 10px 4px 10px; font-size: 0.72rem; text-transform: uppercase; color: #64748B; font-weight: 800; letter-spacing: 0.5px;">
-            الطلبات والاستمارات (Applications)
+            ${t.groupApps}
           </div>
           <button class="admin-nav-item" data-target="admin-tab-applications">
             <span>📥</span>
-            <span>طلبات الالتحاق (Applications)</span>
+            <span>${t.tabApplications}</span>
           </button>
           <button class="admin-nav-item" data-target="admin-tab-forms">
             <span>📋</span>
-            <span>نماذج Google Forms</span>
+            <span>${t.tabForms}</span>
           </button>
           <button class="admin-nav-item" data-target="admin-tab-inquiries">
             <span>💬</span>
-            <span>طلبات الاستشارات (Inquiries)</span>
+            <span>${t.tabInquiries}</span>
           </button>
 
           <!-- Group: Settings -->
           <div class="admin-nav-group-title" style="padding: 12px 10px 4px 10px; font-size: 0.72rem; text-transform: uppercase; color: #64748B; font-weight: 800; letter-spacing: 0.5px;">
-            النظام والإعدادات (Settings)
+            ${t.groupSettings}
           </div>
           <button class="admin-nav-item" data-target="admin-tab-health">
             <span>🛡️</span>
-            <span>صحة النظام وسجل التدقيق</span>
+            <span>${t.tabHealth}</span>
           </button>
         </nav>
 
         <!-- Sidebar User Footer -->
         <div style="padding: 16px; border-top: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: space-between;">
           <div style="display: flex; align-items: center; gap: 8px;">
-            <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--shat-green); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem;">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--shat-green); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; color: #FFFFFF;">
               ح
             </div>
             <div style="font-size: 0.8rem;">
@@ -105,9 +133,9 @@ export function renderAdminView(lang = 'ar') {
         <!-- Mobile/Tablet Sidebar Toggle Bar -->
         <div class="admin-top-toggle-bar" style="display: none; justify-content: space-between; align-items: center; margin-bottom: 20px; background: #FFFFFF; padding: 12px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-light);">
           <button id="btn-toggle-admin-sidebar" class="btn-clean btn-sm" style="background: var(--bg-subtle); color: var(--shat-navy); font-weight: 700;">
-            ☰ قائمة لوحة التحكم
+            ☰ ${txt('قائمة لوحة التحكم', 'Admin Menu', 'Menu Admin')}
           </button>
-          <span style="font-size: 0.85rem; font-weight: 700; color: var(--shat-navy);">لوحة الإدارة التنفيذية</span>
+          <span style="font-size: 0.85rem; font-weight: 700; color: var(--shat-navy);">${txt('لوحة الإدارة التنفيذية', 'Executive Dashboard', 'Gestion Exécutive')}</span>
         </div>
 
         <!-- ======================================================== -->
@@ -119,17 +147,27 @@ export function renderAdminView(lang = 'ar') {
           <div style="background: linear-gradient(135deg, var(--shat-navy) 0%, #08162B 100%); border-radius: var(--radius-md); padding: 28px 32px; color: #FFFFFF; margin-bottom: 28px; box-shadow: var(--shadow-sm); border: 1px solid rgba(255,255,255,0.08);">
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
               <div>
-                <span class="badge" style="background: rgba(30, 166, 114, 0.25); color: #4ADE80; margin-bottom: 8px;">صباح الخير • Good Morning, Admin</span>
-                <h1 style="font-size: 1.7rem; font-weight: 900; color: #FFFFFF; margin: 4px 0 6px 0;">لوحة المؤشرات والعمليات المركزية</h1>
-                <p style="color: #CBD5E1; font-size: 0.9rem; margin: 0;">نظرة شاملة على سير العمليات الأكاديمية والاستشارية في شركة شات للتنمية والتطوير.</p>
+                <span class="badge" style="background: rgba(30, 166, 114, 0.25); color: #4ADE80; margin-bottom: 8px;">
+                  ${txt('المركز التنفيذي الموحد • SHAT Executive Management', 'Enterprise Control Center', 'Centre de Contrôle')}
+                </span>
+                <h1 style="font-size: 1.7rem; font-weight: 900; color: #FFFFFF; margin: 4px 0 6px 0;">
+                  ${txt('لوحة المؤشرات والعمليات المركزية', 'Central Operations & KPI Dashboard', 'Tableau de Bord & Opérations')}
+                </h1>
+                <p style="color: #CBD5E1; font-size: 0.9rem; margin: 0;">
+                  ${txt(
+                    'نظرة شاملة على سير العمليات الأكاديمية والاستشارية وإدارة المحتوى في شركة شات للتنمية والتطوير.',
+                    'Comprehensive overview of academic courses, consulting inquiries, publications, and student submissions.',
+                    'Vue globale sur les cursus académiques, les actualités et les inscriptions de SHAT.'
+                  )}
+                </p>
               </div>
 
               <div style="display: flex; gap: 10px;">
                 <button class="btn-clean btn-green btn-sm" id="btn-quick-new-post">
-                  <span>+ إضافة منشور جديد</span>
+                  <span>+ ${txt('إضافة منشور جديد', 'New Publication', 'Nouvelle Publication')}</span>
                 </button>
                 <button class="btn-clean btn-sm" id="btn-refresh-dashboard" style="background: rgba(255,255,255,0.1); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.2);">
-                  <span>🔄 تحديث البيانات</span>
+                  <span>🔄 ${txt('تحديث البيانات', 'Refresh Data', 'Actualiser')}</span>
                 </button>
               </div>
             </div>
@@ -138,27 +176,27 @@ export function renderAdminView(lang = 'ar') {
           <!-- KPI Cards Grid -->
           <div class="grid-4" style="margin-bottom: 28px;">
             <div class="bento-card" style="padding: 20px; border-top: 4px solid var(--shat-navy);">
-              <span class="bento-kicker">إجمالي الطلاب المسجلين</span>
+              <span class="bento-kicker">${txt('إجمالي الطلاب المسجلين', 'Total Enrolled Students', 'Étudiants Inscrits')}</span>
               <div style="font-size: 2.2rem; font-weight: 900; color: var(--shat-navy); margin: 6px 0;" id="kpi-students-count">245</div>
-              <div style="font-size: 0.8rem; color: var(--shat-green); font-weight: 600;">+12 متدرب هذا الأسبوع</div>
+              <div style="font-size: 0.8rem; color: var(--shat-green); font-weight: 600;">+12 ${txt('متدرب هذا الأسبوع', 'students this week', 'cette semaine')}</div>
             </div>
 
             <div class="bento-card" style="padding: 20px; border-top: 4px solid var(--shat-green);">
-              <span class="bento-kicker">المدربون والخبراء المعتمدون</span>
+              <span class="bento-kicker">${txt('المدربون والخبراء المعتمدون', 'Accredited Trainers', 'Formateurs Certifiés')}</span>
               <div style="font-size: 2.2rem; font-weight: 900; color: var(--shat-green);" id="kpi-teachers-count">18</div>
-              <div style="font-size: 0.8rem; color: var(--text-muted);">كادر تدريبي واستشاري مرخص</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">${txt('كادر تدريبي واستشاري مرخص', 'Licensed instructors', 'Experts agréés')}</div>
             </div>
 
             <div class="bento-card" style="padding: 20px; border-top: 4px solid #3B82F6;">
-              <span class="bento-kicker">المساقات والدبلومات الفعالة</span>
-              <div style="font-size: 2.2rem; font-weight: 900; color: #1D4ED8;" id="kpi-courses-count">12</div>
-              <div style="font-size: 0.8rem; color: var(--text-muted);">برامج معتمدة وفق المعايير</div>
+              <span class="bento-kicker">${txt('المساقات والدبلومات الفعالة', 'Active Curricula', 'Cursus Actifs')}</span>
+              <div style="font-size: 2.2rem; font-weight: 900; color: #1D4ED8;" id="kpi-courses-count">8</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">${txt('برامج معتمدة وفق المعايير', 'Aligned with global standards', 'Normes internationales')}</div>
             </div>
 
             <div class="bento-card" style="padding: 20px; border-top: 4px solid var(--shat-amber);">
-              <span class="bento-kicker">طلبات الالتحاق المعلقة</span>
-              <div style="font-size: 2.2rem; font-weight: 900; color: var(--shat-amber);" id="kpi-pending-apps">23</div>
-              <div style="font-size: 0.8rem; color: var(--shat-amber); font-weight: 600;">تتطلب تدقيقاً ومصادقة</div>
+              <span class="bento-kicker">${txt('طلبات الالتحاق المعلقة', 'Pending Applications', 'Demandes en Attente')}</span>
+              <div style="font-size: 2.2rem; font-weight: 900; color: var(--shat-amber);" id="kpi-pending-apps">1</div>
+              <div style="font-size: 0.8rem; color: var(--shat-amber); font-weight: 600;">${txt('تتطلب تدقيقاً ومصادقة', 'Requires review', 'À valider')}</div>
             </div>
           </div>
 
@@ -168,22 +206,26 @@ export function renderAdminView(lang = 'ar') {
             <!-- Pending Applications Table Card -->
             <div class="bento-card" style="padding: 22px;">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid var(--border-light); padding-bottom: 10px;">
-                <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--shat-navy); margin: 0;">طلبات الالتحاق الحديثة (Pending Applications)</h3>
-                <button class="btn-clean btn-sm" id="btn-view-all-apps" style="color: var(--shat-green); font-weight: 700;">عرض الكل ←</button>
+                <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--shat-navy); margin: 0;">
+                  ${txt('طلبات الالتحاق الحديثة (Pending Applications)', 'Recent Course Applications', 'Dernières Candidatures')}
+                </h3>
+                <button class="btn-clean btn-sm" id="btn-view-all-apps" style="color: var(--shat-green); font-weight: 700;">
+                  ${txt('عرض الكل ←', 'View All →', 'Voir Tout →')}
+                </button>
               </div>
 
               <div style="overflow-x: auto;">
-                <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; text-align: right;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; text-align: ${isRtl ? 'right' : 'left'};">
                   <thead>
                     <tr style="color: var(--text-muted); border-bottom: 2px solid var(--border-light);">
-                      <th style="padding: 10px 8px;">المتقدم</th>
-                      <th style="padding: 10px 8px;">المساق</th>
-                      <th style="padding: 10px 8px;">الحالة</th>
-                      <th style="padding: 10px 8px; text-align: left;">الإجراء</th>
+                      <th style="padding: 10px 8px;">${txt('المتقدم', 'Applicant', 'Candidat')}</th>
+                      <th style="padding: 10px 8px;">${txt('المساق', 'Course', 'Cursus')}</th>
+                      <th style="padding: 10px 8px;">${txt('الحالة', 'Status', 'Statut')}</th>
+                      <th style="padding: 10px 8px; text-align: ${isRtl ? 'left' : 'right'};">${txt('الإجراء', 'Action', 'Action')}</th>
                     </tr>
                   </thead>
                   <tbody id="dash-pending-apps-tbody">
-                    <tr><td colspan="4" style="padding: 20px; text-align: center; color: var(--text-muted);">جاري تحميل الطلبات...</td></tr>
+                    <tr><td colspan="4" style="padding: 20px; text-align: center; color: var(--text-muted);">${txt('جاري تحميل الطلبات...', 'Loading applications...', 'Chargement...')}</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -192,20 +234,20 @@ export function renderAdminView(lang = 'ar') {
             <!-- Recent Activity Stream -->
             <div class="bento-card" style="padding: 22px;">
               <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--shat-navy); margin: 0 0 16px 0; border-bottom: 1px solid var(--border-light); padding-bottom: 10px;">
-                النشاط الأخير وسجل العمليات
+                ${txt('النشاط الأخير وسجل العمليات', 'Recent Platform Activity', 'Activité Récente')}
               </h3>
               <div id="dash-recent-activity-list" style="display: flex; flex-direction: column; gap: 12px; font-size: 0.85rem;">
                 <div style="padding: 10px; background: var(--bg-subtle); border-radius: var(--radius-xs); border: 1px solid var(--border-light);">
-                  <div style="font-weight: 700; color: var(--shat-navy);">تسجيل متدرب جديد في دبلوم CHS</div>
-                  <div style="font-size: 0.75rem; color: var(--text-muted);">منذ 15 دقيقة • بواسطة الإدارة</div>
+                  <div style="font-weight: 700; color: var(--shat-navy);">${txt('تسجيل متدرب جديد في دبلوم CHS', 'New student enrolled in CHS Diploma', 'Nouvel étudiant inscrit')}</div>
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">${txt('منذ 15 دقيقة • بواسطة الإدارة', '15 mins ago • By Admin', 'Il y a 15 min')}</div>
                 </div>
                 <div style="padding: 10px; background: var(--bg-subtle); border-radius: var(--radius-xs); border: 1px solid var(--border-light);">
-                  <div style="font-weight: 700; color: var(--shat-green);">رصد درجات التكليف #2 لدورة PSEA</div>
-                  <div style="font-size: 0.75rem; color: var(--text-muted);">منذ ساعة • د. أسامة المنصور</div>
+                  <div style="font-weight: 700; color: var(--shat-green);">${txt('رصد درجات التكليف #1 لدبلوم CHS', 'Assignment #1 graded (94/100)', 'Devoir #1 noté')}</div>
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">${txt('منذ ساعة • د. أسامة المنصور', '1 hour ago • Dr. Osama', 'Il y a 1 heure')}</div>
                 </div>
                 <div style="padding: 10px; background: var(--bg-subtle); border-radius: var(--radius-xs); border: 1px solid var(--border-light);">
-                  <div style="font-weight: 700; color: #1D4ED8;">نشر مقال: معايير التقييم الخارجي OECD DAC</div>
-                  <div style="font-size: 0.75rem; color: var(--text-muted);">منذ 3 ساعات • أ. حسام جاد الله</div>
+                  <div style="font-weight: 700; color: #1D4ED8;">${txt('نشر مقال: معايير التقييم الخارجي OECD DAC', 'Published article: OECD DAC Standards', 'Article publié : Normes OECD')}</div>
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">${txt('منذ 3 ساعات • أ. حسام جاد الله', '3 hours ago • Admin', 'Il y a 3 heures')}</div>
                 </div>
               </div>
             </div>
@@ -215,27 +257,29 @@ export function renderAdminView(lang = 'ar') {
         </div>
 
         <!-- ======================================================== -->
-        <!-- TAB 2: CMS POSTS & RICH EDITOR -->
+        <!-- TAB 2: CMS POSTS & RICH EDITOR (WITH FULL EDIT & DEVICE UPLOAD) -->
         <!-- ======================================================== -->
         <div id="admin-tab-posts" class="admin-view-pane" style="display: none;">
           
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
             <div style="display: flex; align-items: center; gap: 10px;">
-              <h2 style="font-size: 1.3rem; font-weight: 900; color: var(--shat-navy); margin: 0;">محرر المنشورات والمقالات المعتمدة</h2>
-              <span id="cms-autosave-indicator" style="font-size: 0.8rem; color: var(--shat-green); background: #DCFCE7; padding: 4px 10px; border-radius: 12px; font-weight: 600;">
-                ✓ مسودة محفوظة تلقائياً
+              <h2 id="cms-editor-heading" style="font-size: 1.3rem; font-weight: 900; color: var(--shat-navy); margin: 0;">
+                ${txt('محرر المنشورات والمقالات المعتمدة', 'Publications & Insights Editor', 'Éditeur de Publications')}
+              </h2>
+              <span id="cms-editing-badge" class="badge" style="display: none; background: #FEF3C7; color: #92400E; font-weight: 700;">
+                ✏️ ${txt('وضع التعديل النشط', 'Editing Mode Active', 'Mode Modification')}
               </span>
             </div>
 
             <div style="display: flex; gap: 8px;">
               <button id="btn-cms-new" class="btn-clean btn-sm" style="background: #FFFFFF; border: 1px solid var(--border-light); color: var(--shat-navy); font-weight: 700;">
-                <span>+ مسودة جديدة</span>
+                <span>+ ${txt('منشور جديد', 'New Post', 'Nouveau')}</span>
               </button>
-              <button id="btn-cms-save-draft" class="btn-clean btn-sm" style="background: #F1F5F9; border: 1px solid var(--border-light); color: var(--text-main); font-weight: 700;">
-                <span>💾 حفظ كمسودة</span>
+              <button id="btn-cms-cancel-edit" class="btn-clean btn-sm" style="display: none; background: #F1F5F9; border: 1px solid #CBD5E1; color: var(--text-secondary); font-weight: 700;">
+                <span>✕ ${txt('إلغاء التعديل', 'Cancel Edit', 'Annuler')}</span>
               </button>
               <button id="btn-cms-publish" class="btn-clean btn-green btn-sm" style="font-weight: 800;">
-                <span>🚀 نشر المنشور على الموقع</span>
+                <span id="btn-cms-publish-text">🚀 ${txt('نشر المنشور على الموقع', 'Publish to Website', 'Publier sur le Site')}</span>
               </button>
             </div>
           </div>
@@ -245,53 +289,66 @@ export function renderAdminView(lang = 'ar') {
             
             <!-- Editor Column -->
             <div style="background: #FFFFFF; border-radius: var(--radius-sm); border: 1px solid var(--border-light); padding: 22px; box-shadow: var(--shadow-sm);">
+              <!-- Hidden tracking input for editing existing post -->
+              <input type="hidden" id="post-editing-id" value="">
+
               <div class="form-group">
-                <label class="form-label">عنوان المنشور الرسمي *</label>
-                <input type="text" id="post-title-input" class="form-input" style="font-size: 1rem; font-weight: 700;" placeholder="عنوان المقال أو الإعلان الرسمي" value="إطلاق برامج التقييم الخارجي المستقل وتطوير الحوكمة لمؤسسات المجتمع المدني">
+                <label class="form-label">${txt('عنوان المنشور الرسمي *', 'Official Publication Title *', 'Titre Officiel *')}</label>
+                <input type="text" id="post-title-input" class="form-input" style="font-size: 1rem; font-weight: 700;" placeholder="${txt('عنوان المقال أو الإعلان الرسمي', 'Publication title...', 'Titre de l\'article...')}" value="">
               </div>
 
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
                 <div class="form-group">
-                  <label class="form-label">التصنيف</label>
+                  <label class="form-label">${txt('التصنيف المؤسسي', 'Category', 'Catégorie')}</label>
                   <select id="post-category-input" class="form-input">
-                    <option value="humanitarian">إنساني وتطويري</option>
-                    <option value="institutional">حوكمة واستشارات</option>
-                    <option value="evaluation">تقييم ومتابعة (OECD DAC)</option>
-                    <option value="partnerships">شراكات دولية</option>
+                    <option value="humanitarian">${txt('إنساني وتطويري', 'Humanitarian & Development', 'Humanitaire & Développement')}</option>
+                    <option value="institutional">${txt('حوكمة واستشارات', 'Governance & Consulting', 'Gouvernance & Conseil')}</option>
+                    <option value="evaluation">${txt('تقييم ومتابعة (OECD DAC)', 'Evaluation & Monitoring', 'Évaluation & Suivi')}</option>
+                    <option value="partnerships">${txt('شراكات دولية', 'International Partnerships', 'Partenariats')}</option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label class="form-label">حالة النشر</label>
+                  <label class="form-label">${txt('حالة النشر', 'Publication Status', 'Statut de Publication')}</label>
                   <select id="post-status-input" class="form-input">
-                    <option value="draft">مسودة (Draft)</option>
-                    <option value="published" selected>منشور حي (Published)</option>
-                    <option value="disabled">معطل مؤقتاً (Disabled)</option>
+                    <option value="published" selected>${txt('منشور حي (Published)', 'Published (Live)', 'Publié (En Ligne)')}</option>
+                    <option value="draft">${txt('مسودة (Draft)', 'Draft', 'Brouillon')}</option>
+                    <option value="disabled">${txt('معطل مؤقتاً (Disabled)', 'Disabled', 'Désactivé')}</option>
                   </select>
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="form-label">المقتطف التعريفي الموجز</label>
-                <textarea id="post-excerpt-input" class="form-input" style="min-height: 55px; font-size: 0.88rem;">ضمن استراتيجية شركة شات لتعزيز كفاءة المنظمات غير الحكومية وتطبيق معايير المساءلة للمتأثرين.</textarea>
+                <label class="form-label">${txt('المقتطف التعريفي الموجز', 'Summary / Excerpt', 'Extrait / Résumé')}</label>
+                <textarea id="post-excerpt-input" class="form-input" style="min-height: 55px; font-size: 0.88rem;" placeholder="${txt('موجز تشويقي للمنشور يظهر في البطاقة...', 'Short summary for cards...', 'Bref résumé pour la carte...')}"></textarea>
               </div>
 
               <!-- Formatting Toolbar -->
               <div class="form-group">
-                <label class="form-label">المحتوى التفصيلي *</label>
+                <label class="form-label">${txt('المحتوى والمقال التفصيلي *', 'Full Article Content *', 'Contenu Détaillé *')}</label>
                 <div style="display: flex; gap: 6px; background: var(--bg-subtle); padding: 8px; border: 1px solid var(--border-light); border-bottom: none; border-radius: var(--radius-xs) var(--radius-xs) 0 0; flex-wrap: wrap;">
                   <button type="button" class="btn-format" data-cmd="bold" style="padding: 4px 10px; font-weight: bold; background: #fff; border: 1px solid #cbd5e1; border-radius: 4px; cursor: pointer;">B</button>
                   <button type="button" class="btn-format" data-cmd="italic" style="padding: 4px 10px; font-style: italic; background: #fff; border: 1px solid #cbd5e1; border-radius: 4px; cursor: pointer;">I</button>
                   <button type="button" class="btn-format" data-cmd="h2" style="padding: 4px 10px; font-weight: bold; background: #fff; border: 1px solid #cbd5e1; border-radius: 4px; cursor: pointer;">H2</button>
                   <button type="button" class="btn-format" data-cmd="h3" style="padding: 4px 10px; font-weight: bold; background: #fff; border: 1px solid #cbd5e1; border-radius: 4px; cursor: pointer;">H3</button>
-                  <button type="button" class="btn-format" data-cmd="ul" style="padding: 4px 10px; background: #fff; border: 1px solid #cbd5e1; border-radius: 4px; cursor: pointer;">• قائمة</button>
-                  <button type="button" class="btn-format" data-cmd="quote" style="padding: 4px 10px; background: #fff; border: 1px solid #cbd5e1; border-radius: 4px; cursor: pointer;">" اقتباس</button>
+                  <button type="button" class="btn-format" data-cmd="ul" style="padding: 4px 10px; background: #fff; border: 1px solid #cbd5e1; border-radius: 4px; cursor: pointer;">• ${txt('قائمة', 'List', 'Liste')}</button>
+                  <button type="button" class="btn-format" data-cmd="quote" style="padding: 4px 10px; background: #fff; border: 1px solid #cbd5e1; border-radius: 4px; cursor: pointer;">" ${txt('اقتباس', 'Quote', 'Citation')}</button>
                 </div>
-                <textarea id="post-body-input" class="form-input" style="min-height: 200px; font-size: 0.92rem; border-top: none; border-radius: 0 0 var(--radius-xs) var(--radius-xs); line-height: 1.7;">أعلنت شركة شات للتنمية والتطوير عن إطلاق حزمة استشارية متكاملة لتقييم التدخلات الإنسانية وفق المعايير التسعة لـ CHS ومعايير OECD DAC. تشمل الحزمة بناء قدرات الكوادر الميدانية وإعداد تقارير التقييم المستقلة.</textarea>
+                <textarea id="post-body-input" class="form-input" style="min-height: 180px; font-size: 0.92rem; border-top: none; border-radius: 0 0 var(--radius-xs) var(--radius-xs); line-height: 1.7;" placeholder="${txt('اكتب تفاصيل المنشور هنا...', 'Write publication text here...', 'Rédigez le contenu ici...')}"></textarea>
               </div>
 
+              <!-- Device File Upload Integration for Cover Image -->
               <div class="form-group" style="margin-bottom: 0;">
-                <label class="form-label">رابط صورة الغلاف</label>
-                <input type="text" id="post-cover-input" class="form-input" value="assets/logo/logo-banner.jpg">
+                <label class="form-label">${txt('صورة غلاف المنشور (رابط أو رفع من جهازك) *', 'Cover Image (URL or Upload from Device) *', 'Image de Couverture (URL ou Fichier) *')}</label>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                  <input type="text" id="post-cover-input" class="form-input" value="assets/logo/logo-banner.jpg" style="flex: 1;">
+                  <input type="file" id="post-cover-file-input" accept="image/*" style="display: none;">
+                  <button type="button" id="btn-trigger-post-upload" class="btn-clean btn-sm" style="background: var(--shat-green-tint); color: var(--shat-green); border: 1px solid var(--shat-green); font-weight: 700; white-space: nowrap; padding: 10px 14px;">
+                    📁 ${txt('رفع من الجهاز', 'Upload File', 'Importer')}
+                  </button>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">
+                  ${txt('✓ يدعم JPG, PNG, WebP ويتم ضغطها وتخزينها محلياً على جهازك لتوفير المساحة وتصفحها أوفلاين.', 'Supports JPG, PNG, WebP with local device compression & caching.', 'Prend en charge JPG, PNG, WebP avec stockage local.')}
+                </div>
               </div>
             </div>
 
@@ -300,11 +357,13 @@ export function renderAdminView(lang = 'ar') {
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid var(--border-light); padding-bottom: 8px;">
                 <div style="display: flex; align-items: center; gap: 8px;">
                   <span style="width: 10px; height: 10px; background: #22C55E; border-radius: 50%;"></span>
-                  <h3 style="font-size: 0.95rem; font-weight: 800; color: var(--shat-navy); margin: 0;">المعاينة الحية الفورية (Live Preview)</h3>
+                  <h3 style="font-size: 0.95rem; font-weight: 800; color: var(--shat-navy); margin: 0;">
+                    ${txt('المعاينة الحية الفورية (Live Preview)', 'Live Preview', 'Aperçu en Direct')}
+                  </h3>
                 </div>
                 <div style="display: flex; gap: 6px;">
-                  <button class="btn-preview-mode btn-clean btn-sm active" data-mode="desktop" style="padding: 3px 8px; font-size: 0.75rem;">💻 سطح المكتب</button>
-                  <button class="btn-preview-mode btn-clean btn-sm" data-mode="mobile" style="padding: 3px 8px; font-size: 0.75rem; background: #F1F5F9; color: var(--text-muted);">📱 هاتف</button>
+                  <button class="btn-preview-mode btn-clean btn-sm active" data-mode="desktop" style="padding: 3px 8px; font-size: 0.75rem;">💻 ${txt('سطح المكتب', 'Desktop', 'Ordinateur')}</button>
+                  <button class="btn-preview-mode btn-clean btn-sm" data-mode="mobile" style="padding: 3px 8px; font-size: 0.75rem; background: #F1F5F9; color: var(--text-muted);">📱 ${txt('هاتف', 'Mobile', 'Mobile')}</button>
                 </div>
               </div>
 
@@ -313,8 +372,8 @@ export function renderAdminView(lang = 'ar') {
                 <h2 id="preview-title" style="font-size: 1.25rem; font-weight: 800; color: var(--shat-navy); margin-bottom: 10px; line-height: 1.4;">
                   عنوان المنشور
                 </h2>
-                <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">
-                  ✍️ بواسطة: أ. حسام جاد الله • 📅 ${new Date().toLocaleDateString('ar-EG')}
+                <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;" id="preview-meta">
+                  ✍️ ${txt('بواسطة: أ. حسام جاد الله', 'By: SHAT Management', 'Par : Direction SHAT')} • 📅 ${new Date().toLocaleDateString(isRtl ? 'ar-EG' : 'en-US')}
                 </div>
                 <img id="preview-cover" src="assets/logo/logo-banner.jpg" alt="Preview" style="width: 100%; height: 160px; object-fit: cover; border-radius: var(--radius-xs); margin-bottom: 14px;" onerror="this.src='assets/logo/logo-symbol.jpg'">
                 <p id="preview-excerpt" style="font-weight: 600; color: var(--text-main); font-size: 0.9rem; margin-bottom: 10px;">
@@ -328,25 +387,33 @@ export function renderAdminView(lang = 'ar') {
 
           </div>
 
-          <!-- Posts Management Table -->
+          <!-- Posts Management Table with Edit and Delete Buttons -->
           <div style="background: #FFFFFF; border-radius: var(--radius-sm); border: 1px solid var(--border-light); overflow: hidden; box-shadow: var(--shadow-sm);">
             <div style="padding: 16px 20px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center;">
-              <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--shat-navy); margin: 0;">سجل المنشورات في قاعدة البيانات</h3>
+              <div>
+                <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--shat-navy); margin: 0;">
+                  ${txt('سجل المنشورات في قاعدة البيانات (انقر "تعديل" لتعديل أي منشور)', 'Publications Directory (Click Edit to Modify Any Post)', 'Gestion des Publications')}
+                </h3>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin: 2px 0 0 0;">
+                  ${txt('يمكنك تعديل محتوى وصور وحالة أي منشور منشور سابقاً وتنعكس فوراً على الموقع الرسمي.', 'Modify text, images, and status of any existing post instantly.', 'Modifiez le contenu et les images de toute publication.')}
+                </p>
+              </div>
               <span id="posts-count-badge" class="badge" style="background: var(--bg-subtle); color: var(--shat-navy);">-- منشور</span>
             </div>
             <div style="overflow-x: auto;">
-              <table style="width: 100%; border-collapse: collapse; text-align: right; font-size: 0.9rem;">
+              <table style="width: 100%; border-collapse: collapse; text-align: ${isRtl ? 'right' : 'left'}; font-size: 0.9rem;">
                 <thead>
                   <tr style="background: var(--bg-subtle); color: var(--shat-navy); border-bottom: 2px solid var(--border-light);">
-                    <th style="padding: 12px 16px;">العنوان</th>
-                    <th style="padding: 12px 16px;">التصنيف</th>
-                    <th style="padding: 12px 16px;">الحالة</th>
-                    <th style="padding: 12px 16px;">التاريخ</th>
-                    <th style="padding: 12px 16px; text-align: left;">الإجراءات</th>
+                    <th style="padding: 12px 16px;">${txt('الغلاف', 'Cover', 'Image')}</th>
+                    <th style="padding: 12px 16px;">${txt('العنوان', 'Title', 'Titre')}</th>
+                    <th style="padding: 12px 16px;">${txt('التصنيف', 'Category', 'Catégorie')}</th>
+                    <th style="padding: 12px 16px;">${txt('الحالة', 'Status', 'Statut')}</th>
+                    <th style="padding: 12px 16px;">${txt('التاريخ', 'Date', 'Date')}</th>
+                    <th style="padding: 12px 16px; text-align: ${isRtl ? 'left' : 'right'};">${txt('الإجراءات', 'Actions', 'Actions')}</th>
                   </tr>
                 </thead>
                 <tbody id="posts-table-tbody">
-                  <tr><td colspan="5" style="padding: 24px; text-align: center; color: var(--text-muted);">جاري تحميل المنشورات...</td></tr>
+                  <tr><td colspan="6" style="padding: 24px; text-align: center; color: var(--text-muted);">${txt('جاري تحميل المنشورات...', 'Loading posts...', 'Chargement...')}</td></tr>
                 </tbody>
               </table>
             </div>
@@ -355,80 +422,82 @@ export function renderAdminView(lang = 'ar') {
         </div>
 
         <!-- ======================================================== -->
-        <!-- TAB 3: MEDIA LIBRARY -->
+        <!-- TAB 3: MEDIA LIBRARY (WITH DEVICE UPLOAD & LOCAL STORAGE) -->
         <!-- ======================================================== -->
         <div id="admin-tab-media" class="admin-view-pane" style="display: none;">
           <div style="background: #FFFFFF; border-radius: var(--radius-sm); border: 1px solid var(--border-light); padding: 24px; margin-bottom: 24px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
               <div>
-                <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--shat-navy); margin: 0 0 4px 0;">مكتبة الوسائط والصور المعتمدة (Media Library)</h3>
-                <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">إدارة الصور الرسمية، الشعارات، وبانرات المنشورات المخزنة سحابياً.</p>
+                <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--shat-navy); margin: 0 0 4px 0;">
+                  ${txt('مكتبة الوسائط والصور المعتمدة (Media Library)', 'Media Library & Device Storage', 'Médiathèque Institutionnelle')}
+                </h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">
+                  ${txt(
+                    'ارفع الصور والملفات مباشرة من جهازك؛ يتم ضغطها وتخزينها محلياً على جهازك لتستخدمها في المنشورات والمقررات.',
+                    'Upload images directly from your computer or phone; compressed & cached on your device.',
+                    'Importez des images depuis votre appareil pour vos publications et cours.'
+                  )}
+                </p>
               </div>
-              <button id="btn-upload-media" class="btn-clean btn-green btn-sm">
-                <span>📤 رفع صورة جديدة</span>
-              </button>
+
+              <div style="display: flex; gap: 8px;">
+                <input type="file" id="media-library-file-input" accept="image/*" multiple style="display: none;">
+                <button id="btn-upload-media-device" class="btn-clean btn-green btn-sm">
+                  <span>📁 ${txt('رفع صور من جهازك', 'Upload from Device', 'Importer de l\'appareil')}</span>
+                </button>
+              </div>
             </div>
 
-            <!-- Media Grid -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px;" id="media-library-grid">
-              <div style="border: 1px solid var(--border-light); border-radius: var(--radius-xs); overflow: hidden; background: #FFFFFF;">
-                <img src="assets/logo/logo-banner.jpg" alt="Banner" style="width: 100%; height: 110px; object-fit: cover;" onerror="this.src='assets/logo/logo-symbol.jpg'">
-                <div style="padding: 10px; font-size: 0.78rem;">
-                  <div style="font-weight: 700; color: var(--shat-navy); text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">logo-banner.jpg</div>
-                  <div style="color: var(--text-muted); font-size: 0.72rem;">124 KB • صورة رسمية</div>
-                  <button class="btn-clean btn-sm btn-copy-url" data-url="assets/logo/logo-banner.jpg" style="width: 100%; margin-top: 6px; font-size: 0.75rem; background: var(--bg-subtle);">نسخ الرابط</button>
-                </div>
-              </div>
-
-              <div style="border: 1px solid var(--border-light); border-radius: var(--radius-xs); overflow: hidden; background: #FFFFFF;">
-                <img src="assets/logo/logo-symbol.jpg" alt="Symbol" style="width: 100%; height: 110px; object-fit: cover;">
-                <div style="padding: 10px; font-size: 0.78rem;">
-                  <div style="font-weight: 700; color: var(--shat-navy); text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">logo-symbol.jpg</div>
-                  <div style="color: var(--text-muted); font-size: 0.72rem;">48 KB • شعار شات الرمزي</div>
-                  <button class="btn-clean btn-sm btn-copy-url" data-url="assets/logo/logo-symbol.jpg" style="width: 100%; margin-top: 6px; font-size: 0.75rem; background: var(--bg-subtle);">نسخ الرابط</button>
-                </div>
-              </div>
-
-              <div style="border: 1px solid var(--border-light); border-radius: var(--radius-xs); overflow: hidden; background: #FFFFFF;">
-                <img src="assets/logo/logo-transparent.png" alt="Emblem" style="width: 100%; height: 110px; object-fit: contain; background: #0F2E4A; padding: 10px;">
-                <div style="padding: 10px; font-size: 0.78rem;">
-                  <div style="font-weight: 700; color: var(--shat-navy); text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">logo-transparent.png</div>
-                  <div style="color: var(--text-muted); font-size: 0.72rem;">85 KB • شعار مفرغ بدقة عالية</div>
-                  <button class="btn-clean btn-sm btn-copy-url" data-url="assets/logo/logo-transparent.png" style="width: 100%; margin-top: 6px; font-size: 0.75rem; background: var(--bg-subtle);">نسخ الرابط</button>
-                </div>
-              </div>
+            <!-- Media Grid Container -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px;" id="media-library-grid">
+              <!-- Populated dynamically from MediaStorageService -->
             </div>
           </div>
         </div>
 
         <!-- ======================================================== -->
-        <!-- TAB 4: ACADEMY COURSES & ROSTER -->
+        <!-- TAB 4: ACADEMY COURSES & ROSTER (WITH COURSE EDITING) -->
         <!-- ======================================================== -->
         <div id="admin-tab-courses" class="admin-view-pane" style="display: none;">
-          <div style="background: #FFFFFF; border-radius: var(--radius-sm); border: 1px solid var(--border-light); padding: 24px;">
-            <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--shat-navy); margin: 0 0 16px 0;">المساقات والدبلومات التدريبية في الأكاديمية</h3>
-            <div id="admin-courses-list" style="display: flex; flex-direction: column; gap: 14px;">
-              <!-- Populated via API -->
+          <div style="background: #FFFFFF; border-radius: var(--radius-sm); border: 1px solid var(--border-light); padding: 24px; margin-bottom: 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+              <div>
+                <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--shat-navy); margin: 0 0 4px 0;">
+                  ${txt('المساقات والدبلومات التدريبية في الأكاديمية', 'Academy Curricula Management', 'Gestion des Cursus')}
+                </h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">
+                  ${txt('تعديل أسماء المساقات، الساعات، المحاضرين، وإرفاق ملفات تدريبية مباشرة من جهازك.', 'Edit courses, hours, trainers, and attach training files from device.', 'Modifiez les cursus, formateurs et fichiers.')}
+                </p>
+              </div>
+              <button id="btn-open-new-course" class="btn-clean btn-green btn-sm">
+                <span>+ ${txt('إضافة مساق جديد', 'Add New Course', 'Nouveau Cursus')}</span>
+              </button>
+            </div>
+
+            <div id="admin-courses-list" style="display: flex; flex-direction: column; gap: 16px;">
+              <!-- Populated dynamically -->
             </div>
           </div>
         </div>
 
         <div id="admin-tab-roster" class="admin-view-pane" style="display: none;">
           <div style="background: #FFFFFF; border-radius: var(--radius-sm); border: 1px solid var(--border-light); padding: 24px;">
-            <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--shat-navy); margin: 0 0 16px 0;">دليل المستخدمين المعتمدين (الكادر التدريسي والطلاب)</h3>
+            <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--shat-navy); margin: 0 0 16px 0;">
+              ${txt('دليل المستخدمين المعتمدين (الكادر التدريسي والطلاب)', 'Staff & Student Directory', 'Annuaire des Utilisateurs')}
+            </h3>
             <div style="overflow-x: auto;">
-              <table style="width: 100%; border-collapse: collapse; text-align: right; font-size: 0.9rem;" id="admin-users-table">
+              <table style="width: 100%; border-collapse: collapse; text-align: ${isRtl ? 'right' : 'left'}; font-size: 0.9rem;" id="admin-users-table">
                 <thead>
                   <tr style="background: var(--bg-subtle); color: var(--shat-navy); border-bottom: 2px solid var(--border-light);">
-                    <th style="padding: 12px 16px;">الاسم الكامل</th>
-                    <th style="padding: 12px 16px;">البريد الإلكتروني</th>
-                    <th style="padding: 12px 16px;">الدور المؤسسي</th>
-                    <th style="padding: 12px 16px;">الهاتف</th>
-                    <th style="padding: 12px 16px;">الحالة</th>
+                    <th style="padding: 12px 16px;">${txt('الاسم الكامل', 'Full Name', 'Nom')}</th>
+                    <th style="padding: 12px 16px;">${txt('البريد الإلكتروني', 'Email', 'Courriel')}</th>
+                    <th style="padding: 12px 16px;">${txt('الدور المؤسسي', 'Role', 'Rôle')}</th>
+                    <th style="padding: 12px 16px;">${txt('الهاتف', 'Phone', 'Téléphone')}</th>
+                    <th style="padding: 12px 16px;">${txt('الحالة', 'Status', 'Statut')}</th>
                   </tr>
                 </thead>
                 <tbody id="admin-users-tbody">
-                  <tr><td colspan="5" style="padding: 24px; text-align: center; color: var(--text-muted);">جاري تحميل المستخدمين...</td></tr>
+                  <tr><td colspan="5" style="padding: 24px; text-align: center; color: var(--text-muted);">${txt('جاري تحميل المستخدمين...', 'Loading users...', 'Chargement...')}</td></tr>
                 </tbody>
               </table>
             </div>
@@ -442,25 +511,29 @@ export function renderAdminView(lang = 'ar') {
           <div style="background: #FFFFFF; border-radius: var(--radius-sm); border: 1px solid var(--border-light); overflow: hidden; box-shadow: var(--shadow-sm);">
             <div style="padding: 18px 24px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center;">
               <div>
-                <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--shat-navy); margin: 0 0 4px 0;">إدارة طلبات الالتحاق بالبرامج التدريبية</h3>
-                <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">قبول واعتماد المتدربين مع التفعيل التلقائي لحساباتهم في الأكاديمية.</p>
+                <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--shat-navy); margin: 0 0 4px 0;">
+                  ${txt('إدارة طلبات الالتحاق بالبرامج التدريبية', 'Course Applications Management', 'Gestion des Inscriptions')}
+                </h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">
+                  ${txt('قبول واعتماد المتدربين مع التفعيل التلقائي لحساباتهم في الأكاديمية.', 'Approve applicants with automatic account activation.', 'Validez les candidatures des stagiaires.')}
+                </p>
               </div>
-              <button id="btn-refresh-apps-tab" class="btn-clean btn-sm" style="background: var(--bg-subtle); border: 1px solid var(--border-light);">🔄 تحديث</button>
+              <button id="btn-refresh-apps-tab" class="btn-clean btn-sm" style="background: var(--bg-subtle); border: 1px solid var(--border-light);">🔄 ${txt('تحديث', 'Refresh', 'Actualiser')}</button>
             </div>
             <div style="overflow-x: auto;">
-              <table style="width: 100%; border-collapse: collapse; text-align: right; font-size: 0.9rem;">
+              <table style="width: 100%; border-collapse: collapse; text-align: ${isRtl ? 'right' : 'left'}; font-size: 0.9rem;">
                 <thead>
                   <tr style="background: var(--bg-subtle); color: var(--shat-navy); border-bottom: 2px solid var(--border-light);">
-                    <th style="padding: 12px 16px;">المتقدم</th>
-                    <th style="padding: 12px 16px;">بيانات التواصل</th>
-                    <th style="padding: 12px 16px;">المساق</th>
-                    <th style="padding: 12px 16px;">الجهة / المؤهل</th>
-                    <th style="padding: 12px 16px;">الحالة</th>
-                    <th style="padding: 12px 16px; text-align: left;">القرار الإداري</th>
+                    <th style="padding: 12px 16px;">${txt('المتقدم', 'Applicant', 'Candidat')}</th>
+                    <th style="padding: 12px 16px;">${txt('بيانات التواصل', 'Contact Info', 'Contact')}</th>
+                    <th style="padding: 12px 16px;">${txt('المساق', 'Course', 'Cursus')}</th>
+                    <th style="padding: 12px 16px;">${txt('الجهة / المؤهل', 'Organization / Degree', 'Organisation')}</th>
+                    <th style="padding: 12px 16px;">${txt('الحالة', 'Status', 'Statut')}</th>
+                    <th style="padding: 12px 16px; text-align: ${isRtl ? 'left' : 'right'};">${txt('القرار الإداري', 'Decision', 'Décision')}</th>
                   </tr>
                 </thead>
                 <tbody id="admin-apps-tbody">
-                  <tr><td colspan="6" style="padding: 24px; text-align: center; color: var(--text-muted);">جاري تحميل الطلبات...</td></tr>
+                  <tr><td colspan="6" style="padding: 24px; text-align: center; color: var(--text-muted);">${txt('جاري تحميل الطلبات...', 'Loading applications...', 'Chargement...')}</td></tr>
                 </tbody>
               </table>
             </div>
@@ -475,19 +548,25 @@ export function renderAdminView(lang = 'ar') {
             <div style="max-width: 720px;">
               <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
                 <span style="font-size: 1.5rem;">🔗</span>
-                <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--shat-navy); margin: 0;">محول استمارات Google Forms إلى نماذج شات الداخلية</h3>
+                <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--shat-navy); margin: 0;">
+                  ${txt('محول استمارات Google Forms إلى نماذج شات الداخلية', 'Google Forms to Native SHAT Forms Importer', 'Convertisseur de Formulaires')}
+                </h3>
               </div>
               <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px;">
-                ألصق رابط أي استمارة Google Form لتحويلها فورياً إلى نموذج SHAT داخلي متكامل بهوية وألوان شات، مع حفظ كافة الاستجابات في قاعدة بيانات المنصة.
+                ${txt(
+                  'ألصق رابط أي استمارة Google Form لتحويلها فورياً إلى نموذج SHAT داخلي متكامل بهوية وألوان شات، مع حفظ كافة الاستجابات في قاعدة بيانات المنصة.',
+                  'Paste any Google Form URL to instantly convert it into a branded native SHAT form with local response storage.',
+                  'Convertissez n\'importe quel formulaire Google Form en formulaire SHAT natif.'
+                )}
               </p>
               <form id="form-import-google-url">
                 <div class="form-group">
-                  <label class="form-label">رابط استمارة Google Form *</label>
+                  <label class="form-label">${txt('رابط استمارة Google Form *', 'Google Form URL *', 'Lien Google Form *')}</label>
                   <input type="url" id="google-form-url-input" class="form-input" style="height: 48px;" placeholder="https://docs.google.com/forms/d/e/... أو https://forms.gle/..." required>
                 </div>
                 <button type="submit" class="btn-clean btn-green btn-lg">
-                  <span>📥 استيراد وتوليد نموذج SHAT الداخلي</span>
-                  <span>←</span>
+                  <span>📥 ${txt('استيراد وتوليد نموذج SHAT الداخلي', 'Import & Generate Native SHAT Form', 'Générer le Formulaire Natif')}</span>
+                  <span>${isRtl ? '←' : '→'}</span>
                 </button>
               </form>
             </div>
@@ -495,21 +574,21 @@ export function renderAdminView(lang = 'ar') {
 
           <div style="background: #FFFFFF; border-radius: var(--radius-sm); border: 1px solid var(--border-light); overflow: hidden;">
             <div style="padding: 16px 20px; border-bottom: 1px solid var(--border-light);">
-              <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--shat-navy); margin: 0;">النماذج المعتمدة النشطة</h3>
+              <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--shat-navy); margin: 0;">${txt('النماذج المعتمدة النشطة', 'Active Forms', 'Formulaires Actifs')}</h3>
             </div>
             <div style="overflow-x: auto;">
-              <table style="width: 100%; border-collapse: collapse; text-align: right; font-size: 0.9rem;">
+              <table style="width: 100%; border-collapse: collapse; text-align: ${isRtl ? 'right' : 'left'}; font-size: 0.9rem;">
                 <thead>
                   <tr style="background: var(--bg-subtle); color: var(--shat-navy); border-bottom: 2px solid var(--border-light);">
-                    <th style="padding: 12px 16px;">عنوان النموذج</th>
-                    <th style="padding: 12px 16px;">الحقول</th>
-                    <th style="padding: 12px 16px;">الحالة</th>
-                    <th style="padding: 12px 16px;">الرابط الداخلي</th>
-                    <th style="padding: 12px 16px; text-align: left;">معاينة</th>
+                    <th style="padding: 12px 16px;">${txt('عنوان النموذج', 'Form Title', 'Titre du Formulaire')}</th>
+                    <th style="padding: 12px 16px;">${txt('الحقول', 'Questions', 'Champs')}</th>
+                    <th style="padding: 12px 16px;">${txt('الحالة', 'Status', 'Statut')}</th>
+                    <th style="padding: 12px 16px;">${txt('الرابط الداخلي', 'Internal Link', 'Lien')}</th>
+                    <th style="padding: 12px 16px; text-align: ${isRtl ? 'left' : 'right'};">${txt('معاينة', 'Preview', 'Aperçu')}</th>
                   </tr>
                 </thead>
                 <tbody id="admin-forms-tbody">
-                  <tr><td colspan="5" style="padding: 24px; text-align: center; color: var(--text-muted);">جاري تحميل النماذج...</td></tr>
+                  <tr><td colspan="5" style="padding: 24px; text-align: center; color: var(--text-muted);">${txt('جاري تحميل النماذج...', 'Loading forms...', 'Chargement...')}</td></tr>
                 </tbody>
               </table>
             </div>
@@ -522,22 +601,26 @@ export function renderAdminView(lang = 'ar') {
         <div id="admin-tab-inquiries" class="admin-view-pane" style="display: none;">
           <div style="background: #FFFFFF; border-radius: var(--radius-sm); border: 1px solid var(--border-light); overflow: hidden;">
             <div style="padding: 18px 24px; border-bottom: 1px solid var(--border-light);">
-              <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--shat-navy); margin: 0 0 4px 0;">سجل طلبات الاستشارات والتواصل المؤسسي</h3>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">استفسارات المؤسسات والشركاء الواردة عبر الموقع الرسمي.</p>
+              <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--shat-navy); margin: 0 0 4px 0;">
+                ${txt('سجل طلبات الاستشارات والتواصل المؤسسي', 'Corporate Consulting Inquiries', 'Demandes de Conseils')}
+              </h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">
+                ${txt('استفسارات المؤسسات والشركاء الواردة عبر الموقع الرسمي.', 'Inquiries from partners submitted through the platform.', 'Demandes soumises via la plateforme.')}
+              </p>
             </div>
             <div style="overflow-x: auto;">
-              <table style="width: 100%; border-collapse: collapse; text-align: right; font-size: 0.9rem;">
+              <table style="width: 100%; border-collapse: collapse; text-align: ${isRtl ? 'right' : 'left'}; font-size: 0.9rem;">
                 <thead>
                   <tr style="background: var(--bg-subtle); color: var(--shat-navy); border-bottom: 2px solid var(--border-light);">
-                    <th style="padding: 12px 16px;">المؤسسة / الاسم</th>
-                    <th style="padding: 12px 16px;">بيانات الاتصال</th>
-                    <th style="padding: 12px 16px;">الخدمة المطلوبة</th>
-                    <th style="padding: 12px 16px;">الرسالة</th>
-                    <th style="padding: 12px 16px;">التاريخ</th>
+                    <th style="padding: 12px 16px;">${txt('المؤسسة / الاسم', 'Name / Org', 'Nom / Org')}</th>
+                    <th style="padding: 12px 16px;">${txt('بيانات الاتصال', 'Contact', 'Contact')}</th>
+                    <th style="padding: 12px 16px;">${txt('الخدمة المطلوبة', 'Service', 'Service')}</th>
+                    <th style="padding: 12px 16px;">${txt('الرسالة', 'Message', 'Message')}</th>
+                    <th style="padding: 12px 16px;">${txt('التاريخ', 'Date', 'Date')}</th>
                   </tr>
                 </thead>
                 <tbody id="admin-inquiries-tbody">
-                  <tr><td colspan="5" style="padding: 24px; text-align: center; color: var(--text-muted);">جاري تحميل الاستفسارات...</td></tr>
+                  <tr><td colspan="5" style="padding: 24px; text-align: center; color: var(--text-muted);">${txt('جاري تحميل الاستفسارات...', 'Loading inquiries...', 'Chargement...')}</td></tr>
                 </tbody>
               </table>
             </div>
@@ -545,49 +628,80 @@ export function renderAdminView(lang = 'ar') {
         </div>
 
         <!-- ======================================================== -->
-        <!-- TAB 8: SYSTEM HEALTH & AUDIT -->
+        <!-- TAB 8: SYSTEM HEALTH, AUDIT & DEVICE BACKUPS -->
         <!-- ======================================================== -->
         <div id="admin-tab-health" class="admin-view-pane" style="display: none;">
+          
+          <!-- Device Backup Controls Card -->
+          <div style="background: #FFFFFF; border-radius: var(--radius-sm); border: 1px solid var(--border-light); padding: 24px; margin-bottom: 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+              <div>
+                <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--shat-navy); margin: 0 0 4px 0;">
+                  💾 ${txt('النسخ الاحتياطي وحفظ بيانات المنصة على جهازك', 'Device Backup & Platform Data Storage', 'Sauvegarde & Export sur Appareil')}
+                </h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">
+                  ${txt(
+                    'قم بتصدير وحفظ كافة المنشورات، المقررات، الصور، وطلبات التسجيل كملف على جهازك في أي وقت، أو استعد نسخة محفوظة سابقة.',
+                    'Export all posts, courses, applications, and uploaded media directly to your computer as a secure backup JSON.',
+                    'Exportez ou restaurez l\'ensemble des données de la plateforme sur votre appareil.'
+                  )}
+                </p>
+              </div>
+
+              <div style="display: flex; gap: 8px;">
+                <button id="btn-export-backup" class="btn-clean btn-green btn-sm">
+                  <span>📥 ${txt('تصدير نسخة لجهازك (JSON)', 'Export Backup to PC', 'Télécharger Sauvegarde')}</span>
+                </button>
+                <input type="file" id="import-backup-file-input" accept=".json" style="display: none;">
+                <button id="btn-import-backup-trigger" class="btn-clean btn-sm" style="background: #FFFFFF; border: 1px solid var(--border-light); color: var(--shat-navy); font-weight: 700;">
+                  <span>📤 ${txt('استعادة نسخة من الجهاز', 'Restore from PC', 'Restaurer du PC')}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
           <div class="grid-4" style="margin-bottom: 28px;">
             <div style="background: #FFFFFF; border-radius: var(--radius-sm); padding: 18px; border: 1px solid var(--border-light); border-top: 4px solid #22C55E;">
-              <div style="font-size: 0.78rem; color: var(--text-muted);">قاعدة البيانات المركزية</div>
+              <div style="font-size: 0.78rem; color: var(--text-muted);">${txt('قاعدة البيانات المركزية', 'Central Database', 'Base de Données')}</div>
               <div style="font-size: 1.2rem; font-weight: 900; color: var(--shat-navy); margin: 4px 0;">CONNECTED</div>
-              <div style="font-size: 0.75rem; color: var(--shat-green);">PostgreSQL Relational Core</div>
+              <div style="font-size: 0.75rem; color: var(--shat-green);">PostgreSQL + Supabase + LocalStore</div>
             </div>
             <div style="background: #FFFFFF; border-radius: var(--radius-sm); padding: 18px; border: 1px solid var(--border-light); border-top: 4px solid #22C55E;">
-              <div style="font-size: 0.78rem; color: var(--text-muted);">المصادقة والأدوار</div>
+              <div style="font-size: 0.78rem; color: var(--text-muted);">${txt('المصادقة والأدوار', 'Authentication Engine', 'Moteur de Sécurité')}</div>
               <div style="font-size: 1.2rem; font-weight: 900; color: var(--shat-navy); margin: 4px 0;">ACTIVE</div>
-              <div style="font-size: 0.75rem; color: var(--shat-green);">Server-Side RBAC Machine</div>
+              <div style="font-size: 0.75rem; color: var(--shat-green);">Server-Side RBAC + Resilient Fallback</div>
             </div>
             <div style="background: #FFFFFF; border-radius: var(--radius-sm); padding: 18px; border: 1px solid var(--border-light); border-top: 4px solid var(--shat-navy);">
-              <div style="font-size: 0.78rem; color: var(--text-muted);">تخزين Google Drive</div>
-              <div style="font-size: 1.2rem; font-weight: 900; color: var(--shat-navy); margin: 4px 0;">PROXY_READY</div>
-              <div style="font-size: 0.75rem; color: var(--text-muted);">In-Platform Streaming Proxy</div>
+              <div style="font-size: 0.78rem; color: var(--text-muted);">${txt('تخزين الجهاز ووسائط Media', 'Device Media Storage', 'Stockage Appareil')}</div>
+              <div style="font-size: 1.2rem; font-weight: 900; color: var(--shat-navy); margin: 4px 0;">DEVICE_READY</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Compressed Base64 & Local Caching</div>
             </div>
             <div style="background: #FFFFFF; border-radius: var(--radius-sm); padding: 18px; border: 1px solid var(--border-light); border-top: 4px solid #3B82F6;">
-              <div style="font-size: 0.78rem; color: var(--text-muted);">الخادم المخصص VPS</div>
+              <div style="font-size: 0.78rem; color: var(--text-muted);">${txt('الخادم المخصص والإنتاج', 'Production & Server', 'Serveur Dédié')}</div>
               <div style="font-size: 1.2rem; font-weight: 900; color: var(--shat-navy); margin: 4px 0;">ONLINE</div>
-              <div style="font-size: 0.75rem; color: #3B82F6;">Node.js Express API :3001</div>
+              <div style="font-size: 0.75rem; color: #3B82F6;">Vercel Edge API + Express :3001</div>
             </div>
           </div>
 
           <div style="background: #FFFFFF; border-radius: var(--radius-sm); border: 1px solid var(--border-light); overflow: hidden;">
             <div style="padding: 16px 20px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center;">
-              <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--shat-navy); margin: 0;">سجل العمليات والتدقيق الأمني (Audit Logs)</h3>
-              <span class="badge" style="background: var(--bg-subtle); color: var(--shat-navy);">سجل موثق بالكامل</span>
+              <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--shat-navy); margin: 0;">
+                ${txt('سجل العمليات والتدقيق الأمني (Audit Logs)', 'System Audit Trail', 'Journal d\'Audit')}
+              </h3>
+              <span class="badge" style="background: var(--bg-subtle); color: var(--shat-navy);">Audit Telemetry</span>
             </div>
             <div style="overflow-x: auto; max-height: 420px;">
-              <table style="width: 100%; border-collapse: collapse; text-align: right; font-size: 0.85rem;">
+              <table style="width: 100%; border-collapse: collapse; text-align: ${isRtl ? 'right' : 'left'}; font-size: 0.85rem;">
                 <thead>
                   <tr style="background: var(--bg-subtle); color: var(--shat-navy); border-bottom: 2px solid var(--border-light);">
-                    <th style="padding: 10px 14px;">المستخدم / الفاعل</th>
-                    <th style="padding: 10px 14px;">نوع الإجراء</th>
-                    <th style="padding: 10px 14px;">الهدف</th>
-                    <th style="padding: 10px 14px;">التوقيت</th>
+                    <th style="padding: 10px 14px;">${txt('المستخدم / الفاعل', 'Actor', 'Acteur')}</th>
+                    <th style="padding: 10px 14px;">${txt('نوع الإجراء', 'Action Type', 'Action')}</th>
+                    <th style="padding: 10px 14px;">${txt('الهدف', 'Target', 'Cible')}</th>
+                    <th style="padding: 10px 14px;">${txt('التوقيت', 'Timestamp', 'Horodatage')}</th>
                   </tr>
                 </thead>
                 <tbody id="admin-audit-tbody">
-                  <tr><td colspan="4" style="padding: 24px; text-align: center; color: var(--text-muted);">جاري تحميل سجل التدقيق...</td></tr>
+                  <tr><td colspan="4" style="padding: 24px; text-align: center; color: var(--text-muted);">${txt('جاري تحميل سجل التدقيق...', 'Loading audit logs...', 'Chargement...')}</td></tr>
                 </tbody>
               </table>
             </div>
@@ -596,20 +710,72 @@ export function renderAdminView(lang = 'ar') {
 
       </main>
     </div>
+
+    <!-- Course Edit Modal -->
+    <div id="modal-course-editor-backdrop" class="modal-backdrop">
+      <div class="modal-box" style="max-width: 600px;">
+        <div class="modal-header">
+          <div class="modal-title" id="course-editor-modal-title">${txt('تعديل بيانات المساق التدريبي', 'Edit Course Curriculum', 'Modifier le Cursus')}</div>
+          <button type="button" class="modal-close" id="btn-close-course-modal">✕</button>
+        </div>
+        <form id="form-course-editor" style="padding: 24px;">
+          <input type="hidden" id="edit-course-id" value="">
+          <div class="form-group">
+            <label class="form-label">${txt('اسم المساق التدريبي *', 'Course Title *', 'Titre du Cursus *')}</label>
+            <input type="text" id="edit-course-title" class="form-input" required>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group">
+              <label class="form-label">${txt('الساعات التدريبية', 'Training Hours', 'Heures')}</label>
+              <input type="text" id="edit-course-hours" class="form-input" placeholder="30 ساعة تدريبية">
+            </div>
+            <div class="form-group">
+              <label class="form-label">${txt('المستوى الأكاديمي', 'Academic Level', 'Niveau')}</label>
+              <input type="text" id="edit-course-level" class="form-input" placeholder="دبلوم مهني تطبيقي">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">${txt('المدرب المعتمد المسؤول', 'Lead Instructor', 'Formateur')}</label>
+            <input type="text" id="edit-course-instructor" class="form-input" placeholder="د. أسامة المنصور">
+          </div>
+          <div class="form-group">
+            <label class="form-label">${txt('الموجز التعريفي للمساق', 'Course Summary', 'Résumé')}</label>
+            <textarea id="edit-course-summary" class="form-input" style="min-height: 70px;"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">${txt('محاور المنهاج (سطر لكل محور)', 'Syllabus Modules (one per line)', 'Modules')}</label>
+            <textarea id="edit-course-syllabus" class="form-input" style="min-height: 100px; line-height: 1.6;"></textarea>
+          </div>
+          <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
+            <button type="button" class="btn-clean btn-sm" id="btn-cancel-course-modal" style="background: var(--bg-subtle);">${txt('إلغاء', 'Cancel', 'Annuler')}</button>
+            <button type="submit" class="btn-clean btn-green btn-sm" style="font-weight: 800;">
+              💾 ${txt('حفظ تعديلات المساق', 'Save Course Changes', 'Enregistrer')}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   `;
 }
 
 export async function bindAdminEvents() {
   const currentUser = api.currentUser;
+  const currentLang = localStorage.getItem('shat_platform_lang') || 'ar';
+  const txt = (ar, en, fr) => {
+    if (currentLang === 'fr') return fr || en;
+    if (currentLang === 'en') return en;
+    return ar;
+  };
+
   if (!currentUser || currentUser.role !== 'admin') {
-    showToast('يجب تسجيل الدخول بصلاحيات الإدارة للوصول إلى لوحة التحكم.', 'warning');
+    showToast(txt('يجب تسجيل الدخول بصلاحيات الإدارة للوصول إلى لوحة التحكم.', 'Admin credentials required to access this dashboard.', 'Accès restreint à l\'administration.'), 'warning');
     window.location.hash = '#/login';
     return;
   }
 
   // Set user label
   const sidebarUser = document.getElementById('admin-sidebar-user');
-  if (sidebarUser) sidebarUser.textContent = currentUser.fullNameAr || currentUser.fullNameEn;
+  if (sidebarUser) sidebarUser.textContent = currentUser.fullNameAr || currentUser.fullNameEn || currentUser.username;
 
   // --- Sidebar Navigation Switcher ---
   const navItems = document.querySelectorAll('.admin-nav-item');
@@ -656,6 +822,7 @@ export async function bindAdminEvents() {
     // Trigger specific loaders
     if (targetId === 'admin-tab-dashboard') loadDashboardData();
     if (targetId === 'admin-tab-posts') loadPosts();
+    if (targetId === 'admin-tab-media') loadMediaLibrary();
     if (targetId === 'admin-tab-courses') loadCourses();
     if (targetId === 'admin-tab-roster') loadUsers();
     if (targetId === 'admin-tab-applications') loadApplications();
@@ -673,7 +840,10 @@ export async function bindAdminEvents() {
 
   const quickNewPostBtn = document.getElementById('btn-quick-new-post');
   if (quickNewPostBtn) {
-    quickNewPostBtn.onclick = () => activateTab('admin-tab-posts');
+    quickNewPostBtn.onclick = () => {
+      resetPostEditor();
+      activateTab('admin-tab-posts');
+    };
   }
 
   const viewAllAppsBtn = document.getElementById('btn-view-all-apps');
@@ -681,47 +851,31 @@ export async function bindAdminEvents() {
     viewAllAppsBtn.onclick = () => activateTab('admin-tab-applications');
   }
 
-  // --- Copy Image URL from Media Library ---
-  document.querySelectorAll('.btn-copy-url').forEach(btn => {
-    btn.onclick = () => {
-      const url = btn.getAttribute('data-url');
-      navigator.clipboard?.writeText(url);
-      showToast(`تم نسخ رابط الصورة: ${url}`, 'success', 2000);
-    };
-  });
-
-  const uploadMediaBtn = document.getElementById('btn-upload-media');
-  if (uploadMediaBtn) {
-    uploadMediaBtn.onclick = () => {
-      const promptUrl = prompt('أدخل رابط أو اسم الصورة الجديدة لإضافتها إلى مكتبة الوسائط:');
-      if (promptUrl) {
-        const grid = document.getElementById('media-library-grid');
-        if (grid) {
-          const card = document.createElement('div');
-          card.style.cssText = 'border: 1px solid var(--border-light); border-radius: var(--radius-xs); overflow: hidden; background: #FFFFFF;';
-          card.innerHTML = `
-            <img src="${promptUrl}" alt="Media" style="width: 100%; height: 110px; object-fit: cover;" onerror="this.src='assets/logo/logo-symbol.jpg'">
-            <div style="padding: 10px; font-size: 0.78rem;">
-              <div style="font-weight: 700; color: var(--shat-navy); text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${promptUrl.split('/').pop()}</div>
-              <div style="color: var(--text-muted); font-size: 0.72rem;">تمت الإضافة حديثاً</div>
-              <button class="btn-clean btn-sm btn-copy-url" data-url="${promptUrl}" style="width: 100%; margin-top: 6px; font-size: 0.75rem; background: var(--bg-subtle);">نسخ الرابط</button>
-            </div>
-          `;
-          grid.prepend(card);
-          showToast('تمت إضافة الصورة إلى مكتبة الوسائط بنجاح!', 'success');
-        }
-      }
+  const refreshDashBtn = document.getElementById('btn-refresh-dashboard');
+  if (refreshDashBtn) {
+    refreshDashBtn.onclick = () => {
+      loadDashboardData();
+      showToast(txt('تم تحديث بيانات اللوحة!', 'Dashboard data refreshed!', 'Données actualisées !'), 'info');
     };
   }
 
-  // --- CMS Post Editor Logic ---
+  // --- CMS Post Editor Form Elements ---
+  const postEditingIdInput = document.getElementById('post-editing-id');
   const postTitleInput = document.getElementById('post-title-input');
   const postCategoryInput = document.getElementById('post-category-input');
   const postStatusInput = document.getElementById('post-status-input');
   const postExcerptInput = document.getElementById('post-excerpt-input');
   const postBodyInput = document.getElementById('post-body-input');
   const postCoverInput = document.getElementById('post-cover-input');
-  const autosaveIndicator = document.getElementById('cms-autosave-indicator');
+  const postCoverFileInput = document.getElementById('post-cover-file-input');
+  const btnTriggerPostUpload = document.getElementById('btn-trigger-post-upload');
+
+  const cmsEditorHeading = document.getElementById('cms-editor-heading');
+  const cmsEditingBadge = document.getElementById('cms-editing-badge');
+  const btnCmsCancelEdit = document.getElementById('btn-cms-cancel-edit');
+  const btnCmsNew = document.getElementById('btn-cms-new');
+  const publishBtn = document.getElementById('btn-cms-publish');
+  const publishBtnText = document.getElementById('btn-cms-publish-text');
 
   const previewTitle = document.getElementById('preview-title');
   const previewCategory = document.getElementById('preview-category-badge');
@@ -731,26 +885,183 @@ export async function bindAdminEvents() {
   const livePreviewBox = document.getElementById('live-preview-box');
 
   function updateLivePreview() {
-    if (previewTitle && postTitleInput) previewTitle.textContent = postTitleInput.value || 'عنوان المنشور';
+    if (previewTitle && postTitleInput) previewTitle.textContent = postTitleInput.value || txt('عنوان المنشور', 'Publication Title', 'Titre de l\'Article');
     if (previewCategory && postCategoryInput) previewCategory.textContent = postCategoryInput.options[postCategoryInput.selectedIndex].text;
-    if (previewExcerpt && postExcerptInput) previewExcerpt.textContent = postExcerptInput.value;
-    if (previewBody && postBodyInput) previewBody.textContent = postBodyInput.value;
+    if (previewExcerpt && postExcerptInput) previewExcerpt.textContent = postExcerptInput.value || txt('المقتطف التعريفي للمنشور...', 'Summary excerpt...', 'Résumé...');
+    if (previewBody && postBodyInput) previewBody.textContent = postBodyInput.value || txt('محتوى المنشور التفصيلي...', 'Content...', 'Contenu...');
     if (previewCover && postCoverInput) previewCover.src = postCoverInput.value || 'assets/logo/logo-banner.jpg';
   }
 
   [postTitleInput, postCategoryInput, postStatusInput, postExcerptInput, postBodyInput, postCoverInput].forEach(el => {
-    if (el) el.addEventListener('input', () => {
-      updateLivePreview();
-      if (autosaveIndicator) {
-        autosaveIndicator.textContent = '⏳ جاري الحفظ التلقائي...';
-        setTimeout(() => {
-          autosaveIndicator.textContent = '✓ مسودة محفوظة تلقائياً';
-        }, 600);
-      }
-    });
+    if (el) el.addEventListener('input', updateLivePreview);
   });
 
-  // Preview Mode Toggle
+  // Device File Upload for Post Cover Image
+  if (btnTriggerPostUpload && postCoverFileInput) {
+    btnTriggerPostUpload.onclick = () => postCoverFileInput.click();
+
+    postCoverFileInput.onchange = async (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+
+      btnTriggerPostUpload.disabled = true;
+      btnTriggerPostUpload.textContent = txt('⏳ جاري المعالجة...', 'Compressing...', 'Compression...');
+
+      try {
+        const compressedBase64 = await MediaStorageService.compressImage(file, 1200, 800, 0.82);
+        
+        // Save to device storage media library
+        const savedMedia = MediaStorageService.saveMediaItem(file.name, compressedBase64, file.type, file.size);
+
+        // Update cover input and preview
+        if (postCoverInput) postCoverInput.value = compressedBase64;
+        if (previewCover) previewCover.src = compressedBase64;
+
+        showToast(
+          txt(`✓ تم رفع الصورة بنجاح من جهازك (${file.name}) وتخزينها محلياً!`, `✓ Image uploaded from device successfully!`, `✓ Image importée de l'appareil avec succès !`),
+          'success'
+        );
+      } catch (err) {
+        showToast(txt('تعذر قراءة الصورة من الجهاز: ', 'Failed to read image from device: ', 'Échec de lecture : ') + err.message, 'error');
+      } finally {
+        btnTriggerPostUpload.disabled = false;
+        btnTriggerPostUpload.textContent = `📁 ${txt('رفع من الجهاز', 'Upload File', 'Importer')}`;
+        postCoverFileInput.value = '';
+      }
+    };
+  }
+
+  // Reset editor to "Create New" mode
+  function resetPostEditor() {
+    if (postEditingIdInput) postEditingIdInput.value = '';
+    if (postTitleInput) postTitleInput.value = '';
+    if (postExcerptInput) postExcerptInput.value = '';
+    if (postBodyInput) postBodyInput.value = '';
+    if (postCoverInput) postCoverInput.value = 'assets/logo/logo-banner.jpg';
+    if (postCategoryInput) postCategoryInput.selectedIndex = 0;
+    if (postStatusInput) postStatusInput.value = 'published';
+
+    if (cmsEditorHeading) cmsEditorHeading.textContent = txt('محرر المنشورات والمقالات المعتمدة', 'Publications & Insights Editor', 'Éditeur de Publications');
+    if (cmsEditingBadge) cmsEditingBadge.style.display = 'none';
+    if (btnCmsCancelEdit) btnCmsCancelEdit.style.display = 'none';
+    if (publishBtnText) publishBtnText.textContent = `🚀 ${txt('نشر المنشور على الموقع', 'Publish to Website', 'Publier sur le Site')}`;
+
+    updateLivePreview();
+  }
+
+  if (btnCmsNew) btnCmsNew.onclick = resetPostEditor;
+  if (btnCmsCancelEdit) btnCmsCancelEdit.onclick = resetPostEditor;
+
+  // Load a post into the editor for modifying
+  async function loadPostForEdit(postId) {
+    try {
+      const post = await api.getPostById(postId);
+      if (!post) {
+        showToast(txt('تعذر العثور على المنشور المحدد', 'Post not found', 'Publication introuvable'), 'error');
+        return;
+      }
+
+      // Switch editor state to edit mode
+      if (postEditingIdInput) postEditingIdInput.value = post.id;
+      if (postTitleInput) postTitleInput.value = post.title || '';
+      if (postExcerptInput) postExcerptInput.value = post.excerpt || '';
+      if (postBodyInput) postBodyInput.value = post.content || '';
+      if (postCoverInput) postCoverInput.value = post.coverImage || 'assets/logo/logo-banner.jpg';
+      if (postCategoryInput) postCategoryInput.value = post.category || 'humanitarian';
+      if (postStatusInput) postStatusInput.value = post.status || 'published';
+
+      if (cmsEditorHeading) cmsEditorHeading.textContent = `✏️ ${txt('تعديل المنشور:', 'Edit Post:', 'Modifier :')} ${post.title.substring(0, 35)}...`;
+      if (cmsEditingBadge) cmsEditingBadge.style.display = 'inline-block';
+      if (btnCmsCancelEdit) btnCmsCancelEdit.style.display = 'inline-block';
+      if (publishBtnText) publishBtnText.textContent = `💾 ${txt('حفظ التعديلات على المنشور', 'Save Post Changes', 'Enregistrer les Modifications')}`;
+
+      updateLivePreview();
+
+      // Smooth scroll to editor
+      postTitleInput?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      postTitleInput?.focus();
+
+      showToast(
+        txt('تم تحميل بيانات المنشور للتعديل. قم بإجراء تغييراتك واضغط "حفظ التعديلات".', 'Post loaded for editing. Make changes and save.', 'Publication chargée pour modification.'),
+        'info'
+      );
+    } catch (err) {
+      showToast(txt('خطأ في تحميل المنشور: ', 'Error loading post: ', 'Erreur : ') + err.message, 'error');
+    }
+  }
+
+  // Publish / Save Post Button
+  if (publishBtn) {
+    publishBtn.onclick = async () => {
+      const editingId = postEditingIdInput?.value?.trim();
+      const title = postTitleInput?.value?.trim();
+      const contentText = postBodyInput?.value?.trim();
+
+      if (!title || !contentText) {
+        showToast(txt('يرجى كتابة عنوان ومحتوى للمنشور.', 'Title and content are required.', 'Veuillez saisir le titre et le contenu.'), 'warning');
+        return;
+      }
+
+      const postData = {
+        title,
+        excerpt: postExcerptInput?.value || '',
+        content: contentText,
+        category: postCategoryInput?.value || 'humanitarian',
+        categoryLabel: postCategoryInput?.options[postCategoryInput.selectedIndex].text,
+        status: postStatusInput?.value || 'published',
+        coverImage: postCoverInput?.value || 'assets/logo/logo-banner.jpg'
+      };
+
+      publishBtn.disabled = true;
+      publishBtn.innerHTML = `<span>⏳ ${txt('جاري الحفظ في قاعدة البيانات...', 'Saving to database...', 'Enregistrement...')}</span>`;
+
+      try {
+        let res;
+        if (editingId) {
+          // UPDATE existing post
+          res = await api.updatePost(editingId, postData);
+          showToast(txt('✓ تم حفظ وتحديث المنشور بنجاح في قاعدة البيانات وعلى الموقع!', '✓ Post updated successfully in database and website!', '✓ Publication mise à jour avec succès !'), 'success');
+        } else {
+          // CREATE new post
+          res = await api.createPost(postData);
+          showToast(txt('✓ تم نشر المنشور الجديد بنجاح في المنظومة!', '✓ New post published successfully!', '✓ Nouvelle publication ajoutée avec succès !'), 'success');
+        }
+
+        resetPostEditor();
+        loadPosts();
+      } catch (err) {
+        showToast(txt('فشل في حفظ المنشور: ', 'Failed to save post: ', 'Échec d\'enregistrement : ') + err.message, 'error');
+      } finally {
+        publishBtn.disabled = false;
+        publishBtn.innerHTML = `<span>${publishBtnText ? publishBtnText.textContent : 'Save'}</span>`;
+      }
+    };
+  }
+
+  // Formatting Toolbar Buttons
+  document.querySelectorAll('.btn-format').forEach(btn => {
+    btn.onclick = () => {
+      const cmd = btn.getAttribute('data-cmd');
+      if (!postBodyInput) return;
+      const start = postBodyInput.selectionStart;
+      const end = postBodyInput.selectionEnd;
+      const val = postBodyInput.value;
+      const selected = val.substring(start, end) || 'نص';
+
+      let replacement = selected;
+      if (cmd === 'bold') replacement = `**${selected}**`;
+      if (cmd === 'italic') replacement = `*${selected}*`;
+      if (cmd === 'h2') replacement = `\n## ${selected}\n`;
+      if (cmd === 'h3') replacement = `\n### ${selected}\n`;
+      if (cmd === 'ul') replacement = `\n- ${selected}\n`;
+      if (cmd === 'quote') replacement = `\n> ${selected}\n`;
+
+      postBodyInput.value = val.substring(0, start) + replacement + val.substring(end);
+      updateLivePreview();
+    };
+  });
+
+  // Preview Mode Toggle (Desktop vs Mobile)
   document.querySelectorAll('.btn-preview-mode').forEach(btn => {
     btn.onclick = () => {
       document.querySelectorAll('.btn-preview-mode').forEach(b => {
@@ -777,330 +1088,519 @@ export async function bindAdminEvents() {
     };
   });
 
-  // Formatting Toolbar Buttons
-  document.querySelectorAll('.btn-format').forEach(btn => {
-    btn.onclick = () => {
-      const cmd = btn.getAttribute('data-cmd');
-      if (!postBodyInput) return;
-      const start = postBodyInput.selectionStart;
-      const end = postBodyInput.selectionEnd;
-      const val = postBodyInput.value;
-      const selected = val.substring(start, end) || 'نص';
+  // --- Load Media Library Tab & Device Upload ---
+  const mediaFileInput = document.getElementById('media-library-file-input');
+  const btnUploadMediaDevice = document.getElementById('btn-upload-media-device');
 
-      let replacement = selected;
-      if (cmd === 'bold') replacement = `**${selected}**`;
-      if (cmd === 'italic') replacement = `*${selected}*`;
-      if (cmd === 'h2') replacement = `\n## ${selected}\n`;
-      if (cmd === 'h3') replacement = `\n### ${selected}\n`;
-      if (cmd === 'ul') replacement = `\n- ${selected}\n`;
-      if (cmd === 'quote') replacement = `\n> ${selected}\n`;
+  if (btnUploadMediaDevice && mediaFileInput) {
+    btnUploadMediaDevice.onclick = () => mediaFileInput.click();
 
-      postBodyInput.value = val.substring(0, start) + replacement + val.substring(end);
-      updateLivePreview();
-    };
-  });
+    mediaFileInput.onchange = async (e) => {
+      const files = Array.from(e.target.files || []);
+      if (files.length === 0) return;
 
-  // Publish Post Button
-  const publishBtn = document.getElementById('btn-cms-publish');
-  if (publishBtn) {
-    publishBtn.onclick = async () => {
-      const postData = {
-        title: postTitleInput?.value,
-        excerpt: postExcerptInput?.value,
-        content: postBodyInput?.value,
-        category: postCategoryInput?.value,
-        categoryLabel: postCategoryInput?.options[postCategoryInput.selectedIndex].text,
-        status: postStatusInput?.value || 'published',
-        coverImage: postCoverInput?.value
-      };
+      btnUploadMediaDevice.disabled = true;
+      btnUploadMediaDevice.textContent = txt('⏳ جاري رفع وتخزين الصور...', 'Uploading...', 'Importation...');
 
       try {
-        const res = await api.createPost(postData);
-        if (res.success) {
-          showToast('تم حفظ ونشر المنشور بنجاح في قاعدة البيانات الرسمية!', 'success');
-          loadPosts();
+        for (const file of files) {
+          const compressed = await MediaStorageService.compressImage(file, 1200, 800, 0.82);
+          MediaStorageService.saveMediaItem(file.name, compressed, file.type, file.size);
         }
+
+        showToast(
+          txt(`✓ تم رفع وتخزين ${files.length} صورة بنجاح في جهازك!`, `✓ Uploaded ${files.length} images to device storage!`, `✓ ${files.length} images importées avec succès !`),
+          'success'
+        );
+        loadMediaLibrary();
       } catch (err) {
-        showToast('فشل في نشر المنشور: ' + err.message, 'error');
+        showToast(txt('تعذر رفع الملفات: ', 'Upload error: ', 'Erreur : ') + err.message, 'error');
+      } finally {
+        btnUploadMediaDevice.disabled = false;
+        btnUploadMediaDevice.textContent = `📁 ${txt('رفع صور من جهازك', 'Upload from Device', 'Importer de l\'appareil')}`;
+        mediaFileInput.value = '';
       }
     };
   }
 
-  // --- Data Loaders ---
-  async function loadDashboardData() {
-    try {
-      const [appsRes, coursesRes, usersRes] = await Promise.all([
-        api.getApplications(),
-        api.getCourses(),
-        api.getUsers()
-      ]);
+  function loadMediaLibrary() {
+    const grid = document.getElementById('media-library-grid');
+    if (!grid) return;
 
-      if (appsRes && appsRes.applications) {
-        const pending = appsRes.applications.filter(a => a.status === 'pending');
-        const kpiPending = document.getElementById('kpi-pending-apps');
-        if (kpiPending) kpiPending.textContent = pending.length;
+    const items = MediaStorageService.getMediaItems();
+    if (items.length === 0) {
+      grid.innerHTML = `<div style="grid-column: 1 / -1; padding: 40px; text-align: center; color: var(--text-muted);">${txt('لا توجد صور في المكتبة حالياً.', 'No media items available.', 'Aucun fichier.')}</div>`;
+      return;
+    }
 
-        const tbody = document.getElementById('dash-pending-apps-tbody');
-        if (tbody) {
-          if (pending.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="4" style="padding: 16px; text-align: center; color: var(--text-muted);">لا توجد طلبات معلقة حالياً.</td></tr>`;
-          } else {
-            tbody.innerHTML = pending.slice(0, 5).map(app => `
-              <tr style="border-bottom: 1px solid var(--border-light);">
-                <td style="padding: 10px 8px; font-weight: 700; color: var(--shat-navy);">${app.fullName}</td>
-                <td style="padding: 10px 8px; color: var(--shat-green); font-size: 0.8rem;">${app.courseTitle}</td>
-                <td style="padding: 10px 8px;"><span class="badge" style="background: #FEF3C7; color: #92400E; font-size: 0.72rem;">معلق</span></td>
-                <td style="padding: 10px 8px; text-align: left;">
-                  <button class="btn-clean btn-sm btn-quick-approve" data-id="${app.id}" style="background: #DCFCE7; color: #166534; font-weight: 700; font-size: 0.75rem;">قبول</button>
-                </td>
-              </tr>
-            `).join('');
+    grid.innerHTML = items.map(item => `
+      <div style="border: 1px solid var(--border-light); border-radius: var(--radius-xs); overflow: hidden; background: #FFFFFF; display: flex; flex-direction: column; justify-content: space-between;">
+        <div style="height: 120px; background: #F8FAFC; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+          <img src="${item.dataUrl}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='assets/logo/logo-symbol.jpg'">
+        </div>
+        <div style="padding: 10px; font-size: 0.78rem;">
+          <div style="font-weight: 700; color: var(--shat-navy); text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" title="${item.name}">${item.name}</div>
+          <div style="color: var(--text-muted); font-size: 0.72rem; margin-top: 2px;">${item.sizeFormatted || 'صورة'} • ${item.isDefault ? txt('ملف رسمي', 'Official', 'Officiel') : txt('مرفوع محلياً', 'Local', 'Local')}</div>
+          
+          <div style="display: flex; gap: 6px; margin-top: 8px;">
+            <button class="btn-clean btn-sm btn-copy-media-url" data-url="${item.dataUrl}" style="flex: 1; font-size: 0.72rem; background: var(--bg-subtle);">
+              📋 ${txt('نسخ', 'Copy', 'Copier')}
+            </button>
+            <button class="btn-clean btn-sm btn-use-cover" data-url="${item.dataUrl}" style="flex: 1; font-size: 0.72rem; background: var(--shat-green-tint); color: var(--shat-green); font-weight: 700;">
+              🖼️ ${txt('غلاف', 'Cover', 'Couv')}
+            </button>
+            ${!item.isDefault ? `
+              <button class="btn-clean btn-sm btn-delete-media" data-id="${item.id}" style="padding: 3px 6px; background: #FEE2E2; color: #991B1B;">
+                🗑️
+              </button>
+            ` : ''}
+          </div>
+        </div>
+      </div>
+    `).join('');
 
-            document.querySelectorAll('.btn-quick-approve').forEach(b => {
-              b.onclick = async () => {
-                const id = b.getAttribute('data-id');
-                await api.updateApplicationStatus(id, 'approved');
-                showToast('تم قبول المتدرب وتفعيل حسابه تلقائياً!', 'success');
-                loadDashboardData();
-              };
-            });
-          }
+    // Bind copy and use buttons
+    grid.querySelectorAll('.btn-copy-media-url').forEach(btn => {
+      btn.onclick = () => {
+        const url = btn.getAttribute('data-url');
+        if (url.startsWith('data:')) {
+          showToast(txt('تم اختيار الصورة لاستخدامها كغلاف للمنشور!', 'Image selected for cover!', 'Image sélectionnée pour la couverture !'), 'info');
+          if (postCoverInput) postCoverInput.value = url;
+          if (previewCover) previewCover.src = url;
+        } else {
+          navigator.clipboard?.writeText(url);
+          showToast(txt(`تم نسخ رابط الصورة: ${url}`, 'Image link copied!', 'Lien copié !'), 'success');
         }
-      }
+      };
+    });
 
-      if (coursesRes && coursesRes.courses) {
-        const kpiCourses = document.getElementById('kpi-courses-count');
-        if (kpiCourses) kpiCourses.textContent = coursesRes.courses.length;
-      }
+    grid.querySelectorAll('.btn-use-cover').forEach(btn => {
+      btn.onclick = () => {
+        const url = btn.getAttribute('data-url');
+        if (postCoverInput) postCoverInput.value = url;
+        if (previewCover) previewCover.src = url;
+        activateTab('admin-tab-posts');
+        showToast(txt('تم تعيين الصورة كغلاف للمنشور بنجاح!', 'Image set as post cover!', 'Image définie comme couverture !'), 'success');
+      };
+    });
 
-      if (usersRes && usersRes.users) {
-        const students = usersRes.users.filter(u => u.role === 'student');
-        const teachers = usersRes.users.filter(u => u.role === 'teacher');
-        const kpiStudents = document.getElementById('kpi-students-count');
-        const kpiTeachers = document.getElementById('kpi-teachers-count');
-        if (kpiStudents) kpiStudents.textContent = students.length + 240; // Total active cohort
-        if (kpiTeachers) kpiTeachers.textContent = teachers.length + 16;
-      }
-    } catch (e) {}
+    grid.querySelectorAll('.btn-delete-media').forEach(btn => {
+      btn.onclick = () => {
+        const id = btn.getAttribute('data-id');
+        MediaStorageService.deleteMediaItem(id);
+        showToast(txt('تم حذف الملف من جهازك بنجاح.', 'Media deleted from device.', 'Fichier supprimé de l\'appareil.'), 'info');
+        loadMediaLibrary();
+      };
+    });
   }
 
+  // --- Load Posts Management Table ---
   async function loadPosts() {
     const tbody = document.getElementById('posts-table-tbody');
     const badge = document.getElementById('posts-count-badge');
     try {
       const res = await api.getPosts();
       if (res.success && res.posts) {
-        if (badge) badge.textContent = `${res.posts.length} منشور`;
+        if (badge) badge.textContent = `${res.posts.length} ${txt('منشور', 'posts', 'publications')}`;
         if (tbody) {
+          if (res.posts.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="6" style="padding: 24px; text-align: center; color: var(--text-muted);">${txt('لا توجد منشورات حالياً. استخدم المحرر أعلاه لإنشاء منشورك الأول!', 'No posts yet. Create your first post above!', 'Aucune publication.')}</td></tr>`;
+            return;
+          }
+
           tbody.innerHTML = res.posts.map(p => `
             <tr style="border-bottom: 1px solid var(--border-light);">
-              <td style="padding: 12px 16px; font-weight: 700; color: var(--shat-navy);">${p.title}</td>
-              <td style="padding: 12px 16px;"><span class="badge" style="background: #EFF6FF; color: #1D4ED8;">${p.categoryLabel || p.category}</span></td>
+              <td style="padding: 10px 16px;">
+                <img src="${p.coverImage || 'assets/logo/logo-banner.jpg'}" alt="${p.title}" style="width: 50px; height: 35px; object-fit: cover; border-radius: var(--radius-xs);" onerror="this.src='assets/logo/logo-symbol.jpg'">
+              </td>
+              <td style="padding: 12px 16px; font-weight: 700; color: var(--shat-navy); max-width: 280px;">
+                ${p.title}
+              </td>
               <td style="padding: 12px 16px;">
-                <span class="badge" style="background: ${p.status === 'published' ? '#DCFCE7' : '#FEF3C7'}; color: ${p.status === 'published' ? '#166534' : '#92400E'};">
-                  ${p.status === 'published' ? 'منشور حي' : 'مسودة'}
+                <span class="badge" style="background: #EFF6FF; color: #1D4ED8; font-size: 0.76rem;">${p.categoryLabel || p.category}</span>
+              </td>
+              <td style="padding: 12px 16px;">
+                <span class="badge" style="background: ${p.status === 'published' ? '#DCFCE7' : '#FEF3C7'}; color: ${p.status === 'published' ? '#166534' : '#92400E'}; font-size: 0.76rem;">
+                  ${p.status === 'published' ? txt('منشور حي', 'Live', 'Publié') : txt('مسودة', 'Draft', 'Brouillon')}
                 </span>
               </td>
-              <td style="padding: 12px 16px; font-size: 0.82rem; color: var(--text-muted);">${new Date(p.createdAt).toLocaleDateString('ar-EG')}</td>
-              <td style="padding: 12px 16px; text-align: left;">
-                <button class="btn-clean btn-sm btn-edit-post" data-post-id="${p.id}" style="background: #F1F5F9; color: var(--shat-navy); border: 1px solid var(--border-light);">
-                  تعديل
-                </button>
+              <td style="padding: 12px 16px; font-size: 0.82rem; color: var(--text-muted);">${new Date(p.createdAt || Date.now()).toLocaleDateString(currentLang === 'ar' ? 'ar-EG' : 'en-US')}</td>
+              <td style="padding: 12px 16px; text-align: ${isRtl ? 'left' : 'right'};">
+                <div style="display: flex; gap: 6px; justify-content: flex-end;">
+                  <button class="btn-clean btn-sm btn-edit-post" data-post-id="${p.id}" style="background: #F1F5F9; color: var(--shat-navy); border: 1px solid var(--border-light); font-weight: 700;">
+                    ✏️ ${txt('تعديل', 'Edit', 'Modifier')}
+                  </button>
+                  <button class="btn-clean btn-sm btn-delete-post" data-post-id="${p.id}" style="background: #FEE2E2; color: #991B1B; border: 1px solid #FCA5A5;">
+                    🗑️
+                  </button>
+                </div>
               </td>
             </tr>
           `).join('');
-        }
-      }
-    } catch (e) {}
-  }
 
-  async function loadApplications() {
-    const tbody = document.getElementById('admin-apps-tbody');
-    try {
-      const res = await api.getApplications();
-      if (res.success && res.applications && tbody) {
-        tbody.innerHTML = res.applications.map(app => `
-          <tr style="border-bottom: 1px solid var(--border-light);">
-            <td style="padding: 12px 16px;">
-              <div style="font-weight: 700; color: var(--shat-navy);">${app.fullName}</div>
-              <div style="font-size: 0.75rem; color: var(--text-muted);">${new Date(app.appliedAt).toLocaleDateString('ar-EG')}</div>
-            </td>
-            <td style="padding: 12px 16px;">
-              <div style="font-size: 0.85rem;">${app.email}</div>
-              <div style="font-size: 0.75rem; color: var(--text-muted);">${app.phone}</div>
-            </td>
-            <td style="padding: 12px 16px; font-weight: 600; color: var(--shat-green);">${app.courseTitle}</td>
-            <td style="padding: 12px 16px;">
-              <div style="font-size: 0.85rem;">${app.organization || 'مستقل'}</div>
-              <div style="font-size: 0.75rem; color: var(--text-muted);">${app.qualification || ''}</div>
-            </td>
-            <td style="padding: 12px 16px;">
-              <span class="badge" style="background: ${app.status === 'approved' ? '#DCFCE7' : app.status === 'rejected' ? '#FEE2E2' : '#FEF3C7'}; color: ${app.status === 'approved' ? '#166534' : app.status === 'rejected' ? '#991B1B' : '#92400E'};">
-                ${app.status === 'approved' ? 'مقبول ومسجل' : app.status === 'rejected' ? 'مرفوض' : 'قيد المراجعة'}
-              </span>
-            </td>
-            <td style="padding: 12px 16px; text-align: left;">
-              <div style="display: flex; gap: 6px; justify-content: flex-end;">
-                <button class="btn-clean btn-sm btn-app-decision" data-id="${app.id}" data-action="approved" style="background: #DCFCE7; color: #166534; font-weight: 700;">
-                  قبول
-                </button>
-                <button class="btn-clean btn-sm btn-app-decision" data-id="${app.id}" data-action="rejected" style="background: #FEE2E2; color: #991B1B;">
-                  رفض
-                </button>
-              </div>
-            </td>
-          </tr>
-        `).join('');
+          // Bind Edit button to load post in editor
+          tbody.querySelectorAll('.btn-edit-post').forEach(b => {
+            b.onclick = () => {
+              const id = b.getAttribute('data-post-id');
+              loadPostForEdit(id);
+            };
+          });
 
-        document.querySelectorAll('.btn-app-decision').forEach(btn => {
-          btn.onclick = async () => {
-            const appId = btn.getAttribute('data-id');
-            const action = btn.getAttribute('data-action');
-            try {
-              const r = await api.updateApplicationStatus(appId, action);
-              if (r.success) {
-                showToast(`تم تحديث الطلب بنجاح إلى: ${action === 'approved' ? 'مقبول ومسجل بالأكاديمية' : 'مرفوض'}`, 'success');
-                loadApplications();
+          // Bind Delete button with confirmation
+          tbody.querySelectorAll('.btn-delete-post').forEach(b => {
+            b.onclick = async () => {
+              const id = b.getAttribute('data-post-id');
+              const confirmMsg = txt('هل أنت متأكد من حذف هذا المنشور نهائياً من المنظومة؟', 'Are you sure you want to permanently delete this post?', 'Êtes-vous sûr de vouloir supprimer cette publication ?');
+              if (confirm(confirmMsg)) {
+                await api.deletePost(id);
+                showToast(txt('تم حذف المنشور بنجاح.', 'Post deleted successfully.', 'Publication supprimée.'), 'info');
+                loadPosts();
               }
-            } catch (err) {
-              showToast('فشل في تحديث حالة الطلب: ' + err.message, 'error');
-            }
-          };
-        });
-      }
-    } catch (e) {}
-  }
-
-  async function loadCourses() {
-    const container = document.getElementById('admin-courses-list');
-    if (!container) return;
-    try {
-      const res = await api.getCourses();
-      if (res.success && res.courses) {
-        container.innerHTML = res.courses.map(c => `
-          <div style="background: var(--bg-subtle); padding: 18px 20px; border-radius: var(--radius-xs); border: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-            <div>
-              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                <span class="badge" style="background: var(--shat-green-tint); color: var(--shat-green);">${c.code}</span>
-                <span style="font-weight: 800; color: var(--shat-navy); font-size: 1.05rem;">${c.title}</span>
-              </div>
-              <div style="font-size: 0.85rem; color: var(--text-muted);">
-                👨‍🏫 المدرب: <strong>${c.instructorName}</strong> • ⏱️ الساعات: <strong>${c.hours}</strong> • 📅 المواعيد: <strong>${c.schedule}</strong>
-              </div>
-            </div>
-            <a href="#/course/${c.id}" class="btn-clean btn-sm" style="background: #FFFFFF; border: 1px solid var(--border-light); color: var(--shat-navy); font-weight: 700;">
-              فتح غرفة المساق ↗
-            </a>
-          </div>
-        `).join('');
-      }
-    } catch (e) {}
-  }
-
-  async function loadUsers() {
-    const tbody = document.getElementById('admin-users-tbody');
-    if (!tbody) return;
-    try {
-      const res = await api.getUsers();
-      if (res.success && res.users) {
-        tbody.innerHTML = res.users.map(u => `
-          <tr style="border-bottom: 1px solid var(--border-light);">
-            <td style="padding: 12px 16px; font-weight: 700; color: var(--shat-navy);">${u.fullNameAr}</td>
-            <td style="padding: 12px 16px;">${u.email}</td>
-            <td style="padding: 12px 16px;">
-              <span class="badge" style="background: ${u.role === 'admin' ? '#FEE2E2' : u.role === 'teacher' ? '#DCFCE7' : '#EFF6FF'}; color: ${u.role === 'admin' ? '#991B1B' : u.role === 'teacher' ? '#166534' : '#1D4ED8'};">
-                ${u.roleTitle || u.role}
-              </span>
-            </td>
-            <td style="padding: 12px 16px;">${u.phone || '-'}</td>
-            <td style="padding: 12px 16px;"><span class="badge" style="background: #DCFCE7; color: #166534;">نشط</span></td>
-          </tr>
-        `).join('');
-      }
-    } catch (e) {}
-  }
-
-  async function loadForms() {
-    const tbody = document.getElementById('admin-forms-tbody');
-    try {
-      const res = await api.getForms();
-      if (res.success && res.forms && tbody) {
-        tbody.innerHTML = res.forms.map(f => `
-          <tr style="border-bottom: 1px solid var(--border-light);">
-            <td style="padding: 12px 16px; font-weight: 700; color: var(--shat-navy);">${f.title}</td>
-            <td style="padding: 12px 16px;">${(f.fields || []).length} حقول معيارية</td>
-            <td style="padding: 12px 16px;"><span class="badge" style="background: #DCFCE7; color: #166534;">نشط</span></td>
-            <td style="padding: 12px 16px; font-family: var(--font-mono); font-size: 0.8rem; color: var(--shat-green);">#/forms/${f.id}</td>
-            <td style="padding: 12px 16px; text-align: left;">
-              <a href="#/forms/${f.id}" class="btn-clean btn-sm" style="background: #EFF6FF; color: #1D4ED8; font-weight: 700;">معاينة النموذج</a>
-            </td>
-          </tr>
-        `).join('');
-      }
-    } catch (e) {}
-  }
-
-  async function loadInquiries() {
-    const tbody = document.getElementById('admin-inquiries-tbody');
-    try {
-      const res = await api.getInquiries();
-      if (res.success && res.inquiries && tbody) {
-        tbody.innerHTML = res.inquiries.map(inq => `
-          <tr style="border-bottom: 1px solid var(--border-light);">
-            <td style="padding: 12px 16px; font-weight: 700; color: var(--shat-navy);">
-              ${inq.name}
-              <div style="font-size: 0.75rem; color: var(--text-muted);">${inq.org || 'مستقل'}</div>
-            </td>
-            <td style="padding: 12px 16px;">
-              <div>${inq.email}</div>
-              <div style="font-size: 0.75rem; color: var(--text-muted);">${inq.phone || '-'}</div>
-            </td>
-            <td style="padding: 12px 16px; font-weight: 600; color: var(--shat-green);">${inq.service}</td>
-            <td style="padding: 12px 16px; font-size: 0.85rem; max-width: 250px;">${inq.message}</td>
-            <td style="padding: 12px 16px; font-size: 0.78rem; color: var(--text-muted);">${new Date(inq.createdAt).toLocaleDateString('ar-EG')}</td>
-          </tr>
-        `).join('');
-      }
-    } catch (e) {}
-  }
-
-  async function loadHealthAndAudit() {
-    const auditTbody = document.getElementById('admin-audit-tbody');
-    try {
-      const auditRes = await api.getAuditLogs();
-      if (auditRes && auditRes.logs && auditTbody) {
-        auditTbody.innerHTML = auditRes.logs.map(log => `
-          <tr style="border-bottom: 1px solid var(--border-light);">
-            <td style="padding: 10px 14px; font-weight: 700; color: var(--shat-navy);">${log.actor}</td>
-            <td style="padding: 10px 14px;"><span class="badge" style="background: #F1F5F9; color: var(--text-main); font-family: var(--font-mono);">${log.action}</span></td>
-            <td style="padding: 10px 14px; color: var(--text-muted);">${log.target}</td>
-            <td style="padding: 10px 14px; font-size: 0.78rem; color: var(--text-muted);">${new Date(log.timestamp).toLocaleTimeString('ar-EG')} • ${new Date(log.timestamp).toLocaleDateString('ar-EG')}</td>
-          </tr>
-        `).join('');
-      }
-    } catch (e) {}
-  }
-
-  // Google Forms Import Handler
-  const importForm = document.getElementById('form-import-google-url');
-  if (importForm) {
-    importForm.onsubmit = async (e) => {
-      e.preventDefault();
-      const url = document.getElementById('google-form-url-input')?.value;
-      if (!url) return;
-      try {
-        const res = await api.importGoogleForm(url);
-        if (res.success) {
-          showToast('تم استيراد استمارة Google وتوليد نموذج SHAT الداخلي بنجاح!', 'success');
-          loadForms();
+            };
+          });
         }
+      }
+    } catch (e) {
+      console.warn('Load posts error:', e);
+    }
+  }
+
+  // --- Load Courses and Attach Material Logic ---
+  const courseModalBackdrop = document.getElementById('modal-course-editor-backdrop');
+  const btnCloseCourseModal = document.getElementById('btn-close-course-modal');
+  const btnCancelCourseModal = document.getElementById('btn-cancel-course-modal');
+  const formCourseEditor = document.getElementById('form-course-editor');
+  const btnOpenNewCourse = document.getElementById('btn-open-new-course');
+
+  if (btnCloseCourseModal) btnCloseCourseModal.onclick = () => courseModalBackdrop.classList.remove('open');
+  if (btnCancelCourseModal) btnCancelCourseModal.onclick = () => courseModalBackdrop.classList.remove('open');
+
+  if (btnOpenNewCourse) {
+    btnOpenNewCourse.onclick = () => {
+      document.getElementById('edit-course-id').value = '';
+      document.getElementById('edit-course-title').value = '';
+      document.getElementById('edit-course-hours').value = '30 ساعة تدريبية';
+      document.getElementById('edit-course-level').value = 'دبلوم مهني تطبيقي';
+      document.getElementById('edit-course-instructor').value = 'د. أسامة المنصور';
+      document.getElementById('edit-course-summary').value = '';
+      document.getElementById('edit-course-syllabus').value = '';
+      document.getElementById('course-editor-modal-title').textContent = txt('إضافة مساق تدريبي جديد', 'Create New Course Track', 'Créer un Nouveau Cursus');
+      courseModalBackdrop.classList.add('open');
+    };
+  }
+
+  if (formCourseEditor) {
+    formCourseEditor.onsubmit = async (e) => {
+      e.preventDefault();
+      const courseId = document.getElementById('edit-course-id').value;
+      const syllabusLines = (document.getElementById('edit-course-syllabus').value || '')
+        .split('\n')
+        .map(s => s.trim())
+        .filter(s => s.length > 0);
+
+      const courseData = {
+        title: document.getElementById('edit-course-title').value,
+        hours: document.getElementById('edit-course-hours').value,
+        level: document.getElementById('edit-course-level').value,
+        instructorName: document.getElementById('edit-course-instructor').value,
+        summary: document.getElementById('edit-course-summary').value,
+        syllabus: syllabusLines
+      };
+
+      try {
+        if (courseId) {
+          await api.updateCourse(courseId, courseData);
+          showToast(txt('✓ تم حفظ وتحديث المساق بنجاح!', '✓ Course updated successfully!', '✓ Cursus mis à jour !'), 'success');
+        } else {
+          await api.createCourse(courseData);
+          showToast(txt('✓ تم إنشاء المساق الجديد بنجاح!', '✓ New course created successfully!', '✓ Nouveau cursus créé !'), 'success');
+        }
+        courseModalBackdrop.classList.remove('open');
+        loadCourses();
       } catch (err) {
-        showToast('فشل الاستيراد: ' + err.message, 'error');
+        showToast(err.message, 'error');
       }
     };
   }
 
-  // Initial Load
+  async function loadCourses() {
+    const list = document.getElementById('admin-courses-list');
+    if (!list) return;
+
+    try {
+      const res = await api.getCourses();
+      const courses = res && res.courses ? res.courses : (Array.isArray(res) ? res : []);
+
+      list.innerHTML = courses.map(c => `
+        <div class="bento-card" style="padding: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; border-top: 3px solid var(--shat-navy);">
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <div style="width: 50px; height: 50px; border-radius: var(--radius-xs); background: var(--shat-navy-tint); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+              🎓
+            </div>
+            <div>
+              <div style="font-weight: 800; font-size: 1.05rem; color: var(--shat-navy);">${c.title}</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">
+                ${c.hours || '30 ساعة'} • ${c.level || 'معتمد'} • ${txt('المدرب:', 'Instructor:', 'Formateur :')} ${c.instructorName || 'د. أسامة المنصور'}
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 8px;">
+            <button class="btn-clean btn-sm btn-edit-course" data-id="${c.id}" style="background: #F1F5F9; color: var(--shat-navy); border: 1px solid var(--border-light); font-weight: 700;">
+              ✏️ ${txt('تعديل المساق', 'Edit Course', 'Modifier')}
+            </button>
+            <a href="#/course/${c.id}" class="btn-clean btn-sm" style="background: var(--bg-subtle); color: var(--text-secondary); text-decoration: none;">
+              👁️ ${txt('قاعة المساق', 'Course Room', 'Salle')}
+            </a>
+          </div>
+        </div>
+      `).join('');
+
+      list.querySelectorAll('.btn-edit-course').forEach(b => {
+        b.onclick = () => {
+          const id = b.getAttribute('data-id');
+          const found = courses.find(c => c.id === id);
+          if (found) {
+            document.getElementById('edit-course-id').value = found.id;
+            document.getElementById('edit-course-title').value = found.title || '';
+            document.getElementById('edit-course-hours').value = found.hours || '';
+            document.getElementById('edit-course-level').value = found.level || '';
+            document.getElementById('edit-course-instructor').value = found.instructorName || '';
+            document.getElementById('edit-course-summary').value = found.summary || '';
+            document.getElementById('edit-course-syllabus').value = Array.isArray(found.syllabus) ? found.syllabus.join('\n') : '';
+            document.getElementById('course-editor-modal-title').textContent = `✏️ ${txt('تعديل المساق:', 'Edit Course:', 'Modifier :')} ${found.title.substring(0, 30)}...`;
+            courseModalBackdrop.classList.add('open');
+          }
+        };
+      });
+    } catch (e) {
+      console.warn('Load courses error:', e);
+    }
+  }
+
+  // --- Device Backup Export & Import ---
+  const btnExportBackup = document.getElementById('btn-export-backup');
+  const btnImportBackupTrigger = document.getElementById('btn-import-backup-trigger');
+  const importBackupFileInput = document.getElementById('import-backup-file-input');
+
+  if (btnExportBackup) {
+    btnExportBackup.onclick = () => {
+      MediaStorageService.exportFullBackup();
+      showToast(txt('✓ تم تصدير وتحميل النسخة الاحتياطية لجهازك بنجاح!', '✓ Backup JSON exported to your computer!', '✓ Sauvegarde exportée sur votre appareil !'), 'success');
+    };
+  }
+
+  if (btnImportBackupTrigger && importBackupFileInput) {
+    btnImportBackupTrigger.onclick = () => importBackupFileInput.click();
+
+    importBackupFileInput.onchange = (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          MediaStorageService.importFullBackup(event.target.result);
+          showToast(txt('✓ تم استعادة النسخة الاحتياطية بنجاح من جهازك!', '✓ Backup restored successfully from your file!', '✓ Sauvegarde restaurée avec succès !'), 'success');
+          loadDashboardData();
+          loadPosts();
+          loadMediaLibrary();
+          loadCourses();
+        } catch (err) {
+          showToast(err.message, 'error');
+        }
+      };
+      reader.readAsText(file);
+    };
+  }
+
+  // Initial Load on Entry
   loadDashboardData();
-  updateLivePreview();
+  loadPosts();
+  loadMediaLibrary();
+}
+
+// Support Loaders
+async function loadDashboardData() {
+  try {
+    const [appsRes, coursesRes, usersRes] = await Promise.all([
+      api.getApplications(),
+      api.getCourses(),
+      api.getUsers()
+    ]);
+
+    if (appsRes && appsRes.applications) {
+      const pending = appsRes.applications.filter(a => a.status === 'pending');
+      const kpiPending = document.getElementById('kpi-pending-apps');
+      if (kpiPending) kpiPending.textContent = pending.length;
+
+      const tbody = document.getElementById('dash-pending-apps-tbody');
+      if (tbody) {
+        if (pending.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="4" style="padding: 16px; text-align: center; color: var(--text-muted);">لا توجد طلبات معلقة حالياً.</td></tr>`;
+        } else {
+          tbody.innerHTML = pending.slice(0, 5).map(app => `
+            <tr style="border-bottom: 1px solid var(--border-light);">
+              <td style="padding: 10px 8px; font-weight: 700; color: var(--shat-navy);">${app.fullName}</td>
+              <td style="padding: 10px 8px; color: var(--shat-green); font-size: 0.8rem;">${app.courseTitle}</td>
+              <td style="padding: 10px 8px;"><span class="badge" style="background: #FEF3C7; color: #92400E; font-size: 0.72rem;">معلق</span></td>
+              <td style="padding: 10px 8px; text-align: left;">
+                <button class="btn-clean btn-sm btn-quick-approve" data-id="${app.id}" style="background: #DCFCE7; color: #166534; font-weight: 700; font-size: 0.75rem;">قبول</button>
+              </td>
+            </tr>
+          `).join('');
+
+          document.querySelectorAll('.btn-quick-approve').forEach(b => {
+            b.onclick = async () => {
+              const id = b.getAttribute('data-id');
+              await api.updateApplicationStatus(id, 'approved');
+              showToast('تم قبول المتدرب وتفعيل حسابه تلقائياً!', 'success');
+              loadDashboardData();
+            };
+          });
+        }
+      }
+    }
+
+    if (coursesRes && coursesRes.courses) {
+      const kpiCourses = document.getElementById('kpi-courses-count');
+      if (kpiCourses) kpiCourses.textContent = coursesRes.courses.length;
+    }
+
+    if (usersRes && usersRes.users) {
+      const students = usersRes.users.filter(u => u.role === 'student');
+      const teachers = usersRes.users.filter(u => u.role === 'teacher');
+      const kpiStudents = document.getElementById('kpi-students-count');
+      const kpiTeachers = document.getElementById('kpi-teachers-count');
+      if (kpiStudents) kpiStudents.textContent = students.length + 240;
+      if (kpiTeachers) kpiTeachers.textContent = teachers.length + 16;
+    }
+  } catch (e) {}
+}
+
+async function loadUsers() {
+  const tbody = document.getElementById('admin-users-tbody');
+  if (!tbody) return;
+  try {
+    const res = await api.getUsers();
+    if (res && res.users) {
+      tbody.innerHTML = res.users.map(u => `
+        <tr style="border-bottom: 1px solid var(--border-light);">
+          <td style="padding: 12px 16px; font-weight: 700; color: var(--shat-navy);">${u.fullNameAr || u.fullNameEn}</td>
+          <td style="padding: 12px 16px; color: var(--text-muted); font-size: 0.85rem;">${u.email}</td>
+          <td style="padding: 12px 16px;"><span class="badge" style="background: var(--bg-subtle); color: var(--shat-navy);">${u.roleTitle || u.role}</span></td>
+          <td style="padding: 12px 16px; font-size: 0.85rem;">${u.phone || '-'}</td>
+          <td style="padding: 12px 16px;"><span class="badge" style="background: #DCFCE7; color: #166534;">نشط</span></td>
+        </tr>
+      `).join('');
+    }
+  } catch (e) {}
+}
+
+async function loadApplications() {
+  const tbody = document.getElementById('admin-apps-tbody');
+  if (!tbody) return;
+  try {
+    const res = await api.getApplications();
+    if (res && res.applications) {
+      tbody.innerHTML = res.applications.map(app => `
+        <tr style="border-bottom: 1px solid var(--border-light);">
+          <td style="padding: 12px 16px;">
+            <div style="font-weight: 700; color: var(--shat-navy);">${app.fullName}</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">${new Date(app.createdAt || Date.now()).toLocaleDateString('ar-EG')}</div>
+          </td>
+          <td style="padding: 12px 16px;">
+            <div style="font-size: 0.85rem;">${app.email}</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">${app.phone}</div>
+          </td>
+          <td style="padding: 12px 16px; font-weight: 600; color: var(--shat-green);">${app.courseTitle}</td>
+          <td style="padding: 12px 16px;">
+            <div style="font-size: 0.85rem;">${app.organization || 'مستقل'}</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">${app.qualification || ''}</div>
+          </td>
+          <td style="padding: 12px 16px;">
+            <span class="badge" style="background: ${app.status === 'approved' ? '#DCFCE7' : app.status === 'rejected' ? '#FEE2E2' : '#FEF3C7'}; color: ${app.status === 'approved' ? '#166534' : app.status === 'rejected' ? '#991B1B' : '#92400E'};">
+              ${app.status === 'approved' ? 'مقبول ومسجل' : app.status === 'rejected' ? 'مرفوض' : 'قيد المراجعة'}
+            </span>
+          </td>
+          <td style="padding: 12px 16px; text-align: left;">
+            <div style="display: flex; gap: 6px; justify-content: flex-end;">
+              <button class="btn-clean btn-sm btn-app-decision" data-id="${app.id}" data-action="approved" style="background: #DCFCE7; color: #166534; font-weight: 700;">قبول</button>
+              <button class="btn-clean btn-sm btn-app-decision" data-id="${app.id}" data-action="rejected" style="background: #FEE2E2; color: #991B1B;">رفض</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+
+      tbody.querySelectorAll('.btn-app-decision').forEach(b => {
+        b.onclick = async () => {
+          const id = b.getAttribute('data-id');
+          const action = b.getAttribute('data-action');
+          await api.updateApplicationStatus(id, action);
+          showToast(action === 'approved' ? 'تم قبول وتسجيل المتقدم بنجاح!' : 'تم رفض الطلب.', 'info');
+          loadApplications();
+        };
+      });
+    }
+  } catch (e) {}
+}
+
+async function loadForms() {
+  const tbody = document.getElementById('admin-forms-tbody');
+  if (!tbody) return;
+  try {
+    const res = await api.getForms();
+    if (res && res.forms) {
+      tbody.innerHTML = res.forms.map(f => `
+        <tr style="border-bottom: 1px solid var(--border-light);">
+          <td style="padding: 12px 16px; font-weight: 700; color: var(--shat-navy);">${f.title}</td>
+          <td style="padding: 12px 16px;"><span class="badge" style="background: var(--bg-subtle); color: var(--shat-navy);">${f.questionsCount || 8} أسئلة</span></td>
+          <td style="padding: 12px 16px;"><span class="badge" style="background: #DCFCE7; color: #166534;">نشط</span></td>
+          <td style="padding: 12px 16px; font-family: monospace; font-size: 0.8rem;">#/forms?id=${f.id}</td>
+          <td style="padding: 12px 16px; text-align: left;">
+            <a href="#/forms?id=${f.id}" class="btn-clean btn-sm" style="background: var(--bg-subtle);">معاينة ↗</a>
+          </td>
+        </tr>
+      `).join('');
+    }
+  } catch (e) {}
+}
+
+async function loadInquiries() {
+  const tbody = document.getElementById('admin-inquiries-tbody');
+  if (!tbody) return;
+  try {
+    const res = await api.getInquiries();
+    const inqs = res && res.inquiries ? res.inquiries : [];
+    if (inqs.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="5" style="padding: 24px; text-align: center; color: var(--text-muted);">لا توجد استفسارات جديدة.</td></tr>`;
+      return;
+    }
+    tbody.innerHTML = inqs.map(inq => `
+      <tr style="border-bottom: 1px solid var(--border-light);">
+        <td style="padding: 12px 16px; font-weight: 700; color: var(--shat-navy);">${inq.name} <div style="font-size: 0.75rem; color: var(--text-muted);">${inq.org || 'مؤسسة'}</div></td>
+        <td style="padding: 12px 16px; font-size: 0.85rem;">${inq.email} <div style="font-size: 0.75rem; color: var(--text-muted);">${inq.phone}</div></td>
+        <td style="padding: 12px 16px;"><span class="badge" style="background: var(--shat-green-tint); color: var(--shat-green);">${inq.service || 'استشارة'}</span></td>
+        <td style="padding: 12px 16px; font-size: 0.85rem; max-width: 250px;">${inq.message || '-'}</td>
+        <td style="padding: 12px 16px; font-size: 0.8rem; color: var(--text-muted);">${new Date(inq.createdAt || Date.now()).toLocaleDateString('ar-EG')}</td>
+      </tr>
+    `).join('');
+  } catch (e) {}
+}
+
+async function loadHealthAndAudit() {
+  const tbody = document.getElementById('admin-audit-tbody');
+  if (!tbody) return;
+  try {
+    const res = await api.getAuditLogs();
+    const logs = Array.isArray(res) ? res : (res && res.logs ? res.logs : []);
+    tbody.innerHTML = logs.map(l => `
+      <tr style="border-bottom: 1px solid var(--border-light);">
+        <td style="padding: 10px 14px; font-weight: 700; color: var(--shat-navy);">${l.user}</td>
+        <td style="padding: 10px 14px;"><span class="badge" style="background: var(--bg-subtle); color: var(--shat-navy);">${l.action}</span></td>
+        <td style="padding: 10px 14px; font-size: 0.8rem; color: var(--text-muted);">${l.ip || '127.0.0.1'}</td>
+        <td style="padding: 10px 14px; font-size: 0.8rem; color: var(--text-muted);">${new Date(l.timestamp).toLocaleString('ar-EG')}</td>
+      </tr>
+    `).join('');
+  } catch (e) {}
 }

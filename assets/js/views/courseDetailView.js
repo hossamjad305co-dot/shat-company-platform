@@ -90,7 +90,8 @@ export async function bindCourseDetailEvents() {
 
   try {
     const res = await api.getCourseById(courseId);
-    if (!res.success || !res.course) {
+    const c = (res && res.course) ? res.course : res;
+    if (!c || !c.title) {
       container.innerHTML = `
         <div style="background: #FFFFFF; border-radius: var(--radius-md); padding: 48px; text-align: center; border: 1px solid var(--border-light);">
           <div style="font-size: 2.5rem; margin-bottom: 16px;">⚠️</div>
@@ -107,8 +108,6 @@ export async function bindCourseDetailEvents() {
       `;
       return;
     }
-
-    const c = res.course;
     const courseTitle = currentLang === 'en' ? (c.titleEn || c.title) : c.title;
     if (breadcrumbTitle) breadcrumbTitle.textContent = courseTitle;
 

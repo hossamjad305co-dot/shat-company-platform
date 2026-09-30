@@ -1,6 +1,7 @@
 // assets/js/services/api/apiClient.js
 // Production Client Gateway to SHAT Backend API & Resilient Local Session Store
 import { content } from '../../content.js';
+import { MediaStorageService } from '../storage/mediaStorageService.js';
 
 const isBrowser = typeof window !== 'undefined';
 const isLocalhost = isBrowser && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
@@ -58,6 +59,65 @@ const FALLBACK_USERS = [
     phone: '+972 59 612 3456',
     maskedNationalId: 'ID-***-6125',
     createdAt: '2026-02-15T00:00:00Z'
+  }
+];
+
+const DEFAULT_INITIAL_POSTS = [
+  {
+    id: 'post-01',
+    title: 'إطلاق برامج التقييم الخارجي المستقل وتطوير الحوكمة لمؤسسات المجتمع المدني',
+    excerpt: 'ضمن استراتيجية شركة شات لتعزيز كفاءة المنظمات غير الحكومية وتطبيق معايير المساءلة للمتأثرين.',
+    content: 'أعلنت شركة شات للتنمية والتطوير عن إطلاق حزمة استشارية متكاملة لتقييم التدخلات الإنسانية والتنموية وفق المعايير التسعة للمعيار الإنساني الأساسي (CHS) ومعايير OECD DAC. تشمل الحزمة بناء قدرات الكوادر الميدانية وإعداد تقارير التقييم المستقلة المعتمدة لدى الجهات المانحة الدولية.',
+    category: 'evaluation',
+    categoryLabel: 'تقييم ومتابعة (OECD DAC)',
+    status: 'published',
+    coverImage: 'assets/logo/logo-banner.jpg',
+    author: 'أ. حسام جاد الله',
+    authorRole: 'المدير العام (Super Admin)',
+    createdAt: '2026-03-25T10:00:00Z',
+    viewsCount: 342
+  },
+  {
+    id: 'post-02',
+    title: 'اعتماد ورقة الموقف المؤسسي حول سياسات صون السلامة ومنع الاستغلال (PSEA)',
+    excerpt: 'تأصيل وتفعيل آليات الإبلاغ والمساءلة وحماية الفئات الأكثر هشاشة في كافة التدخلات الميدانية.',
+    content: 'اعتمد مجلس إدارة شركة شات للتنمية والتطوير الإطار المرجعي لحماية الكوادر والمستفيدين وبناء مسارات الإحالة السرية والآمنة. يأتي ذلك استجابة للالتزامات الأخلاقية والإنسانية الصارمة، وضمان خلو كافة بيئات العمل والتدريب من أي شكل من أشكال الاستغلال والانتهاك.',
+    category: 'institutional',
+    categoryLabel: 'حوكمة واستشارات',
+    status: 'published',
+    coverImage: 'assets/logo/logo-circle.jpg',
+    author: 'د. أسامة المنصور',
+    authorRole: 'المدرب المعتمد (Master Trainer)',
+    createdAt: '2026-03-20T14:30:00Z',
+    viewsCount: 289
+  },
+  {
+    id: 'post-03',
+    title: 'فتح باب القبول في الدفعة الثالثة من دبلوم المعيار الإنساني الأساسي (CHS)',
+    excerpt: 'برنامج تنفيذي مكثف (40 ساعة) لبناء مهارات تصميم التدخلات والمساءلة الميدانية للمنظمات الدولية.',
+    content: 'يسر أكاديمية شات الإعلان عن فتح باب الالتحاق المباشر ببرنامج دبلوم المعيار الإنساني الأساسي (CHS) وتصميم التدخلات. يركز البرنامج على التطبيق العملي، ومراجعة مؤشرات الامتثال، وتصميم قنوات الشكاوى والمقترحات المجتمعية الفعالة مع شهادة معتمدة دولياً.',
+    category: 'humanitarian',
+    categoryLabel: 'إنساني وتطويري',
+    status: 'published',
+    coverImage: 'assets/logo/logo-banner.jpg',
+    author: 'أ. مريم النجار',
+    authorRole: 'مسؤول القبول والتسجيل',
+    createdAt: '2026-03-15T09:15:00Z',
+    viewsCount: 512
+  },
+  {
+    id: 'post-04',
+    title: 'تقرير الأثر الميداني: تدريب 120 كادراً محلياً على منهجيات عدم الإضرار (Do No Harm)',
+    excerpt: 'نتائج برامج تعزيز حساسية النزاع وبناء التماسك المجتمعي في بيئات العمل المعقدة.',
+    content: 'استكملت شركة شات سلسلة ورش العمل التخصصية في تعزيز حساسية النزاع وضمان الحياد المؤسسي الكامل. شمل التدريب 120 ممارساً ومسؤول برامج من مختلف المنظمات المحلية والدولية، مع تقييمات ميدانية أظهرت تحسناً بنسبة 88% في كفاءة التخطيط الميداني الحساس للنزاع.',
+    category: 'partnerships',
+    categoryLabel: 'شراكات دولية',
+    status: 'published',
+    coverImage: 'assets/logo/logo-transparent.png',
+    author: 'سارة عبد الله',
+    authorRole: 'مسؤول المحتوى والنشر',
+    createdAt: '2026-03-05T12:00:00Z',
+    viewsCount: 198
   }
 ];
 
@@ -158,7 +218,6 @@ class ApiClient {
     }
 
     // 3. Fallback Trigger on 405 (Method Not Allowed), 404, 502/503, or Network Error
-    // Intercepts and executes seamlessly without displaying 405 to the user
     try {
       const fallbackResult = this.handleFallback(endpoint, options);
       if (fallbackResult !== null) {
@@ -208,23 +267,60 @@ class ApiClient {
 
     // D. Courses
     if (path === '/api/courses' && method === 'GET') {
-      const lang = localStorage.getItem('shat_platform_lang') || 'ar';
-      return (content[lang] || content.ar).courses || content.ar.courses;
+      return { success: true, courses: this.getStoredCourses() };
     }
 
-    if (path.startsWith('/api/courses/') && !path.includes('/assignments') && !path.includes('/submissions') && !path.includes('/roster') && method === 'GET') {
+    if (path === '/api/courses' && method === 'POST') {
+      const courses = this.getStoredCourses();
+      const newCourse = {
+        id: body.id || `course-${Date.now()}`,
+        code: body.code || 'SHAT-NEW',
+        title: body.title || 'مساق جديد',
+        track: body.track || 'المسار التدريبي المعتمد',
+        hours: body.hours || '30 ساعة تدريبية',
+        level: body.level || 'مهني تطبيقي',
+        summary: body.summary || '',
+        instructorName: body.instructorName || 'أ. حسام جاد الله',
+        syllabus: body.syllabus || [],
+        coverImage: body.coverImage || 'assets/logo/logo-banner.jpg',
+        materials: body.materials || []
+      };
+      courses.unshift(newCourse);
+      this.saveStoredCourses(courses);
+      return { success: true, message: 'تم إنشاء المساق التدريبي بنجاح!', course: newCourse };
+    }
+
+    if (path.startsWith('/api/courses/') && !path.includes('/assignments') && !path.includes('/submissions') && !path.includes('/roster')) {
       const courseId = path.replace('/api/courses/', '').trim();
-      const lang = localStorage.getItem('shat_platform_lang') || 'ar';
-      const cList = (content[lang] || content.ar).courses || content.ar.courses;
-      const found = cList.find(c => c.id === courseId);
-      return found || cList[0] || null;
+      const courses = this.getStoredCourses();
+
+      if (method === 'GET') {
+        const found = courses.find(c => c.id === courseId);
+        const resolved = found || courses[0] || null;
+        return { success: !!resolved, course: resolved };
+      }
+
+      if (method === 'PUT') {
+        const idx = courses.findIndex(c => c.id === courseId);
+        if (idx !== -1) {
+          courses[idx] = { ...courses[idx], ...body, updatedAt: new Date().toISOString() };
+          this.saveStoredCourses(courses);
+          return { success: true, message: 'تم تحديث بيانات المساق بنجاح!', course: courses[idx] };
+        }
+        return { success: false, error: 'المساق غير موجود' };
+      }
+
+      if (method === 'DELETE') {
+        const updated = courses.filter(c => c.id !== courseId);
+        this.saveStoredCourses(updated);
+        return { success: true, message: 'تم حذف المساق التدريبي بنجاح.' };
+      }
     }
 
     // E. My Courses
     if (path === '/api/my-courses' && method === 'GET') {
-      const lang = localStorage.getItem('shat_platform_lang') || 'ar';
-      const cList = (content[lang] || content.ar).courses || content.ar.courses;
-      return cList.slice(0, 3);
+      const courses = this.getStoredCourses();
+      return courses.slice(0, 3);
     }
 
     // F. Assignments
@@ -242,6 +338,7 @@ class ApiClient {
         studentId: this.currentUser?.id || 'student-01',
         studentName: this.currentUser?.fullNameAr || 'أحمد خليل',
         fileName: body.fileName || 'Assignment_Submission.pdf',
+        fileData: body.fileData || null,
         submittedAt: new Date().toISOString(),
         status: 'submitted',
         grade: null,
@@ -285,7 +382,7 @@ class ApiClient {
         this.saveStoredApplications(apps);
         return { success: true, message: 'تم استلام طلب تسجيلكم بنجاح! سيقوم فريق القبول بالتواصل معكم.', application: newApp };
       }
-      return this.getStoredApplications();
+      return { success: true, applications: this.getStoredApplications() };
     }
 
     if (path.includes('/status') && method === 'POST') {
@@ -314,29 +411,67 @@ class ApiClient {
         this.saveStoredInquiries(inqs);
         return { success: true, message: 'شكراً لتواصلكم مع شركة شات. تم استلام طلبكم بنجاح.' };
       }
-      return this.getStoredInquiries();
+      return { success: true, inquiries: this.getStoredInquiries() };
     }
 
-    // J. Posts
+    // J. Posts (Complete Full CRUD)
     if (path === '/api/posts') {
+      if (method === 'GET') {
+        return { success: true, posts: this.getStoredPosts() };
+      }
+
       if (method === 'POST') {
         const posts = this.getStoredPosts();
         const newPost = {
           id: `post-${Date.now()}`,
-          ...body,
-          publishedAt: new Date().toISOString().split('T')[0]
+          title: body.title || 'منشور جديد',
+          excerpt: body.excerpt || '',
+          content: body.content || '',
+          category: body.category || 'humanitarian',
+          categoryLabel: body.categoryLabel || 'إنساني وتطويري',
+          status: body.status || 'published',
+          coverImage: body.coverImage || 'assets/logo/logo-banner.jpg',
+          author: this.currentUser?.fullNameAr || 'أ. حسام جاد الله',
+          authorRole: this.currentUser?.roleTitle || 'إدارة شات',
+          createdAt: new Date().toISOString(),
+          viewsCount: 1
         };
         posts.unshift(newPost);
         this.saveStoredPosts(posts);
-        return { success: true, message: 'تم نشر الخبر بنجاح.', post: newPost };
+        return { success: true, message: 'تم نشر الخبر بنجاح في المنظومة!', post: newPost };
       }
-      return this.getStoredPosts();
+    }
+
+    // Edit Post: /api/posts/:id (PUT)
+    if (path.startsWith('/api/posts/') && method === 'PUT') {
+      const postId = path.replace('/api/posts/', '').trim();
+      const posts = this.getStoredPosts();
+      const idx = posts.findIndex(p => p.id === postId);
+      if (idx !== -1) {
+        posts[idx] = {
+          ...posts[idx],
+          ...body,
+          updatedAt: new Date().toISOString()
+        };
+        this.saveStoredPosts(posts);
+        return { success: true, message: 'تم حفظ تعديلات المنشور بنجاح!', post: posts[idx] };
+      }
+      return { success: false, error: 'المنشور غير موجود' };
+    }
+
+    // Delete Post: /api/posts/:id (DELETE)
+    if (path.startsWith('/api/posts/') && method === 'DELETE') {
+      const postId = path.replace('/api/posts/', '').trim();
+      const posts = this.getStoredPosts();
+      const updated = posts.filter(p => p.id !== postId);
+      this.saveStoredPosts(updated);
+      return { success: true, message: 'تم حذف المنشور بنجاح من قاعدة البيانات.' };
     }
 
     // K. Teacher Analytics
     if (path === '/api/teacher/courses' && method === 'GET') {
-      const lang = localStorage.getItem('shat_platform_lang') || 'ar';
-      return ((content[lang] || content.ar).courses || content.ar.courses).slice(0, 2);
+      const courses = this.getStoredCourses();
+      return courses.slice(0, 2);
     }
 
     if (path.includes('/roster') && method === 'GET') {
@@ -359,7 +494,7 @@ class ApiClient {
         telemetry: {
           uptime: '99.98%',
           activeSessions: 14,
-          storageEngines: ['Live Express Proxy', 'Supabase Cloud', 'Resilient Client Fallback']
+          storageEngines: ['Live Express Proxy', 'Supabase Cloud', 'Resilient Client Fallback', 'Device LocalStorage']
         }
       };
     }
@@ -367,8 +502,8 @@ class ApiClient {
     if (path === '/api/audit') {
       return [
         { id: 'aud-01', action: 'AUTH_LOGIN', user: 'admin', timestamp: new Date().toISOString(), ip: '127.0.0.1', status: 'SUCCESS' },
-        { id: 'aud-02', action: 'ASSIGNMENT_GRADE', user: 'osama', timestamp: new Date(Date.now() - 3600000).toISOString(), ip: '127.0.0.1', status: 'SUCCESS' },
-        { id: 'aud-03', action: 'COURSE_APPLICATION', user: 'visitor', timestamp: new Date(Date.now() - 7200000).toISOString(), ip: '127.0.0.1', status: 'SUCCESS' }
+        { id: 'aud-02', action: 'POST_UPDATE', user: 'admin', timestamp: new Date(Date.now() - 1800000).toISOString(), ip: '127.0.0.1', status: 'SUCCESS' },
+        { id: 'aud-03', action: 'ASSIGNMENT_GRADE', user: 'osama', timestamp: new Date(Date.now() - 3600000).toISOString(), ip: '127.0.0.1', status: 'SUCCESS' }
       ];
     }
 
@@ -435,7 +570,52 @@ class ApiClient {
     };
   }
 
-  // Helper Storage Accessors
+  // --- Helper Storage Accessors ---
+  getStoredPosts() {
+    try {
+      const data = localStorage.getItem('shat_platform_posts');
+      if (data) {
+        const parsed = JSON.parse(data);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch (e) {}
+
+    // Initialize with default authoritative news posts
+    this.saveStoredPosts(DEFAULT_INITIAL_POSTS);
+    return DEFAULT_INITIAL_POSTS;
+  }
+
+  saveStoredPosts(posts) {
+    try {
+      localStorage.setItem('shat_platform_posts', JSON.stringify(posts));
+    } catch (e) {
+      console.warn('LocalStorage save error for posts:', e);
+    }
+  }
+
+  getStoredCourses() {
+    try {
+      const data = localStorage.getItem('shat_platform_courses');
+      if (data) {
+        const parsed = JSON.parse(data);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch (e) {}
+
+    const lang = localStorage.getItem('shat_platform_lang') || 'ar';
+    const cList = (content[lang] || content.ar).courses || content.ar.courses || [];
+    this.saveStoredCourses(cList);
+    return cList;
+  }
+
+  saveStoredCourses(courses) {
+    try {
+      localStorage.setItem('shat_platform_courses', JSON.stringify(courses));
+    } catch (e) {
+      console.warn('LocalStorage save error for courses:', e);
+    }
+  }
+
   getStoredSubmissions() {
     try {
       const data = localStorage.getItem('shat_platform_submissions');
@@ -497,20 +677,6 @@ class ApiClient {
     } catch (e) {}
   }
 
-  getStoredPosts() {
-    try {
-      const data = localStorage.getItem('shat_platform_posts');
-      if (data) return JSON.parse(data);
-    } catch (e) {}
-    return content.ar?.news?.posts || [];
-  }
-
-  saveStoredPosts(posts) {
-    try {
-      localStorage.setItem('shat_platform_posts', JSON.stringify(posts));
-    } catch (e) {}
-  }
-
   // --- Auth APIs ---
   async login(usernameOrEmail, password) {
     const res = await this.request('/api/auth/login', {
@@ -541,13 +707,33 @@ class ApiClient {
     return null;
   }
 
-  // --- LMS APIs ---
+  // --- LMS Course APIs ---
   async getCourses() {
     return this.request('/api/courses');
   }
 
   async getCourseById(id) {
     return this.request(`/api/courses/${id}`);
+  }
+
+  async createCourse(courseData) {
+    return this.request('/api/courses', {
+      method: 'POST',
+      body: JSON.stringify(courseData)
+    });
+  }
+
+  async updateCourse(id, courseData) {
+    return this.request(`/api/courses/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(courseData)
+    });
+  }
+
+  async deleteCourse(id) {
+    return this.request(`/api/courses/${id}`, {
+      method: 'DELETE'
+    });
   }
 
   async getMyCourses() {
@@ -558,10 +744,10 @@ class ApiClient {
     return this.request(`/api/courses/${courseId}/assignments`);
   }
 
-  async submitAssignment(assignmentId, fileName, notes) {
+  async submitAssignment(assignmentId, fileName, notes, fileData = null) {
     return this.request('/api/submissions', {
       method: 'POST',
-      body: JSON.stringify({ assignmentId, fileName, notes })
+      body: JSON.stringify({ assignmentId, fileName, notes, fileData })
     });
   }
 
@@ -603,9 +789,15 @@ class ApiClient {
     return this.request(`/api/forms/${formId}/responses`);
   }
 
-  // --- CMS Posts APIs ---
+  // --- CMS Posts APIs (Full CRUD) ---
   async getPosts() {
     return this.request('/api/posts');
+  }
+
+  async getPostById(id) {
+    const res = await this.getPosts();
+    const posts = res && res.posts ? res.posts : [];
+    return posts.find(p => p.id === id) || null;
   }
 
   async createPost(postData) {
@@ -619,6 +811,12 @@ class ApiClient {
     return this.request(`/api/posts/${postId}`, {
       method: 'PUT',
       body: JSON.stringify(postData)
+    });
+  }
+
+  async deletePost(postId) {
+    return this.request(`/api/posts/${postId}`, {
+      method: 'DELETE'
     });
   }
 
@@ -673,6 +871,19 @@ class ApiClient {
 
   async getAuditLogs() {
     return this.request('/api/audit');
+  }
+
+  // --- Media & Device Storage Helper ---
+  getMedia() {
+    return MediaStorageService.getMediaItems();
+  }
+
+  saveMedia(name, dataUrl, type, size) {
+    return MediaStorageService.saveMediaItem(name, dataUrl, type, size);
+  }
+
+  deleteMedia(id) {
+    return MediaStorageService.deleteMediaItem(id);
   }
 }
 
