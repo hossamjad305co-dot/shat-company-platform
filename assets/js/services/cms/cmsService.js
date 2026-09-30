@@ -40,8 +40,8 @@ const SEED_COMPANY_POSTS = [
     excerpt_ar: "اختتام فعاليات البرنامج التدريبي التفاعلي حول الالتزامات التسعة للمعيار الإنساني الأساسي (CHS) بمشاركة ممثلي المنظمات الإنسانية والمحلية لتعزيز آليات المساءلة المجتمعية (AAP).",
     fullText: "اختتمت شركة شات للتنمية والتطوير البرنامج التدريبي الميداني المتقدم حول تطبيق معايير المعيار الإنساني الأساسي (Core Humanitarian Standard - CHS). ركزت الورشة على تدريب الكوادر التنفيذية ومسؤولي البرامج في المؤسسات الشريكة على الالتزامات التسعة للجودة والمساءلة، وتصميم أدوات المساءلة المجتمعية وآليات الشكاوى والملاحظات الفعالة، ودمج معايير Sphere Handbook في خطط الاستجابة الإنسانية.",
     content_rich_text: "<p>اختتمت شركة شات للتنمية والتطوير البرنامج التدريبي الميداني المتقدم حول تطبيق معايير المعيار الإنساني الأساسي (Core Humanitarian Standard - CHS).</p><p>ركزت الورشة على تدريب الكوادر التنفيذية ومسؤولي البرامج في المؤسسات الشريكة على الالتزامات التسعة للجودة والمساءلة، وتصميم أدوات المساءلة المجتمعية وآليات الشكاوى والملاحظات الفعالة، ودمج معايير Sphere Handbook في خطط الاستجابة الإنسانية.</p>",
-    img: "assets/logo/WhatsApp Image 2026-09-23 at 19.33.56 (1).jpeg",
-    cover_image_url: "assets/logo/WhatsApp Image 2026-09-23 at 19.33.56 (1).jpeg",
+    img: "assets/logo/logo-banner.jpg",
+    cover_image_url: "assets/logo/logo-banner.jpg",
     createdAt: "2026-09-20T10:00:00Z",
     publishedAt: "2026-09-21T09:00:00Z"
   },
@@ -68,8 +68,8 @@ const SEED_COMPANY_POSTS = [
     excerpt_ar: "تنفيذ الجلسات الاستشارية المتقدمة لبناء وتحديث سياسات الحماية وصون السلامة وتأسيس قنوات الإبلاغ الآمنة وسرية البيانات لدى المنظمات غير الحكومية.",
     fullText: "أطلقت شركة شات للتنمية والتطوير حزمة استشارية متقدمة لدعم منظمات المجتمع المدني في تطوير سياسات الحماية وصون السلامة (PSEA). تضمن البرنامج ورش عمل تطبيقية لصياغة مواثيق الشرف الوظيفية، وإجراءات التحقيق الإداري الداخلي، وإنشاء مسارات إحالة آمنة تضمن سرية الشكاوى وعدم الإضرار بالضحايا.",
     content_rich_text: "<p>أطلقت شركة شات للتنمية والتطوير حزمة استشارية متقدمة لدعم منظمات المجتمع المدني في تطوير سياسات الحماية وصون السلامة (PSEA).</p><p>تضمن البرنامج ورش عمل تطبيقية لصياغة مواثيق الشرف الوظيفية، وإجراءات التحقيق الإداري الداخلي، وإنشاء مسارات إحالة آمنة تضمن سرية الشكاوى وعدم الإضرار بالضحايا.</p>",
-    img: "assets/logo/WhatsApp Image 2026-09-23 at 19.33.56 (2).jpeg",
-    cover_image_url: "assets/logo/WhatsApp Image 2026-09-23 at 19.33.56 (2).jpeg",
+    img: "assets/logo/logo-circle.jpg",
+    cover_image_url: "assets/logo/logo-circle.jpg",
     createdAt: "2026-09-18T11:00:00Z",
     publishedAt: "2026-09-19T08:30:00Z"
   },
@@ -105,7 +105,7 @@ const SEED_MEDIA = [
   {
     id: "media_chs_banner",
     title: "ورشة CHS والمساءلة",
-    url: "assets/logo/WhatsApp Image 2026-09-23 at 19.33.56 (1).jpeg",
+    url: "assets/logo/logo-banner.jpg",
     size: "114 KB",
     type: "image/jpeg",
     createdAt: "2026-09-20"
@@ -113,10 +113,26 @@ const SEED_MEDIA = [
   {
     id: "media_psea_banner",
     title: "برنامج صون السلامة PSEA",
-    url: "assets/logo/WhatsApp Image 2026-09-23 at 19.33.56 (2).jpeg",
+    url: "assets/logo/logo-circle.jpg",
     size: "157 KB",
     type: "image/jpeg",
     createdAt: "2026-09-18"
+  },
+  {
+    id: "media_badge",
+    title: "شارة شات الرسمية",
+    url: "assets/logo/logo-badge.jpg",
+    size: "199 KB",
+    type: "image/jpeg",
+    createdAt: "2026-09-15"
+  },
+  {
+    id: "media_transparent",
+    title: "شعار شات شفاف (PNG)",
+    url: "assets/logo/logo-transparent.png",
+    size: "288 KB",
+    type: "image/png",
+    createdAt: "2026-09-10"
   },
   {
     id: "media_logo_banner",

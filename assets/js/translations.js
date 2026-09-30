@@ -309,7 +309,7 @@ export const translations = {
                   "platform": "Facebook",
                   "excerpt": "Conclusión de nuestro programa intensivo sobre los nueve compromisos de la Norma Humanitaria Esencial (CHS) para fortalecer la rendición de cuentas hacia las comunidades afectadas.",
                   "link": "https://www.facebook.com/shat.development.growth/",
-                  "img": "assets/logo/WhatsApp Image 2026-09-23 at 19.33.56 (1).jpeg"
+                  "img": "assets/logo/logo-banner.jpg"
             },
             {
                   "title": "Programa de Salvaguardia y Protección contra el Abuso (PSEA)",
@@ -318,7 +318,7 @@ export const translations = {
                   "platform": "Instagram",
                   "excerpt": "Desarrollo de asesorías institucionales para formular políticas de salvaguardia y canales de denuncia seguros y confidenciales.",
                   "link": "https://www.instagram.com/shat.development.growth/",
-                  "img": "assets/logo/WhatsApp Image 2026-09-23 at 19.33.56 (2).jpeg"
+                  "img": "assets/logo/logo-circle.jpg"
             },
             {
                   "title": "Misiones de Evaluación Externa Independiente (Criterios OCDE CAD)",
@@ -2008,7 +2008,7 @@ footer: {
                   "platform": "Facebook",
                   "excerpt": "Clôture de notre programme intensif sur les neuf engagements de la Norme Humanitaire Fondamentale (CHS) pour renforcer la redevabilité envers les populations affectées.",
                   "link": "https://www.facebook.com/shat.development.growth/",
-                  "img": "assets/logo/WhatsApp Image 2026-09-23 at 19.33.56 (1).jpeg"
+                  "img": "assets/logo/logo-banner.jpg"
             },
             {
                   "title": "Programme de Sauvegarde et Protection contre les Abus (PSEA)",
@@ -2017,7 +2017,7 @@ footer: {
                   "platform": "Instagram",
                   "excerpt": "Animation de sessions de conseil de haut niveau pour élaborer des politiques de sauvegarde institutionnelle et des circuits de signalement sécurisés.",
                   "link": "https://www.instagram.com/shat.development.growth/",
-                  "img": "assets/logo/WhatsApp Image 2026-09-23 at 19.33.56 (2).jpeg"
+                  "img": "assets/logo/logo-circle.jpg"
             },
             {
                   "title": "Missions d'Évaluation Externe Indépendante selon les Critères OCDE CAD",
@@ -2775,7 +2775,7 @@ footer: {
                   "platform": "Facebook",
                   "excerpt": "Conclusión de nuestro programa intensivo sobre los nueve compromisos de la Norma Humanitaria Esencial (CHS) para fortalecer la rendición de cuentas hacia las comunidades afectadas.",
                   "link": "https://www.facebook.com/shat.development.growth/",
-                  "img": "assets/logo/WhatsApp Image 2026-09-23 at 19.33.56 (1).jpeg"
+                  "img": "assets/logo/logo-banner.jpg"
             },
             {
                   "title": "Programa de Salvaguardia y Protección contra el Abuso (PSEA)",
@@ -2784,7 +2784,7 @@ footer: {
                   "platform": "Instagram",
                   "excerpt": "Desarrollo de asesorías institucionales para formular políticas de salvaguardia y canales de denuncia seguros y confidenciales.",
                   "link": "https://www.instagram.com/shat.development.growth/",
-                  "img": "assets/logo/WhatsApp Image 2026-09-23 at 19.33.56 (2).jpeg"
+                  "img": "assets/logo/logo-circle.jpg"
             },
             {
                   "title": "Misiones de Evaluación Externa Independiente (Criterios OCDE CAD)",
@@ -3362,7 +3362,7 @@ footer: {
                   "platform": "Facebook",
                   "excerpt": "Conclusione del programma interattivo sui nove impegni della Norma Umanitaria Fondamentale (CHS) per rafforzare la responsabilità verso le popolazioni colpite.",
                   "link": "https://www.facebook.com/shat.development.growth/",
-                  "img": "assets/logo/WhatsApp Image 2026-09-23 at 19.33.56 (1).jpeg"
+                  "img": "assets/logo/logo-banner.jpg"
             },
             {
                   "title": "Programma di Salvaguardia e Protezione contro gli Abusi (PSEA)",
@@ -3371,7 +3371,7 @@ footer: {
                   "platform": "Instagram",
                   "excerpt": "Consulenza avanzata per la formulazione di policy di salvaguardia istituzionale e canali di segnalazione sicuri e riservati.",
                   "link": "https://www.instagram.com/shat.development.growth/",
-                  "img": "assets/logo/WhatsApp Image 2026-09-23 at 19.33.56 (2).jpeg"
+                  "img": "assets/logo/logo-circle.jpg"
             },
             {
                   "title": "Missioni di Valutazione Esterna Indipendente (Criteri OCSE DAC)",

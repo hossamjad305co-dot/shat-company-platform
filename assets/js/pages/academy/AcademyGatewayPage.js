@@ -5,8 +5,8 @@
 import { courseService } from '../../services/courses/courseService.js';
 import { Breadcrumbs } from '../../components/ui/core.js';
 
-export function renderAcademyGatewayPage() {
-  const courses = courseService.getCourses();
+export async function renderAcademyGatewayPage() {
+  const courses = await courseService.getCourses();
 
   const breadcrumbs = [
     { label: 'الرئيسية', href: '#/home' },
@@ -16,8 +16,11 @@ export function renderAcademyGatewayPage() {
   return `
     <div class="academy-gateway-page" style="background: var(--bg-page); min-height: 100vh; padding-bottom: 60px;">
       <!-- Breadcrumb Bar -->
-      <div class="container" style="padding-top: var(--space-md); padding-bottom: var(--space-xs);">
+      <div class="container" style="padding-top: var(--space-md); padding-bottom: var(--space-xs); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
         ${Breadcrumbs({ items: breadcrumbs })}
+        <a href="#/home" style="text-decoration: none; font-weight: 700; color: var(--shat-navy-950); font-size: 0.88rem; display: inline-flex; align-items: center; gap: 6px;">
+          <span>← العودة للصفحة الرئيسية</span>
+        </a>
       </div>
 
       <!-- Hero Section -->

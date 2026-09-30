@@ -30,13 +30,13 @@ export const MODULAR_ROUTES = {
 
   // Academy LMS Core (Intelligent Visitor Gate vs Logged-In Student Dashboard)
   'academy': {
-    handler: (arg) => {
+    handler: async (arg) => {
       const user = authService.getCurrentUser();
       if (authService.isLoggedIn() && user && user.role !== 'visitor') {
-        if (user.role === 'instructor') return renderTeacherDashboardPage(arg);
-        return renderAcademyDashboardPage(arg);
+        if (user.role === 'instructor') return await renderTeacherDashboardPage(arg);
+        return await renderAcademyDashboardPage(arg);
       }
-      return renderAcademyGatewayPage();
+      return await renderAcademyGatewayPage();
     },
     init: () => {
       const user = authService.getCurrentUser();

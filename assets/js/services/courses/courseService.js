@@ -25,7 +25,7 @@ const DEV_FIXTURE_COURSES = [
     isFixture: true,
     googleFormUrl: "https://forms.gle/shat-chs-registration-2026",
     driveFolderUrl: "https://drive.google.com/drive/folders/shat-chs-materials",
-    coverImage: "assets/logo/WhatsApp Image 2026-09-23 at 19.33.56 (1).jpeg",
+    coverImage: "assets/logo/logo-banner.jpg",
     overview: "برنامج تدريبي تفاعلي معتمد دولياً لتأهيل قادة العمل الإنساني والمديرين التنفيذيين على حوكمة الالتزامات التسعة للمعيار الإنساني الأساسي (Core Humanitarian Standard)، وتصميم آليات المساءلة المجتمعية (AAP) ومواءمة خطط الاستجابة مع متطلبات Sphere Handbook والجهات المانحة.",
     chapters: [
       {
@@ -116,7 +116,7 @@ const DEV_FIXTURE_COURSES = [
     isFixture: true,
     googleFormUrl: "https://forms.gle/shat-psea-registration-2026",
     driveFolderUrl: "https://drive.google.com/drive/folders/shat-psea-materials",
-    coverImage: "assets/logo/WhatsApp Image 2026-09-23 at 19.33.56 (2).jpeg",
+    coverImage: "assets/logo/logo-circle.jpg",
     overview: "حزمة استشارية وتدريبية متقدمة موجهة لضباط الحماية ومسؤولي الموارد البشرية لتأسيس وتحديث سياسات الحماية من الاستغلال والانتهاك الجنسيين، والتحرش الوظيفي، وتصميم قنوات الإبلاغ المستقلة والمشفرة وفق متطلبات المانحين الدوليين ومبدأ عدم الإضرار.",
     chapters: [
       {

@@ -16,12 +16,12 @@ import { courseService } from '../../services/courses/courseService.js';
 import { settingsService } from '../../services/settings/settingsService.js';
 import { auditService } from '../../services/audit/auditService.js';
 import { parseGoogleDriveResource } from '../../services/files/fileService.js';
-import { PostEditorModal } from '../../components/cms/PostEditorModal.js';
+import { PostEditorModal, openPostEditor } from '../../components/cms/PostEditorModal.js';
 import { MediaLibraryModal } from '../../components/cms/MediaLibraryModal.js';
 
 let activeAdminTab = 'overview';
 
-export function renderAdminPortalPage() {
+export async function renderAdminPortalPage() {
   const user = authService.getCurrentUser();
   const isAdmin = authService.isAdmin();
 
@@ -34,7 +34,7 @@ export function renderAdminPortalPage() {
   const settings = settingsService.getSettings();
   const posts = cmsService.getAllPosts();
   const applications = applicationService.getAllApplications();
-  const courses = courseService.getCourses();
+  const courses = await courseService.getCourses();
   const media = cmsService.getMediaLibrary();
   const auditLogs = auditService.getLogs();
 
@@ -730,12 +730,13 @@ export function initAdminPortalEvents() {
     btn.addEventListener('click', () => {
       const action = btn.getAttribute('data-action');
       if (action === 'new-post') {
-        const createBtn = document.getElementById('btn-admin-create-post');
-        if (createBtn) createBtn.click();
+        openPostEditor(null, () => window.location.reload());
       } else if (action === 'goto-admissions') {
-        document.querySelector('.admin-tab-btn[data-tab="admissions"]')?.click();
+        const admissionsTab = document.querySelector('.admin-tab-btn[data-tab="admissions"]');
+        if (admissionsTab) admissionsTab.click();
       } else if (action === 'upload-media') {
-        document.getElementById('btn-trigger-device-upload')?.click();
+        const fileInput = document.getElementById('admin-device-file-input');
+        if (fileInput) fileInput.click();
       } else if (action === 'export-backup') {
         settingsService.exportFullBackup();
       }
@@ -746,7 +747,7 @@ export function initAdminPortalEvents() {
   const createPostBtn = document.getElementById('btn-admin-create-post');
   if (createPostBtn) {
     createPostBtn.addEventListener('click', () => {
-      window.openPostEditorModal(null, () => window.location.reload());
+      openPostEditor(null, () => window.location.reload());
     });
   }
 
@@ -768,7 +769,8 @@ export function initAdminPortalEvents() {
   document.querySelectorAll('.btn-edit-post').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = btn.getAttribute('data-id');
-      window.openPostEditorModal(id, () => window.location.reload());
+      const post = cmsService.getAllPosts().find(p => p.id === id);
+      openPostEditor(post, () => window.location.reload());
     });
   });
 
@@ -778,6 +780,21 @@ export function initAdminPortalEvents() {
       const id = btn.getAttribute('data-id');
       if (confirm('هل أنت متأكد من حذف هذا المنشور؟')) {
         cmsService.deletePost(id);
+        window.location.reload();
+      }
+    });
+  });
+
+  // 8.1 Courses & Drive Direct Download Link Editor
+  document.querySelectorAll('.btn-edit-course-drive').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-id');
+      const currentUrl = localStorage.getItem(`shat_course_drive_${id}`) || 'https://drive.google.com/file/d/.../view';
+      const newUrl = prompt(`أدخل رابط Google Drive المباشر لهذا المساق (${id}):\n(يقبل روابط الملفات والمستندات وجداول البيانات والمجلدات)`, currentUrl);
+      if (newUrl && newUrl.trim()) {
+        const parsed = parseGoogleDriveResource(newUrl.trim());
+        localStorage.setItem(`shat_course_drive_${id}`, newUrl.trim());
+        alert(`✓ تم حفظ رابط Google Drive للمساق بنجاح!\n\n• نوع المورد: ${parsed.type}\n• إمكانية التحميل المباشر: ${parsed.canDirectDownload ? 'نعم (تنزيل تلقائي للطالب)' : 'لا (عرض في المتصفح)'}\n• رابط التحميل المشتق: ${parsed.downloadUrl || 'غير متاح'}`);
         window.location.reload();
       }
     });

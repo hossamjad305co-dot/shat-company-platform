@@ -18,7 +18,7 @@ const DEFAULT_CMS_DATA = {
       platform: "Facebook",
       excerpt: "اختتام فعاليات البرنامج التدريبي التفاعلي حول الالتزامات التسعة للمعيار الإنساني الأساسي (CHS) بمشاركة ممثلي المنظمات الإنسانية والمحلية لتعزيز آليات المساءلة المجتمعية (AAP).",
       link: "https://www.facebook.com/shat.development.growth/",
-      img: "assets/logo/WhatsApp Image 2026-09-23 at 19.33.56 (1).jpeg"
+      img: "assets/logo/logo-banner.jpg"
     },
     {
       id: "post-2",
@@ -28,7 +28,7 @@ const DEFAULT_CMS_DATA = {
       platform: "Instagram",
       excerpt: "تنفيذ الجلسات الاستشارية المتقدمة لبناء وتحديث سياسات الحماية وصون السلامة وتأسيس قنوات الإبلاغ الآمنة وسرية البيانات لدى المنظمات غير الحكومية.",
       link: "https://www.instagram.com/shat.development.growth/",
-      img: "assets/logo/WhatsApp Image 2026-09-23 at 19.33.56 (2).jpeg"
+      img: "assets/logo/logo-circle.jpg"
     },
     {
       id: "post-3",

@@ -20,9 +20,18 @@ export async function renderCourseRegistrationPage(selectedCourseId = '') {
     title: 'طلب التسجيل والالتحاق بالبرامج التدريبية | شركة شات للتنمية',
     breadcrumbs,
     children: `
-      <section class="registration-page-section" style="padding: 40px 16px 80px; max-width: 800px; margin: 0 auto;">
+      <section class="registration-page-section" style="padding: 24px 16px 80px; max-width: 800px; margin: 0 auto;">
         
-        <!-- Header -->
+        <!-- Back Navigation Bar -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 12px;">
+          <a href="#/academy" style="text-decoration: none; font-weight: 700; color: var(--shat-navy-950); display: inline-flex; align-items: center; gap: 6px; font-size: 0.92rem;">
+            <span style="font-size: 1.1rem;">←</span>
+            <span>العودة للأكاديمية والمساقات</span>
+          </a>
+          <a href="#/home" style="text-decoration: none; font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">
+            الرئيسية ↗
+          </a>
+        </div>
         <div style="text-align: center; margin-bottom: 32px;">
           <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(75, 136, 52, 0.12); color: var(--shat-green-800); padding: 6px 16px; border-radius: var(--radius-full); font-size: 0.85rem; font-weight: 700; margin-bottom: 12px;">
             🎓 التسجيل الأكاديمي والمهني المعتمد
