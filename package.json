@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "node tests/production_readiness_suite.js && node tests/phase4_suite.js && node tests/verify_standards_content.js"
+    "test": "node tests/minimalist_platform_suite.js"
   },
   "devDependencies": {
     "vite": "^6.2.0"

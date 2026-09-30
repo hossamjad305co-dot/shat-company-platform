@@ -4,582 +4,111 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>شركة شات للتنمية والتطوير | SHAT Development & Growth</title>
-  <meta name="description" content="منصة شركة شات للتنمية والتطوير — بناء القدرات، تعزيز المؤسسات، وتطوير النتائج. حلول تدريبية ونظام مودل متقدم وفق المعايير الدولية والإنسانية.">
-  <meta name="keywords" content="شات للتنمية, تدريب, نظام مودل, استشارات مؤسسية, تقييم مشاريع, حماية وصون السلامة, SHAT Development, Moodle, Capacity Building">
-  
-  <!-- PWA & Mobile Web Capabilities -->
-  <meta name="theme-color" content="#0F2E4A">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="SHAT Platform">
+  <meta name="description" content="شركة شات للتنمية والتطوير — بيت خبرة واستشارات دولي متخصص في بناء القدرات، تعزيز المؤسسات، وتطوير النتائج وفق أعلى المعايير الدولية والإنسانية.">
   <link rel="icon" type="image/png" href="assets/logo/logo-transparent.png">
   <link rel="apple-touch-icon" href="assets/logo/logo-symbol.jpg">
-  <link rel="canonical" href="https://shat-company-platform.vercel.app/">
-
-  <!-- OpenGraph & Twitter Social Cards (SEO) -->
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="شركة شات للتنمية والتطوير">
-  <meta property="og:title" content="شركة شات للتنمية والتطوير | SHAT Development & Growth">
-  <meta property="og:description" content="بناء القدرات • تعزيز المؤسسات • تطوير النتائج. منصة التدريب والاستشارات المؤسسية المعتمدة.">
-  <meta property="og:image" content="https://shat-company-platform.vercel.app/assets/logo/logo-banner.jpg">
-  <meta property="og:url" content="https://shat-company-platform.vercel.app/">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="شركة شات للتنمية والتطوير | SHAT Development & Growth">
-  <meta name="twitter:description" content="بناء القدرات • تعزيز المؤسسات • تطوير النتائج. منصة التدريب والاستشارات المؤسسية المعتمدة.">
-  <meta name="twitter:image" content="https://shat-company-platform.vercel.app/assets/logo/logo-banner.jpg">
-
-  <!-- Lordicon for Animated Interactive Icons -->
-  <script src="https://cdn.lordicon.com/lordicon.js"></script>
-
-  <!-- Design Tokens & Stylesheets -->
-  <link rel="stylesheet" href="assets/css/variables.css">
-  <link rel="stylesheet" href="assets/css/components/design-system.css">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-  <!-- VISUAL LOADING SCREEN (Header z-index: 1000, Loader z-index: 900 as required) -->
-  <div id="shat-page-loader" class="shat-loader-screen" aria-label="Loading platform">
-    <div class="loader-content">
-      <img src="assets/logo/logo-transparent.png" alt="SHAT Logo" class="loader-pulse-logo" onerror="this.src='assets/logo/logo-symbol.jpg'">
-      <div class="loader-spinner-ring"></div>
-      <div class="loader-status-text">شركة شات للتنمية والتطوير</div>
-      <div class="loader-sub-text">بناء القدرات • تعزيز المؤسسات • تطوير النتائج</div>
-    </div>
-  </div>
-
-  <!-- Top Utility Notice Bar (Fixed Top) -->
-  <aside class="top-notice-bar" aria-label="Company Overview and Motto">
-    <div class="container top-notice-inner">
-      <div class="top-pills">
-        <span class="top-pill" id="top-pill-training">التدريب</span>
-        <span class="top-pill consulting" id="top-pill-consulting">الاستشارات</span>
-        <span class="top-motto" id="top-bar-motto">الإنسان • المهارات • غدٌ أكثر إشراقاً</span>
+  <!-- Top Utility Notice Bar -->
+  <aside class="site-top-bar" aria-label="Company Overview">
+    <div class="container">
+      <div class="top-motto-tag">
+        بناء القدرات • تعزيز المؤسسات • تطوير النتائج | PEOPLE • SKILLS • A BRIGHTER TOMORROW
       </div>
-      <div class="top-contact-quick">
-        <a href="https://wa.me/972592879621" target="_blank" rel="noopener" class="top-contact-link">
-          <span>واتساب: +972592879621</span>
-        </a>
-        <span style="opacity: 0.4;">|</span>
-        <a href="mailto:shat.company26@gmail.com" class="top-contact-link">
-          <span>shat.company26@gmail.com</span>
-        </a>
+      <div class="top-contact-links">
+        <a href="https://wa.me/972592879621" target="_blank" rel="noopener">واتساب: +972 59 287 9621</a>
+        <span style="opacity: 0.3;">|</span>
+        <a href="mailto:shat.company26@gmail.com">shat.company26@gmail.com</a>
       </div>
     </div>
   </aside>
 
-  <!-- Main Navigation Header (Fixed Below Top Bar at z-index: 1000) -->
-  <header class="main-header" id="site-header">
-    <div class="container header-container">
-      <!-- Brand Logo -->
-      <a href="#/home" class="brand-link" title="Shat Company Platform">
-        <img src="assets/logo/logo-transparent.png" alt="SHAT Emblem" class="brand-emblem" onerror="this.src='assets/logo/logo-clean.jpg'">
-        <div class="brand-text-block">
-          <span class="brand-name">SHAT</span>
-          <span class="brand-sub">Development & Growth</span>
-        </div>
-      </a>
-
-      <!-- Desktop Navigation Menu (Numbered 01 to 08 + Academy Moodle) -->
-      <nav class="desktop-nav" id="desktop-nav" aria-label="Main Navigation">
-        <!-- Injected dynamically by app.js -->
-      </nav>
-
-      <!-- Header Tools & Language Selector -->
-      <div class="header-actions">
-        <!-- Auth Button with Status Dot -->
-        <button class="header-login-btn" id="header-auth-btn" title="تسجيل الدخول / الحساب">
-          <span class="status-dot online"></span>
-          <span id="auth-btn-label">دخول / حسابي</span>
-        </button>
-
-        <!-- Language Picker -->
-        <div class="lang-selector">
-          <button class="lang-btn" id="lang-toggle-btn" aria-haspopup="true" aria-expanded="false" title="Change Language">
-            <span id="current-lang-text">🌐 العربية</span>
-            <span style="font-size: 0.72rem;">▼</span>
-          </button>
-          <div class="lang-dropdown" id="lang-dropdown-menu" role="menu">
-            <button class="lang-option" data-lang="ar" role="menuitem">
-              <span>🇸🇦 العربية</span>
-              <span style="font-size: 0.75rem; opacity: 0.7;">AR</span>
-            </button>
-            <button class="lang-option" data-lang="en" role="menuitem">
-              <span>🇬🇧 English</span>
-              <span style="font-size: 0.75rem; opacity: 0.7;">EN</span>
-            </button>
+  <!-- Main Navigation Header -->
+  <header class="site-header" id="main-site-header">
+    <div class="container">
+      <div class="header-wrapper">
+        <!-- Brand Identity -->
+        <a href="#/home" class="brand-identity" title="شركة شات للتنمية والتطوير">
+          <img src="assets/logo/logo-transparent.png" alt="SHAT Emblem" class="brand-logo-img" onerror="this.src='assets/logo/logo-circle.jpg'">
+          <div class="brand-text-block">
+            <span class="brand-title" id="header-brand-title">شركة شات للتنمية والتطوير</span>
+            <span class="brand-subtitle" id="header-brand-sub">SHAT Development & Growth</span>
           </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="nav-menu" id="site-desktop-nav" aria-label="Main Navigation">
+          <!-- Populated dynamically by app.js -->
+        </nav>
+
+        <!-- Actions -->
+        <div class="header-actions">
+          <button class="btn-clean btn-secondary btn-sm" id="btn-toggle-lang" title="تبديل اللغة / Switch Language">
+            🌐 English
+          </button>
+          <a href="#/contact" class="btn-clean btn-primary btn-sm">
+            طلب استشارة
+          </a>
+          <button class="mobile-toggle" id="btn-mobile-menu" aria-label="فتح القائمة">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
         </div>
-
-        <!-- CTA Consultation Button -->
-        <button class="btn-cta" id="header-cta-btn">
-          طلب استشارة
-        </button>
-
-        <!-- Mobile Drawer Toggle -->
-        <button class="mobile-nav-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-        </button>
       </div>
     </div>
   </header>
 
-  <!-- Mobile Drawer Menu (Nav Drawer) -->
-  <aside id="mobile-drawer" style="position: fixed; top: 0; right: 0; bottom: 0; width: 310px; background: #ffffff; z-index: var(--z-drawer); box-shadow: var(--shadow-xl); transform: translateX(100%); transition: transform 0.3s ease; padding: 22px; display: flex; flex-direction: column; overflow-y: auto;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);">
-      <div style="display: flex; align-items: center; gap: 8px;">
-        <img src="assets/logo/logo-transparent.png" alt="SHAT" style="height: 32px;" onerror="this.src='assets/logo/logo-symbol.jpg'">
-        <span style="font-weight: 800; color: var(--shat-navy-950); font-size: 1rem;">قائمة الأقسام</span>
+  <!-- Mobile Drawer Menu -->
+  <aside id="mobile-drawer-nav" style="position: fixed; inset: 0; background: rgba(15,23,42,0.6); z-index: 1500; display: none; backdrop-filter: blur(4px);">
+    <div style="position: absolute; top: 0; right: 0; bottom: 0; width: 280px; background: #FFFFFF; padding: 24px; display: flex; flex-direction: column; gap: 16px; box-shadow: -4px 0 20px rgba(0,0,0,0.15);">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-light); padding-bottom: 14px;">
+        <span style="font-weight: 800; color: var(--shat-navy);">القائمة الرئيسية</span>
+        <button id="btn-close-mobile-drawer" style="font-size: 1.25rem; color: var(--text-muted);">✕</button>
       </div>
-      <button id="mobile-drawer-close" style="background: transparent; border: none; font-size: 1.4rem; cursor: pointer; color: var(--text-muted);">✕</button>
+      <nav style="display: flex; flex-direction: column; gap: 12px; font-weight: 700;">
+        <a href="#/home" class="nav-link">الرئيسية</a>
+        <a href="#/about" class="nav-link">نبذة عن شات</a>
+        <a href="#/services" class="nav-link">خدماتنا ونظمنا</a>
+        <a href="#/standards" class="nav-link">المرجعيات والمعايير</a>
+        <a href="#/delivery" class="nav-link">نموذج العمل</a>
+        <a href="#/academy" class="nav-link">الأكاديمية والتدريب</a>
+        <a href="#/contact" class="nav-link">تواصل معنا</a>
+        <a href="#/admin" class="nav-link" style="color: var(--shat-green);">⚙️ المركز الإداري</a>
+      </nav>
     </div>
-    <nav id="mobile-nav-links" style="display: flex; flex-direction: column; gap: 10px;">
-      <!-- Populated dynamically by app.js -->
-    </nav>
   </aside>
 
-  <!-- Main Dynamic Route View Container -->
+  <!-- Dynamic Page Content Container -->
   <main id="app-content">
-    <!-- Populated dynamically by router.js -->
+    <!-- Rendered dynamically by router.js -->
   </main>
 
-  <!-- Consultation Request Modal -->
-  <div class="modal-overlay" id="consultation-modal" role="dialog" aria-modal="true">
-    <div class="modal-box">
-      <button class="modal-close-btn" id="modal-close-button" aria-label="Close dialog">✕</button>
-      <div id="consultation-modal-content">
-        <!-- Rendered by app.js -->
-      </div>
-    </div>
-  </div>
-
-  <!-- Authentication Modal (Username/Password + WhatsApp OTP Registration + Google) -->
-  <div class="modal-overlay" id="auth-modal" role="dialog" aria-modal="true">
-    <div class="modal-box" style="max-width: 520px; padding: 28px 24px;">
-      <button class="modal-close-btn" id="auth-modal-close-btn" aria-label="Close dialog">✕</button>
-      <div id="auth-modal-content">
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
-          <img src="assets/logo/logo-transparent.png" alt="SHAT" style="height: 34px;" onerror="this.src='assets/logo/logo-symbol.jpg'">
-          <div>
-            <h2 id="auth-modal-title" style="font-size: 1.35rem; font-weight: 800; color: var(--shat-navy-950); margin: 0;">
-              بوابة الدخول إلى المنصة والمودل
-            </h2>
-            <div style="font-size: 0.78rem; color: var(--shat-green-700); font-weight: 600;">SHAT Development & Growth LMS</div>
-          </div>
-        </div>
-
-        <p id="auth-modal-subtitle" style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 16px;">
-          الدخول ببيانات الحساب، أو التسجيل لأول مرة عبر رمز التحقق المباشر OTP
-        </p>
-
-        <!-- Main Auth Navigation Tabs -->
-        <div class="auth-tab-row" style="margin-bottom: 18px; display: flex; gap: 6px; background: #f1f5f9; padding: 4px; border-radius: var(--radius-md);">
-          <button class="auth-tab-btn active" id="tab-auth-login" style="flex: 1; padding: 8px 12px; font-size: 0.85rem; font-weight: 700; border-radius: var(--radius-sm); border: none; cursor: pointer;">
-            🔑 تسجيل الدخول
-          </button>
-          <button class="auth-tab-btn" id="tab-auth-register" style="flex: 1; padding: 8px 12px; font-size: 0.85rem; font-weight: 700; border-radius: var(--radius-sm); border: none; cursor: pointer;">
-            📱 تسجيل جديد (OTP)
-          </button>
-          <button class="auth-tab-btn" id="tab-auth-google" style="padding: 8px 12px; font-size: 0.85rem; font-weight: 700; border-radius: var(--radius-sm); border: none; cursor: pointer;">
-            🌐 Google
-          </button>
-        </div>
-
-        <!-- 1. PANE: Password Login (Username or Email) -->
-        <div id="auth-pane-login">
-          <form id="form-password-login">
-            <div class="form-group" style="margin-bottom: 12px;">
-              <label class="form-label" style="font-weight: 700; font-size: 0.86rem;">اسم المستخدم أو البريد الإلكتروني:</label>
-              <input type="text" id="login-identifier" class="form-input" placeholder="اسم المستخدم أو بريدك الإلكتروني" required autocomplete="username">
-            </div>
-
-            <div class="form-group" style="margin-bottom: 14px;">
-              <label class="form-label" style="font-weight: 700; font-size: 0.86rem;">كلمة المرور:</label>
-              <input type="password" id="login-password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
-            </div>
-
-            <!-- Quick Demo Accounts Helper (Visible only in Development Mode) -->
-            <div id="demo-account-chips-wrapper" style="display: none; background: #f8fafc; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 10px; margin-bottom: 16px;">
-              <div style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 6px;">
-                ⚡ حسابات تجريبية سريعة (بيئة التطوير فقط):
-              </div>
-              <div style="display: flex; flex-wrap: wrap; gap: 6px;" id="demo-account-chips">
-                <button type="button" class="btn-demo-fill" data-user="admin" data-pass="admin" style="background: #ffffff; border: 1px solid var(--border-subtle); padding: 4px 8px; border-radius: 4px; font-size: 0.76rem; cursor: pointer; color: #1e3a8a; font-weight: 600;">
-                  ⚙️ المدير (admin)
-                </button>
-                <button type="button" class="btn-demo-fill" data-user="instructor" data-pass="teach" style="background: #ffffff; border: 1px solid var(--border-subtle); padding: 4px 8px; border-radius: 4px; font-size: 0.76rem; cursor: pointer; color: #065f46; font-weight: 600;">
-                  👨‍🏫 مدرب (instructor)
-                </button>
-                <button type="button" class="btn-demo-fill" data-user="student" data-pass="student" style="background: #ffffff; border: 1px solid var(--border-subtle); padding: 4px 8px; border-radius: 4px; font-size: 0.76rem; cursor: pointer; color: #92400e; font-weight: 600;">
-                  🎓 طالب (student)
-                </button>
-                <button type="button" class="btn-demo-fill" data-user="registrar" data-pass="reg" style="background: #ffffff; border: 1px solid var(--border-subtle); padding: 4px 8px; border-radius: 4px; font-size: 0.76rem; cursor: pointer; color: #475569; font-weight: 600;">
-                  📋 قبول وتسجيل (registrar)
-                </button>
-              </div>
-            </div>
-
-            <button type="submit" class="btn-cta" id="btn-submit-password-login" style="width: 100%; padding: 11px; font-weight: 700;">
-              تسجيل الدخول إلى المنصة
-            </button>
-          </form>
-
-          <div style="margin-top: 14px; text-align: center; border-top: 1px solid var(--border-subtle); padding-top: 12px;">
-            <a href="#/register-course" class="modal-link-btn" id="link-goto-googleform" style="font-size: 0.84rem; color: var(--shat-green-700); font-weight: 700; text-decoration: none;">
-              📝 تسجيل طالب جديد في دورة تدريبية (Google Form) ↗
-            </a>
-          </div>
-        </div>
-
-        <!-- 2. PANE: First-Time Registration via WhatsApp OTP -->
-        <div id="auth-pane-register" style="display: none;">
-          <!-- Step 1: Fill Info & Send OTP -->
-          <div id="reg-step-inputs">
-            <div class="form-group" style="margin-bottom: 10px;">
-              <label class="form-label" style="font-weight: 700; font-size: 0.84rem;">الاسم الرباعي الكامل *</label>
-              <input type="text" id="reg-fullname" class="form-input" placeholder="مثال: أحمد عبد الله خليل" required>
-            </div>
-
-            <div class="grid-2" style="gap: 10px; margin-bottom: 10px;">
-              <div class="form-group">
-                <label class="form-label" style="font-weight: 700; font-size: 0.84rem;">رقم واتساب (مع رمز الدولة) *</label>
-                <input type="tel" id="reg-phone" class="form-input" placeholder="+972592879621" dir="ltr" required value="+97259">
-              </div>
-              <div class="form-group">
-                <label class="form-label" style="font-weight: 700; font-size: 0.84rem;">البريد الإلكتروني</label>
-                <input type="email" id="reg-email" class="form-input" placeholder="name@domain.com">
-              </div>
-            </div>
-
-            <div class="grid-2" style="gap: 10px; margin-bottom: 14px;">
-              <div class="form-group">
-                <label class="form-label" style="font-weight: 700; font-size: 0.84rem;">تعيين كلمة المرور *</label>
-                <input type="password" id="reg-password" class="form-input" placeholder="اختر كلمة مرور" required>
-              </div>
-              <div class="form-group">
-                <label class="form-label" style="font-weight: 700; font-size: 0.84rem;">نوع الحساب المطلوب</label>
-                <select id="reg-role" class="form-select">
-                  <option value="student">🎓 طالب / متدرب (Student)</option>
-                  <option value="instructor">👨‍🏫 مدرب / خبير (Instructor)</option>
-                </select>
-              </div>
-            </div>
-
-            <button type="button" class="btn-cta" id="btn-trigger-reg-otp" style="width: 100%; padding: 11px;">
-              📱 إرسال رمز التحقق OTP عبر واتساب (WaForge)
-            </button>
-            <span style="font-size: 0.75rem; color: var(--text-muted); display: block; text-align: center; margin-top: 6px;">
-              يتم إرسال رمز أمان مكون من 6 أرقام عبر واتساب لتأكيد رقمك
-            </span>
-          </div>
-
-          <!-- Step 2: Verify OTP -->
-          <div id="reg-step-verify" style="display: none;">
-            <div style="background: #e8f5e9; border: 1px solid #c8e6c9; border-radius: var(--radius-sm); padding: 12px; margin-bottom: 14px; font-size: 0.85rem; color: #1b5e20;">
-              ✓ تم إرسال رمز التحقق بنجاح إلى: <strong id="reg-display-phone"></strong>
-              <div id="reg-demo-otp-display" style="margin-top: 6px; font-weight: 800; font-size: 1rem; color: #166534; background: #ffffff; padding: 6px 10px; border-radius: 4px; display: inline-block;"></div>
-            </div>
-
-            <label class="form-label" style="font-weight: 700; text-align: center; display: block; margin-bottom: 8px;">
-              أدخل رمز التحقق (6 أرقام):
-            </label>
-            <div class="otp-box-inputs" style="display: flex; justify-content: center; gap: 8px; margin-bottom: 14px;">
-              <input type="text" maxlength="1" class="otp-input-digit" id="reg-otp-1" style="width: 42px; height: 48px; text-align: center; font-size: 1.3rem; font-weight: 800; border: 2px solid var(--border-subtle); border-radius: 8px;">
-              <input type="text" maxlength="1" class="otp-input-digit" id="reg-otp-2" style="width: 42px; height: 48px; text-align: center; font-size: 1.3rem; font-weight: 800; border: 2px solid var(--border-subtle); border-radius: 8px;">
-              <input type="text" maxlength="1" class="otp-input-digit" id="reg-otp-3" style="width: 42px; height: 48px; text-align: center; font-size: 1.3rem; font-weight: 800; border: 2px solid var(--border-subtle); border-radius: 8px;">
-              <input type="text" maxlength="1" class="otp-input-digit" id="reg-otp-4" style="width: 42px; height: 48px; text-align: center; font-size: 1.3rem; font-weight: 800; border: 2px solid var(--border-subtle); border-radius: 8px;">
-              <input type="text" maxlength="1" class="otp-input-digit" id="reg-otp-5" style="width: 42px; height: 48px; text-align: center; font-size: 1.3rem; font-weight: 800; border: 2px solid var(--border-subtle); border-radius: 8px;">
-              <input type="text" maxlength="1" class="otp-input-digit" id="reg-otp-6" style="width: 42px; height: 48px; text-align: center; font-size: 1.3rem; font-weight: 800; border: 2px solid var(--border-subtle); border-radius: 8px;">
-            </div>
-
-            <button type="button" class="btn-cta" id="btn-confirm-reg-otp" style="width: 100%; padding: 11px;">
-              ✓ تأكيد وتفعيل الحساب والدخول فوراً
-            </button>
-            <button type="button" id="btn-reg-back-inputs" style="background: none; border: none; color: var(--text-muted); font-size: 0.82rem; margin-top: 10px; width: 100%; cursor: pointer;">
-              ← تعديل البيانات ورقم الهاتف
-            </button>
-          </div>
-        </div>
-
-        <!-- 3. PANE: Google SSO Login -->
-        <div id="auth-pane-google" style="display: none; text-align: center; padding: 20px 0;">
-          <p style="font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 20px;">
-            تسجيل الدخول السريع الموحد بحساب Google المؤسسي
-          </p>
-          <button type="button" id="btn-google-login-action" class="btn-secondary" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px; font-weight: 700;">
-            <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.15z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.15C3.25 21.37 7.34 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.26C.46 8.16 0 9.97 0 12s.46 3.84 1.26 5.42l4.02-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.25 2.63 1.26 6.58l4.02 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg>
-            <span>الدخول عبر Google</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Social Media & Field Post Reader Modal -->
-  <div class="modal-overlay" id="post-reader-modal" role="dialog" aria-modal="true">
-    <div class="modal-box" style="max-width: 760px; padding: 0; overflow: hidden; border-radius: var(--radius-xl); box-shadow: var(--shadow-xl);">
-      <button class="modal-close-btn" id="post-reader-close-btn" aria-label="Close dialog" style="position: absolute; top: 14px; inset-inline-end: 14px; z-index: 10; background: rgba(10,15,29,0.7); color: #ffffff; width: 34px; height: 34px; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">✕</button>
-      <div id="post-reader-content">
-        <!-- Rendered dynamically by router.js -->
-      </div>
-    </div>
-  </div>
-
-  <!-- Academic Permissions Guard Modal (Blocks visitors from direct material downloads) -->
-  <div class="modal-overlay" id="modal-permission-guard" role="dialog" aria-modal="true">
-    <div class="modal-box" style="max-width: 580px; padding: 36px 28px; text-align: center; border-radius: var(--radius-xl); box-shadow: var(--shadow-xl); border: 2px solid #fecaca; background: #ffffff;">
-      <button class="modal-close-btn" id="btn-close-perm-guard" aria-label="Close dialog" style="position: absolute; top: 16px; inset-inline-end: 16px; background: none; border: none; font-size: 1.25rem; cursor: pointer; color: var(--text-muted);">✕</button>
-      
-      <div style="width: 70px; height: 70px; border-radius: 50%; background: #fef2f2; border: 2.5px solid #ef4444; display: flex; align-items: center; justify-content: center; color: #dc2626; margin: 0 auto 16px;">
-        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-      </div>
-
-      <div style="font-size: 0.8rem; font-weight: 800; color: #dc2626; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">
-        🔒 تنبيه الصلاحيات والاعتماد الأكاديمي
-      </div>
-
-      <h3 style="font-size: 1.45rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 12px;" id="perm-guard-title">
-        المواد التدريبية المعتمدة مخصصة للمتدربين المسجلين فقط
-      </h3>
-
-      <p style="font-size: 0.94rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px;" id="perm-guard-msg">
-        وفقاً للوائح الحوكمة وضبط الجودة لشركة شات (SHAT)، لا يُسمح للزوار غير المسجلين بالتحميل المباشر للحقائب التدريبية الرسمية أو الوصول لمجلدات Google Drive المعتمدة بدون تسجيل الدخول بحساب طالب مفعل أو هيئة التدريس.
-      </p>
-
-      <div style="display: flex; flex-direction: column; gap: 10px; max-width: 440px; margin: 0 auto;">
-        <button type="button" class="btn-cta btn-open-login-from-guard" style="padding: 12px; font-size: 0.92rem; justify-content: center; display: flex; align-items: center; gap: 8px;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>
-          <span>تسجيل الدخول بحساب المتدرب أو المدرب</span>
-        </button>
-
-        <a href="#/register-course" class="btn-secondary" id="perm-guard-gform-btn" style="padding: 12px; font-size: 0.9rem; justify-content: center; display: flex; align-items: center; gap: 8px; border-color: #10b981; color: #047857; text-decoration: none;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M9 12h6"/><path d="M9 16h6"/></svg>
-          <span>تقديم طلب تسجيل والتحاق بالدورة ↗</span>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Admin Image & Media Customizer Modal -->
-  <div class="modal-overlay" id="modal-admin-image-editor" role="dialog" aria-modal="true">
-    <div class="modal-box" style="max-width: 620px; padding: 28px; border-radius: var(--radius-xl); box-shadow: var(--shadow-xl); background: #ffffff;">
-      <button class="modal-close-btn" id="btn-close-image-editor" aria-label="Close dialog" style="position: absolute; top: 16px; inset-inline-end: 16px; background: none; border: none; font-size: 1.25rem; cursor: pointer; color: var(--text-muted);">✕</button>
-      
-      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 12px;">
-        <div style="width: 38px; height: 38px; border-radius: 8px; background: #eff6ff; border: 1.5px solid #3b82f6; display: flex; align-items: center; justify-content: center; color: #1d4ed8;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-        </div>
-        <div>
-          <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--shat-navy-950); margin: 0;" id="image-editor-title">
-            تعديل واستبدال الصورة
-          </h3>
-          <span style="font-size: 0.78rem; color: #2563eb; font-weight: 600;">صلاحيات المدير العام (Admin Media Controller)</span>
-        </div>
-      </div>
-
-      <!-- Live Preview Box -->
-      <div style="margin-bottom: 16px; text-align: center;">
-        <label style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 6px; text-align: start;">المعاينة الحية للصورة:</label>
-        <div style="height: 180px; border-radius: var(--radius-lg); overflow: hidden; background: #f8fafc; border: 2px dashed #cbd5e1; display: flex; align-items: center; justify-content: center; position: relative;">
-          <img id="image-editor-preview" src="/assets/logo/logo-badge.jpg" alt="Preview" style="max-width: 100%; max-height: 100%; object-fit: contain;">
-        </div>
-      </div>
-
-      <!-- Input for Custom URL -->
-      <div style="margin-bottom: 16px;">
-        <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 6px;">رابط الصورة الجديد (Image URL أو مسار محلي):</label>
-        <input type="text" id="image-editor-url-input" class="form-input" style="width: 100%; font-size: 0.88rem;" dir="ltr" placeholder="https://... أو /assets/...">
-      </div>
-
-      <!-- Preset Gallery Selection -->
-      <div style="margin-bottom: 20px;">
-        <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 8px;">أو اختر من مكتبة صور المنصة الرسمية المعتمدة:</label>
-        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; max-height: 150px; overflow-y: auto; padding: 4px;" id="image-preset-picker">
-          <!-- Injected dynamically by router.js -->
-        </div>
-      </div>
-
-      <div style="display: flex; justify-content: flex-end; gap: 10px; border-top: 1px solid var(--border-subtle); padding-top: 16px;">
-        <button type="button" class="btn-secondary" id="btn-cancel-image-edit" style="padding: 9px 18px;">إلغاء</button>
-        <button type="button" class="btn-cta" id="btn-save-image-edit" style="padding: 9px 24px;">حفظ وتطبيق فوراً ✓</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Admin Social Post Editor Modal -->
-  <div class="modal-overlay" id="modal-admin-post-editor" role="dialog" aria-modal="true">
-    <div class="modal-box" style="max-width: 640px; padding: 28px; border-radius: var(--radius-xl); box-shadow: var(--shadow-xl); background: #ffffff;">
-      <button class="modal-close-btn" id="btn-close-post-editor" aria-label="Close dialog" style="position: absolute; top: 16px; inset-inline-end: 16px; background: none; border: none; font-size: 1.25rem; cursor: pointer; color: var(--text-muted);">✕</button>
-      
-      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 12px;">
-        <div style="width: 38px; height: 38px; border-radius: 8px; background: #eff6ff; border: 1.5px solid #3b82f6; display: flex; align-items: center; justify-content: center; color: #1d4ed8;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-        </div>
-        <div>
-          <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--shat-navy-950); margin: 0;">
-            تعديل بيانات وصورة المنشور (Facebook / Instagram)
-          </h3>
-          <span style="font-size: 0.78rem; color: #2563eb; font-weight: 600;">لوحة تحكم المدير العام (CMS Post Editor)</span>
-        </div>
-      </div>
-
-      <form id="form-admin-post-editor">
-        <input type="hidden" id="admin-post-edit-id">
-
-        <div style="margin-bottom: 12px;">
-          <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 4px;">عنوان المنشور:</label>
-          <input type="text" id="admin-post-edit-title" class="form-input" style="width: 100%; font-size: 0.88rem;" required>
-        </div>
-
-        <div style="margin-bottom: 12px;">
-          <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 4px;">رابط صورة المنشور (Image URL):</label>
-          <div style="display: flex; gap: 8px;">
-            <input type="text" id="admin-post-edit-img" class="form-input" style="flex: 1; font-size: 0.88rem;" dir="ltr" required>
-            <button type="button" class="btn-secondary" id="btn-pick-post-preset-img" style="padding: 6px 12px; font-size: 0.8rem; white-space: nowrap;">اختيار كفر</button>
-          </div>
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
-          <div>
-            <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 4px;">المنصة:</label>
-            <select id="admin-post-edit-platform" class="form-input" style="width: 100%; font-size: 0.88rem;">
-              <option value="Facebook">فيسبوك (Facebook)</option>
-              <option value="Instagram">إنستغرام (Instagram)</option>
-            </select>
-          </div>
-          <div>
-            <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 4px;">التصنيف والوسم:</label>
-            <input type="text" id="admin-post-edit-tag" class="form-input" style="width: 100%; font-size: 0.88rem;">
-          </div>
-        </div>
-
-        <div style="margin-bottom: 12px;">
-          <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 4px;">نص الملخص / المنشور:</label>
-          <textarea id="admin-post-edit-excerpt" class="form-input" rows="2" style="width: 100%; font-size: 0.88rem;"></textarea>
-        </div>
-
-        <div style="margin-bottom: 16px;">
-          <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 4px;">النص الكامل للمنشور / التفاصيل الموسعة:</label>
-          <textarea id="admin-post-edit-fulltext" class="form-input" rows="4" style="width: 100%; font-size: 0.88rem;" placeholder="تفاصيل المنشور الكاملة والمخرجات التدريبية..."></textarea>
-        </div>
-
-        <div style="display: flex; justify-content: flex-end; gap: 10px; border-top: 1px solid var(--border-subtle); padding-top: 16px;">
-          <button type="button" class="btn-secondary" id="btn-cancel-post-edit" style="padding: 9px 18px;">إلغاء</button>
-          <button type="submit" class="btn-cta" style="padding: 9px 24px;">حفظ المنشور وتحديثه ✓</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- Floating Quick WhatsApp Button -->
-  <a href="https://wa.me/972592879621" target="_blank" rel="noopener" class="floating-whatsapp-btn" title="تواصل مباشر عبر واتساب (+972592879621)">
-    <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-    </svg>
-  </a>
-
-  <!-- NameThatUI: Bottom Navigation (Tab Bar) for Mobile -->
-  <nav class="bottom-nav-bar" id="mobile-bottom-bar" aria-label="Mobile Navigation">
-    <a href="#/home" class="bottom-nav-item active" data-route="home">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-      <span>الرئيسية</span>
-    </a>
-    <a href="#/tracks" class="bottom-nav-item" data-route="tracks">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-      <span>المسارات</span>
-    </a>
-    <a href="#/academy" class="bottom-nav-item" data-route="academy" style="color: var(--shat-green-700); font-weight: 700;">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
-      <span>المودل</span>
-    </a>
-    <a href="#/moodle-chat" class="bottom-nav-item" data-route="moodle-chat">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-      <span>المحادثة</span>
-    </a>
-    <button class="bottom-nav-item" id="bottom-bar-menu-btn" style="background: none; border: none; cursor: pointer;">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-      <span>القائمة</span>
-    </button>
-  </nav>
-
-  <!-- Corporate Footer with Official Details & Socials -->
-  <footer class="main-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-            <img src="assets/logo/logo-transparent.png" alt="SHAT Icon" style="height: 44px;" onerror="this.src='assets/logo/logo-symbol.jpg'">
-            <div>
-              <div style="font-size: 1.3rem; font-weight: 800; color: var(--shat-navy-950);">SHAT</div>
-              <div style="font-size: 0.78rem; color: var(--shat-green-800); font-weight: 700;">Development & Growth</div>
-            </div>
-          </div>
-          <p id="footer-about-text" style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 20px;">
-            شركة شات للتنمية والتطوير — شركة متخصصة في التدريب، بناء القدرات، الاستشارات والتطوير المؤسسي.
-          </p>
-          <div style="font-size: 0.85rem; color: var(--shat-green-800); font-weight: 700;">
-            Building Capacity • Strengthening Institutions • Advancing Results
-          </div>
-        </div>
-
-        <div>
-          <h4 class="footer-col-title" id="footer-quick-title">الأقسام المؤسسية</h4>
-          <nav class="footer-links-list" id="footer-links">
-            <!-- Rendered by app.js -->
-          </nav>
-        </div>
-
-        <div>
-          <h4 class="footer-col-title" id="footer-standards-title">المرجعيات والمعايير</h4>
-          <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.88rem; color: var(--text-muted);" id="footer-standards-list">
-            <span>Core Humanitarian Standard (CHS)</span>
-            <span>Sphere Project Handbook</span>
-            <span>OECD DAC Evaluation Criteria</span>
-            <span>UNEG Evaluation Norms</span>
-            <span>Protection & PSEA Principles</span>
-            <span>Do No Harm Framework</span>
-          </div>
-        </div>
-
-        <div>
-          <h4 class="footer-col-title" id="footer-contact-title">التواصل المؤسسي والشبكات</h4>
-          <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; color: var(--text-secondary);">
-            <div id="footer-phone-row">✆ هاتف / واتساب: <a href="https://wa.me/972592879621" target="_blank" style="color: var(--shat-green-700); font-weight: 700;">+972 59 287 9621</a></div>
-            <div id="footer-email-row">✉ بريد إلكتروني: <a href="mailto:shat.company26@gmail.com" style="color: #0284c7;">shat.company26@gmail.com</a></div>
-            <div style="display: flex; gap: 14px; margin-top: 10px;">
-              <a href="https://www.instagram.com/shat.development.growth/" target="_blank" rel="noopener" style="color: var(--text-primary); display: flex; align-items: center; gap: 6px; background: #ffffff; border: 1px solid var(--border-subtle); padding: 6px 12px; border-radius: var(--radius-sm); font-size: 0.82rem; box-shadow: var(--shadow-sm);">
-                <span id="footer-insta-btn">📷 إنستغرام</span>
-              </a>
-              <a href="https://www.facebook.com/shat.development.growth" target="_blank" rel="noopener" style="color: var(--text-primary); display: flex; align-items: center; gap: 6px; background: #ffffff; border: 1px solid var(--border-subtle); padding: 6px 12px; border-radius: var(--radius-sm); font-size: 0.82rem; box-shadow: var(--shadow-sm);">
-                <span id="footer-fb-btn">🌐 فيسبوك</span>
-              </a>
-            </div>
-            <div style="margin-top: 6px; font-size: 0.82rem; color: var(--text-muted);" id="footer-coverage-note">📍 فلسطين • خدماتنا تغطي النطاق الإقليمي والدولي</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-bottom-bar" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-        <div id="footer-legal-copy">
-          جميع الحقوق محفوظة © 2026 شركة شات للتنمية والتطوير (SHAT Development & Growth).
-        </div>
-        <div style="display: flex; align-items: center; gap: 14px;">
-          <a href="#/admin" style="display: inline-flex; align-items: center; gap: 6px; color: var(--shat-green-700); font-weight: 700; text-decoration: none; font-size: 0.82rem; background: rgba(75, 136, 52, 0.08); padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(75, 136, 52, 0.2);">
-            <span>🔐 بوابة المركز الإداري</span>
-          </a>
-          <div id="footer-privacy-pledge" style="font-size: 0.8rem; color: var(--text-muted);">
-            ملتزمون بأعلى معايير السرية وحوكمة البيانات.
-          </div>
-        </div>
-      </div>
+  <!-- Clean Corporate Footer -->
+  <footer class="site-footer">
+    <div class="container" id="site-footer-content">
+      <!-- Populated dynamically by app.js -->
     </div>
   </footer>
 
-  <!-- Application Entry Point -->
+  <!-- Global Modal for Enrollment / Inquiries -->
+  <div class="modal-backdrop" id="global-modal-backdrop" role="dialog" aria-modal="true">
+    <div class="modal-window">
+      <div class="modal-top">
+        <h3 id="global-modal-title" style="font-size: 1.25rem; font-weight: 800; color: var(--shat-navy); margin: 0;"></h3>
+        <button class="modal-close" id="global-modal-close" aria-label="إغلاق">✕</button>
+      </div>
+      <div id="global-modal-body">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Application Script (ES Module) -->
   <script type="module" src="assets/js/app.js"></script>
 </body>
 </html>
