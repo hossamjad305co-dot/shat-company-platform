@@ -597,62 +597,102 @@ export const translations = {
         {
           code: "CHS",
           title: "المعيار الإنساني الأساسي للجودة والمساءلة",
-          en: "Core Humanitarian Standard",
-          desc: "إطار عالمي يحدد التزامات المنظمات الإنسانية لتقديم استجابات عالية الجودة تخضع للمساءلة."
+          en: "Core Humanitarian Standard (CHS)",
+          desc: "إطار عالمي يحدد التزامات المنظمات الإنسانية لتقديم استجابات عالية الجودة تخضع للمساءلة وتضع كرامة المتضررين في المركز.",
+          whyItMatters: "يضمن عدم هدر الموارد وتقديم الاستجابة في الوقت المناسب ومحاسبة المنظمات أمام المجتمعات التي تخدمها عبر 9 التزامات محورية.",
+          howShatApplies: "تقييم الجاهزية المؤسسية للمنظمات للامتثال، تصميم مسارات المساءلة المجتمعية (AAP) وشكاوى المستفيدين، وتأهيل مديري المشاريع.",
+          deliverable: "مصفوفة الامتثال للالتزامات التسعة • دليل آليات المساءلة المجتمعية • خطة تصحيحية لتحسين الجودة والشفافية.",
+          route: "#/course/CHS-101"
         },
         {
           code: "SPHERE",
           title: "المعايير الإنسانية الدنيا — دليل إسفير",
-          en: "Sphere Handbook",
-          desc: "ميثاق العمل الإنساني والمعايير الدنيا المشتركة في مجالات الاستجابة المنقذة للحياة وصون الكرامة."
+          en: "The Sphere Project Handbook",
+          desc: "ميثاق العمل الإنساني والمعايير الدنيا المشتركة في مجالات الاستجابة المنقذة للحياة وصون الكرامة (المياه، الغذاء، المأوى، الصحة).",
+          whyItMatters: "يوفر المسطرة الفنية العالمية الموحدة للحدود الإنسانية الدنيا المقبولة التي تحول دون تدهور صحة وسلامة المتضررين في الكوارث.",
+          howShatApplies: "مراجعة تصاميم ومقترحات المشاريع ومطابقتها للمؤشرات الفنية (كمية المياه، نصيب الفرد من الإيواء)، وتدريب فرق الطوارئ على القياس الميداني.",
+          deliverable: "بطاقات التدقيق الفني الميداني للمشاريع • قوائم المؤشرات والتحقق الفني الميداني • دليل السلامة والكرامة.",
+          route: "#/academy?filter=humanitarian"
         },
         {
           code: "OECD DAC",
           title: "معايير لجنة المساعدات الإنمائية للتقييم",
           en: "OECD DAC Evaluation Criteria",
-          desc: "المعايير المعتمدة دولياً لتقييم المساعدات والبرامج التنموية والإنسانية (الملائمة، الفعالية، الأثر...)."
+          desc: "المعايير المعتمدة دولياً لتقييم المساعدات والبرامج التنموية والإنسانية (الملائمة، الاتساق، الفعالية، الكفاءة، الأثر، الاستدامة).",
+          whyItMatters: "المرجعية الأولى المعترف بها من جميع وكالات الأمم المتحدة والمانحين لتقييم جدوى المشروعات وإثبات القيمة مقابل التمويل.",
+          howShatApplies: "تنفيذ مهمات التقييم الخارجي المستقل (Independent External Evaluation) بأساليب كمية ونوعية دقيقة وتحليل الفجوات وتقديم التوصيات لصناع القرار.",
+          deliverable: "تقارير التقييم الخارجي المستقل المعتمدة للمانحين • مصفوفات قياس الأثر والقيمة مقابل التمويل • تقارير الدروس المستفادة.",
+          route: "#/tracks"
         },
         {
           code: "UNEG",
           title: "أطر ومبادئ التقييم — فريق الأمم المتحدة للتقييم",
-          en: "UN Evaluation Group",
-          desc: "المعايير الأخلاقية والمهنية الموحدة لضمان نزاهة وموضوعية التقييمات في منظومة الأمم المتحدة."
+          en: "UN Evaluation Group Norms & Standards",
+          desc: "المعايير الأخلاقية والمهنية الموحدة لضمان نزاهة وموضوعية واستقلالية التقييمات في منظومة التنمية والعمل الإنساني.",
+          whyItMatters: "تحمي مصداقية نتائج التقييم وتمنع تضارب المصالح وتضمن احترام كرامة وحقوق وخصوصية الفئات المبحوثة.",
+          howShatApplies: "حوكمة عمليات التقييم الخارجي وتطبيق بروتوكولات الموافقة المستنيرة والسرية ومراجعة جودة الأدلة والبراهين المستخلصة.",
+          deliverable: "بروتوكول الأخلاقيات والموافقة المستنيرة • ميثاق استقلالية ونزاهة المقيمين • تقرير ضمان جودة البيانات الميدانية.",
+          route: "#/tracks"
+        },
+        {
+          code: "PSEA",
+          title: "أطر الحماية من الاستغلال والانتهاك وصون السلامة",
+          en: "Protection & PSEA Frameworks (IASC)",
+          desc: "سياسات صارمة ومبادئ ملزمة لعدم التسامح مع الاستغلال والاعتداء والتحرش الجنسي وصون سلامة الفئات المستضعفة.",
+          whyItMatters: "حماية المستفيدين والعاملين من أي انتهاك للسلطة، وضمان بيئة عمل ومساعدات إنسانية آمنة وخالية من الاستغلال.",
+          howShatApplies: "تأسيس سياسات صون السلامة المؤسسية، بناء قنوات إبلاغ سرية ومحمية، وتصميم إجراءات التشغيل القياسية (SOPs) للإحالة الآمنة للضحايا.",
+          deliverable: "وثيقة سياسة صون السلامة المعتمدة • مصفوفة إدارة مخاطر الحماية • مسارات الإحالة الآمنة والدعم.",
+          route: "#/course/PSEA-201"
+        },
+        {
+          code: "Do No Harm",
+          title: "إطار تجنب الضرر وحساسية النزاع",
+          en: "Do No Harm (DNH) Framework",
+          desc: "منهجية دقيقة للتأكد من أن التدخلات والمساعدات المؤسسية لا تغذي الانقسامات أو النزاعات بل تعزز التماسك المجتمعي.",
+          whyItMatters: "تجنب العواقب غير المقصودة للتدخلات التي قد تثير حساسيات مناطقية أو تفاوت في توزيع الموارد بين الفئات السكانية.",
+          howShatApplies: "تحليل السياق الميداني وتحديد قوى الانقسام (Dividers) والربط (Connectors)، وتعديل خطط العمل لتكون حساسة للنزاع.",
+          deliverable: "تقرير تقييم حساسية النزاع • خطة تكييف التدخل الميداني • مصفوفة التوزيع العادل والرقابة المجتمعية.",
+          route: "#/tracks"
         },
         {
           code: "HRBA",
           title: "النهج القائم على حقوق الإنسان",
           en: "Human Rights-Based Approach",
-          desc: "إدماج مبادئ حقوق الإنسان الدولية كجوهر للتخطيط، التصميم، والتنفيذ في العمل التنموي."
+          desc: "إدماج مبادئ حقوق الإنسان الدولية كجوهر للتخطيط، التصميم، والتنفيذ في العمل التنموي وبناء قدرات حاملي الواجب وأصحاب الحقوق.",
+          whyItMatters: "ينقل المستفيدين من موقع متلقي المساعدة السلبي إلى موقع صاحب الحق الفاعل والمطالب بحقوقه المشروعة.",
+          howShatApplies: "إدماج معايير عدم التمييز والمشاركة والشفافية في تصميم استراتيجيات التنمية وتدريب القيادات المؤسسية.",
+          deliverable: "أدلة إدماج حقوق الإنسان في المشاريع • مصفوفة مؤشرات المساواة والعدالة الإجرائية.",
+          route: "#/about"
         },
         {
           code: "AAP",
           title: "المساءلة تجاه الأشخاص المتأثرين",
           en: "Accountability to Affected People",
-          desc: "آليات ضمان مشاركة المجتمعات المتأثرة والاستماع لأصواتهم وتضمين ملاحظاتهم في القرارات."
+          desc: "آليات ضمان مشاركة المجتمعات المتأثرة والاستماع لأصواتهم وتضمين ملاحظاتهم وشكاواهم في جميع قرارات التدخل.",
+          whyItMatters: "يجعل متلقي الخدمة شركاء حقيقيين في تحديد أولوياتهم وتصحيح انحرافات المشروعات أثناء التنفيذ.",
+          howShatApplies: "تأسيس أنظمة الشكاوى والتغذية الراجعة المجتمعية (CFRM)، وإجراء استطلاعات رضا المستفيدين الدورية.",
+          deliverable: "دليل تشغيل قنوات الشكاوى والمقترحات • لوحة مؤشرات التغذية الراجعة المجتمعية.",
+          route: "#/course/CHS-101"
         },
         {
           code: "Protection",
           title: "إدماج الحماية عبر القطاعات",
           en: "Protection Mainstreaming",
-          desc: "دمج مبادئ السلامة والكرامة والوصول ذو المعنى وعدم التمييز في شتى الخدمات والقطاعات."
+          desc: "دمج مبادئ السلامة والكرامة والوصول ذو المعنى وعدم التمييز في شتى الخدمات والقطاعات الإغاثية والتنموية.",
+          whyItMatters: "يضمن عدم تعرض أي فئة (كالنساء، الأطفال، وذوي الإعاقة) للخطر أو الحرمان أثناء تلقي الخدمات الأساسية.",
+          howShatApplies: "تحليل مخاطر الوصول في مواقع توزيع المساعدات وتوفير مرافق آمنة وميسرة تراعي النوع الاجتماعي وذوي الإعاقة.",
+          deliverable: "مصفوفة فحص أمان مواقع الخدمات • دليل إدماج الحماية القطاعي.",
+          route: "#/tracks"
         },
         {
-          code: "PSEA",
-          title: "أطر الحماية من الاستغلال والانتهاك الجنسيين",
-          en: "PSEA Frameworks",
-          desc: "سياسات صارمة لمنع ومعالجة أي شكل من أشكال الاستغلال وسوء السلوك الجنسي في بيئة العمل."
-        },
-        {
-          code: "CRC",
-          title: "اتفاقية حقوق الطفل",
-          en: "Convention on the Rights of the Child",
-          desc: "المعاهدة الدولية الحامية لحقوق الطفل النمائية والتعليمية وحمايته من كافة أشكال الإساءة."
-        },
-        {
-          code: "CEDAW",
-          title: "اتفاقية القضاء على التمييز ضد المرأة",
-          en: "CEDAW Convention",
-          desc: "الأطر الدولية الضامنة لتمكين المرأة وتحقيق المساواة وتكافؤ الفرص في الحياة العامة والمهنية."
+          code: "CRC & CEDAW",
+          title: "اتفاقيات حقوق الطفل وتمكين المرأة (CRC & CEDAW)",
+          en: "CRC & CEDAW International Conventions",
+          desc: "المعاهدات الدولية الضامنة لحقوق الطفل النمائية وحمايته، وتمكين المرأة ومكافحة التمييز وتحقيق العدالة وتكافؤ الفرص.",
+          whyItMatters: "الأطر القانونية العالمية الملزمة لحماية أجيال الغد وتمكين نصف المجتمع في قيادة التغيير والتطوير.",
+          howShatApplies: "تصميم برامج الحماية المجتمعية وتأهيل المعلمين والمشرفين ودعم المبادرات النسائية والشبابية المستدامة.",
+          deliverable: "برامج تدريبية تخصصية لتنمية المرأة والطفل • أدلة صون حقوق اليافعين.",
+          route: "#/academy"
         }
       ]
     },
@@ -1614,62 +1654,102 @@ footer: {
         {
           code: "CHS",
           title: "Core Humanitarian Standard on Quality and Accountability",
-          en: "Core Humanitarian Standard",
-          desc: "A globally recognized framework defining institutional commitments for principled, accountable humanitarian action."
+          en: "Core Humanitarian Standard (CHS)",
+          desc: "A globally recognized framework defining 9 institutional commitments for principled, accountable, and high-quality humanitarian response.",
+          whyItMatters: "Ensures resources directly serve affected communities with timely, dignified, and accountable assistance while preventing waste.",
+          howShatApplies: "Assessing organizational readiness for compliance, designing safe AAP complaint mechanisms, and training field response leadership.",
+          deliverable: "9 Commitments Compliance Matrix • AAP Operational Manual • Quality Improvement Roadmap.",
+          route: "#/course/CHS-101"
         },
         {
           code: "SPHERE",
-          title: "Sphere Handbook Minimum Standards",
-          en: "Sphere Handbook",
-          desc: "Universal ethical charter and minimum technical benchmarks for humanitarian crisis response and dignity."
+          title: "Sphere Project Minimum Standards Handbook",
+          en: "The Sphere Project Handbook",
+          desc: "Universal ethical charter and minimum technical benchmarks safeguarding human dignity across WASH, shelter, food, and health.",
+          whyItMatters: "Provides the authoritative global baseline preventing avoidable disease, indignity, and mortality in crises.",
+          howShatApplies: "Benchmarking field project designs against technical minimums and training humanitarian logisticians and coordinators.",
+          deliverable: "Technical Compliance Audit Checklists • Sphere Field Indicator Cards • Dignity & Safety Guidelines.",
+          route: "#/academy?filter=humanitarian"
         },
         {
           code: "OECD DAC",
           title: "OECD Development Assistance Committee Criteria",
           en: "OECD DAC Evaluation Criteria",
-          desc: "International gold standard for assessing development cooperation and humanitarian program efficacy."
+          desc: "International gold standard evaluating development cooperation: Relevance, Coherence, Effectiveness, Efficiency, Impact, and Sustainability.",
+          whyItMatters: "The premier evaluation benchmark required by bilateral donors, UN agencies, and global development funds to verify value for money.",
+          howShatApplies: "Conducting independent midterm and final project evaluations, statistical baseline comparison, and executive decision briefings.",
+          deliverable: "Independent External Evaluation Reports • Impact Assessment Matrices • Strategic Learning Briefs.",
+          route: "#/tracks"
         },
         {
           code: "UNEG",
           title: "UN Evaluation Group Norms & Standards",
-          en: "UN Evaluation Group",
-          desc: "Professional guidelines safeguarding the objectivity, rigor, and credibility of systemic evaluations."
+          en: "UN Evaluation Group Norms & Standards",
+          desc: "Professional guidelines safeguarding the objectivity, independence, ethical rigor, and human rights focus of evaluations.",
+          whyItMatters: "Guarantees evaluator impartiality, protects interviewee confidentiality, and eliminates institutional conflicts of interest.",
+          howShatApplies: "Enforcing strict codes of conduct, informed consent protocols, and rigorous evidentiary triangulation in fragile settings.",
+          deliverable: "Evaluation Ethics Charter • Data Confidentiality Protocols • Quality Assurance Sign-off Records.",
+          route: "#/tracks"
+        },
+        {
+          code: "PSEA",
+          title: "Protection from Sexual Exploitation, Abuse & Harassment",
+          en: "Protection & PSEA Frameworks (IASC)",
+          desc: "Zero-tolerance institutional systems, preventative audits, safe reporting channels, and victim referral protocols.",
+          whyItMatters: "Protects vulnerable populations and aid workers from abuse of power, upholding moral and institutional integrity.",
+          howShatApplies: "Drafting corporate safeguarding policies, setting up encrypted reporting hotlines, and designing safe survivor referral SOPs.",
+          deliverable: "Institutional Safeguarding Policy • PSEA Risk Assessment Matrix • Survivor Assistance Referral SOPs.",
+          route: "#/course/PSEA-201"
+        },
+        {
+          code: "Do No Harm",
+          title: "Do No Harm & Conflict Sensitivity Framework",
+          en: "Do No Harm (DNH) Framework",
+          desc: "Analytical methodology ensuring aid and institutional programs do not exacerbate societal divisions or incite tension.",
+          whyItMatters: "Prevents unintended harm, resource capture by conflicting factions, and local perception of bias or favoritism.",
+          howShatApplies: "Mapping local Dividers and Connectors, auditing resource distribution formulas, and adapting project milestones to social dynamics.",
+          deliverable: "Conflict Sensitivity Assessments • Project Mitigation Workplans • Community Feedback Dashboards.",
+          route: "#/tracks"
         },
         {
           code: "HRBA",
           title: "Human Rights-Based Approach",
           en: "Human Rights-Based Approach",
-          desc: "Normative framework integrating international human rights covenants into program design and implementation."
+          desc: "Normative framework integrating international human rights covenants (CRC, CEDAW) into development programming.",
+          whyItMatters: "Shifts affected populations from passive recipients of charity to active rights-holders demanding transparency and accountability.",
+          howShatApplies: "Strengthening capacities of duty-bearers to deliver public services while empowering marginalized community rights-holders.",
+          deliverable: "Human Rights Mainstreaming Guidelines • Inclusion & Equity Metric Checklists.",
+          route: "#/about"
         },
         {
           code: "AAP",
           title: "Accountability to Affected People",
           en: "Accountability to Affected People",
-          desc: "Operationalizing community voice, feedback loops, and stakeholder governance in aid delivery."
+          desc: "Operationalizing community voice, feedback loops, and meaningful participation in program design and monitoring.",
+          whyItMatters: "Ensures community ownership, early error detection, and continuous alignment with real beneficiary needs.",
+          howShatApplies: "Deploying multi-channel complaints and feedback mechanisms (CFRM) and conducting routine community perception audits.",
+          deliverable: "CFRM Standard Operating Procedures • Beneficiary Satisfaction Dashboards.",
+          route: "#/course/CHS-101"
         },
         {
           code: "Protection",
           title: "Protection Mainstreaming Guidelines",
           en: "Protection Mainstreaming",
-          desc: "Ensuring non-discriminatory access, meaningful participation, and physical safety across all sectoral activities."
+          desc: "Ensuring non-discriminatory access, meaningful participation, and physical safety across all sectoral activities.",
+          whyItMatters: "Prevents exclusion of women, children, and persons with disabilities from essential relief and educational services.",
+          howShatApplies: "Conducting safe access barrier analyses at service distribution sites and engineering barrier-free pathways.",
+          deliverable: "Safe Access Field Audit Reports • Cross-Sectoral Protection Toolkits.",
+          route: "#/tracks"
         },
         {
-          code: "PSEA",
-          title: "Protection from Sexual Exploitation and Abuse",
-          en: "PSEA Frameworks",
-          desc: "Zero-tolerance institutional systems, preventative audits, and investigation protocols safeguarding beneficiaries."
-        },
-        {
-          code: "CRC",
-          title: "UN Convention on the Rights of the Child",
-          en: "Convention on the Rights of the Child",
-          desc: "The binding legal instrument defending child welfare, protection, education, and holistic development."
-        },
-        {
-          code: "CEDAW",
-          title: "Convention on the Elimination of All Discrimination Against Women",
-          en: "CEDAW Convention",
-          desc: "International bill of rights for women advancing gender equality, institutional parity, and non-discrimination."
+          code: "CRC & CEDAW",
+          title: "Child Rights & Women Empowerment Conventions",
+          en: "CRC & CEDAW International Conventions",
+          desc: "Binding global treaties defending the rights of the child and advancing gender equality, protection, and leadership.",
+          whyItMatters: "Foundational pillars ensuring youth development and female economic and social empowerment across all programs.",
+          howShatApplies: "Developing child safeguarding toolkits, women leadership accelerators, and institutional gender-equity audits.",
+          deliverable: "Child Protection Toolkits • Gender Parity Institutional Audits.",
+          route: "#/academy"
         }
       ]
     },

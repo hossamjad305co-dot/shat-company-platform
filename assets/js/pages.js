@@ -727,13 +727,43 @@ export function renderReferencesPage(t) {
 
       <div class="grid-2">
         ${r.standards.map(st => `
-          <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 24px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-              <span style="font-size: 0.8rem; font-weight: 800; background: var(--shat-navy-100); color: var(--shat-navy-800); padding: 3px 10px; border-radius: var(--radius-full);">${st.code}</span>
-              <span style="font-size: 0.8rem; color: var(--text-muted);">${st.en}</span>
+          <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 26px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; justify-content: space-between; border-top: 4px solid var(--shat-navy-800);">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <span style="font-size: 0.82rem; font-weight: 800; background: var(--shat-green-100); color: var(--shat-green-950); padding: 4px 12px; border-radius: var(--radius-full); border: 1px solid var(--shat-green-300);">${st.code}</span>
+                <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">معيار دولي معتمد</span>
+              </div>
+              <h3 style="font-size: 1.25rem; color: var(--shat-navy-950); margin-bottom: 4px; line-height: 1.4;">${st.title}</h3>
+              <div style="font-size: 0.84rem; color: var(--shat-green-700); font-weight: 700; margin-bottom: 14px;">${st.en}</div>
+              <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 14px;">${st.desc}</p>
+              
+              ${st.whyItMatters ? `
+                <div style="background: #f8fafc; border-radius: 6px; padding: 12px; margin-bottom: 10px; border-right: 3px solid var(--shat-navy-700);">
+                  <div style="font-size: 0.8rem; font-weight: 800; color: var(--shat-navy-900); margin-bottom: 3px;">🎯 القيمة والأهمية المؤسسية:</div>
+                  <div style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55;">${st.whyItMatters}</div>
+                </div>
+              ` : ''}
+
+              ${st.howShatApplies ? `
+                <div style="background: var(--shat-green-50); border-radius: 6px; padding: 12px; margin-bottom: 10px; border-right: 3px solid var(--shat-green-600);">
+                  <div style="font-size: 0.8rem; font-weight: 800; color: var(--shat-green-950); margin-bottom: 3px;">⚡ كيف نطبقه في شات؟</div>
+                  <div style="font-size: 0.88rem; color: var(--shat-green-900); line-height: 1.55;">${st.howShatApplies}</div>
+                </div>
+              ` : ''}
+
+              ${st.deliverable ? `
+                <div style="background: #ffffff; border: 1px dashed var(--shat-green-400); border-radius: 6px; padding: 10px 12px; margin-bottom: 14px;">
+                  <div style="font-size: 0.78rem; font-weight: 800; color: var(--shat-green-800); margin-bottom: 2px;">📦 المخرج المؤسسي المحقق:</div>
+                  <div style="font-size: 0.85rem; color: var(--text-primary); line-height: 1.5;">${st.deliverable}</div>
+                </div>
+              ` : ''}
             </div>
-            <h3 style="font-size: 1.2rem; color: var(--shat-navy-950); margin-bottom: 8px;">${st.title}</h3>
-            <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; flex: 1;">${st.desc}</p>
+
+            <div style="padding-top: 12px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+              <a href="${st.route || '#/academy'}" style="font-size: 0.88rem; font-weight: 700; color: var(--shat-green-700); text-decoration: none;">
+                التسجيل بالمساق والبرنامج التدريبي ←
+              </a>
+            </div>
           </div>
         `).join('')}
       </div>
