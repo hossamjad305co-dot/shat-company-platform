@@ -2,9 +2,12 @@
 // Main Bootstrap & Global Modal Engine
 import { content } from './content.js';
 import { router } from './router.js';
+import { initLoadingScreen } from './components/loadingScreen.js';
+import { api } from './services/api/apiClient.js';
 
 class Application {
   constructor() {
+    initLoadingScreen();
     this.currentLang = localStorage.getItem('shat_platform_lang') || 'ar';
     this.init();
   }
@@ -14,12 +17,18 @@ class Application {
     this.renderFooter();
     this.bindGlobalEvents();
     router.init();
+
+    // Verify session with server silently on boot
+    api.getMe().then(() => {
+      this.renderHeader();
+    }).catch(() => {});
   }
 
   renderHeader() {
     const d = content[this.currentLang] || content.ar;
     const c = d.company;
     const nav = d.nav;
+    const user = api.currentUser;
 
     const navContainer = document.getElementById('site-desktop-nav');
     if (navContainer) {
@@ -31,7 +40,6 @@ class Application {
         <a href="#/delivery" class="nav-link">${nav.delivery}</a>
         <a href="#/academy" class="nav-link">${nav.academy}</a>
         <a href="#/contact" class="nav-link">${nav.contact}</a>
-        <a href="#/admin" class="nav-link" style="color: var(--shat-green); font-weight: 700;">⚙️ ${nav.admin}</a>
       `;
     }
 
@@ -39,6 +47,89 @@ class Application {
     if (brandEl) brandEl.textContent = c.name;
     const subEl = document.getElementById('header-brand-sub');
     if (subEl) subEl.textContent = c.nameEn;
+
+    // Dynamic Header User Action Buttons
+    const headerActions = document.querySelector('.header-actions');
+    if (headerActions) {
+      if (user) {
+        let portalRoute = '#/student';
+        let portalLabel = 'لوحة المتدرب';
+        if (user.role === 'teacher') {
+          portalRoute = '#/teacher';
+          portalLabel = 'بوابة المدرب';
+        } else if (user.role === 'admin') {
+          portalRoute = '#/admin';
+          portalLabel = 'لوحة الإدارة ⚙️';
+        }
+
+        headerActions.innerHTML = `
+          <button class="btn-clean btn-secondary btn-sm" id="btn-toggle-lang" title="تبديل اللغة / Switch Language">
+            🌐 ${this.currentLang === 'ar' ? 'English' : 'العربية'}
+          </button>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <a href="${portalRoute}" class="btn-clean btn-green btn-sm" style="font-weight: 700;">
+              <span>👤 ${user.fullNameAr || user.username} (${portalLabel})</span>
+            </a>
+            <button id="btn-header-logout" class="btn-clean btn-sm" style="background: rgba(239, 68, 68, 0.1); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.2);" title="تسجيل الخروج">
+              خروج
+            </button>
+          </div>
+          <button class="mobile-toggle" id="btn-mobile-menu" aria-label="فتح القائمة">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        `;
+
+        const logoutBtn = document.getElementById('btn-header-logout');
+        if (logoutBtn) {
+          logoutBtn.onclick = async () => {
+            await api.logout();
+            this.renderHeader();
+            window.location.hash = '#/home';
+          };
+        }
+      } else {
+        headerActions.innerHTML = `
+          <button class="btn-clean btn-secondary btn-sm" id="btn-toggle-lang" title="تبديل اللغة / Switch Language">
+            🌐 ${this.currentLang === 'ar' ? 'English' : 'العربية'}
+          </button>
+          <a href="#/login" class="btn-clean btn-sm" style="background: #FFFFFF; border: 1px solid var(--border-light); color: var(--shat-navy); font-weight: 700;">
+            تسجيل الدخول
+          </a>
+          <a href="#/contact" class="btn-clean btn-primary btn-sm">
+            طلب استشارة
+          </a>
+          <button class="mobile-toggle" id="btn-mobile-menu" aria-label="فتح القائمة">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        `;
+      }
+
+      // Rebind language toggle and mobile drawer
+      const langBtn = document.getElementById('btn-toggle-lang');
+      if (langBtn) {
+        langBtn.onclick = () => {
+          const nextLang = this.currentLang === 'ar' ? 'en' : 'ar';
+          this.currentLang = nextLang;
+          router.setLang(nextLang);
+          this.renderHeader();
+          this.renderFooter();
+        };
+      }
+
+      const mobileBtn = document.getElementById('btn-mobile-menu');
+      const mobileDrawer = document.getElementById('mobile-drawer-nav');
+      if (mobileBtn && mobileDrawer) {
+        mobileBtn.onclick = () => mobileDrawer.classList.toggle('open');
+      }
+    }
   }
 
   renderFooter() {
@@ -209,29 +300,44 @@ class Application {
 
       const enrollForm = document.getElementById('modal-enrollment-form');
       if (enrollForm) {
-        enrollForm.addEventListener('submit', (ev) => {
+        enrollForm.addEventListener('submit', async (ev) => {
           ev.preventDefault();
+          const submitBtn = enrollForm.querySelector('button[type="submit"]');
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<span>جاري إرسال الطلب للخادم...</span>`;
+          }
+
           const appData = {
-            id: 'app_' + Date.now(),
             courseId: document.getElementById('app-course-id')?.value,
             courseTitle: document.getElementById('app-course-title')?.value,
             fullName: document.getElementById('app-fullname')?.value,
             phone: document.getElementById('app-phone')?.value,
             email: document.getElementById('app-email')?.value,
-            org: document.getElementById('app-org')?.value,
-            qualification: document.getElementById('app-qualification')?.value,
-            createdAt: new Date().toISOString()
+            organization: document.getElementById('app-org')?.value,
+            qualification: document.getElementById('app-qualification')?.value
           };
 
-          const stored = JSON.parse(localStorage.getItem('shat_course_applications') || '[]');
-          stored.unshift(appData);
-          localStorage.setItem('shat_course_applications', JSON.stringify(stored));
-
-          alert('تم استلام طلب تسجيلكم بنجاح! سيقوم فريق القبول والتسجيل بالتواصل معكم لتأكيد القبول وتفاصيل المواعيد.');
-          modalBackdrop.classList.remove('open');
+          try {
+            const res = await api.submitApplication(appData);
+            alert(res.message || 'تم استلام طلب تسجيلكم بنجاح في قاعدة البيانات الرسمية! سيقوم فريق القبول والتسجيل بالتواصل معكم لتأكيد القبول وتفاصيل المواعيد.');
+            modalBackdrop.classList.remove('open');
+          } catch (err) {
+            alert('تعذر إرسال طلب الالتحاق للخادم: ' + err.message);
+          } finally {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = `<span>تأكيد وإرسال طلب الالتحاق</span><span>←</span>`;
+            }
+          }
         });
       }
     };
+
+    // Re-render header on auth change
+    window.addEventListener('shat:auth-updated', () => {
+      this.renderHeader();
+    });
   }
 }
 

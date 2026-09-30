@@ -13,7 +13,7 @@ export function renderAcademyView(lang = 'ar') {
         <div class="container">
           <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px;">
             <div style="max-width: 720px;">
-              <div class="section-badge">أكاديمية التدريب وبناء القدرات • LMS Portal</div>
+              <div class="section-badge">أكاديمية شركة شات للتدريب وبناء القدرات • SHAT Academy LMS Portal</div>
               <h1 class="section-title" style="margin-bottom: 12px;">المساقات والدبلومات المهنية المعتمدة</h1>
               <p class="section-desc">
                 برامج تدريبية تخصصية وتطبيقية تعتمد على الجدارات وتحاكي المعايير الإنسانية والدولية لربط التعلم بالأداء الفعلي.
@@ -64,13 +64,16 @@ export function renderAcademyView(lang = 'ar') {
                   </div>
                 </div>
 
-                <div class="bento-footer" style="display: flex; gap: 10px; justify-content: space-between;">
+                <div class="bento-footer" style="display: flex; gap: 8px; justify-content: space-between; flex-wrap: wrap;">
+                  <a href="#/course/${c.id}" class="btn-clean btn-sm" style="background: var(--bg-subtle); color: var(--shat-navy); border: 1px solid var(--border-light); font-weight: 700;">
+                    <span>📖 استعراض المنهاج والملفات</span>
+                  </a>
                   <button class="btn-clean btn-primary btn-sm btn-open-reg-modal" data-course="${c.id}" style="flex: 1;">
-                    <span>طلب التسجيل بالمساق</span>
+                    <span>طلب التسجيل</span>
                     <span>←</span>
                   </button>
-                  <a href="https://wa.me/972592879621?text=${encodeURIComponent('مرحباً، أود الاستفسار عن مساق: ' + c.title)}" target="_blank" rel="noopener" class="btn-clean btn-secondary btn-sm">
-                    <span>استفسار واتساب</span>
+                  <a href="https://wa.me/972592879621?text=${encodeURIComponent('مرحباً، أود الاستفسار عن مساق: ' + c.title)}" target="_blank" rel="noopener" class="btn-clean btn-secondary btn-sm" title="واتساب">
+                    <span>💬</span>
                   </a>
                 </div>
               </div>

@@ -12,7 +12,7 @@ export function renderDeliveryView(lang = 'ar') {
       <section class="section" style="padding: 64px 0 40px 0; background: var(--bg-subtle); border-bottom: 1px solid var(--border-light);">
         <div class="container">
           <div style="max-width: 800px;">
-            <div class="section-badge">${dm.slogan}</div>
+            <div class="section-badge">${dm.slogan} • شركة شات للتنمية والتطوير (SHAT Delivery Model)</div>
             <h1 class="section-title" style="margin-bottom: 12px;">${dm.title}</h1>
             <p class="section-desc">${dm.subtitle}</p>
           </div>

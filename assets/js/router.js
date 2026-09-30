@@ -1,5 +1,6 @@
 // assets/js/router.js
-// Clean Minimalist Client-Side Hash Router
+// Production Client-Side Hash Router for SHAT Platform
+import { api } from './services/api/apiClient.js';
 import { renderHomeView } from './views/homeView.js';
 import { renderAboutView } from './views/aboutView.js';
 import { renderServicesView } from './views/servicesView.js';
@@ -7,7 +8,12 @@ import { renderStandardsView } from './views/standardsView.js';
 import { renderDeliveryView } from './views/deliveryView.js';
 import { renderAcademyView } from './views/academyView.js';
 import { renderContactView } from './views/contactView.js';
-import { renderAdminView } from './views/adminView.js';
+import { renderLoginView, bindLoginEvents } from './views/loginView.js';
+import { renderStudentDashboardView, bindStudentEvents } from './views/studentDashboardView.js';
+import { renderTeacherDashboardView, bindTeacherEvents } from './views/teacherDashboardView.js';
+import { renderAdminView, bindAdminEvents } from './views/adminView.js';
+import { renderCourseDetailView, bindCourseDetailEvents } from './views/courseDetailView.js';
+import { renderFormsView, bindFormsEvents } from './views/formsView.js';
 
 class SimpleRouter {
   constructor() {
@@ -22,7 +28,12 @@ class SimpleRouter {
       'delivery-model': renderDeliveryView,
       'academy': renderAcademyView,
       'contact': renderContactView,
-      'admin': renderAdminView
+      'login': renderLoginView,
+      'student': renderStudentDashboardView,
+      'teacher': renderTeacherDashboardView,
+      'admin': renderAdminView,
+      'course': renderCourseDetailView,
+      'forms': renderFormsView
     };
     this.currentLang = localStorage.getItem('shat_platform_lang') || 'ar';
   }
@@ -43,9 +54,9 @@ class SimpleRouter {
   handleRoute() {
     const rawHash = window.location.hash.replace('#/', '').replace('#', '').trim();
     const [path] = rawHash.split('?');
-    const cleanPath = path || 'home';
+    const rootPath = path.split('/')[0] || 'home';
 
-    const renderFn = this.routes[cleanPath] || this.routes['home'];
+    const renderFn = this.routes[rootPath] || this.routes['home'];
     const container = document.getElementById('app-content');
     if (!container) return;
 
@@ -55,8 +66,8 @@ class SimpleRouter {
       container.innerHTML = renderFn(this.currentLang);
       container.style.opacity = '1';
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      this.updateActiveNav(cleanPath);
-      this.bindInteractions();
+      this.updateActiveNav(rootPath);
+      this.bindInteractions(rootPath);
     }, 40);
   }
 
@@ -72,28 +83,54 @@ class SimpleRouter {
     });
   }
 
-  bindInteractions() {
-    // Consultation Inquiry Form Handler
+  bindInteractions(activeRoute) {
+    // Route-specific binders
+    if (activeRoute === 'login') {
+      bindLoginEvents();
+    } else if (activeRoute === 'student') {
+      bindStudentEvents();
+    } else if (activeRoute === 'teacher') {
+      bindTeacherEvents();
+    } else if (activeRoute === 'admin') {
+      bindAdminEvents();
+    } else if (activeRoute === 'course') {
+      bindCourseDetailEvents();
+    } else if (activeRoute === 'forms') {
+      bindFormsEvents();
+    }
+
+    // Consultation Inquiry Form Handler (Contact View)
     const inquiryForm = document.getElementById('consultation-inquiry-form');
     if (inquiryForm) {
-      inquiryForm.addEventListener('submit', (e) => {
+      inquiryForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+        const submitBtn = inquiryForm.querySelector('button[type="submit"]');
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'جاري إرسال الطلب...';
+        }
+
         const inquiryData = {
           name: document.getElementById('contact-name')?.value,
           org: document.getElementById('contact-org')?.value,
           email: document.getElementById('contact-email')?.value,
           phone: document.getElementById('contact-phone')?.value,
           service: document.getElementById('contact-service')?.value,
-          message: document.getElementById('contact-message')?.value,
-          createdAt: new Date().toISOString()
+          message: document.getElementById('contact-message')?.value
         };
 
-        const existing = JSON.parse(localStorage.getItem('shat_inquiries') || '[]');
-        existing.unshift(inquiryData);
-        localStorage.setItem('shat_inquiries', JSON.stringify(existing));
-
-        alert('شكراً لتواصلكم مع شركة شات للتنمية والتطوير. تم استلام طلبكم بنجاح وسيتواصل معكم فريقنا خلال 24 ساعة.');
-        inquiryForm.reset();
+        try {
+          const res = await api.submitInquiry(inquiryData);
+          alert(res.message || 'شكراً لتواصلكم مع شركة شات للتنمية والتطوير. تم استلام طلبكم بنجاح وسيتواصل معكم فريقنا خلال 24 ساعة.');
+          inquiryForm.reset();
+        } catch (err) {
+          alert('تعذر إرسال الطلب عبر الخادم: ' + err.message);
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'إرسال طلب الاستشارة أو التدريب ←';
+          }
+        }
       });
     }
 
@@ -101,7 +138,9 @@ class SimpleRouter {
     document.querySelectorAll('.btn-open-reg-modal').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const courseId = e.currentTarget.getAttribute('data-course') || 'general';
-        window.openGlobalModal(courseId);
+        if (window.openGlobalModal) {
+          window.openGlobalModal(courseId);
+        }
       });
     });
   }
