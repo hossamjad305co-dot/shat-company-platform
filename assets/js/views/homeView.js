@@ -106,6 +106,51 @@ export function renderHomeView(lang = 'ar') {
               </div>
             </div>
 
+            <!-- Interactive Fast-Track Program & Form Finder (Double-Bezel Architecture) -->
+            <div class="fast-track-finder-shell" style="
+              margin-top: 40px;
+              background: rgba(255, 255, 255, 0.75);
+              border: 1px solid rgba(226, 232, 240, 0.9);
+              padding: 8px;
+              border-radius: 20px;
+              box-shadow: 0 16px 40px -12px rgba(11, 30, 54, 0.08);
+              text-align: right;
+            ">
+              <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 24px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+                  <div>
+                    <span style="font-size: 0.78rem; font-weight: 800; color: #1E7E34; background: #E8F5E9; padding: 4px 12px; border-radius: 6px;">
+                      ⚡ ${txt('مستكشف البرامج والاستمارات المعتمدة 2026', 'Accredited Programs & Forms Finder 2026', 'Explorateur Rapide')}
+                    </span>
+                    <h3 style="font-size: 1.15rem; font-weight: 900; color: var(--shat-navy, #0B1E36); margin: 6px 0 0;">
+                      ${txt('اختر تخصصك واستعرض استمارة التسجيل الرسمية فوراً', 'Select your domain to access the verified registration form', 'Sélectionnez votre domaine')}
+                    </h3>
+                  </div>
+
+                  <!-- 4 Interactive Tabs -->
+                  <div style="display: flex; gap: 6px; flex-wrap: wrap;" id="finder-tabs">
+                    <button type="button" class="btn-clean finder-tab active" data-track="case-management" style="background: var(--shat-navy, #0B1E36); color: #FFFFFF; font-weight: 700; font-size: 0.82rem; padding: 7px 14px; border-radius: 20px; transition: all 0.15s ease;">
+                      🤝 إدارة الحالة
+                    </button>
+                    <button type="button" class="btn-clean finder-tab" data-track="presentation" style="background: #F1F5F9; color: #475569; font-weight: 700; font-size: 0.82rem; padding: 7px 14px; border-radius: 20px; transition: all 0.15s ease;">
+                      🎤 مهارات العرض
+                    </button>
+                    <button type="button" class="btn-clean finder-tab" data-track="humanitarian" style="background: #F1F5F9; color: #475569; font-weight: 700; font-size: 0.82rem; padding: 7px 14px; border-radius: 20px; transition: all 0.15s ease;">
+                      🛡️ دبلوم CHS
+                    </button>
+                    <button type="button" class="btn-clean finder-tab" data-track="consulting" style="background: #F1F5F9; color: #475569; font-weight: 700; font-size: 0.82rem; padding: 7px 14px; border-radius: 20px; transition: all 0.15s ease;">
+                      🏛️ استشارات مؤسسية
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Active Track Dynamic Showcase Card -->
+                <div id="finder-showcase-content">
+                  <!-- Populated dynamically via JS -->
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
@@ -570,6 +615,123 @@ export function bindHomeEvents() {
   standardsExplorer.init(currentLang);
   toolkitsLibrary.bindEvents(currentLang);
 
+  // Fast Track Program Finder Engine
+  const finderTabs = document.querySelectorAll('.finder-tab');
+  const finderContent = document.getElementById('finder-showcase-content');
+
+  const TRACKS_DATA = {
+    'case-management': {
+      title: 'دورة إعداد وتأهيل مدير حالة Case Management (د. محمد إسليم)',
+      code: 'SHAT-FORM-01',
+      badge: 'إدارة الحالة والعمل الإنساني الميداني',
+      badgeColor: '#1E7E34',
+      badgeBg: '#E8F5E9',
+      trainer: 'د. محمد إسليم • استشاري إدارة الحالة والرعاية المتكاملة',
+      hours: '30 ساعة تدريبية وتطبيق إكلينيكي',
+      fee: 'رسوم مدعومة جزئياً',
+      desc: 'برنامج تطبيقي متقدم يؤهل الأخصائيين الاجتماعيين والنفسيين وكوادر المنظمات لإدارة خطط الرعاية المتكاملة، تقييم الاحتياجات، وإحالة الحالات وفق أدلة العمل المعتمدة.',
+      formUrl: '#/forms?id=case-manager-2026',
+      icon: '🤝'
+    },
+    'presentation': {
+      title: 'دورة مهارات العرض والتقديم Presentation Skills (م. مهدي الملاحي)',
+      code: 'SHAT-FORM-02',
+      badge: 'مهارات التواصل والإلقاء والتأثير',
+      badgeColor: '#D97706',
+      badgeBg: '#FEF3C7',
+      trainer: 'م. مهدي الملاحي • استشاري التواصل المؤسسي والعرض الفعال',
+      hours: '24 ساعة تدريبية وتطبيق عملي',
+      fee: 'رسوم تفضيلية',
+      desc: 'تمكين قادة المشاريع والمدربين من هندسة العروض التقديمية الاحترافية، إتقان لغة الجسد، إدارة منصات التحدث أمام الجمهور، وصياغة الرسائل المقنعة للمانحين وأصحاب المصلحة.',
+      formUrl: '#/forms?id=presentation-skills-2026',
+      icon: '🎤'
+    },
+    'humanitarian': {
+      title: 'دبلوم الممارس الإنساني وبناء القدرات المؤسسية (CHS Master)',
+      code: 'SHAT-FORM-03',
+      badge: 'المعايير الدولية وجودة الاستجابة الإنسانية',
+      badgeColor: '#2563EB',
+      badgeBg: '#EFF6FF',
+      trainer: 'أ. حسام جاد الله • نخبة خبراء ومستشاري شركة شات',
+      hours: '60 ساعة معتمدة دولياً',
+      fee: 'منحة تدريبية وبناء قدرات',
+      desc: 'تأهيل متعمق في المعيار الإنساني الأساسي للجودة والمساءلة (CHS)، صون السلامة والحماية من الاستغلال الجنسي والاعتداء (PSEA)، وتصميم مؤشرات المتابعة والتقييم (MEAL).',
+      formUrl: '#/forms?id=humanitarian-worker-2026',
+      icon: '🛡️'
+    },
+    'consulting': {
+      title: 'استمارة الاستشارات المؤسسية وبناء القدرات وتطوير النظم',
+      code: 'SHAT-FORM-04',
+      badge: 'التدخلات الاستشارية المتقدمة للمنظمات',
+      badgeColor: '#7C3AED',
+      badgeBg: '#F5F3FF',
+      trainer: 'فريق الخبراء والاستشاريين المعتمدين لشركة شات',
+      hours: 'وفق نطاق التدخل المؤسسي',
+      fee: 'يحدد وفق موازنة التدخل',
+      desc: 'خدمات استشارية متخصصة في تأهيل المنظمات للحصول على شهادة CHS، إعداد الأدلة التشغيلية SOPs، مراجعة سياسات الحوكمة، وإجراء التقييم الخارجي المستقل وفق معايير OECD DAC.',
+      formUrl: '#/forms?id=consulting-inquiry-2026',
+      icon: '🏛️'
+    }
+  };
+
+  const renderActiveTrack = (trackKey) => {
+    if (!finderContent) return;
+    const t = TRACKS_DATA[trackKey] || TRACKS_DATA['case-management'];
+
+    finderContent.innerHTML = `
+      <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 8px;">
+              <span style="background: ${t.badgeBg}; color: ${t.badgeColor}; font-size: 0.78rem; font-weight: 800; padding: 3px 10px; border-radius: 6px;">
+                ${t.badge}
+              </span>
+              <span style="font-size: 0.76rem; font-family: monospace; background: #FFFFFF; border: 1px solid #E2E8F0; padding: 2px 8px; border-radius: 4px; color: #64748B;">
+                ${t.code}
+              </span>
+            </div>
+            <h4 style="font-size: 1.25rem; font-weight: 900; color: #0B1E36; margin: 0 0 8px; line-height: 1.4;">
+              ${t.icon} ${t.title}
+            </h4>
+          </div>
+
+          <a href="${t.formUrl}" class="btn-clean btn-green" style="font-weight: 800; padding: 10px 22px; border-radius: 8px; box-shadow: 0 4px 12px rgba(30,126,52,0.2); white-space: nowrap;">
+            <span>✍️ فتح الاستمارة المباشرة</span>
+            <span>←</span>
+          </a>
+        </div>
+
+        <p style="font-size: 0.92rem; color: #475569; line-height: 1.7; margin: 0;">
+          ${t.desc}
+        </p>
+
+        <div style="display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.85rem; color: #334155; padding-top: 14px; border-top: 1px solid #E2E8F0;">
+          <div><strong>👨‍🏫 المدرب / الخبير:</strong> ${t.trainer}</div>
+          <div><strong>⏱️ الساعات:</strong> ${t.hours}</div>
+          <div><strong>💳 الرسوم:</strong> <span style="color: #1E7E34; font-weight: 700;">${t.fee}</span></div>
+          <div><strong>🟢 حالة التسجيل:</strong> <span style="color: #166534; font-weight: 800;">متاح للتسجيل الفوري</span></div>
+        </div>
+      </div>
+    `;
+  };
+
+  if (finderTabs.length > 0) {
+    renderActiveTrack('case-management');
+    finderTabs.forEach(tab => {
+      tab.onclick = () => {
+        finderTabs.forEach(t => {
+          t.style.background = '#F1F5F9';
+          t.style.color = '#475569';
+          t.classList.remove('active');
+        });
+        tab.style.background = 'var(--shat-navy, #0B1E36)';
+        tab.style.color = '#FFFFFF';
+        tab.classList.add('active');
+        renderActiveTrack(tab.getAttribute('data-track'));
+      };
+    });
+  }
+
   // 2. Open Diagnostic Tool Modal Triggers
   document.querySelectorAll('.btn-open-diagnostic').forEach(btn => {
     btn.onclick = () => {
@@ -580,15 +742,14 @@ export function bindHomeEvents() {
   // 3. Open Certificate Validator Trigger
   document.querySelectorAll('.btn-open-cert-validator').forEach(btn => {
     btn.onclick = () => {
-      if (window.openCertificateModal) window.openCertificateModal();
+      window.location.hash = '#/verify';
     };
   });
 
   // 4. Trigger Spotlight Search from Hero
   document.querySelectorAll('.btn-trigger-spotlight').forEach(btn => {
     btn.onclick = () => {
-      const searchTrigger = document.getElementById('btn-spotlight-search');
-      if (searchTrigger) searchTrigger.click();
+      if (window.openCommandPalette) window.openCommandPalette();
     };
   });
 

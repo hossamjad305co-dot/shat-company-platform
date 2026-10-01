@@ -19,6 +19,7 @@ import { renderCourseDetailView } from '../assets/js/views/courseDetailView.js';
 import { renderProjectsView } from '../assets/js/views/projectsView.js';
 import { renderNewsView } from '../assets/js/views/newsView.js';
 import { renderFormsView } from '../assets/js/views/formsView.js';
+import { renderVerifyView } from '../assets/js/views/verifyView.js';
 
 // Setup Mock Browser Environment for View Tests
 global.localStorage = {
@@ -397,14 +398,15 @@ async function runAllTests() {
     { name: 'Teacher Dashboard', html: renderTeacherDashboardView('ar') },
     { name: 'Admin Portal', html: renderAdminView('ar') },
     { name: 'Course Detail', html: renderCourseDetailView('ar') },
-    { name: 'Forms', html: renderFormsView('ar') }
+    { name: 'Forms', html: renderFormsView('ar') },
+    { name: 'Verify Certificate', html: renderVerifyView('ar') }
   ];
 
   views.forEach(v => {
     assert(v.html && v.html.length > 100, `${v.name} renders non-empty HTML`);
     assert(v.html.includes('شات') || v.html.includes('SHAT'), `${v.name} contains SHAT branding`);
   });
-  console.log('  ✓ All 13 Frontend Views verified with 0 errors.');
+  console.log('  ✓ All 14 Frontend Views verified with 0 errors.');
   passedCount++;
 
   console.log('\n================================================================');

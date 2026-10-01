@@ -14,6 +14,7 @@ import { diagnosticTool } from './tools/diagnosticTool.js';
 import { certificateValidator } from './tools/certificateValidator.js';
 import { toolkitsLibrary } from './tools/toolkitsLibrary.js';
 import { standardsExplorer } from './tools/standardsExplorer.js';
+import { commandPalette } from './components/commandPalette.js';
 
 class Application {
   constructor() {
@@ -25,6 +26,8 @@ class Application {
   init() {
     window.siteCustomizer = siteCustomizer;
     window.openSiteCustomizer = (l) => siteCustomizer.openModal(l || this.currentLang);
+    window.commandPalette = commandPalette;
+    window.openCommandPalette = () => commandPalette.open();
     this.applyLanguage(this.currentLang);
     this.renderRoleSimulator();
     this.renderHeader();
@@ -273,7 +276,7 @@ class Application {
       const searchTrigger = document.getElementById('btn-spotlight-search');
       if (searchTrigger) {
         searchTrigger.onclick = () => {
-          globalSearch.open(this.currentLang);
+          commandPalette.open();
         };
       }
 
@@ -363,7 +366,13 @@ class Application {
         <a href="#/news" class="nav-link">${nav.news || (this.currentLang === 'fr' ? 'Actualités' : 'الأخبار')}</a>
         <a href="#/academy" class="nav-link">${nav.academy}</a>
         <a href="#/forms" class="nav-link" style="color: var(--shat-green); font-weight: 800;">📋 ${this.currentLang === 'ar' ? 'استمارات التسجيل المعتمدة' : (this.currentLang === 'fr' ? 'Formulaires d’Inscription' : 'Official Forms')}</a>
+        <a href="#/verify" class="nav-link" style="color: #10B981; font-weight: 800;">🛡️ ${this.currentLang === 'ar' ? 'التحقق من الشهادات والاعتمادات' : (this.currentLang === 'fr' ? 'Vérifier Certificats' : 'Verify Certificates')}</a>
         <a href="#/contact" class="nav-link">${nav.contact}</a>
+        
+        <button type="button" id="btn-mobile-drawer-search" class="btn-clean" style="margin: 8px 0; background: var(--bg-subtle); color: var(--shat-navy); font-weight: 800; width: 100%; justify-content: center; padding: 10px 14px; border-radius: var(--radius-xs); border: 1px solid var(--border-light); cursor: pointer; display: flex; align-items: center; gap: 8px;">
+          <span>🔍</span>
+          <span>${this.currentLang === 'ar' ? 'البحث الذكي الشامل (Ctrl+K)' : 'Spotlight Search (Ctrl+K)'}</span>
+        </button>
         <div style="height: 1px; background: var(--border-light); margin: 6px 0;"></div>
         ${user ? `
           <a href="${user.role === 'teacher' ? '#/teacher' : (user.role === 'admin' ? '#/admin' : '#/student')}" class="nav-link" style="color: var(--shat-green); font-weight: 800;">
@@ -413,6 +422,15 @@ class Application {
           } else {
             showToast('أداة تخصيص المنصة جاهزة للمشرفين', 'info');
           }
+        };
+      }
+
+      const drawerSearchBtn = document.getElementById('btn-mobile-drawer-search');
+      if (drawerSearchBtn) {
+        drawerSearchBtn.onclick = () => {
+          const drawer = document.getElementById('mobile-drawer-nav');
+          if (drawer) drawer.style.display = 'none';
+          commandPalette.open();
         };
       }
 

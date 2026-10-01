@@ -586,9 +586,38 @@ function renderSingleForm(container, form, lang, formsList) {
         ` : ''}
       </div>
 
+      <!-- 3-Step Visual Progress Breadcrumb -->
+      <div style="background: #F8FAFC; padding: 14px 36px; border-bottom: 1px solid #E2E8F0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 0.82rem; font-weight: 700;">
+        <div style="display: flex; align-items: center; gap: 6px; color: #166534;">
+          <span style="width: 22px; height: 22px; border-radius: 50%; background: #166534; color: #FFF; display: flex; align-items: center; justify-content: center; font-size: 0.72rem;">1</span>
+          <span>البيانات الأساسية</span>
+        </div>
+        <span style="color: #CBD5E1;">←</span>
+        <div style="display: flex; align-items: center; gap: 6px; color: #0B1E36;">
+          <span style="width: 22px; height: 22px; border-radius: 50%; background: #0B1E36; color: #FFF; display: flex; align-items: center; justify-content: center; font-size: 0.72rem;">2</span>
+          <span>التخصص والمؤهل</span>
+        </div>
+        <span style="color: #CBD5E1;">←</span>
+        <div style="display: flex; align-items: center; gap: 6px; color: #64748B;">
+          <span style="width: 22px; height: 22px; border-radius: 50%; background: #E2E8F0; color: #64748B; display: flex; align-items: center; justify-content: center; font-size: 0.72rem;">3</span>
+          <span>المزامنة والاعتماد</span>
+        </div>
+      </div>
+
       <!-- Native Form Fields -->
       <form id="native-shat-form" style="padding: 36px;">
         <input type="hidden" id="native-form-id" value="${form.id}">
+
+        <!-- Auto-Draft Banner -->
+        <div id="form-draft-notice" style="display: none; background: #FEF3C7; border: 1px solid #FDE68A; padding: 10px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 0.84rem; color: #92400E; justify-content: space-between; align-items: center;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span>💾</span>
+            <span>تم استعادة مسودتك المحفوظة تلقائياً. يمكنك المتابعة أو مسح المسودة.</span>
+          </div>
+          <button type="button" id="btn-clear-draft" class="btn-clean" style="font-size: 0.76rem; color: #DC2626; font-weight: 800; text-decoration: underline;">
+            مسح المسودة
+          </button>
+        </div>
 
         <div style="display: flex; flex-direction: column; gap: 22px;">
           ${(form.fields || []).map(field => {
@@ -600,7 +629,7 @@ function renderSingleForm(container, form, lang, formsList) {
                   <label class="form-label" style="font-size: 0.95rem; font-weight: 700; color: var(--shat-navy, #0B1E36); margin-bottom: 8px; display: block;">
                     ${field.label} ${field.required ? '<span style="color: var(--accent-red, #DC2626);">*</span>' : ''}
                   </label>
-                  <select id="${fieldIdentifier}" data-field-id="${field.id}" data-entry-id="${field.entryId || ''}" class="form-input" style="height: 48px; font-size: 0.95rem; width: 100%; border-radius: 8px; border: 1px solid #CBD5E1; padding: 0 14px;" ${field.required ? 'required' : ''}>
+                  <select id="${fieldIdentifier}" data-field-id="${field.id}" data-entry-id="${field.entryId || ''}" class="form-input form-field-input" style="height: 48px; font-size: 0.95rem; width: 100%; border-radius: 8px; border: 1px solid #CBD5E1; padding: 0 14px;" ${field.required ? 'required' : ''}>
                     <option value="">${txt('-- يرجى الاختيار من القائمة المعتمدة --', '-- Select an option --', '-- Choisir une option --')}</option>
                     ${(field.options || []).map(opt => `<option value="${opt}">${opt}</option>`).join('')}
                   </select>
@@ -612,7 +641,7 @@ function renderSingleForm(container, form, lang, formsList) {
                   <label class="form-label" style="font-size: 0.95rem; font-weight: 700; color: var(--shat-navy, #0B1E36); margin-bottom: 8px; display: block;">
                     ${field.label} ${field.required ? '<span style="color: var(--accent-red, #DC2626);">*</span>' : ''}
                   </label>
-                  <textarea id="${fieldIdentifier}" data-field-id="${field.id}" data-entry-id="${field.entryId || ''}" class="form-input" style="min-height: 110px; font-size: 0.95rem; width: 100%; border-radius: 8px; border: 1px solid #CBD5E1; padding: 12px 14px;" placeholder="${field.placeholder || ''}" ${field.required ? 'required' : ''}></textarea>
+                  <textarea id="${fieldIdentifier}" data-field-id="${field.id}" data-entry-id="${field.entryId || ''}" class="form-input form-field-input" style="min-height: 110px; font-size: 0.95rem; width: 100%; border-radius: 8px; border: 1px solid #CBD5E1; padding: 12px 14px;" placeholder="${field.placeholder || ''}" ${field.required ? 'required' : ''}></textarea>
                 </div>
               `;
             } else {
@@ -621,7 +650,7 @@ function renderSingleForm(container, form, lang, formsList) {
                   <label class="form-label" style="font-size: 0.95rem; font-weight: 700; color: var(--shat-navy, #0B1E36); margin-bottom: 8px; display: block;">
                     ${field.label} ${field.required ? '<span style="color: var(--accent-red, #DC2626);">*</span>' : ''}
                   </label>
-                  <input type="${field.type || 'text'}" id="${fieldIdentifier}" data-field-id="${field.id}" data-entry-id="${field.entryId || ''}" class="form-input" style="height: 48px; font-size: 0.95rem; width: 100%; border-radius: 8px; border: 1px solid #CBD5E1; padding: 0 14px;" placeholder="${field.placeholder || ''}" ${field.required ? 'required' : ''}>
+                  <input type="${field.type || 'text'}" id="${fieldIdentifier}" data-field-id="${field.id}" data-entry-id="${field.entryId || ''}" class="form-input form-field-input" style="height: 48px; font-size: 0.95rem; width: 100%; border-radius: 8px; border: 1px solid #CBD5E1; padding: 0 14px;" placeholder="${field.placeholder || ''}" ${field.required ? 'required' : ''}>
                 </div>
               `;
             }
@@ -635,7 +664,7 @@ function renderSingleForm(container, form, lang, formsList) {
           </a>
 
           <div style="display: flex; gap: 10px;">
-            <button type="reset" class="btn-clean" style="background: #F8FAFC; color: var(--text-muted, #64748B); border: 1px solid var(--border-light, #E2E8F0);">
+            <button type="reset" id="btn-reset-native-form" class="btn-clean" style="background: #F8FAFC; color: var(--text-muted, #64748B); border: 1px solid var(--border-light, #E2E8F0);">
               ${txt('إعادة ضبط', 'Reset', 'Réinitialiser')}
             </button>
             <button type="submit" id="btn-submit-native-form" class="btn-clean btn-green btn-lg" style="padding: 13px 36px; font-weight: 900; border-radius: 8px; font-size: 1rem; box-shadow: 0 4px 12px rgba(30,126,52,0.25);">
@@ -649,11 +678,56 @@ function renderSingleForm(container, form, lang, formsList) {
     </div>
   `;
 
-  // Bind Form Submission
+  // Bind Form Submission & Auto-Draft Persistence
   const formEl = document.getElementById('native-shat-form');
   const submitBtn = document.getElementById('btn-submit-native-form');
+  const draftKey = `shat_form_draft_${form.id}`;
+  const draftNoticeBox = document.getElementById('form-draft-notice');
+  const clearDraftBtn = document.getElementById('btn-clear-draft');
 
+  // A. Restore Draft if available
+  try {
+    const rawDraft = localStorage.getItem(draftKey);
+    if (rawDraft) {
+      const draftObj = JSON.parse(rawDraft);
+      let count = 0;
+      Object.entries(draftObj).forEach(([id, val]) => {
+        const el = document.getElementById(id);
+        if (el && val) {
+          el.value = val;
+          count++;
+        }
+      });
+      if (count > 0 && draftNoticeBox) {
+        draftNoticeBox.style.display = 'flex';
+      }
+    }
+  } catch (e) {}
+
+  // B. Clear Draft Handler
+  if (clearDraftBtn) {
+    clearDraftBtn.onclick = () => {
+      localStorage.removeItem(draftKey);
+      if (formEl) formEl.reset();
+      if (draftNoticeBox) draftNoticeBox.style.display = 'none';
+      showToast('تم مسح المسودة المحفوظة بنجاح.', 'info');
+    };
+  }
+
+  // C. Auto-save input changes
   if (formEl) {
+    formEl.addEventListener('input', () => {
+      const currentDraft = {};
+      (form.fields || []).forEach(field => {
+        const k = field.entryId || field.id;
+        const el = document.getElementById(k);
+        if (el && el.value) currentDraft[k] = el.value;
+      });
+      try {
+        localStorage.setItem(draftKey, JSON.stringify(currentDraft));
+      } catch (e) {}
+    });
+
     formEl.onsubmit = async (e) => {
       e.preventDefault();
 
@@ -682,6 +756,8 @@ function renderSingleForm(container, form, lang, formsList) {
 
       try {
         const res = await api.submitDualFormRegistration(form.id, form, answers);
+        // Clear saved draft upon successful submission
+        try { localStorage.removeItem(draftKey); } catch (e) {}
         
         container.innerHTML = `
           <div style="background: #FFFFFF; border-radius: var(--radius-lg, 16px); padding: 48px 36px; text-align: center; border: 1px solid var(--border-light, #E2E8F0); box-shadow: var(--shadow-sm); max-width: 720px; margin: 0 auto;">

@@ -16,6 +16,7 @@ import { renderTeacherDashboardView, bindTeacherEvents } from './views/teacherDa
 import { renderAdminView, bindAdminEvents } from './views/adminView.js';
 import { renderCourseDetailView, bindCourseDetailEvents } from './views/courseDetailView.js';
 import { renderFormsView, bindFormsEvents } from './views/formsView.js';
+import { renderVerifyView, bindVerifyEvents } from './views/verifyView.js';
 import { showToast } from './components/toast.js';
 
 class SimpleRouter {
@@ -38,7 +39,9 @@ class SimpleRouter {
       'teacher': renderTeacherDashboardView,
       'admin': renderAdminView,
       'course': renderCourseDetailView,
-      'forms': renderFormsView
+      'forms': renderFormsView,
+      'verify': renderVerifyView,
+      'verify-certificate': renderVerifyView
     };
     this.currentLang = localStorage.getItem('shat_platform_lang') || 'ar';
   }
@@ -121,6 +124,8 @@ class SimpleRouter {
       bindAcademyEvents();
     } else if (activeRoute === 'news') {
       bindNewsEvents();
+    } else if (activeRoute === 'verify' || activeRoute === 'verify-certificate') {
+      bindVerifyEvents();
     }
 
     // Consultation Inquiry Form Handler (Contact View)
