@@ -975,7 +975,20 @@ export function renderAdminView(lang = 'ar') {
 }
 
 export async function bindAdminEvents() {
-  const currentUser = api.currentUser;
+  const storedUser = (function() {
+    try {
+      const u = localStorage.getItem('shat_auth_user_cache') || localStorage.getItem('shat_current_user');
+      return u ? JSON.parse(u) : null;
+    } catch (e) {
+      return null;
+    }
+  })();
+
+  const currentUser = api.currentUser || storedUser;
+  if (!api.currentUser && storedUser) {
+    api.currentUser = storedUser;
+  }
+
   const currentLang = localStorage.getItem('shat_platform_lang') || 'ar';
   const txt = (ar, en, fr) => {
     if (currentLang === 'fr') return fr || en;
@@ -984,7 +997,7 @@ export async function bindAdminEvents() {
   };
 
   const userRole = (currentUser && currentUser.role) ? currentUser.role.toLowerCase() : '';
-  const isAdmin = userRole === 'admin' || userRole === 'super_admin';
+  const isAdmin = userRole === 'admin' || userRole === 'super_admin' || userRole === 'manager';
   if (!currentUser || !isAdmin) {
     showToast(txt('يجب تسجيل الدخول بصلاحيات الإدارة للوصول إلى لوحة التحكم.', 'Admin credentials required to access this dashboard.', 'Accès restreint à l\'administration.'), 'warning');
     window.location.hash = '#/login';
