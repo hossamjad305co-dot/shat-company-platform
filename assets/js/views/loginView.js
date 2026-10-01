@@ -111,8 +111,8 @@ export function renderLoginView(lang = 'ar') {
                   style="height: 48px; font-size: 0.95rem; width: 100%; border-radius: var(--radius-xs); padding-${isRtl ? 'left' : 'right'}: 44px;"
                 />
                 <button type="button" id="btn-toggle-password" title="Show/Hide Password" class="btn-clean" style="position: absolute; ${isRtl ? 'left: 10px' : 'right: 10px'}; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; color: var(--text-muted); cursor: pointer; padding: 0;">
-                  <span id="pwd-icon-show">${icons.eye}</span>
-                  <span id="pwd-icon-hide" style="display: none;">${icons.eyeOff}</span>
+                  <span id="pwd-icon-show">${icons.eye('icon-inline', 18)}</span>
+                  <span id="pwd-icon-hide" style="display: none;">${icons.eyeOff('icon-inline', 18)}</span>
                 </button>
               </div>
             </div>
@@ -148,7 +148,7 @@ export function renderLoginView(lang = 'ar') {
         <div id="tab-pane-nationalId" class="login-tab-pane" style="display: none;">
           <div style="background: rgba(30, 58, 138, 0.04); border: 1px solid rgba(30, 58, 138, 0.15); padding: 14px; border-radius: var(--radius-xs); margin-bottom: 18px;">
             <div style="display: flex; align-items: center; gap: 8px; font-weight: 700; color: #1E3A8A; font-size: 0.88rem; margin-bottom: 4px;">
-              <span style="display: inline-flex;">${icons.fingerprint || '🪪'}</span>
+              <span style="display: inline-flex;">${icons.fingerprint('icon-inline', 18)}</span>
               <span>${l.tabs?.nationalId || 'الهوية الأكاديمية'}</span>
             </div>
             <p style="margin: 0; font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">${l.nationalIdHelp}</p>
@@ -190,7 +190,7 @@ export function renderLoginView(lang = 'ar') {
         <div id="tab-pane-whatsapp" class="login-tab-pane" style="display: none;">
           <div style="background: rgba(37, 211, 102, 0.08); border: 1px solid rgba(37, 211, 102, 0.25); padding: 14px; border-radius: var(--radius-xs); margin-bottom: 18px;">
             <div style="display: flex; align-items: center; gap: 8px; font-weight: 700; color: #15803D; font-size: 0.88rem; margin-bottom: 4px;">
-              <span style="display: inline-flex; width: 20px; height: 20px;">${icons.whatsapp}</span>
+              <span style="display: inline-flex; width: 20px; height: 20px;">${icons.whatsapp('icon-inline', 20)}</span>
               <span>${l.tabs?.whatsapp || 'واتساب السريع'}</span>
             </div>
             <p style="margin: 0; font-size: 0.8rem; color: #166534; line-height: 1.5;">${l.whatsappSimNote}</p>

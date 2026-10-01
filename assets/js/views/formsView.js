@@ -708,7 +708,7 @@ function renderSingleForm(container, form, lang, formsList) {
 
             <!-- Actions Row -->
             <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-              <a href="https://wa.me/972599000000?text=${encodeURIComponent('مرحباً شركة شات، قمت للتو بتقديم طلب تسجيل في: ' + form.title)}" target="_blank" class="btn-clean" style="background: #25D366; color: #FFFFFF; font-weight: 800; padding: 12px 24px; border-radius: 8px;">
+              <a href="https://wa.me/972592879621?text=${encodeURIComponent('مرحباً شركة شات، قمت للتو بتقديم طلب تسجيل في: ' + form.title)}" target="_blank" class="btn-clean" style="background: #25D366; color: #FFFFFF; font-weight: 800; padding: 12px 24px; border-radius: 8px;">
                 💬 متابعة عبر واتساب
               </a>
               <a href="#/forms" class="btn-clean btn-primary" style="padding: 12px 24px; border-radius: 8px;">

@@ -190,6 +190,7 @@ input, select, textarea {
   text-decoration: none;
   flex-shrink: 0;
   user-select: none;
+  flex-direction: row !important;
 }
 .brand-logo-img {
   height: 42px;
@@ -205,7 +206,7 @@ input, select, textarea {
   white-space: nowrap;
 }
 .brand-title {
-  font-size: 1.12rem !important;
+  font-size: 1.15rem !important;
   font-weight: 900 !important;
   color: var(--shat-navy) !important;
   line-height: 1.25 !important;
@@ -214,7 +215,7 @@ input, select, textarea {
   letter-spacing: normal !important;
 }
 .brand-subtitle {
-  font-size: 0.70rem !important;
+  font-size: 0.72rem !important;
   color: var(--shat-green) !important;
   font-weight: 700 !important;
   letter-spacing: 0.04em !important;
@@ -226,18 +227,19 @@ input, select, textarea {
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
   flex: 0 1 auto;
   min-width: 0;
 }
 .nav-link {
-  font-size: 0.82rem;
+  font-size: 0.81rem;
   font-weight: 700;
   color: var(--text-secondary);
-  padding: 4px 7px;
+  padding: 4px 6px;
   white-space: nowrap;
   border-radius: var(--radius-xs);
   transition: all var(--transition-fast);
+  line-height: 1.2;
 }
 .nav-link:hover,
 .nav-link.active {
@@ -248,30 +250,56 @@ input, select, textarea {
   font-weight: 800;
 }
 
+@media (min-width: 1360px) {
+  .nav-menu {
+    gap: 6px;
+  }
+  .nav-link {
+    font-size: 0.85rem;
+    padding: 5px 8px;
+  }
+}
+
 /* Header Action Buttons */
 .header-actions {
   display: flex;
   align-items: center;
   gap: 6px;
-  flex-shrink: 0;
+  flex-shrink: 0 !important;
   margin-inline-start: auto;
   position: relative;
   z-index: 10;
 }
 
 .user-header-auth-group {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-shrink: 0;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex-shrink: 0 !important;
+  visibility: visible !important;
 }
 
 .header-logout-btn {
   flex-shrink: 0 !important;
   display: inline-flex !important;
   align-items: center !important;
+  gap: 4px !important;
   visibility: visible !important;
   opacity: 1 !important;
+  background: #DC2626 !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  font-size: 0.80rem !important;
+  padding: 6px 12px !important;
+  border-radius: var(--radius-xs) !important;
+  border: none !important;
+  cursor: pointer !important;
+  box-shadow: 0 1px 3px rgba(220,38,38,0.3) !important;
+  transition: all 0.15s ease !important;
+}
+.header-logout-btn:hover {
+  background: #B91C1C !important;
+  transform: translateY(-1px);
 }
 
 .mobile-toggle {
@@ -289,29 +317,23 @@ input, select, textarea {
   height: 22px;
 }
 
-@media (max-width: 992px) {
+/* Responsive Navigation Breakpoints */
+@media (max-width: 1140px) {
   .site-header {
     padding: 10px 0;
   }
   .site-header .container {
-    padding-left: 8px !important;
-    padding-right: 8px !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
   }
   .header-wrapper {
-    gap: 6px;
-  }
-  .brand-identity {
-    gap: 6px;
-  }
-  .brand-logo-img {
-    height: 34px;
+    gap: 8px;
   }
   .nav-menu {
     display: none !important;
   }
   .header-actions #btn-spotlight-search,
   .header-actions .lang-switch-dropdown,
-  .header-actions .user-header-auth-group,
   .header-actions .header-notif-container,
   .header-actions #btn-notifications-toggle,
   .header-actions a.btn-clean {
@@ -321,26 +343,50 @@ input, select, textarea {
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
-    padding: 5px 7px;
+    padding: 6px 9px;
+  }
+  .user-header-auth-group {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    flex-shrink: 0 !important;
+  }
+  .header-logout-btn {
+    display: inline-flex !important;
+    visibility: visible !important;
   }
 }
-@media (max-width: 1280px) and (min-width: 993px) {
-  .nav-menu {
-    gap: 2px;
+
+@media (max-width: 640px) {
+  .site-header {
+    padding: 8px 0 !important;
   }
-  .nav-link {
-    font-size: 0.77rem;
-    padding: 3px 5px;
+  .site-header .container {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
   }
-  #btn-spotlight-search .search-text-label,
-  #btn-spotlight-search kbd {
+  .brand-identity {
+    gap: 6px !important;
+  }
+  .brand-logo-img {
+    height: 32px !important;
+  }
+  .brand-title {
+    font-size: 0.95rem !important;
+  }
+  .brand-subtitle {
+    font-size: 0.65rem !important;
+  }
+  .user-portal-pill {
+    padding: 4px 6px !important;
+  }
+  .user-portal-pill .user-short-name,
+  .user-portal-pill .badge {
     display: none !important;
   }
-  #btn-spotlight-search {
-    padding: 6px 8px !important;
-  }
-  .user-short-name {
-    max-width: 75px !important;
+  .header-logout-btn {
+    padding: 5px 8px !important;
+    font-size: 0.74rem !important;
   }
 }
 
@@ -1681,6 +1727,76 @@ p {
   color: #FFFFFF !important;
   border-color: var(--shat-navy) !important;
   box-shadow: 0 4px 12px rgba(15, 46, 74, 0.2);
+}
+
+/* ==========================================================================
+   Mobile-First Complete Experience Overhaul (Touch Ergonomics & Responsiveness)
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Prevent horizontal scrolling & set safe bottom padding for bottom nav */
+  body {
+    padding-bottom: calc(76px + env(safe-area-inset-bottom, 12px)) !important;
+  }
+
+  /* Ergonomic Touch Targets: Minimum 44px height */
+  button, .btn-clean, .btn-island, .nav-link, .mobile-bottom-link {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+
+  /* Prevent auto-zooming on inputs in iOS Safari */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  input[type="search"],
+  select,
+  textarea,
+  .form-input,
+  .form-select,
+  .form-textarea {
+    font-size: 16px !important;
+    min-height: 46px !important;
+  }
+
+  /* Single Column Collapse for Bento & Grid Containers */
+  .bento-grid,
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  /* Container padding */
+  .container {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  /* Metric cards on mobile */
+  .metric-pill-box {
+    padding: 12px 14px !important;
+  }
+
+  /* Modal Windows */
+  .modal-window {
+    width: 95% !important;
+    padding: 20px 16px !important;
+    max-height: 88vh !important;
+  }
+
+  /* Section Spacing */
+  .section {
+    padding: 44px 0 !important;
+  }
+
+  /* Table Horizontal Scrolling */
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 

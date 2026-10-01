@@ -33,7 +33,7 @@ export function renderHomeView(lang = 'ar') {
       <!-- ==================================================================== -->
       <!-- 1. World-Class Executive Hero Section                                -->
       <!-- ==================================================================== -->
-      <section class="section" style="padding: clamp(64px, 8vw, 110px) 0 40px; background: radial-gradient(circle at 50% 10%, rgba(15,46,74,0.04) 0%, #FFFFFF 85%);">
+      <section class="section hero-executive-section" style="padding: 72px 0 40px; background: radial-gradient(circle at 50% 10%, rgba(15,46,74,0.04) 0%, #FFFFFF 85%);">
         <div class="container">
           <div style="max-width: 920px; margin: 0 auto; text-align: center;">
             
@@ -45,13 +45,13 @@ export function renderHomeView(lang = 'ar') {
               </span>
             </div>
 
-            <!-- Primary Headline -->
-            <h1 style="font-size: clamp(2.3rem, 4.8vw, 3.6rem); color: var(--shat-navy); line-height: 1.25; font-weight: 900; margin-bottom: 22px; letter-spacing: -0.02em;">
+            <!-- Primary Headline: Rock-solid locked font size -->
+            <h1 class="hero-headline" style="font-size: 2.75rem; color: var(--shat-navy); line-height: 1.25; font-weight: 900; margin-bottom: 22px; letter-spacing: -0.01em;">
               ${c.motto}
             </h1>
 
             <!-- Subtitle -->
-            <p style="font-size: clamp(1.05rem, 1.8vw, 1.25rem); color: var(--text-secondary); line-height: 1.8; margin-bottom: 34px; max-width: 780px; margin-inline: auto; font-weight: 500;">
+            <p class="hero-subheadline" style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 34px; max-width: 780px; margin-inline: auto; font-weight: 500;">
               ${h.heroSubtitle}
             </p>
 
@@ -530,9 +530,9 @@ export function renderHomeView(lang = 'ar') {
       <section class="section" style="padding: 80px 0; background: #FFFFFF; border-top: 1px solid var(--border-light);">
         <div class="container">
           <div class="double-bezel" style="max-width: 900px; margin: 0 auto;">
-            <div class="double-bezel-inner" style="padding: clamp(32px, 6vw, 64px); text-align: center; background: var(--bg-subtle);">
+            <div class="double-bezel-inner" style="padding: 48px 24px; text-align: center; background: var(--bg-subtle);">
               <span class="section-badge" style="margin-bottom: 16px;">${c.name}</span>
-              <h2 style="font-size: clamp(1.8rem, 3.5vw, 2.5rem); color: var(--shat-navy); margin-bottom: 14px; line-height: 1.3; font-weight: 900;">
+              <h2 style="font-size: 2.1rem; color: var(--shat-navy); margin-bottom: 14px; line-height: 1.35; font-weight: 900;">
                 ${lang === 'fr' 
                   ? 'Prêts à vous accompagner pour transformer le savoir en résultats mesurables' 
                   : (isRtl ? 'جاهزون لدعم مؤسستكم في تحويل المعرفة إلى نتائج قابلة للقياس' : 'Ready to support your organization in converting knowledge into measurable results')}

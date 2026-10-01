@@ -30,13 +30,13 @@ export function AcademySidebar({ activeRoute = 'academy' }) {
   return `
     <aside class="shat-academy-sidebar" style="width: var(--sidebar-width); background: var(--bg-surface); border-inline-end: 1px solid var(--border-subtle); padding: var(--space-lg); display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
       <div>
-        <!-- Academy Brand Emblem -->
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: var(--space-xl); padding-bottom: var(--space-md); border-bottom: 1px solid var(--border-subtle);">
-          <img src="assets/logo/logo-transparent.png" alt="SHAT" style="height: 36px;" onerror="this.src='assets/logo/logo-symbol.jpg'">
+        <!-- Academy Brand Emblem: Text to the RIGHT of Logo (in RTL: text first in DOM) -->
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: var(--space-xl); padding-bottom: var(--space-md); border-bottom: 1px solid var(--border-subtle); flex-direction: row;">
           <div>
             <div style="font-weight: 800; font-size: var(--font-size-body); color: var(--shat-navy-950);">أكاديمية شات</div>
             <div style="font-size: var(--font-size-caption); color: var(--shat-green-700); font-weight: 600;">LMS & Capacity Hub</div>
           </div>
+          <img src="assets/logo/logo-transparent.png" alt="SHAT" style="height: 36px;" onerror="this.src='assets/logo/logo-symbol.jpg'">
         </div>
 
         <!-- User Role Profile Pill -->

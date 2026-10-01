@@ -549,8 +549,8 @@ class ApiClient {
     }
 
     if (path.includes('/grade') && method === 'POST') {
-      const parts = path.split('/');
-      const subId = parts[3];
+      const parts = path.split('/').filter(Boolean);
+      const subId = parts[2];
       const subs = this.getStoredSubmissions();
       const target = subs.find(s => s.id === subId);
       if (target) {
@@ -580,8 +580,8 @@ class ApiClient {
     }
 
     if (path.includes('/status') && method === 'POST') {
-      const parts = path.split('/');
-      const appId = parts[3];
+      const parts = path.split('/').filter(Boolean);
+      const appId = parts[2];
       const apps = this.getStoredApplications();
       const app = apps.find(a => a.id === appId);
       if (app) {
@@ -711,9 +711,9 @@ class ApiClient {
     }
 
     if (path.startsWith('/api/forms/')) {
-      const parts = path.split('/');
-      const formId = parts[2];
-      const action = parts[3];
+      const parts = path.split('/').filter(Boolean); // ['api', 'forms', formId, action]
+      const formId = parts[2]; // e.g. 'case-manager-2026'
+      const action = parts[3]; // e.g. 'submit' or 'responses'
 
       const forms = this.getStoredForms();
       const form = forms.find(f => f.id === formId);
@@ -1257,27 +1257,70 @@ class ApiClient {
 
   // Dual-Sync Submitter: Direct to Google Form (Sheets) + SHAT Platform Storage
   async submitDualFormRegistration(formId, formMeta, answers) {
-    // 1. Direct submit to Google Form formResponse endpoint via no-cors
+    // 1. Direct submit to Google Form formResponse endpoint via no-cors fetch + hidden iframe DOM form
     if (formMeta && formMeta.googleSubmitUrl) {
       try {
         const params = new URLSearchParams();
         for (const [key, value] of Object.entries(answers)) {
-          params.append(key, value || '');
+          if (value !== undefined && value !== null) {
+            params.append(key, value);
+          }
         }
-        await fetch(formMeta.googleSubmitUrl, {
+        
+        // Approach A: Fetch with mode no-cors
+        fetch(formMeta.googleSubmitUrl, {
           method: 'POST',
           mode: 'no-cors',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: params.toString()
         }).catch(err => {
-          console.warn('Direct Google Form submission handled silently:', err);
+          console.warn('Direct Google Form fetch notice:', err);
         });
+
+        // Approach B: Hidden iframe DOM form submission (100% reliable across all browsers & CORS policies)
+        if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+          const iframeName = 'gform_sync_frame_' + Date.now();
+          const iframe = document.createElement('iframe');
+          iframe.name = iframeName;
+          iframe.style.position = 'absolute';
+          iframe.style.width = '1px';
+          iframe.style.height = '1px';
+          iframe.style.top = '-9999px';
+          iframe.style.left = '-9999px';
+          iframe.style.opacity = '0';
+          document.body.appendChild(iframe);
+
+          const hiddenForm = document.createElement('form');
+          hiddenForm.action = formMeta.googleSubmitUrl;
+          hiddenForm.method = 'POST';
+          hiddenForm.target = iframeName;
+          hiddenForm.style.display = 'none';
+
+          for (const [key, value] of Object.entries(answers)) {
+            if (value !== undefined && value !== null) {
+              const input = document.createElement('input');
+              input.type = 'hidden';
+              input.name = key;
+              input.value = value;
+              hiddenForm.appendChild(input);
+            }
+          }
+          document.body.appendChild(hiddenForm);
+          hiddenForm.submit();
+
+          setTimeout(() => {
+            try {
+              if (document.body.contains(hiddenForm)) document.body.removeChild(hiddenForm);
+              if (document.body.contains(iframe)) document.body.removeChild(iframe);
+            } catch (e) {}
+          }, 3500);
+        }
       } catch (gErr) {
         console.warn('Google Form direct push notice:', gErr);
       }
     }
 
-    // 2. Submit to SHAT Platform Local/Backend API
+    // 2. Submit to SHAT Platform Local/Backend API & LocalStorage
     const res = await this.submitForm(formId, answers);
     return res;
   }

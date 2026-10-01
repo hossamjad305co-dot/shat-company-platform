@@ -5,6 +5,7 @@ import { api } from '../services/api/apiClient.js';
 import { showToast } from '../components/toast.js';
 import { MediaStorageService } from '../services/storage/mediaStorageService.js';
 import { content } from '../content.js';
+import { siteCustomizer } from '../tools/siteCustomizer.js';
 
 export function renderAdminView(lang = 'ar') {
   const isRtl = lang === 'ar';
@@ -38,14 +39,14 @@ export function renderAdminView(lang = 'ar') {
       <!-- Collapsible Desktop/Tablet Admin Sidebar -->
       <aside id="admin-sidebar" class="admin-sidebar" style="width: 280px; background: #0B192C; color: #FFFFFF; flex-shrink: 0; display: flex; flex-direction: column; border-left: 1px solid rgba(255,255,255,0.08); transition: transform 0.3s ease;">
         
-        <!-- Sidebar Brand Banner -->
+        <!-- Sidebar Brand Banner: Text to the RIGHT of Logo (in RTL: text first in DOM) -->
         <div style="padding: 22px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: space-between;">
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <img src="assets/logo/logo-transparent.png" alt="SHAT" style="height: 32px;" onerror="this.onerror=null; this.src='assets/logo/logo-symbol.jpg';">
+          <div style="display: flex; align-items: center; gap: 10px; flex-direction: row;">
             <div>
               <div style="font-weight: 800; font-size: 0.95rem; color: #FFFFFF;">${t.brandTitle}</div>
               <div style="font-size: 0.72rem; color: #94A3B8;">${t.brandSub}</div>
             </div>
+            <img src="assets/logo/logo-transparent.png" alt="SHAT" style="height: 32px;" onerror="this.onerror=null; this.src='assets/logo/logo-symbol.jpg';">
           </div>
           <button id="btn-close-admin-sidebar" class="mobile-only" style="background: none; border: none; color: #94A3B8; font-size: 1.2rem; cursor: pointer; display: none;">✕</button>
         </div>
@@ -109,6 +110,10 @@ export function renderAdminView(lang = 'ar') {
           <button class="admin-nav-item" data-target="admin-tab-health">
             <span>🛡️</span>
             <span>${t.tabHealth}</span>
+          </button>
+          <button type="button" class="admin-nav-item" id="btn-admin-customizer-trigger" style="margin-top: 6px; background: rgba(30,126,52,0.18); border: 1px solid rgba(30,126,52,0.4); color: #4ADE80; font-weight: 800;">
+            <span>🎨</span>
+            <span>${txt('تخصيص المنصة والمظهر', 'Platform Customizer', 'Personnalisation du Site')}</span>
           </button>
         </nav>
 
@@ -850,6 +855,14 @@ export async function bindAdminEvents() {
   if (viewAllAppsBtn) {
     viewAllAppsBtn.onclick = () => activateTab('admin-tab-applications');
   }
+
+  const customizerTriggerBtn = document.getElementById('btn-admin-customizer-trigger');
+  if (customizerTriggerBtn) {
+    customizerTriggerBtn.onclick = () => {
+      siteCustomizer.openModal(currentLang);
+    };
+  }
+  window.openSiteCustomizer = (l = currentLang) => siteCustomizer.openModal(l);
 
   const refreshDashBtn = document.getElementById('btn-refresh-dashboard');
   if (refreshDashBtn) {

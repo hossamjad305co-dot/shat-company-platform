@@ -22,12 +22,12 @@ export function MobileHeader({ title = '', backRoute = null, showNotification = 
               ${title}
             </span>
           ` : `
-            <a href="#/home" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: #ffffff;">
-              <img src="assets/logo/logo-badge.jpg" alt="SHAT" style="width: 32px; height: 32px; border-radius: 6px; object-fit: cover;" onerror="this.src='assets/logo/logo-transparent.png'"/>
-              <div style="display: flex; flex-direction: column;">
+            <a href="#/home" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: #ffffff; flex-direction: row;">
+              <div style="display: flex; flex-direction: column; text-align: right;">
                 <span style="font-size: 0.95rem; font-weight: 900; letter-spacing: 0.5px; line-height: 1;">SHAT</span>
                 <span style="font-size: 0.65rem; opacity: 0.8; line-height: 1;">للتنمية والتطوير</span>
               </div>
+              <img src="assets/logo/logo-badge.jpg" alt="SHAT" style="width: 32px; height: 32px; border-radius: 6px; object-fit: cover;" onerror="this.src='assets/logo/logo-transparent.png'"/>
             </a>
           `}
         </div>

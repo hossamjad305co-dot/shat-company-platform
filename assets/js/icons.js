@@ -449,3 +449,10 @@ export const icons = {
   `
 };
 
+// Safe fallback: Ensure any ${icons.name} in template literals automatically executes and returns valid SVG
+for (const [key, fn] of Object.entries(icons)) {
+  if (typeof fn === 'function') {
+    fn.toString = () => fn('', 20);
+  }
+}
+

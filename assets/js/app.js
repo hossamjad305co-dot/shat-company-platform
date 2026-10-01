@@ -537,9 +537,9 @@ class Application {
       footerContainer.innerHTML = `
         <div class="footer-grid">
           <div>
-            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
-              <img src="assets/logo/logo-transparent.png" alt="SHAT" style="height: 38px;" onerror="this.onerror=null; this.src='assets/logo/logo-symbol.jpg';">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-direction: row;">
               <span style="font-weight: 900; font-size: 1.1rem; color: #FFFFFF;">${c.name}</span>
+              <img src="assets/logo/logo-transparent.png" alt="SHAT" style="height: 38px;" onerror="this.onerror=null; this.src='assets/logo/logo-symbol.jpg';">
             </div>
             <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.7; margin-bottom: 16px;">
               ${c.motto}<br>
@@ -592,16 +592,16 @@ class Application {
           <div>© ${c.year} ${c.name} (${c.nameEn}). ${f.rights}</div>
           <div style="display: flex; gap: 10px; align-items: center;">
             <a href="https://www.facebook.com/shat.development.growth/" target="_blank" rel="noopener" class="social-pill-btn" title="Facebook" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; color: #FFFFFF; transition: all 0.2s ease;">
-              ${icons.facebook}
+              ${icons.facebook('', 18)}
             </a>
             <a href="https://wa.me/972592879621" target="_blank" rel="noopener" class="social-pill-btn" title="WhatsApp" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; color: #FFFFFF; transition: all 0.2s ease;">
-              ${icons.whatsapp}
+              ${icons.whatsapp('', 18)}
             </a>
-            <a href="https://www.instagram.com" target="_blank" rel="noopener" class="social-pill-btn" title="Instagram" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; color: #FFFFFF; transition: all 0.2s ease;">
-              ${icons.instagram}
+            <a href="https://www.instagram.com/shat.development.growth/" target="_blank" rel="noopener" class="social-pill-btn" title="Instagram" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; color: #FFFFFF; transition: all 0.2s ease;">
+              ${icons.instagram('', 18)}
             </a>
             <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="social-pill-btn" title="LinkedIn" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; color: #FFFFFF; transition: all 0.2s ease;">
-              ${icons.linkedin}
+              ${icons.linkedin('', 18)}
             </a>
           </div>
           <div>${f.standardsNotice}</div>
