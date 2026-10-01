@@ -317,8 +317,24 @@ const FALLBACK_FORMS = [
 
 class ApiClient {
   constructor() {
-    this.token = this.getStoredToken();
-    this.currentUser = this.getStoredUser();
+    this._token = null;
+    this._currentUser = null;
+  }
+
+  get token() {
+    return this._token || this.getStoredToken();
+  }
+
+  set token(val) {
+    this._token = val;
+  }
+
+  get currentUser() {
+    return this._currentUser || this.getStoredUser();
+  }
+
+  set currentUser(val) {
+    this._currentUser = val;
   }
 
   getStoredToken() {
@@ -346,18 +362,21 @@ class ApiClient {
   }
 
   setSession(token, user) {
-    this.token = token;
-    this.currentUser = user;
+    this._token = token;
+    this._currentUser = user;
     try {
       if (token) localStorage.setItem('shat_auth_token', token);
-      if (user) localStorage.setItem('shat_auth_user_cache', JSON.stringify(user));
+      if (user) {
+        localStorage.setItem('shat_auth_user_cache', JSON.stringify(user));
+        localStorage.setItem('shat_current_user', JSON.stringify(user));
+      }
     } catch (e) {}
     window.dispatchEvent(new CustomEvent('shat:auth-updated', { detail: user }));
   }
 
   clearSession() {
-    this.token = null;
-    this.currentUser = null;
+    this._token = null;
+    this._currentUser = null;
     try {
       localStorage.removeItem('shat_auth_token');
       localStorage.removeItem('shat_auth_user_cache');

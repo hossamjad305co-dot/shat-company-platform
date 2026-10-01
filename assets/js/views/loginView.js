@@ -413,6 +413,7 @@ export function bindLoginEvents() {
         token: 'simulated_jwt_token_' + Date.now()
       };
 
+      api.setSession(simulatedUser.token, simulatedUser);
       localStorage.setItem('shat_current_user', JSON.stringify(simulatedUser));
       
       showToast(
