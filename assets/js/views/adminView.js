@@ -983,7 +983,9 @@ export async function bindAdminEvents() {
     return ar;
   };
 
-  if (!currentUser || currentUser.role !== 'admin') {
+  const userRole = (currentUser && currentUser.role) ? currentUser.role.toLowerCase() : '';
+  const isAdmin = userRole === 'admin' || userRole === 'super_admin';
+  if (!currentUser || !isAdmin) {
     showToast(txt('يجب تسجيل الدخول بصلاحيات الإدارة للوصول إلى لوحة التحكم.', 'Admin credentials required to access this dashboard.', 'Accès restreint à l\'administration.'), 'warning');
     window.location.hash = '#/login';
     return;

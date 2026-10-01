@@ -323,7 +323,14 @@ class ApiClient {
 
   getStoredToken() {
     try {
-      return localStorage.getItem('shat_auth_token') || null;
+      const t = localStorage.getItem('shat_auth_token');
+      if (t) return t;
+      const u = localStorage.getItem('shat_current_user');
+      if (u) {
+        const parsed = JSON.parse(u);
+        return parsed.token || 'simulated_session_token';
+      }
+      return null;
     } catch (e) {
       return null;
     }
@@ -331,7 +338,7 @@ class ApiClient {
 
   getStoredUser() {
     try {
-      const u = localStorage.getItem('shat_auth_user_cache');
+      const u = localStorage.getItem('shat_auth_user_cache') || localStorage.getItem('shat_current_user');
       return u ? JSON.parse(u) : null;
     } catch (e) {
       return null;
