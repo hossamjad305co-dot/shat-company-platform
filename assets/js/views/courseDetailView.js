@@ -123,57 +123,86 @@ export async function bindCourseDetailEvents() {
               <span class="badge" style="background: rgba(30, 166, 114, 0.25); color: #4ADE80; border: 1px solid rgba(74, 222, 128, 0.3); font-family: var(--font-mono);">${c.code}</span>
               <span class="badge" style="background: rgba(255, 255, 255, 0.12); color: #F8FAFC;">${c.track}</span>
               <span class="badge" style="background: rgba(245, 158, 11, 0.2); color: #FBBF24;">${c.level}</span>
+              ${c.fee ? `<span class="badge" style="background: rgba(217, 119, 6, 0.25); color: #FCD34D; border: 1px solid rgba(252, 211, 77, 0.4); font-weight: 800;"><span class="pro-symbol-badge">💳</span> ${c.fee}</span>` : ''}
             </div>
             <h1 style="font-size: 1.85rem; font-weight: 900; line-height: 1.4; margin-bottom: 14px; color: #FFFFFF;">${courseTitle}</h1>
             <p style="color: #CBD5E1; font-size: 0.96rem; line-height: 1.7; margin-bottom: 20px;">
-              ${c.overview}
+              ${c.overview || c.summary || ''}
             </p>
             <div style="display: flex; gap: 20px; flex-wrap: wrap; font-size: 0.88rem; color: #94A3B8;">
-              <div>👨‍🏫 ${txt('المدرب المعتمد:', 'Master Trainer:', 'Formateur Expert :')} <strong style="color: #FFFFFF;">${c.instructorName}</strong></div>
-              <div>⏱️ ${txt('الساعات المعتمدة:', 'Accredited Hours:', 'Heures Certifiées :')} <strong style="color: #FFFFFF;">${c.hours}</strong></div>
-              <div>📅 ${txt('المواعيد:', 'Schedule:', 'Horaires :')} <strong style="color: #FFFFFF;">${c.schedule}</strong></div>
+              <div style="display: flex; align-items: center; gap: 6px;"><span class="pro-symbol-badge">👤</span> ${txt('المدرب المعتمد:', 'Master Trainer:', 'Formateur Expert :')} <strong style="color: #FFFFFF;">${c.instructorName || 'أ. حسام جاد الله'}</strong></div>
+              <div style="display: flex; align-items: center; gap: 6px;"><span class="pro-symbol-badge">⏱️</span> ${txt('الساعات المعتمدة:', 'Accredited Hours:', 'Heures Certifiées :')} <strong style="color: #FFFFFF;">${c.hours || '30 ساعة'}</strong></div>
+              <div style="display: flex; align-items: center; gap: 6px;"><span class="pro-symbol-badge">📅</span> ${txt('المواعيد:', 'Schedule:', 'Horaires :')} <strong style="color: #FFFFFF;">${c.schedule || 'مرن / أسبوعي'}</strong></div>
             </div>
           </div>
 
-          <div style="background: rgba(255,255,255,0.06); padding: 24px; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.1); min-width: 260px; text-align: center;">
-            <div style="font-size: 0.85rem; color: #94A3B8; margin-bottom: 8px;">
-              ${txt('حالة التسجيل الأكاديمي', 'Enrollment Status', 'Statut d’Inscription')}
+          <div style="background: rgba(255,255,255,0.06); padding: 24px; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.1); min-width: 280px; text-align: center;">
+            <div style="font-size: 0.85rem; color: #94A3B8; margin-bottom: 6px;">
+              ${txt('خيارات الالتحاق والتسجيل', 'Enrollment & Access Options', 'Options d’Inscription')}
             </div>
-            ${currentUser ? `
-              <div style="font-weight: 800; color: #4ADE80; font-size: 1.1rem; margin-bottom: 16px;">
-                ${txt('متاح للتسجيل والتعلم', 'Active & Enrolled', 'Accessible & Validé')}
+            ${c.fee ? `
+              <div style="background: rgba(217, 119, 6, 0.2); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 8px; padding: 8px 12px; margin-bottom: 14px;">
+                <div style="font-size: 0.75rem; color: #FCD34D;">${txt('الرسوم التدريبية المعتمدة', 'Accredited Tuition Fee', 'Frais d’Inscription')}</div>
+                <div style="font-size: 1.15rem; font-weight: 900; color: #FFFFFF; font-family: var(--font-cairo);">${c.fee}</div>
               </div>
-              <a href="#/student" class="btn-clean btn-green" style="width: 100%; justify-content: center; margin-bottom: 8px;">
+            ` : ''}
+
+            ${currentUser ? `
+              <div style="font-weight: 800; color: #4ADE80; font-size: 1.05rem; margin-bottom: 14px;">
+                ✓ ${txt('متاح للتسجيل والتعلم في حسابك', 'Active & Enrolled in Your Account', 'Accessible & Validé dans Votre Compte')}
+              </div>
+              <a href="#/student" class="btn-clean btn-green" style="width: 100%; justify-content: center; margin-bottom: 8px; text-decoration: none; font-weight: 700;">
                 <span>${txt('الانتقال للمقرر في لوحتي', 'Open in My Dashboard', 'Ouvrir dans Mon Espace')}</span>
               </a>
+              ${(c.driveFolderUrl || c.driveUrl) ? `
+                <a href="${c.driveFolderUrl || c.driveUrl}" target="_blank" rel="noopener noreferrer" class="btn-clean" style="width: 100%; justify-content: center; margin-bottom: 8px; background: rgba(59, 130, 246, 0.2); color: #93C5FD; border: 1px solid rgba(147, 197, 253, 0.4); text-decoration: none; font-weight: 700; font-size: 0.85rem;">
+                  <span>📁 ${txt('فتح مجلد Google Drive للمساق', 'Open Google Drive Materials', 'Ouvrir Dossier Google Drive')}</span>
+                  <span>↗</span>
+                </a>
+              ` : ''}
             ` : `
-              <div style="font-weight: 800; color: #FBBF24; font-size: 1.1rem; margin-bottom: 16px;">
-                ${txt('متاح للالتحاق العام', 'Open for Registration', 'Inscriptions Ouvertes')}
+              <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px;">
+                ${c.googleFormUrl ? `
+                  <a href="${c.googleFormUrl}" target="_blank" rel="noopener noreferrer" class="btn-clean" style="width: 100%; justify-content: center; background: #D97706; color: #FFFFFF; font-weight: 800; font-size: 0.88rem; padding: 10px; border-radius: 8px; text-decoration: none; box-shadow: 0 4px 12px rgba(217,119,6,0.25); display: flex; align-items: center; gap: 6px;">
+                    <span class="pro-symbol-badge">📋</span>
+                    <span>${txt('التسجيل عبر Google Form الرسمي', 'Register via Official Google Form', 'Inscription via Google Form')}</span>
+                    <span style="font-size: 0.8rem;">↗</span>
+                  </a>
+                ` : ''}
+
+                <button class="btn-clean btn-primary btn-open-reg-modal" data-course="${c.id}" style="width: 100%; justify-content: center; font-size: 0.88rem; padding: 10px; font-weight: 800;">
+                  <span class="pro-symbol-badge">✍️</span>
+                  <span>${txt('التسجيل الفوري باستمارة المنصة', 'Quick Platform Registration', 'Inscription Rapide Plateforme')}</span>
+                  <span>${arrow}</span>
+                </button>
+
+                ${(c.driveFolderUrl || c.driveUrl) ? `
+                  <button type="button" class="btn-clean btn-intercept-download" data-file="حقيبة المساق التدريبية على Google Drive" style="width: 100%; justify-content: center; background: rgba(59, 130, 246, 0.15); color: #93C5FD; border: 1px solid rgba(147, 197, 253, 0.3); font-weight: 700; font-size: 0.82rem; padding: 8px; border-radius: 6px; cursor: pointer;">
+                    <span>🔒 📁 ${txt('حقيبة Google Drive (يتطلب تسجيلاً)', 'Drive Materials (Enroll to Access)', 'Dossier Drive (Connexion Requise)')}</span>
+                  </button>
+                ` : ''}
               </div>
-              <button class="btn-clean btn-primary btn-open-reg-modal" data-course="${c.id}" style="width: 100%; justify-content: center; margin-bottom: 8px;">
-                <span>${txt('تقديم طلب التحاق بالمساق', 'Apply for Enrollment', 'Demande d’Inscription')}</span>
-                <span>${arrow}</span>
-              </button>
+
               <button type="button" class="btn-clean" id="btn-view-course-syllabus" style="
                 width: 100%;
                 justify-content: center;
-                background: #FFFFFF;
-                border: 1px solid rgba(255,255,255,0.3);
+                background: rgba(255,255,255,0.08);
+                border: 1px solid rgba(255,255,255,0.25);
                 color: #FFFFFF;
                 font-weight: 700;
-                font-size: 0.86rem;
-                padding: 10px;
+                font-size: 0.84rem;
+                padding: 9px;
                 border-radius: 8px;
-                margin-bottom: 12px;
+                margin-bottom: 10px;
                 display: inline-flex;
                 align-items: center;
                 gap: 8px;
-                background: rgba(255,255,255,0.08);
               ">
-                <span>📄 ${txt('تحميل / طباعة الخطة التدريبية (Syllabus)', 'Accredited Syllabus (PDF)', 'Syllabus Officiel (PDF)')}</span>
+                <span class="pro-symbol-badge">📄</span>
+                <span>${txt('تحميل / استعراض الخطة (Syllabus)', 'Accredited Syllabus (PDF)', 'Syllabus Officiel (PDF)')}</span>
               </button>
               <div style="font-size: 0.78rem; color: #94A3B8;">
-                ${txt('يتم التدقيق والاعتماد الإداري خلال 24 ساعة', 'Reviewed within 24 hours by Admissions', 'Dossier traité sous 24h par l’équipe')}
+                ${txt('التدقيق والاعتماد الإداري فوري خلال 24 ساعة', 'Fast 24-hr verification & admission by SHAT', 'Traitement sous 24h')}
               </div>
             `}
           </div>

@@ -113,7 +113,7 @@ const DEFAULT_INITIAL_POSTS = [
     category: 'evaluation',
     categoryLabel: 'تقييم ومتابعة (OECD DAC)',
     status: 'published',
-    coverImage: 'assets/logo/logo-banner.jpg',
+    coverImage: 'assets/images/posts/post-oecd-evaluation.svg',
     author: 'أ. حسام جاد الله',
     authorRole: 'المدير العام (Super Admin)',
     createdAt: '2026-03-25T10:00:00Z',
@@ -127,7 +127,7 @@ const DEFAULT_INITIAL_POSTS = [
     category: 'institutional',
     categoryLabel: 'حوكمة واستشارات',
     status: 'published',
-    coverImage: 'assets/logo/logo-circle.jpg',
+    coverImage: 'assets/images/posts/post-psea-protection.svg',
     author: 'د. أسامة المنصور',
     authorRole: 'المدرب المعتمد (Master Trainer)',
     createdAt: '2026-03-20T14:30:00Z',
@@ -141,7 +141,7 @@ const DEFAULT_INITIAL_POSTS = [
     category: 'humanitarian',
     categoryLabel: 'إنساني وتطويري',
     status: 'published',
-    coverImage: 'assets/logo/logo-banner.jpg',
+    coverImage: 'assets/images/posts/post-chs-workshop.svg',
     author: 'أ. مريم النجار',
     authorRole: 'مسؤول القبول والتسجيل',
     createdAt: '2026-03-15T09:15:00Z',
@@ -155,7 +155,7 @@ const DEFAULT_INITIAL_POSTS = [
     category: 'partnerships',
     categoryLabel: 'شراكات دولية',
     status: 'published',
-    coverImage: 'assets/logo/logo-transparent.png',
+    coverImage: 'assets/images/posts/post-partnerships.svg',
     author: 'سارة عبد الله',
     authorRole: 'مسؤول المحتوى والنشر',
     createdAt: '2026-03-05T12:00:00Z',
@@ -311,6 +311,141 @@ const FALLBACK_FORMS = [
         'خبير التقييم الخارجي المستقل للمشاريع OECD DAC',
         'حوكمة المنظمات غير الحكومية وإعداد الأدلة التشغيلية SOPs'
       ]}
+    ]
+  }
+];
+
+const DEFAULT_AUTHORITATIVE_COURSES = [
+  {
+    id: "shat-chs-master",
+    code: "CHS-101",
+    title: "دبلوم المعيار الإنساني الأساسي (CHS) وإدارة الاستجابة",
+    track: "humanitarian",
+    trackName: "العمل الإنساني والمعايير الدولية",
+    hours: "40 ساعة تدريبية معتمدة",
+    level: "تنفيذي / متقدم",
+    fee: "250$ (أو منحة ممولة للمنظمات)",
+    schedule: "الأحد والأربعاء • 6:00 - 8:30 م",
+    instructorName: "د. أسامة المنصور",
+    googleFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfzjius7lEMOULtsaz6ByhXwFx82mWUkXwQoisdkbid4PLhGg/viewform",
+    nativeFormUrl: "#/forms?id=case-manager-2026",
+    driveFolderUrl: "https://drive.google.com/drive/folders/1_SHAT_CHS_MATERIALS_2026",
+    summary: "برنامج تدريبي تفاعلي معتمد دولياً لتأهيل قادة العمل الإنساني والمديرين التنفيذيين على حوكمة الالتزامات التسعة للمعيار الإنساني الأساسي (CHS)، وتصميم آليات المساءلة للمتأثرين (AAP).",
+    syllabus: [
+      "الوحدة الأولى: الالتزامات التسعة للمعيار الإنساني الأساسي (CHS)",
+      "الوحدة الثانية: أدوات المساءلة للمتأثرين بالأزمات (AAP)",
+      "الوحدة الثالثة: تقييم الاحتياجات الإنسانية وتصميم التدخلات",
+      "الوحدة الرابعة: دراسة حالة واقعية وتطبيق مصفوفة الامتثال"
+    ]
+  },
+  {
+    id: "case-manager-2026",
+    code: "CM-2026",
+    title: "دورة إعداد وتأهيل مدير حالة Case Management (د. محمد إسليم)",
+    track: "protection",
+    trackName: "حماية وصون كرامة",
+    hours: "12 ساعة تدريبية (4 لقاءات)",
+    level: "مهني تطبيقي تخصصي",
+    fee: "150 شيكل فقط",
+    schedule: "السبت والثلاثاء • 5:00 - 8:00 م",
+    instructorName: "د. محمد إسليم",
+    googleFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfzjius7lEMOULtsaz6ByhXwFx82mWUkXwQoisdkbid4PLhGg/viewform",
+    nativeFormUrl: "#/forms?id=case-manager-2026",
+    driveFolderUrl: "https://drive.google.com/drive/folders/1_SHAT_CASE_MANAGEMENT_MATERIALS",
+    summary: "برنامج تدريبي تخصصي لبناء وتطوير مهارات مديري الحالة في تحديد وتقييم الحالات الأكثر هشاشة، وتصميم خطط التدخل الفردية، والإحالة الآمنة وفق معايير حماية الطفل الدولية.",
+    syllabus: [
+      "المحور الأول: مفاهيم ومبادئ إدارة الحالة وخطوات التدخل الست",
+      "المحور الثاني: أدوات التقييم الشامل وتحديد المخاطر والأولويات",
+      "المحور الثالث: تصميم خطة التدخل الفردية ومسارات الإحالة الآمنة",
+      "المحور الرابع: المتابعة والتوثيق وإغلاق الحالة وتطبيقات عملية"
+    ]
+  },
+  {
+    id: "presentation-skills-2026",
+    code: "COMM-102",
+    title: "دورة تدريبية متقدمة في مهارات العرض والتقديم (م. مهدي الملاحي)",
+    track: "governance",
+    trackName: "الاتصال والتأثير المؤسسي",
+    hours: "12 ساعة تدريبية (4 لقاءات)",
+    level: "احترافي تطبيقي",
+    fee: "120 شيكل فقط",
+    schedule: "الإثنين والخميس • 5:00 - 8:00 م",
+    instructorName: "م. مهدي الملاحي",
+    googleFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSewFY_nZGz_jQ-FCWTw40O8wxuoQK4H9f1ted6An1NzIcGc_Q/viewform",
+    nativeFormUrl: "#/forms?id=presentation-skills-2026",
+    driveFolderUrl: "https://drive.google.com/drive/folders/1_SHAT_PRESENTATION_SKILLS_MATERIALS",
+    summary: "تطوير مهارات الإلقاء والتحدث الجماهيري، إدارة لغة الجسد، وصياغة العروض التقديمية المؤثرة لإقناع المانحين والشركاء في قاعة شات التفاعلية.",
+    syllabus: [
+      "المحور الأول: سيكولوجية الجمهور وهيكلة الرسالة الإقناعية",
+      "المحور الثاني: لغة الجسد ونبرات الصوت والسيطرة على التوتر",
+      "المحور الثالث: تصميم الشرائح الاحترافية وعرض البيانات المؤثرة",
+      "المحور الرابع: محاكاة عملية وتقديم مشاريع التخرج أمام لجنة تحكيم"
+    ]
+  },
+  {
+    id: "humanitarian-worker-diploma",
+    code: "HUM-DIP-142",
+    title: "دبلوم تأهيل عامل في المجال الإنساني «من المبادئ إلى الممارسة»",
+    track: "humanitarian",
+    trackName: "دبلومات العمل الإنساني الشاملة",
+    hours: "3 أشهر • 142 ساعة تدريبية • 13 دورة",
+    level: "دبلوم مهني متكامل",
+    fee: "تسديد الرسوم على دفعات ميسرة خلال فترة التدريب",
+    schedule: "3 أيام أسبوعياً • صباحي ومسائي",
+    instructorName: "نخبة من كبار الخبراء الإنسانيين (أكثر من 10 مدربين)",
+    googleFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSft0nB4QGxS2HCZApraSmn5GDca1R7taC0ZNs441kVx6gh_Og/viewform",
+    nativeFormUrl: "#/forms?id=humanitarian-worker-diploma",
+    driveFolderUrl: "https://drive.google.com/drive/folders/1_SHAT_HUMANITARIAN_DIPLOMA_MATERIALS",
+    summary: "برنامج دبلوم تأهيلي مكثف وشامل يغطي المعايير الإنسانية، إدارة المشاريع، المتابعة والتقييم MEAL، الحماية PSEA، وسلاسل الإمداد، مؤهلاً الخريجين للعمل الفوري في المنظمات الدولية.",
+    syllabus: [
+      "المسار الأول: المعايير الإنسانية الدولية (Sphere, CHS, Do No Harm)",
+      "المسار الثاني: إدارة دورة المشروع الإنساني والتنموي (PCM)",
+      "المسار الثالث: المتابعة والتقييم والمساءلة والتعلم (MEAL)",
+      "المسار الرابع: اللوجستيات وسلاسل الإمداد وإدارة المخيمات والإيواء"
+    ]
+  },
+  {
+    id: "shat-psea-expert",
+    code: "PSEA-201",
+    title: "البرنامج التنفيذي في استشارات الحماية وصون السلامة (PSEA & Safeguarding)",
+    track: "protection",
+    trackName: "الحماية وصون السلامة",
+    hours: "35 ساعة تدريبية معتمدة",
+    level: "استشاري / متقدم",
+    fee: "200$",
+    schedule: "الإثنين والخميس • 5:30 - 8:00 م",
+    instructorName: "أ. ندى الخالدي",
+    googleFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLScIM3dPv92bS-61qrfr_vW8_eVKQS2tsrvR_QhUY_CfbsdlGw/viewform",
+    nativeFormUrl: "#/forms?id=consulting-inquiry-2026",
+    driveFolderUrl: "https://drive.google.com/drive/folders/1_SHAT_PSEA_MATERIALS",
+    summary: "حزمة استشارية وتدريبية متقدمة لتأسيس وتحديث سياسات الحماية من الاستغلال والانتهاك الجنسيين والتحرش الوظيفي، وتصميم قنوات الإبلاغ المستقلة المشفرة.",
+    syllabus: [
+      "الوحدة الأولى: المفاهيم والأطر التشريعية الدولية لسياسات PSEA",
+      "الوحدة الثانية: مسارات الإبلاغ والخطوط الآمنة وسرية المعلومات",
+      "الوحدة الثالثة: الإحالة الآمنة للخدمات الطبية والنفسية والقانونية",
+      "الوحدة الرابعة: التحقيق الإداري الداخلي وإعداد تقارير الامتثال"
+    ]
+  },
+  {
+    id: "shat-oecd-eval",
+    code: "OECD-301",
+    title: "الشهادة الاحترافية في التقييم التنموي المستقل (OECD DAC)",
+    track: "evaluation",
+    trackName: "التقييم المستقل والمتابعة",
+    hours: "45 ساعة تدريبية معتمدة",
+    level: "احترافي دولي",
+    fee: "280$",
+    schedule: "السبت والثلاثاء • 6:00 - 9:00 م",
+    instructorName: "م. طارق الزهراني",
+    googleFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLScIM3dPv92bS-61qrfr_vW8_eVKQS2tsrvR_QhUY_CfbsdlGw/viewform",
+    nativeFormUrl: "#/forms?id=consulting-inquiry-2026",
+    driveFolderUrl: "https://drive.google.com/drive/folders/1_SHAT_OECD_DAC_MATERIALS",
+    summary: "مساق تدريبي وتطبيقي يركز على تطبيق المعايير الستة لمنظمة التعاون الاقتصادي والتنمية: الملاءمة، التماسك، الفعالية، الكفاءة، الأثر، والاستدامة وفق أطر UNEG الدولية.",
+    syllabus: [
+      "الوحدة الأولى: معايير OECD DAC الستة ونظرية التغيير",
+      "الوحدة الثانية: مصفوفات الأسئلة التقييمية ومؤشرات الأثر",
+      "الوحدة الثالثة: جمع البيانات والتحليل المختلط ومجموعات التركيز",
+      "الوحدة الرابعة: صياغة تقارير التقييم المستقلة وعرضها على المانحين"
     ]
   }
 ];
@@ -845,7 +980,25 @@ class ApiClient {
       const data = localStorage.getItem('shat_platform_posts');
       if (data) {
         const parsed = JSON.parse(data);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          // Auto-migrate any cached posts with placeholder logo images to dedicated SVGs
+          let changed = false;
+          const updated = parsed.map(p => {
+            if (!p.coverImage || p.coverImage.includes('logo-banner') || p.coverImage.includes('logo-circle')) {
+              changed = true;
+              if (p.id.includes('case-manager')) p.coverImage = 'assets/images/posts/post-case-management.svg';
+              else if (p.id.includes('presentation')) p.coverImage = 'assets/images/posts/post-presentation-skills.svg';
+              else if (p.id.includes('humanitarian-worker')) p.coverImage = 'assets/images/posts/post-humanitarian-worker.svg';
+              else if (p.category === 'evaluation' || p.id.includes('oecd')) p.coverImage = 'assets/images/posts/post-oecd-evaluation.svg';
+              else if (p.category === 'protection' || p.id.includes('psea')) p.coverImage = 'assets/images/posts/post-psea-protection.svg';
+              else if (p.id.includes('chs')) p.coverImage = 'assets/images/posts/post-chs-workshop.svg';
+              else p.coverImage = 'assets/images/posts/post-partnerships.svg';
+            }
+            return p;
+          });
+          if (changed) this.saveStoredPosts(updated);
+          return updated;
+        }
       }
     } catch (e) {}
 
@@ -1014,14 +1167,29 @@ class ApiClient {
       const data = localStorage.getItem('shat_platform_courses');
       if (data) {
         const parsed = JSON.parse(data);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          // Merge authoritative links if missing in cached items
+          const merged = parsed.map(c => {
+            const def = DEFAULT_AUTHORITATIVE_COURSES.find(d => d.id === c.id);
+            if (def) {
+              return {
+                ...def,
+                ...c,
+                googleFormUrl: c.googleFormUrl || def.googleFormUrl,
+                nativeFormUrl: c.nativeFormUrl || def.nativeFormUrl,
+                driveFolderUrl: c.driveFolderUrl || def.driveFolderUrl,
+                fee: c.fee || def.fee
+              };
+            }
+            return c;
+          });
+          return merged;
+        }
       }
     } catch (e) {}
 
-    const lang = localStorage.getItem('shat_platform_lang') || 'ar';
-    const cList = (content[lang] || content.ar).courses || content.ar.courses || [];
-    this.saveStoredCourses(cList);
-    return cList;
+    this.saveStoredCourses(DEFAULT_AUTHORITATIVE_COURSES);
+    return DEFAULT_AUTHORITATIVE_COURSES;
   }
 
   saveStoredCourses(courses) {

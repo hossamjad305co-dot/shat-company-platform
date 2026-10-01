@@ -11,6 +11,36 @@ const DEFAULT_CMS_DATA = {
   address: "فلسطين • نطاق العمل: دولي وإقليمي",
   posts: [
     {
+      id: "post-case-manager-2026",
+      title: "إطلاق دورة إعداد وتأهيل مدير حالة Case Management (د. محمد إسليم)",
+      date: "أكتوبر 2026",
+      tag: "إدارة الحالة وحماية الطفل",
+      platform: "Facebook",
+      excerpt: "برنامج تدريبي تخصصي معتمد (30 ساعة) لبناء مهارات تحديد وتقييم الحالات وتصميم خطط التدخل والإحالة الآمنة مع د. محمد إسليم.",
+      link: "https://www.facebook.com/shat.development.growth/",
+      img: "assets/images/posts/post-case-management.svg"
+    },
+    {
+      id: "post-presentation-skills-2026",
+      title: "دورة تدريبية متقدمة في مهارات العرض والتقديم (م. مهدي الملاحي)",
+      date: "أكتوبر 2026",
+      tag: "الاتصال والتأثير المؤسسي",
+      platform: "Instagram",
+      excerpt: "تطوير مهارات الإلقاء والتحدث الجماهيري وصياغة العروض التقديمية الاحترافية وإقناع المانحين والشركاء (12 ساعة تدريبية).",
+      link: "https://www.instagram.com/shat.development.growth/",
+      img: "assets/images/posts/post-presentation-skills.svg"
+    },
+    {
+      id: "post-humanitarian-worker-2026",
+      title: "دبلوم تأهيل عامل في المجال الإنساني «من المبادئ إلى الممارسة» (142 ساعة)",
+      date: "أكتوبر 2026",
+      tag: "دبلوم العمل الإنساني",
+      platform: "Facebook",
+      excerpt: "3 أشهر • 142 ساعة تدريبية • 13 دورة متخصصة بمشاركة أكثر من 10 مدربين دوليين مع شهادة دبلوم معتمدة وتقسيط ميسر.",
+      link: "https://www.facebook.com/shat.development.growth/",
+      img: "assets/images/posts/post-humanitarian-worker.svg"
+    },
+    {
       id: "post-1",
       title: "ورشة تطبيق المعيار الإنساني الأساسي (CHS) وضمان المساءلة للمتأثرين",
       date: "سبتمبر 2026",
@@ -18,7 +48,7 @@ const DEFAULT_CMS_DATA = {
       platform: "Facebook",
       excerpt: "اختتام فعاليات البرنامج التدريبي التفاعلي حول الالتزامات التسعة للمعيار الإنساني الأساسي (CHS) بمشاركة ممثلي المنظمات الإنسانية والمحلية لتعزيز آليات المساءلة المجتمعية (AAP).",
       link: "https://www.facebook.com/shat.development.growth/",
-      img: "assets/logo/logo-banner.jpg"
+      img: "assets/images/posts/post-chs-workshop.svg"
     },
     {
       id: "post-2",
@@ -28,7 +58,7 @@ const DEFAULT_CMS_DATA = {
       platform: "Instagram",
       excerpt: "تنفيذ الجلسات الاستشارية المتقدمة لبناء وتحديث سياسات الحماية وصون السلامة وتأسيس قنوات الإبلاغ الآمنة وسرية البيانات لدى المنظمات غير الحكومية.",
       link: "https://www.instagram.com/shat.development.growth/",
-      img: "assets/logo/logo-circle.jpg"
+      img: "assets/images/posts/post-psea-protection.svg"
     },
     {
       id: "post-3",
@@ -38,7 +68,7 @@ const DEFAULT_CMS_DATA = {
       platform: "Facebook",
       excerpt: "بدء الفريق الاستشاري لشركة شات مهام التقييم الميداني المستقل للمشاريع التنموية والإنسانية لقياس الملاءمة، الأثر، الكفاءة، واستدامة التدخلات وفق أطر UNEG الدولية.",
       link: "https://www.facebook.com/shat.development.growth/",
-      img: "assets/logo/logo-banner.jpg"
+      img: "assets/images/posts/post-oecd-evaluation.svg"
     }
   ]
 };

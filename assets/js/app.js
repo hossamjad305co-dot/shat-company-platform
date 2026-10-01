@@ -26,8 +26,15 @@ class Application {
   }
 
   init() {
+    siteCustomizer.applyThemeToDocument();
     window.siteCustomizer = siteCustomizer;
     window.openSiteCustomizer = (l) => siteCustomizer.openModal(l || this.currentLang);
+    window.addEventListener('shat:customization-updated', (e) => {
+      siteCustomizer.applyThemeToDocument(e.detail);
+      this.renderHeader();
+      this.renderFooter();
+      this.renderMobileDrawer();
+    });
     window.commandPalette = commandPalette;
     window.openCommandPalette = () => commandPalette.open();
     this.concierge = initWhatsAppConcierge();
@@ -612,18 +619,18 @@ class Application {
 
         <div class="footer-bottom" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
           <div>© ${c.year} ${c.name} (${c.nameEn}). ${f.rights}</div>
-          <div style="display: flex; gap: 10px; align-items: center;">
-            <a href="https://www.facebook.com/shat.development.growth/" target="_blank" rel="noopener" class="social-pill-btn" title="Facebook" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; color: #FFFFFF; transition: all 0.2s ease;">
-              ${icons.facebook('', 18)}
+          <div style="display: flex; gap: 12px; align-items: center;">
+            <a href="https://www.facebook.com/shat.development.growth/" target="_blank" rel="noopener" class="social-pill-btn icon-only" title="Facebook" style="width: 42px; height: 42px; padding: 0 !important; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); display: inline-flex; align-items: center; justify-content: center; color: #1877F2; transition: all 0.25s ease;">
+              ${icons.facebook('svg-social-fb', 22)}
             </a>
-            <a href="https://wa.me/972592879621" target="_blank" rel="noopener" class="social-pill-btn" title="WhatsApp" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; color: #FFFFFF; transition: all 0.2s ease;">
-              ${icons.whatsapp('', 18)}
+            <a href="https://wa.me/972592879621" target="_blank" rel="noopener" class="social-pill-btn icon-only" title="WhatsApp" style="width: 42px; height: 42px; padding: 0 !important; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); display: inline-flex; align-items: center; justify-content: center; color: #25D366; transition: all 0.25s ease;">
+              ${icons.whatsapp('svg-social-wa', 22)}
             </a>
-            <a href="https://www.instagram.com/shat.development.growth/" target="_blank" rel="noopener" class="social-pill-btn" title="Instagram" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; color: #FFFFFF; transition: all 0.2s ease;">
-              ${icons.instagram('', 18)}
+            <a href="https://www.instagram.com/shat.development.growth/" target="_blank" rel="noopener" class="social-pill-btn icon-only" title="Instagram" style="width: 42px; height: 42px; padding: 0 !important; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); display: inline-flex; align-items: center; justify-content: center; color: #E4405F; transition: all 0.25s ease;">
+              ${icons.instagram('svg-social-ig', 22)}
             </a>
-            <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="social-pill-btn" title="LinkedIn" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; color: #FFFFFF; transition: all 0.2s ease;">
-              ${icons.linkedin('', 18)}
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="social-pill-btn icon-only" title="LinkedIn" style="width: 42px; height: 42px; padding: 0 !important; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); display: inline-flex; align-items: center; justify-content: center; color: #0A66C2; transition: all 0.25s ease;">
+              ${icons.linkedin('svg-social-li', 22)}
             </a>
           </div>
           <div>${f.standardsNotice}</div>

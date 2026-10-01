@@ -929,43 +929,105 @@ export function renderAdminView(lang = 'ar') {
 
     <!-- Course Edit Modal -->
     <div id="modal-course-editor-backdrop" class="modal-backdrop">
-      <div class="modal-box" style="max-width: 600px;">
+      <div class="modal-box" style="max-width: 680px; max-height: 90vh; overflow-y: auto;">
         <div class="modal-header">
-          <div class="modal-title" id="course-editor-modal-title">${txt('تعديل بيانات المساق التدريبي', 'Edit Course Curriculum', 'Modifier le Cursus')}</div>
+          <div class="modal-title" id="course-editor-modal-title">${txt('تعديل بيانات المساق التدريبي الشامل', 'Edit Course Curriculum', 'Modifier le Cursus')}</div>
           <button type="button" class="modal-close" id="btn-close-course-modal">✕</button>
         </div>
         <form id="form-course-editor" style="padding: 24px;">
           <input type="hidden" id="edit-course-id" value="">
-          <div class="form-group">
-            <label class="form-label">${txt('اسم المساق التدريبي *', 'Course Title *', 'Titre du Cursus *')}</label>
-            <input type="text" id="edit-course-title" class="form-input" required>
+          
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 12px;">
+            <div class="form-group">
+              <label class="form-label">${txt('اسم المساق التدريبي أو الدبلوم *', 'Course Title *', 'Titre du Cursus *')}</label>
+              <input type="text" id="edit-course-title" class="form-input" required placeholder="مثال: دبلوم المعيار الإنساني الأساسي (CHS)">
+            </div>
+            <div class="form-group">
+              <label class="form-label">${txt('رمز المساق (Code)', 'Course Code', 'Code')}</label>
+              <input type="text" id="edit-course-code" class="form-input" placeholder="CHS-101" style="font-family: var(--font-mono);">
+            </div>
           </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
             <div class="form-group">
               <label class="form-label">${txt('الساعات التدريبية', 'Training Hours', 'Heures')}</label>
-              <input type="text" id="edit-course-hours" class="form-input" placeholder="30 ساعة تدريبية">
+              <input type="text" id="edit-course-hours" class="form-input" placeholder="40 ساعة معتمدة">
             </div>
             <div class="form-group">
               <label class="form-label">${txt('المستوى الأكاديمي', 'Academic Level', 'Niveau')}</label>
-              <input type="text" id="edit-course-level" class="form-input" placeholder="دبلوم مهني تطبيقي">
+              <input type="text" id="edit-course-level" class="form-input" placeholder="تنفيذي / متقدم">
+            </div>
+            <div class="form-group">
+              <label class="form-label">${txt('الرسوم / التكلفة', 'Course Fee', 'Frais')}</label>
+              <input type="text" id="edit-course-fee" class="form-input" placeholder="150 شيكل أو منحة ممولة">
             </div>
           </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group">
+              <label class="form-label">${txt('المسار التخصصي', 'Specialized Track', 'Filière')}</label>
+              <select id="edit-course-track" class="form-input">
+                <option value="humanitarian">العمل الإنساني والمعايير (CHS & Sphere)</option>
+                <option value="protection">الحماية وصون السلامة (PSEA & Safeguarding)</option>
+                <option value="evaluation">التقييم المستقل والمتابعة (OECD DAC & MEL)</option>
+                <option value="governance">الحوكمة والقيادة والتخطيط (SOPs)</option>
+                <option value="tot">إعداد وتأهيل المدربين (TOT)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">${txt('مواعيد وأيام اللقاءات', 'Schedule', 'Horaires')}</label>
+              <input type="text" id="edit-course-schedule" class="form-input" placeholder="الأحد والأربعاء • 6:00 - 8:30 م">
+            </div>
+          </div>
+
           <div class="form-group">
             <label class="form-label">${txt('المدرب المعتمد المسؤول', 'Lead Instructor', 'Formateur')}</label>
             <input type="text" id="edit-course-instructor" class="form-input" placeholder="د. أسامة المنصور">
           </div>
+
+          <!-- Official Forms & Google Drive Links Panel -->
+          <div style="background: #F8FAFC; border: 1px solid var(--border-medium); border-radius: var(--radius-xs); padding: 14px; margin-bottom: 16px;">
+            <div style="font-weight: 800; font-size: 0.88rem; color: var(--shat-navy); margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+              <span>🔗</span>
+              <span>${txt('روابط التسجيل والملفات التدريبية (Google Forms & Drive)', 'Enrollment & Materials Links', 'Liens d’Inscription & Drive')}</span>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" style="font-size: 0.82rem; font-weight: 700; color: #1D4ED8;">
+                📋 ${txt('رابط استمارة Google Form الخاصة بالمساق (للتسجيل الخارجي المباشر)', 'Google Form Registration URL', 'Lien Google Form')}
+              </label>
+              <input type="url" id="edit-course-google-form" class="form-input" placeholder="https://docs.google.com/forms/d/e/.../viewform" style="font-family: var(--font-mono); font-size: 0.82rem;">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" style="font-size: 0.82rem; font-weight: 700; color: var(--shat-green);">
+                ✍️ ${txt('رابط أو معرف استمارة المنصة الداخلية (مثل #/forms?id=...)', 'Platform Form Link or ID', 'Formulaire de la Plateforme')}
+              </label>
+              <input type="text" id="edit-course-native-form" class="form-input" placeholder="#/forms?id=case-manager-2026" style="font-family: var(--font-mono); font-size: 0.82rem;">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" style="font-size: 0.82rem; font-weight: 700; color: #B45309;">
+                📁 ${txt('رابط مجلد الحقيبة التدريبية والملفات على Google Drive', 'Google Drive Materials Folder URL', 'Dossier Google Drive')}
+              </label>
+              <input type="url" id="edit-course-drive-url" class="form-input" placeholder="https://drive.google.com/drive/folders/..." style="font-family: var(--font-mono); font-size: 0.82rem;">
+            </div>
+          </div>
+
           <div class="form-group">
             <label class="form-label">${txt('الموجز التعريفي للمساق', 'Course Summary', 'Résumé')}</label>
-            <textarea id="edit-course-summary" class="form-input" style="min-height: 70px;"></textarea>
+            <textarea id="edit-course-summary" class="form-input" style="min-height: 70px;" placeholder="نص وصفي شامل لأهداف المساق والنتائج المرجوة..."></textarea>
           </div>
+
           <div class="form-group">
-            <label class="form-label">${txt('محاور المنهاج (سطر لكل محور)', 'Syllabus Modules (one per line)', 'Modules')}</label>
-            <textarea id="edit-course-syllabus" class="form-input" style="min-height: 100px; line-height: 1.6;"></textarea>
+            <label class="form-label">${txt('محاور المنهاج التفصيلية (سطر لكل محور)', 'Syllabus Modules (one per line)', 'Modules')}</label>
+            <textarea id="edit-course-syllabus" class="form-input" style="min-height: 100px; line-height: 1.6;" placeholder="الوحدة الأولى: مدخل إلى المنظومة المعيارية&#10;الوحدة الثانية: أدوات المساءلة المجتمعية&#10;الوحدة الثالثة: دراسة حالة تطبيقية ميدانية"></textarea>
           </div>
+
           <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
             <button type="button" class="btn-clean btn-sm" id="btn-cancel-course-modal" style="background: var(--bg-subtle);">${txt('إلغاء', 'Cancel', 'Annuler')}</button>
-            <button type="submit" class="btn-clean btn-green btn-sm" style="font-weight: 800;">
-              💾 ${txt('حفظ تعديلات المساق', 'Save Course Changes', 'Enregistrer')}
+            <button type="submit" class="btn-clean btn-green btn-sm" style="font-weight: 800; padding: 10px 20px;">
+              💾 ${txt('حفظ تعديلات المساق بالكامل', 'Save All Course Changes', 'Enregistrer')}
             </button>
           </div>
         </form>
@@ -1518,9 +1580,16 @@ export async function bindAdminEvents() {
     btnOpenNewCourse.onclick = () => {
       document.getElementById('edit-course-id').value = '';
       document.getElementById('edit-course-title').value = '';
-      document.getElementById('edit-course-hours').value = '30 ساعة تدريبية';
+      document.getElementById('edit-course-code').value = 'SHAT-' + Math.floor(100 + Math.random() * 900);
+      document.getElementById('edit-course-hours').value = '40 ساعة تدريبية معتمدة';
       document.getElementById('edit-course-level').value = 'دبلوم مهني تطبيقي';
+      document.getElementById('edit-course-fee').value = '150 شيكل';
+      document.getElementById('edit-course-track').value = 'humanitarian';
+      document.getElementById('edit-course-schedule').value = 'الأحد والأربعاء • 6:00 - 8:30 م';
       document.getElementById('edit-course-instructor').value = 'د. أسامة المنصور';
+      document.getElementById('edit-course-google-form').value = '';
+      document.getElementById('edit-course-native-form').value = '';
+      document.getElementById('edit-course-drive-url').value = '';
       document.getElementById('edit-course-summary').value = '';
       document.getElementById('edit-course-syllabus').value = '';
       document.getElementById('course-editor-modal-title').textContent = txt('إضافة مساق تدريبي جديد', 'Create New Course Track', 'Créer un Nouveau Cursus');
@@ -1539,9 +1608,16 @@ export async function bindAdminEvents() {
 
       const courseData = {
         title: document.getElementById('edit-course-title').value,
+        code: document.getElementById('edit-course-code').value || 'SHAT',
         hours: document.getElementById('edit-course-hours').value,
         level: document.getElementById('edit-course-level').value,
+        fee: document.getElementById('edit-course-fee').value,
+        track: document.getElementById('edit-course-track').value,
+        schedule: document.getElementById('edit-course-schedule').value,
         instructorName: document.getElementById('edit-course-instructor').value,
+        googleFormUrl: document.getElementById('edit-course-google-form').value,
+        nativeFormUrl: document.getElementById('edit-course-native-form').value,
+        driveFolderUrl: document.getElementById('edit-course-drive-url').value,
         summary: document.getElementById('edit-course-summary').value,
         syllabus: syllabusLines
       };
@@ -1572,29 +1648,61 @@ export async function bindAdminEvents() {
 
       list.innerHTML = courses.map(c => `
         <div class="bento-card" style="padding: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; border-top: 3px solid var(--shat-navy);">
-          <div style="display: flex; align-items: center; gap: 16px;">
-            <div style="width: 50px; height: 50px; border-radius: var(--radius-xs); background: var(--shat-navy-tint); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+          <div style="display: flex; align-items: center; gap: 16px; flex: 1; min-width: 280px;">
+            <div style="width: 52px; height: 52px; border-radius: var(--radius-xs); background: var(--shat-navy-tint); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;">
               🎓
             </div>
             <div>
-              <div style="font-weight: 800; font-size: 1.05rem; color: var(--shat-navy);">${c.title}</div>
-              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">
-                ${c.hours || '30 ساعة'} • ${c.level || 'معتمد'} • ${txt('المدرب:', 'Instructor:', 'Formateur :')} ${c.instructorName || 'د. أسامة المنصور'}
+              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <span class="badge" style="background: var(--shat-navy); color: #FFFFFF; font-size: 0.75rem; font-family: var(--font-mono);">${c.code || 'SHAT'}</span>
+                <span style="font-weight: 800; font-size: 1.05rem; color: var(--shat-navy);">${c.title}</span>
+              </div>
+              
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 6px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+                <span>⏱️ ${c.hours || '30 ساعة'}</span>
+                <span>•</span>
+                <span>🏅 ${c.level || 'معتمد'}</span>
+                <span>•</span>
+                <span>👨‍🏫 ${c.instructorName || 'د. أسامة المنصور'}</span>
+                ${c.fee ? `<span>•</span><span style="color: var(--shat-green); font-weight: 700;">💰 ${c.fee}</span>` : ''}
+              </div>
+
+              <!-- Integration Badges -->
+              <div style="display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap;">
+                ${c.googleFormUrl ? `
+                  <a href="${c.googleFormUrl}" target="_blank" rel="noopener" class="badge btn-google-form" style="font-size: 0.72rem; text-decoration: none;">
+                    📋 Google Form
+                  </a>
+                ` : ''}
+                ${c.nativeFormUrl ? `
+                  <a href="${c.nativeFormUrl}" class="badge btn-platform-form" style="font-size: 0.72rem; text-decoration: none;">
+                    ✍️ استمارة المنصة
+                  </a>
+                ` : ''}
+                ${c.driveFolderUrl ? `
+                  <a href="${c.driveFolderUrl}" target="_blank" rel="noopener" class="badge btn-drive-folder" style="font-size: 0.72rem; text-decoration: none;">
+                    📁 Google Drive
+                  </a>
+                ` : ''}
               </div>
             </div>
           </div>
 
-          <div style="display: flex; gap: 8px;">
+          <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
             <button class="btn-clean btn-sm btn-edit-course" data-id="${c.id}" style="background: #F1F5F9; color: var(--shat-navy); border: 1px solid var(--border-light); font-weight: 700;">
               ✏️ ${txt('تعديل المساق', 'Edit Course', 'Modifier')}
             </button>
             <a href="#/course/${c.id}" class="btn-clean btn-sm" style="background: var(--bg-subtle); color: var(--text-secondary); text-decoration: none;">
               👁️ ${txt('قاعة المساق', 'Course Room', 'Salle')}
             </a>
+            <button class="btn-clean btn-sm btn-delete-course" data-id="${c.id}" style="background: #FEF2F2; color: #DC2626; border: 1px solid #FECACA; font-weight: 700;">
+              🗑️
+            </button>
           </div>
         </div>
       `).join('');
 
+      // Bind Edit click
       list.querySelectorAll('.btn-edit-course').forEach(b => {
         b.onclick = () => {
           const id = b.getAttribute('data-id');
@@ -1602,13 +1710,33 @@ export async function bindAdminEvents() {
           if (found) {
             document.getElementById('edit-course-id').value = found.id;
             document.getElementById('edit-course-title').value = found.title || '';
+            document.getElementById('edit-course-code').value = found.code || '';
             document.getElementById('edit-course-hours').value = found.hours || '';
             document.getElementById('edit-course-level').value = found.level || '';
+            document.getElementById('edit-course-fee').value = found.fee || '';
+            document.getElementById('edit-course-track').value = found.track || 'humanitarian';
+            document.getElementById('edit-course-schedule').value = found.schedule || '';
             document.getElementById('edit-course-instructor').value = found.instructorName || '';
-            document.getElementById('edit-course-summary').value = found.summary || '';
+            document.getElementById('edit-course-google-form').value = found.googleFormUrl || '';
+            document.getElementById('edit-course-native-form').value = found.nativeFormUrl || (found.formId ? `#/forms?id=${found.formId}` : '');
+            document.getElementById('edit-course-drive-url').value = found.driveFolderUrl || '';
+            document.getElementById('edit-course-summary').value = found.summary || found.overview || '';
             document.getElementById('edit-course-syllabus').value = Array.isArray(found.syllabus) ? found.syllabus.join('\n') : '';
             document.getElementById('course-editor-modal-title').textContent = `✏️ ${txt('تعديل المساق:', 'Edit Course:', 'Modifier :')} ${found.title.substring(0, 30)}...`;
             courseModalBackdrop.classList.add('open');
+          }
+        };
+      });
+
+      // Bind Delete click
+      list.querySelectorAll('.btn-delete-course').forEach(b => {
+        b.onclick = async () => {
+          const id = b.getAttribute('data-id');
+          const confirmMsg = txt('هل أنت متأكد من حذف هذا المساق التدريبي نهائياً من الأكاديمية؟', 'Are you sure you want to delete this course track?', 'Supprimer ce cursus ?');
+          if (confirm(confirmMsg)) {
+            await api.deleteCourse(id);
+            showToast(txt('تم حذف المساق بنجاح.', 'Course deleted.', 'Cursus supprimé.'), 'info');
+            loadCourses();
           }
         };
       });

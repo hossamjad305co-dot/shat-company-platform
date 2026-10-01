@@ -14,18 +14,27 @@ export function renderAcademyView(lang = 'ar') {
   const at = academyTranslations[lang] || academyTranslations.ar;
   const d = content[lang] || content.ar;
 
-  // Combine courses from academyTranslations and content to guarantee full rich catalog
-  let courses = at.courses || [];
-  try {
-    const stored = api.getStoredCourses ? api.getStoredCourses() : null;
-    if (stored && Array.isArray(stored) && stored.length > 0) {
-      // Merge unique
-      const existingIds = new Set(courses.map(c => c.id));
-      stored.forEach(sc => {
-        if (!existingIds.has(sc.id)) courses.push(sc);
-      });
+  // Combine courses from academyTranslations and stored courses to guarantee live editing takes effect
+  const stored = (api.getStoredCourses ? api.getStoredCourses() : []) || [];
+  const storedMap = new Map();
+  if (Array.isArray(stored)) {
+    stored.forEach(sc => storedMap.set(sc.id, sc));
+  }
+
+  // Merge overrides into translation catalog
+  let courses = (at.courses || []).map(baseCourse => {
+    if (storedMap.has(baseCourse.id)) {
+      const override = storedMap.get(baseCourse.id);
+      storedMap.delete(baseCourse.id);
+      return { ...baseCourse, ...override };
     }
-  } catch (e) {}
+    return baseCourse;
+  });
+
+  // Append new courses created via Admin
+  storedMap.forEach(newCourse => {
+    courses.push(newCourse);
+  });
 
   const t = {
     badge: lang === 'fr' ? 'Académie SHAT de Formation et Renforcement des Capacités' : (isRtl ? 'أكاديمية شركة شات للتدريب وبناء القدرات • SHAT Academy' : 'SHAT Academy for Capacity Development'),
@@ -148,12 +157,18 @@ export function renderAcademyView(lang = 'ar') {
                       </span>
                     </div>
 
-                    <h3 class="bento-title" style="font-size: 1.3rem; font-weight: 900; line-height: 1.4; margin-bottom: 6px;">${c.title}</h3>
+                    <h3 class="bento-title" style="font-size: 1.3rem; font-weight: 900; line-height: 1.4; margin-bottom: 6px; color: var(--shat-navy);">${c.title}</h3>
                     
-                    <div style="display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; font-size: 0.8rem;">
+                    <div style="display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; font-size: 0.82rem; align-items: center;">
                       <span style="color: var(--shat-navy); font-weight: 700;">${t.levelLabel} ${c.level || 'تنفيذي'}</span>
                       <span style="color: var(--text-muted);">•</span>
-                      <span style="color: var(--text-muted);">${c.format || 'هجين (تفاعلي + دراسات حالة)'}</span>
+                      <span style="color: var(--text-secondary); font-weight: 600;">👨‍🏫 ${c.instructorName || c.instructor || 'د. أسامة المنصور'}</span>
+                      ${c.fee ? `
+                        <span style="color: var(--text-muted);">•</span>
+                        <span class="pro-symbol-badge" style="background: var(--shat-green-tint); color: var(--shat-green); border-color: var(--shat-green-border); font-weight: 800;">
+                          💰 ${c.fee}
+                        </span>
+                      ` : ''}
                     </div>
 
                     <p class="bento-text" style="margin-bottom: 16px; font-size: 0.92rem; line-height: 1.7; color: var(--text-secondary);">
@@ -176,18 +191,28 @@ export function renderAcademyView(lang = 'ar') {
                     </div>
                   </div>
 
-                  <!-- Actions -->
-                  <div style="display: flex; gap: 8px; justify-content: space-between; flex-wrap: wrap; padding-top: 14px; border-top: 1px solid var(--border-light);">
-                    <a href="#/course/${c.id}" class="btn-clean btn-sm" style="background: #FFFFFF; color: var(--shat-navy); border: 1px solid var(--border-medium); font-weight: 700; flex: 1; justify-content: center;">
-                      <span>${t.btnExploreFiles}</span>
-                    </a>
-                    <button type="button" class="btn-clean btn-sm btn-open-course-syllabus" data-course="${c.id}" style="background: #F8FAFC; color: var(--shat-navy); border: 1px solid var(--border-medium); font-weight: 700; padding: 6px 12px; font-size: 0.82rem;" title="عرض الخطة التدريبية المعتمدة">
-                      <span>📄 ${isRtl ? 'الخطة' : 'Syllabus'}</span>
-                    </button>
-                    <button class="btn-clean btn-green btn-sm btn-island btn-open-reg-modal" data-course="${c.id}" style="flex: 1; justify-content: center;">
-                      <span>${t.btnRegisterCourse}</span>
+                  <!-- Actions: Google Form, Platform Form, Drive Folder, and Syllabus -->
+                  <div style="display: flex; gap: 8px; justify-content: flex-start; align-items: center; flex-wrap: wrap; padding-top: 14px; border-top: 1px solid var(--border-light);">
+                    ${c.googleFormUrl ? `
+                      <a href="${c.googleFormUrl}" target="_blank" rel="noopener" class="btn-clean btn-sm btn-google-form" style="padding: 7px 12px; font-size: 0.82rem;" title="التسجيل المباشر عبر Google Form">
+                        <span>📋 Google Form</span>
+                      </a>
+                    ` : ''}
+
+                    <button type="button" class="btn-clean btn-green btn-sm btn-island btn-open-reg-modal" data-course="${c.id}" style="padding: 7px 14px; font-size: 0.82rem;">
+                      <span>✍️ ${t.btnRegisterCourse}</span>
                       <span>${arrow}</span>
                     </button>
+
+                    ${c.driveFolderUrl ? `
+                      <a href="${c.driveFolderUrl}" target="_blank" rel="noopener" class="btn-clean btn-sm btn-drive-folder" style="padding: 7px 12px; font-size: 0.82rem;" title="ملفات وحقيبة المساق على Google Drive">
+                        <span>📁 Drive</span>
+                      </a>
+                    ` : ''}
+
+                    <a href="#/course/${c.id}" class="btn-clean btn-sm" style="background: #FFFFFF; color: var(--shat-navy); border: 1px solid var(--border-medium); font-weight: 700; padding: 7px 12px; font-size: 0.82rem; margin-inline-start: auto;">
+                      <span>${t.btnExploreFiles}</span>
+                    </a>
                   </div>
                 </div>
               </div>
