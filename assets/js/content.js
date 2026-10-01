@@ -24,14 +24,14 @@ export const content = {
     nav: {
       home: "الرئيسية",
       about: "من نحن",
-      services: "مجالات العمل والخدمات",
-      standards: "المعايير والنظم",
+      services: "خدماتنا",
+      standards: "المعايير",
       projects: "المشاريع",
-      news: "الأخبار والمنشورات",
+      news: "الأخبار",
       delivery: "نموذج العمل",
       academy: "الأكاديمية",
       admin: "المركز الإداري",
-      contact: "التواصل",
+      contact: "اتصل بنا",
       login: "تسجيل الدخول",
       requestConsultation: "طلب استشارة"
     },
@@ -478,17 +478,17 @@ export const content = {
     },
     nav: {
       home: "Home",
-      about: "About Us",
-      services: "Services & Systems",
-      standards: "International Standards",
-      projects: "Field Projects",
-      news: "News & Publications",
-      delivery: "Delivery Model",
+      about: "About",
+      services: "Services",
+      standards: "Standards",
+      projects: "Projects",
+      news: "News",
+      delivery: "Model",
       academy: "Academy",
-      admin: "Admin Center",
+      admin: "Admin",
       contact: "Contact",
       login: "Sign In",
-      requestConsultation: "Request Consultation"
+      requestConsultation: "Consultation"
     },
     home: {
       heroBadge: "SHAT Development & Growth Platform",
@@ -934,16 +934,16 @@ export const content = {
     nav: {
       home: "Accueil",
       about: "À Propos",
-      services: "Services & Systèmes",
-      standards: "Normes Internationales",
-      projects: "Projets de Terrain",
-      news: "Actualités & Publications",
-      delivery: "Modèle Opérationnel",
+      services: "Services",
+      standards: "Normes",
+      projects: "Projets",
+      news: "Actualités",
+      delivery: "Modèle",
       academy: "Académie",
-      admin: "Centre d'Administration",
+      admin: "Admin",
       contact: "Contact",
       login: "Connexion",
-      requestConsultation: "Demande de Conseil"
+      requestConsultation: "Consultation"
     },
     home: {
       heroBadge: "Plateforme SHAT Développement & Croissance",

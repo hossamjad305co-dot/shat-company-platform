@@ -163,10 +163,10 @@ class Application {
         const notifTooltip = this.currentLang === 'ar' ? 'التنبيهات المؤسسية' : (this.currentLang === 'fr' ? 'Notifications' : 'Notifications');
 
         const searchBtnHtml = `
-          <button id="btn-spotlight-search" class="btn-clean btn-sm" style="display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: var(--bg-subtle); border: 1px solid var(--border-light); border-radius: var(--radius-xs); color: var(--shat-navy); font-weight: 700; cursor: pointer;" title="البحث الشامل (Ctrl+K)">
+          <button id="btn-spotlight-search" class="btn-clean btn-sm" style="display: flex; align-items: center; gap: 5px; padding: 6px 10px; background: var(--bg-subtle); border: 1px solid var(--border-light); border-radius: var(--radius-xs); color: var(--shat-navy); font-weight: 700; cursor: pointer; flex-shrink: 0;" title="البحث الشامل (Ctrl+K)">
             <span>🔍</span>
-            <span style="font-size: 0.82rem;">${isRtl ? 'بحث...' : 'Search...'}</span>
-            <kbd style="font-size: 0.65rem; padding: 1px 5px; background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 3px; font-family: var(--font-mono); color: var(--text-muted);">⌘K</kbd>
+            <span class="search-text-label" style="font-size: 0.80rem;">${isRtl ? 'بحث...' : 'Search...'}</span>
+            <kbd class="search-kbd-hint" style="font-size: 0.65rem; padding: 1px 4px; background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 3px; font-family: var(--font-mono); color: var(--text-muted);">⌘K</kbd>
           </button>
         `;
 
@@ -178,7 +178,7 @@ class Application {
           ${langPickerHtml}
           
           <!-- Notifications Bell -->
-          <div style="position: relative;">
+          <div class="header-notif-container" style="position: relative;">
             <button id="btn-notifications-toggle" class="btn-clean btn-secondary btn-sm" style="position: relative; padding: 7px 11px;" title="${notifTooltip}">
               <span style="font-size: 1.1rem;">🔔</span>
               <span class="notification-badge-dot">3</span>
