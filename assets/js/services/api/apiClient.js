@@ -1168,21 +1168,44 @@ class ApiClient {
       if (data) {
         const parsed = JSON.parse(data);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          // Merge authoritative links if missing in cached items
+          // If old legacy schema without authoritative forms, upgrade and replace with DEFAULT_AUTHORITATIVE_COURSES
+          const hasAuthoritative = parsed.some(c => c.googleFormUrl);
+          if (!hasAuthoritative) {
+            this.saveStoredCourses(DEFAULT_AUTHORITATIVE_COURSES);
+            return DEFAULT_AUTHORITATIVE_COURSES;
+          }
+
+          // Merge authoritative links onto cached items
           const merged = parsed.map(c => {
-            const def = DEFAULT_AUTHORITATIVE_COURSES.find(d => d.id === c.id);
+            const def = DEFAULT_AUTHORITATIVE_COURSES.find(d => 
+              d.id === c.id || 
+              d.code === c.code || 
+              d.code === c.id || 
+              (c.id && d.id && (c.id.includes(d.id) || d.id.includes(c.id)))
+            );
             if (def) {
               return {
                 ...def,
                 ...c,
+                id: def.id,
                 googleFormUrl: c.googleFormUrl || def.googleFormUrl,
                 nativeFormUrl: c.nativeFormUrl || def.nativeFormUrl,
                 driveFolderUrl: c.driveFolderUrl || def.driveFolderUrl,
-                fee: c.fee || def.fee
+                fee: c.fee || def.fee,
+                instructorName: c.instructorName || def.instructorName
               };
             }
             return c;
           });
+
+          // Ensure all DEFAULT_AUTHORITATIVE_COURSES are present in the list
+          DEFAULT_AUTHORITATIVE_COURSES.forEach(def => {
+            if (!merged.some(m => m.id === def.id || m.code === def.code)) {
+              merged.push(def);
+            }
+          });
+
+          this.saveStoredCourses(merged);
           return merged;
         }
       }
