@@ -154,6 +154,24 @@ export async function bindCourseDetailEvents() {
                 <span>${txt('تقديم طلب التحاق بالمساق', 'Apply for Enrollment', 'Demande d’Inscription')}</span>
                 <span>${arrow}</span>
               </button>
+              <button type="button" class="btn-clean" id="btn-view-course-syllabus" style="
+                width: 100%;
+                justify-content: center;
+                background: #FFFFFF;
+                border: 1px solid rgba(255,255,255,0.3);
+                color: #FFFFFF;
+                font-weight: 700;
+                font-size: 0.86rem;
+                padding: 10px;
+                border-radius: 8px;
+                margin-bottom: 12px;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                background: rgba(255,255,255,0.08);
+              ">
+                <span>📄 ${txt('تحميل / طباعة الخطة التدريبية (Syllabus)', 'Accredited Syllabus (PDF)', 'Syllabus Officiel (PDF)')}</span>
+              </button>
               <div style="font-size: 0.78rem; color: #94A3B8;">
                 ${txt('يتم التدقيق والاعتماد الإداري خلال 24 ساعة', 'Reviewed within 24 hours by Admissions', 'Dossier traité sous 24h par l’équipe')}
               </div>
@@ -324,6 +342,14 @@ export async function bindCourseDetailEvents() {
         if (window.openGlobalModal) window.openGlobalModal(cId);
       };
     });
+
+    // Syllabus Viewer Trigger
+    const btnSyllabus = document.getElementById('btn-view-course-syllabus');
+    if (btnSyllabus) {
+      btnSyllabus.onclick = () => {
+        if (window.openSyllabusModal) window.openSyllabusModal(courseId);
+      };
+    }
 
   } catch (err) {
     container.innerHTML = `

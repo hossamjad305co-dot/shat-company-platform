@@ -15,6 +15,8 @@ import { certificateValidator } from './tools/certificateValidator.js';
 import { toolkitsLibrary } from './tools/toolkitsLibrary.js';
 import { standardsExplorer } from './tools/standardsExplorer.js';
 import { commandPalette } from './components/commandPalette.js';
+import { initWhatsAppConcierge } from './components/whatsappConcierge.js';
+import { initSyllabusViewer } from './components/syllabusViewer.js';
 
 class Application {
   constructor() {
@@ -28,6 +30,8 @@ class Application {
     window.openSiteCustomizer = (l) => siteCustomizer.openModal(l || this.currentLang);
     window.commandPalette = commandPalette;
     window.openCommandPalette = () => commandPalette.open();
+    this.concierge = initWhatsAppConcierge();
+    this.syllabusViewer = initSyllabusViewer();
     this.applyLanguage(this.currentLang);
     this.renderRoleSimulator();
     this.renderHeader();
@@ -471,9 +475,9 @@ class Application {
           <span class="mobile-bottom-icon">📋</span>
           <span class="mobile-bottom-label">${this.currentLang === 'ar' ? 'الاستمارات' : 'Forms'}</span>
         </a>
-        <a href="#/news" class="mobile-bottom-link">
-          <span class="mobile-bottom-icon">📰</span>
-          <span class="mobile-bottom-label">${this.currentLang === 'ar' ? 'الأخبار' : 'News'}</span>
+        <a href="#/verify" class="mobile-bottom-link" style="color: #10B981;">
+          <span class="mobile-bottom-icon">🛡️</span>
+          <span class="mobile-bottom-label">${this.currentLang === 'ar' ? 'الشهادات' : 'Verify'}</span>
         </a>
         <a href="#/login" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">🔑</span>

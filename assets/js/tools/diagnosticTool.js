@@ -348,11 +348,11 @@ export const diagnosticTool = {
         </div>
 
         <div style="display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap;">
-          <a href="#/academy" class="btn-clean btn-secondary btn-sm" onclick="document.getElementById('modal-diagnostic-assessment').classList.remove('open');">
-            <span>📚 ${txt('تصفح الدبلومات المرشحة', 'View Recommended Courses', 'Voir les Formations')}</span>
+          <a href="#/forms?id=humanitarian-worker-2026" class="btn-clean btn-secondary btn-sm" onclick="document.getElementById('modal-diagnostic-assessment').classList.remove('open');">
+            <span>📚 ${txt('التسجيل في دبلوم CHS المرشح', 'Enroll in CHS Diploma', 'S\'inscrire au Diplôme CHS')}</span>
           </a>
-          <a href="#/contact" class="btn-clean btn-primary btn-sm" onclick="document.getElementById('modal-diagnostic-assessment').classList.remove('open');">
-            <span>🤝 ${txt('حجز استشارة لتطوير الفجوات', 'Book Advisory Consultation', 'Prendre Rendez-vous')}</span>
+          <a href="#/forms?id=consulting-inquiry-2026" class="btn-clean btn-green btn-sm" onclick="document.getElementById('modal-diagnostic-assessment').classList.remove('open');" style="font-weight: 800;">
+            <span>🤝 ${txt('طلب استشارة وبناء قدرات مؤسسية', 'Request Consulting Intervention', 'Demande de Conseil')}</span>
           </a>
           <button class="btn-clean btn-sm" style="background: #FFFFFF; border: 1px solid var(--border-medium); color: var(--shat-navy);" onclick="window.print();">
             <span>🖨️ ${txt('طباعة التقرير', 'Print Report', 'Imprimer')}</span>

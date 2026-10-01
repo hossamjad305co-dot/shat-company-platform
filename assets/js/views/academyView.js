@@ -4,6 +4,8 @@
 import { content } from '../content.js';
 import { api } from '../services/api/apiClient.js';
 import { academyTranslations } from '../academyTranslations.js';
+import { renderTrainingCalendarSection, bindTrainingCalendarEvents } from '../components/trainingCalendar.js';
+import { renderFaqSection, bindFaqEvents } from '../components/faqSection.js';
 
 export function renderAcademyView(lang = 'ar') {
   const isRtl = lang === 'ar';
@@ -175,10 +177,13 @@ export function renderAcademyView(lang = 'ar') {
                   </div>
 
                   <!-- Actions -->
-                  <div style="display: flex; gap: 10px; justify-content: space-between; flex-wrap: wrap; padding-top: 14px; border-top: 1px solid var(--border-light);">
+                  <div style="display: flex; gap: 8px; justify-content: space-between; flex-wrap: wrap; padding-top: 14px; border-top: 1px solid var(--border-light);">
                     <a href="#/course/${c.id}" class="btn-clean btn-sm" style="background: #FFFFFF; color: var(--shat-navy); border: 1px solid var(--border-medium); font-weight: 700; flex: 1; justify-content: center;">
                       <span>${t.btnExploreFiles}</span>
                     </a>
+                    <button type="button" class="btn-clean btn-sm btn-open-course-syllabus" data-course="${c.id}" style="background: #F8FAFC; color: var(--shat-navy); border: 1px solid var(--border-medium); font-weight: 700; padding: 6px 12px; font-size: 0.82rem;" title="عرض الخطة التدريبية المعتمدة">
+                      <span>📄 ${isRtl ? 'الخطة' : 'Syllabus'}</span>
+                    </button>
                     <button class="btn-clean btn-green btn-sm btn-island btn-open-reg-modal" data-course="${c.id}" style="flex: 1; justify-content: center;">
                       <span>${t.btnRegisterCourse}</span>
                       <span>${arrow}</span>
@@ -195,6 +200,12 @@ export function renderAcademyView(lang = 'ar') {
           </div>
         </div>
       </section>
+
+      <!-- 2. Interactive Training Calendar & Upcoming Cohorts Schedule -->
+      ${renderTrainingCalendarSection(lang)}
+
+      <!-- 3. Interactive FAQ Section with Live Search -->
+      ${renderFaqSection(lang)}
     </div>
   `;
 }
@@ -266,4 +277,18 @@ export function bindAcademyEvents() {
       }
     });
   });
+
+  // Syllabus Modal Triggers
+  document.querySelectorAll('.btn-open-course-syllabus').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const courseId = e.currentTarget.getAttribute('data-course') || 'shat-chs-master';
+      if (window.openSyllabusModal) {
+        window.openSyllabusModal(courseId);
+      }
+    });
+  });
+
+  // Bind Calendar and FAQ Sub-components
+  bindTrainingCalendarEvents();
+  bindFaqEvents();
 }

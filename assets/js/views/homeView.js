@@ -9,6 +9,8 @@ import { icons } from '../icons.js';
 import { showToast } from '../components/toast.js';
 import { standardsExplorer } from '../tools/standardsExplorer.js';
 import { toolkitsLibrary } from '../tools/toolkitsLibrary.js';
+import { renderTrainingCalendarSection, bindTrainingCalendarEvents } from '../components/trainingCalendar.js';
+import { renderFaqSection, bindFaqEvents } from '../components/faqSection.js';
 
 export function renderHomeView(lang = 'ar') {
   const d = content[lang] || content.ar;
@@ -570,6 +572,16 @@ export function renderHomeView(lang = 'ar') {
       </section>
 
       <!-- ==================================================================== -->
+      <!-- 9.1. Interactive Training Calendar & Upcoming Cohorts Schedule       -->
+      <!-- ==================================================================== -->
+      ${renderTrainingCalendarSection(lang)}
+
+      <!-- ==================================================================== -->
+      <!-- 9.2. Interactive FAQ Section with Live Search Filter                 -->
+      <!-- ==================================================================== -->
+      ${renderFaqSection(lang)}
+
+      <!-- ==================================================================== -->
       <!-- 10. Minimalist Corporate Call to Action                             -->
       <!-- ==================================================================== -->
       <section class="section" style="padding: 80px 0; background: #FFFFFF; border-top: 1px solid var(--border-light);">
@@ -851,4 +863,8 @@ export function bindHomeEvents() {
       if (modalBackdrop) modalBackdrop.classList.add('open');
     };
   });
+
+  // Bind Calendar and FAQ Sub-components
+  bindTrainingCalendarEvents();
+  bindFaqEvents();
 }
