@@ -2,6 +2,7 @@
 // Production Student LMS Portal & Learning Dashboard — SHAT Company Platform with 100% Trilingual Support (AR, EN, FR)
 import { api } from '../services/api/apiClient.js';
 import { showToast } from '../components/toast.js';
+import { examEngine } from '../tools/examEngine.js';
 
 export function renderStudentDashboardView(lang = 'ar') {
   const user = api.currentUser;
@@ -138,6 +139,9 @@ export function renderStudentDashboardView(lang = 'ar') {
             </div>
 
             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button id="btn-student-view-cert" class="btn-clean btn-sm" style="background: rgba(16, 185, 129, 0.22); color: #6EE7B7; border: 1px solid rgba(52, 211, 153, 0.4); font-weight: 800; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+                <span>📜 ${txt('شهاداتي المعتمدة', 'My Certificates', 'Mes Certificats')}</span>
+              </button>
               <button id="btn-student-id-card" class="btn-clean btn-sm" style="background: rgba(255, 255, 255, 0.16); color: #FFFFFF; border: 1px solid rgba(255, 255, 255, 0.28); font-weight: 800; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
                 <span>🪪 ${txt('بطاقة الحضور والباركود الرقمي', 'Digital Admission Pass', 'Pass Numérique')}</span>
               </button>
@@ -186,10 +190,15 @@ export function renderStudentDashboardView(lang = 'ar') {
               <div style="font-size: 0.88rem; color: var(--text-muted);">
                 ${t.instructorLabel} <strong>${t.instructorName}</strong> • ${t.hoursMeta}
               </div>
-              <a href="#/course/shat-chs-master" class="btn-clean btn-primary btn-md" style="font-weight: 700;">
-                <span>${t.btnResume}</span>
-                <span>${arrow}</span>
-              </a>
+              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button type="button" id="btn-hero-take-exam" class="btn-clean btn-sm" style="background: var(--shat-green); color: #FFFFFF; font-weight: 800; border-radius: 6px; padding: 8px 16px; box-shadow: 0 3px 10px rgba(30,126,52,0.25);">
+                  <span>📝 ${txt('الاختبار والشهادة المعتمدة', 'Exam & Certificate', 'Examen & Certificat')}</span>
+                </button>
+                <a href="#/course/shat-chs-master" class="btn-clean btn-primary btn-md" style="font-weight: 700;">
+                  <span>${t.btnResume}</span>
+                  <span>${arrow}</span>
+                </a>
+              </div>
             </div>
           </div>
 
@@ -351,6 +360,30 @@ export function bindStudentEvents() {
       showToast(txt('تم تسجيل الخروج بنجاح. نلقاك قريباً في شركة شات!', 'Signed out successfully. See you soon at SHAT!', 'Déconnexion réussie. À bientôt chez SHAT !'), 'info');
       window.location.hash = '#/home';
     });
+  }
+
+  // Handle Exam and Accredited Certificate
+  const btnHeroTakeExam = document.getElementById('btn-hero-take-exam');
+  if (btnHeroTakeExam) {
+    btnHeroTakeExam.onclick = () => {
+      examEngine.initExam('shat-chs-master', currentLang);
+    };
+  }
+
+  const btnViewCertTop = document.getElementById('btn-student-view-cert');
+  if (btnViewCertTop) {
+    btnViewCertTop.onclick = () => {
+      let earned = {};
+      try {
+        earned = JSON.parse(localStorage.getItem('shat_earned_certificates') || '{}');
+      } catch (e) {}
+      const certList = Object.values(earned);
+      if (certList.length > 0) {
+        examEngine.openCertificateModal(certList[certList.length - 1], currentLang);
+      } else {
+        examEngine.initExam('shat-chs-master', currentLang);
+      }
+    };
   }
 
   // Handle Digital Admission Pass & QR Badge Modal

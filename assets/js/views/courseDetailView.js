@@ -2,6 +2,7 @@
 // Production Course Room & Interactive Syllabus for SHAT Academy with 100% Trilingual Support (AR, EN, FR)
 import { api } from '../services/api/apiClient.js';
 import { content } from '../content.js';
+import { examEngine } from '../tools/examEngine.js';
 
 export function renderCourseDetailView(lang = 'ar') {
   const isRtl = lang === 'ar';
@@ -314,6 +315,31 @@ export async function bindCourseDetailEvents() {
             </ul>
           </div>
 
+          <!-- Accredited Exam & Certification Card -->
+          <div style="background: linear-gradient(135deg, #064E3B 0%, #065F46 100%); color: #FFFFFF; border-radius: var(--radius-sm); padding: 22px; margin-bottom: 24px; box-shadow: var(--shadow-sm); border: 1px solid rgba(16,185,129,0.3);">
+            <div style="font-size: 0.82rem; font-weight: 800; color: #6EE7B7; margin-bottom: 6px;">
+              🎓 ${txt('التقييم والاعتماد المهني', 'Accredited Assessment & Certification', 'Certification Homologuée')}
+            </div>
+            <h4 style="font-size: 1.05rem; font-weight: 800; color: #FFFFFF; margin-bottom: 8px;">
+              ${txt('الاختبار النهائي للبرنامج التدريبي', 'Course Final Examination', 'Examen Final du Cursus')}
+            </h4>
+            <p style="font-size: 0.82rem; color: #D1FAE5; line-height: 1.6; margin-bottom: 16px;">
+              ${txt(
+                'اختبار تفاعلي متعدد الخيارات يقيس استيعاب المعايير الإنسانية والمهارات التطبيقية. اجتيازك بنسبة 80% يمنحك الشهادة الرقمية المعتمدة فوراً مع باركود التحقق.',
+                'Interactive exam evaluating standard competencies. Scoring 80%+ awards official accredited certificate with instant verification QR.',
+                'Évaluation certifiante. Un score de 80%+ décerne le certificat officiel vérifiable avec QR code.'
+              )}
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <button type="button" class="btn-clean" id="btn-take-course-exam" style="background: #10B981; color: #FFFFFF; font-weight: 800; padding: 10px 14px; border-radius: 8px; justify-content: center; box-shadow: 0 4px 12px rgba(16,185,129,0.3); cursor: pointer;">
+                <span>📝 ${txt('خوض الاختبار النهائي المعتمد', 'Take Final Accredited Exam', 'Passer l’Examen Final')}</span>
+              </button>
+              <button type="button" class="btn-clean btn-sm" id="btn-view-course-cert-quick" style="background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.25); justify-content: center; padding: 8px; border-radius: 6px; font-weight: 700; cursor: pointer;">
+                <span>📜 ${txt('استعراض شهاداتي المكتسبة', 'View My Earned Certificates', 'Mes Certificats')}</span>
+              </button>
+            </div>
+          </div>
+
           <!-- Interactive Digital Tools Sidebar Widget -->
           <div style="background: linear-gradient(135deg, #0F2E4A 0%, #071726 100%); color: #FFFFFF; border-radius: var(--radius-sm); padding: 22px; margin-bottom: 24px; box-shadow: var(--shadow-sm); border: 1px solid rgba(255,255,255,0.1);">
             <div style="font-size: 0.82rem; font-weight: 800; color: #4ADE80; margin-bottom: 6px;">
@@ -377,6 +403,30 @@ export async function bindCourseDetailEvents() {
     if (btnSyllabus) {
       btnSyllabus.onclick = () => {
         if (window.openSyllabusModal) window.openSyllabusModal(courseId);
+      };
+    }
+
+    // Accredited Course Exam & Certificate
+    const btnTakeExam = document.getElementById('btn-take-course-exam');
+    if (btnTakeExam) {
+      btnTakeExam.onclick = () => {
+        examEngine.initExam(courseId, currentLang);
+      };
+    }
+
+    const btnViewCertQuick = document.getElementById('btn-view-course-cert-quick');
+    if (btnViewCertQuick) {
+      btnViewCertQuick.onclick = () => {
+        let earned = {};
+        try {
+          earned = JSON.parse(localStorage.getItem('shat_earned_certificates') || '{}');
+        } catch (e) {}
+        const certList = Object.values(earned);
+        if (certList.length > 0) {
+          examEngine.openCertificateModal(certList[certList.length - 1], currentLang);
+        } else {
+          examEngine.initExam(courseId, currentLang);
+        }
       };
     }
 

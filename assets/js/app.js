@@ -17,6 +17,8 @@ import { standardsExplorer } from './tools/standardsExplorer.js';
 import { commandPalette } from './components/commandPalette.js';
 import { initWhatsAppConcierge } from './components/whatsappConcierge.js';
 import { initSyllabusViewer } from './components/syllabusViewer.js';
+import { aiAdvisorWidget } from './components/aiAdvisorWidget.js';
+import { examEngine } from './tools/examEngine.js';
 
 class Application {
   constructor() {
@@ -37,12 +39,15 @@ class Application {
     });
     window.commandPalette = commandPalette;
     window.openCommandPalette = () => commandPalette.open();
+    window.examEngine = examEngine;
+    window.aiAdvisorWidget = aiAdvisorWidget;
     this.concierge = initWhatsAppConcierge();
     this.syllabusViewer = initSyllabusViewer();
     this.applyLanguage(this.currentLang);
     this.renderRoleSimulator();
     this.renderHeader();
     this.renderMobileDrawer();
+    aiAdvisorWidget.init(this.currentLang);
     this.renderFooter();
     this.renderMobileBottomNav();
     this.bindGlobalEvents();
@@ -117,8 +122,10 @@ class Application {
         <a href="#/services" class="nav-link">${nav.services}</a>
         <a href="#/standards" class="nav-link">${nav.standards}</a>
         <a href="#/projects" class="nav-link">${nav.projects || (this.currentLang === 'fr' ? 'Projets' : 'المشاريع')}</a>
+        <a href="#/toolkits" class="nav-link">${this.currentLang === 'fr' ? 'Outils' : (this.currentLang === 'en' ? 'Toolkits' : 'الأدلة والنماذج')}</a>
         <a href="#/news" class="nav-link">${nav.news || (this.currentLang === 'fr' ? 'Actualités' : 'الأخبار')}</a>
         <a href="#/academy" class="nav-link">${nav.academy}</a>
+        <a href="#/verify" class="nav-link">${this.currentLang === 'fr' ? 'Vérification' : (this.currentLang === 'en' ? 'Verify' : 'التحقق')}</a>
         <a href="#/contact" class="nav-link">${nav.contact}</a>
       `;
     }
@@ -374,6 +381,7 @@ class Application {
         <a href="#/services" class="nav-link">${nav.services}</a>
         <a href="#/standards" class="nav-link">${nav.standards}</a>
         <a href="#/projects" class="nav-link">${nav.projects || (this.currentLang === 'fr' ? 'Projets' : 'المشاريع')}</a>
+        <a href="#/toolkits" class="nav-link" style="color: var(--shat-navy); font-weight: 700;">📂 ${this.currentLang === 'fr' ? 'Outils & Modèles' : (this.currentLang === 'en' ? 'Toolkits & Templates' : 'الأدلة والنماذج الميدانية')}</a>
         <a href="#/news" class="nav-link">${nav.news || (this.currentLang === 'fr' ? 'Actualités' : 'الأخبار')}</a>
         <a href="#/academy" class="nav-link">${nav.academy}</a>
         <a href="#/forms" class="nav-link" style="color: var(--shat-green); font-weight: 800;">📋 ${this.currentLang === 'ar' ? 'استمارات التسجيل المعتمدة' : (this.currentLang === 'fr' ? 'Formulaires d’Inscription' : 'Official Forms')}</a>

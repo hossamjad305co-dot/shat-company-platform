@@ -79,6 +79,44 @@ export const toolkitsLibrary = {
         "3. خطة التواصل وإدارة توقعات الشركاء والجهات المانحة",
         "4. خطة الاستدامة وتسليم مخرجات المشروع للمجتمع المحلي"
       ]
+    },
+    {
+      id: "tk-cm-intake",
+      titleAr: "استمارة دراسة وتقييم الحالة الشاملة ونموذج الموافقة المستنيرة (Case Intake & Assessment)",
+      titleEn: "Comprehensive Case Management Intake & Informed Consent Tool",
+      categoryAr: "إدارة الحالة والرعاية",
+      categoryEn: "Case Management",
+      format: "PDF / Editable Form",
+      size: "2.1 MB",
+      badge: "متوافق مع معايير حماية الطفل",
+      badgeEn: "Child Protection Compliant",
+      descAr: "أداة توثيق مهنية تضم نموذج الموافقة المستنيرة، شجرة تقييم المخاطر، مصفوفة نقاط القوة والاحتياجات، وخطة التدخل الفردي.",
+      descEn: "Standardized case intake instrument featuring continuous informed consent, vulnerability screening, and multi-sectoral care planning.",
+      contentOutline: [
+        "القسم 1: بيانات التسجيل الأساسية وإقرار الموافقة المستنيرة (Informed Consent/Assent)",
+        "القسم 2: التقييم متعدد الأبعاد (الوضع الصحي، النفسي-اجتماعي، الحماية، والتعليم)",
+        "القسم 3: مصفوفة تحليل المخاطر ونقاط القوة والمساندة الأسرية والمجتمعية",
+        "القسم 4: خطة العمل الفردية، مواعيد المتابعة الميدانية، ومسارات الإحالة الآمنة"
+      ]
+    },
+    {
+      id: "tk-oecd-evaluation",
+      titleAr: "مصفوفة معايير التقييم الخارجي المستقل (OECD DAC Evaluation Matrix)",
+      titleEn: "OECD DAC Independent Evaluation Framework & Data Protocols",
+      categoryAr: "التقييم وضمان الجودة",
+      categoryEn: "Evaluation & Quality",
+      format: "XLSX / DOCX",
+      size: "2.8 MB",
+      badge: "معيار OECD DAC الدولي",
+      badgeEn: "OECD DAC Accredited",
+      descAr: "مصفوفة توجيهية تشتمل على أسئلة التقييم ومصادر الأدلة ومؤشرات القياس وفق معايير الملاءمة، الفعالية، الكفاءة، التماسك، الأثر، والاستدامة.",
+      descEn: "Operational evaluation matrix outlining research questions, data sources, and triangulation methodologies across the 6 OECD DAC criteria.",
+      contentOutline: [
+        "المعيار 1: الملاءمة والتماسك (Relevance & Coherence) — فحص الاحتياجات والأولويات",
+        "المعيار 2: الفعالية والكفاءة (Effectiveness & Efficiency) — تحقيق الأهداف وإدارة الموارد",
+        "المعيار 3: الأثر التراكمي والاستدامة (Impact & Sustainability) — التغيير طويل الأجل",
+        "المعيار 4: أدوات جمع البيانات الميدانية (مقابلات الخبراء KIIs ومجموعات النقاش FGDs)"
+      ]
     }
   ],
 
@@ -193,15 +231,20 @@ export const toolkitsLibrary = {
         </div>
 
         <div style="margin-bottom: 20px;">
-          <h5 style="font-size: 0.95rem; font-weight: 800; color: var(--shat-navy); margin-bottom: 10px;">
-            ${txt('فهرس وهيكل القالب المؤسسي:', 'Detailed Document Architecture:', 'Structure Détaillée :')}
-          </h5>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <h5 style="font-size: 0.95rem; font-weight: 800; color: var(--shat-navy); margin: 0;">
+              ${txt('فهرس وهيكل القالب وقائمة التحقق التفاعلية:', 'Detailed Architecture & Interactive Checklist:', 'Structure & Liste de Contrôle :')}
+            </h5>
+            <span id="tk-checklist-counter" style="font-size: 0.78rem; font-weight: 800; color: var(--shat-green);">0 / ${tk.contentOutline.length} ${txt('مكتمل', 'Completed', 'Validé')}</span>
+          </div>
+
           <div style="display: flex; flex-direction: column; gap: 8px;">
             ${tk.contentOutline.map((item, idx) => `
-              <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-xs); padding: 10px 14px; display: flex; align-items: center; gap: 10px;">
+              <label style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-xs); padding: 10px 14px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: all 0.2s ease;">
+                <input type="checkbox" class="tk-check-item" style="width: 18px; height: 18px; accent-color: var(--shat-green); cursor: pointer;" />
                 <span style="font-weight: 800; color: var(--shat-green); font-family: var(--font-mono); font-size: 0.85rem;">0${idx + 1}</span>
                 <span style="font-size: 0.86rem; color: var(--text-secondary); font-weight: 600;">${item}</span>
-              </div>
+              </label>
             `).join('')}
           </div>
         </div>
@@ -214,16 +257,49 @@ export const toolkitsLibrary = {
           )}
         </div>
 
-        <div style="display: flex; justify-content: flex-end; gap: 10px;">
-          <button class="btn-clean btn-secondary btn-sm" onclick="document.getElementById('modal-toolkit-preview').classList.remove('open');">
+        <div class="no-print" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <button type="button" class="btn-clean btn-secondary btn-sm" onclick="document.getElementById('modal-toolkit-preview').classList.remove('open');">
             ${txt('إغلاق', 'Close', 'Fermer')}
           </button>
-          <a href="#/contact" class="btn-clean btn-primary btn-sm" onclick="document.getElementById('modal-toolkit-preview').classList.remove('open');">
-            <span>📥 ${txt('طلب تحميل النسخة الأصلية القابلة للتعديل', 'Request Editable Version', 'Télécharger la Version Éditée')}</span>
-          </a>
+          
+          <div style="display: flex; gap: 8px;">
+            <button type="button" class="btn-clean btn-sm allow-print" onclick="window.print();" style="background: var(--bg-subtle); color: var(--shat-navy); border: 1px solid var(--border-light); font-weight: 700;">
+              🖨️ ${txt('طباعة القائمة', 'Print Checklist', 'Imprimer')}
+            </button>
+            <button type="button" class="btn-clean btn-primary btn-sm btn-download-tk-direct" data-title="${isRtl ? tk.titleAr : tk.titleEn}">
+              <span>📥 ${txt('تحميل الحقيبة الرسمية', 'Download Toolkit', 'Télécharger')}</span>
+            </button>
+          </div>
         </div>
       </div>
     `;
+
+    // Interactive checklist update
+    const checkBoxes = modalBody.querySelectorAll('.tk-check-item');
+    const counter = modalBody.querySelector('#tk-checklist-counter');
+    checkBoxes.forEach(cb => {
+      cb.addEventListener('change', () => {
+        const checked = modalBody.querySelectorAll('.tk-check-item:checked').length;
+        if (counter) {
+          counter.textContent = `${checked} / ${checkBoxes.length} ${txt('مكتمل', 'Completed', 'Validé')}`;
+        }
+      });
+    });
+
+    // Intercept unauthenticated users
+    const btnDown = modalBody.querySelector('.btn-download-tk-direct');
+    if (btnDown) {
+      btnDown.onclick = () => {
+        const user = localStorage.getItem('shat_platform_current_user');
+        if (user) {
+          alert(txt('✓ جاري بدء تنزيل حزمة النموذج المعتمدة...', '✓ Downloading accredited toolkit package...', '✓ Téléchargement du pack officiel en cours...'));
+        } else {
+          if (window.openPermissionGuard) {
+            window.openPermissionGuard(isRtl ? tk.titleAr : tk.titleEn, 'student');
+          }
+        }
+      };
+    }
 
     modal.classList.add('open');
   },

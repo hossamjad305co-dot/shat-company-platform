@@ -176,6 +176,15 @@ export function bindVerifyEvents() {
   const input = document.getElementById('input-certificate-id');
   const resultContainer = document.getElementById('verify-result-container');
 
+  // Helper to get all certificates (Mock + Earned in current browser)
+  function getAllCertificates() {
+    let earned = {};
+    try {
+      earned = JSON.parse(localStorage.getItem('shat_earned_certificates') || '{}');
+    } catch (e) {}
+    return { ...MOCK_CERTIFICATES, ...earned };
+  }
+
   // Quick Demo Buttons
   document.querySelectorAll('.btn-sample-id').forEach(btn => {
     btn.onclick = () => {
@@ -186,6 +195,20 @@ export function bindVerifyEvents() {
       }
     };
   });
+
+  // Auto-verify if id is in URL hash or search params
+  const hash = window.location.hash || '';
+  let urlCode = '';
+  if (hash.includes('?id=')) {
+    urlCode = hash.split('?id=')[1]?.split('&')[0];
+  } else if (hash.includes('/verify/')) {
+    urlCode = hash.split('/verify/')[1];
+  }
+
+  if (urlCode && input) {
+    input.value = decodeURIComponent(urlCode);
+    setTimeout(() => verifyCertificateId(input.value), 200);
+  }
 
   if (form) {
     form.onsubmit = (e) => {
@@ -203,7 +226,8 @@ export function bindVerifyEvents() {
     resultContainer.style.display = 'block';
     resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-    const cert = MOCK_CERTIFICATES[code];
+    const allCerts = getAllCertificates();
+    const cert = allCerts[code];
 
     if (!cert) {
       resultContainer.innerHTML = `
