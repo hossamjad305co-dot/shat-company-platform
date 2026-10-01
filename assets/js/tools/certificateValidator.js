@@ -75,7 +75,7 @@ export const certificateValidator = {
       <div class="cert-validator-wrapper" style="text-align: ${isRtl ? 'right' : 'left'};">
         <div style="margin-bottom: 20px; background: linear-gradient(135deg, rgba(15,46,74,0.05) 0%, rgba(217,119,6,0.06) 100%); padding: 18px 20px; border-radius: var(--radius-md); border: 1px solid rgba(217,119,6,0.2);">
           <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-            <span style="font-size: 1.4rem; color: #D97706;">◈</span>
+            <span style="font-size: 1.4rem; color: #D97706;"></span>
             <span style="font-weight: 800; font-size: 1.05rem; color: var(--shat-navy);">
               ${txt('أداة التحقق من الشهادات الرقمية المعتمدة', 'Accredited Digital Certificate Verification', 'Vérification des Certificats Numériques')}
             </span>
@@ -97,7 +97,7 @@ export const certificateValidator = {
           <div style="display: flex; gap: 10px; margin-bottom: 10px;">
             <input type="text" id="cert-search-input" class="form-input" placeholder="${txt('مثال: SHAT-CHS-2026-9482', 'e.g., SHAT-CHS-2026-9482', 'ex. SHAT-CHS-2026-9482')}" style="font-family: var(--font-mono); text-transform: uppercase; font-size: 1rem; padding: 12px 14px;" value="SHAT-CHS-2026-9482">
             <button id="btn-cert-verify" class="btn-clean btn-primary btn-md" style="padding: 0 24px; font-weight: 800;">
-              <span>◈ ${txt('تحقق الآن', 'Verify Now', 'Vérifier')}</span>
+              <span>${txt('تحقق الآن', 'Verify Now', 'Vérifier')}</span>
             </button>
           </div>
 
@@ -262,14 +262,14 @@ export const certificateValidator = {
 
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-top: 1px solid var(--border-light); padding-top: 16px;">
           <div style="font-size: 0.76rem; color: var(--text-muted);">
-            ◈ ${txt('سجل التحقق الأكاديمي محمي وموثق في خوادم شركة شات الرسمية.', 'Digital record encrypted and verified on SHAT institutional servers.', 'Enregistrement sécurisé sur les serveurs institutionnels SHAT.')}
+            ${txt('سجل التحقق الأكاديمي محمي وموثق في خوادم شركة شات الرسمية.', 'Digital record encrypted and verified on SHAT institutional servers.', 'Enregistrement sécurisé sur les serveurs institutionnels SHAT.')}
           </div>
           <div style="display: flex; gap: 8px;">
             <button class="btn-clean btn-sm" style="background: var(--shat-navy); color: #FFFFFF;" onclick="window.print();">
               <span>⎙ ${txt('طباعة إفادة التحقق', 'Print Official Verification', 'Imprimer')}</span>
             </button>
             <a href="#/course/shat-chs-master" class="btn-clean btn-sm" style="background: var(--bg-subtle); border: 1px solid var(--border-medium); color: var(--shat-navy);" onclick="document.getElementById('modal-certificate-validator').classList.remove('open');">
-              <span>▪ ${txt('استعراض تفاصيل المساق', 'Course Details', 'Détails du Cursus')}</span>
+              <span>${txt('استعراض تفاصيل المساق', 'Course Details', 'Détails du Cursus')}</span>
             </a>
           </div>
         </div>

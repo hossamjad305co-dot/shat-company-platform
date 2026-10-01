@@ -417,10 +417,10 @@ export function renderProjectsView(lang = 'ar') {
                       <!-- Standard Tag with Tool Trigger -->
                       <div style="margin-bottom: 14px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
                         <button type="button" class="btn-clean" onclick="if(window.openStandardsExplorer) window.openStandardsExplorer('${p.standardCode}');" style="background: #EFF6FF; color: #1D4ED8; font-size: 0.78rem; font-weight: 700; padding: 4px 10px; border-radius: 4px; border: 1px solid #BFDBFE; cursor: pointer;">
-                          ◈ ${t.standardLabel} ${p.standardLabel}
+                          ${t.standardLabel} ${p.standardLabel}
                         </button>
                         <a href="#/course/${p.linkedCourseId}" style="font-size: 0.78rem; color: var(--shat-green); font-weight: 700; text-decoration: none;">
-                          ✦ ${linkedTitle}
+                          ${linkedTitle}
                         </a>
                       </div>
 
@@ -465,7 +465,7 @@ export function renderProjectsView(lang = 'ar') {
                     <div style="border-top: 1px solid var(--border-light); padding-top: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
                       <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                         <button type="button" class="btn-clean btn-view-brief" data-project="${p.code}" style="background: var(--shat-navy); color: #FFFFFF; font-size: 0.8rem; font-weight: 700; padding: 6px 12px; border-radius: var(--radius-xs); box-shadow: 0 2px 6px rgba(15,46,74,0.2);">
-                          ▪ ${t.btnViewBrief}
+                          ${t.btnViewBrief}
                         </button>
                         <button type="button" class="btn-clean btn-download-case" data-project="${p.code}" style="background: #F1F5F9; color: var(--shat-navy); border: 1px solid var(--border-light); font-size: 0.8rem; font-weight: 700; padding: 6px 12px; border-radius: var(--radius-xs);">
                           ↓ ${t.btnDownloadSummary}
@@ -496,7 +496,7 @@ export function renderProjectsView(lang = 'ar') {
                   <span>${arrow}</span>
                 </a>
                 <button type="button" class="btn-clean btn-green btn-lg btn-island" onclick="if(window.openDiagnosticAssessment) window.openDiagnosticAssessment();">
-                  <span>◈ ${txt('فحص الجاهزية المؤسسية للمشروع', 'Project Readiness Diagnostic', 'Diagnostic de Projet')}</span>
+                  <span>${txt('فحص الجاهزية المؤسسية للمشروع', 'Project Readiness Diagnostic', 'Diagnostic de Projet')}</span>
                 </button>
               </div>
             </div>
@@ -585,7 +585,7 @@ function openProjectBriefModal(project, lang = 'ar') {
       <div class="modal-window" style="max-width: 820px; max-height: 92vh; display: flex; flex-direction: column;">
         <div class="modal-top no-print" style="border-bottom: 2px solid var(--shat-navy); padding: 16px 24px;">
           <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 1.3rem;">▪</span>
+            <span style="font-size: 1.3rem;"></span>
             <h3 style="font-size: 1.15rem; font-weight: 900; color: var(--shat-navy); margin: 0;">
               ${txt('وثيقة ملخص التدخل الميداني المعتمد', 'Official Project Brief & Evaluation Sheet', 'Fiche Synthèse de Projet Homologué')}
             </h3>

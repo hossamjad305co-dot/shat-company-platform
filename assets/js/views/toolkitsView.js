@@ -3,6 +3,7 @@
 // 100% Trilingual Support (AR, EN, FR) & WCAG AAA High Contrast Design
 import { toolkitsLibrary } from '../tools/toolkitsLibrary.js';
 import { api } from '../services/api/apiClient.js';
+import { icons } from '../icons.js';
 
 export function renderToolkitsView(lang = 'ar') {
   const isRtl = lang === 'ar';
@@ -55,7 +56,7 @@ export function renderToolkitsView(lang = 'ar') {
             </div>
 
             <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 12px; padding: 18px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow-sm);">
-              <span style="font-size: 1.5rem; font-weight: 900; color: #0F2E4A;">◈</span>
+              <span style="font-size: 1.5rem; font-weight: 900; color: #0F2E4A;"></span>
               <div>
                 <div style="font-weight: 800; font-size: 0.95rem; color: var(--shat-navy);">سياسات PSEA وصون السلامة</div>
                 <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">مسارات إحالة وتدقيق مسبق معتمد</div>
@@ -63,7 +64,7 @@ export function renderToolkitsView(lang = 'ar') {
             </div>
 
             <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 12px; padding: 18px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow-sm);">
-              <span style="font-size: 1.5rem; font-weight: 900; color: #D97706;">❖</span>
+              <span style="font-size: 1.5rem; font-weight: 900; color: #D97706;"></span>
               <div>
                 <div style="font-weight: 800; font-size: 0.95rem; color: var(--shat-navy);">ملفات ونماذج إدارة الحالة</div>
                 <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">استمارات تقييم وموافقة مستنيرة</div>
@@ -82,7 +83,7 @@ export function renderToolkitsView(lang = 'ar') {
           <div style="background: linear-gradient(135deg, #0F2E4A 0%, #064E3B 100%); color: #FFFFFF; border-radius: 16px; padding: 40px; margin-top: 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; box-shadow: 0 10px 30px rgba(15,46,74,0.15);">
             <div style="max-width: 620px;">
               <span style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: #A7F3D0; font-size: 0.75rem; font-weight: 800; padding: 4px 12px; border-radius: 999px; display: inline-block; margin-bottom: 10px;">
-                ★ ${txt('استشارات مؤسسية متقدمة', 'Custom Institutional Consulting', 'Conseil Institutionnel Personnalisé')}
+                ${txt('استشارات مؤسسية متقدمة', 'Custom Institutional Consulting', 'Conseil Institutionnel Personnalisé')}
               </span>
               <h3 style="font-size: 1.5rem; font-weight: 900; margin: 0 0 10px 0; color: #FFFFFF;">
                 ${t.btnRequestCustom}
@@ -98,7 +99,8 @@ export function renderToolkitsView(lang = 'ar') {
 
             <div>
               <a href="#/contact" class="btn-clean" style="background: #10B981; color: #FFFFFF; font-weight: 800; padding: 14px 28px; border-radius: 10px; font-size: 1rem; box-shadow: 0 4px 14px rgba(16,185,129,0.3); display: inline-flex; align-items: center; gap: 8px;">
-                <span>✉ ${txt('تواصل مع مستشار النظم والأدلة', 'Consult with a Systems Expert', 'Contacter un Consultant')}</span>
+                <span style="display: inline-flex; align-items: center;">${icons.chat('', 18)}</span>
+                <span>${txt('تواصل مع مستشار النظم والأدلة', 'Consult with a Systems Expert', 'Contacter un Consultant')}</span>
                 <span>${arrow}</span>
               </a>
             </div>

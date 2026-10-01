@@ -59,10 +59,10 @@ export async function renderTeacherDashboardPage() {
       <!-- Quick Action Buttons -->
       <div style="display: flex; gap: var(--space-md); margin-bottom: var(--space-xl); flex-wrap: wrap;">
         <a href="#/teacher/builder" class="shat-btn shat-btn-primary" style="text-decoration: none;">
-          <span>◈ فتح منشئ المناهج (Course Builder)</span>
+          <span>فتح منشئ المناهج (Course Builder)</span>
         </a>
         <a href="#/academy/assignments" class="shat-btn shat-btn-secondary" style="text-decoration: none;">
-          <span>▪ مراجعة تسليمات التكليفات</span>
+          <span>مراجعة تسليمات التكليفات</span>
         </a>
       </div>
 
@@ -70,7 +70,7 @@ export async function renderTeacherDashboardPage() {
       <div class="shat-card" style="padding: 0; overflow: hidden;">
         <div style="padding: var(--space-lg); border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
           <h3 style="margin: 0; font-size: var(--font-size-h4); color: var(--text-primary);">
-            ▪ المساقات التدريبية المكلف بإدارتها
+            المساقات التدريبية المكلف بإدارتها
           </h3>
           <span class="shat-badge shat-badge-success">حالة الاعتماد: نشط</span>
         </div>

@@ -42,18 +42,22 @@ export function renderLoginView(lang = 'ar') {
         <div id="login-alert-box" style="display: none; padding: 12px 16px; border-radius: var(--radius-xs); margin-bottom: 18px; font-size: 0.88rem;"></div>
 
         <!-- Method Navigation Tabs (4 Channels) -->
-        <div class="login-tabs-container" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; background: var(--bg-subtle); padding: 5px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); margin-bottom: 22px;">
-          <button type="button" class="btn-clean login-tab-btn active" data-tab="corporate" style="padding: 8px 4px; font-size: 0.78rem; font-weight: 700; border-radius: 6px; text-align: center; transition: all 0.2s ease;">
-            ${l.tabs?.corporate || 'حساب المؤسسة'}
+        <div class="login-tabs-container">
+          <button type="button" class="btn-clean login-tab-btn active" data-tab="corporate">
+            ${icons.building('tab-icon', 17)}
+            <span>${l.tabs?.corporate || 'حساب المؤسسة'}</span>
           </button>
-          <button type="button" class="btn-clean login-tab-btn" data-tab="nationalId" style="padding: 8px 4px; font-size: 0.78rem; font-weight: 700; border-radius: 6px; text-align: center; transition: all 0.2s ease;">
-            ${l.tabs?.nationalId || 'الهوية الأكاديمية'}
+          <button type="button" class="btn-clean login-tab-btn" data-tab="nationalId">
+            ${icons.idCard('tab-icon', 17)}
+            <span>${l.tabs?.nationalId || 'الهوية الرقمية'}</span>
           </button>
-          <button type="button" class="btn-clean login-tab-btn" data-tab="whatsapp" style="padding: 8px 4px; font-size: 0.78rem; font-weight: 700; border-radius: 6px; text-align: center; transition: all 0.2s ease;">
-            ${l.tabs?.whatsapp || 'واتساب السريع'}
+          <button type="button" class="btn-clean login-tab-btn" data-tab="whatsapp">
+            ${icons.whatsapp('tab-icon', 17)}
+            <span>${l.tabs?.whatsapp || 'واتساب السريع'}</span>
           </button>
-          <button type="button" class="btn-clean login-tab-btn" data-tab="simulator" style="padding: 8px 4px; font-size: 0.78rem; font-weight: 700; border-radius: 6px; text-align: center; transition: all 0.2s ease;">
-            ${l.tabs?.simulator || 'محاكي الأدوار'}
+          <button type="button" class="btn-clean login-tab-btn" data-tab="simulator">
+            ${icons.zap('tab-icon', 17)}
+            <span>${l.tabs?.simulator || 'محاكي الأدوار'}</span>
           </button>
         </div>
 
@@ -171,10 +175,10 @@ export function renderLoginView(lang = 'ar') {
             <!-- Preset Quick ID tags -->
             <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px;">
               <button type="button" class="btn-clean btn-sm btn-quick-id" data-id="1098765432" style="font-size: 0.75rem; padding: 4px 10px; background: var(--bg-subtle); border: 1px solid var(--border-medium); border-radius: 4px; color: var(--shat-navy);">
-                ✦ 1098765432 (طارق الخالد)
+                1098765432 (طارق الخالد)
               </button>
               <button type="button" class="btn-clean btn-sm btn-quick-id" data-id="401234567" style="font-size: 0.75rem; padding: 4px 10px; background: var(--bg-subtle); border: 1px solid var(--border-medium); border-radius: 4px; color: var(--shat-green);">
-                ✦ 401234567 (سارة العلي)
+                401234567 (سارة العلي)
               </button>
             </div>
 
@@ -252,28 +256,28 @@ export function renderLoginView(lang = 'ar') {
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
             <!-- Trainee Student Card -->
             <button type="button" class="btn-clean btn-instant-role" data-role="student" style="padding: 14px 12px; text-align: ${isRtl ? 'right' : 'left'}; background: #F8FAFC; border: 1.5px solid #CBD5E1; border-radius: var(--radius-xs); transition: all 0.2s ease;">
-              <div style="font-size: 1.3rem; margin-bottom: 4px; color: #1D4ED8; font-weight: 800;">✦</div>
+              <div style="margin-bottom: 6px; color: #1D4ED8; display: flex; align-items: center;">${icons.academy('role-svg', 22)}</div>
               <div style="font-weight: 800; color: #1D4ED8; font-size: 0.88rem;">${l.studentRole}</div>
               <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">لوحة المتدرب، المقررات، والشهادات</div>
             </button>
 
             <!-- Master Trainer Card -->
             <button type="button" class="btn-clean btn-instant-role" data-role="teacher" style="padding: 14px 12px; text-align: ${isRtl ? 'right' : 'left'}; background: #F8FAFC; border: 1.5px solid #CBD5E1; border-radius: var(--radius-xs); transition: all 0.2s ease;">
-              <div style="font-size: 1.3rem; margin-bottom: 4px; color: #15803D; font-weight: 800;">❖</div>
+              <div style="margin-bottom: 6px; color: #15803D; display: flex; align-items: center;">${icons.award('role-svg', 22)}</div>
               <div style="font-weight: 800; color: #15803D; font-size: 0.88rem;">${l.teacherRole}</div>
               <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">إدارة الفصول، التقييم، وبنوك الأسئلة</div>
             </button>
 
             <!-- Super Admin Card -->
             <button type="button" class="btn-clean btn-instant-role" data-role="admin" style="padding: 14px 12px; text-align: ${isRtl ? 'right' : 'left'}; background: #F8FAFC; border: 1.5px solid #CBD5E1; border-radius: var(--radius-xs); transition: all 0.2s ease;">
-              <div style="font-size: 1.3rem; margin-bottom: 4px; color: var(--shat-navy); font-weight: 800;">⚙</div>
+              <div style="margin-bottom: 6px; color: var(--shat-navy); display: flex; align-items: center;">${icons.shield('role-svg', 22)}</div>
               <div style="font-weight: 800; color: var(--shat-navy); font-size: 0.88rem;">${l.adminRole}</div>
               <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">إدارة المنظومة، المحتوى، والتحكم الشامل</div>
             </button>
 
             <!-- Public Visitor Card -->
             <button type="button" class="btn-clean btn-instant-role" data-role="visitor" style="padding: 14px 12px; text-align: ${isRtl ? 'right' : 'left'}; background: #F8FAFC; border: 1.5px solid #CBD5E1; border-radius: var(--radius-xs); transition: all 0.2s ease;">
-              <div style="font-size: 1.3rem; margin-bottom: 4px; color: #475569; font-weight: 800;">◈</div>
+              <div style="margin-bottom: 6px; color: #475569; display: flex; align-items: center;">${icons.compass('role-svg', 22)}</div>
               <div style="font-weight: 800; color: #475569; font-size: 0.88rem;">${l.visitorRole || 'الزائر العام'}</div>
               <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">استكشاف البرامج والخدمات العامة</div>
             </button>
@@ -318,16 +322,8 @@ export function bindLoginEvents() {
   const tabs = document.querySelectorAll('.login-tab-btn');
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      tabs.forEach(t => {
-        t.classList.remove('active');
-        t.style.background = 'transparent';
-        t.style.color = 'var(--text-secondary)';
-        t.style.boxShadow = 'none';
-      });
+      tabs.forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
-      tab.style.background = '#FFFFFF';
-      tab.style.color = 'var(--shat-navy)';
-      tab.style.boxShadow = '0 2px 5px rgba(0,0,0,0.06)';
 
       const target = tab.getAttribute('data-tab');
       document.querySelectorAll('.login-tab-pane').forEach(pane => {

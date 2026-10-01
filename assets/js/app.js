@@ -148,7 +148,7 @@ class Application {
     const langPickerHtml = `
       <div class="lang-switch-dropdown" style="position: relative; display: inline-block;">
         <button id="btn-lang-selector" class="btn-clean btn-secondary btn-sm" style="display: flex; align-items: center; gap: 6px; font-weight: 700; padding: 6px 12px; border-radius: var(--radius-xs);" title="اختيار اللغة / Select Language / Choisir la langue">
-          <span>◈</span>
+          <span style="display: flex; align-items: center;">${icons.globe('lang-globe', 16)}</span>
           <span>${langLabel}</span>
           <span style="font-size: 0.65rem; opacity: 0.7;">▼</span>
         </button>
@@ -185,7 +185,7 @@ class Application {
 
         const searchBtnHtml = `
           <button id="btn-spotlight-search" class="btn-clean btn-sm" style="display: flex; align-items: center; gap: 5px; padding: 6px 10px; background: var(--bg-subtle); border: 1px solid var(--border-light); border-radius: var(--radius-xs); color: var(--shat-navy); font-weight: 700; cursor: pointer; flex-shrink: 0;" title="البحث الشامل (Ctrl+K)">
-            <span style="font-size: 0.85rem; color: var(--shat-navy);">◈</span>
+            <span style="display: flex; align-items: center; color: var(--shat-navy);">${icons.search('search-icon', 15)}</span>
             <span class="search-text-label" style="font-size: 0.80rem;">${isRtl ? 'بحث...' : 'Search...'}</span>
             <kbd class="search-kbd-hint" style="font-size: 0.65rem; padding: 1px 4px; background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 3px; font-family: var(--font-mono); color: var(--text-muted);">⌘K</kbd>
           </button>
@@ -200,8 +200,8 @@ class Application {
           
           <!-- Notifications Bell -->
           <div class="header-notif-container" style="position: relative;">
-            <button id="btn-notifications-toggle" class="btn-clean btn-secondary btn-sm" style="position: relative; padding: 7px 11px;" title="${notifTooltip}">
-              <span style="font-size: 0.95rem; font-weight: 800;">✉</span>
+            <button id="btn-notifications-toggle" class="btn-clean btn-secondary btn-sm" style="position: relative; padding: 7px 11px; display: flex; align-items: center; justify-content: center;" title="${notifTooltip}">
+              <span style="display: flex; align-items: center;">${icons.bell('notif-bell', 18)}</span>
               <span class="notification-badge-dot">3</span>
             </button>
           </div>
@@ -217,7 +217,7 @@ class Application {
             </a>
 
             <button id="btn-header-logout" class="btn-clean btn-sm header-logout-btn" style="flex-shrink: 0; background: #DC2626; color: #FFFFFF; font-weight: 800; font-size: 0.78rem; padding: 6px 12px; border-radius: var(--radius-xs); border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 3px rgba(220,38,38,0.3); transition: all 0.15s ease;" title="${logoutLabel}">
-              <span>→</span>
+              <span style="display: flex; align-items: center;">${icons.arrowLeft('logout-icon', 14)}</span>
               <span class="logout-btn-text">${logoutLabel}</span>
             </button>
           </div>
@@ -265,7 +265,7 @@ class Application {
         // Visitor Navigation Header
         const searchBtnHtml = `
           <button id="btn-spotlight-search" class="btn-clean btn-sm" style="display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: var(--bg-subtle); border: 1px solid var(--border-light); border-radius: var(--radius-xs); color: var(--shat-navy); font-weight: 700; cursor: pointer;" title="البحث الشامل (Ctrl+K)">
-            <span>◈</span>
+            <span style="display: flex; align-items: center;">${icons.search('search-icon', 15)}</span>
             <span style="font-size: 0.82rem;">${isRtl ? 'بحث...' : 'Search...'}</span>
             <kbd style="font-size: 0.65rem; padding: 1px 5px; background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 3px; font-family: var(--font-mono); color: var(--text-muted);">⌘K</kbd>
           </button>
@@ -381,32 +381,37 @@ class Application {
         <a href="#/services" class="nav-link">${nav.services}</a>
         <a href="#/standards" class="nav-link">${nav.standards}</a>
         <a href="#/projects" class="nav-link">${nav.projects || (this.currentLang === 'fr' ? 'Projets' : 'المشاريع')}</a>
-        <a href="#/toolkits" class="nav-link" style="color: var(--shat-navy); font-weight: 700;">▪ ${this.currentLang === 'fr' ? 'Outils & Modèles' : (this.currentLang === 'en' ? 'Toolkits & Templates' : 'الأدلة والنماذج الميدانية')}</a>
+        <a href="#/toolkits" class="nav-link" style="color: var(--shat-navy); font-weight: 700;">${this.currentLang === 'fr' ? 'Outils & Modèles' : (this.currentLang === 'en' ? 'Toolkits & Templates' : 'الأدلة والنماذج الميدانية')}</a>
         <a href="#/news" class="nav-link">${nav.news || (this.currentLang === 'fr' ? 'Actualités' : 'الأخبار')}</a>
         <a href="#/academy" class="nav-link">${nav.academy}</a>
-        <a href="#/forms" class="nav-link" style="color: var(--shat-green); font-weight: 800;">▪ ${this.currentLang === 'ar' ? 'استمارات التسجيل المعتمدة' : (this.currentLang === 'fr' ? 'Formulaires d’Inscription' : 'Official Forms')}</a>
-        <a href="#/verify" class="nav-link" style="color: #10B981; font-weight: 800;">◈ ${this.currentLang === 'ar' ? 'التحقق من الشهادات والاعتمادات' : (this.currentLang === 'fr' ? 'Vérifier Certificats' : 'Verify Certificates')}</a>
+        <a href="#/forms" class="nav-link" style="color: var(--shat-green); font-weight: 800;">${this.currentLang === 'ar' ? 'استمارات التسجيل المعتمدة' : (this.currentLang === 'fr' ? 'Formulaires d’Inscription' : 'Official Forms')}</a>
+        <a href="#/verify" class="nav-link" style="color: #10B981; font-weight: 800;">${this.currentLang === 'ar' ? 'التحقق من الشهادات والاعتمادات' : (this.currentLang === 'fr' ? 'Vérifier Certificats' : 'Verify Certificates')}</a>
         <a href="#/contact" class="nav-link">${nav.contact}</a>
         
         <button type="button" id="btn-mobile-drawer-search" class="btn-clean" style="margin: 8px 0; background: var(--bg-subtle); color: var(--shat-navy); font-weight: 800; width: 100%; justify-content: center; padding: 10px 14px; border-radius: var(--radius-xs); border: 1px solid var(--border-light); cursor: pointer; display: flex; align-items: center; gap: 8px;">
-          <span style="font-size: 0.9rem;">◈</span>
+          <span style="display: flex; align-items: center;">${icons.search('mob-search-icon', 16)}</span>
           <span>${this.currentLang === 'ar' ? 'البحث الذكي الشامل (Ctrl+K)' : 'Spotlight Search (Ctrl+K)'}</span>
         </button>
         <div style="height: 1px; background: var(--border-light); margin: 6px 0;"></div>
         ${user ? `
           <a href="${user.role === 'teacher' ? '#/teacher' : (user.role === 'admin' ? '#/admin' : '#/student')}" class="nav-link" style="color: var(--shat-green); font-weight: 800;">
-            ❖ ${user.fullNameAr || user.username} (${user.roleTitle || user.role})
+            ${user.fullNameAr || user.username} (${user.roleTitle || user.role})
           </a>
           ${(user.role === 'admin' || user.role === 'supervisor') ? `
-            <button type="button" id="btn-mobile-drawer-customizer" class="btn-clean" style="margin-top: 6px; background: var(--shat-navy); color: #FFFFFF; font-weight: 700; width: 100%; justify-content: center; padding: 9px 12px; border-radius: var(--radius-xs); border: 1px solid rgba(255,255,255,0.2); cursor: pointer;">
-              ⚙ ${this.currentLang === 'ar' ? 'تخصيص المنصة والمحتوى' : 'Platform Customizer'}
+            <button type="button" id="btn-mobile-drawer-customizer" class="btn-clean" style="margin-top: 6px; background: var(--shat-navy); color: #FFFFFF; font-weight: 700; width: 100%; justify-content: center; padding: 9px 12px; border-radius: var(--radius-xs); border: 1px solid rgba(255,255,255,0.2); cursor: pointer; display: flex; align-items: center; gap: 6px;">
+              <span style="display: flex; align-items: center;">${icons.settings('mob-icon', 15)}</span>
+              <span>${this.currentLang === 'ar' ? 'تخصيص المنصة والمحتوى' : 'Platform Customizer'}</span>
             </button>
           ` : ''}
-          <button type="button" id="btn-mobile-drawer-logout" class="btn-clean" style="margin-top: 8px; background: #DC2626; color: #FFFFFF; font-weight: 700; width: 100%; justify-content: center; padding: 9px 12px; border-radius: var(--radius-xs); border: none; cursor: pointer;">
-            → ${this.currentLang === 'ar' ? 'تسجيل الخروج' : (this.currentLang === 'fr' ? 'Se déconnecter' : 'Logout')}
+          <button type="button" id="btn-mobile-drawer-logout" class="btn-clean" style="margin-top: 8px; background: #DC2626; color: #FFFFFF; font-weight: 700; width: 100%; justify-content: center; padding: 9px 12px; border-radius: var(--radius-xs); border: none; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+            <span style="display: flex; align-items: center;">${icons.arrowLeft('mob-icon', 15)}</span>
+            <span>${this.currentLang === 'ar' ? 'تسجيل الخروج' : (this.currentLang === 'fr' ? 'Se déconnecter' : 'Logout')}</span>
           </button>
         ` : `
-          <a href="#/login" class="nav-link" style="color: var(--shat-navy);">→ ${nav.login}</a>
+          <a href="#/login" class="nav-link" style="color: var(--shat-navy); display: flex; align-items: center; gap: 6px;">
+            <span style="display: flex; align-items: center;">${icons.key('mob-icon', 15)}</span>
+            <span>${nav.login}</span>
+          </a>
           <a href="#/contact" class="btn-clean btn-primary btn-sm" style="margin-top: 6px;">${nav.requestConsultation}</a>
         `}
       `;
@@ -479,84 +484,84 @@ class Application {
       // Guest Bottom Navigation: Ergonomic Thumb Reach
       bottomNav.innerHTML = `
         <a href="#/home" class="mobile-bottom-link">
-          <span class="mobile-bottom-icon">◈</span>
+          <span class="mobile-bottom-icon">${icons.home('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.home}</span>
         </a>
         <a href="#/academy" class="mobile-bottom-link">
-          <span class="mobile-bottom-icon">◈</span>
+          <span class="mobile-bottom-icon">${icons.academy('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.academy}</span>
         </a>
         <a href="#/forms" class="mobile-bottom-link" style="color: var(--shat-green);">
-          <span class="mobile-bottom-icon">▪</span>
+          <span class="mobile-bottom-icon">${icons.form('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${this.currentLang === 'ar' ? 'الاستمارات' : 'Forms'}</span>
         </a>
         <a href="#/verify" class="mobile-bottom-link" style="color: #10B981;">
-          <span class="mobile-bottom-icon">◈</span>
+          <span class="mobile-bottom-icon">${icons.checkCircle('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${this.currentLang === 'ar' ? 'الشهادات' : 'Verify'}</span>
         </a>
         <a href="#/login" class="mobile-bottom-link">
-          <span class="mobile-bottom-icon">◈</span>
+          <span class="mobile-bottom-icon">${icons.key('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.login}</span>
         </a>
       `;
     } else if (user.role === 'student') {
       bottomNav.innerHTML = `
         <a href="#/home" class="mobile-bottom-link">
-          <span class="mobile-bottom-icon">◈</span>
+          <span class="mobile-bottom-icon">${icons.home('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.home}</span>
         </a>
         <a href="#/academy" class="mobile-bottom-link">
-          <span class="mobile-bottom-icon">▪</span>
+          <span class="mobile-bottom-icon">${icons.book('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.courses}</span>
         </a>
         <a href="#/student" class="mobile-bottom-link">
-          <span class="mobile-bottom-icon">▲</span>
+          <span class="mobile-bottom-icon">${icons.grid('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.myDashboard}</span>
         </a>
         <a href="#/course/shat-chs-master" class="mobile-bottom-link">
-          <span class="mobile-bottom-icon">★</span>
+          <span class="mobile-bottom-icon">${icons.award('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.myRoom}</span>
         </a>
         <a href="#/student" class="mobile-bottom-link">
-          <span class="mobile-bottom-icon">◈</span>
+          <span class="mobile-bottom-icon">${icons.user('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.profile}</span>
         </a>
       `;
     } else if (user.role === 'teacher') {
       bottomNav.innerHTML = `
         <a href="#/home" class="mobile-bottom-link">
-          <span class="mobile-bottom-icon">◈</span>
+          <span class="mobile-bottom-icon">${icons.home('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.home}</span>
         </a>
         <a href="#/teacher" class="mobile-bottom-link">
-          <span class="mobile-bottom-icon">◈</span>
+          <span class="mobile-bottom-icon">${icons.book('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.courses}</span>
         </a>
         <a href="#/teacher" class="mobile-bottom-link">
-          <span class="mobile-bottom-icon">▪</span>
+          <span class="mobile-bottom-icon">${icons.clipboardCheck('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.grading}</span>
         </a>
         <a href="#/academy" class="mobile-bottom-link">
-          <span class="mobile-bottom-icon">◈</span>
+          <span class="mobile-bottom-icon">${icons.academy('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.academy}</span>
         </a>
       `;
     } else if (user.role === 'admin') {
       bottomNav.innerHTML = `
         <a href="#/home" class="mobile-bottom-link">
-          <span class="mobile-bottom-icon">◈</span>
+          <span class="mobile-bottom-icon">${icons.home('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.home}</span>
         </a>
         <a href="#/admin" class="mobile-bottom-link">
-          <span class="mobile-bottom-icon">▪</span>
+          <span class="mobile-bottom-icon">${icons.fileText('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.content}</span>
         </a>
         <a href="#/admin" class="mobile-bottom-link">
-          <span class="mobile-bottom-icon">↓</span>
+          <span class="mobile-bottom-icon">${icons.users('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.requests}</span>
         </a>
         <a href="#/admin" class="mobile-bottom-link">
-          <span class="mobile-bottom-icon">⚙</span>
+          <span class="mobile-bottom-icon">${icons.shield('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.admin}</span>
         </a>
       `;

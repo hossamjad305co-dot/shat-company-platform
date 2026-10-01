@@ -8,6 +8,7 @@
 
 import { api } from '../services/api/apiClient.js';
 import { showToast } from '../components/toast.js';
+import { icons } from '../icons.js';
 
 export const roleSimulator = {
   roles: [
@@ -15,7 +16,7 @@ export const roleSimulator = {
       id: 'visitor',
       labelAr: 'زائر استكشافي',
       labelEn: 'Public Visitor',
-      icon: '◈',
+      iconFn: () => icons.compass('sim-icon', 13),
       route: '#/home',
       badgeColor: '#64748B'
     },
@@ -23,7 +24,7 @@ export const roleSimulator = {
       id: 'student',
       labelAr: 'متدرب معتمد',
       labelEn: 'Student Trainee',
-      icon: '✦',
+      iconFn: () => icons.academy('sim-icon', 13),
       route: '#/student',
       badgeColor: '#2563EB',
       user: {
@@ -39,7 +40,7 @@ export const roleSimulator = {
       id: 'teacher',
       labelAr: 'خبير مدرب',
       labelEn: 'Master Trainer',
-      icon: '❖',
+      iconFn: () => icons.award('sim-icon', 13),
       route: '#/teacher',
       badgeColor: '#166534',
       user: {
@@ -56,7 +57,7 @@ export const roleSimulator = {
       id: 'admin',
       labelAr: 'المدير التنفيذي',
       labelEn: 'Executive Admin',
-      icon: '⚙',
+      iconFn: () => icons.shield('sim-icon', 13),
       route: '#/admin',
       badgeColor: '#0F2E4A',
       user: {
@@ -97,16 +98,16 @@ export const roleSimulator = {
                                (r.id === 'instructor' && currentRole === 'teacher') ||
                                (r.id === currentRole);
               return `
-                <button type="button" class="btn-clean sim-role-btn ${isActive ? 'active' : ''}" data-role-id="${r.id}" style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 20px; font-size: 0.74rem; font-weight: 800; border: 1px solid ${isActive ? '#10B981' : 'rgba(255,255,255,0.18)'}; background: ${isActive ? 'rgba(16,185,129,0.2)' : 'rgba(255,255,255,0.05)'}; color: ${isActive ? '#6EE7B7' : '#E2E8F0'}; transition: all 0.15s ease;">
-                  <span>${r.icon}</span>
+                <button type="button" class="btn-clean sim-role-btn ${isActive ? 'active' : ''}" data-role-id="${r.id}" style="display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 20px; font-size: 0.74rem; font-weight: 800; border: 1px solid ${isActive ? '#10B981' : 'rgba(255,255,255,0.18)'}; background: ${isActive ? 'rgba(16,185,129,0.2)' : 'rgba(255,255,255,0.05)'}; color: ${isActive ? '#6EE7B7' : '#E2E8F0'}; transition: all 0.15s ease;">
+                  <span style="display: inline-flex; align-items: center;">${r.iconFn()}</span>
                   <span>${isRtl ? r.labelAr : r.labelEn}</span>
                   ${isActive ? '<span style="font-size: 0.65rem; color: #10B981;">●</span>' : ''}
                 </button>
               `;
             }).join('')}
             
-            <button type="button" id="btn-open-site-customizer-bar" class="btn-clean" style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 11px; border-radius: 20px; font-size: 0.74rem; font-weight: 800; border: 1px solid rgba(251,191,36,0.6); background: rgba(251,191,36,0.18); color: #FCD34D; cursor: pointer; transition: all 0.15s ease;" title="${txt('تخصيص كامل لكافة نصوص وروابط وأقسام واستمارات المنصة', 'Customize all copy, links, sections & forms', 'Personnaliser la plateforme')}">
-              <span>⚙</span>
+            <button type="button" id="btn-open-site-customizer-bar" class="btn-clean" style="display: inline-flex; align-items: center; gap: 5px; padding: 4px 11px; border-radius: 20px; font-size: 0.74rem; font-weight: 800; border: 1px solid rgba(251,191,36,0.6); background: rgba(251,191,36,0.18); color: #FCD34D; cursor: pointer; transition: all 0.15s ease;" title="${txt('تخصيص كامل لكافة نصوص وروابط وأقسام واستمارات المنصة', 'Customize all copy, links, sections & forms', 'Personnaliser la plateforme')}">
+              <span style="display: inline-flex; align-items: center;">${icons.settings('sim-icon', 13)}</span>
               <span>${txt('تخصيص المنصة', 'Customizer', 'Personnaliser')}</span>
             </button>
           </div>

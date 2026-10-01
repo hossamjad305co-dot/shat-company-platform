@@ -34,7 +34,7 @@ export function renderAdminSettingsPage() {
       <div style="max-width: 800px;">
         <div class="shat-card" style="background: #ffffff; border-radius: var(--radius-xl); padding: 28px; box-shadow: var(--shadow-sm); margin-bottom: 24px;">
           <h3 style="font-size: var(--font-size-h4); color: var(--shat-navy-950); margin: 0 0 12px; display: flex; align-items: center; gap: 8px;">
-            ▪ إعدادات مسار تسجيل الطلاب في المساقات
+            إعدادات مسار تسجيل الطلاب في المساقات
           </h3>
           <p style="font-size: var(--font-size-body-sm); color: var(--text-secondary); margin-bottom: 24px; line-height: 1.6;">
             حدد كيفية استقبال طلبات الالتحاق بالدورات التدريبية المعتمدة عبر المنصة:

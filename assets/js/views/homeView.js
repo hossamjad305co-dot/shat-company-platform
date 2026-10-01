@@ -64,8 +64,8 @@ export function renderHomeView(lang = 'ar') {
                 <span class="icon-circle">${arrow}</span>
               </a>
               <button type="button" class="btn-island btn-island-secondary btn-open-diagnostic">
-                <span>◈ ${txt('أداة التشخيص المؤسسي الفوري', 'Instant Readiness Diagnostic', 'Diagnostic Institutionnel')}</span>
-                <span class="icon-circle">◈</span>
+                <span>${txt('أداة التشخيص المؤسسي الفوري', 'Instant Readiness Diagnostic', 'Diagnostic Institutionnel')}</span>
+                <span class="icon-circle"></span>
               </button>
               <a href="#/services" class="btn-island btn-island-secondary" style="background: transparent; color: var(--shat-navy); border-color: var(--border-medium);">
                 <span>${h.exploreServices}</span>
@@ -76,7 +76,7 @@ export function renderHomeView(lang = 'ar') {
             <!-- High-Contrast Executive Metrics Counter Row -->
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; max-width: 880px; margin: 0 auto;">
               <div class="metric-pill-box">
-                <span style="font-size: 1.5rem; font-weight: 900; color: var(--shat-navy);">★</span>
+                <span style="font-size: 1.5rem; font-weight: 900; color: var(--shat-navy);"></span>
                 <div style="text-align: ${isRtl ? 'right' : 'left'};">
                   <div style="font-size: 1.45rem; font-weight: 900; color: var(--shat-navy); font-family: var(--font-mono); line-height: 1.1;">14+</div>
                   <div style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700;">${txt('منظمات شريكة وحكومية', 'Partner Organizations', 'Organisations Partenaires')}</div>
@@ -84,7 +84,7 @@ export function renderHomeView(lang = 'ar') {
               </div>
 
               <div class="metric-pill-box">
-                <span style="font-size: 1.5rem; font-weight: 900; color: var(--shat-green);">✦</span>
+                <span style="font-size: 1.5rem; font-weight: 900; color: var(--shat-green);"></span>
                 <div style="text-align: ${isRtl ? 'right' : 'left'};">
                   <div style="font-size: 1.45rem; font-weight: 900; color: var(--shat-green); font-family: var(--font-mono); line-height: 1.1;">420+</div>
                   <div style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700;">${txt('كادراً قيادياً معتمداً', 'Accredited Leaders', 'Cadres Dirigeants Formés')}</div>
@@ -92,7 +92,7 @@ export function renderHomeView(lang = 'ar') {
               </div>
 
               <div class="metric-pill-box">
-                <span style="font-size: 1.5rem; font-weight: 900; color: var(--shat-navy);">▪</span>
+                <span style="font-size: 1.5rem; font-weight: 900; color: var(--shat-navy);"></span>
                 <div style="text-align: ${isRtl ? 'right' : 'left'};">
                   <div style="font-size: 1.45rem; font-weight: 900; color: var(--shat-navy); font-family: var(--font-mono); line-height: 1.1;">8</div>
                   <div style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700;">${txt('حقائب تدريبية واستشارية', 'Specialized Portfolios', 'Portefeuilles Métiers')}</div>
@@ -100,7 +100,7 @@ export function renderHomeView(lang = 'ar') {
               </div>
 
               <div class="metric-pill-box">
-                <span style="font-size: 1.5rem; font-weight: 900; color: #10B981;">◈</span>
+                <span style="font-size: 1.5rem; font-weight: 900; color: #10B981;"></span>
                 <div style="text-align: ${isRtl ? 'right' : 'left'};">
                   <div style="font-size: 1.45rem; font-weight: 900; color: #10B981; font-family: var(--font-mono); line-height: 1.1;">100%</div>
                   <div style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700;">${txt('امتثال لمعايير CHS & PSEA', 'CHS & PSEA Compliance', 'Conformité CHS & PSEA')}</div>
@@ -122,7 +122,7 @@ export function renderHomeView(lang = 'ar') {
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
                   <div>
                     <span style="font-size: 0.78rem; font-weight: 800; color: #1E7E34; background: #E8F5E9; padding: 4px 12px; border-radius: 6px;">
-                      ◈ ${txt('مستكشف البرامج والاستمارات المعتمدة 2026', 'Accredited Programs & Forms Finder 2026', 'Explorateur Rapide')}
+                      ${txt('مستكشف البرامج والاستمارات المعتمدة 2026', 'Accredited Programs & Forms Finder 2026', 'Explorateur Rapide')}
                     </span>
                     <h3 style="font-size: 1.15rem; font-weight: 900; color: var(--shat-navy, #0B1E36); margin: 6px 0 0;">
                       ${txt('اختر تخصصك واستعرض استمارة التسجيل الرسمية فوراً', 'Select your domain to access the verified registration form', 'Sélectionnez votre domaine')}
@@ -132,16 +132,16 @@ export function renderHomeView(lang = 'ar') {
                   <!-- 4 Interactive Tabs -->
                   <div style="display: flex; gap: 6px; flex-wrap: wrap;" id="finder-tabs">
                     <button type="button" class="btn-clean finder-tab active" data-track="case-management" style="background: var(--shat-navy, #0B1E36); color: #FFFFFF; font-weight: 700; font-size: 0.82rem; padding: 7px 14px; border-radius: 20px; transition: all 0.15s ease;">
-                      ▪ إدارة الحالة
+                      إدارة الحالة
                     </button>
                     <button type="button" class="btn-clean finder-tab" data-track="presentation" style="background: #F1F5F9; color: #475569; font-weight: 700; font-size: 0.82rem; padding: 7px 14px; border-radius: 20px; transition: all 0.15s ease;">
-                      ▪ مهارات العرض
+                      مهارات العرض
                     </button>
                     <button type="button" class="btn-clean finder-tab" data-track="humanitarian" style="background: #F1F5F9; color: #475569; font-weight: 700; font-size: 0.82rem; padding: 7px 14px; border-radius: 20px; transition: all 0.15s ease;">
-                      ▪ دبلوم CHS
+                      دبلوم CHS
                     </button>
                     <button type="button" class="btn-clean finder-tab" data-track="consulting" style="background: #F1F5F9; color: #475569; font-weight: 700; font-size: 0.82rem; padding: 7px 14px; border-radius: 20px; transition: all 0.15s ease;">
-                      ▪ استشارات مؤسسية
+                      استشارات مؤسسية
                     </button>
                   </div>
                 </div>
@@ -200,7 +200,7 @@ export function renderHomeView(lang = 'ar') {
               <div class="double-bezel-inner">
                 <div>
                   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                    <span style="font-size: 1.5rem; color: var(--shat-navy); font-weight: 900;">◈</span>
+                    <span style="font-size: 1.5rem; color: var(--shat-navy); font-weight: 900;"></span>
                     <span class="badge badge-primary">${txt('فوري • مجاني', 'Instant • Free', 'Instantané')}</span>
                   </div>
                   <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--shat-navy); margin-bottom: 8px;">
@@ -224,7 +224,7 @@ export function renderHomeView(lang = 'ar') {
               <div class="double-bezel-inner">
                 <div>
                   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                    <span style="font-size: 1.5rem; color: var(--shat-green); font-weight: 900;">★</span>
+                    <span style="font-size: 1.5rem; color: var(--shat-green); font-weight: 900;"></span>
                     <span class="badge" style="background: #FEF3C7; color: #B45309; font-weight: 800;">${txt('موثق رسمياً', 'Accredited', 'Homologué')}</span>
                   </div>
                   <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--shat-navy); margin-bottom: 8px;">
@@ -490,16 +490,16 @@ export function renderHomeView(lang = 'ar') {
                 ${soc.filterAll || 'الكل'}
               </button>
               <button class="btn-clean btn-sm social-tab-btn" data-filter="Facebook" style="padding: 6px 14px; border-radius: 20px; font-weight: 700; background: var(--bg-subtle); color: var(--text-secondary); border: 1px solid var(--border-light);">
-                ▪ Facebook
+                Facebook
               </button>
               <button class="btn-clean btn-sm social-tab-btn" data-filter="Instagram" style="padding: 6px 14px; border-radius: 20px; font-weight: 700; background: var(--bg-subtle); color: var(--text-secondary); border: 1px solid var(--border-light);">
-                ▪ Instagram
+                Instagram
               </button>
               <button class="btn-clean btn-sm social-tab-btn" data-filter="training" style="padding: 6px 14px; border-radius: 20px; font-weight: 700; background: var(--bg-subtle); color: var(--text-secondary); border: 1px solid var(--border-light);">
-                ✦ ${soc.filterTraining || 'تدريب ومعايير'}
+                ${soc.filterTraining || 'تدريب ومعايير'}
               </button>
               <button class="btn-clean btn-sm social-tab-btn" data-filter="protection" style="padding: 6px 14px; border-radius: 20px; font-weight: 700; background: var(--bg-subtle); color: var(--text-secondary); border: 1px solid var(--border-light);">
-                ◈ ${soc.filterProtection || 'حماية وصون كرامة'}
+                ${soc.filterProtection || 'حماية وصون كرامة'}
               </button>
             </div>
           </div>
@@ -542,7 +542,7 @@ export function renderHomeView(lang = 'ar') {
                 <div class="social-feed-actions">
                   <div style="display: flex; gap: 4px;">
                     <button class="social-reaction-btn btn-like-social" data-id="${post.id}">
-                      <span>★</span>
+                      
                       <span class="like-count">${140 + (i * 23)}</span>
                     </button>
                     <button class="social-reaction-btn btn-share-social" data-link="${post.link}" data-title="${post.title}">
@@ -558,7 +558,7 @@ export function renderHomeView(lang = 'ar') {
                       </a>
                     ` : ''}
                     <button class="btn-clean btn-sm btn-read-social-detail" data-post-id="${post.id}" style="background: var(--bg-subtle); color: var(--shat-navy); font-weight: 700; font-size: 0.78rem;">
-                      <span>▪ ${lang === 'fr' ? 'Détails' : (isRtl ? 'تفاصيل' : 'Details')}</span>
+                      <span>${lang === 'fr' ? 'Détails' : (isRtl ? 'تفاصيل' : 'Details')}</span>
                     </button>
                     <a href="${post.link}" target="_blank" rel="noopener" class="btn-clean btn-sm" style="background: var(--shat-green-tint); color: var(--shat-green); font-weight: 800; font-size: 0.78rem;">
                       <span>→ ${post.platform}</span>
@@ -606,7 +606,7 @@ export function renderHomeView(lang = 'ar') {
                 </a>
                 <a href="https://wa.me/972592879621" target="_blank" rel="noopener" class="btn-island btn-island-secondary">
                   <span>WhatsApp: +972 59 287 9621</span>
-                  <span class="icon-circle">✉</span>
+                  <span class="icon-circle" style="display:inline-flex; align-items:center;">${icons.whatsapp('', 16)}</span>
                 </a>
               </div>
             </div>
@@ -643,7 +643,7 @@ export function bindHomeEvents() {
       fee: 'رسوم مدعومة جزئياً',
       desc: 'برنامج تطبيقي متقدم يؤهل الأخصائيين الاجتماعيين والنفسيين وكوادر المنظمات لإدارة خطط الرعاية المتكاملة، تقييم الاحتياجات، وإحالة الحالات وفق أدلة العمل المعتمدة.',
       formUrl: '#/forms?id=case-manager-2026',
-      icon: '❖'
+      iconKey: 'users'
     },
     'presentation': {
       title: 'دورة مهارات العرض والتقديم Presentation Skills (م. مهدي الملاحي)',
@@ -656,7 +656,7 @@ export function bindHomeEvents() {
       fee: 'رسوم تفضيلية',
       desc: 'تمكين قادة المشاريع والمدربين من هندسة العروض التقديمية الاحترافية، إتقان لغة الجسد، إدارة منصات التحدث أمام الجمهور، وصياغة الرسائل المقنعة للمانحين وأصحاب المصلحة.',
       formUrl: '#/forms?id=presentation-skills-2026',
-      icon: '❖'
+      iconKey: 'chat'
     },
     'humanitarian': {
       title: 'دبلوم الممارس الإنساني وبناء القدرات المؤسسية (CHS Master)',
@@ -669,7 +669,7 @@ export function bindHomeEvents() {
       fee: 'منحة تدريبية وبناء قدرات',
       desc: 'تأهيل متعمق في المعيار الإنساني الأساسي للجودة والمساءلة (CHS)، صون السلامة والحماية من الاستغلال الجنسي والاعتداء (PSEA)، وتصميم مؤشرات المتابعة والتقييم (MEAL).',
       formUrl: '#/forms?id=humanitarian-worker-2026',
-      icon: '◈'
+      iconKey: 'book'
     },
     'consulting': {
       title: 'استمارة الاستشارات المؤسسية وبناء القدرات وتطوير النظم',
@@ -682,7 +682,7 @@ export function bindHomeEvents() {
       fee: 'يحدد وفق موازنة التدخل',
       desc: 'خدمات استشارية متخصصة في تأهيل المنظمات للحصول على شهادة CHS، إعداد الأدلة التشغيلية SOPs، مراجعة سياسات الحوكمة، وإجراء التقييم الخارجي المستقل وفق معايير OECD DAC.',
       formUrl: '#/forms?id=consulting-inquiry-2026',
-      icon: '★'
+      iconKey: 'award'
     }
   };
 
@@ -702,14 +702,15 @@ export function bindHomeEvents() {
                 ${t.code}
               </span>
             </div>
-            <h4 style="font-size: 1.25rem; font-weight: 900; color: #0B1E36; margin: 0 0 8px; line-height: 1.4;">
-              ${t.icon} ${t.title}
+            <h4 style="font-size: 1.25rem; font-weight: 900; color: #0B1E36; margin: 0 0 8px; line-height: 1.4; display: flex; align-items: center; gap: 8px;">
+              <span style="color: ${t.badgeColor}; display: inline-flex; align-items: center;">${(icons[t.iconKey] || icons.book)('', 22)}</span>
+              <span>${t.title}</span>
             </h4>
           </div>
 
-          <a href="${t.formUrl}" class="btn-clean btn-green" style="font-weight: 800; padding: 10px 22px; border-radius: 8px; box-shadow: 0 4px 12px rgba(30,126,52,0.2); white-space: nowrap;">
-            <span>✓ فتح الاستمارة المباشرة</span>
-            <span>←</span>
+          <a href="${t.formUrl}" class="btn-clean btn-green" style="font-weight: 800; padding: 10px 22px; border-radius: 8px; box-shadow: 0 4px 12px rgba(30,126,52,0.2); white-space: nowrap; display: inline-flex; align-items: center; gap: 6px;">
+            <span>فتح الاستمارة المباشرة</span>
+            <span style="display:inline-flex; align-items:center;">${icons.arrowLeft('', 16)}</span>
           </a>
         </div>
 
@@ -718,9 +719,9 @@ export function bindHomeEvents() {
         </p>
 
         <div style="display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.85rem; color: #334155; padding-top: 14px; border-top: 1px solid #E2E8F0;">
-          <div><strong>❖ المدرب / الخبير:</strong> ${t.trainer}</div>
-          <div><strong>◷ الساعات:</strong> ${t.hours}</div>
-          <div><strong>▪ الرسوم:</strong> <span style="color: #1E7E34; font-weight: 700;">${t.fee}</span></div>
+          <div><strong>المدرب / الخبير:</strong> ${t.trainer}</div>
+          <div><strong>الساعات:</strong> ${t.hours}</div>
+          <div><strong>الرسوم:</strong> <span style="color: #1E7E34; font-weight: 700;">${t.fee}</span></div>
           <div><strong>• حالة التسجيل:</strong> <span style="color: #166534; font-weight: 800;">متاح للتسجيل الفوري</span></div>
         </div>
       </div>
@@ -844,10 +845,10 @@ export function bindHomeEvents() {
               <img src="${post.img || 'assets/logo/logo-banner.jpg'}" alt="${post.title}" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
             <div style="display: flex; gap: 12px; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px; flex-wrap: wrap;">
-              <span>▪ ${post.tag}</span>
-              <span>◷ ${post.date}</span>
+              <span>${post.tag}</span>
+              <span>${post.date}</span>
               <span>• ${post.platform}</span>
-              <span>◷ ${post.readTime || '3 دقائق'}</span>
+              <span>${post.readTime || '3 دقائق'}</span>
             </div>
             <div style="font-size: 0.95rem; line-height: 1.8; color: var(--text-main); margin-bottom: 20px;">
               ${post.fullText || post.excerpt}

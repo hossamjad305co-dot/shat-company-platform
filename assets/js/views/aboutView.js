@@ -82,7 +82,7 @@ export function renderAboutView(lang = 'ar') {
                     <span>${arrow}</span>
                   </a>
                   <button type="button" class="btn-clean btn-secondary btn-sm" onclick="if(window.openCertificateValidator) window.openCertificateValidator();" style="width: 100%; justify-content: center; background: #FFFFFF;">
-                    <span>◈ ${isRtl ? 'التحقق من الشهادات' : 'Verify Certificate'}</span>
+                    <span>${isRtl ? 'التحقق من الشهادات' : 'Verify Certificate'}</span>
                   </button>
                 </div>
               </div>

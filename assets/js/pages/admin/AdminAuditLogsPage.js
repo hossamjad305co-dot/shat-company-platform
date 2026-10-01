@@ -36,7 +36,7 @@ export function renderAdminAuditLogsPage() {
       <div class="shat-card" style="padding: 0; overflow: hidden;">
         <div style="padding: var(--space-lg); border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
           <h3 style="margin: 0; font-size: var(--font-size-h4); color: var(--text-primary);">
-            ▪ سجل الأحداث الأمنية والتشغيلية الموثقة
+            سجل الأحداث الأمنية والتشغيلية الموثقة
           </h3>
           <span class="shat-badge shat-badge-success">حالة الرقابة: نشطة وموثقة</span>
         </div>

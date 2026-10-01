@@ -180,7 +180,7 @@ export const toolkitsLibrary = {
                   <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px;">
                     ${tk.contentOutline.map(item => `
                       <li style="font-size: 0.8rem; color: var(--text-secondary); display: flex; align-items: flex-start; gap: 6px;">
-                        <span style="color: var(--shat-green);">▪</span>
+                        <span style="color: var(--shat-green);"></span>
                         <span>${item}</span>
                       </li>
                     `).join('')}
@@ -194,7 +194,7 @@ export const toolkitsLibrary = {
                 </span>
 
                 <button class="btn-clean btn-primary btn-sm btn-open-toolkit-preview" data-toolkit="${tk.id}">
-                  <span>◈ ${txt('معاينة وتحميل النموذج', 'Preview & Download', 'Aperçu & Téléchargement')}</span>
+                  <span>${txt('معاينة وتحميل النموذج', 'Preview & Download', 'Aperçu & Téléchargement')}</span>
                 </button>
               </div>
             </div>
@@ -250,7 +250,7 @@ export const toolkitsLibrary = {
         </div>
 
         <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: var(--radius-xs); padding: 14px; margin-bottom: 20px; font-size: 0.84rem; color: #166534; line-height: 1.6;">
-          ◈ ${txt(
+          ${txt(
             'هذا النموذج مملوك لشركة شات ومتاح للاستخدام المهني غير التجاري للمنظمات الإنسانية والتنموية الشريكة والمتدربين المعتمدين.',
             'Licensed for non-commercial institutional use by SHAT partner organizations and certified trainees.',
             'Licence d’utilisation non commerciale réservée aux organisations partenaires et stagiaires certifiés.'

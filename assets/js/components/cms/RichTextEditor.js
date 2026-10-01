@@ -31,7 +31,7 @@ export function RichTextEditor({ id = 'cms-rich-editor', initialContent = '', pl
         <button type="button" class="rich-btn" data-command="insertOrderedList" title="قائمة مرقمة">1. قائمة</button>
         <button type="button" class="rich-btn" data-command="formatBlock" data-val="blockquote" title="اقتباس">“ اقتباس</button>
         <span class="rich-sep" style="width: 1px; height: 18px; background: var(--border-subtle); margin: 0 4px;"></span>
-        <button type="button" class="rich-btn" data-command="createLink" title="إدراج رابط">◈ رابط</button>
+        <button type="button" class="rich-btn" data-command="createLink" title="إدراج رابط">رابط</button>
         <button type="button" class="rich-btn" data-command="removeFormat" title="مسح التنسيق">⌫ مسح</button>
         <button type="button" class="rich-btn" data-command="undo" title="تراجع">↩</button>
         <button type="button" class="rich-btn" data-command="redo" title="إعادة">↪</button>

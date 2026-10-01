@@ -3,6 +3,7 @@
 // Indexes all Courses, Services, Standards, Projects, and Tools across the SHAT Platform
 
 import { content } from '../content.js';
+import { icons } from '../icons.js';
 
 export const globalSearch = {
   getSearchIndex(lang = 'ar') {
@@ -128,7 +129,7 @@ export const globalSearch = {
         
         <!-- Search Input Bar -->
         <div style="display: flex; align-items: center; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--border-light); background: #FFFFFF;">
-          <span style="font-size: 1.25rem; color: var(--shat-green); font-weight: bold;">◈</span>
+          <span style="font-size: 1.25rem; color: var(--shat-green); font-weight: bold;"></span>
           <input type="text" id="spotlight-search-input" placeholder="${txt('ابحث عن دورة، خدمة، معيار، أداة، أو مشروع... (Esc للإغلاق)', 'Search courses, services, standards, tools, or projects...', 'Rechercher une formation, service, norme...')}" style="flex: 1; border: none; outline: none; font-size: 1.05rem; font-family: inherit; color: var(--shat-navy); background: transparent; text-align: ${isRtl ? 'right' : 'left'};">
           <kbd style="background: var(--bg-subtle); border: 1px solid var(--border-light); border-radius: 4px; padding: 3px 8px; font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">ESC</kbd>
         </div>
@@ -139,19 +140,19 @@ export const globalSearch = {
             ${txt('الكل', 'All', 'Tous')}
           </button>
           <button class="btn-clean search-pill-btn" data-filter="tool" style="font-size: 0.75rem; padding: 3px 10px; border-radius: 12px; font-weight: 700; background: #FFFFFF; color: var(--shat-navy); border: 1px solid var(--border-light);">
-            ◈ ${txt('الأدوات', 'Tools', 'Outils')}
+            ${txt('الأدوات', 'Tools', 'Outils')}
           </button>
           <button class="btn-clean search-pill-btn" data-filter="course" style="font-size: 0.75rem; padding: 3px 10px; border-radius: 12px; font-weight: 700; background: #FFFFFF; color: var(--shat-navy); border: 1px solid var(--border-light);">
-            ★ ${txt('الدورات', 'Courses', 'Formations')}
+            ${txt('الدورات', 'Courses', 'Formations')}
           </button>
           <button class="btn-clean search-pill-btn" data-filter="service" style="font-size: 0.75rem; padding: 3px 10px; border-radius: 12px; font-weight: 700; background: #FFFFFF; color: var(--shat-navy); border: 1px solid var(--border-light);">
-            ◈ ${txt('الخدمات', 'Services', 'Services')}
+            ${txt('الخدمات', 'Services', 'Services')}
           </button>
           <button class="btn-clean search-pill-btn" data-filter="standard" style="font-size: 0.75rem; padding: 3px 10px; border-radius: 12px; font-weight: 700; background: #FFFFFF; color: var(--shat-navy); border: 1px solid var(--border-light);">
-            ◈ ${txt('المعايير', 'Standards', 'Normes')}
+            ${txt('المعايير', 'Standards', 'Normes')}
           </button>
           <button class="btn-clean search-pill-btn" data-filter="project" style="font-size: 0.75rem; padding: 3px 10px; border-radius: 12px; font-weight: 700; background: #FFFFFF; color: var(--shat-navy); border: 1px solid var(--border-light);">
-            ★ ${txt('المشاريع', 'Projects', 'Projets')}
+            ${txt('المشاريع', 'Projects', 'Projets')}
           </button>
         </div>
 
@@ -237,7 +238,9 @@ export const globalSearch = {
     if (filtered.length === 0) {
       container.innerHTML = `
         <div style="padding: 32px; text-align: center; color: var(--text-muted);">
-          <div style="font-size: 2rem; margin-bottom: 8px; color: var(--shat-navy);">◈</div>
+          <div style="display: flex; justify-content: center; margin-bottom: 12px; color: var(--shat-navy); opacity: 0.6;">
+            ${icons.search('', 36)}
+          </div>
           <div style="font-weight: 700; color: var(--shat-navy);">${lang === 'ar' ? 'لا توجد نتائج مطابقة لبحثك' : 'No matching results found'}</div>
           <div style="font-size: 0.8rem; margin-top: 4px;">${lang === 'ar' ? 'جرّب البحث بكلمات أخرى مثل: CHS، تدريب، استشارات، تقييم...' : 'Try keywords like: CHS, training, evaluation, MEAL...'}</div>
         </div>
@@ -248,7 +251,9 @@ export const globalSearch = {
     container.innerHTML = filtered.map(item => `
       <div class="search-result-row" data-route="${item.route || ''}" data-action="${item.action || ''}" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-radius: var(--radius-xs); border: 1px solid var(--border-light); background: #FFFFFF; cursor: pointer; transition: all 0.15s ease;">
         <div style="display: flex; align-items: center; gap: 12px;">
-          <span style="font-size: 1.3rem;">${item.icon}</span>
+          <span style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: rgba(15, 46, 74, 0.06); color: var(--shat-navy); flex-shrink: 0;">
+            ${item.type === 'tool' ? icons.compass('', 18) : item.type === 'course' ? icons.book('', 18) : item.type === 'standard' ? icons.shield('', 18) : item.type === 'service' ? icons.briefcase('', 18) : icons.fileText('', 18)}
+          </span>
           <div>
             <div style="display: flex; align-items: center; gap: 6px;">
               <span style="font-weight: 800; font-size: 0.92rem; color: var(--shat-navy);">${item.title}</span>
@@ -257,7 +262,7 @@ export const globalSearch = {
             <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">${item.desc}</div>
           </div>
         </div>
-        <span style="color: var(--shat-green); font-weight: 800; font-size: 0.9rem;">${lang === 'ar' ? '←' : '→'}</span>
+        <span style="color: var(--shat-green); display: flex; align-items: center;">${lang === 'ar' ? icons.arrowLeft('', 16) : icons.arrowRight('', 16)}</span>
       </div>
     `).join('');
 

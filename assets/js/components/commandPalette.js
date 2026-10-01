@@ -1,6 +1,7 @@
 // assets/js/components/commandPalette.js
 // Executive Spotlight / Command Palette (Ctrl+K / ⌘K) for SHAT Platform
 // Linear & Apple-Tier Instant Search Across All Courses, Forms, Tools & Pages
+import { icons } from '../icons.js';
 
 export class CommandPalette {
   constructor() {
@@ -22,7 +23,7 @@ export class CommandPalette {
         category: isAr ? 'استمارات التسجيل المعتمدة' : 'Official Forms',
         title: isAr ? 'دورة إعداد مدير حالة Case Management (د. محمد إسليم)' : 'Case Manager Training (Dr. Mohamed Isleem)',
         subtitle: isAr ? 'استمارة Google Forms الرسمية • 30 ساعة تدريبية معتمدة' : 'Official Google Form • 30 Accredited Hours',
-        icon: '▪',
+        icon: icons.form('cmd-icon', 18),
         url: '#/forms?id=case-manager-2026',
         badge: 'SHAT-FORM-01'
       },
@@ -31,7 +32,7 @@ export class CommandPalette {
         category: isAr ? 'استمارات التسجيل المعتمدة' : 'Official Forms',
         title: isAr ? 'دورة مهارات العرض والتقديم Presentation Skills (م. مهدي الملاحي)' : 'Presentation Skills Course (Eng. Mahdi Al-Malahi)',
         subtitle: isAr ? 'استمارة Google Forms الرسمية • مهارات الإلقاء والتأثير' : 'Official Google Form • Executive Speaking',
-        icon: '▪',
+        icon: icons.form('cmd-icon', 18),
         url: '#/forms?id=presentation-skills-2026',
         badge: 'SHAT-FORM-02'
       },
@@ -40,7 +41,7 @@ export class CommandPalette {
         category: isAr ? 'استمارات التسجيل المعتمدة' : 'Official Forms',
         title: isAr ? 'دبلوم الممارس الإنساني وبناء القدرات المؤسسية' : 'Humanitarian Worker Diploma & Capacity Building',
         subtitle: isAr ? 'استمارة Google Forms الرسمية • معايير العمل الإنساني والتدخل' : 'Official Google Form • Humanitarian Standards',
-        icon: '◈',
+        icon: icons.form('cmd-icon', 18),
         url: '#/forms?id=humanitarian-worker-2026',
         badge: 'SHAT-FORM-03'
       },
@@ -49,7 +50,7 @@ export class CommandPalette {
         category: isAr ? 'استمارات التسجيل المعتمدة' : 'Official Forms',
         title: isAr ? 'استمارة الاستشارات المؤسسية وبناء القدرات المتقدمة' : 'Institutional Consulting & Advisory Application',
         subtitle: isAr ? 'استمارة Google Forms الرسمية • للمنظمات والجمعيات والمؤسسات' : 'Official Google Form • For NGOs & Entities',
-        icon: '▪',
+        icon: icons.form('cmd-icon', 18),
         url: '#/forms?id=consulting-inquiry-2026',
         badge: 'SHAT-FORM-04'
       },
@@ -60,7 +61,7 @@ export class CommandPalette {
         category: isAr ? 'الأكاديمية والمساقات' : 'Academy & Courses',
         title: isAr ? 'دبلوم المعيار الإنساني الأساسي (CHS Master Diploma)' : 'Core Humanitarian Standard (CHS Master)',
         subtitle: isAr ? '60 ساعة • 6 مساقات متخصصة • شهادة دولية معتمدة' : '60 Hours • 6 Modules • International Certificate',
-        icon: '★',
+        icon: icons.award('cmd-icon', 18),
         url: '#/course?id=shat-chs-master',
         badge: 'دبلوم تنفيذي'
       },
@@ -69,7 +70,7 @@ export class CommandPalette {
         category: isAr ? 'الأكاديمية والمساقات' : 'Academy & Courses',
         title: isAr ? 'صون السلامة والحماية من الاستغلال والانتهاك (PSEA)' : 'Protection from Sexual Exploitation & Abuse (PSEA)',
         subtitle: isAr ? 'أدلة الامتثال المؤسسي وتدابير الحماية الميدانية' : 'Institutional Compliance & Safeguarding',
-        icon: '▪',
+        icon: icons.shield('cmd-icon', 18),
         url: '#/academy',
         badge: 'معتمد دولياً'
       },
@@ -78,7 +79,7 @@ export class CommandPalette {
         category: isAr ? 'الأكاديمية والمساقات' : 'Academy & Courses',
         title: isAr ? 'نظم المتابعة والتقييم والمساءلة والتعلم (MEAL)' : 'Monitoring, Evaluation, Accountability & Learning (MEAL)',
         subtitle: isAr ? 'تصميم مصفوفات المؤشرات وأدوات الرصد الميداني' : 'Indicator Matrices & Field Monitoring',
-        icon: '▪',
+        icon: icons.book('cmd-icon', 18),
         url: '#/academy',
         badge: 'تطبيقي'
       },
@@ -87,7 +88,7 @@ export class CommandPalette {
         category: isAr ? 'الأكاديمية والمساقات' : 'Academy & Courses',
         title: isAr ? 'خبير التقييم الخارجي المستقل للمشاريع OECD DAC' : 'OECD DAC External Evaluation Expert',
         subtitle: isAr ? 'معايير الملاءمة والفاعلية والكفاءة والاستدامة' : 'Relevance, Effectiveness & Sustainability',
-        icon: '▲',
+        icon: icons.eye('cmd-icon', 18),
         url: '#/academy',
         badge: 'استشاري'
       },
@@ -98,7 +99,7 @@ export class CommandPalette {
         category: isAr ? 'الأدوات التفاعلية' : 'Interactive Tools',
         title: isAr ? 'بوابة التحقق الرقمي من الشهادات والاعتمادات' : 'Digital Certificate Verification Portal',
         subtitle: isAr ? 'فحص صحة وأصالة أي شهادة صادرة من شركة شات' : 'Verify validity & authenticity of SHAT certificates',
-        icon: '◈',
+        icon: icons.checkCircle('cmd-icon', 18),
         url: '#/verify',
         badge: 'جديد'
       },
@@ -107,7 +108,7 @@ export class CommandPalette {
         category: isAr ? 'الأدوات التفاعلية' : 'Interactive Tools',
         title: isAr ? 'أداة التشخيص المؤسسي والجاهزية الفورية' : 'Instant Institutional Readiness Diagnostic',
         subtitle: isAr ? 'تقييم امتثال منظمتك لمعايير CHS والحوكمة والسلامة' : 'Assess compliance with CHS & Governance',
-        icon: '▪',
+        icon: icons.compass('cmd-icon', 18),
         url: '#/home',
         badge: 'تفاعلي'
       },
@@ -116,7 +117,7 @@ export class CommandPalette {
         category: isAr ? 'الأدوات التفاعلية' : 'Interactive Tools',
         title: isAr ? 'تخصيص المنصة والمظهر والمحتوى (CMS)' : 'Deep In-Site Platform Customizer',
         subtitle: isAr ? 'تعديل شعارات ونصوص وروابط وألوان المنصة مباشرة' : 'Customize branding, texts, contacts & colors',
-        icon: '⚙',
+        icon: icons.settings('cmd-icon', 18),
         action: () => {
           if (window.openSiteCustomizer) window.openSiteCustomizer();
         },
@@ -129,7 +130,7 @@ export class CommandPalette {
         category: isAr ? 'بوابات المنظومة' : 'Platform Portals',
         title: isAr ? 'كافة استمارات التسجيل وسجل المتابعة الميداني' : 'All Registration Forms & Submissions Log',
         subtitle: isAr ? 'استعراض النماذج وتعبئتها ومتابعة سجلات التقديم' : 'Browse forms, submit & view submissions table',
-        icon: '▪',
+        icon: icons.form('cmd-icon', 18),
         url: '#/forms',
         badge: 'متزامن'
       },
@@ -138,7 +139,7 @@ export class CommandPalette {
         category: isAr ? 'بوابات المنظومة' : 'Platform Portals',
         title: isAr ? 'بوابة الأكاديمية والتدريب LMS' : 'LMS Training Academy Portal',
         subtitle: isAr ? 'المساقات، المحاضرات، التكليفات الدراسية والاختبارات' : 'Courses, lectures, assignments & exams',
-        icon: '◈',
+        icon: icons.academy('cmd-icon', 18),
         url: '#/academy',
         badge: 'LMS'
       },
@@ -147,7 +148,7 @@ export class CommandPalette {
         category: isAr ? 'بوابات المنظومة' : 'Platform Portals',
         title: isAr ? 'مجالات العمل والاستشارات المؤسسية' : 'Consulting Services & Advisory Tracks',
         subtitle: isAr ? 'تأهيل المؤسسات، الحوكمة، وإعداد الأدلة التشغيلية SOPs' : 'Institutional rehabilitation & SOPs development',
-        icon: '▪',
+        icon: icons.briefcase('cmd-icon', 18),
         url: '#/services',
         badge: 'استشارات'
       },
@@ -156,7 +157,7 @@ export class CommandPalette {
         category: isAr ? 'بوابات المنظومة' : 'Platform Portals',
         title: isAr ? 'الأخبار والمنشورات وأوراق الموقف' : 'News, Announcements & Position Papers',
         subtitle: isAr ? 'آخر الفعاليات ومشاركات فيسبوك وإنستغرام' : 'Latest events & social feeds',
-        icon: '▪',
+        icon: icons.fileText('cmd-icon', 18),
         url: '#/news',
         badge: 'إعلامي'
       },
@@ -165,7 +166,7 @@ export class CommandPalette {
         category: isAr ? 'بوابات المنظومة' : 'Platform Portals',
         title: isAr ? 'التواصل المؤسسي وحجز الاستشارات' : 'Institutional Contact & Inquiries',
         subtitle: isAr ? 'واتساب المعتمد: 972592879621+ • shat.company26@gmail.com' : 'Direct WhatsApp & corporate email',
-        icon: '✉',
+        icon: icons.whatsapp('cmd-icon', 18),
         url: '#/contact',
         badge: 'مباشر'
       }
@@ -212,7 +213,7 @@ export class CommandPalette {
       ">
         <!-- Input Header -->
         <div style="display: flex; align-items: center; gap: 12px; padding: 16px 20px; border-bottom: 1px solid #E2E8F0; background: #F8FAFC;">
-          <span style="font-size: 1.1rem; color: #1E3A8A; font-weight: bold;">◈</span>
+          <span style="font-size: 1.1rem; color: #1E3A8A; font-weight: bold;"></span>
           <input type="text" id="palette-search-input" placeholder="ابحث عن دورة، استمارة، مساق، استشارة، أو أداة... (Ctrl+K)" style="
             flex: 1;
             border: none;
@@ -375,7 +376,7 @@ export class CommandPalette {
     if (this.filteredItems.length === 0) {
       list.innerHTML = `
         <div style="padding: 32px 20px; text-align: center; color: #64748B;">
-          <span style="font-size: 1.8rem; display: block; margin-bottom: 8px; color: #94A3B8;">◈</span>
+          <span style="font-size: 1.8rem; display: block; margin-bottom: 8px; color: #94A3B8;"></span>
           <div style="font-weight: 700; font-size: 0.95rem; color: #0B1E36;">لم يتم العثور على نتائج مطابقة</div>
           <div style="font-size: 0.82rem; margin-top: 4px;">جرب البحث بكلمات أخرى مثل "إدارة حالة"، "CHS"، "استشارة"، أو "استمارة"</div>
         </div>
@@ -412,7 +413,7 @@ export class CommandPalette {
           transition: all 0.1s ease;
         ">
           <div style="display: flex; align-items: center; gap: 12px; min-width: 0;">
-            <span style="font-size: 1.3rem; flex-shrink: 0;">${item.icon}</span>
+            <span style="display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--shat-green);">${item.icon}</span>
             <div style="min-width: 0;">
               <div style="font-size: 0.92rem; font-weight: 700; color: ${isSelected ? '#166534' : '#0B1E36'}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                 ${item.title}

@@ -181,7 +181,7 @@ export function renderHomePage(t) {
                   <!-- Direct Link to Single Dedicated Course Page -->
                   <a href="#/course/${c.id}" class="btn-course-cta">
                     ${icons.book('icon-inline', 18)}
-                    <span>صفحة الدورة والمنهاج الكامل ▪</span>
+                    <span>صفحة الدورة والمنهاج الكامل</span>
                   </a>
 
                   <!-- Direct Google Form Registration Link for this Specific Course -->
@@ -199,7 +199,7 @@ export function renderHomePage(t) {
                   ` : `
                     <button type="button" class="btn-guard-download btn-secondary" data-file="${c.files && c.files[0] ? c.files[0].name : 'دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf'}" data-course-title="${c.title}" style="padding: 7px 12px; font-size: 0.78rem; width: 100%; justify-content: center; background: #fffbeb; border-color: #fde68a; color: #b45309;">
                       ${icons.lock('icon-inline', 14)}
-                      <span>تحميل الحقيبة (◈ يتطلب حساب متدرب)</span>
+                      <span>تحميل الحقيبة (يتطلب حساب متدرب)</span>
                     </button>
                   `}
                 </div>
@@ -269,7 +269,7 @@ export function renderHomePage(t) {
             <article class="social-card" data-category="${p.category || 'general'}" data-post-id="${p.id}">
               ${isAdmin ? `
                 <div style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 6px 14px; display: flex; justify-content: space-between; align-items: center;">
-                  <span style="font-size: 0.72rem; color: #1e3a8a; font-weight: 700;">⚙ تحكم المدير:</span>
+                  <span style="font-size: 0.72rem; color: #1e3a8a; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">${icons.settings('', 14)} <span>تحكم المدير:</span></span>
                   <div style="display: flex; gap: 6px;">
                     <button type="button" class="btn-secondary btn-admin-edit-post" data-post-id="${p.id}" style="padding: 3px 8px; font-size: 0.72rem;">
                       ${icons.edit('icon-inline', 12)} تعديل
@@ -739,14 +739,14 @@ export function renderReferencesPage(t) {
               
               ${st.whyItMatters ? `
                 <div style="background: #f8fafc; border-radius: 6px; padding: 12px; margin-bottom: 10px; border-right: 3px solid var(--shat-navy-700);">
-                  <div style="font-size: 0.8rem; font-weight: 800; color: var(--shat-navy-900); margin-bottom: 3px;">★ القيمة والأهمية المؤسسية:</div>
+                  <div style="font-size: 0.8rem; font-weight: 800; color: var(--shat-navy-900); margin-bottom: 3px;">القيمة والأهمية المؤسسية:</div>
                   <div style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55;">${st.whyItMatters}</div>
                 </div>
               ` : ''}
 
               ${st.howShatApplies ? `
                 <div style="background: var(--shat-green-50); border-radius: 6px; padding: 12px; margin-bottom: 10px; border-right: 3px solid var(--shat-green-600);">
-                  <div style="font-size: 0.8rem; font-weight: 800; color: var(--shat-green-950); margin-bottom: 3px;">★ كيف نطبقه في شات؟</div>
+                  <div style="font-size: 0.8rem; font-weight: 800; color: var(--shat-green-950); margin-bottom: 3px;">كيف نطبقه في شات؟</div>
                   <div style="font-size: 0.88rem; color: var(--shat-green-900); line-height: 1.55;">${st.howShatApplies}</div>
                 </div>
               ` : ''}
@@ -802,8 +802,8 @@ export function renderExpertisePage(t) {
         ${ex.sectors.map(sec => `
           <div class="content-card" style="margin-bottom: 0; display: flex; flex-direction: column; justify-content: space-between;">
             <div>
-              <div style="width: 44px; height: 44px; border-radius: var(--radius-sm); background: var(--shat-green-50); color: var(--shat-green-700); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 16px;">
-                ✦
+              <div style="width: 44px; height: 44px; border-radius: var(--radius-sm); background: var(--shat-green-50); color: var(--shat-green-700); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                ${icons.sparkles('', 22)}
               </div>
               <div style="font-size: 0.75rem; font-weight: 700; color: var(--shat-green-700); text-transform: uppercase; margin-bottom: 4px;">${sec.en}</div>
               <h3 style="font-size: 1.2rem; color: var(--shat-navy-950); margin-bottom: 12px;">${sec.name}</h3>
@@ -1005,8 +1005,8 @@ export function renderAcademyPage(t) {
       <div class="moodle-lms-header-bar" style="background: #ffffff; border-bottom: 2px solid var(--shat-green-600); padding: 16px 0; box-shadow: var(--shadow-sm);">
         <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
           <div style="display: flex; align-items: center; gap: 14px;">
-            <div style="width: 44px; height: 44px; border-radius: 10px; background: var(--shat-green-50); border: 1.5px solid var(--shat-green-500); display: flex; align-items: center; justify-content: center; font-size: 1.6rem;">
-              ◈
+            <div style="width: 44px; height: 44px; border-radius: 10px; background: var(--shat-green-50); border: 1.5px solid var(--shat-green-500); display: flex; align-items: center; justify-content: center; color: var(--shat-green-700);">
+              ${icons.academy('', 24)}
             </div>
             <div>
               <div style="font-size: 1.25rem; font-weight: 800; color: var(--shat-navy-950);">
@@ -1018,8 +1018,8 @@ export function renderAcademyPage(t) {
             </div>
           </div>
           <div style="display: flex; align-items: center; gap: 10px;">
-            <span class="status-pill active" style="background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0;">
-              ◈️ سحابة Google Drive المؤسسية متصلة
+            <span class="status-pill active" style="background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; display: inline-flex; align-items: center; gap: 6px;">
+              ${icons.drive('', 14)} <span>سحابة Google Drive المؤسسية متصلة</span>
             </span>
           </div>
         </div>
@@ -1040,7 +1040,7 @@ export function renderAcademyPage(t) {
 
           <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; text-align: start;" class="gate-roles-grid">
             <div style="background: #f8fafc; border: 1.5px solid var(--border-subtle); border-radius: var(--radius-md); padding: 18px;">
-              <div style="font-size: 1.5rem; margin-bottom: 6px;">◈</div>
+              <div style="color: var(--shat-green-700); margin-bottom: 8px;">${icons.academy('', 28)}</div>
               <strong style="font-size: 1rem; color: var(--shat-navy-950); display: block;">حساب الطالب</strong>
               <span style="font-size: 0.86rem; color: var(--text-secondary); line-height: 1.6; display: block; margin-top: 6px;">
                 عرض الدروس، تحميل ملفات Google Drive مباشرة، تسليم التكليفات، ومحادثة المدرب.
@@ -1048,7 +1048,7 @@ export function renderAcademyPage(t) {
             </div>
 
             <div style="background: #f8fafc; border: 1.5px solid var(--border-subtle); border-radius: var(--radius-md); padding: 18px;">
-              <div style="font-size: 1.5rem; margin-bottom: 6px;">◈</div>
+              <div style="color: var(--shat-navy-800); margin-bottom: 8px;">${icons.award('', 28)}</div>
               <strong style="font-size: 1rem; color: var(--shat-navy-950); display: block;">حساب المدرس</strong>
               <span style="font-size: 0.86rem; color: var(--text-secondary); line-height: 1.6; display: block; margin-top: 6px;">
                 رفع الحقائب السحابية لدرايف، متابعة الحضور، وتصحيح التكليفات والتفاعل المباشر.
@@ -1056,7 +1056,7 @@ export function renderAcademyPage(t) {
             </div>
 
             <div style="background: #f8fafc; border: 1.5px solid var(--border-subtle); border-radius: var(--radius-md); padding: 18px;">
-              <div style="font-size: 1.5rem; margin-bottom: 6px;">⚙</div>
+              <div style="color: var(--shat-navy-950); margin-bottom: 8px;">${icons.settings('', 28)}</div>
               <strong style="font-size: 1rem; color: var(--shat-navy-950); display: block;">حساب الإدارة</strong>
               <span style="font-size: 0.86rem; color: var(--text-secondary); line-height: 1.6; display: block; margin-top: 6px;">
                 إدارة الموظفين والصلاحيات، قبول طلبات التسجيل، وتعديل محتوى الموقع بالكامل (CMS).
@@ -1066,7 +1066,7 @@ export function renderAcademyPage(t) {
 
           <div style="display: flex; flex-direction: column; gap: 12px; max-width: 460px; margin: 0 auto;">
             <button type="button" class="btn-cta" id="btn-gate-open-auth" style="padding: 13px; font-size: 1.02rem; border-radius: var(--radius-full); font-weight: 700;">
-              <span>◈ الدخول باسم المستخدم وكلمة المرور / واتساب OTP</span>
+              <span>الدخول باسم المستخدم وكلمة المرور / واتساب OTP</span>
             </button>
             <span style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.5;">
               حسابات تجريبية سريعة متوفرة داخل نافذة الدخول بنقرة واحدة (admin, instructor, student)
@@ -1078,7 +1078,7 @@ export function renderAcademyPage(t) {
         <div style="margin-top: 32px; background: #ffffff; border: 1.5px solid #d1fae5; border-radius: var(--radius-xl); padding: 28px; box-shadow: var(--shadow-sm); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
           <div>
             <div style="display: flex; align-items: center; gap: 8px;">
-              <span class="status-pill active" style="background: #ecfdf5; color: #047857;">▪ تسجيل جديد</span>
+              <span class="status-pill active" style="background: #ecfdf5; color: #047857;">تسجيل جديد</span>
               <strong style="font-size: 1.18rem; color: var(--shat-navy-950);">لست مسجلاً بعد في دورات الأكاديمية؟</strong>
             </div>
             <p style="font-size: 0.92rem; color: var(--text-secondary); margin: 6px 0 0; max-width: 540px; line-height: 1.65;">
@@ -1136,7 +1136,7 @@ export function renderAcademyPage(t) {
           </div>
 
           <a href="#/register-course" class="btn-secondary" style="padding: 6px 12px; font-size: 0.78rem; text-decoration: none; border-radius: var(--radius-full);" title="تسجيل متدرب جديد">
-            ▪ نموذج Google Form
+            نموذج Google Form
           </a>
 
           <button type="button" class="btn-secondary" id="btn-moodle-logout" style="padding: 6px 12px; font-size: 0.78rem; border-radius: var(--radius-full); color: #dc2626; border-color: #fecaca; background: #fff5f5;">
@@ -1150,27 +1150,27 @@ export function renderAcademyPage(t) {
     <div style="background: #ffffff; border-bottom: 2px solid var(--border-subtle);">
       <div class="container" style="display: flex; gap: 4px; overflow-x: auto; padding: 0 16px;">
         <button class="classroom-nav-tab active" data-classroom-tab="stream" style="padding: 14px 18px; font-size: 0.88rem; font-weight: 700; border: none; background: none; cursor: pointer; color: var(--shat-green-700); border-bottom: 3px solid var(--shat-green-600); display: flex; align-items: center; gap: 6px; white-space: nowrap;">
-          <span>★</span>
+          
           <span>ساحة المشاركات (Stream)</span>
         </button>
 
         <button class="classroom-nav-tab" data-classroom-tab="classwork" style="padding: 14px 18px; font-size: 0.88rem; font-weight: 600; border: none; background: none; cursor: pointer; color: var(--text-secondary); border-bottom: 3px solid transparent; display: flex; align-items: center; gap: 6px; white-space: nowrap;">
-          <span>▪</span>
+          
           <span>الواجب الدراسي والمقررات (Classwork)</span>
         </button>
 
         <button class="classroom-nav-tab" data-classroom-tab="drive-folder" style="padding: 14px 18px; font-size: 0.88rem; font-weight: 600; border: none; background: none; cursor: pointer; color: var(--text-secondary); border-bottom: 3px solid transparent; display: flex; align-items: center; gap: 6px; white-space: nowrap;">
-          <span>◈</span>
+          
           <span>سحابة Google Drive (Class Drive)</span>
         </button>
 
         <button class="classroom-nav-tab" data-classroom-tab="chat-room" style="padding: 14px 18px; font-size: 0.88rem; font-weight: 600; border: none; background: none; cursor: pointer; color: var(--text-secondary); border-bottom: 3px solid transparent; display: flex; align-items: center; gap: 6px; white-space: nowrap;">
-          <span>✉</span>
+          <span style="display: inline-flex; align-items: center;">${icons.chat('', 16)}</span>
           <span>المحادثة والساعات المكتبية (Chat)</span>
         </button>
 
         <button class="classroom-nav-tab" data-classroom-tab="grades-cert" style="padding: 14px 18px; font-size: 0.88rem; font-weight: 600; border: none; background: none; cursor: pointer; color: var(--text-secondary); border-bottom: 3px solid transparent; display: flex; align-items: center; gap: 6px; white-space: nowrap;">
-          <span>▲</span>
+          <span style="display: inline-flex; align-items: center;">${icons.award('', 16)}</span>
           <span>الدرجات والشهادة (Grades)</span>
         </button>
 
@@ -1253,7 +1253,7 @@ export function renderAcademyPage(t) {
             <!-- Quick Direct Download Card -->
             <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 20px; box-shadow: var(--shadow-sm);">
               <h3 style="font-size: 0.98rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 12px;">
-                ◈ تحميل سريع للحقيبة التدريبية
+                تحميل سريع للحقيبة التدريبية
               </h3>
               <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px;">
                 انقر للتحميل الفعلي المباشر لملف دليل المعيار الإنساني الأساسي بصيغة PDF لجهازك فوراً:
@@ -1320,7 +1320,7 @@ export function renderAcademyPage(t) {
                 </p>
                 <div style="border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 12px; display: flex; justify-content: space-between; align-items: center; background: #f8fafc;">
                   <div style="display: flex; align-items: center; gap: 10px;">
-                    <span style="font-size: 1.5rem;">▪</span>
+                    <span style="font-size: 1.5rem;"></span>
                     <div>
                       <div style="font-weight: 700; font-size: 0.86rem; color: var(--shat-navy-950);">دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf</div>
                       <div style="font-size: 0.74rem; color: var(--text-muted);">PDF Document • 4.8 MB • معتمد</div>
@@ -1347,7 +1347,7 @@ export function renderAcademyPage(t) {
           </div>
           <div style="display: flex; gap: 10px;">
             <a href="https://drive.google.com" target="_blank" rel="noopener" class="btn-secondary" style="padding: 8px 14px; font-size: 0.82rem; border-radius: var(--radius-full);">
-              ◈ فتح مجلد Drive المشترك ↗
+              فتح مجلد Drive المشترك ↗
             </a>
           </div>
         </div>
@@ -1364,7 +1364,7 @@ export function renderAcademyPage(t) {
             <div style="padding: 18px 20px; display: flex; flex-direction: column; gap: 12px;">
               <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);">
                 <div style="display: flex; align-items: center; gap: 10px;">
-                  <span style="font-size: 1.4rem;">▪</span>
+                  <span style="font-size: 1.4rem;"></span>
                   <div>
                     <div style="font-weight: 700; font-size: 0.88rem; color: var(--shat-navy-950);">دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf</div>
                     <div style="font-size: 0.74rem; color: var(--text-muted);">المرجع الأساسي للوحدة • PDF • 4.8 MB</div>
@@ -1401,7 +1401,7 @@ export function renderAcademyPage(t) {
 
               <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);">
                 <div style="display: flex; align-items: center; gap: 10px;">
-                  <span style="font-size: 1.4rem;">▪</span>
+                  <span style="font-size: 1.4rem;"></span>
                   <div>
                     <div style="font-weight: 700; font-size: 0.88rem; color: var(--shat-navy-950);">حقيبة_أدوات_المساءلة_للجهات_المتضررة_AAP.docx</div>
                     <div style="font-size: 0.74rem; color: var(--text-muted);">نماذج وقوائم التحقق الميدانية • Word • 2.4 MB</div>
@@ -1425,7 +1425,7 @@ export function renderAcademyPage(t) {
             <div style="padding: 18px 20px; display: flex; flex-direction: column; gap: 12px;">
               <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);">
                 <div style="display: flex; align-items: center; gap: 10px;">
-                  <span style="font-size: 1.4rem;">▪</span>
+                  <span style="font-size: 1.4rem;"></span>
                   <div>
                     <div style="font-weight: 700; font-size: 0.88rem; color: var(--shat-navy-950);">إطار_سياسات_الحماية_وصون_السلامة_PSEA.pdf</div>
                     <div style="font-size: 0.74rem; color: var(--text-muted);">سياسات وإجراءات الإبلاغ الآمن • PDF • 3.5 MB</div>
@@ -1460,7 +1460,7 @@ export function renderAcademyPage(t) {
 
             <!-- Download All Button -->
             <button class="btn-cta btn-trigger-real-download" data-file="الحقيبة_التدريبية_الشاملة_CHS_2026.docx" style="padding: 9px 18px; font-size: 0.86rem; border-radius: var(--radius-full); display: flex; align-items: center; gap: 8px;">
-              <span>★</span>
+              
               <span>تحميل الحزمة الشاملة فوراً لجهازك</span>
             </button>
           </div>
@@ -1470,7 +1470,7 @@ export function renderAcademyPage(t) {
             <div style="border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 16px; background: #f8fafc; display: flex; flex-direction: column; justify-content: space-between;">
               <div>
                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                  <span style="font-size: 1.5rem;">▪</span>
+                  <span style="font-size: 1.5rem;"></span>
                   <span class="status-pill active" style="font-size: 0.7rem; padding: 1px 6px;">PDF معتمد</span>
                 </div>
                 <strong style="font-size: 0.9rem; color: var(--shat-navy-950); display: block; margin-bottom: 4px;">
@@ -1508,7 +1508,7 @@ export function renderAcademyPage(t) {
             <div style="border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 16px; background: #f8fafc; display: flex; flex-direction: column; justify-content: space-between;">
               <div>
                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                  <span style="font-size: 1.5rem;">▪</span>
+                  <span style="font-size: 1.5rem;"></span>
                   <span class="status-pill active" style="font-size: 0.7rem; padding: 1px 6px; background: #eff6ff; color: #1e40af;">Word وثيقة</span>
                 </div>
                 <strong style="font-size: 0.9rem; color: var(--shat-navy-950); display: block; margin-bottom: 4px;">
@@ -1535,14 +1535,14 @@ export function renderAcademyPage(t) {
           <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 16px; box-shadow: var(--shadow-sm);">
             <h3 style="font-size: 0.95rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 12px;">قنوات المحادثة الأكاديمية</h3>
             <div style="display: flex; flex-direction: column; gap: 6px;">
-              <div style="padding: 10px 12px; background: #ecfdf5; border-radius: var(--radius-sm); border-right: 3px solid #059669; font-weight: 700; font-size: 0.86rem; color: #065f46; cursor: pointer;">
-                ✉ شات المساق العام (د. أسامة)
+              <div style="padding: 10px 12px; background: #ecfdf5; border-radius: var(--radius-sm); border-right: 3px solid #059669; font-weight: 700; font-size: 0.86rem; color: #065f46; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                ${icons.chat('', 14)} <span>شات المساق العام (د. أسامة)</span>
               </div>
               <div style="padding: 10px 12px; background: #f8fafc; border-radius: var(--radius-sm); font-size: 0.86rem; color: var(--text-secondary); cursor: pointer;">
-                ◈ نقاشات مجموعات العمل
+                نقاشات مجموعات العمل
               </div>
               <div style="padding: 10px 12px; background: #f8fafc; border-radius: var(--radius-sm); font-size: 0.86rem; color: var(--text-secondary); cursor: pointer;">
-                ◈ الدعم الفني والأكاديمي
+                الدعم الفني والأكاديمي
               </div>
             </div>
           </div>
@@ -1624,7 +1624,7 @@ export function renderAcademyPage(t) {
           <div style="background: #ffffff; border: 1.5px solid #bbf7d0; border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; justify-content: space-between;">
             <div>
               <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
-                <span class="status-pill active" style="background: #ecfdf5; color: #047857;">★ شهادة التخرج المعتمدة</span>
+                <span class="status-pill active" style="background: #ecfdf5; color: #047857;">شهادة التخرج المعتمدة</span>
                 <span style="font-size: 0.75rem; color: var(--text-muted);">كود التحقق: SHAT-CERT-2026</span>
               </div>
               <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 8px;">
@@ -1685,7 +1685,7 @@ export function renderAcademyPage(t) {
               </div>
 
               <button type="submit" class="btn-cta" style="width: 100%; padding: 11px; font-weight: 700;">
-                ★ رفع الملف واعتماده فوراً للطلاب
+                رفع الملف واعتماده فوراً للطلاب
               </button>
             </form>
           </div>
@@ -1739,10 +1739,10 @@ export function renderAcademyPage(t) {
                 <div class="form-group">
                   <label class="form-label" style="font-weight: 700; font-size: 0.82rem;">الصلاحية والرتبة في النظام *</label>
                   <select id="new-staff-role" class="form-select">
-                    <option value="instructor">◈ مدرب معتمد (Instructor)</option>
-                    <option value="registrar">▪ مسؤول التسجيل والقبول (Registrar)</option>
-                    <option value="editor">▪ مسؤول المحتوى والنشر (Editor)</option>
-                    <option value="admin">⚙ مدير عام (Admin)</option>
+                    <option value="instructor">مدرب معتمد (Instructor)</option>
+                    <option value="registrar">مسؤول التسجيل والقبول (Registrar)</option>
+                    <option value="editor">مسؤول المحتوى والنشر (Editor)</option>
+                    <option value="admin">مدير عام (Admin)</option>
                   </select>
                 </div>
               </div>
@@ -1777,11 +1777,11 @@ export function renderAcademyPage(t) {
                     </td>
                     <td style="padding: 12px 16px;">
                       <select class="form-select form-select-sm staff-role-change" data-username="${member.username}" style="padding: 4px 8px; font-size: 0.8rem; border-radius: 4px;">
-                        <option value="admin" ${member.role === 'admin' ? 'selected' : ''}>⚙ المدير العام (Admin)</option>
-                        <option value="instructor" ${member.role === 'instructor' ? 'selected' : ''}>◈ مدرب معتمد (Instructor)</option>
-                        <option value="registrar" ${member.role === 'registrar' ? 'selected' : ''}>▪ مسؤول القبول والتسجيل (Registrar)</option>
-                        <option value="editor" ${member.role === 'editor' ? 'selected' : ''}>▪ مسؤول المحتوى (Editor)</option>
-                        <option value="student" ${member.role === 'student' ? 'selected' : ''}>◈ طالب / متدرب (Student)</option>
+                        <option value="admin" ${member.role === 'admin' ? 'selected' : ''}>المدير العام (Admin)</option>
+                        <option value="instructor" ${member.role === 'instructor' ? 'selected' : ''}>مدرب معتمد (Instructor)</option>
+                        <option value="registrar" ${member.role === 'registrar' ? 'selected' : ''}>مسؤول القبول والتسجيل (Registrar)</option>
+                        <option value="editor" ${member.role === 'editor' ? 'selected' : ''}>مسؤول المحتوى (Editor)</option>
+                        <option value="student" ${member.role === 'student' ? 'selected' : ''}>طالب / متدرب (Student)</option>
                       </select>
                     </td>
                     <td style="padding: 12px 16px; font-size: 0.8rem; color: var(--text-secondary);">
@@ -1811,7 +1811,7 @@ export function renderAcademyPage(t) {
               <p style="font-size: 0.88rem; color: var(--text-muted);">إدارة وتسكين المتدربين والمنظمات الذين سجلوا عبر نموذج التسجيل السحابي</p>
             </div>
             <a href="#/register-course" target="_blank" class="btn-secondary" style="padding: 8px 16px; font-size: 0.82rem; border-radius: var(--radius-full);">
-              ◈ فتح نموذج Google Form المباشر ↗
+              فتح نموذج Google Form المباشر ↗
             </a>
           </div>
 
@@ -1936,13 +1936,13 @@ export function renderAcademyPage(t) {
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 14px;">
                   <div>
                     <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 4px; color: #047857;">
-                      ◈ رابط استمارة Google Form الخاصة بالدورة:
+                      رابط استمارة Google Form الخاصة بالدورة:
                     </label>
                     <input type="url" id="new-course-gform-url" class="form-input" placeholder="https://forms.gle/..." style="width: 100%; font-size: 0.88rem; border-color: #10b981;" dir="ltr">
                   </div>
                   <div>
                     <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 4px; color: #0369a1;">
-                      ◈ رابط مجلد Google Drive للدورة:
+                      رابط مجلد Google Drive للدورة:
                     </label>
                     <input type="url" id="new-course-drive-url" class="form-input" placeholder="https://drive.google.com/drive/folders/..." style="width: 100%; font-size: 0.88rem; border-color: #0284c7;" dir="ltr">
                   </div>
@@ -2038,7 +2038,7 @@ export function renderAcademyPage(t) {
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
               <div>
                 <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--shat-navy-950); margin: 0;">
-                  ◈ محرر محتوى نصوص الموقع والمنشورات (Live CMS Editor)
+                  محرر محتوى نصوص الموقع والمنشورات (Live CMS Editor)
                 </h2>
                 <p style="font-size: 0.86rem; color: var(--text-muted); margin: 4px 0 0;">
                   تعديل نصوص الصفحة الرئيسية، الشعار المؤسسي، بيانات الاتصال، ومنشورات المنصات الاجتماعية فوراً
@@ -2386,7 +2386,7 @@ export function renderCourseDetailPage(t, courseId) {
                 ` : `
                   <button type="button" class="btn-course-form btn-guard-drive" data-course-title="${course.title}" style="padding: 10px; font-size: 0.85rem; justify-content: center; width: 100%; border-color: #fde68a; background: #fffbeb; color: #b45309;" id="course-btn-drive">
                     ${icons.lock('icon-inline', 16)}
-                    <span>مجلد Google Drive (◈ للمتدربين فقط)</span>
+                    <span>مجلد Google Drive (للمتدربين فقط)</span>
                   </button>
                 `}
 
@@ -2399,7 +2399,7 @@ export function renderCourseDetailPage(t, courseId) {
                 ` : `
                   <button type="button" class="btn-guard-download btn-secondary" data-file="${course.files && course.files[0] ? course.files[0].name : 'دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf'}" data-course-title="${course.title}" style="padding: 10px; font-size: 0.85rem; justify-content: center; width: 100%; border-color: #fca5a5; background: #fef2f2; color: #dc2626;">
                     ${icons.lock('icon-inline', 16)}
-                    <span>تحميل الحقيبة الكاملة (◈ للمتدربين المسجلين)</span>
+                    <span>تحميل الحقيبة الكاملة (للمتدربين المسجلين)</span>
                   </button>
                 `}
 
@@ -2423,19 +2423,19 @@ export function renderCourseDetailPage(t, courseId) {
           <button class="course-detail-tab-btn" data-course-tab="materials">
             ${icons.drive('icon-inline', 18)}
             <span>الحقائب وملفات Google Drive (${course.files ? course.files.length : 3})</span>
-            ${!canDownload ? `<span class="locked-tab-badge">◈ مقفل</span>` : ''}
+            ${!canDownload ? `<span class="locked-tab-badge">مقفل</span>` : ''}
           </button>
 
           <button class="course-detail-tab-btn" data-course-tab="assignments">
             ${icons.check('icon-inline', 18)}
             <span>التكليفات والمهام (${course.assignments ? course.assignments.length : 2})</span>
-            ${!canDownload ? `<span class="locked-tab-badge">◈ مقفل</span>` : ''}
+            ${!canDownload ? `<span class="locked-tab-badge">مقفل</span>` : ''}
           </button>
 
           <button class="course-detail-tab-btn" data-course-tab="discussion">
             ${icons.chat('icon-inline', 18)}
             <span>شات واستفسارات المدرب</span>
-            ${!canDownload ? `<span class="locked-tab-badge">◈ مقفل</span>` : ''}
+            ${!canDownload ? `<span class="locked-tab-badge">مقفل</span>` : ''}
           </button>
 
           <button class="course-detail-tab-btn" data-course-tab="instructor-view">
@@ -2547,7 +2547,7 @@ export function renderCourseDetailPage(t, courseId) {
                 </a>
                 ${ENV.features.enableDemoQuickFill ? `
                   <button type="button" class="btn-secondary btn-quick-student-login" style="background: #eff6ff; color: #1e40af; border-color: #93c5fd; padding: 11px 20px;">
-                    ★ دخول سريع كمتدرب معتمد (أحمد خليل)
+                    دخول سريع كمتدرب معتمد (أحمد خليل)
                   </button>
                 ` : ''}
               </div>
@@ -2614,7 +2614,7 @@ export function renderCourseDetailPage(t, courseId) {
               <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 18px;">
                 <button type="button" class="btn-cta btn-open-login-from-guard">تسجيل الدخول كطالب</button>
                 ${ENV.features.enableDemoQuickFill ? `
-                  <button type="button" class="btn-secondary btn-quick-student-login">★ تجربة الدخول كمتدرب (أحمد)</button>
+                  <button type="button" class="btn-secondary btn-quick-student-login">تجربة الدخول كمتدرب (أحمد)</button>
                 ` : ''}
               </div>
             </div>
@@ -2689,7 +2689,7 @@ export function renderCourseDetailPage(t, courseId) {
               <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 18px;">
                 <button type="button" class="btn-cta btn-open-login-from-guard">تسجيل الدخول للمحادثة</button>
                 ${ENV.features.enableDemoQuickFill ? `
-                  <button type="button" class="btn-secondary btn-quick-student-login">★ تجربة الدخول كمتدرب (أحمد)</button>
+                  <button type="button" class="btn-secondary btn-quick-student-login">تجربة الدخول كمتدرب (أحمد)</button>
                 ` : ''}
               </div>
             </div>
@@ -2748,7 +2748,7 @@ export function renderCourseDetailPage(t, courseId) {
               <div style="margin-top: 16px;">
                 ${ENV.features.enableDemoQuickFill ? `
                   <button type="button" class="btn-secondary btn-quick-instructor-login" style="background: #ecfdf5; color: #065f46; border-color: #a7f3d0; padding: 9px 20px;">
-                    ★ الدخول كمدرب معتمد (د. أسامة المنصور)
+                    الدخول كمدرب معتمد (د. أسامة المنصور)
                   </button>
                 ` : ''}
               </div>
@@ -2871,7 +2871,7 @@ export function renderCourseDetailPage(t, courseId) {
 
                 <div style="margin-bottom: 14px;">
                   <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 4px; color: #047857;">
-                    ◈ رابط استمارة التسجيل الخاصة بالدورة (Google Form URL):
+                    رابط استمارة التسجيل الخاصة بالدورة (Google Form URL):
                   </label>
                   <input type="url" id="admin-course-gform" class="form-input" value="${course.googleFormUrl || ''}" placeholder="https://forms.gle/..." required style="width: 100%; font-size: 0.9rem; border-color: #10b981; background: #f0fdf4;" dir="ltr">
                   <span style="font-size: 0.74rem; color: var(--text-muted); display: block; margin-top: 3px;">
@@ -2881,7 +2881,7 @@ export function renderCourseDetailPage(t, courseId) {
 
                 <div style="margin-bottom: 14px;">
                   <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 4px; color: #0369a1;">
-                    ◈ رابط مجلد الدورة على Google Drive:
+                    رابط مجلد الدورة على Google Drive:
                   </label>
                   <input type="url" id="admin-course-drive" class="form-input" value="${course.driveFolderUrl || ''}" placeholder="https://drive.google.com/drive/folders/..." required style="width: 100%; font-size: 0.9rem; border-color: #0284c7; background: #f0f9ff;" dir="ltr">
                 </div>

@@ -18,6 +18,7 @@ import { auditService } from '../../services/audit/auditService.js';
 import { parseGoogleDriveResource } from '../../services/files/fileService.js';
 import { PostEditorModal, openPostEditor } from '../../components/cms/PostEditorModal.js';
 import { MediaLibraryModal } from '../../components/cms/MediaLibraryModal.js';
+import { icons } from '../../icons.js';
 
 let activeAdminTab = 'overview';
 
@@ -48,8 +49,8 @@ export async function renderAdminPortalPage() {
       <header style="background: linear-gradient(135deg, #0F2E4A 0%, #1e293b 100%); color: #ffffff; padding: 18px 0; border-bottom: 3px solid #10b981; box-shadow: 0 4px 15px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 100;">
         <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
           <div style="display: flex; align-items: center; gap: 14px;">
-            <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(16, 185, 129, 0.2); border: 1.5px solid #10b981; display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
-              ⚙
+            <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(16, 185, 129, 0.2); border: 1.5px solid #10b981; display: flex; align-items: center; justify-content: center; color: #10b981;">
+              ${icons.settings('', 22)}
             </div>
             <div>
               <h1 style="font-size: 1.25rem; font-weight: 800; margin: 0; color: #ffffff; display: flex; align-items: center; gap: 10px;">
@@ -64,7 +65,7 @@ export async function renderAdminPortalPage() {
 
           <div style="display: flex; align-items: center; gap: 10px;">
             <a href="#/home" target="_blank" rel="noopener" style="background: rgba(255,255,255,0.12); color: #fff; text-decoration: none; padding: 8px 14px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; border: 1px solid rgba(255,255,255,0.2);">
-              <span>◈ معاينة الموقع</span>
+              <span>معاينة الموقع</span>
               <span>↗</span>
             </a>
             <button type="button" id="btn-admin-logout" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.4); padding: 8px 14px; border-radius: 6px; font-size: 0.85rem; font-weight: 700; cursor: pointer;">
@@ -81,25 +82,25 @@ export async function renderAdminPortalPage() {
             ▲ نظرة عامة
           </button>
           <button type="button" class="admin-tab-btn ${activeAdminTab === 'cms' ? 'active' : ''}" data-tab="cms">
-            ▪ إدارة المنشورات (${posts.length})
+            إدارة المنشورات (${posts.length})
           </button>
           <button type="button" class="admin-tab-btn ${activeAdminTab === 'admissions' ? 'active' : ''}" data-tab="admissions">
-            ▪ استمارات القبول وGoogle Form ${newAppsCount > 0 ? `<span style="background: #ef4444; color: #fff; padding: 1px 6px; border-radius: 10px; font-size: 0.72rem;">${newAppsCount}</span>` : ''}
+            استمارات القبول وGoogle Form ${newAppsCount > 0 ? `<span style="background: #ef4444; color: #fff; padding: 1px 6px; border-radius: 10px; font-size: 0.72rem;">${newAppsCount}</span>` : ''}
           </button>
           <button type="button" class="admin-tab-btn ${activeAdminTab === 'courses' ? 'active' : ''}" data-tab="courses">
-            ▪ المساقات والتنزيلات (${courses.length})
+            المساقات والتنزيلات (${courses.length})
           </button>
           <button type="button" class="admin-tab-btn ${activeAdminTab === 'media' ? 'active' : ''}" data-tab="media">
-            ◈ مكتبة الوسائط (${media.length})
+            مكتبة الوسائط (${media.length})
           </button>
           <button type="button" class="admin-tab-btn ${activeAdminTab === 'users' ? 'active' : ''}" data-tab="users">
-            ◈ المستخدمين والصلاحيات
+            المستخدمين والصلاحيات
           </button>
           <button type="button" class="admin-tab-btn ${activeAdminTab === 'settings' ? 'active' : ''}" data-tab="settings">
-            ⚙ إعدادات المنصة والهوية
+            إعدادات المنصة والهوية
           </button>
           <button type="button" class="admin-tab-btn ${activeAdminTab === 'audit' ? 'active' : ''}" data-tab="audit">
-            ▪ سجل العمليات
+            سجل العمليات
           </button>
         </div>
       </nav>
@@ -190,17 +191,17 @@ function renderOverviewPane({ courses, posts, applications, media, settings, pub
       <!-- Quick Actions Grid -->
       <div style="background: #ffffff; border-radius: 14px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 28px; border: 1px solid #e2e8f0;">
         <h3 style="font-size: 1.1rem; color: #0f172a; margin: 0 0 16px; font-weight: 800; display: flex; align-items: center; gap: 8px;">
-          <span>★ إجراءات التحكم والتحرير السريع</span>
+          <span>إجراءات التحكم والتحرير السريع</span>
         </h3>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
           <button type="button" class="btn-quick-admin-action" data-action="new-post" style="padding: 14px; background: #f0fdf4; border: 1.5px solid #10b981; border-radius: 8px; font-weight: 700; color: #166534; cursor: pointer; text-align: center;">
-            ▪ إنشاء منشور جديد
+            إنشاء منشور جديد
           </button>
           <button type="button" class="btn-quick-admin-action" data-action="goto-admissions" style="padding: 14px; background: #f0f9ff; border: 1.5px solid #0284c7; border-radius: 8px; font-weight: 700; color: #075985; cursor: pointer; text-align: center;">
-            ▪ إعداد رابط Google Form
+            إعداد رابط Google Form
           </button>
           <button type="button" class="btn-quick-admin-action" data-action="upload-media" style="padding: 14px; background: #faf5ff; border: 1.5px solid #8b5cf6; border-radius: 8px; font-weight: 700; color: #6b21a8; cursor: pointer; text-align: center;">
-            ◈ رفع صورة جديدة
+            رفع صورة جديدة
           </button>
           <button type="button" class="btn-quick-admin-action" data-action="export-backup" style="padding: 14px; background: #fffbeb; border: 1.5px solid #f59e0b; border-radius: 8px; font-weight: 700; color: #92400e; cursor: pointer; text-align: center;">
             ↓ تصدير نسخة احتياطية (JSON)
@@ -220,7 +221,7 @@ function renderCMSPane({ posts }) {
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 14px; border-bottom: 1px solid #f1f5f9; padding-bottom: 16px;">
         <div>
           <h2 style="font-size: 1.25rem; font-weight: 800; color: #0f172a; margin: 0 0 4px;">
-            ▪ إدارة المنشورات والمقالات الإخبارية
+            إدارة المنشورات والمقالات الإخبارية
           </h2>
           <p style="font-size: 0.85rem; color: #64748b; margin: 0;">
             يمكنك إنشاء منشور جديد، إضافة صور وروابط، حفظ مسودات، وتعطيل أو تفعيل أي منشور بنقرة واحدة.
@@ -261,7 +262,7 @@ function renderCMSPane({ posts }) {
                   </td>
                   <td style="padding: 12px;">
                     <span style="display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; ${isPub ? 'background: #dcfce7; color: #15803d;' : 'background: #f1f5f9; color: #475569;'}">
-                      ${isPub ? '✓ منشور نشط' : (p.status === 'draft' ? '▪ مسودة' : '⏸️ غير منشور')}
+                      ${isPub ? '✓ منشور نشط' : (p.status === 'draft' ? 'مسودة' : '⏸️ غير منشور')}
                     </span>
                   </td>
                   <td style="padding: 12px; font-size: 0.82rem; color: #94a3b8;">
@@ -271,7 +272,7 @@ function renderCMSPane({ posts }) {
                     <div style="display: inline-flex; gap: 6px;">
                       <!-- Toggle Publish/Unpublish -->
                       <button type="button" class="btn-toggle-post-status" data-id="${p.id}" data-current="${p.status}" title="${isPub ? 'تعطيل المنشور' : 'نشر وتفعيل'}" style="padding: 6px 10px; border-radius: 6px; border: 1px solid #cbd5e1; background: #fff; font-size: 0.82rem; cursor: pointer; font-weight: 600;">
-                        ${isPub ? '⏸️ تعطيل' : '★ نشر'}
+                        ${isPub ? '⏸️ تعطيل' : 'نشر'}
                       </button>
                       <!-- Edit -->
                       <button type="button" class="btn-edit-post" data-id="${p.id}" title="تعديل المنشور" style="padding: 6px 10px; border-radius: 6px; border: 1px solid #cbd5e1; background: #fff; font-size: 0.82rem; cursor: pointer;">
@@ -305,7 +306,7 @@ function renderAdmissionsPane({ applications, settings }) {
       <!-- Google Form Link Setting & Generated Internal Form Box -->
       <div style="background: #ffffff; border-radius: 14px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; border: 1px solid #e2e8f0;">
         <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin: 0 0 10px; display: flex; align-items: center; gap: 8px;">
-          <span>◈ ربط نموذج Google Form وتوليد الاستمارة الداخلية</span>
+          <span>ربط نموذج Google Form وتوليد الاستمارة الداخلية</span>
         </h3>
         <p style="font-size: 0.88rem; color: #64748b; margin: 0 0 20px; line-height: 1.6;">
           ضع رابط استمارة Google Form هنا؛ ستقوم المنصة بتوليد استمارة تقديم إلكترونية متطابقة بهوية شات فوراً، مع إظهار رابط المشاركة الجديد الخاص بالشركة.
@@ -328,7 +329,7 @@ function renderAdmissionsPane({ applications, settings }) {
           <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px;">
             <input type="text" id="live-generated-internal-link" value="${internalUrl}" readonly style="flex: 1; min-width: 260px; padding: 10px 14px; background: #ffffff; border: 1px solid #bbf7d0; border-radius: 6px; font-weight: 700; color: #0F2E4A;" dir="ltr">
             <button type="button" id="btn-copy-generated-link" style="background: #10b981; color: #fff; border: none; padding: 10px 18px; border-radius: 6px; font-weight: 700; cursor: pointer;">
-              ▪ نسخ الرابط للمشاركة
+              نسخ الرابط للمشاركة
             </button>
             <a href="#/apply" target="_blank" style="background: #ffffff; color: #0F2E4A; border: 1px solid #cbd5e1; padding: 10px 16px; border-radius: 6px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
               <span>معاينة الاستمارة ↗</span>
@@ -336,7 +337,7 @@ function renderAdmissionsPane({ applications, settings }) {
           </div>
 
           <div style="font-size: 0.8rem; color: #15803d;">
-            ★ المتدربون عند دخولهم هذا الرابط سيسجلون عبر استمارة شات الرسمية، وتصل طلباتهم مباشرة إلى هذا الجدول أدناه مع إمكانية فتح نموذج Google Form الأصلي كخيار بديل.
+            المتدربون عند دخولهم هذا الرابط سيسجلون عبر استمارة شات الرسمية، وتصل طلباتهم مباشرة إلى هذا الجدول أدناه مع إمكانية فتح نموذج Google Form الأصلي كخيار بديل.
           </div>
         </div>
       </div>
@@ -397,7 +398,7 @@ function renderCoursesPane({ courses }) {
   return `
     <div style="background: #ffffff; border-radius: 14px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e2e8f0;">
       <h2 style="font-size: 1.25rem; font-weight: 800; color: #0f172a; margin: 0 0 8px;">
-        ▪ إدارة المساقات وروابط Google Drive للتنزيل المباشر
+        إدارة المساقات وروابط Google Drive للتنزيل المباشر
       </h2>
       <p style="font-size: 0.88rem; color: #64748b; margin: 0 0 24px; line-height: 1.6;">
         عند وضع رابط ملف من Google Drive، يقوم محرك شات بتحويله تلقائياً لرابط تحميل مباشر بحيث يتم تنزيل الملف فوراً للطالب دون نقله إلى واجهة Google Drive.
@@ -421,7 +422,7 @@ function renderCoursesPane({ courses }) {
                 معاينة المساق ↗
               </a>
               <button type="button" class="btn-edit-course-drive" data-id="${c.id}" style="padding: 8px 16px; background: #10b981; color: #fff; border: none; border-radius: 6px; font-size: 0.85rem; font-weight: 700; cursor: pointer;">
-                ◈ تعديل رابط Drive المباشر
+                تعديل رابط Drive المباشر
               </button>
             </div>
           </div>
@@ -440,7 +441,7 @@ function renderMediaPane({ media, settings }) {
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; border-bottom: 1px solid #f1f5f9; padding-bottom: 16px;">
         <div>
           <h2 style="font-size: 1.25rem; font-weight: 800; color: #0f172a; margin: 0 0 4px;">
-            ◈ مكتبة الوسائط ورفع الصور
+            مكتبة الوسائط ورفع الصور
           </h2>
           <p style="font-size: 0.85rem; color: #64748b; margin: 0;">
             ارفع أي صورة من جهازك بحد أقصى 5MB. يمكنك نسخ رابطها المباشر أو تعيينها كشعار أو غلاف مساق.
@@ -467,7 +468,7 @@ function renderMediaPane({ media, settings }) {
                 ${m.title}
               </div>
               <button type="button" class="btn-copy-media-url" data-url="${m.url}" style="background: #f1f5f9; border: 1px solid #cbd5e1; padding: 5px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; cursor: pointer; text-align: center;">
-                ▪ نسخ الرابط
+                نسخ الرابط
               </button>
             </div>
           </div>
@@ -491,7 +492,7 @@ function renderUsersPane() {
   return `
     <div style="background: #ffffff; border-radius: 14px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e2e8f0;">
       <h2 style="font-size: 1.25rem; font-weight: 800; color: #0f172a; margin: 0 0 16px;">
-        ◈ إدارة المستخدمين والصلاحيات
+        إدارة المستخدمين والصلاحيات
       </h2>
 
       <div style="overflow-x: auto;">
@@ -535,7 +536,7 @@ function renderSettingsPane({ settings }) {
   return `
     <div style="background: #ffffff; border-radius: 14px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e2e8f0;">
       <h2 style="font-size: 1.25rem; font-weight: 800; color: #0f172a; margin: 0 0 16px;">
-        ⚙ إعدادات المنصة، الهوية المؤسسية، والنسخ الاحتياطي
+        إعدادات المنصة، الهوية المؤسسية، والنسخ الاحتياطي
       </h2>
 
       <form id="form-site-settings" style="max-width: 700px; display: flex; flex-direction: column; gap: 16px;">
@@ -603,7 +604,7 @@ function renderAuditPane({ auditLogs }) {
   return `
     <div style="background: #ffffff; border-radius: 14px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e2e8f0;">
       <h2 style="font-size: 1.25rem; font-weight: 800; color: #0f172a; margin: 0 0 16px;">
-        ▪ سجل الرقابة والعمليات الإدارية
+        سجل الرقابة والعمليات الإدارية
       </h2>
 
       <div style="overflow-x: auto;">
@@ -664,7 +665,7 @@ function renderAdminLoginGate() {
           <div id="gate-login-error" style="display: none; background: #fee2e2; color: #991b1b; padding: 10px; border-radius: 6px; font-size: 0.85rem; margin-bottom: 14px; text-align: center;"></div>
 
           <button type="submit" style="width: 100%; background: #0F2E4A; color: #ffffff; border: none; padding: 14px; border-radius: 8px; font-weight: 800; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(15, 46, 74, 0.25);">
-            ◈ الدخول إلى لوحة التحكم
+            الدخول إلى لوحة التحكم
           </button>
         </form>
 
@@ -819,7 +820,7 @@ export function initAdminPortalEvents() {
       const input = document.getElementById('live-generated-internal-link');
       if (input) {
         navigator.clipboard.writeText(input.value);
-        alert('▪ تم نسخ الرابط الداخلي بنجاح للمشاركة مع المتدربين!');
+        alert('تم نسخ الرابط الداخلي بنجاح للمشاركة مع المتدربين!');
       }
     });
   }
@@ -866,7 +867,7 @@ export function initAdminPortalEvents() {
     btn.addEventListener('click', () => {
       const url = btn.getAttribute('data-url');
       navigator.clipboard.writeText(url);
-      alert('▪ تم نسخ رابط الصورة بنجاح!');
+      alert('تم نسخ رابط الصورة بنجاح!');
     });
   });
 

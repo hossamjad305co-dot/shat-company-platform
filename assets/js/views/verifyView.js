@@ -14,7 +14,7 @@ export function renderVerifyView(lang = 'ar') {
         <div style="text-align: center; margin-bottom: 36px;">
           <div style="display: inline-flex; align-items: center; gap: 8px; background: #E8F5E9; border: 1px solid #C8E6C9; padding: 4px 16px; border-radius: 999px; margin-bottom: 14px;">
             <span style="font-size: 0.8rem; font-weight: 800; color: #1E7E34;">
-              ◈ ${txt('بوابة التحقق الرقمي المعتمدة رسمياً', 'Officially Accredited Verification Portal', 'Portail de Vérification Officiel')}
+              ${txt('بوابة التحقق الرقمي المعتمدة رسمياً', 'Officially Accredited Verification Portal', 'Portail de Vérification Officiel')}
             </span>
           </div>
 
@@ -348,7 +348,7 @@ export function bindVerifyEvents() {
                 text-align: center;
                 border: 2px solid #D97706;
               ">
-                <span style="font-size: 1.3rem; font-weight: 900;">★</span>
+                <span style="font-size: 1.3rem; font-weight: 900;"></span>
                 <span>SHAT SEAL</span>
               </div>
 

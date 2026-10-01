@@ -4,6 +4,7 @@
 // Output: Real-time maturity score, gap analysis, and tailored capacity development roadmap
 
 import { showToast } from '../components/toast.js';
+import { icons } from '../icons.js';
 
 export const diagnosticTool = {
   pillars: [
@@ -102,7 +103,7 @@ export const diagnosticTool = {
       <div class="diagnostic-tool-wrapper" style="text-align: ${isRtl ? 'right' : 'left'};">
         <div style="margin-bottom: 20px; background: linear-gradient(135deg, rgba(15,46,74,0.04) 0%, rgba(75,136,52,0.06) 100%); padding: 18px 20px; border-radius: var(--radius-md); border: 1px solid var(--border-light);">
           <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-            <span style="font-size: 1.3rem; color: var(--shat-green);">◈</span>
+            <span style="font-size: 1.3rem; color: var(--shat-green);"></span>
             <span style="font-weight: 800; font-size: 1.05rem; color: var(--shat-navy);">
               ${txt('أداة التقييم والتشخيص المؤسسي التفاعلية', 'Interactive Institutional Readiness Diagnostic', 'Outil Interactif de Diagnostic Institutionnel')}
             </span>
@@ -164,7 +165,7 @@ export const diagnosticTool = {
 
           <div style="display: flex; gap: 12px; margin-top: 24px; justify-content: flex-end;">
             <button type="button" class="btn-clean btn-secondary btn-sm" id="btn-diagnostic-sample" style="padding: 10px 16px;">
-              <span>★ ${txt('تعبئة تجريبية سريعة', 'Quick Sample Data', 'Remplissage Rapide')}</span>
+              <span>${txt('تعبئة تجريبية سريعة', 'Quick Sample Data', 'Remplissage Rapide')}</span>
             </button>
             <button type="submit" class="btn-clean btn-primary btn-lg" style="padding: 12px 28px;">
               <span>▲ ${txt('تحليل النتيجة وإصدار خارطة الطريق', 'Analyze & Generate Roadmap', 'Analyser et Générer la Feuille de Route')}</span>
@@ -337,7 +338,7 @@ export const diagnosticTool = {
         <!-- Action Roadmap & Links -->
         <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: var(--radius-xs); padding: 16px; margin-bottom: 20px;">
           <div style="font-weight: 800; font-size: 0.92rem; color: #166534; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-            <span>★</span>
+            
             <span>${txt('خارطة الطريق المقترحة من خبراء شركة شات:', 'Recommended Institutional Roadmap by SHAT:', 'Feuille de Route Recommandée :')}</span>
           </div>
           <ul style="font-size: 0.85rem; color: #14532D; margin: 0; padding-inline-start: 20px; line-height: 1.7;">
@@ -349,13 +350,14 @@ export const diagnosticTool = {
 
         <div style="display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap;">
           <a href="#/forms?id=humanitarian-worker-2026" class="btn-clean btn-secondary btn-sm" onclick="document.getElementById('modal-diagnostic-assessment').classList.remove('open');">
-            <span>▪ ${txt('التسجيل في دبلوم CHS المرشح', 'Enroll in CHS Diploma', 'S\'inscrire au Diplôme CHS')}</span>
+            <span>${txt('التسجيل في دبلوم CHS المرشح', 'Enroll in CHS Diploma', 'S\'inscrire au Diplôme CHS')}</span>
           </a>
-          <a href="#/forms?id=consulting-inquiry-2026" class="btn-clean btn-green btn-sm" onclick="document.getElementById('modal-diagnostic-assessment').classList.remove('open');" style="font-weight: 800;">
-            <span>✉ ${txt('طلب استشارة وبناء قدرات مؤسسية', 'Request Consulting Intervention', 'Demande de Conseil')}</span>
+          <a href="#/forms?id=consulting-inquiry-2026" class="btn-clean btn-green btn-sm" onclick="document.getElementById('modal-diagnostic-assessment').classList.remove('open');" style="font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
+            <span style="display: inline-flex; align-items: center;">${icons.whatsapp('', 16)}</span>
+            <span>${txt('طلب استشارة وبناء قدرات مؤسسية', 'Request Consulting Intervention', 'Demande de Conseil')}</span>
           </a>
           <button class="btn-clean btn-sm" style="background: #FFFFFF; border: 1px solid var(--border-medium); color: var(--shat-navy);" onclick="window.print();">
-            <span>⎙ ${txt('طباعة التقرير', 'Print Report', 'Imprimer')}</span>
+            <span>${txt('طباعة التقرير', 'Print Report', 'Imprimer')}</span>
           </button>
         </div>
       </div>

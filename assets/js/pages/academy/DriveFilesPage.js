@@ -63,7 +63,7 @@ export function renderDriveFilesPage() {
         <div style="padding: var(--space-lg); border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-md);">
           <div>
             <h3 style="margin: 0; font-size: var(--font-size-h4); color: var(--text-primary);">
-              ◈ البيانات الوصفية للملفات المعتمدة (Database Metadata)
+              البيانات الوصفية للملفات المعتمدة (Database Metadata)
             </h3>
             <div style="font-size: var(--font-size-caption); color: var(--text-muted); margin-top: 4px;">
               يتم إدارة سجلات الملفات عبر جدول public.shat_course_materials. التحميل المباشر يتطلب ربط Google Drive API.
@@ -89,7 +89,7 @@ export function renderDriveFilesPage() {
                 <tr>
                   <td>
                     <div style="display: flex; align-items: center; gap: 8px;">
-                      <span>▪</span>
+                      
                       <strong style="color: var(--text-primary);">${m.name}</strong>
                     </div>
                   </td>

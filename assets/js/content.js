@@ -358,9 +358,9 @@ export const content = {
       subtitle: "منظومة شركة شات للتنمية والتطوير الأكاديمية والمؤسسية الموحدة",
       tabs: {
         corporate: "حساب المؤسسة",
-        nationalId: "الهوية الأكاديمية",
-        whatsapp: "دخول واتساب السريع",
-        simulator: "معاينة الأدوار الفورية"
+        nationalId: "الهوية الرقمية",
+        whatsapp: "واتساب السريع",
+        simulator: "محاكي الأدوار"
       },
       quickDemoTitle: "تجربة سريعة للحسابات الرسمية (انقر للتعبئة التلقائية):",
       adminRole: "المدير العام",
@@ -380,7 +380,7 @@ export const content = {
       nationalIdBtn: "التحقق الفوري وتسجيل الدخول ←",
       whatsappPhoneLabel: "رقم هاتف الواتساب المسجل *",
       whatsappPhonePlaceholder: "+972 59 XXX XXXX أو +970 59 XXX XXXX",
-      whatsappBtn: "إرسال رمز التحقق الفوري (OTP) ✉",
+      whatsappBtn: "إرسال رمز التحقق الفوري (OTP)",
       whatsappOtpLabel: "رمز التحقق السريع المكون من 4 أرقام:",
       whatsappVerifyBtn: "تأكيد الرمز والدخول إلى حسابك ←",
       whatsappSimNote: "خدمة فورية مرتبطة بحساب واتساب المؤسسي المعتمد",
@@ -812,10 +812,10 @@ export const content = {
       title: "Welcome Back • SHAT Platform",
       subtitle: "SHAT Development & Growth Unified Institutional & Academic Platform",
       tabs: {
-        corporate: "Corporate Account",
-        nationalId: "Student / ID",
-        whatsapp: "Instant WhatsApp",
-        simulator: "1-Click Role Preview"
+        corporate: "Enterprise Account",
+        nationalId: "Academic ID",
+        whatsapp: "WhatsApp OTP",
+        simulator: "Role Simulator"
       },
       quickDemoTitle: "Quick Role Selector (Click for instant fill):",
       adminRole: "Super Admin",
@@ -835,7 +835,7 @@ export const content = {
       nationalIdBtn: "Instant ID Verification Sign In ←",
       whatsappPhoneLabel: "Registered WhatsApp Phone Number *",
       whatsappPhonePlaceholder: "+972 59 XXX XXXX or +970 59 XXX XXXX",
-      whatsappBtn: "Send Instant Verification Code (OTP) ✉",
+      whatsappBtn: "Send Instant Verification Code (OTP)",
       whatsappOtpLabel: "4-Digit Instant Verification Code:",
       whatsappVerifyBtn: "Verify Code & Sign In ←",
       whatsappSimNote: "Direct verification linked to authorized institutional WhatsApp service",
@@ -1268,8 +1268,8 @@ export const content = {
       subtitle: "Système Unifié de Gestion Académique et Institutionnelle SHAT",
       tabs: {
         corporate: "Compte Entreprise",
-        nationalId: "ID / Étudiant",
-        whatsapp: "WhatsApp Instantané",
+        nationalId: "Identifiant Académique",
+        whatsapp: "WhatsApp OTP",
         simulator: "Simulateur de Rôles"
       },
       quickDemoTitle: "Sélecteur Rapide de Compte (Cliquez pour remplir):",
@@ -1290,7 +1290,7 @@ export const content = {
       nationalIdBtn: "Vérification Immédiate & Connexion ←",
       whatsappPhoneLabel: "Numéro de Téléphone WhatsApp Enregistré *",
       whatsappPhonePlaceholder: "+972 59 XXX XXXX ou +970 59 XXX XXXX",
-      whatsappBtn: "Envoyer le Code de Vérification Instantané (OTP) ✉",
+      whatsappBtn: "Envoyer le Code de Vérification Instantané (OTP)",
       whatsappOtpLabel: "Code de Vérification à 4 Chiffres :",
       whatsappVerifyBtn: "Confirmer le Code & Se Connecter ←",
       whatsappSimNote: "Service direct lié au compte WhatsApp officiel de l'institution",

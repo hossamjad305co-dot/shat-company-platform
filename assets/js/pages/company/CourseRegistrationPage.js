@@ -34,7 +34,7 @@ export async function renderCourseRegistrationPage(selectedCourseId = '') {
         </div>
         <div style="text-align: center; margin-bottom: 32px;">
           <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(75, 136, 52, 0.12); color: var(--shat-green-800); padding: 6px 16px; border-radius: var(--radius-full); font-size: 0.85rem; font-weight: 700; margin-bottom: 12px;">
-            ◈ التسجيل الأكاديمي والمهني المعتمد
+            التسجيل الأكاديمي والمهني المعتمد
           </div>
           <h1 style="font-size: var(--font-size-h2); color: var(--shat-navy-950); margin: 0 0 10px; font-weight: 900;">
             استمارة الالتحاق بمساقات شات التدريبية
@@ -49,7 +49,7 @@ export async function renderCourseRegistrationPage(selectedCourseId = '') {
           <div style="background: #eff6ff; border: 1.5px solid #bfdbfe; border-radius: var(--radius-lg); padding: 18px 20px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
             <div>
               <strong style="color: #1e40af; font-size: 0.95rem; display: block; margin-bottom: 4px;">
-                ▪ تفضل التسجيل عبر Google Form؟
+                تفضل التسجيل عبر Google Form؟
               </strong>
               <span style="font-size: 0.82rem; color: #3b82f6;">
                 يمكنك التقديم عبر نموذج جوجل الرسمي للشركة أو المتابعة مباشرة عبر الاستمارة الإلكترونية أدناه.
@@ -117,11 +117,11 @@ export async function renderCourseRegistrationPage(selectedCourseId = '') {
 
             <!-- Submit Button -->
             <button type="submit" id="btn-submit-application" class="shat-btn shat-btn-primary" style="width: 100%; height: 50px; font-size: 1.05rem; font-weight: 800; justify-content: center;">
-              <span>إرسال طلب التسجيل والاعتماد ★</span>
+              <span>إرسال طلب التسجيل والاعتماد</span>
             </button>
 
             <div style="text-align: center; margin-top: 14px; font-size: var(--font-size-caption); color: var(--text-muted);">
-              ◈ بياناتك محمية وفق سياسة الخصوصية وحوكمة البيانات المعتمدة لشركة شات.
+              بياناتك محمية وفق سياسة الخصوصية وحوكمة البيانات المعتمدة لشركة شات.
             </div>
           </form>
 
@@ -197,7 +197,7 @@ export function initCourseRegistrationEvents() {
       alert(res.error || 'حدث خطأ أثناء إرسال الطلب. يرجى المحاولة لاحقاً.');
       if (btn) {
         btn.disabled = false;
-        btn.innerHTML = 'إرسال طلب التسجيل والاعتماد ★';
+        btn.innerHTML = 'إرسال طلب التسجيل والاعتماد';
       }
     }
   };

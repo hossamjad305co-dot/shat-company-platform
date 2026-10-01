@@ -3,6 +3,7 @@
 import { api } from '../services/api/apiClient.js';
 import { content } from '../content.js';
 import { examEngine } from '../tools/examEngine.js';
+import { icons } from '../icons.js';
 
 export function renderCourseDetailView(lang = 'ar') {
   const isRtl = lang === 'ar';
@@ -94,8 +95,9 @@ export async function bindCourseDetailEvents() {
     const c = (res && res.course) ? res.course : res;
     if (!c || !c.title) {
       container.innerHTML = `
-        <div style="background: #FFFFFF; border-radius: var(--radius-md); padding: 48px; text-align: center; border: 1px solid var(--border-light);">
-          <div style="font-size: 2.2rem; color: #DC2626; margin-bottom: 16px; font-weight: 900;">◈</div>
+          <div style="display: flex; justify-content: center; color: #DC2626; margin-bottom: 16px;">
+            ${icons.alertCircle('', 44)}
+          </div>
           <h2 style="font-weight: 800; color: var(--shat-navy); margin-bottom: 8px;">
             ${txt('المساق التدريبي غير متاح', 'Course Track Not Found', 'Cursus Non Disponible')}
           </h2>
@@ -124,16 +126,16 @@ export async function bindCourseDetailEvents() {
               <span class="badge" style="background: rgba(30, 166, 114, 0.25); color: #4ADE80; border: 1px solid rgba(74, 222, 128, 0.3); font-family: var(--font-mono);">${c.code}</span>
               <span class="badge" style="background: rgba(255, 255, 255, 0.12); color: #F8FAFC;">${c.track}</span>
               <span class="badge" style="background: rgba(245, 158, 11, 0.2); color: #FBBF24;">${c.level}</span>
-              ${c.fee ? `<span class="badge" style="background: rgba(217, 119, 6, 0.25); color: #FCD34D; border: 1px solid rgba(252, 211, 77, 0.4); font-weight: 800;"><span class="pro-symbol-badge">✦</span> ${c.fee}</span>` : ''}
+              ${c.fee ? `<span class="badge" style="background: rgba(217, 119, 6, 0.25); color: #FCD34D; border: 1px solid rgba(252, 211, 77, 0.4); font-weight: 800;"><span class="pro-symbol-badge"></span> ${c.fee}</span>` : ''}
             </div>
             <h1 style="font-size: 1.85rem; font-weight: 900; line-height: 1.4; margin-bottom: 14px; color: #FFFFFF;">${courseTitle}</h1>
             <p style="color: #CBD5E1; font-size: 0.96rem; line-height: 1.7; margin-bottom: 20px;">
               ${c.overview || c.summary || ''}
             </p>
             <div style="display: flex; gap: 20px; flex-wrap: wrap; font-size: 0.88rem; color: #94A3B8;">
-              <div style="display: flex; align-items: center; gap: 6px;"><span class="pro-symbol-badge">▪</span> ${txt('المدرب المعتمد:', 'Master Trainer:', 'Formateur Expert :')} <strong style="color: #FFFFFF;">${c.instructorName || 'أ. حسام جاد الله'}</strong></div>
-              <div style="display: flex; align-items: center; gap: 6px;"><span class="pro-symbol-badge">◷</span> ${txt('الساعات المعتمدة:', 'Accredited Hours:', 'Heures Certifiées :')} <strong style="color: #FFFFFF;">${c.hours || '30 ساعة'}</strong></div>
-              <div style="display: flex; align-items: center; gap: 6px;"><span class="pro-symbol-badge">▪</span> ${txt('المواعيد:', 'Schedule:', 'Horaires :')} <strong style="color: #FFFFFF;">${c.schedule || 'مرن / أسبوعي'}</strong></div>
+              <div style="display: flex; align-items: center; gap: 6px;"><span class="pro-symbol-badge"></span> ${txt('المدرب المعتمد:', 'Master Trainer:', 'Formateur Expert :')} <strong style="color: #FFFFFF;">${c.instructorName || 'أ. حسام جاد الله'}</strong></div>
+              <div style="display: flex; align-items: center; gap: 6px;"><span class="pro-symbol-badge"></span> ${txt('الساعات المعتمدة:', 'Accredited Hours:', 'Heures Certifiées :')} <strong style="color: #FFFFFF;">${c.hours || '30 ساعة'}</strong></div>
+              <div style="display: flex; align-items: center; gap: 6px;"><span class="pro-symbol-badge"></span> ${txt('المواعيد:', 'Schedule:', 'Horaires :')} <strong style="color: #FFFFFF;">${c.schedule || 'مرن / أسبوعي'}</strong></div>
             </div>
           </div>
 
@@ -157,7 +159,7 @@ export async function bindCourseDetailEvents() {
               </a>
               ${(c.driveFolderUrl || c.driveUrl) ? `
                 <a href="${c.driveFolderUrl || c.driveUrl}" target="_blank" rel="noopener noreferrer" class="btn-clean" style="width: 100%; justify-content: center; margin-bottom: 8px; background: rgba(59, 130, 246, 0.2); color: #93C5FD; border: 1px solid rgba(147, 197, 253, 0.4); text-decoration: none; font-weight: 700; font-size: 0.85rem;">
-                  <span>◈ ${txt('فتح مجلد Google Drive للمساق', 'Open Google Drive Materials', 'Ouvrir Dossier Google Drive')}</span>
+                  <span>${txt('فتح مجلد Google Drive للمساق', 'Open Google Drive Materials', 'Ouvrir Dossier Google Drive')}</span>
                   <span>↗</span>
                 </a>
               ` : ''}
@@ -165,7 +167,7 @@ export async function bindCourseDetailEvents() {
               <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px;">
                 ${c.googleFormUrl ? `
                   <a href="${c.googleFormUrl}" target="_blank" rel="noopener noreferrer" class="btn-clean" style="width: 100%; justify-content: center; background: #D97706; color: #FFFFFF; font-weight: 800; font-size: 0.88rem; padding: 10px; border-radius: 8px; text-decoration: none; box-shadow: 0 4px 12px rgba(217,119,6,0.25); display: flex; align-items: center; gap: 6px;">
-                    <span class="pro-symbol-badge">▪</span>
+                    <span class="pro-symbol-badge"></span>
                     <span>${txt('التسجيل عبر Google Form الرسمي', 'Register via Official Google Form', 'Inscription via Google Form')}</span>
                     <span style="font-size: 0.8rem;">↗</span>
                   </a>
@@ -179,7 +181,7 @@ export async function bindCourseDetailEvents() {
 
                 ${(c.driveFolderUrl || c.driveUrl) ? `
                   <button type="button" class="btn-clean btn-intercept-download" data-file="حقيبة المساق التدريبية على Google Drive" style="width: 100%; justify-content: center; background: rgba(59, 130, 246, 0.15); color: #93C5FD; border: 1px solid rgba(147, 197, 253, 0.3); font-weight: 700; font-size: 0.82rem; padding: 8px; border-radius: 6px; cursor: pointer;">
-                    <span>◈ ${txt('حقيبة Google Drive (يتطلب تسجيلاً)', 'Drive Materials (Enroll to Access)', 'Dossier Drive (Connexion Requise)')}</span>
+                    <span>${txt('حقيبة Google Drive (يتطلب تسجيلاً)', 'Drive Materials (Enroll to Access)', 'Dossier Drive (Connexion Requise)')}</span>
                   </button>
                 ` : ''}
               </div>
@@ -199,7 +201,7 @@ export async function bindCourseDetailEvents() {
                 align-items: center;
                 gap: 8px;
               ">
-                <span class="pro-symbol-badge">▪</span>
+                <span class="pro-symbol-badge"></span>
                 <span>${txt('تحميل / استعراض الخطة (Syllabus)', 'Accredited Syllabus (PDF)', 'Syllabus Officiel (PDF)')}</span>
               </button>
               <div style="font-size: 0.78rem; color: #94A3B8;">
@@ -245,7 +247,7 @@ export async function bindCourseDetailEvents() {
                     ${(ch.lessons || []).map(les => `
                       <div style="background: #F8FAFC; border-radius: var(--radius-xs); padding: 16px; border: 1px solid #E2E8F0;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                          <div style="font-weight: 700; color: var(--shat-navy); font-size: 0.95rem;">▪ ${les.title}</div>
+                          <div style="font-weight: 700; color: var(--shat-navy); font-size: 0.95rem;">${les.title}</div>
                           <span style="font-size: 0.8rem; color: var(--text-muted);">${les.duration}</span>
                         </div>
                         <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.6;">${les.contentSummary}</p>
@@ -271,7 +273,7 @@ export async function bindCourseDetailEvents() {
                                     </a>
                                   ` : `
                                     <button type="button" class="btn-clean btn-sm btn-intercept-download" data-file="${m.name}" style="background: #F8FAFC; color: var(--shat-navy); border: 1px solid var(--border-medium); font-size: 0.8rem; font-weight: 700; cursor: pointer;">
-                                      <span>◈ ${txt('تحميل المرجع (يتطلب التحاقاً)', 'Enroll to Download', 'Inscription Requise')}</span>
+                                      <span>${txt('تحميل المرجع (يتطلب التحاقاً)', 'Enroll to Download', 'Inscription Requise')}</span>
                                     </button>
                                   `}
                                 </div>
@@ -318,7 +320,7 @@ export async function bindCourseDetailEvents() {
           <!-- Accredited Exam & Certification Card -->
           <div style="background: linear-gradient(135deg, #064E3B 0%, #065F46 100%); color: #FFFFFF; border-radius: var(--radius-sm); padding: 22px; margin-bottom: 24px; box-shadow: var(--shadow-sm); border: 1px solid rgba(16,185,129,0.3);">
             <div style="font-size: 0.82rem; font-weight: 800; color: #6EE7B7; margin-bottom: 6px;">
-              ◈ ${txt('التقييم والاعتماد المهني', 'Accredited Assessment & Certification', 'Certification Homologuée')}
+              ${txt('التقييم والاعتماد المهني', 'Accredited Assessment & Certification', 'Certification Homologuée')}
             </div>
             <h4 style="font-size: 1.05rem; font-weight: 800; color: #FFFFFF; margin-bottom: 8px;">
               ${txt('الاختبار النهائي للبرنامج التدريبي', 'Course Final Examination', 'Examen Final du Cursus')}
@@ -335,7 +337,7 @@ export async function bindCourseDetailEvents() {
                 <span>✓ ${txt('خوض الاختبار النهائي المعتمد', 'Take Final Accredited Exam', 'Passer l’Examen Final')}</span>
               </button>
               <button type="button" class="btn-clean btn-sm" id="btn-view-course-cert-quick" style="background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.25); justify-content: center; padding: 8px; border-radius: 6px; font-weight: 700; cursor: pointer;">
-                <span>◈ ${txt('استعراض شهاداتي المكتسبة', 'View My Earned Certificates', 'Mes Certificats')}</span>
+                <span>${txt('استعراض شهاداتي المكتسبة', 'View My Earned Certificates', 'Mes Certificats')}</span>
               </button>
             </div>
           </div>
@@ -343,7 +345,7 @@ export async function bindCourseDetailEvents() {
           <!-- Interactive Digital Tools Sidebar Widget -->
           <div style="background: linear-gradient(135deg, #0F2E4A 0%, #071726 100%); color: #FFFFFF; border-radius: var(--radius-sm); padding: 22px; margin-bottom: 24px; box-shadow: var(--shadow-sm); border: 1px solid rgba(255,255,255,0.1);">
             <div style="font-size: 0.82rem; font-weight: 800; color: #4ADE80; margin-bottom: 6px;">
-              ◈ ${txt('الأدوات المنهجية المعتمدة', 'Accredited Methodological Tools', 'Outils Méthodologiques')}
+              ${txt('الأدوات المنهجية المعتمدة', 'Accredited Methodological Tools', 'Outils Méthodologiques')}
             </div>
             <h4 style="font-size: 1.05rem; font-weight: 800; color: #FFFFFF; margin-bottom: 14px;">
               ${txt('أدوات التحقق والامتثال لهذا المساق', 'Verification & Standards Tools', 'Outils de Vérification')}
@@ -353,10 +355,10 @@ export async function bindCourseDetailEvents() {
                 <span>• ${txt('التحقق من الشهادات الرقمية الصادرة', 'Verify Digital Certificates', 'Vérifier Certificats')}</span>
               </button>
               <button type="button" class="btn-clean btn-sm" onclick="if(window.openStandardsExplorer) window.openStandardsExplorer('${c.code || 'CHS'}');" style="background: rgba(255,255,255,0.1); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.2); justify-content: flex-start; padding: 8px 12px; border-radius: 6px;">
-                <span>▪ ${txt('قوائم التحقق والامتثال للمعايير', 'Standards Compliance Explorer', 'Normes & Référentiels')}</span>
+                <span>${txt('قوائم التحقق والامتثال للمعايير', 'Standards Compliance Explorer', 'Normes & Référentiels')}</span>
               </button>
               <button type="button" class="btn-clean btn-sm" onclick="if(window.openToolkitsLibrary) window.openToolkitsLibrary();" style="background: rgba(255,255,255,0.1); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.2); justify-content: flex-start; padding: 8px 12px; border-radius: 6px;">
-                <span>▪ ${txt('مكتبة القوالب والمصفوفات الميدانية', 'Field Toolkits & Matrices Hub', 'Modèles & Outils')}</span>
+                <span>${txt('مكتبة القوالب والمصفوفات الميدانية', 'Field Toolkits & Matrices Hub', 'Modèles & Outils')}</span>
               </button>
             </div>
           </div>

@@ -1588,20 +1588,85 @@ html, body {
 
 /* Responsive Login Hub & Tab Ergonomics */
 .login-card-container {
+  width: 100%;
+  max-width: 520px;
+  box-sizing: border-box;
   transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.login-tabs-container {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+  background: var(--bg-subtle);
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  margin-bottom: 22px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.login-tab-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 10px 8px !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  border-radius: 6px !important;
+  text-align: center !important;
+  border: 1px solid var(--border-light) !important;
+  background: #FFFFFF !important;
+  color: var(--text-secondary) !important;
+  transition: all 0.2s ease !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.login-tab-btn:hover {
+  background: #F8FAFC !important;
+  color: var(--shat-navy) !important;
+  border-color: var(--border-medium) !important;
+}
+
+.login-tab-btn.active {
+  background: #FFFFFF !important;
+  color: var(--shat-navy) !important;
+  border: 1.5px solid var(--shat-green) !important;
+  box-shadow: 0 2px 6px rgba(15, 46, 74, 0.08) !important;
+  font-weight: 800 !important;
+}
+
+.login-tab-btn .svg-icon {
+  flex-shrink: 0;
+  color: var(--shat-green);
+}
+
+.login-tab-btn.active .svg-icon {
+  color: var(--shat-green);
 }
 
 @media (max-width: 600px) {
   .login-card-container {
-    padding: 24px 18px !important;
+    padding: 24px 16px !important;
   }
   .login-tabs-container {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 6px !important;
+    padding: 4px !important;
   }
   .login-tab-btn {
-    font-size: 0.74rem !important;
-    padding: 7px 4px !important;
+    font-size: 0.76rem !important;
+    padding: 8px 4px !important;
+    gap: 5px !important;
   }
   #tab-pane-simulator div[style*="grid-template-columns: 1fr 1fr"] {
     grid-template-columns: 1fr !important;

@@ -333,7 +333,7 @@ export const examEngine = {
         <div class="modal-window" style="max-width: 780px; max-height: 92vh; display: flex; flex-direction: column;">
           <div class="modal-top no-print" style="border-bottom: 2px solid var(--shat-navy); padding: 18px 24px;">
             <div style="display: flex; align-items: center; gap: 10px;">
-              <span style="font-size: 1.5rem; color: var(--shat-navy);">◈</span>
+              <span style="font-size: 1.5rem; color: var(--shat-navy);"></span>
               <div>
                 <h3 id="modal-exam-title" style="font-size: 1.15rem; font-weight: 900; color: var(--shat-navy); margin: 0;"></h3>
                 <span id="modal-exam-subtitle" style="font-size: 0.78rem; color: var(--shat-green); font-weight: 700;"></span>
@@ -492,7 +492,7 @@ export const examEngine = {
             ✓
           </div>
           <h2 style="font-size: 1.6rem; font-weight: 900; color: var(--shat-navy); margin: 0 0 8px;">
-            ★ ${txt('مبارك! تم اجتياز الاختبار بنجاح باهر', 'Congratulations! You Passed Successfully', 'Félicitations ! Examen Réussi')}
+            ${txt('مبارك! تم اجتياز الاختبار بنجاح باهر', 'Congratulations! You Passed Successfully', 'Félicitations ! Examen Réussi')}
           </h2>
           <div style="font-size: 1.15rem; font-weight: 800; color: var(--shat-green); margin-bottom: 12px;">
             ${txt('النتيجة النهائية:', 'Final Score:', 'Score Final :')} ${scorePercentage}% (${correctCount}/${totalCount})
@@ -517,7 +517,7 @@ export const examEngine = {
 
           <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
             <button type="button" class="btn-clean btn-primary btn-md" id="btn-view-generated-cert" style="background: var(--shat-navy); font-weight: 800; padding: 12px 24px; box-shadow: 0 4px 14px rgba(15,46,74,0.3);">
-              ◈ ${txt('استعراض وتحميل الشهادة المعتمدة', 'View & Print Official Certificate', 'Voir le Certificat Homologué')}
+              ${txt('استعراض وتحميل الشهادة المعتمدة', 'View & Print Official Certificate', 'Voir le Certificat Homologué')}
             </button>
             <button type="button" class="btn-clean btn-secondary btn-md" id="btn-close-exam-modal">
               ${txt('إغلاق والعودة', 'Close', 'Fermer')}
@@ -661,7 +661,7 @@ export const examEngine = {
         <div class="modal-window" style="max-width: 900px; max-height: 94vh; display: flex; flex-direction: column;">
           <div class="modal-top no-print" style="border-bottom: 2px solid var(--shat-navy); padding: 16px 24px;">
             <div style="display: flex; align-items: center; gap: 10px;">
-              <span style="font-size: 1.4rem;">◈</span>
+              <span style="font-size: 1.4rem;"></span>
               <h3 style="font-size: 1.15rem; font-weight: 900; color: var(--shat-navy); margin: 0;">
                 ${txt('الشهادة الرقمية المعتمدة رسمياً', 'Officially Accredited Digital Certificate', 'Certificat Numérique Homologué')}
               </h3>
@@ -720,7 +720,7 @@ export const examEngine = {
 
           <div style="text-align: ${isAr ? 'left' : 'right'};">
             <span style="display: inline-block; background: #FEF3C7; border: 1px solid #F59E0B; color: #B45309; padding: 4px 12px; border-radius: 999px; font-size: 0.72rem; font-weight: 800;">
-              ★ ${txt('اعتماد دولي وتدقيق مؤسسي معتمد', 'Accredited Credential', 'Certificat Homologué')}
+              ${txt('اعتماد دولي وتدقيق مؤسسي معتمد', 'Accredited Credential', 'Certificat Homologué')}
             </span>
             <div style="font-size: 0.72rem; font-family: var(--font-mono); color: #64748B; margin-top: 4px; font-weight: 700;">
               REF: ${cert.serial}
@@ -820,7 +820,7 @@ export const examEngine = {
               text-align: center;
               padding: 6px;
             ">
-              <span style="font-size: 1.3rem; font-weight: 900;">★</span>
+              <span style="font-size: 1.3rem; font-weight: 900;"></span>
               <span style="font-size: 0.58rem; font-weight: 900; letter-spacing: 0.5px;">SHAT SEAL</span>
               <span style="font-size: 0.5rem; font-weight: 800;">VERIFIED 2026</span>
             </div>

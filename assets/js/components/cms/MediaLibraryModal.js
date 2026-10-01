@@ -12,7 +12,7 @@ export function MediaLibraryModal() {
         <!-- Header -->
         <div style="padding: 16px 24px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; background: #f8fafc;">
           <div>
-            <h3 style="margin: 0; font-size: var(--font-size-h3); color: var(--shat-navy-950);">◈ مكتبة الوسائط والصور (Media Library)</h3>
+            <h3 style="margin: 0; font-size: var(--font-size-h3); color: var(--shat-navy-950);">مكتبة الوسائط والصور (Media Library)</h3>
             <p style="margin: 4px 0 0; font-size: var(--font-size-caption); color: var(--text-muted);">إدارة الصور والبوسترات المعتمدة لاستخدامها في المنشورات والأغلفة</p>
           </div>
           <button type="button" class="btn-close-media-library" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); min-height: 44px; min-width: 44px;">✕</button>
@@ -30,7 +30,7 @@ export function MediaLibraryModal() {
 
           <div style="display: flex; gap: 8px;">
             <label class="shat-btn shat-btn-primary" style="cursor: pointer; margin: 0; display: inline-flex; align-items: center; gap: 6px;">
-              <span>◈ رفع صورة جديدة</span>
+              <span>رفع صورة جديدة</span>
               <input type="file" id="media-file-input" accept="image/png,image/jpeg,image/webp,image/svg+xml" style="display: none;" />
             </label>
           </div>

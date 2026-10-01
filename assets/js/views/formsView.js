@@ -5,6 +5,7 @@
 
 import { api } from '../services/api/apiClient.js';
 import { showToast } from '../components/toast.js';
+import { icons } from '../icons.js';
 
 export function renderFormsView(lang = 'ar') {
   const isRtl = lang === 'ar';
@@ -38,7 +39,7 @@ export function renderFormsView(lang = 'ar') {
 
           <div style="display: flex; gap: 10px; align-items: center;">
             <a href="#/forms" id="btn-show-all-forms-top" class="btn-clean" style="background: #FFFFFF; border: 1px solid var(--border-light, #E2E8F0); color: var(--shat-navy, #0B1E36); font-size: 0.85rem; padding: 7px 16px;">
-              <span>▪ ${t.btnAllForms}</span>
+              <span>${t.btnAllForms}</span>
             </a>
             <a href="#/academy" class="btn-clean" style="background: #FFFFFF; border: 1px solid var(--border-light, #E2E8F0); color: var(--shat-navy, #0B1E36); font-size: 0.85rem; padding: 7px 16px;">
               <span>${t.btnBack}</span>
@@ -139,7 +140,7 @@ function renderFormsPortal(container, formsList, lang) {
       <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
         <div>
           <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(30,126,52,0.25); border: 1px solid rgba(74,222,128,0.4); padding: 4px 14px; border-radius: 999px; margin-bottom: 12px;">
-            <span style="font-size: 0.8rem; font-weight: 700; color: #4ADE80;">★ ${txt('نظام الاستمارات المتزامن رسمياً', 'Officially Synced Forms Engine', 'Moteur de Formulaires Synchronisé')}</span>
+            <span style="font-size: 0.8rem; font-weight: 700; color: #4ADE80;">${txt('نظام الاستمارات المتزامن رسمياً', 'Officially Synced Forms Engine', 'Moteur de Formulaires Synchronisé')}</span>
           </div>
           <h1 style="font-size: 1.75rem; font-weight: 900; color: #FFFFFF; margin: 0 0 8px;">
             ${txt('استمارات التسجيل والالتحاق بالبرامج المعتمدة 2026', 'Official Program Registration & Admission Forms 2026', 'Formulaires d’Inscription et d’Admission 2026')}
@@ -155,7 +156,7 @@ function renderFormsPortal(container, formsList, lang) {
 
         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
           <button type="button" id="tab-btn-catalog" class="btn-clean" style="background: var(--shat-green, #1E7E34); color: #FFFFFF; font-weight: 700; padding: 10px 20px; border-radius: 8px;">
-            ▪ ${txt('نماذج التسجيل المتاحة', 'Available Forms', 'Formulaires Disponibles')}
+            ${txt('نماذج التسجيل المتاحة', 'Available Forms', 'Formulaires Disponibles')}
           </button>
           <button type="button" id="tab-btn-submissions" class="btn-clean" style="background: rgba(255,255,255,0.15); color: #FFFFFF; font-weight: 700; padding: 10px 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2);">
             ▲ ${txt('سجل طلبات التسجيل (الإدارة)', 'Submissions Log', 'Registre des Inscriptions')}
@@ -192,9 +193,9 @@ function renderFormsPortal(container, formsList, lang) {
 
                 <!-- Program Highlights Pills -->
                 <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.84rem; color: #334155; background: #F8FAFC; padding: 12px 14px; border-radius: 8px;">
-                  ${form.trainer ? `<div style="display: flex; align-items: center; gap: 8px;"><span>❖</span> <span><strong>المدرب / الخبير:</strong> ${form.trainer}</span></div>` : ''}
-                  ${form.hours ? `<div style="display: flex; align-items: center; gap: 8px;"><span>◷</span> <span><strong>المدة:</strong> ${form.hours}</span></div>` : ''}
-                  ${form.fee ? `<div style="display: flex; align-items: center; gap: 8px;"><span>▪</span> <span><strong>الرسوم:</strong> <span style="color: #1E7E34; font-weight: 700;">${form.fee}</span></span></div>` : ''}
+                  ${form.trainer ? `<div style="display: flex; align-items: center; gap: 8px;"> <span><strong>المدرب / الخبير:</strong> ${form.trainer}</span></div>` : ''}
+                  ${form.hours ? `<div style="display: flex; align-items: center; gap: 8px;"> <span><strong>المدة:</strong> ${form.hours}</span></div>` : ''}
+                  ${form.fee ? `<div style="display: flex; align-items: center; gap: 8px;"> <span><strong>الرسوم:</strong> <span style="color: #1E7E34; font-weight: 700;">${form.fee}</span></span></div>` : ''}
                 </div>
               </div>
 
@@ -220,8 +221,8 @@ function renderFormsPortal(container, formsList, lang) {
 
       <!-- Trust Assurance Box -->
       <div style="background: #FFFFFF; border-radius: 12px; border: 1px solid var(--border-light, #E2E8F0); padding: 24px 28px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
-        <div style="width: 48px; height: 48px; border-radius: 50%; background: #DCFCE7; color: #166534; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; font-weight: 900;">
-          ◈
+        <div style="width: 48px; height: 48px; border-radius: 50%; background: #DCFCE7; color: #166534; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          ${icons.shield('', 24)}
         </div>
         <div style="flex: 1; min-width: 250px;">
           <h4 style="margin: 0 0 4px; font-weight: 800; color: var(--shat-navy, #0B1E36); font-size: 1rem;">
@@ -245,7 +246,7 @@ function renderFormsPortal(container, formsList, lang) {
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
           <div>
             <h2 style="margin: 0 0 6px; font-weight: 900; color: var(--shat-navy, #0B1E36); font-size: 1.25rem;">
-              ▪ ${txt('سجل طلبات التسجيل الميدانية الموثقة', 'Recorded Applications Log', 'Registre des Candidatures')}
+              ${txt('سجل طلبات التسجيل الميدانية الموثقة', 'Recorded Applications Log', 'Registre des Candidatures')}
             </h2>
             <p style="margin: 0; color: var(--text-muted, #64748B); font-size: 0.86rem;">
               ${txt('استعراض كافة الاستجابات الواردة عبر استمارات الموقع والمزامنة مع Google Forms', 'All responses registered via website forms and synced with Google Forms', 'Toutes les réponses enregistrées')}
@@ -414,7 +415,7 @@ function renderSubmissionsRows(list) {
         </td>
         <td style="padding: 12px 14px; text-align: center;">
           <button type="button" class="btn-clean btn-sm btn-view-sub" data-index="${idx}" style="background: #F1F5F9; color: var(--shat-navy, #0B1E36); font-size: 0.78rem; padding: 5px 10px; border-radius: 6px; font-weight: 700;">
-            ▪ عرض
+            عرض
           </button>
         </td>
       </tr>
@@ -561,17 +562,17 @@ function renderSingleForm(container, form, lang, formsList) {
 
         <!-- Course Meta Row -->
         <div style="display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.86rem; color: #CBD5E1; margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.15);">
-          ${form.trainer ? `<div>❖ <strong>المدرب:</strong> ${form.trainer}</div>` : ''}
-          ${form.hours ? `<div>◷ <strong>الساعات:</strong> ${form.hours}</div>` : ''}
-          ${form.fee ? `<div>▪ <strong>الرسوم:</strong> <span style="color: #4ADE80; font-weight: 700;">${form.fee}</span></div>` : ''}
-          ${form.certificate ? `<div>▪ <strong>الشهادة:</strong> ${form.certificate}</div>` : ''}
+          ${form.trainer ? `<div><strong>المدرب:</strong> ${form.trainer}</div>` : ''}
+          ${form.hours ? `<div><strong>الساعات:</strong> ${form.hours}</div>` : ''}
+          ${form.fee ? `<div><strong>الرسوم:</strong> <span style="color: #4ADE80; font-weight: 700;">${form.fee}</span></div>` : ''}
+          ${form.certificate ? `<div><strong>الشهادة:</strong> ${form.certificate}</div>` : ''}
         </div>
       </div>
 
       <!-- Sync & Security Assurance Bar -->
       <div style="background: #F0FDF4; padding: 12px 36px; border-bottom: 1px solid #DCFCE7; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 0.84rem; color: #166534;">
         <div style="display: flex; align-items: center; gap: 8px;">
-          <span>◈</span>
+          
           <span>${txt(
             'توثيق آمن: يتم تسجيل طلبك في المنصة وإرساله مباشرة لجدول المتابعة الميداني على Google Forms.',
             'Secure Dual-Sync: Recorded directly to SHAT database and Google Form sheet simultaneously.',
@@ -784,11 +785,11 @@ function renderSingleForm(container, form, lang, formsList) {
 
             <!-- Actions Row -->
             <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-              <a href="https://wa.me/972592879621?text=${encodeURIComponent('مرحباً شركة شات، قمت للتو بتقديم طلب تسجيل في: ' + form.title)}" target="_blank" class="btn-clean" style="background: #25D366; color: #FFFFFF; font-weight: 800; padding: 12px 24px; border-radius: 8px;">
-                ✉ متابعة عبر واتساب
+              <a href="https://wa.me/972592879621?text=${encodeURIComponent('مرحباً شركة شات، قمت للتو بتقديم طلب تسجيل في: ' + form.title)}" target="_blank" class="btn-clean" style="background: #25D366; color: #FFFFFF; font-weight: 800; padding: 12px 24px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px;">
+                ${icons.whatsapp('', 20)} <span>متابعة عبر واتساب</span>
               </a>
               <a href="#/forms" class="btn-clean btn-primary" style="padding: 12px 24px; border-radius: 8px;">
-                ▪ استعراض استمارات وبرامج أخرى
+                استعراض استمارات وبرامج أخرى
               </a>
               <a href="#/home" class="btn-clean" style="background: #F1F5F9; color: var(--shat-navy, #0B1E36); border: 1px solid var(--border-light, #E2E8F0); padding: 12px 20px; border-radius: 8px;">
                 الرئيسية

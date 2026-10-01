@@ -3,6 +3,7 @@
 
 import { notificationService } from '../../services/notifications/notificationService.js';
 import { BaseLayout } from '../../layouts/baseLayout.js';
+import { icons } from '../../icons.js';
 
 export function renderNotificationsPage() {
   const notifications = notificationService.getNotifications();
@@ -22,8 +23,9 @@ export function renderNotificationsPage() {
         <!-- Header -->
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
           <div>
-            <h1 style="font-size: var(--font-size-h3); color: var(--shat-navy-950); margin: 0 0 4px; font-weight: 800;">
-              ✉ الإشعارات والتنبيهات
+            <h1 style="font-size: var(--font-size-h3); color: var(--shat-navy-950); margin: 0 0 4px; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+              <span style="display: inline-flex; align-items: center; color: var(--shat-navy);">${icons.bell('', 24)}</span>
+              <span>الإشعارات والتنبيهات</span>
             </h1>
             <span style="font-size: var(--font-size-caption); color: var(--text-muted);">
               ${unreadCount > 0 ? `لديك ${unreadCount} إشعارات جديدة غير مقروءة` : 'جميع الإشعارات مقروءة'}

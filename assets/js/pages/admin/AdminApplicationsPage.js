@@ -148,7 +148,7 @@ function renderApplicationsTable(apps) {
               </td>
               <td data-label="الإجراءات">
                 <button type="button" class="shat-btn shat-btn-secondary shat-btn-sm btn-open-review" data-id="${a.id}">
-                  ◈ مراجعة واعتماد
+                  مراجعة واعتماد
                 </button>
               </td>
             </tr>

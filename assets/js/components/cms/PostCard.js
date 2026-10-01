@@ -16,9 +16,9 @@ export function PostCard({ post }) {
       <div style="padding: var(--space-lg); display: flex; flex-direction: column; flex: 1; justify-content: space-between;">
         <div>
           <div style="display: flex; gap: 8px; font-size: var(--font-size-caption); color: var(--text-muted); margin-bottom: var(--space-xs);">
-            <span>◷ ${post.date}</span>
+            <span>${post.date}</span>
             <span>•</span>
-            <span>◷ ${post.readTime || '3 دقائق'}</span>
+            <span>${post.readTime || '3 دقائق'}</span>
           </div>
 
           <h3 style="font-size: var(--font-size-h4); color: var(--text-primary); margin-bottom: var(--space-sm); line-height: 1.4;">

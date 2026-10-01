@@ -38,7 +38,7 @@ export function renderAdminUsersPage() {
         <div style="padding: var(--space-lg); border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
           <div>
             <h3 style="margin: 0; font-size: var(--font-size-h4); color: var(--text-primary);">
-              ◈ سجل الحسابات المعتمدة في النظام
+              سجل الحسابات المعتمدة في النظام
             </h3>
             <div style="font-size: var(--font-size-caption); color: var(--text-muted); margin-top: 4px;">
               يتم قناع الهوية الوطنية آلياً لحماية خصوصية البيانات وفق معيار Phase 1 Security Model.

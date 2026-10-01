@@ -19,7 +19,7 @@ export function renderDeliveryView(lang = 'ar') {
       ? 'Nos experts analysent vos réalités institutionnelles et conçoivent un accompagnement sur mesure selon ces 6 phases.'
       : (isRtl ? 'يقوم خبراؤنا بدراسة واقع مؤسستكم وتصميم تدخل استشاري أو تدريبي متكامل وفق المراحل الست.' : 'Our consultants analyze your institutional reality and engineer a tailored intervention mapped across the 6 phases.'),
     ctaBtn: lang === 'fr' ? 'Demander une Proposition Technique' : (isRtl ? 'طلب استشارة وعرض فني مخصص' : 'Request Tailored Advisory Proposal'),
-    diagBtn: isRtl ? '★ فحص جاهزية المؤسسة للتدخل' : '★ Check Readiness for Intervention'
+    diagBtn: isRtl ? 'فحص جاهزية المؤسسة للتدخل' : 'Check Readiness for Intervention'
   };
 
   return `

@@ -1,6 +1,4 @@
-// assets/js/tools/standardsExplorer.js
-// Interactive Humanitarian & International Standards Explorer & Checklist Engine
-// Deep interactive exploration of CHS, Sphere, PSEA, and OECD DAC standards
+import { icons } from '../icons.js';
 
 export const standardsExplorer = {
   data: [
@@ -216,7 +214,7 @@ export const standardsExplorer = {
         <!-- Linked Training Track & Consulting Footer -->
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-top: 1px solid var(--border-light); padding-top: 16px;">
           <div style="display: flex; align-items: center; gap: 8px;">
-            <span style="font-size: 1.1rem; color: var(--shat-green);">◈</span>
+            <span style="font-size: 1.1rem; color: var(--shat-green);"></span>
             <div>
               <div style="font-size: 0.74rem; color: var(--text-muted); font-weight: 700;">${txt('المسار الأكاديمي المرتبط:', 'Associated Academy Track:', 'Cursus Lié :')}</div>
               <div style="font-weight: 800; font-size: 0.88rem; color: var(--shat-navy);">${item.linkedCourseTitleAr}</div>
@@ -462,7 +460,7 @@ export const standardsExplorer = {
           </div>
 
           <div class="audit-seal-box">
-            <div style="font-size: 1.5rem; margin-bottom: 4px; color: var(--shat-navy);">◈</div>
+            <div style="display: flex; justify-content: center; margin-bottom: 4px; color: var(--shat-navy);">${icons.shield('', 24)}</div>
             <div style="font-size: 0.75rem; font-weight: 900; color: var(--shat-navy); letter-spacing: 0.5px;">SHAT VERIFIED AUDIT</div>
             <div style="font-size: 0.68rem; color: var(--shat-green); font-weight: 800;">معتمد • تدقيق رسمي</div>
             <div style="font-size: 0.64rem; font-family: var(--font-mono); color: #94A3B8; margin-top: 2px;">${refNumber}</div>
@@ -478,11 +476,12 @@ export const standardsExplorer = {
         </button>
 
         <div style="display: flex; gap: 10px;">
-          <a href="#/contact" class="btn-clean btn-sm" style="background: var(--bg-subtle); color: var(--shat-navy); border: 1px solid var(--border-light); font-weight: 700;">
-            ✉ ${txt('طلب استشارة تنفيذية مخصصة', 'Request Advisory', 'Demande de Conseil')}
+          <a href="#/contact" class="btn-clean btn-sm" style="background: var(--bg-subtle); color: var(--shat-navy); border: 1px solid var(--border-light); font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
+            <span style="display: inline-flex; align-items: center;">${icons.chat('', 16)}</span>
+            <span>${txt('طلب استشارة تنفيذية مخصصة', 'Request Advisory', 'Demande de Conseil')}</span>
           </a>
           <button type="button" class="btn-clean btn-primary btn-md allow-print" id="btn-trigger-print-audit" style="background: var(--shat-navy); font-weight: 800; box-shadow: 0 4px 14px rgba(15,46,74,0.3);">
-            ⎙ ${txt('طباعة التقرير / حفظ كـ PDF', 'Print / Save as PDF', 'Imprimer / Enregistrer PDF')}
+            <span>${txt('طباعة التقرير / حفظ كـ PDF', 'Print / Save as PDF', 'Imprimer / Enregistrer PDF')}</span>
           </button>
         </div>
       </div>

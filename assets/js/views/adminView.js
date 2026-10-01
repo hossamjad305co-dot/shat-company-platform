@@ -6,6 +6,7 @@ import { showToast } from '../components/toast.js';
 import { MediaStorageService } from '../services/storage/mediaStorageService.js';
 import { content } from '../content.js';
 import { siteCustomizer } from '../tools/siteCustomizer.js';
+import { icons } from '../icons.js';
 
 export function renderAdminView(lang = 'ar') {
   const isRtl = lang === 'ar';
@@ -87,11 +88,11 @@ export function renderAdminView(lang = 'ar') {
             ${t.groupContent}
           </div>
           <button class="admin-nav-item" data-target="admin-tab-posts">
-            <span>▪</span>
+            
             <span>${t.tabPosts}</span>
           </button>
           <button class="admin-nav-item" data-target="admin-tab-media">
-            <span>▪</span>
+            
             <span>${t.tabMedia}</span>
           </button>
 
@@ -100,11 +101,11 @@ export function renderAdminView(lang = 'ar') {
             ${t.groupAcademy}
           </div>
           <button class="admin-nav-item" data-target="admin-tab-courses">
-            <span>✦</span>
+            
             <span>${t.tabCourses}</span>
           </button>
           <button class="admin-nav-item" data-target="admin-tab-roster">
-            <span>❖</span>
+            
             <span>${t.tabRoster}</span>
           </button>
 
@@ -117,11 +118,11 @@ export function renderAdminView(lang = 'ar') {
             <span>${t.tabApplications}</span>
           </button>
           <button class="admin-nav-item" data-target="admin-tab-forms">
-            <span>▪</span>
+            
             <span>${t.tabForms}</span>
           </button>
           <button class="admin-nav-item" data-target="admin-tab-inquiries">
-            <span>✉</span>
+            <span style="display:inline-flex; align-items:center;">${icons.chat('', 16)}</span>
             <span>${t.tabInquiries}</span>
           </button>
 
@@ -130,11 +131,11 @@ export function renderAdminView(lang = 'ar') {
             ${t.groupSettings}
           </div>
           <button class="admin-nav-item" data-target="admin-tab-health">
-            <span>◈</span>
+            
             <span>${t.tabHealth}</span>
           </button>
           <button type="button" class="admin-nav-item" id="btn-admin-customizer-trigger" style="margin-top: 6px; background: rgba(30,126,52,0.18); border: 1px solid rgba(30,126,52,0.4); color: #4ADE80; font-weight: 800;">
-            <span>⚙</span>
+            <span style="display:inline-flex; align-items:center;">${icons.settings('', 16)}</span>
             <span>${txt('تخصيص المنصة والمظهر', 'Platform Customizer', 'Personnalisation du Site')}</span>
           </button>
         </nav>
@@ -159,8 +160,8 @@ export function renderAdminView(lang = 'ar') {
         
         <!-- Mobile/Tablet Sidebar Toggle Bar -->
         <div class="admin-top-toggle-bar" style="display: none; justify-content: space-between; align-items: center; margin-bottom: 20px; background: #FFFFFF; padding: 12px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-light);">
-          <button id="btn-toggle-admin-sidebar" class="btn-clean btn-sm" style="background: var(--bg-subtle); color: var(--shat-navy); font-weight: 700;">
-            ☰ ${txt('قائمة لوحة التحكم', 'Admin Menu', 'Menu Admin')}
+          <button id="btn-toggle-admin-sidebar" class="btn-clean btn-sm" style="background: var(--bg-subtle); color: var(--shat-navy); font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
+            ${icons.menu('', 16)} <span>${txt('قائمة لوحة التحكم', 'Admin Menu', 'Menu Admin')}</span>
           </button>
           <span style="font-size: 0.85rem; font-weight: 700; color: var(--shat-navy);">${txt('لوحة الإدارة التنفيذية', 'Executive Dashboard', 'Gestion Exécutive')}</span>
         </div>
@@ -200,7 +201,7 @@ export function renderAdminView(lang = 'ar') {
                 </p>
                 <div style="display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.76rem; color: #94A3B8;">
                   <span style="background: rgba(255,255,255,0.06); padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);">• زمن الاستجابة: <strong>92ms</strong></span>
-                  <span style="background: rgba(255,255,255,0.06); padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);">◈ امتثال CHS: <strong>100%</strong></span>
+                  <span style="background: rgba(255,255,255,0.06); padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);">امتثال CHS: <strong>100%</strong></span>
                   <span style="background: rgba(255,255,255,0.06); padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);">✓ أمان البيانات: <strong>OWASP Level 3</strong></span>
                 </div>
               </div>
@@ -228,8 +229,8 @@ export function renderAdminView(lang = 'ar') {
                   </span>
                   <div style="font-size: 2.3rem; font-weight: 900; color: #064E3B; margin: 4px 0; line-height: 1.1;" id="kpi-students-count">245</div>
                 </div>
-                <div style="width: 48px; height: 48px; border-radius: 12px; background: #DCFCE7; border: 1px solid #A7F3D0; color: #15803D; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; font-weight: 900;">
-                  ❖
+                <div style="width: 48px; height: 48px; border-radius: 12px; background: #DCFCE7; border: 1px solid #A7F3D0; color: #15803D; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  ${icons.users('', 24)}
                 </div>
               </div>
               <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; font-size: 0.8rem;">
@@ -252,8 +253,8 @@ export function renderAdminView(lang = 'ar') {
                   </span>
                   <div style="font-size: 2.3rem; font-weight: 900; color: #1E3A8A; margin: 4px 0; line-height: 1.1;" id="kpi-teachers-count">18</div>
                 </div>
-                <div style="width: 48px; height: 48px; border-radius: 12px; background: #DBEAFE; border: 1px solid #BFDBFE; color: #1D4ED8; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; font-weight: 900;">
-                  ❖
+                <div style="width: 48px; height: 48px; border-radius: 12px; background: #DBEAFE; border: 1px solid #BFDBFE; color: #1D4ED8; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  ${icons.userCheck('', 24)}
                 </div>
               </div>
               <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; font-size: 0.8rem;">
@@ -276,8 +277,8 @@ export function renderAdminView(lang = 'ar') {
                   </span>
                   <div style="font-size: 2.3rem; font-weight: 900; color: #5B21B6; margin: 4px 0; line-height: 1.1;" id="kpi-courses-count">8</div>
                 </div>
-                <div style="width: 48px; height: 48px; border-radius: 12px; background: #F3E8FF; border: 1px solid #DDD6FE; color: #7C3AED; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; font-weight: 900;">
-                  ▪
+                <div style="width: 48px; height: 48px; border-radius: 12px; background: #F3E8FF; border: 1px solid #DDD6FE; color: #7C3AED; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  ${icons.book('', 24)}
                 </div>
               </div>
               <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; font-size: 0.8rem;">
@@ -306,7 +307,7 @@ export function renderAdminView(lang = 'ar') {
               </div>
               <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; font-size: 0.8rem;">
                 <span style="background: #FEF3C7; color: #B45309; font-weight: 800; font-size: 0.76rem; padding: 3px 10px; border-radius: 999px; border: 1px solid #FCD34D;">
-                  ◈ ${txt('تتطلب مصادقة فورية', 'Requires Approval', 'À Valider')}
+                  ${txt('تتطلب مصادقة فورية', 'Requires Approval', 'À Valider')}
                 </span>
                 <span style="color: #B45309; font-weight: 700; font-size: 0.76rem;">Google Forms</span>
               </div>
@@ -324,7 +325,7 @@ export function renderAdminView(lang = 'ar') {
             <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 16px; padding: 24px; box-shadow: 0 4px 20px rgba(11,30,54,0.04);">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 1px solid #F1F5F9; padding-bottom: 12px;">
                 <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--shat-navy); margin: 0; display: flex; align-items: center; gap: 8px;">
-                  <span>◈</span>
+                  
                   <span>${txt('توزيع المتدربين والاهتمام حسب المسار التخصصي', 'Enrollment Distribution by Track', 'Répartition par Cursus')}</span>
                 </h3>
                 <span style="font-size: 0.74rem; font-weight: 700; background: #ECFDF5; color: #15803D; padding: 2px 8px; border-radius: 4px;">بيانات حية 2026</span>
@@ -334,7 +335,7 @@ export function renderAdminView(lang = 'ar') {
                 <!-- Track 1: Case Management -->
                 <div>
                   <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 5px;">
-                    <span style="color: #065F46;">▪ إدارة الحالة Case Management (د. محمد إسليم)</span>
+                    <span style="color: #065F46;">إدارة الحالة Case Management (د. محمد إسليم)</span>
                     <span style="color: #10B981; font-weight: 800;">38% (93 متدرب)</span>
                   </div>
                   <div style="height: 8px; background: #E2E8F0; border-radius: 999px; overflow: hidden;">
@@ -345,7 +346,7 @@ export function renderAdminView(lang = 'ar') {
                 <!-- Track 2: CHS Humanitarian -->
                 <div>
                   <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 5px;">
-                    <span style="color: #1E40AF;">▪ دبلوم المعيار الإنساني CHS (أ. حسام جاد الله)</span>
+                    <span style="color: #1E40AF;">دبلوم المعيار الإنساني CHS (أ. حسام جاد الله)</span>
                     <span style="color: #2563EB; font-weight: 800;">32% (78 متدرب)</span>
                   </div>
                   <div style="height: 8px; background: #E2E8F0; border-radius: 999px; overflow: hidden;">
@@ -356,7 +357,7 @@ export function renderAdminView(lang = 'ar') {
                 <!-- Track 3: Presentation Skills -->
                 <div>
                   <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 5px;">
-                    <span style="color: #92400E;">▪ مهارات العرض والتقديم (م. مهدي الملاحي)</span>
+                    <span style="color: #92400E;">مهارات العرض والتقديم (م. مهدي الملاحي)</span>
                     <span style="color: #D97706; font-weight: 800;">18% (44 متدرب)</span>
                   </div>
                   <div style="height: 8px; background: #E2E8F0; border-radius: 999px; overflow: hidden;">
@@ -367,7 +368,7 @@ export function renderAdminView(lang = 'ar') {
                 <!-- Track 4: Institutional Consulting -->
                 <div>
                   <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 5px;">
-                    <span style="color: #5B21B6;">▪ الاستشارات وتطوير النظم للمنظمات</span>
+                    <span style="color: #5B21B6;">الاستشارات وتطوير النظم للمنظمات</span>
                     <span style="color: #7C3AED; font-weight: 800;">12% (30 جهة)</span>
                   </div>
                   <div style="height: 8px; background: #E2E8F0; border-radius: 999px; overflow: hidden;">
@@ -381,7 +382,7 @@ export function renderAdminView(lang = 'ar') {
             <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 16px; padding: 24px; box-shadow: 0 4px 20px rgba(11,30,54,0.04);">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 1px solid #F1F5F9; padding-bottom: 12px;">
                 <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--shat-navy); margin: 0; display: flex; align-items: center; gap: 8px;">
-                  <span>◈</span>
+                  
                   <span>${txt('مؤشرات الكفاءة وسرعة الاستجابة التشغيلية', 'Operational Efficiency & SLA Metrics', 'Indicateurs de Performance')}</span>
                 </h3>
                 <span style="font-size: 0.74rem; font-weight: 700; background: #EFF6FF; color: #1D4ED8; padding: 2px 8px; border-radius: 4px;">SLA Level 1</span>
@@ -397,7 +398,7 @@ export function renderAdminView(lang = 'ar') {
                 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 14px; text-align: center;">
                   <div style="font-size: 0.76rem; font-weight: 700; color: #64748B;">شهادات محققة رقمياً</div>
                   <div style="font-size: 1.5rem; font-weight: 900; color: #2563EB; margin: 4px 0;">142</div>
-                  <div style="font-size: 0.72rem; color: #1D4ED8; font-weight: 600;">◈ رمز موثق سارٍ</div>
+                  <div style="font-size: 0.72rem; color: #1D4ED8; font-weight: 600;">رمز موثق سارٍ</div>
                 </div>
 
                 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 14px; text-align: center;">
@@ -409,7 +410,7 @@ export function renderAdminView(lang = 'ar') {
                 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 14px; text-align: center;">
                   <div style="font-size: 0.76rem; font-weight: 700; color: #64748B;">معدل الإنجاز والتخرج</div>
                   <div style="font-size: 1.5rem; font-weight: 900; color: #D97706; margin: 4px 0;">94.2%</div>
-                  <div style="font-size: 0.72rem; color: #B45309; font-weight: 600;">✦ تقييم ممتاز</div>
+                  <div style="font-size: 0.72rem; color: #B45309; font-weight: 600;">تقييم ممتاز</div>
                 </div>
               </div>
             </div>
@@ -483,7 +484,7 @@ export function renderAdminView(lang = 'ar') {
                 ${txt('محرر المنشورات والمقالات المعتمدة', 'Publications & Insights Editor', 'Éditeur de Publications')}
               </h2>
               <span id="cms-editing-badge" class="badge" style="display: none; background: #FEF3C7; color: #92400E; font-weight: 700;">
-                ▪ ${txt('وضع التعديل النشط', 'Editing Mode Active', 'Mode Modification')}
+                ${txt('وضع التعديل النشط', 'Editing Mode Active', 'Mode Modification')}
               </span>
             </div>
 
@@ -559,7 +560,7 @@ export function renderAdminView(lang = 'ar') {
                   <input type="text" id="post-cover-input" class="form-input" value="assets/logo/logo-banner.jpg" style="flex: 1;">
                   <input type="file" id="post-cover-file-input" accept="image/*" style="display: none;">
                   <button type="button" id="btn-trigger-post-upload" class="btn-clean btn-sm" style="background: var(--shat-green-tint); color: var(--shat-green); border: 1px solid var(--shat-green); font-weight: 700; white-space: nowrap; padding: 10px 14px;">
-                    ▪ ${txt('رفع من الجهاز', 'Upload File', 'Importer')}
+                    ${txt('رفع من الجهاز', 'Upload File', 'Importer')}
                   </button>
                 </div>
                 <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">
@@ -578,8 +579,8 @@ export function renderAdminView(lang = 'ar') {
                   </h3>
                 </div>
                 <div style="display: flex; gap: 6px;">
-                  <button class="btn-preview-mode btn-clean btn-sm active" data-mode="desktop" style="padding: 3px 8px; font-size: 0.75rem;">▪ ${txt('سطح المكتب', 'Desktop', 'Ordinateur')}</button>
-                  <button class="btn-preview-mode btn-clean btn-sm" data-mode="mobile" style="padding: 3px 8px; font-size: 0.75rem; background: #F1F5F9; color: var(--text-muted);">▪ ${txt('هاتف', 'Mobile', 'Mobile')}</button>
+                  <button class="btn-preview-mode btn-clean btn-sm active" data-mode="desktop" style="padding: 3px 8px; font-size: 0.75rem;">${txt('سطح المكتب', 'Desktop', 'Ordinateur')}</button>
+                  <button class="btn-preview-mode btn-clean btn-sm" data-mode="mobile" style="padding: 3px 8px; font-size: 0.75rem; background: #F1F5F9; color: var(--text-muted);">${txt('هاتف', 'Mobile', 'Mobile')}</button>
                 </div>
               </div>
 
@@ -589,7 +590,7 @@ export function renderAdminView(lang = 'ar') {
                   عنوان المنشور
                 </h2>
                 <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;" id="preview-meta">
-                  ▪ ${txt('بواسطة: أ. حسام جاد الله', 'By: SHAT Management', 'Par : Direction SHAT')} • ◷ ${new Date().toLocaleDateString(isRtl ? 'ar-EG' : 'en-US')}
+                  ${txt('بواسطة: أ. حسام جاد الله', 'By: SHAT Management', 'Par : Direction SHAT')} • ${new Date().toLocaleDateString(isRtl ? 'ar-EG' : 'en-US')}
                 </div>
                 <img id="preview-cover" src="assets/logo/logo-banner.jpg" alt="Preview" style="width: 100%; height: 160px; object-fit: cover; border-radius: var(--radius-xs); margin-bottom: 14px;" onerror="this.onerror=null; this.src='assets/logo/logo-banner.jpg';">
                 <p id="preview-excerpt" style="font-weight: 600; color: var(--text-main); font-size: 0.9rem; margin-bottom: 10px;">
@@ -659,7 +660,7 @@ export function renderAdminView(lang = 'ar') {
               <div style="display: flex; gap: 8px;">
                 <input type="file" id="media-library-file-input" accept="image/*" multiple style="display: none;">
                 <button id="btn-upload-media-device" class="btn-clean btn-green btn-sm">
-                  <span>▪ ${txt('رفع صور من جهازك', 'Upload from Device', 'Importer de l\'appareil')}</span>
+                  <span>${txt('رفع صور من جهازك', 'Upload from Device', 'Importer de l\'appareil')}</span>
                 </button>
               </div>
             </div>
@@ -768,7 +769,7 @@ export function renderAdminView(lang = 'ar') {
           <div style="background: #FFFFFF; border-radius: var(--radius-sm); border: 1px solid var(--border-light); padding: 28px; margin-bottom: 24px;">
             <div style="max-width: 720px;">
               <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                <span style="font-size: 1.2rem; color: var(--shat-green);">◈</span>
+                <span style="font-size: 1.2rem; color: var(--shat-green);"></span>
                 <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--shat-navy); margin: 0;">
                   ${txt('محول استمارات Google Forms إلى نماذج شات الداخلية', 'Google Forms to Native SHAT Forms Importer', 'Convertisseur de Formulaires')}
                 </h3>
@@ -993,27 +994,27 @@ export function renderAdminView(lang = 'ar') {
           <!-- Official Forms & Google Drive Links Panel -->
           <div style="background: #F8FAFC; border: 1px solid var(--border-medium); border-radius: var(--radius-xs); padding: 14px; margin-bottom: 16px;">
             <div style="font-weight: 800; font-size: 0.88rem; color: var(--shat-navy); margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
-              <span>◈</span>
+              
               <span>${txt('روابط التسجيل والملفات التدريبية (Google Forms & Drive)', 'Enrollment & Materials Links', 'Liens d’Inscription & Drive')}</span>
             </div>
             
             <div class="form-group">
               <label class="form-label" style="font-size: 0.82rem; font-weight: 700; color: #1D4ED8;">
-                ▪ ${txt('رابط استمارة Google Form الخاصة بالمساق (للتسجيل الخارجي المباشر)', 'Google Form Registration URL', 'Lien Google Form')}
+                ${txt('رابط استمارة Google Form الخاصة بالمساق (للتسجيل الخارجي المباشر)', 'Google Form Registration URL', 'Lien Google Form')}
               </label>
               <input type="url" id="edit-course-google-form" class="form-input" placeholder="https://docs.google.com/forms/d/e/.../viewform" style="font-family: var(--font-mono); font-size: 0.82rem;">
             </div>
 
             <div class="form-group">
               <label class="form-label" style="font-size: 0.82rem; font-weight: 700; color: var(--shat-green);">
-                ▪ ${txt('رابط أو معرف استمارة المنصة الداخلية (مثل #/forms?id=...)', 'Platform Form Link or ID', 'Formulaire de la Plateforme')}
+                ${txt('رابط أو معرف استمارة المنصة الداخلية (مثل #/forms?id=...)', 'Platform Form Link or ID', 'Formulaire de la Plateforme')}
               </label>
               <input type="text" id="edit-course-native-form" class="form-input" placeholder="#/forms?id=case-manager-2026" style="font-family: var(--font-mono); font-size: 0.82rem;">
             </div>
 
             <div class="form-group" style="margin-bottom: 0;">
               <label class="form-label" style="font-size: 0.82rem; font-weight: 700; color: #B45309;">
-                ▪ ${txt('رابط مجلد الحقيبة التدريبية والملفات على Google Drive', 'Google Drive Materials Folder URL', 'Dossier Google Drive')}
+                ${txt('رابط مجلد الحقيبة التدريبية والملفات على Google Drive', 'Google Drive Materials Folder URL', 'Dossier Google Drive')}
               </label>
               <input type="url" id="edit-course-drive-url" class="form-input" placeholder="https://drive.google.com/drive/folders/..." style="font-family: var(--font-mono); font-size: 0.82rem;">
             </div>
@@ -1211,7 +1212,7 @@ export async function bindAdminEvents() {
       if (!file) return;
 
       btnTriggerPostUpload.disabled = true;
-      btnTriggerPostUpload.textContent = txt('◷ جاري المعالجة...', 'Compressing...', 'Compression...');
+      btnTriggerPostUpload.textContent = txt('جاري المعالجة...', 'Compressing...', 'Compression...');
 
       try {
         const compressedBase64 = await MediaStorageService.compressImage(file, 1200, 800, 0.82);
@@ -1231,7 +1232,7 @@ export async function bindAdminEvents() {
         showToast(txt('تعذر قراءة الصورة من الجهاز: ', 'Failed to read image from device: ', 'Échec de lecture : ') + err.message, 'error');
       } finally {
         btnTriggerPostUpload.disabled = false;
-        btnTriggerPostUpload.textContent = `▪ ${txt('رفع من الجهاز', 'Upload File', 'Importer')}`;
+        btnTriggerPostUpload.textContent = `${txt('رفع من الجهاز', 'Upload File', 'Importer')}`;
         postCoverFileInput.value = '';
       }
     };
@@ -1276,7 +1277,7 @@ export async function bindAdminEvents() {
       if (postCategoryInput) postCategoryInput.value = post.category || 'humanitarian';
       if (postStatusInput) postStatusInput.value = post.status || 'published';
 
-      if (cmsEditorHeading) cmsEditorHeading.textContent = `▪ ${txt('تعديل المنشور:', 'Edit Post:', 'Modifier :')} ${post.title.substring(0, 35)}...`;
+      if (cmsEditorHeading) cmsEditorHeading.textContent = `${txt('تعديل المنشور:', 'Edit Post:', 'Modifier :')} ${post.title.substring(0, 35)}...`;
       if (cmsEditingBadge) cmsEditingBadge.style.display = 'inline-block';
       if (btnCmsCancelEdit) btnCmsCancelEdit.style.display = 'inline-block';
       if (publishBtnText) publishBtnText.textContent = `✓ ${txt('حفظ التعديلات على المنشور', 'Save Post Changes', 'Enregistrer les Modifications')}`;
@@ -1319,7 +1320,7 @@ export async function bindAdminEvents() {
       };
 
       publishBtn.disabled = true;
-      publishBtn.innerHTML = `<span>◷ ${txt('جاري الحفظ في قاعدة البيانات...', 'Saving to database...', 'Enregistrement...')}</span>`;
+      publishBtn.innerHTML = `<span>${txt('جاري الحفظ في قاعدة البيانات...', 'Saving to database...', 'Enregistrement...')}</span>`;
 
       try {
         let res;
@@ -1406,7 +1407,7 @@ export async function bindAdminEvents() {
       if (files.length === 0) return;
 
       btnUploadMediaDevice.disabled = true;
-      btnUploadMediaDevice.textContent = txt('◷ جاري رفع وتخزين الصور...', 'Uploading...', 'Importation...');
+      btnUploadMediaDevice.textContent = txt('جاري رفع وتخزين الصور...', 'Uploading...', 'Importation...');
 
       try {
         for (const file of files) {
@@ -1423,7 +1424,7 @@ export async function bindAdminEvents() {
         showToast(txt('تعذر رفع الملفات: ', 'Upload error: ', 'Erreur : ') + err.message, 'error');
       } finally {
         btnUploadMediaDevice.disabled = false;
-        btnUploadMediaDevice.textContent = `▪ ${txt('رفع صور من جهازك', 'Upload from Device', 'Importer de l\'appareil')}`;
+        btnUploadMediaDevice.textContent = `${txt('رفع صور من جهازك', 'Upload from Device', 'Importer de l\'appareil')}`;
         mediaFileInput.value = '';
       }
     };
@@ -1450,10 +1451,10 @@ export async function bindAdminEvents() {
           
           <div style="display: flex; gap: 6px; margin-top: 8px;">
             <button class="btn-clean btn-sm btn-copy-media-url" data-url="${item.dataUrl}" style="flex: 1; font-size: 0.72rem; background: var(--bg-subtle);">
-              ▪ ${txt('نسخ', 'Copy', 'Copier')}
+              ${txt('نسخ', 'Copy', 'Copier')}
             </button>
             <button class="btn-clean btn-sm btn-use-cover" data-url="${item.dataUrl}" style="flex: 1; font-size: 0.72rem; background: var(--shat-green-tint); color: var(--shat-green); font-weight: 700;">
-              ▪ ${txt('غلاف', 'Cover', 'Couv')}
+              ${txt('غلاف', 'Cover', 'Couv')}
             </button>
             ${!item.isDefault ? `
               <button class="btn-clean btn-sm btn-delete-media" data-id="${item.id}" style="padding: 3px 6px; background: #FEE2E2; color: #991B1B;">
@@ -1534,7 +1535,7 @@ export async function bindAdminEvents() {
               <td style="padding: 12px 16px; text-align: ${isRtl ? 'left' : 'right'};">
                 <div style="display: flex; gap: 6px; justify-content: flex-end;">
                   <button class="btn-clean btn-sm btn-edit-post" data-post-id="${p.id}" style="background: #F1F5F9; color: var(--shat-navy); border: 1px solid var(--border-light); font-weight: 700;">
-                    ▪ ${txt('تعديل', 'Edit', 'Modifier')}
+                    ${txt('تعديل', 'Edit', 'Modifier')}
                   </button>
                   <button class="btn-clean btn-sm btn-delete-post" data-post-id="${p.id}" style="background: #FEE2E2; color: #991B1B; border: 1px solid #FCA5A5;">
                     ✕
@@ -1654,8 +1655,8 @@ export async function bindAdminEvents() {
       list.innerHTML = courses.map(c => `
         <div class="bento-card" style="padding: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; border-top: 3px solid var(--shat-navy);">
           <div style="display: flex; align-items: center; gap: 16px; flex: 1; min-width: 280px;">
-            <div style="width: 52px; height: 52px; border-radius: var(--radius-xs); background: var(--shat-navy-tint); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; font-weight: 800; color: var(--shat-navy);">
-              ◈
+            <div style="width: 52px; height: 52px; border-radius: var(--radius-xs); background: var(--shat-navy-tint); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--shat-navy);">
+              ${icons.book('', 24)}
             </div>
             <div>
               <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
@@ -1664,29 +1665,29 @@ export async function bindAdminEvents() {
               </div>
               
               <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 6px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
-                <span>◷ ${c.hours || '30 ساعة'}</span>
+                <span>${c.hours || '30 ساعة'}</span>
                 <span>•</span>
-                <span>★ ${c.level || 'معتمد'}</span>
+                <span>${c.level || 'معتمد'}</span>
                 <span>•</span>
-                <span>▪ ${c.instructorName || 'د. أسامة المنصور'}</span>
-                ${c.fee ? `<span>•</span><span style="color: var(--shat-green); font-weight: 700;">✦ ${c.fee}</span>` : ''}
+                <span>${c.instructorName || 'د. أسامة المنصور'}</span>
+                ${c.fee ? `<span>•</span><span style="color: var(--shat-green); font-weight: 700;">${c.fee}</span>` : ''}
               </div>
 
               <!-- Integration Badges -->
               <div style="display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap;">
                 ${c.googleFormUrl ? `
                   <a href="${c.googleFormUrl}" target="_blank" rel="noopener" class="badge btn-google-form" style="font-size: 0.72rem; text-decoration: none;">
-                    ▪ Google Form
+                    Google Form
                   </a>
                 ` : ''}
                 ${c.nativeFormUrl ? `
                   <a href="${c.nativeFormUrl}" class="badge btn-platform-form" style="font-size: 0.72rem; text-decoration: none;">
-                    ▪ استمارة المنصة
+                    استمارة المنصة
                   </a>
                 ` : ''}
                 ${c.driveFolderUrl ? `
                   <a href="${c.driveFolderUrl}" target="_blank" rel="noopener" class="badge btn-drive-folder" style="font-size: 0.72rem; text-decoration: none;">
-                    ▪ Google Drive
+                    Google Drive
                   </a>
                 ` : ''}
               </div>
@@ -1695,10 +1696,10 @@ export async function bindAdminEvents() {
 
           <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
             <button class="btn-clean btn-sm btn-edit-course" data-id="${c.id}" style="background: #F1F5F9; color: var(--shat-navy); border: 1px solid var(--border-light); font-weight: 700;">
-              ▪ ${txt('تعديل المساق', 'Edit Course', 'Modifier')}
+              ${txt('تعديل المساق', 'Edit Course', 'Modifier')}
             </button>
             <a href="#/course/${c.id}" class="btn-clean btn-sm" style="background: var(--bg-subtle); color: var(--text-secondary); text-decoration: none;">
-              ▪ ${txt('قاعة المساق', 'Course Room', 'Salle')}
+              ${txt('قاعة المساق', 'Course Room', 'Salle')}
             </a>
             <button class="btn-clean btn-sm btn-delete-course" data-id="${c.id}" style="background: #FEF2F2; color: #DC2626; border: 1px solid #FECACA; font-weight: 700;">
               ✕
@@ -1727,7 +1728,7 @@ export async function bindAdminEvents() {
             document.getElementById('edit-course-drive-url').value = found.driveFolderUrl || '';
             document.getElementById('edit-course-summary').value = found.summary || found.overview || '';
             document.getElementById('edit-course-syllabus').value = Array.isArray(found.syllabus) ? found.syllabus.join('\n') : '';
-            document.getElementById('course-editor-modal-title').textContent = `▪ ${txt('تعديل المساق:', 'Edit Course:', 'Modifier :')} ${found.title.substring(0, 30)}...`;
+            document.getElementById('course-editor-modal-title').textContent = `${txt('تعديل المساق:', 'Edit Course:', 'Modifier :')} ${found.title.substring(0, 30)}...`;
             courseModalBackdrop.classList.add('open');
           }
         };

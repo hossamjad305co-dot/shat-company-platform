@@ -4,6 +4,7 @@
 
 import { courseService } from '../../services/courses/courseService.js';
 import { Breadcrumbs } from '../../components/ui/core.js';
+import { icons } from '../../icons.js';
 
 export async function renderAcademyGatewayPage() {
   const courses = await courseService.getCourses();
@@ -28,7 +29,7 @@ export async function renderAcademyGatewayPage() {
         <div style="position: absolute; inset: 0; background: radial-gradient(circle at 80% 20%, rgba(75, 136, 52, 0.18) 0%, transparent 60%); pointer-events: none;"></div>
         <div class="container" style="position: relative; z-index: 2; max-width: 900px; text-align: center; margin: 0 auto;">
           <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); padding: 6px 16px; border-radius: 999px; font-size: 0.85rem; font-weight: 700; color: #86efac; margin-bottom: var(--space-md);">
-            <span>◈</span>
+            
             <span>بوابة نظام إدارة التعلم المعتمد (SHAT LMS)</span>
           </div>
 
@@ -43,17 +44,17 @@ export async function renderAcademyGatewayPage() {
           <!-- Gate Action Buttons -->
           <div style="display: flex; justify-content: center; align-items: center; gap: 14px; flex-wrap: wrap;">
             <button type="button" class="shat-btn" id="btn-gateway-login" style="background: var(--shat-green-500); color: #ffffff; font-weight: 800; font-size: 1rem; padding: 14px 30px; border-radius: var(--radius-md); border: none; cursor: pointer; box-shadow: 0 8px 20px rgba(75, 136, 52, 0.35); display: inline-flex; align-items: center; gap: 10px;">
-              <span>◈ تسجيل الدخول إلى الأكاديمية</span>
+              <span>تسجيل الدخول إلى الأكاديمية</span>
             </button>
 
             <a href="#/apply" class="shat-btn" style="background: rgba(255, 255, 255, 0.12); color: #ffffff; font-weight: 700; font-size: 1rem; padding: 14px 28px; border-radius: var(--radius-md); border: 1.5px solid rgba(255, 255, 255, 0.3); text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
-              <span>▪ استمارة التسجيل والالتحاق ↗</span>
+              <span>استمارة التسجيل والالتحاق ↗</span>
             </a>
           </div>
 
           <!-- Lock Notification -->
           <div style="margin-top: var(--space-lg); display: inline-flex; align-items: center; gap: 8px; font-size: 0.82rem; color: #cbd5e1; background: rgba(15, 23, 42, 0.5); padding: 6px 14px; border-radius: 6px;">
-            <span>◈</span>
+            
             <span>المواد والحقائب وسجل التقييمات مخصصة للمتدربين والمدربين المعتمدين بعد تسجيل الدخول.</span>
           </div>
         </div>
@@ -64,7 +65,7 @@ export async function renderAcademyGatewayPage() {
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xl); flex-wrap: wrap; gap: var(--space-md); border-bottom: 2px solid var(--border-subtle); padding-bottom: var(--space-md);">
           <div>
             <h2 style="font-size: var(--font-size-h2); color: var(--shat-navy-950); margin: 0 0 6px; font-weight: 800;">
-              ▪ البرامج والمساقات التدريبية المعتمدة
+              البرامج والمساقات التدريبية المعتمدة
             </h2>
             <p style="font-size: var(--font-size-body-sm); color: var(--text-muted); margin: 0;">
               استعرض المساقات المتاحة وقدم طلب التحاق للحصول على الاعتماد الرسمي
@@ -98,11 +99,11 @@ export async function renderAcademyGatewayPage() {
                   </p>
                   <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 20px;">
                     <div style="display: flex; align-items: center; gap: 6px;">
-                      <span>◈ المدرب المعتمد:</span>
+                      <span>المدرب المعتمد:</span>
                       <strong style="color: var(--shat-navy-950);">${c.instructor}</strong>
                     </div>
                     <div style="display: flex; align-items: center; gap: 6px;">
-                      <span>◈ الوحدات التدريبية:</span>
+                      <span>الوحدات التدريبية:</span>
                       <strong>${c.modules ? c.modules.length : 6} فصول تعليمية</strong>
                     </div>
                     <div style="display: flex; align-items: center; gap: 6px;">
@@ -115,7 +116,7 @@ export async function renderAcademyGatewayPage() {
                 <!-- Action Button -->
                 <div style="display: flex; gap: 10px; margin-top: 10px; border-top: 1px solid var(--border-subtle); padding-top: 16px;">
                   <a href="#/apply?course=${encodeURIComponent(c.id)}" class="shat-btn" style="flex: 1; text-align: center; background: var(--shat-green-600); color: #ffffff; padding: 10px; border-radius: var(--radius-sm); font-weight: 700; text-decoration: none; font-size: 0.88rem;">
-                    ▪ التسجيل في الدورة
+                    التسجيل في الدورة
                   </a>
                   <a href="#/course/${c.id}" class="shat-btn" style="text-align: center; background: #f1f5f9; color: var(--shat-navy-950); padding: 10px 14px; border-radius: var(--radius-sm); font-weight: 600; text-decoration: none; font-size: 0.88rem;">
                     تفاصيل
@@ -135,8 +136,8 @@ export async function renderAcademyGatewayPage() {
           </h3>
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;">
             <div style="display: flex; gap: 14px; align-items: flex-start;">
-              <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(75, 136, 52, 0.1); color: var(--shat-green-700); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;">
-                ↓
+              <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(75, 136, 52, 0.1); color: var(--shat-green-700); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                ${icons.download('', 22)}
               </div>
               <div>
                 <h4 style="margin: 0 0 6px; font-size: 1rem; color: var(--shat-navy-950); font-weight: 700;">تحميل فوري للمواد والحقائب</h4>
@@ -147,8 +148,8 @@ export async function renderAcademyGatewayPage() {
             </div>
 
             <div style="display: flex; gap: 14px; align-items: flex-start;">
-              <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(15, 46, 74, 0.08); color: var(--shat-navy-900); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;">
-                ★
+              <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(15, 46, 74, 0.08); color: var(--shat-navy-900); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                ${icons.award('', 22)}
               </div>
               <div>
                 <h4 style="margin: 0 0 6px; font-size: 1rem; color: var(--shat-navy-950); font-weight: 700;">شهادات تدريبية معتمدة</h4>
@@ -159,8 +160,8 @@ export async function renderAcademyGatewayPage() {
             </div>
 
             <div style="display: flex; gap: 14px; align-items: flex-start;">
-              <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(234, 179, 8, 0.15); color: #b45309; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;">
-                ▲
+              <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(234, 179, 8, 0.15); color: #b45309; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                ${icons.checkCircle('', 22)}
               </div>
               <div>
                 <h4 style="margin: 0 0 6px; font-size: 1rem; color: var(--shat-navy-950); font-weight: 700;">متابعة تفاعلية مستمرة</h4>

@@ -108,7 +108,7 @@ export function renderTrainingCalendarSection(lang = 'ar') {
         <!-- Section Header -->
         <div style="text-align: center; max-width: 780px; margin: 0 auto 36px;">
           <div style="display: inline-flex; align-items: center; gap: 8px; background: #E8F5E9; color: var(--shat-green, #1E7E34); padding: 5px 16px; border-radius: 999px; font-size: 0.84rem; font-weight: 800; margin-bottom: 14px;">
-            <span>◷</span>
+            
             <span>${txt('الجدول الزمني والتقويم التدريبي لعام 2026', '2026 Training Calendar & Upcoming Cohorts', 'Calendrier de Formation 2026')}</span>
           </div>
           <h2 style="font-size: 2rem; font-weight: 900; color: var(--shat-navy, #0B1E36); margin: 0 0 14px; line-height: 1.3;">
@@ -147,7 +147,7 @@ export function renderTrainingCalendarSection(lang = 'ar') {
             font-weight: 700;
             cursor: pointer;
             transition: all 0.2s;
-          ">${txt('✉ إدارة الحالة (د. إسليم)', 'Case Management', 'Gestion de Cas')}</button>
+          ">${txt('إدارة الحالة (د. إسليم)', 'Case Management', 'Gestion de Cas')}</button>
           
           <button type="button" class="calendar-filter-btn" data-filter="presentation" style="
             background: #F1F5F9;
@@ -159,7 +159,7 @@ export function renderTrainingCalendarSection(lang = 'ar') {
             font-weight: 700;
             cursor: pointer;
             transition: all 0.2s;
-          ">${txt('▪ مهارات العرض (م. الملاحي)', 'Presentation Skills', 'Prise de Parole')}</button>
+          ">${txt('مهارات العرض (م. الملاحي)', 'Presentation Skills', 'Prise de Parole')}</button>
           
           <button type="button" class="calendar-filter-btn" data-filter="humanitarian" style="
             background: #F1F5F9;
@@ -171,7 +171,7 @@ export function renderTrainingCalendarSection(lang = 'ar') {
             font-weight: 700;
             cursor: pointer;
             transition: all 0.2s;
-          ">${txt('▪ دبلوم CHS الإنساني', 'CHS Master Diploma', 'Diplôme CHS')}</button>
+          ">${txt('دبلوم CHS الإنساني', 'CHS Master Diploma', 'Diplôme CHS')}</button>
           
           <button type="button" class="calendar-filter-btn" data-filter="consulting" style="
             background: #F1F5F9;
@@ -183,7 +183,7 @@ export function renderTrainingCalendarSection(lang = 'ar') {
             font-weight: 700;
             cursor: pointer;
             transition: all 0.2s;
-          ">${txt('▪ استشارات المنظمات', 'Institutional Consulting', 'Conseil Institutionnel')}</button>
+          ">${txt('استشارات المنظمات', 'Institutional Consulting', 'Conseil Institutionnel')}</button>
         </div>
 
         <!-- Cohorts Grid -->
@@ -194,7 +194,7 @@ export function renderTrainingCalendarSection(lang = 'ar') {
         <!-- Calendar Guarantee & Corporate Note -->
         <div style="margin-top: 36px; background: #F8FAFC; border: 1px dashed #CBD5E1; border-radius: 12px; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
           <div style="display: flex; align-items: center; gap: 12px;">
-            <span style="font-size: 1.3rem; color: var(--shat-green);">◈</span>
+            <span style="font-size: 1.3rem; color: var(--shat-green);"></span>
             <div style="font-size: 0.9rem; color: #334155;">
               <strong>${txt('ضمان الجودة والاعتماد:', 'Accreditation Guarantee:', 'Garantie de Qualité :')}</strong>
               ${txt('تمنح شركة شات للتنمية والتطوير شهادات معتمدة رسمياً ومزودة برقم تسلسلي موثق ورمز QR يمكن التحقق منه دولياً.', 'Official verified certificates with cryptographic serial IDs and QR codes are issued upon completion.', 'Des certificats officiels avec numéro de série cryptographique sont délivrés à la fin de la formation.')}
@@ -244,7 +244,7 @@ function renderCohortCard(c, lang) {
 
         <!-- Trainer -->
         <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px; font-size: 0.88rem; color: #334155;">
-          <span>▪</span>
+          
           <div>
             <strong>${c.trainer}</strong>
             <div style="font-size: 0.76rem; color: #64748B;">${c.trainerRole}</div>
@@ -254,15 +254,15 @@ function renderCohortCard(c, lang) {
         <!-- Date & Schedule Details -->
         <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 12px 14px; margin-bottom: 18px; display: flex; flex-direction: column; gap: 6px; font-size: 0.84rem; color: #475569;">
           <div style="display: flex; justify-content: space-between;">
-            <span>▪ <strong>${txt('تاريخ الانطلاق:', 'Start Date:', 'Date de Début :')}</strong></span>
+            <span><strong>${txt('تاريخ الانطلاق:', 'Start Date:', 'Date de Début :')}</strong></span>
             <span style="font-weight: 800; color: var(--shat-navy, #0B1E36);">${c.startDateFormatted}</span>
           </div>
           <div style="display: flex; justify-content: space-between;">
-            <span>◷ <strong>${txt('الساعات المعتمدة:', 'Hours:', 'Volume :')}</strong></span>
+            <span><strong>${txt('الساعات المعتمدة:', 'Hours:', 'Volume :')}</strong></span>
             <span>${c.duration}</span>
           </div>
           <div style="display: flex; justify-content: space-between;">
-            <span>◷ <strong>${txt('المواعيد:', 'Schedule:', 'Horaires :')}</strong></span>
+            <span><strong>${txt('المواعيد:', 'Schedule:', 'Horaires :')}</strong></span>
             <span>${isRtl ? c.scheduleAr : c.scheduleEn}</span>
           </div>
         </div>

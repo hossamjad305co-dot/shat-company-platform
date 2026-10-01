@@ -45,8 +45,8 @@ export function renderAcademyView(lang = 'ar') {
     
     // Quick tool actions
     verifyBtn: lang === 'fr' ? '✓ Vérifier un Certificat' : (isRtl ? '✓ التحقق من شهادة رقمية' : '✓ Verify Digital Certificate'),
-    toolkitsBtn: lang === 'fr' ? '▪ Boîtes à Outils de Terrain' : (isRtl ? '▪ مكتبة الأدوات الميدانية' : '▪ Field Toolkits Hub'),
-    diagBtn: lang === 'fr' ? '★ Test de Préparation' : (isRtl ? '★ تقييم الجاهزية المؤسسية' : '★ Readiness Diagnostic'),
+    toolkitsBtn: lang === 'fr' ? 'Boîtes à Outils de Terrain' : (isRtl ? 'مكتبة الأدوات الميدانية' : 'Field Toolkits Hub'),
+    diagBtn: lang === 'fr' ? 'Test de Préparation' : (isRtl ? 'تقييم الجاهزية المؤسسية' : 'Readiness Diagnostic'),
 
     searchPlaceholder: lang === 'fr' ? 'Rechercher un cursus par mot-clé, code ou axe...' : (isRtl ? 'ابحث في البرامج والدبلومات المعتمدة بالاسم أو المحور...' : 'Search accredited diplomas by title, code or module...'),
     filterAll: lang === 'fr' ? 'Tous les Cursus' : (isRtl ? 'كافة المساقات الأكاديمية' : 'All Academic Tracks'),
@@ -58,7 +58,7 @@ export function renderAcademyView(lang = 'ar') {
 
     levelLabel: lang === 'fr' ? 'Niveau:' : (isRtl ? 'المستوى:' : 'Level:'),
     syllabusLabel: lang === 'fr' ? 'محاور المنهاج التدريبي:' : (isRtl ? 'محاور المنهاج المعتمد:' : 'Curriculum Modules:'),
-    btnExploreFiles: lang === 'fr' ? '▪ استعراض المنهاج والملفات' : (isRtl ? '▪ استعراض المنهاج والملفات' : '▪ View Curriculum & Files'),
+    btnExploreFiles: lang === 'fr' ? 'استعراض المنهاج والملفات' : (isRtl ? 'استعراض المنهاج والملفات' : 'View Curriculum & Files'),
     btnRegisterCourse: lang === 'fr' ? 'التسجيل بالمساق' : (isRtl ? 'تسجيل فوري بالمساق' : 'Enroll Now'),
     btnApplyGeneral: lang === 'fr' ? 'Demande d’Inscription' : (isRtl ? 'تقديم طلب التحاق جديد' : 'Apply for Enrollment'),
     emptySearch: lang === 'fr' ? 'Aucun cursus ne correspond à votre recherche.' : (isRtl ? 'لا توجد مساقات مطابقة للبحث الحالي. جرب كلمة بحث أخرى.' : 'No courses match your current search criteria.')
@@ -87,7 +87,7 @@ export function renderAcademyView(lang = 'ar') {
           <!-- Quick Tools Actions Bar -->
           <div style="margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; background: #FFFFFF; padding: 14px 18px; border-radius: var(--radius-sm); border: 1px solid var(--border-medium); box-shadow: var(--shadow-sm);">
             <span style="font-size: 0.84rem; font-weight: 800; color: var(--shat-navy);">
-              ◈ ${isRtl ? 'الأدوات الرقمية المعتمدة:' : 'Accredited Digital Tools:'}
+              ${isRtl ? 'الأدوات الرقمية المعتمدة:' : 'Accredited Digital Tools:'}
             </span>
             <button type="button" class="btn-clean btn-sm" onclick="if(window.openCertificateValidator) window.openCertificateValidator();" style="background: #F8FAFC; color: var(--shat-navy); border: 1px solid var(--border-medium); font-weight: 700; border-radius: 9999px; padding: 6px 14px;">
               ${t.verifyBtn}
@@ -162,11 +162,11 @@ export function renderAcademyView(lang = 'ar') {
                     <div style="display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; font-size: 0.82rem; align-items: center;">
                       <span style="color: var(--shat-navy); font-weight: 700;">${t.levelLabel} ${c.level || 'تنفيذي'}</span>
                       <span style="color: var(--text-muted);">•</span>
-                      <span style="color: var(--text-secondary); font-weight: 600;">▪ ${c.instructorName || c.instructor || 'د. أسامة المنصور'}</span>
+                      <span style="color: var(--text-secondary); font-weight: 600;">${c.instructorName || c.instructor || 'د. أسامة المنصور'}</span>
                       ${c.fee ? `
                         <span style="color: var(--text-muted);">•</span>
                         <span class="pro-symbol-badge" style="background: var(--shat-green-tint); color: var(--shat-green); border-color: var(--shat-green-border); font-weight: 800;">
-                          ✦ ${c.fee}
+                          ${c.fee}
                         </span>
                       ` : ''}
                     </div>
@@ -195,7 +195,7 @@ export function renderAcademyView(lang = 'ar') {
                   <div style="display: flex; gap: 8px; justify-content: flex-start; align-items: center; flex-wrap: wrap; padding-top: 14px; border-top: 1px solid var(--border-light);">
                     ${c.googleFormUrl ? `
                       <a href="${c.googleFormUrl}" target="_blank" rel="noopener" class="btn-clean btn-sm btn-google-form" style="padding: 7px 12px; font-size: 0.82rem;" title="التسجيل المباشر عبر Google Form">
-                        <span>▪ Google Form</span>
+                        <span>Google Form</span>
                       </a>
                     ` : ''}
 
@@ -206,7 +206,7 @@ export function renderAcademyView(lang = 'ar') {
 
                     ${c.driveFolderUrl ? `
                       <a href="${c.driveFolderUrl}" target="_blank" rel="noopener" class="btn-clean btn-sm btn-drive-folder" style="padding: 7px 12px; font-size: 0.82rem;" title="ملفات وحقيبة المساق على Google Drive">
-                        <span>▪ Drive</span>
+                        <span>Drive</span>
                       </a>
                     ` : ''}
 

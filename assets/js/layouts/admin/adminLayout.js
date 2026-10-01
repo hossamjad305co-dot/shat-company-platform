@@ -1,6 +1,7 @@
 // SHAT Platform — Admin Executive Layout Shell (layouts/admin/adminLayout.js)
 import { AcademySidebar } from '../../components/navigation/AcademySidebar.js';
 import { Breadcrumbs } from '../../components/ui/core.js';
+import { icons } from '../../icons.js';
 
 export function AdminLayout({
   activeRoute = 'admin/users',
@@ -23,7 +24,8 @@ export function AdminLayout({
               ${Breadcrumbs({ items: breadcrumbs })}
               ${pageTitle ? `
                 <h1 style="font-size: var(--font-size-h2); color: var(--shat-navy-950); margin: var(--space-xs) 0 4px 0; font-weight: 800; display: flex; align-items: center; gap: 10px;">
-                  <span>⚙️ ${pageTitle}</span>
+                  <span style="display: inline-flex; align-items: center; color: var(--shat-navy);">${icons.settings('', 22)}</span>
+                  <span>${pageTitle}</span>
                   <span class="shat-badge shat-badge-navy">إدارة عليا</span>
                 </h1>
               ` : ''}

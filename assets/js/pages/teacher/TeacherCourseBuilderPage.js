@@ -2,6 +2,7 @@
 import { AcademyLayout } from '../../layouts/academy/academyLayout.js';
 import { Card, Button, Input, Badge, ErrorState } from '../../components/ui/core.js';
 import { authService } from '../../services/auth/authService.js';
+import { icons } from '../../icons.js';
 
 export function renderTeacherCourseBuilderPage() {
   const isTeacher = authService.isInstructor() || authService.isAdmin();
@@ -64,7 +65,7 @@ export function renderTeacherCourseBuilderPage() {
               <div class="shat-card" style="border: 1px solid var(--border-prominent);">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-md); padding-bottom: var(--space-sm); border-bottom: 1px solid var(--border-subtle);">
                   <div style="display: flex; align-items: center; gap: 8px;">
-                    <span style="cursor: grab; color: var(--text-muted);">☰</span>
+                    <span style="cursor: grab; color: var(--text-muted); display: inline-flex; align-items: center;">${icons.menu('', 16)}</span>
                     <strong style="color: var(--text-primary); font-size: var(--font-size-body);">${sec.title}</strong>
                   </div>
                   <div style="display: flex; gap: 6px;">
