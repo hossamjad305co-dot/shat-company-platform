@@ -84,7 +84,7 @@ export async function bindNewsEvents() {
       <article class="bento-card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; border-top: 4px solid var(--shat-green);">
         <div>
           <div style="height: 180px; width: 100%; background: #F1F5F9; overflow: hidden;">
-            <img src="${p.coverImage || 'assets/logo/logo-banner.jpg'}" alt="${p.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" onerror="this.src='assets/logo/logo-symbol.jpg'">
+            <img src="${p.coverImage || 'assets/logo/logo-banner.jpg'}" alt="${p.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" onerror="this.onerror=null; this.src='assets/logo/logo-banner.jpg';">
           </div>
 
           <div style="padding: 20px;">
@@ -134,7 +134,7 @@ export async function bindNewsEvents() {
         if (modalBody) {
           modalBody.innerHTML = `
             <div style="margin-bottom: 16px;">
-              <img src="${post.coverImage || 'assets/logo/logo-banner.jpg'}" alt="${post.title}" style="width: 100%; max-height: 260px; object-fit: cover; border-radius: var(--radius-xs); margin-bottom: 14px;" onerror="this.src='assets/logo/logo-symbol.jpg'">
+              <img src="${post.coverImage || 'assets/logo/logo-banner.jpg'}" alt="${post.title}" style="width: 100%; max-height: 260px; object-fit: cover; border-radius: var(--radius-xs); margin-bottom: 14px;" onerror="this.onerror=null; this.src='assets/logo/logo-banner.jpg';">
               <div style="display: flex; gap: 12px; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px;">
                 <span>🏷️ ${post.categoryLabel || post.category}</span>
                 <span>📅 ${new Date(post.createdAt || Date.now()).toLocaleDateString(currentLang === 'ar' ? 'ar-EG' : (currentLang === 'fr' ? 'fr-FR' : 'en-US'))}</span>

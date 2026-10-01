@@ -21,6 +21,48 @@ export const translations = {
       "closeArticle": "إغلاق التقرير",
       "posts": [
         {
+          "id": "post-case-manager-2026",
+          "category": "training",
+          "title": "إطلاق دورة إعداد وتأهيل مدير حالة Case Management (د. محمد إسليم)",
+          "date": "أكتوبر 2026",
+          "readTime": "3 دقائق قراءة",
+          "tag": "إدارة الحالة وحماية الطفل",
+          "platform": "Facebook",
+          "excerpt": "تعلن شركة شات للتنمية والتطوير عن إطلاق البرنامج التدريبي التخصصي لإعداد وتأهيل مديري الحالة مع الخبير الدولي د. محمد إسليم، بواقع 30 ساعة تدريبية معتمدة ورسوم ميسرة.",
+          "fullText": "يسر شركة شات للتنمية والتطوير الإعلان عن فتح باب التسجيل في دورة 'إعداد وتأهيل مدير حالة Case Management' بقيادة د. محمد إسليم - خبير برامج حماية الطفولة وإدارة الحالة. يهدف البرنامج إلى تزويد المشاركين بالمهارات الإجرائية المتقدمة لتحديد وتقييم الحالات الأكثر هشاشة، وتصميم خطط التدخل الفردية، والإحالة الآمنة متعددة القطاعات وفق موجهات المعيار الإنساني الأساسي وحماية المستفيدين. التسجيل متاح الآن مباشرة من خلال استمارة الموقع المعتمدة.",
+          "link": "https://www.facebook.com/shat.development.growth",
+          "img": "assets/images/posts/post-case-management.svg",
+          "formUrl": "#/forms?id=case-manager-2026"
+        },
+        {
+          "id": "post-presentation-skills-2026",
+          "category": "training",
+          "title": "دورة تدريبية متقدمة في مهارات العرض والتقديم (م. مهدي الملاحي)",
+          "date": "أكتوبر 2026",
+          "readTime": "3 دقائق قراءة",
+          "tag": "الاتصال والتأثير المؤسسي",
+          "platform": "Instagram",
+          "excerpt": "تطوير مهارات الإلقاء والتحدث الجماهيري وصياغة العروض التقديمية الاحترافية مع الاستشاري م. مهدي الملاحي (12 ساعة تدريبية، 4 لقاءات تفاعلية بقاعة شات، رسوم 120 شيكل).",
+          "fullText": "أطلقت شركة شات للتنمية والتطوير بالتعاون مع الاستشاري م. مهدي الملاحي برنامج مهارات العرض والتقديم المتقدم للمهنيين ومديري المشاريع وممثلي المنظمات. يركز البرنامج على لغة الجسد، وإدارة منصات العرض، وتصميم الشرائح المؤثرة وإقناع المانحين والشركاء، ويمنح المشاركون شهادة إتمام معتمدة بعد إنجاز مشروعات التخرج العملية.",
+          "link": "https://www.instagram.com/shat.development.growth/",
+          "img": "assets/images/posts/post-presentation-skills.svg",
+          "formUrl": "#/forms?id=presentation-skills-2026"
+        },
+        {
+          "id": "post-humanitarian-worker-2026",
+          "category": "academy",
+          "title": "دبلوم تأهيل عامل في المجال الإنساني «من المبادئ إلى الممارسة» (142 ساعة)",
+          "date": "أكتوبر 2026",
+          "readTime": "5 دقائق قراءة",
+          "tag": "دبلوم العمل الإنساني",
+          "platform": "Facebook",
+          "excerpt": "أقوى برامج التأهيل الإنساني في فلسطين والمنطقة: 3 أشهر، 142 ساعة تدريبية، 13 دورة متخصصة، وأكثر من 10 مدربين وخبراء دوليين مع شهادة دبلوم معتمدة وتقسيط ميسر.",
+          "fullText": "تعلن شركة شات للتنمية والتطوير عن فتح باب القبول في دبلوم 'تأهيل عامل في المجال الإنساني: من المبادئ إلى الممارسة'. يغطي البرنامج كافة معايير Sphere، CHS، PSEA، إدارة دورة المشروع، المتابعة والتقييم MEAL، واللوجستيات وسلاسل الإمداد، وإدارة المخيمات والملاجئ، مع تطبيقات عملية وحالات دراسية ميدانية تؤهل الخريجين للانخراط الفوري في منظمات الأمم المتحدة والمؤسسات الدولية.",
+          "link": "https://www.facebook.com/shat.development.growth",
+          "img": "assets/images/posts/post-humanitarian-worker.svg",
+          "formUrl": "#/forms?id=humanitarian-worker-diploma"
+        },
+        {
           "id": "post-chs",
           "category": "training",
           "title": "ورشة تطبيق المعيار الإنساني الأساسي (CHS) وضمان المساءلة للمتأثرين",
@@ -2076,40 +2118,99 @@ footer: {
   fr: {
     socialSection: {
       "badge": "Activités & Missions sur le Terrain",
-      "title": "Publications & Activités Officielles",
-      "subtitle": "Suivez nos derniers ateliers, missions d'évaluation sur le terrain et programmes de développement publiés sur Facebook et Instagram.",
+      "title": "Publications & Actualités des Réseaux Sociaux",
+      "subtitle": "Suivez nos derniers ateliers, missions d'évaluation sur le terrain et programmes de développement institutionnel publiés sur Facebook et Instagram.",
       "viewFb": "Voir sur Facebook ↗",
       "viewInsta": "Voir sur Instagram ↗",
+      "filterAll": "Tous",
+      "filterTraining": "Formation & Normes",
+      "filterProtection": "Protection & Sauvegarde",
+      "filterEvaluation": "Évaluation de Terrain",
+      "filterGovernance": "Gouvernance & Systèmes",
+      "filterAcademy": "Académie Numérique",
+      "readArticle": "Lire le Rapport Détaillé 📄",
+      "closeArticle": "Fermer le Rapport",
       "posts": [
-            {
-                  "title": "Atelier sur la Norme Humanitaire Fondamentale (CHS) et la Redevabilité",
-                  "date": "Septembre 2026",
-                  "tag": "Formation & Capacités",
-                  "platform": "Facebook",
-                  "excerpt": "Clôture de notre programme intensif sur les neuf engagements de la Norme Humanitaire Fondamentale (CHS) pour renforcer la redevabilité envers les populations affectées.",
-                  "link": "https://www.facebook.com/shat.development.growth/",
-                  "img": "assets/logo/logo-banner.jpg"
-            },
-            {
-                  "title": "Programme de Sauvegarde et Protection contre les Abus (PSEA)",
-                  "date": "Septembre 2026",
-                  "tag": "Conseil en Protection",
-                  "platform": "Instagram",
-                  "excerpt": "Animation de sessions de conseil de haut niveau pour élaborer des politiques de sauvegarde institutionnelle et des circuits de signalement sécurisés.",
-                  "link": "https://www.instagram.com/shat.development.growth/",
-                  "img": "assets/logo/logo-circle.jpg"
-            },
-            {
-                  "title": "Missions d'Évaluation Externe Indépendante selon les Critères OCDE CAD",
-                  "date": "Août 2026",
-                  "tag": "Évaluation Indépendante",
-                  "platform": "Facebook",
-                  "excerpt": "Déploiement des experts SHAT sur le terrain pour évaluer la pertinence, l'impact, l'efficience et la durabilité des projets humanitaires selon les normes de l'UNEG.",
-                  "link": "https://www.facebook.com/shat.development.growth/",
-                  "img": "assets/logo/logo-banner.jpg"
-            }
+        {
+          "id": "post-chs",
+          "category": "training",
+          "title": "Masterclass sur la Norme Humanitaire Fondamentale (CHS) et la Redevabilité",
+          "date": "Septembre 2026",
+          "readTime": "3 min de lecture",
+          "tag": "Formation & Capacités",
+          "platform": "Facebook",
+          "excerpt": "Clôture de notre programme interactif sur les Neuf Engagements du CHS avec les dirigeants d'ONG partenaires pour institutionnaliser la redevabilité envers les populations affectées.",
+          "fullText": "SHAT Développement & Croissance a mené avec succès un programme de formation de terrain approfondi sur l'opérationnalisation de la Norme Humanitaire Fondamentale (Core Humanitarian Standard - CHS). Ce cursus a doté les coordinateurs et chefs de projet des ONG partenaires d'outils concrets pour instaurer des mécanismes pérennes de retours d'information et de plaintes (AAP), et intégrer les standards du manuel Sphère dans la réponse opérationnelle.",
+          "link": "https://www.facebook.com/shat.development.growth/",
+          "img": "assets/images/posts/post-chs-workshop.svg?v=2026"
+        },
+        {
+          "id": "post-psea",
+          "category": "protection",
+          "title": "Cadres Institutionnels de Sauvegarde et Protection contre les Abus (PSEA)",
+          "date": "Septembre 2026",
+          "readTime": "4 min de lecture",
+          "tag": "Conseil en Protection",
+          "platform": "Instagram",
+          "excerpt": "Fourniture d'une expertise institutionnelle de pointe pour bâtir des politiques de sauvegarde, cartographier les risques et mettre en place des voies de signalement sécurisées.",
+          "fullText": "Les consultants experts de SHAT ont déployé une assistance technique complète auprès d'organisations partenaires afin d'actualiser leurs politiques de prévention de l'exploitation, des abus sexuels et du harcèlement (PSEA). Les livrables ont inclus la rédaction de chartes déontologiques, l'implémentation de procédures de signalement confidentielles et la réalisation d'audits de risques conformes au principe de « Ne pas nuire » (Do No Harm).",
+          "link": "https://www.instagram.com/shat.development.growth/",
+          "img": "assets/images/posts/post-psea-protection.svg?v=2026"
+        },
+        {
+          "id": "post-oecd",
+          "category": "evaluation",
+          "title": "Missions d'Évaluation Externe Indépendante (Critères OCDE CAD & UNEG)",
+          "date": "Août 2026",
+          "readTime": "5 min de lecture",
+          "tag": "Évaluation Indépendante",
+          "platform": "Facebook",
+          "excerpt": "Déploiement des équipes d'évaluation SHAT pour mesurer rigoureusement la pertinence, l'impact, l'efficience et la durabilité des programmes humanitaires et de développement.",
+          "fullText": "L'unité d'évaluation et de recherche de SHAT a conduit une évaluation externe approfondie de programmes multisectoriels d'eau, d'assainissement et de relance économique. En s'appuyant sur les critères du CAD de l'OCDE et les directives du Groupe des Nations Unies pour l'évaluation (UNEG), la mission a mobilisé des enquêtes de terrain, des groupes de discussion avec les bénéficiaires et des entretiens institutionnels pour formuler des recommandations stratégiques pérennes.",
+          "link": "https://www.facebook.com/shat.development.growth/",
+          "img": "assets/images/posts/post-oecd-evaluation.svg?v=2026"
+        },
+        {
+          "id": "post-gov",
+          "category": "governance",
+          "title": "Procédures Opérationnelles Standardisées (SOPs) et Gouvernance",
+          "date": "Août 2026",
+          "readTime": "3 min de lecture",
+          "tag": "Systèmes & Gouvernance",
+          "platform": "Instagram",
+          "excerpt": "Restructuration organisationnelle, élaboration de manuels de procédures et mise à niveau des contrôles financiers et RH pour satisfaire aux exigences des bailleurs de fonds.",
+          "fullText": "SHAT a réalisé un audit et un programme de modernisation organisationnelle pour plusieurs institutions de la société civile. Le projet a permis la rédaction de manuels opératoires standardisés (SOPs), la refonte des politiques de gestion des ressources humaines et le renforcement des mécanismes de passation de marchés et d'audit interne.",
+          "link": "https://www.instagram.com/shat.development.growth/",
+          "img": "assets/images/posts/post-institutional-dev.svg?v=2026"
+        },
+        {
+          "id": "post-moodle",
+          "category": "academy",
+          "title": "Lancement du Portail Moodle LMS et Intégration Google Drive Cloud",
+          "date": "Septembre 2026",
+          "readTime": "3 min de lecture",
+          "tag": "Académie Numérique",
+          "platform": "Facebook",
+          "excerpt": "Mise en service de notre portail d'apprentissage universitaire synchronisé avec Google Drive pour des téléchargements directs de mallettes pédagogiques et attestations certifiées.",
+          "fullText": "L'Académie SHAT a inauguré son portail numérique d'apprentissage exécutif combinant Moodle et Google Classroom. Cette infrastructure permet aux stagiaires et formateurs d'accéder aux référentiels de cours au format PDF et matrices Excel, de déposer leurs devoirs en ligne et de vérifier la validité de leurs diplômes par matricule sécurisé.",
+          "link": "https://www.facebook.com/shat.development.growth/",
+          "img": "assets/images/posts/post-moodle-academy.svg?v=2026"
+        },
+        {
+          "id": "post-partnerships",
+          "category": "partnerships",
+          "title": "Alliances Stratégiques Régionales et Partenariats Institutionnels 2026",
+          "date": "Août 2026",
+          "readTime": "4 min de lecture",
+          "tag": "Partenariats Stratégiques",
+          "platform": "Instagram",
+          "excerpt": "Signature d'accords de coopération pour renforcer les capacités des institutions locales en Palestine et dans la région, transférant les standards internationaux sur le terrain.",
+          "fullText": "Dans le cadre de ses orientations stratégiques 2026, SHAT Développement & Croissance a conclu des partenariats et protocoles d'accord avec des réseaux régionaux et agences internationales. Ces coopérations visent à démultiplier les formations de formateurs (ToT), conduire des études d'impact participatives et mutualiser les expertises au service du renforcement des communautés.",
+          "link": "https://www.instagram.com/shat.development.growth/",
+          "img": "assets/images/posts/post-partnerships.svg?v=2026"
+        }
       ]
-},
+    },
     moodleLMS: {
       "gateBadge": "Accès Restreint • Système Moodle Institutionnel",
       "gateTitle": "Plateforme Moodle de l'Académie & Formation",

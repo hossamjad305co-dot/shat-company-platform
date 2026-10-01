@@ -222,8 +222,8 @@ export async function bindCourseDetailEvents() {
                                       <span>📥 ${txt('تنزيل مباشر', 'Direct Download', 'Télécharger')}</span>
                                     </a>
                                   ` : `
-                                    <button class="btn-clean btn-sm btn-open-reg-modal" data-course="${c.id}" style="background: #F1F5F9; color: var(--text-muted); border: 1px solid var(--border-light); font-size: 0.78rem;">
-                                      <span>🔒 ${txt('يتطلب تسجيلاً', 'Enroll to Download', 'Inscription Requise')}</span>
+                                    <button type="button" class="btn-clean btn-sm btn-intercept-download" data-file="${m.name}" style="background: #F8FAFC; color: var(--shat-navy); border: 1px solid var(--border-medium); font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+                                      <span>🔒 ${txt('تحميل المرجع (يتطلب التحاقاً)', 'Enroll to Download', 'Inscription Requise')}</span>
                                     </button>
                                   `}
                                 </div>
@@ -240,7 +240,7 @@ export async function bindCourseDetailEvents() {
           </div>
         </div>
 
-        <!-- Right: Course Highlights & Academic Standards -->
+        <!-- Right: Course Highlights, Academic Tools & Standards -->
         <div>
           <!-- Course Details Widget -->
           <div style="background: #FFFFFF; border-radius: var(--radius-sm); border: 1px solid var(--border-light); padding: 24px; box-shadow: var(--shadow-sm); margin-bottom: 24px;">
@@ -267,6 +267,27 @@ export async function bindCourseDetailEvents() {
             </ul>
           </div>
 
+          <!-- Interactive Digital Tools Sidebar Widget -->
+          <div style="background: linear-gradient(135deg, #0F2E4A 0%, #071726 100%); color: #FFFFFF; border-radius: var(--radius-sm); padding: 22px; margin-bottom: 24px; box-shadow: var(--shadow-sm); border: 1px solid rgba(255,255,255,0.1);">
+            <div style="font-size: 0.82rem; font-weight: 800; color: #4ADE80; margin-bottom: 6px;">
+              ⚡ ${txt('الأدوات المنهجية المعتمدة', 'Accredited Methodological Tools', 'Outils Méthodologiques')}
+            </div>
+            <h4 style="font-size: 1.05rem; font-weight: 800; color: #FFFFFF; margin-bottom: 14px;">
+              ${txt('أدوات التحقق والامتثال لهذا المساق', 'Verification & Standards Tools', 'Outils de Vérification')}
+            </h4>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <button type="button" class="btn-clean btn-sm" onclick="if(window.openCertificateValidator) window.openCertificateValidator();" style="background: rgba(255,255,255,0.1); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.2); justify-content: flex-start; padding: 8px 12px; border-radius: 6px;">
+                <span>🔍 ${txt('التحقق من الشهادات الرقمية الصادرة', 'Verify Digital Certificates', 'Vérifier Certificats')}</span>
+              </button>
+              <button type="button" class="btn-clean btn-sm" onclick="if(window.openStandardsExplorer) window.openStandardsExplorer('${c.code || 'CHS'}');" style="background: rgba(255,255,255,0.1); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.2); justify-content: flex-start; padding: 8px 12px; border-radius: 6px;">
+                <span>⚡ ${txt('قوائم التحقق والامتثال للمعايير', 'Standards Compliance Explorer', 'Normes & Référentiels')}</span>
+              </button>
+              <button type="button" class="btn-clean btn-sm" onclick="if(window.openToolkitsLibrary) window.openToolkitsLibrary();" style="background: rgba(255,255,255,0.1); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.2); justify-content: flex-start; padding: 8px 12px; border-radius: 6px;">
+                <span>📂 ${txt('مكتبة القوالب والمصفوفات الميدانية', 'Field Toolkits & Matrices Hub', 'Modèles & Outils')}</span>
+              </button>
+            </div>
+          </div>
+
           <!-- Academic Policies Widget -->
           <div style="background: #F8FAFC; border-radius: var(--radius-sm); border: 1px solid var(--border-light); padding: 24px;">
             <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--shat-navy); margin-bottom: 10px;">
@@ -284,6 +305,17 @@ export async function bindCourseDetailEvents() {
 
       </div>
     `;
+
+    // Intercept unauthenticated download clicks via Permission Guard (Rule 1)
+    document.querySelectorAll('.btn-intercept-download').forEach(btn => {
+      btn.onclick = (e) => {
+        e.preventDefault();
+        const fName = btn.getAttribute('data-file') || 'وثائق ومراجع المساق التدريبي';
+        if (window.openPermissionGuard) {
+          window.openPermissionGuard(fName, 'student');
+        }
+      };
+    });
 
     // Modal register listeners if visitor clicks enrollment
     document.querySelectorAll('.btn-open-reg-modal').forEach(btn => {

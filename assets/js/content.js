@@ -354,12 +354,19 @@ export const content = {
       whatsappDirect: "تواصل فوري عبر الواتساب المؤسسي"
     },
     login: {
-      title: "مرحباً بعودتك • Welcome Back",
-      subtitle: "منظومة شركة شات للتنمية والتطوير الأكاديمية والمؤسسية",
+      title: "مرحباً بعودتك • منصة شات",
+      subtitle: "منظومة شركة شات للتنمية والتطوير الأكاديمية والمؤسسية الموحدة",
+      tabs: {
+        corporate: "🏢 حساب المؤسسة",
+        nationalId: "🪪 الهوية الأكاديمية",
+        whatsapp: "💬 دخول واتساب السريع",
+        simulator: "⚡ معاينة الأدوار الفورية"
+      },
       quickDemoTitle: "تجربة سريعة للحسابات الرسمية (انقر للتعبئة التلقائية):",
       adminRole: "⚙️ المدير العام",
       teacherRole: "👨‍🏫 المدرب المعتمد",
       studentRole: "🎓 المتدرب",
+      visitorRole: "🌐 الزائر العام",
       idLabel: "البريد الإلكتروني أو اسم المستخدم *",
       idPlaceholder: "name@shat.com أو اسم المستخدم",
       pwLabel: "كلمة المرور *",
@@ -367,9 +374,30 @@ export const content = {
       submitBtn: "تسجيل الدخول إلى المنظومة",
       orSso: "أو عبر الهوية المؤسسية",
       googleSso: "المتابعة عبر حساب Google المؤسسي (Google Workspace)",
+      nationalIdLabel: "رقم الهوية الوطنية أو الرقم الأكاديمي المعتمد *",
+      nationalIdPlaceholder: "مثال: 1098765432 أو 401234567",
+      nationalIdHelp: "خاص بالمتدربين والطلاب المسجلين في دورات وأكاديمية شات",
+      nationalIdBtn: "التحقق الفوري وتسجيل الدخول ←",
+      whatsappPhoneLabel: "رقم هاتف الواتساب المسجل *",
+      whatsappPhonePlaceholder: "+972 59 XXX XXXX أو +970 59 XXX XXXX",
+      whatsappBtn: "إرسال رمز التحقق الفوري (OTP) 💬",
+      whatsappOtpLabel: "رمز التحقق السريع المكون من 4 أرقام:",
+      whatsappVerifyBtn: "تأكيد الرمز والدخول إلى حسابك ←",
+      whatsappSimNote: "خدمة فورية مرتبطة بحساب واتساب المؤسسي المعتمد",
+      simulatorTitle: "اختر الدور المطلوب لمعاينته بنقرة واحدة مباشرة:",
+      simulatorNote: "يتيح لك محاكي الأدوار استعراض كافة صلاحيات النظام وتجربة واجهات المتدرب، المدرب، والمدير فوراً بدون الحاجة لكتابة كلمات مرور.",
       noAccount: "لا تمتلك حساباً بعد؟",
       applyLink: "تقديم طلب التحاق بدورة تدريبية",
       backHome: "← العودة إلى واجهة الموقع الرسمية"
+    },
+    notifications: {
+      title: "الإشعارات والتحديثات المؤسسية",
+      badge: "3 جديدة",
+      items: [
+        { title: "تم رصد درجة التكليف #1 (94/100)", sub: "دبلوم CHS • مراجعة د. خالد المنصوري" },
+        { title: "إتاحة التكليف الميداني #2 للتحميل", sub: "موعد التسليم النهائي: 4 أكتوبر 2026" },
+        { title: "نشر ورقة الموقف المؤسسي حول PSEA", sub: "قسم الأخبار والدراسات • متاح الآن" }
+      ]
     },
     topBar: {
       motto: "بناء القدرات • تعزيز المؤسسات • تطوير النتائج | الإنسان • المهارات • غدٌ أكثر إشراقاً",
@@ -781,12 +809,19 @@ export const content = {
       whatsappDirect: "Direct Chat via Corporate WhatsApp"
     },
     login: {
-      title: "Welcome Back • Sign In",
-      subtitle: "SHAT Development & Growth Institutional & Academic Platform",
+      title: "Welcome Back • SHAT Platform",
+      subtitle: "SHAT Development & Growth Unified Institutional & Academic Platform",
+      tabs: {
+        corporate: "🏢 Corporate Account",
+        nationalId: "🪪 Student / ID",
+        whatsapp: "💬 Instant WhatsApp",
+        simulator: "⚡ 1-Click Role Preview"
+      },
       quickDemoTitle: "Quick Role Selector (Click for instant fill):",
       adminRole: "⚙️ Super Admin",
       teacherRole: "👨‍🏫 Master Trainer",
       studentRole: "🎓 Trainee Student",
+      visitorRole: "🌐 General Visitor",
       idLabel: "Email or Username *",
       idPlaceholder: "name@shat.com or username",
       pwLabel: "Password *",
@@ -794,9 +829,30 @@ export const content = {
       submitBtn: "Sign In to Platform",
       orSso: "Or via Corporate Identity",
       googleSso: "Continue with Institutional Google Workspace",
+      nationalIdLabel: "National or Student ID Number *",
+      nationalIdPlaceholder: "e.g. 1098765432 or 401234567",
+      nationalIdHelp: "For trainees and students enrolled in SHAT academy & courses",
+      nationalIdBtn: "Instant ID Verification Sign In ←",
+      whatsappPhoneLabel: "Registered WhatsApp Phone Number *",
+      whatsappPhonePlaceholder: "+972 59 XXX XXXX or +970 59 XXX XXXX",
+      whatsappBtn: "Send Instant Verification Code (OTP) 💬",
+      whatsappOtpLabel: "4-Digit Instant Verification Code:",
+      whatsappVerifyBtn: "Verify Code & Sign In ←",
+      whatsappSimNote: "Direct verification linked to authorized institutional WhatsApp service",
+      simulatorTitle: "Select a role to preview the platform in 1 click:",
+      simulatorNote: "The role simulator allows you to experience student, teacher, and administrator interfaces without entering passwords.",
       noAccount: "Don't have an account yet?",
       applyLink: "Apply for a Course Enrollment",
       backHome: "← Return to Public Corporate Portal"
+    },
+    notifications: {
+      title: "Corporate Notifications & Updates",
+      badge: "3 New",
+      items: [
+        { title: "Assignment #1 Graded (94/100)", sub: "CHS Diploma • Reviewed by Dr. Khaled Al-Mansouri" },
+        { title: "Field Assignment #2 Available for Download", sub: "Final Submission Deadline: October 4, 2026" },
+        { title: "Institutional Position Paper on PSEA Published", sub: "News & Studies Department • Available Now" }
+      ]
     },
     topBar: {
       motto: "Building Capacity • Strengthening Institutions • Advancing Results | PEOPLE • SKILLS • A BRIGHTER TOMORROW",
@@ -1208,12 +1264,19 @@ export const content = {
       whatsappDirect: "Échange Direct via WhatsApp Institutionnel"
     },
     login: {
-      title: "Bienvenue • Connexion",
-      subtitle: "Plateforme Académique et Institutionnelle SHAT Développement & Croissance",
+      title: "Bienvenue • Plateforme SHAT",
+      subtitle: "Système Unifié de Gestion Académique et Institutionnelle SHAT",
+      tabs: {
+        corporate: "🏢 Compte Entreprise",
+        nationalId: "🪪 ID / Étudiant",
+        whatsapp: "💬 WhatsApp Instantané",
+        simulator: "⚡ Simulateur de Rôles"
+      },
       quickDemoTitle: "Sélecteur Rapide de Compte (Cliquez pour remplir):",
       adminRole: "⚙️ Directeur Général",
       teacherRole: "👨‍🏫 Formateur Expert",
       studentRole: "🎓 Stagiaire / Étudiant",
+      visitorRole: "🌐 Visiteur Public",
       idLabel: "Adresse E-mail ou Identifiant *",
       idPlaceholder: "name@shat.com ou identifiant",
       pwLabel: "Mot de Passe *",
@@ -1221,9 +1284,30 @@ export const content = {
       submitBtn: "Se Connecter à la Plateforme",
       orSso: "Ou via Identité d'Entreprise",
       googleSso: "Continuer avec Google Workspace Institutionnel",
+      nationalIdLabel: "Numéro National ou Carte d'Étudiant Agréé *",
+      nationalIdPlaceholder: "ex. : 1098765432 ou 401234567",
+      nationalIdHelp: "Réservé aux apprenants et stagiaires inscrits aux formations SHAT",
+      nationalIdBtn: "Vérification Immédiate & Connexion ←",
+      whatsappPhoneLabel: "Numéro de Téléphone WhatsApp Enregistré *",
+      whatsappPhonePlaceholder: "+972 59 XXX XXXX ou +970 59 XXX XXXX",
+      whatsappBtn: "Envoyer le Code de Vérification Instantané (OTP) 💬",
+      whatsappOtpLabel: "Code de Vérification à 4 Chiffres :",
+      whatsappVerifyBtn: "Confirmer le Code & Se Connecter ←",
+      whatsappSimNote: "Service direct lié au compte WhatsApp officiel de l'institution",
+      simulatorTitle: "Choisissez un profil pour tester la plateforme en 1 clic :",
+      simulatorNote: "Le simulateur vous permet d'explorer les interfaces apprenant, formateur et administrateur sans saisir de mot de passe.",
       noAccount: "Vous n'avez pas encore de compte ?",
       applyLink: "Déposer une demande d'inscription",
       backHome: "← Retour au portail public de l'entreprise"
+    },
+    notifications: {
+      title: "Notifications et Mises à Jour Institutionnelles",
+      badge: "3 Nouvelles",
+      items: [
+        { title: "Note du Travail Pratique #1 Enregistrée (94/100)", sub: "Diplôme CHS • Évalué par Dr. Khaled Al-Mansouri" },
+        { title: "Exercice de Terrain #2 Disponible au Téléchargement", sub: "Date limite de soumission finale : 4 octobre 2026" },
+        { title: "Note de Positionnement Institutionnel sur la PSEA Publiée", sub: "Département Actualités & Études • Disponible dès maintenant" }
+      ]
     },
     topBar: {
       motto: "Renforcement des Capacités • Développement Institutionnel • Résultats Durables | HUMAINS • COMPÉTENCES • UN AVENIR PLUS RADIEUX",

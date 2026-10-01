@@ -4,6 +4,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import crypto from 'crypto';
+import https from 'https';
 import { db, supabase } from './db.js';
 
 dotenv.config();
@@ -439,11 +440,12 @@ app.post('/api/forms/:id/submit', (req, res) => {
   }
 
   const responseId = 'resp_' + Date.now();
+  const answers = req.body.answers || {};
   const submissionRecord = {
     id: responseId,
     formId: form.id,
     formTitle: form.title,
-    answers: req.body.answers || {},
+    answers,
     submittedAt: new Date().toISOString(),
     ip: req.ip
   };
@@ -451,11 +453,96 @@ app.post('/api/forms/:id/submit', (req, res) => {
   db.tables.form_responses.set(responseId, submissionRecord);
   db.logAudit('Visitor/Student', 'FORM_SUBMIT', form.id, { responseId });
 
+  // Optional background forward to Google Form
+  if (form.googleSubmitUrl && form.fields) {
+    try {
+      const url = new URL(form.googleSubmitUrl);
+      const postParams = new URLSearchParams();
+      form.fields.forEach(fld => {
+        if (fld.entryId && answers[fld.id] !== undefined) {
+          postParams.append(fld.entryId, answers[fld.id]);
+        }
+      });
+      for (const [k, v] of Object.entries(answers)) {
+        if (k.startsWith('entry.')) postParams.append(k, v);
+      }
+
+      const postData = postParams.toString();
+      if (postData.length > 0) {
+        const gReq = https.request({
+          hostname: url.hostname,
+          path: url.pathname,
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Length': Buffer.byteLength(postData),
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
+          }
+        }, () => {});
+        gReq.on('error', () => {});
+        gReq.write(postData);
+        gReq.end();
+      }
+    } catch (e) {}
+  }
+
   res.json({
     success: true,
     message: 'تم استلام استجابتكم وحفظها في قاعدة بيانات المنصة بنجاح.',
     responseId
   });
+});
+
+app.post('/api/forms/submit-google', (req, res) => {
+  const { formId, answers, fields } = req.body || {};
+  const form = db.tables.forms.get(formId);
+  const responseId = 'resp_g_' + Date.now();
+  const submissionRecord = {
+    id: responseId,
+    formId: formId || 'custom',
+    formTitle: form ? form.title : 'استمارة Google',
+    answers: answers || fields || {},
+    submittedAt: new Date().toISOString(),
+    ip: req.ip
+  };
+
+  db.tables.form_responses.set(responseId, submissionRecord);
+
+  if (form && form.googleSubmitUrl) {
+    try {
+      const url = new URL(form.googleSubmitUrl);
+      const postParams = new URLSearchParams();
+      const payload = fields || answers || {};
+      for (const [k, v] of Object.entries(payload)) {
+        postParams.append(k, v);
+      }
+      const postData = postParams.toString();
+      const gReq = https.request({
+        hostname: url.hostname,
+        path: url.pathname,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Length': Buffer.byteLength(postData),
+          'User-Agent': 'Mozilla/5.0'
+        }
+      }, () => {});
+      gReq.on('error', () => {});
+      gReq.write(postData);
+      gReq.end();
+    } catch (e) {}
+  }
+
+  res.json({
+    success: true,
+    message: 'تم حفظ استجابتكم بنجاح ومزامنتها مع Google Forms.',
+    responseId
+  });
+});
+
+app.get('/api/forms-all-responses', requireRole(['admin']), (req, res) => {
+  const allResponses = Array.from(db.tables.form_responses.values());
+  res.json({ success: true, count: allResponses.length, responses: allResponses });
 });
 
 app.get('/api/forms/:id/responses', requireRole(['admin']), (req, res) => {
@@ -705,6 +792,22 @@ app.get('/api/users', requireRole(['admin']), (req, res) => {
 // =========================================================================
 app.get('/api/audit', requireRole(['admin']), (req, res) => {
   res.json({ success: true, logs: db.tables.audit_logs });
+});
+
+// =========================================================================
+// 13. STATIC FRONTEND SPA SERVING (PRODUCTION & DOCKER)
+// =========================================================================
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __serverDir = path.dirname(fileURLToPath(import.meta.url));
+const distFolder = path.join(__serverDir, '../dist');
+
+app.use(express.static(distFolder));
+app.use((req, res, next) => {
+  if (req.method !== 'GET' || req.path.startsWith('/api')) return next();
+  res.sendFile(path.join(distFolder, 'index.html'), (err) => {
+    if (err) next();
+  });
 });
 
 // --- Server Bootstrapper ---

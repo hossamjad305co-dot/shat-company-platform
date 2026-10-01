@@ -1,14 +1,14 @@
 // assets/js/router.js
 // Production Client-Side Hash Router for SHAT Platform
 import { api } from './services/api/apiClient.js';
-import { renderHomeView } from './views/homeView.js';
+import { renderHomeView, bindHomeEvents } from './views/homeView.js';
 import { renderAboutView } from './views/aboutView.js';
 import { renderServicesView } from './views/servicesView.js';
 import { renderStandardsView } from './views/standardsView.js';
 import { renderDeliveryView } from './views/deliveryView.js';
-import { renderProjectsView } from './views/projectsView.js';
+import { renderProjectsView, bindProjectsEvents } from './views/projectsView.js';
 import { renderNewsView, bindNewsEvents } from './views/newsView.js';
-import { renderAcademyView } from './views/academyView.js';
+import { renderAcademyView, bindAcademyEvents } from './views/academyView.js';
 import { renderContactView } from './views/contactView.js';
 import { renderLoginView, bindLoginEvents } from './views/loginView.js';
 import { renderStudentDashboardView, bindStudentEvents } from './views/studentDashboardView.js';
@@ -101,7 +101,9 @@ class SimpleRouter {
 
   bindInteractions(activeRoute) {
     // Route-specific binders
-    if (activeRoute === 'login') {
+    if (activeRoute === '' || activeRoute === 'home') {
+      bindHomeEvents();
+    } else if (activeRoute === 'login') {
       bindLoginEvents();
     } else if (activeRoute === 'student') {
       bindStudentEvents();
@@ -113,6 +115,10 @@ class SimpleRouter {
       bindCourseDetailEvents();
     } else if (activeRoute === 'forms') {
       bindFormsEvents();
+    } else if (activeRoute === 'projects') {
+      bindProjectsEvents();
+    } else if (activeRoute === 'academy') {
+      bindAcademyEvents();
     } else if (activeRoute === 'news') {
       bindNewsEvents();
     }

@@ -1,6 +1,14 @@
 // assets/js/views/homeView.js
-// Pristine Executive Minimalist Homepage with 100% Trilingual Support (AR, EN, FR)
+// World-Class Executive Platform Experience for SHAT Development & Growth
+// Agency-Tier Architecture: Double-Bezel, Haptic Depth, Interactive Tools Suite & Total Interconnectedness
+// 100% Trilingual Support (العربية AR, English EN, Français FR)
+
 import { content } from '../content.js';
+import { translations } from '../translations.js';
+import { icons } from '../icons.js';
+import { showToast } from '../components/toast.js';
+import { standardsExplorer } from '../tools/standardsExplorer.js';
+import { toolkitsLibrary } from '../tools/toolkitsLibrary.js';
 
 export function renderHomeView(lang = 'ar') {
   const d = content[lang] || content.ar;
@@ -14,36 +22,98 @@ export function renderHomeView(lang = 'ar') {
   const isRtl = lang === 'ar';
   const arrow = isRtl ? '←' : '→';
 
+  const soc = (translations[lang] || translations.ar).socialSection || translations.ar.socialSection;
+  const socPosts = soc.posts || [];
+
+  const txt = (ar, en, fr) => (lang === 'fr' ? fr || en : (lang === 'en' ? en : ar));
+
   return `
     <div class="view-home">
-      <!-- Minimalist Hero Section -->
-      <section class="section" style="padding: clamp(60px, 9vw, 110px) 0; background: linear-gradient(180deg, #FFFFFF 0%, var(--bg-subtle) 100%);">
+      
+      <!-- ==================================================================== -->
+      <!-- 1. World-Class Executive Hero Section                                -->
+      <!-- ==================================================================== -->
+      <section class="section" style="padding: clamp(64px, 8vw, 110px) 0 40px; background: radial-gradient(circle at 50% 10%, rgba(15,46,74,0.04) 0%, #FFFFFF 85%);">
         <div class="container">
-          <div style="max-width: 860px; margin: 0 auto; text-align: center;">
-            <div class="section-badge" style="margin-bottom: 20px;">
-              ${h.heroBadge || (c.name + ' • ' + c.nameEn)}
+          <div style="max-width: 920px; margin: 0 auto; text-align: center;">
+            
+            <!-- Live Operational Eyebrow Tag -->
+            <div style="display: inline-flex; align-items: center; gap: 8px; background: #FFFFFF; border: 1px solid var(--border-light); padding: 6px 16px; border-radius: 9999px; box-shadow: var(--shadow-sm); margin-bottom: 22px;">
+              <span class="live-pulse-dot" style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10B981;"></span>
+              <span style="font-size: 0.82rem; font-weight: 800; color: var(--shat-navy);">
+                ${txt('بيت خبرة واستشارات دولي معتمد • International Advisory House', 'Accredited International Advisory & Capacity Development House', 'Maison Internationale d’Expertise & de Conseil')}
+              </span>
             </div>
-            <h1 style="font-size: clamp(2.2rem, 5vw, 3.4rem); color: var(--shat-navy); line-height: 1.25; font-weight: 900; margin-bottom: 20px;">
+
+            <!-- Primary Headline -->
+            <h1 style="font-size: clamp(2.3rem, 4.8vw, 3.6rem); color: var(--shat-navy); line-height: 1.25; font-weight: 900; margin-bottom: 22px; letter-spacing: -0.02em;">
               ${c.motto}
             </h1>
-            <p style="font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--text-secondary); line-height: 1.8; margin-bottom: 36px; max-width: 740px; margin-left: auto; margin-right: auto;">
+
+            <!-- Subtitle -->
+            <p style="font-size: clamp(1.05rem, 1.8vw, 1.25rem); color: var(--text-secondary); line-height: 1.8; margin-bottom: 34px; max-width: 780px; margin-inline: auto; font-weight: 500;">
               ${h.heroSubtitle}
             </p>
-            <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
-              <a href="#/academy" class="btn-clean btn-primary btn-lg">
+
+            <!-- Nested Island Button Architecture -->
+            <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px;">
+              <a href="#/academy" class="btn-island btn-island-primary">
                 <span>${h.exploreAcademy}</span>
-                <span>${arrow}</span>
+                <span class="icon-circle">${arrow}</span>
               </a>
-              <a href="#/services" class="btn-clean btn-secondary btn-lg">
+              <button type="button" class="btn-island btn-island-secondary btn-open-diagnostic">
+                <span>🧭 ${txt('أداة التشخيص المؤسسي الفوري', 'Instant Readiness Diagnostic', 'Diagnostic Institutionnel')}</span>
+                <span class="icon-circle">⚡</span>
+              </button>
+              <a href="#/services" class="btn-island btn-island-secondary" style="background: transparent; color: var(--shat-navy); border-color: var(--border-medium);">
                 <span>${h.exploreServices}</span>
+                <span class="icon-circle" style="background: var(--bg-subtle); color: var(--shat-navy);">${arrow}</span>
               </a>
             </div>
+
+            <!-- High-Contrast Executive Metrics Counter Row -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; max-width: 880px; margin: 0 auto;">
+              <div class="metric-pill-box">
+                <span style="font-size: 1.8rem;">🏛️</span>
+                <div style="text-align: ${isRtl ? 'right' : 'left'};">
+                  <div style="font-size: 1.45rem; font-weight: 900; color: var(--shat-navy); font-family: var(--font-mono); line-height: 1.1;">14+</div>
+                  <div style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700;">${txt('منظمات شريكة وحكومية', 'Partner Organizations', 'Organisations Partenaires')}</div>
+                </div>
+              </div>
+
+              <div class="metric-pill-box">
+                <span style="font-size: 1.8rem;">🎓</span>
+                <div style="text-align: ${isRtl ? 'right' : 'left'};">
+                  <div style="font-size: 1.45rem; font-weight: 900; color: var(--shat-green); font-family: var(--font-mono); line-height: 1.1;">420+</div>
+                  <div style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700;">${txt('كادراً قيادياً معتمداً', 'Accredited Leaders', 'Cadres Dirigeants Formés')}</div>
+                </div>
+              </div>
+
+              <div class="metric-pill-box">
+                <span style="font-size: 1.8rem;">📘</span>
+                <div style="text-align: ${isRtl ? 'right' : 'left'};">
+                  <div style="font-size: 1.45rem; font-weight: 900; color: var(--shat-navy); font-family: var(--font-mono); line-height: 1.1;">8</div>
+                  <div style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700;">${txt('حقائب تدريبية واستشارية', 'Specialized Portfolios', 'Portefeuilles Métiers')}</div>
+                </div>
+              </div>
+
+              <div class="metric-pill-box">
+                <span style="font-size: 1.8rem;">🛡️</span>
+                <div style="text-align: ${isRtl ? 'right' : 'left'};">
+                  <div style="font-size: 1.45rem; font-weight: 900; color: #10B981; font-family: var(--font-mono); line-height: 1.1;">100%</div>
+                  <div style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700;">${txt('امتثال لمعايير CHS & PSEA', 'CHS & PSEA Compliance', 'Conformité CHS & PSEA')}</div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
-      <!-- Value Equation Bar -->
-      <section class="section-subtle" style="padding: 40px 0;">
+      <!-- ==================================================================== -->
+      <!-- 2. Value Equation Bar (Seamless Connection)                         -->
+      <!-- ==================================================================== -->
+      <section class="section-subtle" style="padding: 38px 0; border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);">
         <div class="container">
           <div style="text-align: center; margin-bottom: 16px;">
             <span style="font-size: 0.82rem; font-weight: 800; color: var(--shat-green); text-transform: uppercase; letter-spacing: 0.05em;">
@@ -59,14 +129,111 @@ export function renderHomeView(lang = 'ar') {
               ${i < eq.steps.length - 1 ? `<div class="formula-arrow">${arrow}</div>` : ''}
             `).join('')}
           </div>
-          <p style="text-align: center; font-size: 0.95rem; color: var(--text-muted); max-width: 740px; margin: 0 auto; line-height: 1.7;">
+          <p style="text-align: center; font-size: 0.95rem; color: var(--text-secondary); max-width: 760px; margin: 0 auto; line-height: 1.7; font-weight: 600;">
             ${h.valueEqQuote}
           </p>
         </div>
       </section>
 
-      <!-- Two Strategic Pillars -->
-      <section class="section">
+      <!-- ==================================================================== -->
+      <!-- 3. Interactive Tools Suite Showcase (مجمع الأدوات المؤسسية)         -->
+      <!-- ==================================================================== -->
+      <section class="section" style="background: #FFFFFF; padding: 70px 0;">
+        <div class="container">
+          <div class="section-header" style="text-align: center; max-width: 820px; margin: 0 auto 40px auto;">
+            <span class="section-badge">${txt('منظومة الأدوات التفاعلية • Interactive Suite', 'Interactive Institutional Tools', 'Boîte à Outils Interactive')}</span>
+            <h2 class="section-title">${txt('أدوات رقمية متقدمة لقياس الجاهزية والتحقق والامتثال', 'Digital Tools for Diagnostic, Verification & Compliance', 'Outils Numériques pour la Conformité et l’Évaluation')}</h2>
+            <p class="section-desc">${txt('حلول ذكية طُوّرت خصيصاً لمساعدة قادة المنظمات الإنسانية والتنموية في اتخاذ قرارات مدروسة قائمة على المعايير.', 'Smart tools engineered to empower humanitarian and development leaders in data-driven decision making.', 'Des outils conçus pour guider les décideurs dans le respect des normes.')}</p>
+          </div>
+
+          <div class="bento-grid grid-3">
+            
+            <!-- Tool 1: Institutional Diagnostic -->
+            <div class="double-bezel">
+              <div class="double-bezel-inner">
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span style="font-size: 1.8rem;">🧭</span>
+                    <span class="badge badge-primary">${txt('فوري • مجاني', 'Instant • Free', 'Instantané')}</span>
+                  </div>
+                  <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--shat-navy); margin-bottom: 8px;">
+                    ${txt('أداة التقييم والتشخيص المؤسسي', 'Institutional Readiness Diagnostic', 'Diagnostic de Préparation')}
+                  </h3>
+                  <p style="font-size: 0.86rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">
+                    ${txt('قياس نضج المؤسسة في 4 محاور (CHS, PSEA, MEAL, الحوكمة) وإصدار خارطة طريق تنفيذية لسد الفجوات.', 'Assess maturity across 4 pillars with an automated roadmap for compliance gaps.', 'Mesurez la maturité sur 4 piliers.')}
+                  </p>
+                </div>
+                <div>
+                  <button type="button" class="btn-clean btn-primary btn-sm btn-open-diagnostic" style="width: 100%;">
+                    <span>${txt('بدء التشخيص المؤسسي الآن', 'Start Diagnostic', 'Lancer le Diagnostic')}</span>
+                    <span>${arrow}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tool 2: Certificate Validator -->
+            <div class="double-bezel">
+              <div class="double-bezel-inner">
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span style="font-size: 1.8rem;">📜</span>
+                    <span class="badge" style="background: #FEF3C7; color: #B45309; font-weight: 800;">${txt('موثق رسمياً', 'Accredited', 'Homologué')}</span>
+                  </div>
+                  <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--shat-navy); margin-bottom: 8px;">
+                    ${txt('نظام التحقق من الشهادات الرقمية', 'Digital Certificate Verification', 'Vérification de Certificats')}
+                  </h3>
+                  <p style="font-size: 0.86rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">
+                    ${txt('تحقق فوري من صحة الدبلومات الصادرة من شركة شات، وسجل الساعات التدريبية والجدارات المحققة للجهات المانحة وأرباب العمل.', 'Instant verification of SHAT issued diplomas and authenticated competencies.', 'Vérification en direct des diplômes.')}
+                  </p>
+                </div>
+                <div>
+                  <button type="button" class="btn-clean btn-secondary btn-sm btn-open-cert-validator" style="width: 100%;">
+                    <span>${txt('التحقق من رقم الشهادة', 'Verify Credential ID', 'Vérifier un Matricule')}</span>
+                    <span>${arrow}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tool 3: Global Spotlight Search -->
+            <div class="double-bezel">
+              <div class="double-bezel-inner">
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span style="font-size: 1.8rem;">🔍</span>
+                    <span class="badge" style="background: var(--shat-navy-tint); color: var(--shat-navy); font-weight: 700;">Ctrl+K</span>
+                  </div>
+                  <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--shat-navy); margin-bottom: 8px;">
+                    ${txt('محرك البحث الذكي الموحد', 'Unified Spotlight Search', 'Recherche Unifiée')}
+                  </h3>
+                  <p style="font-size: 0.86rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">
+                    ${txt('بحث سريع ومباشر عبر قاعدة معرفية شاملة تشمل المقررات، الخدمات، المعايير، والمشاريع الميدانية.', 'Instant search indexing courses, advisory services, global standards, and projects.', 'Indexation instantanée de tous les contenus.')}
+                  </p>
+                </div>
+                <div>
+                  <button type="button" class="btn-clean btn-sm btn-trigger-spotlight" style="width: 100%; background: var(--bg-subtle); border: 1px solid var(--border-medium); color: var(--shat-navy); font-weight: 700;">
+                    <span>${txt('فتح نافذة البحث السريع', 'Open Search Modal', 'Ouvrir la Recherche')}</span>
+                    <span>🔍</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Embedded Interactive Standards Explorer Checklist -->
+          <div style="margin-top: 48px;">
+            ${standardsExplorer.renderSection(lang)}
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==================================================================== -->
+      <!-- 4. Two Strategic Pillars (Double-Bezel Layout)                      -->
+      <!-- ==================================================================== -->
+      <section class="section section-subtle">
         <div class="container">
           <div class="section-header">
             <span class="section-badge">${h.pillarsBadge}</span>
@@ -76,20 +243,23 @@ export function renderHomeView(lang = 'ar') {
 
           <div class="bento-grid grid-2">
             ${pillars.map(p => `
-              <div class="bento-card" style="border-top: 4px solid var(--shat-navy);">
-                <div>
-                  <div class="bento-header">
-                    <span class="section-badge">${p.badge}</span>
+              <div class="double-bezel">
+                <div class="double-bezel-inner" style="border-top: 4px solid var(--shat-navy);">
+                  <div>
+                    <div class="bento-header" style="margin-bottom: 12px;">
+                      <span class="section-badge">${p.badge}</span>
+                      <span style="font-size: 0.78rem; color: var(--text-muted); font-weight: 700;">Pillar Component</span>
+                    </div>
+                    <h3 class="bento-title" style="font-size: 1.35rem;">${p.title}</h3>
+                    <div class="bento-en" style="color: var(--shat-navy); font-weight: 700; margin-bottom: 12px;">${p.en}</div>
+                    <p class="bento-text" style="line-height: 1.7; font-size: 0.95rem;">${p.desc}</p>
                   </div>
-                  <h3 class="bento-title">${p.title}</h3>
-                  <div class="bento-en">${p.en}</div>
-                  <p class="bento-text">${p.desc}</p>
-                </div>
-                <div class="bento-footer">
-                  <a href="#/services" class="btn-clean btn-secondary btn-sm" style="width: 100%;">
-                    <span>${lang === 'fr' ? 'Détails des Solutions' : (isRtl ? 'تفاصيل المنظومة والحلول' : 'Solutions & Methodology')}</span>
-                    <span>${arrow}</span>
-                  </a>
+                  <div class="bento-footer" style="margin-top: 20px; border-top: 1px solid var(--border-light); padding-top: 16px;">
+                    <a href="#/services" class="btn-island btn-island-secondary" style="width: 100%; justify-content: space-between;">
+                      <span>${lang === 'fr' ? 'Détails des Solutions & Méthodologie' : (isRtl ? 'تفاصيل المنظومة والحلول الاستشارية' : 'Solutions & Advisory Details')}</span>
+                      <span class="icon-circle">${arrow}</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             `).join('')}
@@ -97,8 +267,10 @@ export function renderHomeView(lang = 'ar') {
         </div>
       </section>
 
-      <!-- 6-Stage Delivery Model -->
-      <section class="section section-subtle">
+      <!-- ==================================================================== -->
+      <!-- 5. 6-Stage Delivery Model                                           -->
+      <!-- ==================================================================== -->
+      <section class="section">
         <div class="container">
           <div class="section-header">
             <span class="section-badge">${h.deliveryBadge}</span>
@@ -108,67 +280,67 @@ export function renderHomeView(lang = 'ar') {
 
           <div class="bento-grid grid-3">
             ${stages.map(st => `
-              <div class="bento-card">
-                <div>
-                  <div class="bento-header">
-                    <span class="step-number">${st.num}</span>
-                    <span class="bento-kicker">${st.en}</span>
+              <div class="double-bezel">
+                <div class="double-bezel-inner">
+                  <div>
+                    <div class="bento-header" style="margin-bottom: 8px;">
+                      <span class="step-number" style="font-size: 1.3rem;">${st.num}</span>
+                      <span class="bento-kicker">${st.en}</span>
+                    </div>
+                    <h4 class="bento-title" style="font-size: 1.15rem;">${st.ar || st.title}</h4>
+                    <p class="bento-text" style="line-height: 1.6;">${st.desc}</p>
                   </div>
-                  <h4 class="bento-title" style="font-size: 1.15rem;">${st.ar || st.title}</h4>
-                  <p class="bento-text">${st.desc}</p>
                 </div>
               </div>
             `).join('')}
           </div>
 
           <div style="text-align: center; margin-top: 36px;">
-            <a href="#/delivery" class="btn-clean btn-secondary">
+            <a href="#/delivery" class="btn-island btn-island-secondary">
               <span>${h.exploreDelivery}</span>
-              <span>${arrow}</span>
+              <span class="icon-circle">${arrow}</span>
             </a>
           </div>
         </div>
       </section>
 
-      <!-- International Standards Matrix -->
-      <section class="section section-navy">
+      <!-- ==================================================================== -->
+      <!-- 6. International Standards Matrix (High Contrast Navy)               -->
+      <!-- ==================================================================== -->
+      <section class="section section-navy" style="background: #0A1B2A; color: #FFFFFF;">
         <div class="container">
-          <div class="section-header">
-            <span class="section-badge">${h.standardsBadge}</span>
-            <h2 class="section-title">${h.standardsTitle}</h2>
-            <p class="section-desc">${h.standardsSubtitle}</p>
+          <div class="section-header" style="text-align: center; max-width: 820px; margin: 0 auto 40px auto;">
+            <span class="section-badge" style="background: rgba(255,255,255,0.1); color: #6EE7B7; border: 1px solid rgba(110,231,183,0.3);">${h.standardsBadge}</span>
+            <h2 class="section-title" style="color: #FFFFFF;">${h.standardsTitle}</h2>
+            <p class="section-desc" style="color: #CBD5E1;">${h.standardsSubtitle}</p>
           </div>
 
           <div class="bento-grid grid-3">
             ${stList.map(st => `
-              <div class="bento-card">
+              <div class="bento-card" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: #FFFFFF; display: flex; flex-direction: column; justify-content: space-between;">
                 <div>
-                  <div class="bento-header">
-                    <span style="font-size: 0.8rem; font-weight: 800; color: #4ADE80; font-family: var(--font-mono);">${st.code}</span>
+                  <div class="bento-header" style="margin-bottom: 10px;">
+                    <span style="font-size: 0.85rem; font-weight: 800; color: #4ADE80; font-family: var(--font-mono); background: rgba(74,222,128,0.15); padding: 3px 8px; border-radius: 4px;">${st.code}</span>
                     <span style="font-size: 0.76rem; color: #94A3B8;">${st.badge}</span>
                   </div>
-                  <h3 class="bento-title" style="font-size: 1.15rem;">${st.title}</h3>
-                  <div class="bento-en">${st.en}</div>
-                  <div style="margin-bottom: 12px;">
-                    <div style="font-size: 0.78rem; font-weight: 800; color: #FDE047; margin-bottom: 2px;">
-                      ${lang === 'fr' ? 'Valeur & Portée Institutionnelle:' : (isRtl ? 'القيمة والأهمية المؤسسية:' : 'Institutional Value & Scope:')}
-                    </div>
-                    <p style="font-size: 0.88rem; line-height: 1.6;">${st.whyItMatters}</p>
-                  </div>
-                  <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: var(--radius-xs); border-${isRtl ? 'right' : 'left'}: 3px solid #38BDF8; margin-bottom: 12px;">
+                  <h3 class="bento-title" style="font-size: 1.18rem; color: #FFFFFF; margin-bottom: 4px;">${st.title}</h3>
+                  <div class="bento-en" style="color: #93C5FD; font-size: 0.78rem; margin-bottom: 12px;">${st.en}</div>
+                  
+                  <div style="background: rgba(255,255,255,0.06); padding: 12px; border-radius: var(--radius-xs); border-${isRtl ? 'right' : 'left'}: 3px solid #38BDF8; margin-bottom: 12px;">
                     <div style="font-size: 0.78rem; font-weight: 800; color: #38BDF8; margin-bottom: 2px;">
                       ${lang === 'fr' ? 'Application par SHAT:' : (isRtl ? 'كيف نطبقه في شات؟' : 'How SHAT Implements It:')}
                     </div>
                     <p style="font-size: 0.84rem; line-height: 1.5; color: #E2E8F0; margin: 0;">${st.howShatApplies}</p>
                   </div>
                 </div>
-                <div class="bento-footer">
-                  <div style="font-size: 0.78rem; color: #86EFAC; font-weight: 700; margin-bottom: 6px;">
+
+                <div class="bento-footer" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px; margin-top: 8px;">
+                  <div style="font-size: 0.76rem; color: #86EFAC; font-weight: 700; margin-bottom: 4px;">
                     ${lang === 'fr' ? 'Livrable Réalisé:' : (isRtl ? 'المخرج المحقق:' : 'Tangible Deliverable:')}
                   </div>
                   <div style="font-size: 0.82rem; color: #F1F5F9; margin-bottom: 12px;">${st.deliverable}</div>
-                  <a href="${st.route}" class="btn-clean btn-secondary btn-sm" style="width: 100%; border-color: rgba(255,255,255,0.2); background: transparent; color: #FFFFFF;">
-                    <span>${lang === 'fr' ? 'Parcours Lié' : (isRtl ? 'المسار المرتبط' : 'Associated Track')}</span>
+                  <a href="${st.route}" class="btn-clean btn-sm" style="width: 100%; border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.08); color: #FFFFFF; text-align: center; justify-content: center; font-weight: 700;">
+                    <span>${lang === 'fr' ? 'Parcours & Services Liés' : (isRtl ? 'المسار التدريبي والخدمات المرتبطة' : 'Associated Track & Services')}</span>
                     <span>${arrow}</span>
                   </a>
                 </div>
@@ -177,15 +349,17 @@ export function renderHomeView(lang = 'ar') {
           </div>
 
           <div style="text-align: center; margin-top: 36px;">
-            <a href="#/standards" class="btn-clean btn-green btn-lg">
+            <a href="#/standards" class="btn-island btn-island-primary" style="background: #10B981; border-color: #10B981;">
               <span>${h.viewAllStandards}</span>
-              <span>${arrow}</span>
+              <span class="icon-circle">${arrow}</span>
             </a>
           </div>
         </div>
       </section>
 
-      <!-- Specialized Portfolios Preview -->
+      <!-- ==================================================================== -->
+      <!-- 7. Eight Specialized Portfolios (Direct Academy Deep Links)         -->
+      <!-- ==================================================================== -->
       <section class="section">
         <div class="container">
           <div class="section-header">
@@ -196,48 +370,26 @@ export function renderHomeView(lang = 'ar') {
 
           <div class="bento-grid grid-3">
             ${portfolios.map(pf => `
-              <div class="bento-card" style="border-top: 3px solid var(--shat-green);">
-                <div>
-                  <div class="bento-header">
-                    <span class="bento-kicker">${pf.num}</span>
-                    <span style="font-size: 0.76rem; color: var(--text-muted);">${lang === 'fr' ? 'Module Agréé' : (isRtl ? 'حقيبة معتمدة' : 'Accredited Module')}</span>
-                  </div>
-                  <h4 class="bento-title" style="font-size: 1.15rem;">${pf.name}</h4>
-                  <div class="bento-en">${pf.en}</div>
-                  <p class="bento-text">${pf.desc}</p>
-                </div>
-                <div class="bento-footer" style="display: flex; justify-content: space-between; align-items: center;">
-                  <a href="#/academy" class="btn-clean btn-outline-green btn-sm">
-                    <span>${lang === 'fr' ? "S'inscrire au Cours" : (isRtl ? 'التسجيل في المساق' : 'Enroll in Track')}</span>
-                    <span>${arrow}</span>
-                  </a>
-                </div>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-      </section>
-
-      <!-- 8 Professional Principles -->
-      <section class="section section-subtle">
-        <div class="container">
-          <div class="section-header">
-            <span class="section-badge">${lang === 'fr' ? 'Notre Déontologie' : (isRtl ? 'منهجيتنا المهنية' : 'Our Professional Ethics')}</span>
-            <h2 class="section-title">${lang === 'fr' ? 'Principes Directeurs Fondamentaux' : (isRtl ? 'المبادئ الحاكمة لأعمالنا' : 'Our Governing Principles')}</h2>
-            <p class="section-desc">${lang === 'fr' ? 'Principes rigoureux guidant la conception et le déploiement de tous nos services.' : (isRtl ? 'مبادئ راسخة تحكم تصميم وتنفيذ خدماتنا الاستشارية والتدريبية والتقييمية.' : 'Core principles governing our consulting, training, and evaluation interventions.')}</p>
-          </div>
-
-          <div class="bento-grid grid-2">
-            ${d.principles.map((pr, i) => `
-              <div class="bento-card" style="padding: 20px 24px;">
-                <div style="display: flex; gap: 14px; align-items: flex-start;">
-                  <span style="font-size: 1.1rem; font-weight: 800; color: var(--shat-green); font-family: var(--font-mono); min-width: 28px;">
-                    0${i + 1}
-                  </span>
+              <div class="double-bezel">
+                <div class="double-bezel-inner" style="border-top: 3px solid var(--shat-green);">
                   <div>
-                    <h5 style="font-size: 1.05rem; font-weight: 800; color: var(--shat-navy); margin-bottom: 2px;">${pr.ar || pr.en}</h5>
-                    <div style="font-size: 0.78rem; color: var(--text-muted); font-family: var(--font-latin); margin-bottom: 6px;">${pr.en}</div>
-                    <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin: 0;">${pr.desc}</p>
+                    <div class="bento-header" style="margin-bottom: 10px;">
+                      <span class="bento-kicker" style="font-size: 0.82rem;">${pf.num}</span>
+                      <span class="badge badge-primary">${lang === 'fr' ? 'Module Agréé' : (isRtl ? 'حقيبة معتمدة' : 'Accredited Module')}</span>
+                    </div>
+                    <h4 class="bento-title" style="font-size: 1.15rem;">${pf.name}</h4>
+                    <div class="bento-en" style="color: var(--text-muted); font-size: 0.78rem; margin-bottom: 8px;">${pf.en}</div>
+                    <p class="bento-text" style="font-size: 0.88rem; line-height: 1.6;">${pf.desc}</p>
+                  </div>
+
+                  <div class="bento-footer" style="display: flex; gap: 8px; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-light); padding-top: 12px; margin-top: 14px;">
+                    <a href="#/course/shat-chs-master" class="btn-clean btn-sm" style="background: var(--bg-subtle); color: var(--shat-navy); border: 1px solid var(--border-light); font-weight: 700;">
+                      <span>${txt('المقرر المرتبط', 'Linked Course', 'Cursus Lié')}</span>
+                    </a>
+                    <button class="btn-clean btn-green btn-sm btn-open-reg-modal" data-course="general">
+                      <span>${lang === 'fr' ? "S'inscrire" : (isRtl ? 'التسجيل بالمساق' : 'Enroll Now')}</span>
+                      <span>${arrow}</span>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -246,33 +398,296 @@ export function renderHomeView(lang = 'ar') {
         </div>
       </section>
 
-      <!-- Minimalist Corporate Call to Action -->
+      <!-- ==================================================================== -->
+      <!-- 8. Field Toolkits & Operational Templates Hub Embed                 -->
+      <!-- ==================================================================== -->
+      <section class="section" style="padding-top: 0;">
+        <div class="container">
+          ${toolkitsLibrary.renderSection(lang)}
+        </div>
+      </section>
+
+      <!-- ==================================================================== -->
+      <!-- 9. Interactive Social Media Hub & Platform Highlights               -->
+      <!-- ==================================================================== -->
+      <section class="section" id="home-social-section" style="background: #FFFFFF; border-top: 1px solid var(--border-light);">
+        <div class="container">
+          <div class="section-header" style="text-align: center; max-width: 820px; margin: 0 auto 36px auto;">
+            <span class="section-badge">${soc.badge}</span>
+            <h2 class="section-title">${soc.title}</h2>
+            <p class="section-desc">${soc.subtitle}</p>
+            
+            <!-- Official Channels Pill Buttons -->
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
+              <a href="https://www.facebook.com/shat.development.growth/" target="_blank" rel="noopener" class="social-pill-btn btn-fb">
+                ${icons.facebook('svg-social-fb', 18)}
+                <span>Facebook Official</span>
+              </a>
+              <a href="https://www.instagram.com/shat.development.growth/" target="_blank" rel="noopener" class="social-pill-btn btn-ig">
+                ${icons.instagram('svg-social-ig', 18)}
+                <span>Instagram Feed</span>
+              </a>
+              <a href="https://wa.me/972592879621" target="_blank" rel="noopener" class="social-pill-btn btn-wa">
+                ${icons.whatsapp('svg-social-wa', 18)}
+                <span>WhatsApp Line</span>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener" class="social-pill-btn btn-li">
+                ${icons.linkedin('svg-social-li', 18)}
+                <span>LinkedIn Corporate</span>
+              </a>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="social-filter-tabs" style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 24px;">
+              <button class="btn-clean btn-sm social-tab-btn active" data-filter="all" style="padding: 6px 14px; border-radius: 20px; font-weight: 700; background: var(--shat-navy); color: #FFFFFF;">
+                ${soc.filterAll || 'الكل'}
+              </button>
+              <button class="btn-clean btn-sm social-tab-btn" data-filter="Facebook" style="padding: 6px 14px; border-radius: 20px; font-weight: 700; background: var(--bg-subtle); color: var(--text-secondary); border: 1px solid var(--border-light);">
+                📘 Facebook
+              </button>
+              <button class="btn-clean btn-sm social-tab-btn" data-filter="Instagram" style="padding: 6px 14px; border-radius: 20px; font-weight: 700; background: var(--bg-subtle); color: var(--text-secondary); border: 1px solid var(--border-light);">
+                📸 Instagram
+              </button>
+              <button class="btn-clean btn-sm social-tab-btn" data-filter="training" style="padding: 6px 14px; border-radius: 20px; font-weight: 700; background: var(--bg-subtle); color: var(--text-secondary); border: 1px solid var(--border-light);">
+                🎓 ${soc.filterTraining || 'تدريب ومعايير'}
+              </button>
+              <button class="btn-clean btn-sm social-tab-btn" data-filter="protection" style="padding: 6px 14px; border-radius: 20px; font-weight: 700; background: var(--bg-subtle); color: var(--text-secondary); border: 1px solid var(--border-light);">
+                🛡️ ${soc.filterProtection || 'حماية وصون كرامة'}
+              </button>
+            </div>
+          </div>
+
+          <!-- Social Posts Bento Grid -->
+          <div class="bento-grid grid-3" id="home-social-grid">
+            ${socPosts.map((post, i) => `
+              <article class="social-feed-card" data-category="${post.category}" data-platform="${post.platform}">
+                <div class="social-feed-header">
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 32px; height: 32px; border-radius: 50%; background: #FFFFFF; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); border: 1px solid var(--border-light);">
+                      ${post.platform === 'Facebook' ? icons.facebook('svg-social-fb', 18) : icons.instagram('svg-social-ig', 18)}
+                    </div>
+                    <div>
+                      <div style="font-weight: 800; font-size: 0.85rem; color: var(--shat-navy); display: flex; align-items: center; gap: 4px;">
+                        <span>${c.name}</span>
+                        <span style="color: #1D4ED8; font-size: 0.75rem;" title="Official Verified">✓</span>
+                      </div>
+                      <div style="font-size: 0.72rem; color: var(--text-muted);">${post.platform} • ${post.date}</div>
+                    </div>
+                  </div>
+                  <span class="badge" style="background: var(--shat-green-tint); color: var(--shat-green); font-size: 0.74rem;">
+                    ${post.tag}
+                  </span>
+                </div>
+
+                <div style="height: 180px; width: 100%; background: #F1F5F9; overflow: hidden; position: relative;">
+                  <img src="${post.img || 'assets/logo/logo-banner.jpg'}" alt="${post.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" onerror="this.onerror=null; this.src='assets/logo/logo-banner.jpg';">
+                </div>
+
+                <div class="social-feed-body">
+                  <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--shat-navy); margin-bottom: 8px; line-height: 1.45;">
+                    ${post.title}
+                  </h4>
+                  <p style="font-size: 0.86rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
+                    ${post.excerpt}
+                  </p>
+                </div>
+
+                <div class="social-feed-actions">
+                  <div style="display: flex; gap: 4px;">
+                    <button class="social-reaction-btn btn-like-social" data-id="${post.id}">
+                      <span>❤️</span>
+                      <span class="like-count">${140 + (i * 23)}</span>
+                    </button>
+                    <button class="social-reaction-btn btn-share-social" data-link="${post.link}" data-title="${post.title}">
+                      <span>🔗</span>
+                      <span>${lang === 'fr' ? 'Partager' : (isRtl ? 'مشاركة' : 'Share')}</span>
+                    </button>
+                  </div>
+                  
+                  <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                    ${post.formUrl ? `
+                      <a href="${post.formUrl}" class="btn-clean btn-sm" style="background: var(--shat-green); color: #FFFFFF; font-weight: 800; font-size: 0.78rem;">
+                        <span>✍️ ${isRtl ? 'تسجيل' : 'Register'}</span>
+                      </a>
+                    ` : ''}
+                    <button class="btn-clean btn-sm btn-read-social-detail" data-post-id="${post.id}" style="background: var(--bg-subtle); color: var(--shat-navy); font-weight: 700; font-size: 0.78rem;">
+                      <span>📄 ${lang === 'fr' ? 'Détails' : (isRtl ? 'تفاصيل' : 'Details')}</span>
+                    </button>
+                    <a href="${post.link}" target="_blank" rel="noopener" class="btn-clean btn-sm" style="background: var(--shat-green-tint); color: var(--shat-green); font-weight: 800; font-size: 0.78rem;">
+                      <span>↗️ ${post.platform}</span>
+                    </a>
+                  </div>
+                </div>
+              </article>
+            `).join('')}
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================== -->
+      <!-- 10. Minimalist Corporate Call to Action                             -->
+      <!-- ==================================================================== -->
       <section class="section" style="padding: 80px 0; background: #FFFFFF; border-top: 1px solid var(--border-light);">
         <div class="container">
-          <div style="border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: clamp(32px, 6vw, 64px); text-align: center; background: var(--bg-subtle);">
-            <span class="section-badge" style="margin-bottom: 16px;">${c.name}</span>
-            <h2 style="font-size: clamp(1.8rem, 3.5vw, 2.4rem); color: var(--shat-navy); margin-bottom: 14px; line-height: 1.3;">
-              ${lang === 'fr' 
-                ? 'Prêts à vous accompagner pour transformer le savoir en résultats mesurables' 
-                : (isRtl ? 'جاهزون لدعم مؤسستكم في تحويل المعرفة إلى نتائج قابلة للقياس' : 'Ready to support your organization in converting knowledge into measurable results')}
-            </h2>
-            <p style="font-size: 1.05rem; color: var(--text-secondary); max-width: 640px; margin: 0 auto 28px auto; line-height: 1.7;">
-              ${lang === 'fr'
-                ? "Contactez nos consultants pour analyser vos besoins institutionnels ou concevoir des formations sur mesure pour vos équipes."
-                : (isRtl ? 'تواصل مع فريق خبرائنا الاستشاري لبحث احتياجاتكم المؤسسية أو تصميم برامج تدريبية مخصصة لفرق عملكم.' : 'Connect with our advisory team to discuss institutional needs or design tailored capacity-building programs.')}
-            </p>
-            <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-              <a href="#/contact" class="btn-clean btn-primary btn-lg">
-                <span>${d.nav.requestConsultation}</span>
-                <span>${arrow}</span>
-              </a>
-              <a href="https://wa.me/972592879621" target="_blank" rel="noopener" class="btn-clean btn-secondary btn-lg">
-                <span>WhatsApp: +972 59 287 9621</span>
-              </a>
+          <div class="double-bezel" style="max-width: 900px; margin: 0 auto;">
+            <div class="double-bezel-inner" style="padding: clamp(32px, 6vw, 64px); text-align: center; background: var(--bg-subtle);">
+              <span class="section-badge" style="margin-bottom: 16px;">${c.name}</span>
+              <h2 style="font-size: clamp(1.8rem, 3.5vw, 2.5rem); color: var(--shat-navy); margin-bottom: 14px; line-height: 1.3; font-weight: 900;">
+                ${lang === 'fr' 
+                  ? 'Prêts à vous accompagner pour transformer le savoir en résultats mesurables' 
+                  : (isRtl ? 'جاهزون لدعم مؤسستكم في تحويل المعرفة إلى نتائج قابلة للقياس' : 'Ready to support your organization in converting knowledge into measurable results')}
+              </h2>
+              <p style="font-size: 1.05rem; color: var(--text-secondary); max-width: 680px; margin: 0 auto 28px auto; line-height: 1.7; font-weight: 500;">
+                ${lang === 'fr'
+                  ? "Contactez nos consultants pour analyser vos besoins institutionnels ou concevoir des formations sur mesure pour vos équipes."
+                  : (isRtl ? 'تواصل مع فريق خبرائنا الاستشاري لبحث احتياجاتكم المؤسسية أو تصميم برامج تدريبية مخصصة لفرق عملكم وفق معايير الجودة الدولية.' : 'Connect with our advisory team to discuss institutional needs or design tailored capacity-building programs aligned with global standards.')}
+              </p>
+              <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+                <a href="#/contact" class="btn-island btn-island-primary">
+                  <span>${d.nav.requestConsultation}</span>
+                  <span class="icon-circle">${arrow}</span>
+                </a>
+                <a href="https://wa.me/972592879621" target="_blank" rel="noopener" class="btn-island btn-island-secondary">
+                  <span>WhatsApp: +972 59 287 9621</span>
+                  <span class="icon-circle">💬</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </section>
+
     </div>
   `;
+}
+
+export function bindHomeEvents() {
+  const currentLang = localStorage.getItem('shat_platform_lang') || 'ar';
+  const soc = (translations[currentLang] || translations.ar).socialSection || translations.ar.socialSection;
+  const posts = soc.posts || [];
+
+  // 1. Initialize Embedded Tools
+  standardsExplorer.init(currentLang);
+  toolkitsLibrary.bindEvents(currentLang);
+
+  // 2. Open Diagnostic Tool Modal Triggers
+  document.querySelectorAll('.btn-open-diagnostic').forEach(btn => {
+    btn.onclick = () => {
+      if (window.openDiagnosticModal) window.openDiagnosticModal();
+    };
+  });
+
+  // 3. Open Certificate Validator Trigger
+  document.querySelectorAll('.btn-open-cert-validator').forEach(btn => {
+    btn.onclick = () => {
+      if (window.openCertificateModal) window.openCertificateModal();
+    };
+  });
+
+  // 4. Trigger Spotlight Search from Hero
+  document.querySelectorAll('.btn-trigger-spotlight').forEach(btn => {
+    btn.onclick = () => {
+      const searchTrigger = document.getElementById('btn-spotlight-search');
+      if (searchTrigger) searchTrigger.click();
+    };
+  });
+
+  // 5. Social Filter Tabs
+  const filterBtns = document.querySelectorAll('.social-tab-btn');
+  const cards = document.querySelectorAll('.social-feed-card');
+
+  filterBtns.forEach(btn => {
+    btn.onclick = () => {
+      filterBtns.forEach(b => {
+        b.classList.remove('active');
+        b.style.background = 'var(--bg-subtle)';
+        b.style.color = 'var(--text-secondary)';
+        b.style.border = '1px solid var(--border-light)';
+      });
+      btn.classList.add('active');
+      btn.style.background = 'var(--shat-navy)';
+      btn.style.color = '#FFFFFF';
+      btn.style.border = 'none';
+
+      const filter = btn.getAttribute('data-filter');
+      cards.forEach(card => {
+        if (filter === 'all') {
+          card.style.display = 'flex';
+        } else if (card.getAttribute('data-platform') === filter || card.getAttribute('data-category') === filter) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    };
+  });
+
+  // 6. Interactive Likes
+  document.querySelectorAll('.btn-like-social').forEach(btn => {
+    btn.onclick = () => {
+      const countEl = btn.querySelector('.like-count');
+      if (countEl) {
+        let count = parseInt(countEl.textContent, 10) || 0;
+        countEl.textContent = count + 1;
+        btn.style.color = '#DC2626';
+        btn.style.transform = 'scale(1.2)';
+        setTimeout(() => btn.style.transform = 'scale(1)', 200);
+      }
+    };
+  });
+
+  // 7. Share Button
+  document.querySelectorAll('.btn-share-social').forEach(btn => {
+    btn.onclick = () => {
+      const link = btn.getAttribute('data-link');
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(link).then(() => {
+          showToast(currentLang === 'ar' ? 'تم نسخ رابط المنشور إلى الحافظة بنجاح!' : (currentLang === 'fr' ? 'Lien copié dans le presse-papier !' : 'Post link copied to clipboard!'), 'success');
+        }).catch(() => {
+          showToast(link, 'info');
+        });
+      } else {
+        showToast(link, 'info');
+      }
+    };
+  });
+
+  // 8. Read Full Detail Modal
+  document.querySelectorAll('.btn-read-social-detail').forEach(btn => {
+    btn.onclick = () => {
+      const postId = btn.getAttribute('data-post-id');
+      const post = posts.find(p => p.id === postId);
+      if (!post) return;
+
+      const modalBackdrop = document.getElementById('global-modal-backdrop');
+      const modalTitle = document.getElementById('global-modal-title');
+      const modalBody = document.getElementById('global-modal-body');
+
+      if (modalTitle) modalTitle.textContent = post.title;
+      if (modalBody) {
+        modalBody.innerHTML = `
+          <div style="margin-bottom: 20px;">
+            <div style="height: 220px; overflow: hidden; border-radius: var(--radius-xs); margin-bottom: 16px;">
+              <img src="${post.img || 'assets/logo/logo-banner.jpg'}" alt="${post.title}" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div style="display: flex; gap: 12px; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px; flex-wrap: wrap;">
+              <span>🏷️ ${post.tag}</span>
+              <span>📅 ${post.date}</span>
+              <span>🌐 ${post.platform}</span>
+              <span>⏱️ ${post.readTime || '3 دقائق'}</span>
+            </div>
+            <div style="font-size: 0.95rem; line-height: 1.8; color: var(--text-main); margin-bottom: 20px;">
+              ${post.fullText || post.excerpt}
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px;">
+              <a href="${post.link}" target="_blank" rel="noopener" class="btn-clean btn-primary btn-sm">
+                <span>↗️ ${currentLang === 'fr' ? 'Ouvrir sur' : (currentLang === 'ar' ? 'فتح المنشور على' : 'Open on')} ${post.platform}</span>
+              </a>
+            </div>
+          </div>
+        `;
+      }
+      if (modalBackdrop) modalBackdrop.classList.add('open');
+    };
+  });
 }

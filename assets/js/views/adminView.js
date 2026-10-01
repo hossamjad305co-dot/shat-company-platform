@@ -41,7 +41,7 @@ export function renderAdminView(lang = 'ar') {
         <!-- Sidebar Brand Banner -->
         <div style="padding: 22px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: space-between;">
           <div style="display: flex; align-items: center; gap: 10px;">
-            <img src="assets/logo/logo-transparent.png" alt="SHAT" style="height: 32px;" onerror="this.src='assets/logo/logo-symbol.jpg'">
+            <img src="assets/logo/logo-transparent.png" alt="SHAT" style="height: 32px;" onerror="this.onerror=null; this.src='assets/logo/logo-symbol.jpg';">
             <div>
               <div style="font-weight: 800; font-size: 0.95rem; color: #FFFFFF;">${t.brandTitle}</div>
               <div style="font-size: 0.72rem; color: #94A3B8;">${t.brandSub}</div>
@@ -375,7 +375,7 @@ export function renderAdminView(lang = 'ar') {
                 <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;" id="preview-meta">
                   ✍️ ${txt('بواسطة: أ. حسام جاد الله', 'By: SHAT Management', 'Par : Direction SHAT')} • 📅 ${new Date().toLocaleDateString(isRtl ? 'ar-EG' : 'en-US')}
                 </div>
-                <img id="preview-cover" src="assets/logo/logo-banner.jpg" alt="Preview" style="width: 100%; height: 160px; object-fit: cover; border-radius: var(--radius-xs); margin-bottom: 14px;" onerror="this.src='assets/logo/logo-symbol.jpg'">
+                <img id="preview-cover" src="assets/logo/logo-banner.jpg" alt="Preview" style="width: 100%; height: 160px; object-fit: cover; border-radius: var(--radius-xs); margin-bottom: 14px;" onerror="this.onerror=null; this.src='assets/logo/logo-banner.jpg';">
                 <p id="preview-excerpt" style="font-weight: 600; color: var(--text-main); font-size: 0.9rem; margin-bottom: 10px;">
                   المقتطف التعريفي الموجز
                 </p>
@@ -1136,7 +1136,7 @@ export async function bindAdminEvents() {
     grid.innerHTML = items.map(item => `
       <div style="border: 1px solid var(--border-light); border-radius: var(--radius-xs); overflow: hidden; background: #FFFFFF; display: flex; flex-direction: column; justify-content: space-between;">
         <div style="height: 120px; background: #F8FAFC; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-          <img src="${item.dataUrl}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='assets/logo/logo-symbol.jpg'">
+          <img src="${item.dataUrl}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='assets/logo/logo-banner.jpg';">
         </div>
         <div style="padding: 10px; font-size: 0.78rem;">
           <div style="font-weight: 700; color: var(--shat-navy); text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" title="${item.name}">${item.name}</div>
@@ -1211,7 +1211,7 @@ export async function bindAdminEvents() {
           tbody.innerHTML = res.posts.map(p => `
             <tr style="border-bottom: 1px solid var(--border-light);">
               <td style="padding: 10px 16px;">
-                <img src="${p.coverImage || 'assets/logo/logo-banner.jpg'}" alt="${p.title}" style="width: 50px; height: 35px; object-fit: cover; border-radius: var(--radius-xs);" onerror="this.src='assets/logo/logo-symbol.jpg'">
+                <img src="${p.coverImage || 'assets/logo/logo-banner.jpg'}" alt="${p.title}" style="width: 50px; height: 35px; object-fit: cover; border-radius: var(--radius-xs);" onerror="this.onerror=null; this.src='assets/logo/logo-banner.jpg';">
               </td>
               <td style="padding: 12px 16px; font-weight: 700; color: var(--shat-navy); max-width: 280px;">
                 ${p.title}

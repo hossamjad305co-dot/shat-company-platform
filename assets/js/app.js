@@ -6,6 +6,14 @@ import { router } from './router.js';
 import { initLoadingScreen } from './components/loadingScreen.js';
 import { api } from './services/api/apiClient.js';
 import { showToast } from './components/toast.js';
+import { icons } from './icons.js';
+import { roleSimulator } from './tools/roleSimulator.js';
+import { siteCustomizer } from './tools/siteCustomizer.js';
+import { globalSearch } from './tools/globalSearch.js';
+import { diagnosticTool } from './tools/diagnosticTool.js';
+import { certificateValidator } from './tools/certificateValidator.js';
+import { toolkitsLibrary } from './tools/toolkitsLibrary.js';
+import { standardsExplorer } from './tools/standardsExplorer.js';
 
 class Application {
   constructor() {
@@ -15,7 +23,10 @@ class Application {
   }
 
   init() {
+    window.siteCustomizer = siteCustomizer;
+    window.openSiteCustomizer = (l) => siteCustomizer.openModal(l || this.currentLang);
     this.applyLanguage(this.currentLang);
+    this.renderRoleSimulator();
     this.renderHeader();
     this.renderMobileDrawer();
     this.renderFooter();
@@ -25,10 +36,18 @@ class Application {
 
     // Verify session with server silently on boot
     api.getMe().then(() => {
+      this.renderRoleSimulator();
       this.renderHeader();
       this.renderMobileDrawer();
       this.renderMobileBottomNav();
     }).catch(() => {});
+  }
+
+  renderRoleSimulator() {
+    const container = document.getElementById('role-simulator-container');
+    if (!container) return;
+    container.innerHTML = roleSimulator.renderBar(this.currentLang);
+    roleSimulator.bindEvents(this.currentLang);
   }
 
   setLanguage(lang) {
@@ -37,6 +56,7 @@ class Application {
     localStorage.setItem('shat_platform_lang', lang);
     this.applyLanguage(lang);
     router.setLang(lang);
+    this.renderRoleSimulator();
     this.renderHeader();
     this.renderMobileDrawer();
     this.renderMobileBottomNav();
@@ -142,7 +162,19 @@ class Application {
         const logoutLabel = this.currentLang === 'ar' ? 'خروج' : (this.currentLang === 'fr' ? 'Quitter' : 'Logout');
         const notifTooltip = this.currentLang === 'ar' ? 'التنبيهات المؤسسية' : (this.currentLang === 'fr' ? 'Notifications' : 'Notifications');
 
+        const searchBtnHtml = `
+          <button id="btn-spotlight-search" class="btn-clean btn-sm" style="display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: var(--bg-subtle); border: 1px solid var(--border-light); border-radius: var(--radius-xs); color: var(--shat-navy); font-weight: 700; cursor: pointer;" title="البحث الشامل (Ctrl+K)">
+            <span>🔍</span>
+            <span style="font-size: 0.82rem;">${isRtl ? 'بحث...' : 'Search...'}</span>
+            <kbd style="font-size: 0.65rem; padding: 1px 5px; background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 3px; font-family: var(--font-mono); color: var(--text-muted);">⌘K</kbd>
+          </button>
+        `;
+
+        const shortDisplayName = (user.fullNameAr || user.username || '').split(' ')[0] + ' ' + ((user.fullNameAr || user.username || '').split(' ')[1] || '');
+        const roleBadge = user.role === 'admin' ? '⚙️ إشراف' : (user.role === 'teacher' ? '👨‍🏫 مدرب' : '🎓 متدرب');
+
         headerActions.innerHTML = `
+          ${searchBtnHtml}
           ${langPickerHtml}
           
           <!-- Notifications Bell -->
@@ -153,12 +185,19 @@ class Application {
             </button>
           </div>
 
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <a href="${portalRoute}" class="btn-clean btn-green btn-sm" style="font-weight: 700;">
-              <span>👤 ${user.fullNameAr || user.username} (${portalLabel})</span>
+          <!-- User Identity Pill & Direct Logout Button (Always Visible) -->
+          <div class="user-header-auth-group" style="display: flex; align-items: center; gap: 6px; flex-shrink: 0;">
+            <a href="${portalRoute}" class="btn-clean btn-sm user-portal-pill" style="font-weight: 700; background: var(--shat-green-tint); color: var(--shat-green); border: 1px solid var(--shat-green-border); padding: 5px 10px; border-radius: var(--radius-xs); display: inline-flex; align-items: center; gap: 6px; text-decoration: none;" title="${user.fullNameAr || user.username} - ${portalLabel}">
+              <span class="user-avatar-circle" style="width: 22px; height: 22px; border-radius: 50%; background: var(--shat-green); color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 800;">
+                ${(user.fullNameAr || user.username || 'U')[0]}
+              </span>
+              <span class="user-short-name" style="font-size: 0.82rem; white-space: nowrap; max-width: 120px; overflow: hidden; text-overflow: ellipsis;">${shortDisplayName}</span>
+              <span class="badge" style="background: #FFFFFF; color: var(--shat-navy); font-size: 0.68rem; padding: 1px 6px; border-radius: 10px; font-weight: 800;">${roleBadge}</span>
             </a>
-            <button id="btn-header-logout" class="btn-clean btn-sm" style="background: rgba(239, 68, 68, 0.1); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.2);" title="${logoutLabel}">
-              ${logoutLabel}
+
+            <button id="btn-header-logout" class="btn-clean btn-sm header-logout-btn" style="flex-shrink: 0; background: #DC2626; color: #FFFFFF; font-weight: 800; font-size: 0.78rem; padding: 6px 12px; border-radius: var(--radius-xs); border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 3px rgba(220,38,38,0.3); transition: all 0.15s ease;" title="${logoutLabel}">
+              <span>🚪</span>
+              <span class="logout-btn-text">${logoutLabel}</span>
             </button>
           </div>
 
@@ -179,6 +218,7 @@ class Application {
               ? 'تم تسجيل الخروج بنجاح من المنصة.' 
               : (this.currentLang === 'fr' ? 'Déconnexion réussie.' : 'Successfully logged out.');
             showToast(msg, 'info');
+            this.renderRoleSimulator();
             this.renderHeader();
             this.renderMobileDrawer();
             this.renderMobileBottomNav();
@@ -202,7 +242,16 @@ class Application {
         }
       } else {
         // Visitor Navigation Header
+        const searchBtnHtml = `
+          <button id="btn-spotlight-search" class="btn-clean btn-sm" style="display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: var(--bg-subtle); border: 1px solid var(--border-light); border-radius: var(--radius-xs); color: var(--shat-navy); font-weight: 700; cursor: pointer;" title="البحث الشامل (Ctrl+K)">
+            <span>🔍</span>
+            <span style="font-size: 0.82rem;">${isRtl ? 'بحث...' : 'Search...'}</span>
+            <kbd style="font-size: 0.65rem; padding: 1px 5px; background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 3px; font-family: var(--font-mono); color: var(--text-muted);">⌘K</kbd>
+          </button>
+        `;
+
         headerActions.innerHTML = `
+          ${searchBtnHtml}
           ${langPickerHtml}
           <a href="#/login" class="btn-clean btn-sm" style="background: #FFFFFF; border: 1px solid var(--border-light); color: var(--shat-navy); font-weight: 700;">
             ${nav.login}
@@ -218,6 +267,14 @@ class Application {
             </svg>
           </button>
         `;
+      }
+
+      // Bind Search Trigger
+      const searchTrigger = document.getElementById('btn-spotlight-search');
+      if (searchTrigger) {
+        searchTrigger.onclick = () => {
+          globalSearch.open(this.currentLang);
+        };
       }
 
       // Bind Language Dropdown Clicks
@@ -271,7 +328,7 @@ class Application {
           <div class="notif-dot" style="background: ${colors[idx % colors.length]};"></div>
           <div>
             <div style="font-weight: 700; font-size: 0.86rem; color: var(--shat-navy);">${item.title}</div>
-            <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 2px;">${item.desc}</div>
+            <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 2px;">${item.sub || item.desc}</div>
           </div>
         </div>
       `).join('');
@@ -305,17 +362,59 @@ class Application {
         <a href="#/projects" class="nav-link">${nav.projects || (this.currentLang === 'fr' ? 'Projets' : 'المشاريع')}</a>
         <a href="#/news" class="nav-link">${nav.news || (this.currentLang === 'fr' ? 'Actualités' : 'الأخبار')}</a>
         <a href="#/academy" class="nav-link">${nav.academy}</a>
+        <a href="#/forms" class="nav-link" style="color: var(--shat-green); font-weight: 800;">📋 ${this.currentLang === 'ar' ? 'استمارات التسجيل المعتمدة' : (this.currentLang === 'fr' ? 'Formulaires d’Inscription' : 'Official Forms')}</a>
         <a href="#/contact" class="nav-link">${nav.contact}</a>
         <div style="height: 1px; background: var(--border-light); margin: 6px 0;"></div>
         ${user ? `
           <a href="${user.role === 'teacher' ? '#/teacher' : (user.role === 'admin' ? '#/admin' : '#/student')}" class="nav-link" style="color: var(--shat-green); font-weight: 800;">
-            👤 ${user.fullNameAr || user.username}
+            👤 ${user.fullNameAr || user.username} (${user.roleTitle || user.role})
           </a>
+          ${(user.role === 'admin' || user.role === 'supervisor') ? `
+            <button type="button" id="btn-mobile-drawer-customizer" class="btn-clean" style="margin-top: 6px; background: var(--shat-navy); color: #FFFFFF; font-weight: 700; width: 100%; justify-content: center; padding: 9px 12px; border-radius: var(--radius-xs); border: 1px solid rgba(255,255,255,0.2); cursor: pointer;">
+              🎨 ${this.currentLang === 'ar' ? 'تخصيص المنصة والمحتوى' : 'Platform Customizer'}
+            </button>
+          ` : ''}
+          <button type="button" id="btn-mobile-drawer-logout" class="btn-clean" style="margin-top: 8px; background: #DC2626; color: #FFFFFF; font-weight: 700; width: 100%; justify-content: center; padding: 9px 12px; border-radius: var(--radius-xs); border: none; cursor: pointer;">
+            🚪 ${this.currentLang === 'ar' ? 'تسجيل الخروج' : (this.currentLang === 'fr' ? 'Se déconnecter' : 'Logout')}
+          </button>
         ` : `
           <a href="#/login" class="nav-link" style="color: var(--shat-navy);">🔑 ${nav.login}</a>
           <a href="#/contact" class="btn-clean btn-primary btn-sm" style="margin-top: 6px;">${nav.requestConsultation}</a>
         `}
       `;
+
+      // Bind Drawer Logout
+      const drawerLogoutBtn = document.getElementById('btn-mobile-drawer-logout');
+      if (drawerLogoutBtn) {
+        drawerLogoutBtn.onclick = async () => {
+          await api.logout();
+          const drawer = document.getElementById('mobile-drawer-nav');
+          if (drawer) drawer.style.display = 'none';
+          const msg = this.currentLang === 'ar' 
+            ? 'تم تسجيل الخروج بنجاح من المنصة.' 
+            : (this.currentLang === 'fr' ? 'Déconnexion réussie.' : 'Successfully logged out.');
+          showToast(msg, 'info');
+          this.renderRoleSimulator();
+          this.renderHeader();
+          this.renderMobileDrawer();
+          this.renderMobileBottomNav();
+          window.location.hash = '#/home';
+        };
+      }
+
+      // Bind Drawer Customizer
+      const drawerCustomizerBtn = document.getElementById('btn-mobile-drawer-customizer');
+      if (drawerCustomizerBtn) {
+        drawerCustomizerBtn.onclick = () => {
+          const drawer = document.getElementById('mobile-drawer-nav');
+          if (drawer) drawer.style.display = 'none';
+          if (window.openSiteCustomizer) {
+            window.openSiteCustomizer();
+          } else {
+            showToast('أداة تخصيص المنصة جاهزة للمشرفين', 'info');
+          }
+        };
+      }
 
       drawerLinks.querySelectorAll('.mobile-lang-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -340,23 +439,23 @@ class Application {
     const user = api.currentUser;
 
     if (!user) {
-      // Guest Bottom Navigation
+      // Guest Bottom Navigation: Ergonomic Thumb Reach
       bottomNav.innerHTML = `
         <a href="#/home" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">🏠</span>
           <span class="mobile-bottom-label">${b.home}</span>
         </a>
-        <a href="#/services" class="mobile-bottom-link">
-          <span class="mobile-bottom-icon">💼</span>
-          <span class="mobile-bottom-label">${b.services}</span>
-        </a>
-        <a href="#/projects" class="mobile-bottom-link">
-          <span class="mobile-bottom-icon">🎯</span>
-          <span class="mobile-bottom-label">${b.projects}</span>
-        </a>
         <a href="#/academy" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">🎓</span>
           <span class="mobile-bottom-label">${b.academy}</span>
+        </a>
+        <a href="#/forms" class="mobile-bottom-link" style="color: var(--shat-green);">
+          <span class="mobile-bottom-icon">📋</span>
+          <span class="mobile-bottom-label">${this.currentLang === 'ar' ? 'الاستمارات' : 'Forms'}</span>
+        </a>
+        <a href="#/news" class="mobile-bottom-link">
+          <span class="mobile-bottom-icon">📰</span>
+          <span class="mobile-bottom-label">${this.currentLang === 'ar' ? 'الأخبار' : 'News'}</span>
         </a>
         <a href="#/login" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">🔑</span>
@@ -439,7 +538,7 @@ class Application {
         <div class="footer-grid">
           <div>
             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
-              <img src="assets/logo/logo-transparent.png" alt="SHAT" style="height: 38px;" onerror="this.src='assets/logo/logo-symbol.jpg'">
+              <img src="assets/logo/logo-transparent.png" alt="SHAT" style="height: 38px;" onerror="this.onerror=null; this.src='assets/logo/logo-symbol.jpg';">
               <span style="font-weight: 900; font-size: 1.1rem; color: #FFFFFF;">${c.name}</span>
             </div>
             <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.7; margin-bottom: 16px;">
@@ -489,8 +588,22 @@ class Application {
           </div>
         </div>
 
-        <div class="footer-bottom">
+        <div class="footer-bottom" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
           <div>© ${c.year} ${c.name} (${c.nameEn}). ${f.rights}</div>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <a href="https://www.facebook.com/shat.development.growth/" target="_blank" rel="noopener" class="social-pill-btn" title="Facebook" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; color: #FFFFFF; transition: all 0.2s ease;">
+              ${icons.facebook}
+            </a>
+            <a href="https://wa.me/972592879621" target="_blank" rel="noopener" class="social-pill-btn" title="WhatsApp" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; color: #FFFFFF; transition: all 0.2s ease;">
+              ${icons.whatsapp}
+            </a>
+            <a href="https://www.instagram.com" target="_blank" rel="noopener" class="social-pill-btn" title="Instagram" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; color: #FFFFFF; transition: all 0.2s ease;">
+              ${icons.instagram}
+            </a>
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="social-pill-btn" title="LinkedIn" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.08); display: inline-flex; align-items: center; justify-content: center; color: #FFFFFF; transition: all 0.2s ease;">
+              ${icons.linkedin}
+            </a>
+          </div>
           <div>${f.standardsNotice}</div>
         </div>
       `;
@@ -620,8 +733,122 @@ class Application {
       }
     };
 
+    // Keyboard Shortcut for Global Spotlight Search (Ctrl+K / Cmd+K)
+    window.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        globalSearch.open(this.currentLang);
+      }
+    });
+
+    // Modal: Diagnostic Assessment Tool Opener
+    window.openDiagnosticModal = () => {
+      const modal = document.getElementById('modal-diagnostic-assessment');
+      const body = document.getElementById('modal-diagnostic-body');
+      if (!modal || !body) return;
+      body.innerHTML = diagnosticTool.renderModal(this.currentLang);
+      modal.classList.add('open');
+      diagnosticTool.init(this.currentLang);
+    };
+    window.openDiagnosticAssessment = window.openDiagnosticModal;
+
+    const diagClose = document.getElementById('modal-diagnostic-close');
+    const diagModal = document.getElementById('modal-diagnostic-assessment');
+    if (diagClose && diagModal) {
+      diagClose.onclick = () => diagModal.classList.remove('open');
+      diagModal.onclick = (e) => {
+        if (e.target === diagModal) diagModal.classList.remove('open');
+      };
+    }
+
+    // Modal: Certificate Verification Tool Opener
+    window.openCertificateModal = () => {
+      const modal = document.getElementById('modal-certificate-validator');
+      const body = document.getElementById('modal-certificate-body');
+      if (!modal || !body) return;
+      body.innerHTML = certificateValidator.renderModal(this.currentLang);
+      modal.classList.add('open');
+      certificateValidator.init(this.currentLang);
+    };
+    window.openCertificateValidator = window.openCertificateModal;
+
+    const certClose = document.getElementById('modal-certificate-close');
+    const certModal = document.getElementById('modal-certificate-validator');
+    if (certClose && certModal) {
+      certClose.onclick = () => certModal.classList.remove('open');
+      certModal.onclick = (e) => {
+        if (e.target === certModal) certModal.classList.remove('open');
+      };
+    }
+
+    // Modal: Toolkit Preview Opener
+    window.openToolkitModal = (toolkitId = 'meal-plan') => {
+      toolkitsLibrary.openPreview(toolkitId, this.currentLang);
+    };
+    window.openToolkitsLibrary = () => {
+      window.openToolkitModal('meal-plan');
+    };
+
+    // Modal: Standards Explorer Opener
+    window.openStandardsExplorer = (stdCode = 'CHS') => {
+      standardsExplorer.openModal(stdCode, this.currentLang);
+    };
+
+    const tkClose = document.getElementById('modal-toolkit-close');
+    const tkModal = document.getElementById('modal-toolkit-preview');
+    if (tkClose && tkModal) {
+      tkClose.onclick = () => tkModal.classList.remove('open');
+      tkModal.onclick = (e) => {
+        if (e.target === tkModal) tkModal.classList.remove('open');
+      };
+    }
+
+    // Modal: Permission Guard (Rule 1 Enforcement for unauthenticated visitors)
+    window.openPermissionGuard = (actionTitle = '') => {
+      const guard = document.getElementById('modal-permission-guard');
+      if (!guard) return;
+      guard.classList.add('open');
+    };
+
+    const guardClose = document.getElementById('modal-permission-guard-close');
+    const guardDismiss = document.getElementById('btn-guard-dismiss');
+    const guardModal = document.getElementById('modal-permission-guard');
+    if (guardClose && guardModal) {
+      guardClose.onclick = () => guardModal.classList.remove('open');
+    }
+    if (guardDismiss && guardModal) {
+      guardDismiss.onclick = () => guardModal.classList.remove('open');
+    }
+    if (guardModal) {
+      guardModal.onclick = (e) => {
+        if (e.target === guardModal) guardModal.classList.remove('open');
+      };
+    }
+
+    // 1-Click Instant Demo Student in Permission Guard
+    const instantStudentBtn = document.getElementById('btn-guard-instant-student');
+    if (instantStudentBtn && guardModal) {
+      instantStudentBtn.onclick = () => {
+        const studentRole = roleSimulator.roles.find(r => r.id === 'student');
+        if (studentRole) {
+          localStorage.setItem('shat_current_user', JSON.stringify(studentRole.user));
+          api.currentUser = studentRole.user;
+          guardModal.classList.remove('open');
+          showToast(
+            this.currentLang === 'ar' ? 'تم الدخول الفوري بصفة متدرب معتمد.' : 'Instant student access granted.',
+            'success'
+          );
+          window.dispatchEvent(new CustomEvent('shat:auth-updated'));
+          setTimeout(() => {
+            window.location.hash = '#/student';
+          }, 300);
+        }
+      };
+    }
+
     // Re-render on auth updates
     window.addEventListener('shat:auth-updated', () => {
+      this.renderRoleSimulator();
       this.renderHeader();
       this.renderMobileDrawer();
       this.renderMobileBottomNav();
@@ -632,3 +859,4 @@ class Application {
 document.addEventListener('DOMContentLoaded', () => {
   new Application();
 });
+

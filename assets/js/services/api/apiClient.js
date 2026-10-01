@@ -64,6 +64,48 @@ const FALLBACK_USERS = [
 
 const DEFAULT_INITIAL_POSTS = [
   {
+    id: 'post-case-manager-2026',
+    title: 'إطلاق دورة إعداد وتأهيل مدير حالة Case Management (د. محمد إسليم)',
+    excerpt: 'برنامج تدريبي تخصصي معتمد (30 ساعة) لبناء مهارات تحديد وتقييم الحالات وتصميم خطط التدخل والإحالة الآمنة.',
+    content: 'يسر شركة شات للتنمية والتطوير الإعلان عن فتح باب التسجيل في دورة إعداد وتأهيل مدير حالة Case Management بقيادة د. محمد إسليم - خبير برامج حماية الطفولة وإدارة الحالة. يهدف البرنامج إلى تزويد المشاركين بالمهارات الإجرائية المتقدمة لتحديد وتقييم الحالات الأكثر هشاشة، وتصميم خطط التدخل الفردية، والإحالة الآمنة متعددة القطاعات وفق موجهات المعيار الإنساني الأساسي وحماية المستفيدين. رسوم الدورة 300 شيكل مع شهادة إتمام معتمدة.',
+    category: 'humanitarian',
+    categoryLabel: 'إدارة الحالة وحماية الطفل',
+    status: 'published',
+    coverImage: 'assets/images/posts/post-case-management.svg',
+    author: 'د. محمد إسليم',
+    authorRole: 'استشاري الحماية وإدارة الحالة',
+    createdAt: '2026-10-01T08:00:00Z',
+    viewsCount: 480
+  },
+  {
+    id: 'post-presentation-skills-2026',
+    title: 'دورة تدريبية متقدمة في مهارات العرض والتقديم (م. مهدي الملاحي)',
+    excerpt: 'تطوير مهارات الإلقاء والتحدث الجماهيري وصياغة العروض التقديمية الاحترافية وإقناع المانحين والشركاء (12 ساعة).',
+    content: 'أطلقت شركة شات للتنمية والتطوير بالتعاون مع الاستشاري م. مهدي الملاحي برنامج مهارات العرض والتقديم المتقدم للمهنيين ومديري المشاريع وممثلي المنظمات. يركز البرنامج على لغة الجسد، وإدارة منصات العرض، وتصميم الشرائح المؤثرة وإقناع المانحين والشركاء (4 لقاءات تفاعلية بقاعة شات، رسوم 120 شيكل فقط مع شهادة معتمدة).',
+    category: 'institutional',
+    categoryLabel: 'مهارات الاتصال والتأثير',
+    status: 'published',
+    coverImage: 'assets/images/posts/post-presentation-skills.svg',
+    author: 'م. مهدي الملاحي',
+    authorRole: 'مستشار الاتصال المؤسسي',
+    createdAt: '2026-09-28T09:30:00Z',
+    viewsCount: 395
+  },
+  {
+    id: 'post-humanitarian-worker-2026',
+    title: 'دبلوم تأهيل عامل في المجال الإنساني «من المبادئ إلى الممارسة» (142 ساعة)',
+    excerpt: 'برنامج دبلوم متكامل لمدة 3 أشهر يشمل 13 دورة تخصصية بمشاركة أكثر من 10 مدربين دوليين مع تقسيط ميسر للرسوم.',
+    content: 'تعلن شركة شات للتنمية والتطوير عن فتح باب القبول في دبلوم تأهيل عامل في المجال الإنساني: من المبادئ إلى الممارسة. يغطي البرنامج كافة معايير Sphere، CHS، PSEA، إدارة دورة المشروع، المتابعة والتقييم MEAL، واللوجستيات وسلاسل الإمداد، وإدارة المخيمات والملاجئ، مع تطبيقات عملية وحالات دراسية ميدانية تؤهل الخريجين للانخراط الفوري في العمل الإغاثي والتنموي.',
+    category: 'humanitarian',
+    categoryLabel: 'دبلومات العمل الإنساني',
+    status: 'published',
+    coverImage: 'assets/images/posts/post-humanitarian-worker.svg',
+    author: 'أكاديمية شات للتدريب',
+    authorRole: 'عمادة البرامج المهنية',
+    createdAt: '2026-09-25T11:00:00Z',
+    viewsCount: 620
+  },
+  {
     id: 'post-01',
     title: 'إطلاق برامج التقييم الخارجي المستقل وتطوير الحوكمة لمؤسسات المجتمع المدني',
     excerpt: 'ضمن استراتيجية شركة شات لتعزيز كفاءة المنظمات غير الحكومية وتطبيق معايير المساءلة للمتأثرين.',
@@ -142,6 +184,137 @@ const FALLBACK_ASSIGNMENTS = [
   }
 ];
 
+const FALLBACK_FORMS = [
+  {
+    id: 'case-manager-2026',
+    code: 'SHAT-FORM-01',
+    title: 'دورة إعداد مدير حالة (د. محمد إسليم)',
+    titleEn: 'Case Manager Preparation Course',
+    trainer: 'د. محمد إسليم',
+    hours: '12 ساعة تدريبية (4 لقاءات)',
+    fee: '150 شيكل فقط',
+    location: 'غزة',
+    certificate: 'شهادة إتمام مشاركة معتمدة',
+    googleFormSourceUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSfzjius7lEMOULtsaz6ByhXwFx82mWUkXwQoisdkbid4PLhGg/viewform',
+    googleSubmitUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSfzjius7lEMOULtsaz6ByhXwFx82mWUkXwQoisdkbid4PLhGg/formResponse',
+    status: 'active',
+    fields: [
+      { id: 'fullNameAr', entryId: 'entry.143181404', label: 'الاسم ثلاثي باللغة العربية', type: 'text', required: true, placeholder: 'مثال: أحمد خليل منصور' },
+      { id: 'fullNameEn', entryId: 'entry.194985631', label: 'الاسم ثلاثي باللغة الانجليزية', type: 'text', required: true, placeholder: 'Ahmed Khalil Mansour' },
+      { id: 'phone', entryId: 'entry.1986432440', label: 'رقم الجوال', type: 'tel', required: true, placeholder: '059XXXXXXX' },
+      { id: 'nationalId', entryId: 'entry.25683066', label: 'رقم الهوية', type: 'text', required: true, placeholder: 'رقم الهوية الوطنية' },
+      { id: 'address', entryId: 'entry.216577613', label: 'عنوان السكن', type: 'text', required: true, placeholder: 'المدينة / المنطقة' },
+      { id: 'email', entryId: 'entry.1469268289', label: 'البريد الالكتروني', type: 'email', required: true, placeholder: 'email@example.com' },
+      { id: 'motivation', entryId: 'entry.1835619848', label: 'لماذا انت مهتم/ة في حضور هذه الدورة', type: 'textarea', required: false, placeholder: 'اكتب نبذة عن أهدافك ودوافعك المهنية...' }
+    ],
+    createdAt: '2026-09-01T00:00:00Z'
+  },
+  {
+    id: 'presentation-skills-2026',
+    code: 'SHAT-FORM-02',
+    title: 'دورة تدريبية مهارات العرض و التقديم (م. مهدي الملاحي)',
+    titleEn: 'Presentation & Public Speaking Mastery',
+    trainer: 'م. مهدي الملاحي',
+    hours: '12 ساعة تدريبية (4 لقاءات)',
+    fee: '120 شيكل فقط',
+    location: 'قاعة شات التفاعلية',
+    certificate: 'شهادة إتمام الدورة التدريبية معتمدة',
+    googleFormSourceUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSewFY_nZGz_jQ-FCWTw40O8wxuoQK4H9f1ted6An1NzIcGc_Q/viewform',
+    googleSubmitUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSewFY_nZGz_jQ-FCWTw40O8wxuoQK4H9f1ted6An1NzIcGc_Q/formResponse',
+    status: 'active',
+    fields: [
+      { id: 'fullNameAr', entryId: 'entry.1699838868', label: 'الاسم ثلاثي باللغة العربية', type: 'text', required: true, placeholder: 'الاسم ثلاثي بالعربية' },
+      { id: 'fullNameEn', entryId: 'entry.97912557', label: 'الاسم ثلاثي باللغة الإنجليزية', type: 'text', required: true, placeholder: 'Full Name in English' },
+      { id: 'phone', entryId: 'entry.168810623', label: 'رقم الجوال', type: 'tel', required: true, placeholder: '059XXXXXXX' },
+      { id: 'nationalId', entryId: 'entry.1053965865', label: 'رقم الهوية', type: 'text', required: true, placeholder: 'رقم الهوية الوطنية' },
+      { id: 'address', entryId: 'entry.866675921', label: 'عنوان السكن', type: 'text', required: true, placeholder: 'المحافظة / الحي' },
+      { id: 'email', entryId: 'entry.1897449994', label: 'البريد الالكتروني', type: 'email', required: true, placeholder: 'email@example.com' },
+      { id: 'motivation', entryId: 'entry.465475516', label: 'لماذا انت مهتم/ة لهذه الدورة', type: 'textarea', required: false, placeholder: 'تحدث عن أهدافك من اكتساب مهارات العرض...' }
+    ],
+    createdAt: '2026-09-01T00:00:00Z'
+  },
+  {
+    id: 'humanitarian-worker-diploma',
+    code: 'SHAT-FORM-03',
+    title: 'برنامج تأهيل عامل في المجال الإنساني «من المبادئ إلى الممارسة»',
+    titleEn: 'Humanitarian Worker Qualification Diploma',
+    trainer: 'نخبة من كبار الخبراء الإنسانيين (أكثر من 10 مدربين)',
+    hours: '3 أشهر • 142 ساعة تدريبية • 13 دورة متخصصة',
+    fee: 'تسديد الرسوم على دفعات ميسرة خلال فترة التدريب',
+    location: 'حرم شركة شات للتنمية والتطوير',
+    certificate: 'شهادة دبلوم معتمدة ضمن حفل تخرج رسمي',
+    googleFormSourceUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSft0nB4QGxS2HCZApraSmn5GDca1R7taC0ZNs441kVx6gh_Og/viewform',
+    googleSubmitUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSft0nB4QGxS2HCZApraSmn5GDca1R7taC0ZNs441kVx6gh_Og/formResponse',
+    status: 'active',
+    fields: [
+      { id: 'fullNameAr', entryId: 'entry.1015180520', label: 'الاسم ثلاثي باللغة العربية', type: 'text', required: true, placeholder: 'الاسم ثلاثي بالعربية' },
+      { id: 'fullNameEn', entryId: 'entry.1438777846', label: 'الاسم ثلاثي باللغة الانجليزية', type: 'text', required: true, placeholder: 'Full Name in English' },
+      { id: 'nationalId', entryId: 'entry.1245494058', label: 'رقم الهوية', type: 'text', required: true, placeholder: 'رقم الهوية' },
+      { id: 'phone', entryId: 'entry.1641222345', label: 'رقم الجوال', type: 'tel', required: true, placeholder: 'رقم الجوال النشط' },
+      { id: 'age', entryId: 'entry.592772610', label: 'العمر', type: 'number', required: true, placeholder: 'العمر' },
+      { id: 'address', entryId: 'entry.1110437620', label: 'عنوان السكن', type: 'text', required: true, placeholder: 'المدينة / المنطقة' },
+      { id: 'altPhone', entryId: 'entry.1507450919', label: 'رقم الهاتف البديل', type: 'tel', required: false, placeholder: 'رقم اتصال إضافي' },
+      { id: 'email', entryId: 'entry.1300295760', label: 'عنوان البريد الالكتروني', type: 'email', required: true, placeholder: 'email@example.com' },
+      { id: 'isGraduate', entryId: 'entry.919906008', label: 'هل انت خريج بكالوريوس فما اعلى؟', type: 'select', required: true, options: ['نعم', 'لا'] },
+      { id: 'major', entryId: 'entry.1973815943', label: 'التخصص', type: 'text', required: true, placeholder: 'التخصص الجامعي' },
+      { id: 'graduationYear', entryId: 'entry.994193843', label: 'سنة التخرج', type: 'text', required: true, placeholder: 'مثال: 2024' },
+      { id: 'isWorking', entryId: 'entry.962755373', label: 'هل تعمل حاليا؟', type: 'select', required: true, options: ['نعم', 'لا'] },
+      { id: 'workplace', entryId: 'entry.2093201902', label: 'مكان العمل الحالي', type: 'text', required: false, placeholder: 'اسم المنظمة أو المؤسسة' },
+      { id: 'experienceYears', entryId: 'entry.828426710', label: 'عدد سنوات الخبرة', type: 'text', required: false, placeholder: 'مثال: سنتان' }
+    ],
+    createdAt: '2026-09-01T00:00:00Z'
+  },
+  {
+    id: 'consulting-inquiry-2026',
+    code: 'SHAT-FORM-04',
+    title: 'استمارة التسجيل والاستشارات وبناء القدرات المؤسسية المتقدمة',
+    titleEn: 'Advanced Institutional Consulting Application',
+    trainer: 'فريق الخبراء والاستشاريين المعتمدين لشركة شات',
+    hours: 'حسب نطاق التدخل الاستشاري',
+    fee: 'يحدد وفق موازنة التدخل',
+    location: 'ميداني / هجين / عن بعد',
+    certificate: 'مخرجات استشارية معتمدة ومطابقة للمعايير الدولية',
+    googleFormSourceUrl: 'https://docs.google.com/forms/d/e/1FAIpQLScIM3dPv92bS-61qrfr_vW8_eVKQS2tsrvR_QhUY_CfbsdlGw/viewform',
+    googleSubmitUrl: 'https://docs.google.com/forms/d/e/1FAIpQLScIM3dPv92bS-61qrfr_vW8_eVKQS2tsrvR_QhUY_CfbsdlGw/formResponse',
+    status: 'active',
+    fields: [
+      { id: 'orgName', label: 'اسم المؤسسة / الجهة', type: 'text', required: true, placeholder: 'مثال: جمعية الإغاثة الأهلية' },
+      { id: 'contactPerson', label: 'اسم الشخص المسؤول أو المتقدم', type: 'text', required: true, placeholder: 'الاسم والصفة الوظيفية' },
+      { id: 'phone', label: 'رقم الهاتف / واتساب', type: 'tel', required: true, placeholder: 'رقم التواصل' },
+      { id: 'email', label: 'البريد الإلكتروني المؤسسي', type: 'email', required: true, placeholder: 'org@domain.org' },
+      { id: 'serviceType', label: 'المجال الاستشاري أو التدريبي المطلوب', type: 'select', required: true, options: [
+        'تأهيل واعتماد المعيار الإنساني الأساسي (CHS)',
+        'صون السلامة والحماية من الاستغلال والانتهاك (PSEA)',
+        'تصميم أطر المتابعة والتقييم والمساءلة (MEAL)',
+        'التقييم الخارجي المستقل وفق معايير OECD DAC',
+        'تطوير النظم والحوكمة وإجراءات العمل القياسية (SOPs)',
+        'تدريب مخصص للكوادر الميدانية والإدارية'
+      ]},
+      { id: 'scopeSummary', label: 'ملخص نطاق العمل والاحتياج المطلوب', type: 'textarea', required: true, placeholder: 'وضح باختصار الأهداف والنتائج المتوقعة...' }
+    ],
+    createdAt: '2026-09-01T00:00:00Z'
+  },
+  {
+    id: 'form-reg-2026',
+    code: 'SHAT-LEGACY',
+    title: 'طلب الالتحاق بالبرامج التدريبية المعتمدة لعام 2026',
+    description: 'استمارة التسجيل الرسمية في دورات ودبلومات شركة شات للتنمية والتطوير.',
+    googleFormSourceUrl: 'https://forms.gle/shat-training-register-2026',
+    status: 'active',
+    fields: [
+      { id: 'f_name', label: 'الاسم الرباعي الكامل', type: 'text', required: true },
+      { id: 'f_phone', label: 'رقم الهاتف وواتساب', type: 'tel', required: true },
+      { id: 'f_email', label: 'البريد الإلكتروني', type: 'email', required: true },
+      { id: 'f_course', label: 'المساق التدريبي', type: 'select', required: true, options: [
+        'دبلوم المعيار الإنساني الأساسي (CHS) وإدارة الاستجابة',
+        'البرنامج التنفيذي في استشارات الحماية وصون السلامة (PSEA)',
+        'خبير التقييم الخارجي المستقل للمشاريع OECD DAC',
+        'حوكمة المنظمات غير الحكومية وإعداد الأدلة التشغيلية SOPs'
+      ]}
+    ]
+  }
+];
+
 class ApiClient {
   constructor() {
     this.token = this.getStoredToken();
@@ -181,8 +354,20 @@ class ApiClient {
     try {
       localStorage.removeItem('shat_auth_token');
       localStorage.removeItem('shat_auth_user_cache');
+      localStorage.removeItem('shat_current_user');
+      localStorage.removeItem('shat_simulated_role');
     } catch (e) {}
     window.dispatchEvent(new CustomEvent('shat:auth-updated', { detail: null }));
+  }
+
+  async logout() {
+    try {
+      if (this.token) {
+        await this.request('/api/auth/logout', { method: 'POST' }).catch(() => {});
+      }
+    } catch (e) {}
+    this.clearSession();
+    return { success: true };
   }
 
   // Resilient network request engine with transparent fallback
@@ -295,8 +480,17 @@ class ApiClient {
       const courses = this.getStoredCourses();
 
       if (method === 'GET') {
-        const found = courses.find(c => c.id === courseId);
-        const resolved = found || courses[0] || null;
+        const found = courses.find(c => 
+          c.id === courseId || 
+          c.code === courseId || 
+          (c.code && c.code.toLowerCase() === courseId.toLowerCase()) ||
+          (c.id && c.id.toLowerCase() === courseId.toLowerCase()) ||
+          (courseId.includes('chs') && (c.id.includes('chs') || c.code.includes('CHS'))) ||
+          (courseId.includes('psea') && (c.id.includes('psea') || c.code.includes('PSEA'))) ||
+          (courseId.includes('oecd') && (c.id.includes('oecd') || c.code.includes('OECD'))) ||
+          (courseId.includes('gov') && (c.id.includes('gov') || c.code.includes('GOV')))
+        );
+        const resolved = found ? this._ensureCourseChapters(found) : (courses[0] ? this._ensureCourseChapters(courses[0]) : null);
         return { success: !!resolved, course: resolved };
       }
 
@@ -507,11 +701,60 @@ class ApiClient {
       ];
     }
 
-    if (path === '/api/forms') {
-      return [
-        { id: 'form-chs-eval', title: 'استمارة تقييم أثر دبلوم المعيار الإنساني الأساسي (CHS)', questionsCount: 8, responsesCount: 34 },
-        { id: 'form-training-needs', title: 'استبيان تشخيص الاحتياجات التدريبية المؤسسية 2026', questionsCount: 12, responsesCount: 58 }
-      ];
+    // M. Forms & Real Google Forms Integration
+    if (path === '/api/forms' && method === 'GET') {
+      return this.getStoredForms();
+    }
+
+    if (path === '/api/forms-all-responses' && method === 'GET') {
+      return this.getStoredFormResponses();
+    }
+
+    if (path.startsWith('/api/forms/')) {
+      const parts = path.split('/');
+      const formId = parts[2];
+      const action = parts[3];
+
+      const forms = this.getStoredForms();
+      const form = forms.find(f => f.id === formId);
+
+      if (!action && method === 'GET') {
+        if (!form) return { error: 'النموذج غير موجود' };
+        return form;
+      }
+
+      if (action === 'submit' && method === 'POST') {
+        const answers = body.answers || body;
+        const responses = this.getStoredFormResponses();
+        const newResponse = {
+          id: `resp-${Date.now()}`,
+          formId: formId,
+          formTitle: form ? form.title : formId,
+          answers: answers,
+          submittedAt: new Date().toISOString(),
+          source: 'موقع شات الرسمي + مزامنة Google Form',
+          status: 'مؤكد ومسجل'
+        };
+        responses.unshift(newResponse);
+        this.saveStoredFormResponses(responses);
+
+        if (form) {
+          form.responsesCount = (form.responsesCount || 0) + 1;
+          this.saveStoredForms(forms);
+        }
+
+        return {
+          success: true,
+          message: 'تم تسجيل بياناتك وحفظها بنجاح في المنظومة وإرسالها لمشرفي التدريب!',
+          submissionId: newResponse.id,
+          submission: newResponse
+        };
+      }
+
+      if (action === 'responses' && method === 'GET') {
+        const responses = this.getStoredFormResponses();
+        return responses.filter(r => r.formId === formId);
+      }
     }
 
     return null;
@@ -591,6 +834,153 @@ class ApiClient {
     } catch (e) {
       console.warn('LocalStorage save error for posts:', e);
     }
+  }
+
+  _ensureCourseChapters(course) {
+    if (!course) return null;
+    if (course.chapters && Array.isArray(course.chapters) && course.chapters.length > 0) {
+      return course;
+    }
+
+    const isChs = (course.id && course.id.includes('chs')) || (course.code && course.code.includes('CHS'));
+    const isPsea = (course.id && course.id.includes('psea')) || (course.code && course.code.includes('PSEA'));
+    const isOecd = (course.id && course.id.includes('oecd')) || (course.code && course.code.includes('OECD')) || (course.code && course.code.includes('EVAL'));
+    
+    if (isChs) {
+      return {
+        ...course,
+        instructorName: course.instructorName || 'د. أسامة المنصور',
+        hours: course.hours || '40 ساعة تدريبية معتمدة',
+        schedule: course.schedule || 'الأحد والأربعاء • 6:00 - 8:30 م',
+        overview: course.overview || 'برنامج تدريبي تفاعلي لتأهيل قادة العمل الإنساني والمديرين التنفيذيين على حوكمة الالتزامات التسعة للمعيار الإنساني الأساسي (CHS)، وتصميم آليات المساءلة للمتأثرين (AAP)، ومواءمة خطط الاستجابة مع متطلبات Sphere Handbook.',
+        chapters: [
+          {
+            id: 'ch-chs-1',
+            title: 'الفصل الأول: الإطار المفاهيمي والتاريخي للمعيار الإنساني الأساسي (CHS)',
+            description: 'نشأة معايير الجودة والمساءلة والالتزامات التسعة للمعيار الإنساني المعاصر.',
+            lessons: [
+              {
+                id: 'les-chs-1',
+                title: 'الدرس 1: نشأة معايير الجودة والمساءلة وتطور الالتزامات التسعة',
+                duration: '45 دقيقة',
+                contentSummary: 'استعراض جذور المعيار الإنساني كملتقى لمبادرات Sphere و HAP و People in Aid، وتحليل مسؤولية المنظمات تجاه المجتمعات.',
+                materials: [
+                  { id: 'file-chs-01', name: 'دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf', size: '4.8 MB', type: 'PDF' },
+                  { id: 'file-chs-02', name: 'حقيبة_أدوات_المساءلة_للجهات_المتضررة_AAP.pptx', size: '12.3 MB', type: 'PPTX' }
+                ]
+              },
+              {
+                id: 'les-chs-2',
+                title: 'الدرس 2: الالتزام الأول — ملاءمة المساعدات واستجابتها للاحتياجات',
+                duration: '60 دقيقة',
+                contentSummary: 'تطبيق أدوات التقييم الميداني السريع التشاركي وتجنب فرض حلول جاهزة من خارج السياق المحلي.',
+                materials: [
+                  { id: 'file-chs-03', name: 'مصفوفة_تقييم_الامتثال_المؤسسي_CHS.xlsx', size: '1.2 MB', type: 'XLSX' }
+                ]
+              }
+            ]
+          },
+          {
+            id: 'ch-chs-2',
+            title: 'الفصل الثاني: آليات المساءلة للمتأثرين والمشاركة المجتمعية (AAP)',
+            description: 'تصميم قنوات الاستماع المجتمعية والإبلاغ الآمن والتظلمات والسرية.',
+            lessons: [
+              {
+                id: 'les-chs-3',
+                title: 'الدرس 3: تصميم قنوات الاستماع المجتمعية والإبلاغ الآمن والتظلمات',
+                duration: '55 دقيقة',
+                contentSummary: 'معايير سرية المعلومات وسلامة المبلغين وتأسيس لجان المتابعة المستقلة.',
+                materials: [
+                  { id: 'file-chs-04', name: 'نموذج_إجراءات_التشغيل_القياسية_CFRM_SOP.docx', size: '2.1 MB', type: 'DOCX' }
+                ]
+              }
+            ]
+          }
+        ]
+      };
+    }
+
+    if (isPsea) {
+      return {
+        ...course,
+        instructorName: course.instructorName || 'أ. ندى الخالدي',
+        hours: course.hours || '36 ساعة تدريبية معتمدة',
+        schedule: course.schedule || 'الإثنين والخميس • 5:30 - 8:00 م',
+        overview: course.overview || 'بناء وتحديث سياسات الحماية المؤسسية وتصميم مسارات الإحالة الآمنة وضمان الامتثال الصارم لمبادئ Do No Harm والتحقيق الإداري الداخلي المستقل.',
+        chapters: [
+          {
+            id: 'ch-psea-1',
+            title: 'الفصل الأول: الأطر القانونية والأخلاقية للحماية وصون السلامة',
+            description: 'المفاهيم الجوهرية وميثاق الشرف الوظيفي والوقاية من الاستغلال والانتهاك الجنسيين.',
+            lessons: [
+              {
+                id: 'les-psea-1',
+                title: 'الدرس 1: المفاهيم الجوهرية وميثاق الشرف الوظيفي والوقاية',
+                duration: '50 دقيقة',
+                contentSummary: 'تحديد الالتزامات القانونية والإنسانية لمسؤولي الحماية وموظفي الخطوط الأمامية.',
+                materials: [
+                  { id: 'file-psea-01', name: 'إطار_سياسات_الحماية_وصون_السلامة_PSEA.pdf', size: '3.5 MB', type: 'PDF' }
+                ]
+              }
+            ]
+          }
+        ]
+      };
+    }
+
+    if (isOecd) {
+      return {
+        ...course,
+        instructorName: course.instructorName || 'م. طارق الزهراني',
+        hours: course.hours || '45 ساعة تدريبية معتمدة',
+        schedule: course.schedule || 'السبت والثلاثاء • 6:00 - 9:00 م',
+        overview: course.overview || 'تأهيل المقيمين المستقلين على قياس الملاءمة، الاتساق، الفعالية، الكفاءة، الأثر، والاستدامة للمشاريع التنموية والإنسانية وفق أطر UNEG الدولية.',
+        chapters: [
+          {
+            id: 'ch-oecd-1',
+            title: 'الفصل الأول: هندسة معايير OECD DAC الستة ومؤشرات القياس',
+            description: 'الفحص المنهجي لمؤشرات الملاءمة والاتساق والأثر المستدام وتصميم أسئلة التقييم.',
+            lessons: [
+              {
+                id: 'les-oecd-1',
+                title: 'الدرس 1: معايير OECD DAC الستة وأسئلة التقييم الاستراتيجية',
+                duration: '60 دقيقة',
+                contentSummary: 'تصميم مصفوفة التقييم وسلاسل القيمة المؤسسية ومقابلة أصحاب المصلحة.',
+                materials: [
+                  { id: 'file-oecd-01', name: 'دليل_معايير_OECD_DAC_للتقييم_التنموي.pdf', size: '5.1 MB', type: 'PDF' }
+                ]
+              }
+            ]
+          }
+        ]
+      };
+    }
+
+    // Default chapters for governance and other courses
+    return {
+      ...course,
+      instructorName: course.instructorName || 'أ. حسام جاد الله',
+      hours: course.hours || '32 ساعة تدريبية',
+      schedule: course.schedule || 'الأحد والأربعاء • 5:00 - 7:30 م',
+      chapters: [
+        {
+          id: 'ch-gen-1',
+          title: 'الفصل الأول: الأسس النظرية والأطر القياسية الدولية',
+          description: 'مراجعة المرجعيات واللوائح التنظيمية وأفضل الممارسات المعتمدة.',
+          lessons: [
+            {
+              id: 'les-gen-1',
+              title: 'الدرس 1: استعراض الإطار المعياري والتشخيص المؤسسي',
+              duration: '50 دقيقة',
+              contentSummary: 'تحليل البيئة التشغيلية ومتطلبات الامتثال للمؤسسات.',
+              materials: [
+                { id: 'file-gen-01', name: 'الحقيبة_التدريبية_الشاملة_2026.pdf', size: '4.2 MB', type: 'PDF' }
+              ]
+            }
+          ]
+        }
+      ]
+    };
   }
 
   getStoredCourses() {
@@ -674,6 +1064,78 @@ class ApiClient {
   saveStoredInquiries(inqs) {
     try {
       localStorage.setItem('shat_platform_inquiries', JSON.stringify(inqs));
+    } catch (e) {}
+  }
+
+  getStoredForms() {
+    try {
+      const data = localStorage.getItem('shat_platform_forms');
+      if (data) {
+        const parsed = JSON.parse(data);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch (e) {}
+    this.saveStoredForms(FALLBACK_FORMS);
+    return FALLBACK_FORMS;
+  }
+
+  saveStoredForms(forms) {
+    try {
+      localStorage.setItem('shat_platform_forms', JSON.stringify(forms));
+    } catch (e) {}
+  }
+
+  getStoredFormResponses() {
+    try {
+      const data = localStorage.getItem('shat_platform_form_responses');
+      if (data) {
+        const parsed = JSON.parse(data);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch (e) {}
+    const defaults = [
+      {
+        id: 'resp-demo-01',
+        formId: 'case-manager-2026',
+        formTitle: 'دورة إعداد وتأهيل مدير حالة Case Management (د. محمد إسليم)',
+        answers: {
+          'entry.143181404': 'سالم كمال المصري',
+          'entry.194985631': 'Salem Kamal Al-Masri',
+          'entry.1986432440': '0599123456',
+          'entry.25683066': '401928374',
+          'entry.216577613': 'غزة - الرمال الشمالي',
+          'entry.1469268289': 'salem.masri@gmail.com',
+          'entry.1835619848': 'العمل في إدارة وتنسيق الحالات في المنظمات الإنسانية'
+        },
+        submittedAt: '2026-03-25T11:20:00Z',
+        source: 'موقع شات الرسمي + مزامنة Google Form',
+        status: 'مؤكد ومسجل'
+      },
+      {
+        id: 'resp-demo-02',
+        formId: 'presentation-skills-2026',
+        formTitle: 'دورة تدريبية مهارات العرض و التقديم (م. مهدي الملاحي)',
+        answers: {
+          'entry.1699838868': 'منى سمير رضوان',
+          'entry.97912557': 'Mona Samir Radwan',
+          'entry.168810623': '0598765432',
+          'entry.1053965865': '902837461',
+          'entry.866675921': 'خانيونس - وسط البلد',
+          'entry.1897449994': 'mona.radwan@outlook.com',
+          'entry.465475516': 'تطوير مهارات الإلقاء والتأثير أمام الجمهور والشركاء'
+        },
+        submittedAt: '2026-03-27T14:45:00Z',
+        source: 'موقع شات الرسمي + مزامنة Google Form',
+        status: 'مؤكد ومسجل'
+      }
+    ];
+    this.saveStoredFormResponses(defaults);
+    return defaults;
+  }
+
+  saveStoredFormResponses(responses) {
+    try {
+      localStorage.setItem('shat_platform_form_responses', JSON.stringify(responses));
     } catch (e) {}
   }
 
@@ -787,6 +1249,37 @@ class ApiClient {
 
   async getFormResponses(formId) {
     return this.request(`/api/forms/${formId}/responses`);
+  }
+
+  async getAllFormResponses() {
+    return this.request('/api/forms-all-responses');
+  }
+
+  // Dual-Sync Submitter: Direct to Google Form (Sheets) + SHAT Platform Storage
+  async submitDualFormRegistration(formId, formMeta, answers) {
+    // 1. Direct submit to Google Form formResponse endpoint via no-cors
+    if (formMeta && formMeta.googleSubmitUrl) {
+      try {
+        const params = new URLSearchParams();
+        for (const [key, value] of Object.entries(answers)) {
+          params.append(key, value || '');
+        }
+        await fetch(formMeta.googleSubmitUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: params.toString()
+        }).catch(err => {
+          console.warn('Direct Google Form submission handled silently:', err);
+        });
+      } catch (gErr) {
+        console.warn('Google Form direct push notice:', gErr);
+      }
+    }
+
+    // 2. Submit to SHAT Platform Local/Backend API
+    const res = await this.submitForm(formId, answers);
+    return res;
   }
 
   // --- CMS Posts APIs (Full CRUD) ---

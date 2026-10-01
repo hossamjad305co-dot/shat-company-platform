@@ -306,6 +306,48 @@ class ServerRelationalStore {
     // 6. Initial CMS Posts
     const posts = [
       {
+        id: 'post-case-manager-2026',
+        slug: 'case-management-qualification-diploma',
+        title: 'إطلاق دورة إعداد وتأهيل مدير حالة Case Management (د. محمد إسليم)',
+        category: 'training',
+        categoryLabel: 'إدارة الحالة وحماية الطفل',
+        status: 'published',
+        publishedAt: '2026-10-01T08:00:00Z',
+        author: 'د. محمد إسليم',
+        excerpt: 'برنامج تدريبي تخصصي معتمد (30 ساعة) لبناء مهارات تحديد وتقييم الحالات وتصميم خطط التدخل والإحالة الآمنة متعددة القطاعات.',
+        content: '<p>يسر شركة شات للتنمية والتطوير الإعلان عن فتح باب التسجيل في دورة إعداد وتأهيل مدير حالة Case Management بقيادة د. محمد إسليم - خبير برامج حماية الطفولة وإدارة الحالة.</p><p>يهدف البرنامج إلى تزويد المشاركين بالمهارات الإجرائية المتقدمة لتحديد وتقييم الحالات الأكثر هشاشة، وتصميم خطط التدخل الفردية، والإحالة الآمنة متعددة القطاعات وفق موجهات المعيار الإنساني الأساسي وحماية المستفيدين. التسجيل متاح الآن مباشرة عبر استمارة الموقع المعتمدة والمربوطة بـ Google Forms.</p>',
+        coverImage: 'assets/images/posts/post-case-management.svg',
+        tags: ['Case Management', 'Child Protection', 'Humanitarian', 'Training']
+      },
+      {
+        id: 'post-presentation-skills-2026',
+        slug: 'presentation-and-speaking-mastery',
+        title: 'دورة تدريبية متقدمة في مهارات العرض والتقديم (م. مهدي الملاحي)',
+        category: 'training',
+        categoryLabel: 'مهارات الاتصال والتأثير',
+        status: 'published',
+        publishedAt: '2026-09-28T09:30:00Z',
+        author: 'م. مهدي الملاحي',
+        excerpt: 'تطوير مهارات الإلقاء والتحدث الجماهيري وصياغة العروض التقديمية الاحترافية وإقناع المانحين والشركاء (12 ساعة).',
+        content: '<p>أطلقت شركة شات للتنمية والتطوير بالتعاون مع الاستشاري م. مهدي الملاحي برنامج مهارات العرض والتقديم المتقدم للمهنيين ومديري المشاريع وممثلي المنظمات.</p><p>يركز البرنامج على لغة الجسد، وإدارة منصات العرض، وتصميم الشرائح المؤثرة وإقناع المانحين والشركاء (4 لقاءات تفاعلية بقاعة شات، رسوم 120 شيكل فقط مع شهادة معتمدة).</p>',
+        coverImage: 'assets/images/posts/post-presentation-skills.svg',
+        tags: ['Communication', 'Public Speaking', 'Presentation', 'Institutional']
+      },
+      {
+        id: 'post-humanitarian-worker-2026',
+        slug: 'humanitarian-worker-qualification-diploma',
+        title: 'دبلوم تأهيل عامل في المجال الإنساني «من المبادئ إلى الممارسة» (142 ساعة)',
+        category: 'academy',
+        categoryLabel: 'دبلومات العمل الإنساني',
+        status: 'published',
+        publishedAt: '2026-09-25T11:00:00Z',
+        author: 'أكاديمية شات للتدريب',
+        excerpt: 'برنامج دبلوم متكامل لمدة 3 أشهر يشمل 13 دورة تخصصية بمشاركة أكثر من 10 مدربين دوليين مع تقسيط ميسر للرسوم.',
+        content: '<p>تعلن شركة شات للتنمية والتطوير عن فتح باب القبول في دبلوم تأهيل عامل في المجال الإنساني: من المبادئ إلى الممارسة.</p><p>يغطي البرنامج كافة معايير Sphere، CHS، PSEA، إدارة دورة المشروع، المتابعة والتقييم MEAL، واللوجستيات وسلاسل الإمداد، وإدارة المخيمات والملاجئ، مع تطبيقات عملية وحالات دراسية ميدانية تؤهل الخريجين للانخراط الفوري في العمل الإغاثي والتنموي.</p>',
+        coverImage: 'assets/images/posts/post-humanitarian-worker.svg',
+        tags: ['Humanitarian Diploma', 'Sphere', 'CHS', 'PSEA', 'MEAL']
+      },
+      {
         id: 'post-01',
         slug: 'chs-accountability-workshop-2026',
         title: 'ورشة تطبيق المعيار الإنساني الأساسي (CHS) وضمان المساءلة للمتأثرين',
@@ -358,6 +400,123 @@ class ServerRelationalStore {
         { id: 'f_notes', label: 'الدافع من الالتحاق والتوقعات المهنية', type: 'textarea', required: false, placeholder: 'أهم الأهداف التي تسعى لتحقيقها من خلال هذا البرنامج...' }
       ],
       createdAt: '2026-01-01T00:00:00Z'
+    });
+
+    // 7.1 Case Manager Course (Official Google Form)
+    this.tables.forms.set('case-manager-2026', {
+      id: 'case-manager-2026',
+      code: 'SHAT-FORM-01',
+      title: 'دورة إعداد مدير حالة (د. محمد إسليم)',
+      titleEn: 'Case Manager Preparation Course',
+      trainer: 'د. محمد إسليم',
+      hours: '12 ساعة تدريبية (4 لقاءات)',
+      fee: '150 شيكل فقط',
+      location: 'غزة',
+      certificate: 'شهادة إتمام مشاركة معتمدة',
+      googleFormSourceUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSfzjius7lEMOULtsaz6ByhXwFx82mWUkXwQoisdkbid4PLhGg/viewform',
+      googleSubmitUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSfzjius7lEMOULtsaz6ByhXwFx82mWUkXwQoisdkbid4PLhGg/formResponse',
+      status: 'active',
+      fields: [
+        { id: 'fullNameAr', entryId: 'entry.143181404', label: 'الاسم ثلاثي باللغة العربية', type: 'text', required: true, placeholder: 'مثال: أحمد خليل منصور' },
+        { id: 'fullNameEn', entryId: 'entry.194985631', label: 'الاسم ثلاثي باللغة الانجليزية', type: 'text', required: true, placeholder: 'Ahmed Khalil Mansour' },
+        { id: 'phone', entryId: 'entry.1986432440', label: 'رقم الجوال', type: 'tel', required: true, placeholder: '059XXXXXXX' },
+        { id: 'nationalId', entryId: 'entry.25683066', label: 'رقم الهوية', type: 'text', required: true, placeholder: 'رقم الهوية الوطنية' },
+        { id: 'address', entryId: 'entry.216577613', label: 'عنوان السكن', type: 'text', required: true, placeholder: 'المدينة / المنطقة' },
+        { id: 'email', entryId: 'entry.1469268289', label: 'البريد الالكتروني', type: 'email', required: true, placeholder: 'email@example.com' },
+        { id: 'motivation', entryId: 'entry.1835619848', label: 'لماذا انت مهتم/ة في حضور هذه الدورة', type: 'textarea', required: false, placeholder: 'اكتب نبذة عن أهدافك ودوافعك المهنية...' }
+      ],
+      createdAt: '2026-09-01T00:00:00Z'
+    });
+
+    // 7.2 Presentation & Speaking Mastery (Official Google Form)
+    this.tables.forms.set('presentation-skills-2026', {
+      id: 'presentation-skills-2026',
+      code: 'SHAT-FORM-02',
+      title: 'دورة تدريبية مهارات العرض و التقديم (م. مهدي الملاحي)',
+      titleEn: 'Presentation & Public Speaking Mastery',
+      trainer: 'م. مهدي الملاحي',
+      hours: '12 ساعة تدريبية (4 لقاءات)',
+      fee: '120 شيكل فقط',
+      location: 'قاعة شات التفاعلية',
+      certificate: 'شهادة إتمام الدورة التدريبية معتمدة',
+      googleFormSourceUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSewFY_nZGz_jQ-FCWTw40O8wxuoQK4H9f1ted6An1NzIcGc_Q/viewform',
+      googleSubmitUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSewFY_nZGz_jQ-FCWTw40O8wxuoQK4H9f1ted6An1NzIcGc_Q/formResponse',
+      status: 'active',
+      fields: [
+        { id: 'fullNameAr', entryId: 'entry.1699838868', label: 'الاسم ثلاثي باللغة العربية', type: 'text', required: true, placeholder: 'الاسم ثلاثي بالعربية' },
+        { id: 'fullNameEn', entryId: 'entry.97912557', label: 'الاسم ثلاثي باللغة الإنجليزية', type: 'text', required: true, placeholder: 'Full Name in English' },
+        { id: 'phone', entryId: 'entry.168810623', label: 'رقم الجوال', type: 'tel', required: true, placeholder: '059XXXXXXX' },
+        { id: 'nationalId', entryId: 'entry.1053965865', label: 'رقم الهوية', type: 'text', required: true, placeholder: 'رقم الهوية الوطنية' },
+        { id: 'address', entryId: 'entry.866675921', label: 'عنوان السكن', type: 'text', required: true, placeholder: 'المحافظة / الحي' },
+        { id: 'email', entryId: 'entry.1897449994', label: 'البريد الالكتروني', type: 'email', required: true, placeholder: 'email@example.com' },
+        { id: 'motivation', entryId: 'entry.465475516', label: 'لماذا انت مهتم/ة لهذه الدورة', type: 'textarea', required: false, placeholder: 'تحدث عن أهدافك من اكتساب مهارات العرض...' }
+      ],
+      createdAt: '2026-09-01T00:00:00Z'
+    });
+
+    // 7.3 Humanitarian Worker Qualification (Official Google Form)
+    this.tables.forms.set('humanitarian-worker-diploma', {
+      id: 'humanitarian-worker-diploma',
+      code: 'SHAT-FORM-03',
+      title: 'برنامج تأهيل عامل في المجال الإنساني «من المبادئ إلى الممارسة»',
+      titleEn: 'Humanitarian Worker Qualification Diploma',
+      trainer: 'نخبة من كبار الخبراء الإنسانيين (أكثر من 10 مدربين)',
+      hours: '3 أشهر • 142 ساعة تدريبية • 13 دورة متخصصة',
+      fee: 'تسديد الرسوم على دفعات ميسرة خلال فترة التدريب',
+      location: 'حرم شركة شات للتنمية والتطوير',
+      certificate: 'شهادة دبلوم معتمدة ضمن حفل تخرج رسمي',
+      googleFormSourceUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSft0nB4QGxS2HCZApraSmn5GDca1R7taC0ZNs441kVx6gh_Og/viewform',
+      googleSubmitUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSft0nB4QGxS2HCZApraSmn5GDca1R7taC0ZNs441kVx6gh_Og/formResponse',
+      status: 'active',
+      fields: [
+        { id: 'fullNameAr', entryId: 'entry.1015180520', label: 'الاسم ثلاثي باللغة العربية', type: 'text', required: true, placeholder: 'الاسم ثلاثي بالعربية' },
+        { id: 'fullNameEn', entryId: 'entry.1438777846', label: 'الاسم ثلاثي باللغة الانجليزية', type: 'text', required: true, placeholder: 'Full Name in English' },
+        { id: 'nationalId', entryId: 'entry.1245494058', label: 'رقم الهوية', type: 'text', required: true, placeholder: 'رقم الهوية' },
+        { id: 'phone', entryId: 'entry.1641222345', label: 'رقم الجوال', type: 'tel', required: true, placeholder: 'رقم الجوال النشط' },
+        { id: 'age', entryId: 'entry.592772610', label: 'العمر', type: 'number', required: true, placeholder: 'العمر' },
+        { id: 'address', entryId: 'entry.1110437620', label: 'عنوان السكن', type: 'text', required: true, placeholder: 'المدينة / المنطقة' },
+        { id: 'altPhone', entryId: 'entry.1507450919', label: 'رقم الهاتف البديل', type: 'tel', required: false, placeholder: 'رقم اتصال إضافي' },
+        { id: 'email', entryId: 'entry.1300295760', label: 'عنوان البريد الالكتروني', type: 'email', required: true, placeholder: 'email@example.com' },
+        { id: 'isGraduate', entryId: 'entry.919906008', label: 'هل انت خريج بكالوريوس فما اعلى؟', type: 'select', required: true, options: ['نعم', 'لا'] },
+        { id: 'major', entryId: 'entry.1973815943', label: 'التخصص', type: 'text', required: true, placeholder: 'التخصص الجامعي' },
+        { id: 'graduationYear', entryId: 'entry.994193843', label: 'سنة التخرج', type: 'text', required: true, placeholder: 'مثال: 2024' },
+        { id: 'isWorking', entryId: 'entry.962755373', label: 'هل تعمل حاليا؟', type: 'select', required: true, options: ['نعم', 'لا'] },
+        { id: 'workplace', entryId: 'entry.2093201902', label: 'مكان العمل الحالي', type: 'text', required: false, placeholder: 'اسم المنظمة أو المؤسسة' },
+        { id: 'experienceYears', entryId: 'entry.828426710', label: 'عدد سنوات الخبرة', type: 'text', required: false, placeholder: 'مثال: سنتان' }
+      ],
+      createdAt: '2026-09-01T00:00:00Z'
+    });
+
+    // 7.4 Advanced Institutional Consulting & Capacity Application (Official Google Form)
+    this.tables.forms.set('consulting-inquiry-2026', {
+      id: 'consulting-inquiry-2026',
+      code: 'SHAT-FORM-04',
+      title: 'استمارة التسجيل والاستشارات وبناء القدرات المؤسسية المتقدمة',
+      titleEn: 'Advanced Institutional Consulting Application',
+      trainer: 'فريق الخبراء والاستشاريين المعتمدين لشركة شات',
+      hours: 'حسب نطاق التدخل الاستشاري',
+      fee: 'يحدد وفق موازنة التدخل',
+      location: 'ميداني / هجين / عن بعد',
+      certificate: 'مخرجات استشارية معتمدة ومطابقة للمعايير الدولية',
+      googleFormSourceUrl: 'https://docs.google.com/forms/d/e/1FAIpQLScIM3dPv92bS-61qrfr_vW8_eVKQS2tsrvR_QhUY_CfbsdlGw/viewform',
+      googleSubmitUrl: 'https://docs.google.com/forms/d/e/1FAIpQLScIM3dPv92bS-61qrfr_vW8_eVKQS2tsrvR_QhUY_CfbsdlGw/formResponse',
+      status: 'active',
+      fields: [
+        { id: 'orgName', label: 'اسم المؤسسة / الجهة', type: 'text', required: true, placeholder: 'مثال: جمعية الإغاثة الأهلية' },
+        { id: 'contactPerson', label: 'اسم الشخص المسؤول أو المتقدم', type: 'text', required: true, placeholder: 'الاسم والصفة الوظيفية' },
+        { id: 'phone', label: 'رقم الهاتف / واتساب', type: 'tel', required: true, placeholder: 'رقم التواصل' },
+        { id: 'email', label: 'البريد الإلكتروني المؤسسي', type: 'email', required: true, placeholder: 'org@domain.org' },
+        { id: 'serviceType', label: 'المجال الاستشاري أو التدريبي المطلوب', type: 'select', required: true, options: [
+          'تأهيل واعتماد المعيار الإنساني الأساسي (CHS)',
+          'صون السلامة والحماية من الاستغلال والانتهاك (PSEA)',
+          'تصميم أطر المتابعة والتقييم والمساءلة (MEAL)',
+          'التقييم الخارجي المستقل وفق معايير OECD DAC',
+          'تطوير النظم والحوكمة وإجراءات العمل القياسية (SOPs)',
+          'تدريب مخصص للكوادر الميدانية والإدارية'
+        ]},
+        { id: 'scopeSummary', label: 'ملخص نطاق العمل والاحتياج المطلوب', type: 'textarea', required: true, placeholder: 'وضح باختصار الأهداف والنتائج المتوقعة...' }
+      ],
+      createdAt: '2026-09-01T00:00:00Z'
     });
 
     // 6. Authoritative Course Applications (Enrollment Requests)

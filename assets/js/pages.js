@@ -60,7 +60,7 @@ export function renderHomePage(t) {
           <div class="hero-badge-col">
             <div class="hero-emblem-card">
               <div class="hero-emblem-badge-wrapper" style="position: relative;">
-                <img src="${heroBadgeImg}" alt="SHAT Development & Growth" class="hero-badge-img" onerror="this.src='/assets/logo/logo-banner.jpg'">
+                <img src="${heroBadgeImg.startsWith('http') ? heroBadgeImg : heroBadgeImg.replace(/^\//, '')}" alt="SHAT Development & Growth" class="hero-badge-img" onerror="this.onerror=null; this.src='assets/logo/logo-banner.jpg';">
                 <div class="hero-verified-stamp" title="جهة معتمدة رسمياً">✓</div>
               </div>
               ${isAdmin ? `
@@ -284,7 +284,7 @@ export function renderHomePage(t) {
               <!-- Realistic Social Post Header -->
               <div style="padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #f1f5f9; background: #ffffff;">
                 <div style="display: flex; align-items: center; gap: 10px;">
-                  <img src="/assets/logo/logo-badge.jpg" alt="SHAT" style="width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid #10b981; object-fit: cover;" onerror="this.src='/assets/logo/logo-badge.jpg'">
+                  <img src="assets/logo/logo-badge.jpg" alt="SHAT" style="width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid #10b981; object-fit: cover;" onerror="this.onerror=null; this.src='assets/logo/logo-badge.jpg';">
                   <div>
                     <div style="display: flex; align-items: center; gap: 4px;">
                       <strong style="font-size: 0.85rem; color: var(--shat-navy-950);">شركة شات للتنمية</strong>
@@ -303,7 +303,7 @@ export function renderHomePage(t) {
 
               <!-- Post Media Cover with Live Custom Image -->
               <div class="social-card-img-wrap" style="position: relative;">
-                <img src="/${postImg.replace(/^\//, '')}" alt="${p.title}" class="social-card-img" onerror="this.src='/assets/logo/logo-banner.jpg'" loading="lazy">
+                <img src="${postImg.startsWith('http') ? postImg : postImg.replace(/^\//, '')}" alt="${p.title}" class="social-card-img" onerror="this.onerror=null; this.src='assets/logo/logo-banner.jpg';" loading="lazy">
               </div>
 
               <div class="social-card-body">
