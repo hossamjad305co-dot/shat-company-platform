@@ -14,7 +14,7 @@ export function renderVerifyView(lang = 'ar') {
         <div style="text-align: center; margin-bottom: 36px;">
           <div style="display: inline-flex; align-items: center; gap: 8px; background: #E8F5E9; border: 1px solid #C8E6C9; padding: 4px 16px; border-radius: 999px; margin-bottom: 14px;">
             <span style="font-size: 0.8rem; font-weight: 800; color: #1E7E34;">
-              🛡️ ${txt('بوابة التحقق الرقمي المعتمدة رسمياً', 'Officially Accredited Verification Portal', 'Portail de Vérification Officiel')}
+              ◈ ${txt('بوابة التحقق الرقمي المعتمدة رسمياً', 'Officially Accredited Verification Portal', 'Portail de Vérification Officiel')}
             </span>
           </div>
 
@@ -86,7 +86,7 @@ export function renderVerifyView(lang = 'ar') {
                   gap: 8px;
                   box-shadow: 0 4px 12px rgba(30,126,52,0.25);
                 ">
-                  <span>🔍 ${txt('فحص الشهادة', 'Verify Now', 'Vérifier')}</span>
+                  <span>• ${txt('فحص الشهادة', 'Verify Now', 'Vérifier')}</span>
                 </button>
               </div>
             </form>
@@ -242,7 +242,7 @@ export function bindVerifyEvents() {
             يرجى التأكد من كتابة الرقم التسلسلي بشكل دقيق كما هو مطبوع في أسفل الشهادة الورقية أو الرقمية (مثال: <strong>SHAT-CHS-2026-0891</strong>).
           </p>
           <a href="https://wa.me/972592879621?text=${encodeURIComponent('مرحباً شركة شات، أود الاستفسار عن التحقق من شهادة برقم: ' + code)}" target="_blank" class="btn-clean" style="background: #25D366; color: #FFFFFF; font-weight: 700; padding: 10px 22px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px;">
-            <span>💬 التواصل مع دائرة التسجيل والاعتماد عبر واتساب</span>
+            <span>التواصل مع دائرة التسجيل والاعتماد عبر واتساب</span>
           </a>
         </div>
       `;
@@ -348,7 +348,7 @@ export function bindVerifyEvents() {
                 text-align: center;
                 border: 2px solid #D97706;
               ">
-                <span style="font-size: 1.2rem;">🏛️</span>
+                <span style="font-size: 1.3rem; font-weight: 900;">★</span>
                 <span>SHAT SEAL</span>
               </div>
 
@@ -370,7 +370,7 @@ export function bindVerifyEvents() {
               align-items: center;
               gap: 8px;
             ">
-              <span>🖨️ طباعة إشعار التحقق</span>
+              <span>⎙ طباعة إشعار التحقق</span>
             </button>
           </div>
 

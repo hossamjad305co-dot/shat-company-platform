@@ -84,7 +84,7 @@ export function RoleBadge({ role = 'visitor' }) {
     visitor: { label: 'زائر', variant: 'unconfigured' }
   };
   const config = roleMap[role] || { label: role, variant: 'navy' };
-  return `<span class="shat-badge shat-badge-${config.variant}">👤 ${config.label}</span>`;
+  return `<span class="shat-badge shat-badge-${config.variant}">◈ ${config.label}</span>`;
 }
 
 export function Input({
@@ -197,7 +197,7 @@ export function Breadcrumbs({ items = [] }) {
 }
 
 export function EmptyState({
-  icon = '📭',
+  icon = '◈',
   title = 'لا توجد بيانات متاحة حالياً',
   description = 'لم يتم تسجيل أي عناصر أو أنشطة في هذا القسم حتى الآن.',
   actionText = '',
@@ -268,7 +268,7 @@ export function IntegrationStatusCard({
     <div class="shat-card" style="border-inline-start: 4px solid ${configured ? 'var(--shat-green-700)' : 'var(--color-unconfigured)'};">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-sm);">
         <h4 style="margin: 0; color: var(--text-primary); font-size: var(--font-size-h4); display: flex; align-items: center; gap: 8px;">
-          <span>☁️ ${provider}</span>
+          <span>◈ ${provider}</span>
         </h4>
         <span class="shat-badge ${configured ? 'shat-badge-success' : 'shat-badge-unconfigured'}">
           ${statusText}

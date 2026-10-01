@@ -39,7 +39,7 @@ export function showToast(message, type = 'info', duration = 4000) {
   const colors = {
     success: { bg: '#0F2E4A', border: '#4B8834', icon: '✓', text: '#FFFFFF', iconColor: '#4ADE80' },
     error: { bg: '#450A0A', border: '#EF4444', icon: '✕', text: '#FFFFFF', iconColor: '#F87171' },
-    warning: { bg: '#451A03', border: '#F59E0B', icon: '⚠', text: '#FFFFFF', iconColor: '#FBBF24' },
+    warning: { bg: '#451A03', border: '#F59E0B', icon: '▲', text: '#FFFFFF', iconColor: '#FBBF24' },
     info: { bg: '#0F2E4A', border: '#3B82F6', icon: 'ℹ', text: '#FFFFFF', iconColor: '#60A5FA' }
   };
 

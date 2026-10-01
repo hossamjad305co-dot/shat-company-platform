@@ -33,10 +33,10 @@ export function PostEditorModal() {
           <!-- Controls -->
           <div style="display: flex; align-items: center; gap: 8px;">
             <button type="button" id="btn-save-draft" class="shat-btn shat-btn-secondary shat-btn-sm">
-              💾 حفظ كمسودة
+              ✓ حفظ كمسودة
             </button>
             <button type="button" id="btn-publish-post" class="shat-btn shat-btn-primary shat-btn-sm">
-              🚀 نشر المنشور
+              ★ نشر المنشور
             </button>
             <button type="button" id="btn-close-editor" class="shat-btn shat-btn-ghost shat-btn-sm" style="min-width: 44px; min-height: 44px; font-size: 1.2rem;">
               ✕
@@ -86,7 +86,7 @@ export function PostEditorModal() {
                 <div style="display: flex; gap: 8px;">
                   <input type="text" id="post-input-img" class="shat-form-input" placeholder="رابط الصورة أو اختر من المكتبة..." style="flex: 1;" dir="ltr"/>
                   <button type="button" id="btn-open-media-for-post" class="shat-btn shat-btn-secondary" style="white-space: nowrap;">
-                    🖼️ مكتبة الوسائط
+                    ◈ مكتبة الوسائط
                   </button>
                 </div>
               </div>
@@ -128,7 +128,7 @@ export function PostEditorModal() {
             <div style="width: 100%; max-width: 500px;">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                 <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">
-                  👁️ المعاينة الحية الفورية (Live Preview)
+                  ◈ المعاينة الحية الفورية (Live Preview)
                 </span>
                 <span id="preview-badge-status" class="shat-badge shat-badge-warning">DRAFT</span>
               </div>

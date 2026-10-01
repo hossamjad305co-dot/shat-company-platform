@@ -333,7 +333,7 @@ export const examEngine = {
         <div class="modal-window" style="max-width: 780px; max-height: 92vh; display: flex; flex-direction: column;">
           <div class="modal-top no-print" style="border-bottom: 2px solid var(--shat-navy); padding: 18px 24px;">
             <div style="display: flex; align-items: center; gap: 10px;">
-              <span style="font-size: 1.5rem;">📝</span>
+              <span style="font-size: 1.5rem; color: var(--shat-navy);">◈</span>
               <div>
                 <h3 id="modal-exam-title" style="font-size: 1.15rem; font-weight: 900; color: var(--shat-navy); margin: 0;"></h3>
                 <span id="modal-exam-subtitle" style="font-size: 0.78rem; color: var(--shat-green); font-weight: 700;"></span>
@@ -428,7 +428,7 @@ export const examEngine = {
           </button>
 
           <button type="submit" class="btn-clean btn-primary btn-md" style="background: var(--shat-green); font-weight: 800; padding: 12px 28px; box-shadow: 0 4px 14px rgba(30,126,52,0.3);">
-            <span>🚀 ${txt('تسليم الإجابات واحتساب النتيجة', 'Submit & Grade Exam', 'Soumettre et Calculer')}</span>
+            <span>✓ ${txt('تسليم الإجابات واحتساب النتيجة', 'Submit & Grade Exam', 'Soumettre et Calculer')}</span>
           </button>
         </div>
       </form>
@@ -492,7 +492,7 @@ export const examEngine = {
             ✓
           </div>
           <h2 style="font-size: 1.6rem; font-weight: 900; color: var(--shat-navy); margin: 0 0 8px;">
-            🎉 ${txt('مبارك! تم اجتياز الاختبار بنجاح باهر', 'Congratulations! You Passed Successfully', 'Félicitations ! Examen Réussi')}
+            ★ ${txt('مبارك! تم اجتياز الاختبار بنجاح باهر', 'Congratulations! You Passed Successfully', 'Félicitations ! Examen Réussi')}
           </h2>
           <div style="font-size: 1.15rem; font-weight: 800; color: var(--shat-green); margin-bottom: 12px;">
             ${txt('النتيجة النهائية:', 'Final Score:', 'Score Final :')} ${scorePercentage}% (${correctCount}/${totalCount})
@@ -511,13 +511,13 @@ export const examEngine = {
               <div style="font-size: 1.15rem; font-weight: 900; font-family: var(--font-mono); color: var(--shat-navy);">${cert.serial}</div>
             </div>
             <a href="#/verify" class="btn-clean btn-sm" style="background: var(--shat-navy); color: #FFFFFF; font-weight: 700;">
-              🔍 فحص في بوابة التحقق
+              • فحص في بوابة التحقق
             </a>
           </div>
 
           <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
             <button type="button" class="btn-clean btn-primary btn-md" id="btn-view-generated-cert" style="background: var(--shat-navy); font-weight: 800; padding: 12px 24px; box-shadow: 0 4px 14px rgba(15,46,74,0.3);">
-              📜 ${txt('استعراض وتحميل الشهادة المعتمدة', 'View & Print Official Certificate', 'Voir le Certificat Homologué')}
+              ◈ ${txt('استعراض وتحميل الشهادة المعتمدة', 'View & Print Official Certificate', 'Voir le Certificat Homologué')}
             </button>
             <button type="button" class="btn-clean btn-secondary btn-md" id="btn-close-exam-modal">
               ${txt('إغلاق والعودة', 'Close', 'Fermer')}
@@ -549,8 +549,8 @@ export const examEngine = {
       // Failed - Retry Option
       container.innerHTML = `
         <div style="text-align: center; padding: 20px 0;">
-          <div style="width: 72px; height: 72px; background: #FEE2E2; color: #DC2626; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; margin: 0 auto 16px;">
-            ⚠️
+          <div style="width: 72px; height: 72px; background: #FEE2E2; color: #DC2626; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 900; margin: 0 auto 16px;">
+            ▲
           </div>
           <h2 style="font-size: 1.4rem; font-weight: 900; color: #991B1B; margin: 0 0 8px;">
             ${txt('لم يتم تحقيق نسبة الاجتياز المطلوبة (80%)', 'Passing score not reached (80%)', 'Seuil de réussite non atteint (80%)')}
@@ -568,7 +568,7 @@ export const examEngine = {
 
           <div style="display: flex; justify-content: center; gap: 12px;">
             <button type="button" class="btn-clean btn-primary btn-md" id="btn-retry-exam" style="background: var(--shat-navy); font-weight: 800;">
-              🔄 ${txt('إعادة المحاولة الآن', 'Retake Exam Now', 'Retenter l’Épreuve')}
+              ↻ ${txt('إعادة المحاولة الآن', 'Retake Exam Now', 'Retenter l’Épreuve')}
             </button>
             <button type="button" class="btn-clean btn-secondary btn-md" id="btn-cancel-retry">
               ${txt('العودة للمنهاج', 'Return to Course', 'Retour au Cursus')}
@@ -661,7 +661,7 @@ export const examEngine = {
         <div class="modal-window" style="max-width: 900px; max-height: 94vh; display: flex; flex-direction: column;">
           <div class="modal-top no-print" style="border-bottom: 2px solid var(--shat-navy); padding: 16px 24px;">
             <div style="display: flex; align-items: center; gap: 10px;">
-              <span style="font-size: 1.4rem;">📜</span>
+              <span style="font-size: 1.4rem;">◈</span>
               <h3 style="font-size: 1.15rem; font-weight: 900; color: var(--shat-navy); margin: 0;">
                 ${txt('الشهادة الرقمية المعتمدة رسمياً', 'Officially Accredited Digital Certificate', 'Certificat Numérique Homologué')}
               </h3>
@@ -820,7 +820,7 @@ export const examEngine = {
               text-align: center;
               padding: 6px;
             ">
-              <span style="font-size: 1.2rem;">🏛️</span>
+              <span style="font-size: 1.3rem; font-weight: 900;">★</span>
               <span style="font-size: 0.58rem; font-weight: 900; letter-spacing: 0.5px;">SHAT SEAL</span>
               <span style="font-size: 0.5rem; font-weight: 800;">VERIFIED 2026</span>
             </div>
@@ -851,10 +851,10 @@ export const examEngine = {
 
         <div style="display: flex; gap: 10px;">
           <a href="#/verify" class="btn-clean btn-sm" style="background: var(--bg-subtle); color: var(--shat-navy); border: 1px solid var(--border-light); font-weight: 700;">
-            🔍 ${txt('التحقق في البوابة الرقمية', 'Verify Online', 'Vérifier')}
+            • ${txt('التحقق في البوابة الرقمية', 'Verify Online', 'Vérifier')}
           </a>
           <button type="button" class="btn-clean btn-primary btn-md allow-print" id="btn-print-official-cert" style="background: var(--shat-navy); font-weight: 800; box-shadow: 0 4px 14px rgba(15,46,74,0.3);">
-            🖨️ ${txt('طباعة الشهادة / حفظ كـ PDF', 'Print / Save Certificate (PDF)', 'Imprimer le Certificat (PDF)')}
+            ⎙ ${txt('طباعة الشهادة / حفظ كـ PDF', 'Print / Save Certificate (PDF)', 'Imprimer le Certificat (PDF)')}
           </button>
         </div>
       </div>

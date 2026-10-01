@@ -240,7 +240,7 @@ export const applicationService = {
     if (newStatus === ApplicationStatus.APPROVED && oldStatus !== ApplicationStatus.APPROVED) {
       notificationService.createNotification({
         recipientRole: 'student',
-        title: '🎉 تهانينا! تم قبول طلب تسجيلك',
+        title: '✓ تم اعتماد وقبول طلب تسجيلك',
         message: `تم اعتماد تسجيلك رسمياً في (${app.courseTitle}). يمكنك الآن دخول المساق وتحميل الحقائب.`,
         link: `#/course/${app.courseId}`
       });

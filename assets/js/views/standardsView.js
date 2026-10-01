@@ -23,13 +23,13 @@ export function renderStandardsView(lang = 'ar') {
     diagDesc: lang === 'fr'
       ? 'Lancez notre outil interactif pour analyser votre conformité aux 9 engagements CHS, PSEA et UNEG en moins de 3 minutes.'
       : (isRtl ? 'استخدم أداة التشخيص التفاعلية لفحص مستوى الامتثال للالتزامات التسعة للمعيار الإنساني، معايير صون السلامة، وأطر الحوكمة خلال 3 دقائق.' : 'Use our interactive diagnostic tool to inspect institutional alignment with CHS, PSEA, and governance frameworks in 3 minutes.'),
-    diagBtn: lang === 'fr' ? 'Lancer le Test de Conformité' : (isRtl ? '⚡ فحص جاهزية المعايير الآن' : '⚡ Check Compliance Now'),
+    diagBtn: lang === 'fr' ? 'Lancer le Test de Conformité' : (isRtl ? '◈ فحص جاهزية المعايير الآن' : '◈ Check Compliance Now'),
 
-    whyTitle: lang === 'fr' ? '🎯 Portée et valeur pour les organisations:' : (isRtl ? '🎯 ما هو المعيار وما قيمته للمؤسسات؟' : '🎯 Why It Matters to Institutions:'),
-    howTitle: lang === 'fr' ? '⚡ كيف تطبقه شركة شات ميدانياً؟' : (isRtl ? '⚡ كيف تطبقه شركة شات ميدانياً؟' : '⚡ How SHAT Implements It:'),
-    delivTitle: lang === 'fr' ? '📦 Livrable Institutionnel Réalisé:' : (isRtl ? '📦 المخرج المؤسسي المحقق:' : '📦 Tangible Institutional Deliverable:'),
+    whyTitle: lang === 'fr' ? '▪ Portée et valeur pour les organisations:' : (isRtl ? '▪ ما هو المعيار وما قيمته للمؤسسات؟' : '▪ Why It Matters to Institutions:'),
+    howTitle: lang === 'fr' ? '◈ كيف تطبقه شركة شات ميدانياً؟' : (isRtl ? '◈ كيف تطبقه شركة شات ميدانياً؟' : '◈ How SHAT Implements It:'),
+    delivTitle: lang === 'fr' ? '✓ Livrable Institutionnel Réalisé:' : (isRtl ? '✓ المخرج المؤسسي المحقق:' : '✓ Tangible Institutional Deliverable:'),
     
-    btnInteractiveCheck: lang === 'fr' ? 'Explorer la Liste de Contrôle Interactive' : (isRtl ? '⚡ فحص قائمة التحقق التفاعلية' : '⚡ Interactive Compliance Checklist'),
+    btnInteractiveCheck: lang === 'fr' ? 'Explorer la Liste de Contrôle Interactive' : (isRtl ? '◈ فحص قائمة التحقق التفاعلية' : '◈ Interactive Compliance Checklist'),
     btnExploreCourse: lang === 'fr' ? 'Consulter le Cursus Certifié' : (isRtl ? 'استعراض المساق التدريبي المعتمد' : 'View Accredited Track'),
     linkedTrack: lang === 'fr' ? 'Cursus associé:' : (isRtl ? 'المساق التدريبي المرتبط:' : 'Linked Course:'),
     linkedProject: lang === 'fr' ? 'التدخل الميداني:' : (isRtl ? 'المشروع الميداني الموثق:' : 'Field Project:')
@@ -179,7 +179,7 @@ export function renderStandardsView(lang = 'ar') {
                             <span style="color: var(--text-muted); font-size: 0.72rem;">${t.linkedTrack}</span>
                             <div>
                               <a href="#/course/${rel.courseId}" style="color: var(--shat-navy); font-weight: 800; text-decoration: none;">
-                                🎓 ${rel.courseTitle}
+                                ✦ ${rel.courseTitle}
                               </a>
                             </div>
                           </div>
@@ -187,7 +187,7 @@ export function renderStandardsView(lang = 'ar') {
                             <span style="color: var(--text-muted); font-size: 0.72rem;">${t.linkedProject}</span>
                             <div>
                               <a href="#/projects" style="color: var(--shat-green); font-weight: 800; text-decoration: none;">
-                                📋 ${rel.projectCode}
+                                ▪ ${rel.projectCode}
                               </a>
                             </div>
                           </div>
@@ -199,7 +199,7 @@ export function renderStandardsView(lang = 'ar') {
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                       <button type="button" class="btn-clean btn-green btn-island" onclick="if(window.openStandardsExplorer) window.openStandardsExplorer('${st.code}');" style="flex: 1; justify-content: center; font-size: 0.84rem;">
                         <span>${t.btnInteractiveCheck}</span>
-                        <span>⚡</span>
+                        <span>◈</span>
                       </button>
                       <a href="#/course/${rel.courseId}" class="btn-clean btn-secondary btn-sm" style="background: #FFFFFF; color: var(--shat-navy); border: 1px solid var(--border-medium); font-weight: 700;">
                         <span>${t.btnExploreCourse}</span>

@@ -18,7 +18,7 @@ export const globalSearch = {
         title: txt('أداة التقييم والتشخيص المؤسسي (Readiness Diagnostic)', 'Institutional Readiness Diagnostic Tool', 'Diagnostic Institutionnel'),
         desc: txt('تقييم فوري لجاهزية المؤسسة وفق معايير CHS, PSEA, MEAL وخارطة الطريق.', 'Assess readiness across CHS, PSEA, MEAL and get tailored roadmaps.', 'Évaluez la maturité organisationnelle.'),
         action: 'open_diagnostic',
-        icon: '🧭'
+        icon: '◈'
       },
       {
         type: 'tool',
@@ -26,7 +26,7 @@ export const globalSearch = {
         title: txt('أداة التحقق من الشهادات الرقمية المعتمدة (Certificate Verification)', 'Digital Certificate Verification Tool', 'Vérification de Certificat'),
         desc: txt('التحقق الفوري من صحة الشهادات الصادرة من شركة شات وسجل الساعات والجدارات.', 'Instant verification of SHAT issued diplomas, hours and competencies.', 'Vérification en direct des diplômes.'),
         action: 'open_cert',
-        icon: '📜'
+        icon: '▪'
       },
       {
         type: 'tool',
@@ -34,7 +34,7 @@ export const globalSearch = {
         title: txt('مكتبة الحقائب الميدانية والنماذج التشغيلية (Field Toolkits)', 'Field Toolkits & Templates Hub', 'Boîte à Outils Institutionnelle'),
         desc: txt('نماذج MEAL, PSEA, CFRM, وميثاق المشروع الجاهزة للتطبيق الفوري.', 'Downloadable MEAL, PSEA, CFRM, and Project Charter templates.', 'Modèles opérationnels téléchargeables.'),
         action: 'open_toolkits',
-        icon: '📁'
+        icon: '◈'
       },
 
       // Courses
@@ -44,7 +44,7 @@ export const globalSearch = {
         title: txt('دبلوم المعيار الإنساني الأساسي (CHS) وإدارة الاستجابة', 'Core Humanitarian Standard (CHS) Master Diploma', 'Diplôme Norme CHS'),
         desc: txt('حوكمة الالتزامات التسعة وآليات المساءلة للمتأثرين (AAP) وقنوات الشكاوى (CFRM).', 'Governing the 9 CHS commitments, AAP mechanisms and CFRM.', 'Gouvernance des 9 engagements CHS et redevabilité.'),
         route: '#/course/shat-chs-master',
-        icon: '🎓'
+        icon: '★'
       },
       {
         type: 'course',
@@ -52,7 +52,7 @@ export const globalSearch = {
         title: txt('البرنامج التنفيذي في استشارات الحماية وصون السلامة (PSEA)', 'Executive Program in Safeguarding & PSEA Advisory', 'Programme Exécutif PSEA'),
         desc: txt('مأسسة سياسات عدم التسامح مطلقاً وتأسيس وحدات التحقيق ومسارات الإحالة الآمنة.', 'Institutionalizing zero-tolerance, internal investigations and safe referrals.', 'Politiques de sauvegarde et circuits de signalement.'),
         route: '#/course/shat-psea-expert',
-        icon: '🛡️'
+        icon: '◈'
       },
       {
         type: 'course',
@@ -60,7 +60,7 @@ export const globalSearch = {
         title: txt('الشهادة الاحترافية في التقييم التنموي المستقل (OECD DAC)', 'Professional Certificate in Independent Evaluation (OECD DAC)', 'Certificat Évaluation OCDE CAD'),
         desc: txt('المعايير الستة المعتمدة لقياس الأثر التنموي والاستدامة ونظرية التغيير.', 'The 6 criteria for evaluating development impact, sustainability and theory of change.', 'Évaluation d\'impact selon les 6 critères OCDE.'),
         route: '#/course/shat-oecd-eval',
-        icon: '📊'
+        icon: '▲'
       },
 
       // Standards
@@ -70,7 +70,7 @@ export const globalSearch = {
         title: txt('المعيار الإنساني الأساسي للجودة والمساءلة (CHS)', 'Core Humanitarian Standard (CHS)', 'Norme Humanitaire Fondamentale CHS'),
         desc: txt('الالتزامات التسعة للجودة والمساءلة في العمل الإنساني والتنموي.', 'Nine commitments for quality and accountability in aid.', '9 engagements pour la qualité et la redevabilité.'),
         route: '#/standards',
-        icon: '🌐'
+        icon: '◈'
       },
       {
         type: 'standard',
@@ -78,7 +78,7 @@ export const globalSearch = {
         title: txt('معايير مشروع إسفير للاستجابة الإنسانية (Sphere Handbook)', 'The Sphere Handbook Minimum Standards', 'Le Manuel Sphère'),
         desc: txt('المعايير الفنية الدنيا في المياه والإصحاح والمأوى والصحة والأمن الغذائي.', 'Minimum technical standards in WASH, shelter, health, food.', 'Standards minimums en eau, abri, santé, nutrition.'),
         route: '#/standards',
-        icon: '📘'
+        icon: '▪'
       },
 
       // Services & Portfolios
@@ -88,7 +88,7 @@ export const globalSearch = {
         title: txt('منظومة الاستشارات المؤسسية والحوكمة', 'Institutional Consulting & Governance System', 'Système de Conseil & Gouvernance'),
         desc: txt('مساعدة المؤسسات على فهم الواقع، تحليل الفجوات، وبناء اللوائح والسياسات.', 'Assisting organizations in gap analysis and SOP policy formulation.', 'Audit organisationnel et élaboration des politiques.'),
         route: '#/services',
-        icon: '💼'
+        icon: '◈'
       },
       {
         type: 'service',
@@ -96,7 +96,7 @@ export const globalSearch = {
         title: txt('الحقائب التدريبية المتخصصة الثماني (8 Portfolios)', 'Eight Specialized Training Portfolios', 'Huit Portefeuilles de Formation'),
         desc: txt('إدارة المشاريع التنموية، المتابعة والتقييم، الحوكمة، القيادة، والتحول الرقمي.', 'Project management, MEAL, governance, leadership, and digital transformation.', 'Gestion de projets, MEAL, gouvernance, leadership.'),
         route: '#/services',
-        icon: '📁'
+        icon: '▪'
       },
 
       // Projects
@@ -106,7 +106,7 @@ export const globalSearch = {
         title: txt('مشروع حوكمة وتطبيق معيار CHS لمنظمات المجتمع المدني', 'CHS Governance & Implementation for CSOs', 'Déploiement Norme CHS pour ONG'),
         desc: txt('تأهيل 42 كادراً وصياغة 14 دليلاً تشغيلياً للشكاوى والحماية.', 'Trained 42 leaders and drafted 14 CFRM operational manuals.', 'Formation de 42 cadres et 14 manuels CFRM.'),
         route: '#/projects',
-        icon: '🎯'
+        icon: '★'
       },
       {
         type: 'project',
@@ -114,7 +114,7 @@ export const globalSearch = {
         title: txt('مشروع أطر الحماية وصون السلامة ومنع الاستغلال (PSEA)', 'Protection & Safeguarding (PSEA) Frameworks', 'Cadre de Sauvegarde PSEA'),
         desc: txt('اعتماد سياسات الحماية وتأسيس لجان التحقيق الداخلي لـ 8 مؤسسات.', 'Policy adoption and investigation committees established across 8 entities.', 'Adoption de politiques PSEA dans 8 institutions.'),
         route: '#/projects',
-        icon: '🛡️'
+        icon: '◈'
       }
     ];
   },
@@ -128,7 +128,7 @@ export const globalSearch = {
         
         <!-- Search Input Bar -->
         <div style="display: flex; align-items: center; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--border-light); background: #FFFFFF;">
-          <span style="font-size: 1.25rem; color: var(--shat-green);">🔍</span>
+          <span style="font-size: 1.25rem; color: var(--shat-green); font-weight: bold;">◈</span>
           <input type="text" id="spotlight-search-input" placeholder="${txt('ابحث عن دورة، خدمة، معيار، أداة، أو مشروع... (Esc للإغلاق)', 'Search courses, services, standards, tools, or projects...', 'Rechercher une formation, service, norme...')}" style="flex: 1; border: none; outline: none; font-size: 1.05rem; font-family: inherit; color: var(--shat-navy); background: transparent; text-align: ${isRtl ? 'right' : 'left'};">
           <kbd style="background: var(--bg-subtle); border: 1px solid var(--border-light); border-radius: 4px; padding: 3px 8px; font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">ESC</kbd>
         </div>
@@ -139,19 +139,19 @@ export const globalSearch = {
             ${txt('الكل', 'All', 'Tous')}
           </button>
           <button class="btn-clean search-pill-btn" data-filter="tool" style="font-size: 0.75rem; padding: 3px 10px; border-radius: 12px; font-weight: 700; background: #FFFFFF; color: var(--shat-navy); border: 1px solid var(--border-light);">
-            🧭 ${txt('الأدوات', 'Tools', 'Outils')}
+            ◈ ${txt('الأدوات', 'Tools', 'Outils')}
           </button>
           <button class="btn-clean search-pill-btn" data-filter="course" style="font-size: 0.75rem; padding: 3px 10px; border-radius: 12px; font-weight: 700; background: #FFFFFF; color: var(--shat-navy); border: 1px solid var(--border-light);">
-            🎓 ${txt('الدورات', 'Courses', 'Formations')}
+            ★ ${txt('الدورات', 'Courses', 'Formations')}
           </button>
           <button class="btn-clean search-pill-btn" data-filter="service" style="font-size: 0.75rem; padding: 3px 10px; border-radius: 12px; font-weight: 700; background: #FFFFFF; color: var(--shat-navy); border: 1px solid var(--border-light);">
-            💼 ${txt('الخدمات', 'Services', 'Services')}
+            ◈ ${txt('الخدمات', 'Services', 'Services')}
           </button>
           <button class="btn-clean search-pill-btn" data-filter="standard" style="font-size: 0.75rem; padding: 3px 10px; border-radius: 12px; font-weight: 700; background: #FFFFFF; color: var(--shat-navy); border: 1px solid var(--border-light);">
-            🌐 ${txt('المعايير', 'Standards', 'Normes')}
+            ◈ ${txt('المعايير', 'Standards', 'Normes')}
           </button>
           <button class="btn-clean search-pill-btn" data-filter="project" style="font-size: 0.75rem; padding: 3px 10px; border-radius: 12px; font-weight: 700; background: #FFFFFF; color: var(--shat-navy); border: 1px solid var(--border-light);">
-            🎯 ${txt('المشاريع', 'Projects', 'Projets')}
+            ★ ${txt('المشاريع', 'Projects', 'Projets')}
           </button>
         </div>
 
@@ -237,7 +237,7 @@ export const globalSearch = {
     if (filtered.length === 0) {
       container.innerHTML = `
         <div style="padding: 32px; text-align: center; color: var(--text-muted);">
-          <div style="font-size: 2rem; margin-bottom: 8px;">🔍</div>
+          <div style="font-size: 2rem; margin-bottom: 8px; color: var(--shat-navy);">◈</div>
           <div style="font-weight: 700; color: var(--shat-navy);">${lang === 'ar' ? 'لا توجد نتائج مطابقة لبحثك' : 'No matching results found'}</div>
           <div style="font-size: 0.8rem; margin-top: 4px;">${lang === 'ar' ? 'جرّب البحث بكلمات أخرى مثل: CHS، تدريب، استشارات، تقييم...' : 'Try keywords like: CHS, training, evaluation, MEAL...'}</div>
         </div>

@@ -171,10 +171,10 @@ export function renderLoginView(lang = 'ar') {
             <!-- Preset Quick ID tags -->
             <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px;">
               <button type="button" class="btn-clean btn-sm btn-quick-id" data-id="1098765432" style="font-size: 0.75rem; padding: 4px 10px; background: var(--bg-subtle); border: 1px solid var(--border-medium); border-radius: 4px; color: var(--shat-navy);">
-                🎓 1098765432 (طارق الخالد)
+                ✦ 1098765432 (طارق الخالد)
               </button>
               <button type="button" class="btn-clean btn-sm btn-quick-id" data-id="401234567" style="font-size: 0.75rem; padding: 4px 10px; background: var(--bg-subtle); border: 1px solid var(--border-medium); border-radius: 4px; color: var(--shat-green);">
-                🎓 401234567 (سارة العلي)
+                ✦ 401234567 (سارة العلي)
               </button>
             </div>
 
@@ -252,28 +252,28 @@ export function renderLoginView(lang = 'ar') {
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
             <!-- Trainee Student Card -->
             <button type="button" class="btn-clean btn-instant-role" data-role="student" style="padding: 14px 12px; text-align: ${isRtl ? 'right' : 'left'}; background: #F8FAFC; border: 1.5px solid #CBD5E1; border-radius: var(--radius-xs); transition: all 0.2s ease;">
-              <div style="font-size: 1.3rem; margin-bottom: 4px;">🎓</div>
+              <div style="font-size: 1.3rem; margin-bottom: 4px; color: #1D4ED8; font-weight: 800;">✦</div>
               <div style="font-weight: 800; color: #1D4ED8; font-size: 0.88rem;">${l.studentRole}</div>
               <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">لوحة المتدرب، المقررات، والشهادات</div>
             </button>
 
             <!-- Master Trainer Card -->
             <button type="button" class="btn-clean btn-instant-role" data-role="teacher" style="padding: 14px 12px; text-align: ${isRtl ? 'right' : 'left'}; background: #F8FAFC; border: 1.5px solid #CBD5E1; border-radius: var(--radius-xs); transition: all 0.2s ease;">
-              <div style="font-size: 1.3rem; margin-bottom: 4px;">👨‍🏫</div>
+              <div style="font-size: 1.3rem; margin-bottom: 4px; color: #15803D; font-weight: 800;">❖</div>
               <div style="font-weight: 800; color: #15803D; font-size: 0.88rem;">${l.teacherRole}</div>
               <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">إدارة الفصول، التقييم، وبنوك الأسئلة</div>
             </button>
 
             <!-- Super Admin Card -->
             <button type="button" class="btn-clean btn-instant-role" data-role="admin" style="padding: 14px 12px; text-align: ${isRtl ? 'right' : 'left'}; background: #F8FAFC; border: 1.5px solid #CBD5E1; border-radius: var(--radius-xs); transition: all 0.2s ease;">
-              <div style="font-size: 1.3rem; margin-bottom: 4px;">⚙️</div>
+              <div style="font-size: 1.3rem; margin-bottom: 4px; color: var(--shat-navy); font-weight: 800;">⚙</div>
               <div style="font-weight: 800; color: var(--shat-navy); font-size: 0.88rem;">${l.adminRole}</div>
               <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">إدارة المنظومة، المحتوى، والتحكم الشامل</div>
             </button>
 
             <!-- Public Visitor Card -->
             <button type="button" class="btn-clean btn-instant-role" data-role="visitor" style="padding: 14px 12px; text-align: ${isRtl ? 'right' : 'left'}; background: #F8FAFC; border: 1.5px solid #CBD5E1; border-radius: var(--radius-xs); transition: all 0.2s ease;">
-              <div style="font-size: 1.3rem; margin-bottom: 4px;">🌐</div>
+              <div style="font-size: 1.3rem; margin-bottom: 4px; color: #475569; font-weight: 800;">◈</div>
               <div style="font-weight: 800; color: #475569; font-size: 0.88rem;">${l.visitorRole || 'الزائر العام'}</div>
               <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">استكشاف البرامج والخدمات العامة</div>
             </button>
@@ -603,7 +603,7 @@ export function bindLoginEvents() {
         alertBox.style.background = '#FEE2E2';
         alertBox.style.color = '#991B1B';
         alertBox.style.border = '1px solid #FCA5A5';
-        alertBox.innerHTML = `⚠️ ${err.message || txt('بيانات الدخول غير صحيحة. يرجى التحقق والمحاولة مجدداً.', 'Invalid credentials. Please verify and retry.', 'Identifiants invalides. Veuillez vérifier et réessayer.')}`;
+        alertBox.innerHTML = `▲ ${err.message || txt('بيانات الدخول غير صحيحة. يرجى التحقق والمحاولة مجدداً.', 'Invalid credentials. Please verify and retry.', 'Identifiants invalides. Veuillez vérifier et réessayer.')}`;
       }
       showToast(err.message || txt('فشل تسجيل الدخول', 'Login failed', 'Échec de connexion'), 'error');
     } finally {

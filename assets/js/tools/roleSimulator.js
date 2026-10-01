@@ -15,7 +15,7 @@ export const roleSimulator = {
       id: 'visitor',
       labelAr: 'زائر استكشافي',
       labelEn: 'Public Visitor',
-      icon: '👁️',
+      icon: '◈',
       route: '#/home',
       badgeColor: '#64748B'
     },
@@ -23,7 +23,7 @@ export const roleSimulator = {
       id: 'student',
       labelAr: 'متدرب معتمد',
       labelEn: 'Student Trainee',
-      icon: '🎓',
+      icon: '✦',
       route: '#/student',
       badgeColor: '#2563EB',
       user: {
@@ -39,7 +39,7 @@ export const roleSimulator = {
       id: 'teacher',
       labelAr: 'خبير مدرب',
       labelEn: 'Master Trainer',
-      icon: '👨‍🏫',
+      icon: '❖',
       route: '#/teacher',
       badgeColor: '#166534',
       user: {
@@ -56,7 +56,7 @@ export const roleSimulator = {
       id: 'admin',
       labelAr: 'المدير التنفيذي',
       labelEn: 'Executive Admin',
-      icon: '⚙️',
+      icon: '⚙',
       route: '#/admin',
       badgeColor: '#0F2E4A',
       user: {
@@ -85,7 +85,7 @@ export const roleSimulator = {
             <span style="font-weight: 700; color: #E2E8F0;">
               ${txt('محاكي الصلاحيات التفاعلي:', 'Interactive Role Simulator:', 'Simulateur de Rôles :')}
             </span>
-            <span style="color: #94A3B8; font-size: 0.74rem;">
+            <span class="sim-bar-hint" style="color: #94A3B8; font-size: 0.74rem;">
               (${txt('اختر الدور للمعاينة الفورية لكافة البوابات', 'Select role to instantly preview all portals', 'Aperçu instantané des portails')})
             </span>
           </div>
@@ -106,7 +106,7 @@ export const roleSimulator = {
             }).join('')}
             
             <button type="button" id="btn-open-site-customizer-bar" class="btn-clean" style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 11px; border-radius: 20px; font-size: 0.74rem; font-weight: 800; border: 1px solid rgba(251,191,36,0.6); background: rgba(251,191,36,0.18); color: #FCD34D; cursor: pointer; transition: all 0.15s ease;" title="${txt('تخصيص كامل لكافة نصوص وروابط وأقسام واستمارات المنصة', 'Customize all copy, links, sections & forms', 'Personnaliser la plateforme')}">
-              <span>🎨</span>
+              <span>⚙</span>
               <span>${txt('تخصيص المنصة', 'Customizer', 'Personnaliser')}</span>
             </button>
           </div>

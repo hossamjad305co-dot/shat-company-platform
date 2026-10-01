@@ -17,7 +17,7 @@ export const translations = {
       "filterEvaluation": "تقييم ميداني",
       "filterGovernance": "حوكمة ونظم",
       "filterAcademy": "الأكاديمية",
-      "readArticle": "قراءة التقرير والتفاصيل 📄",
+      "readArticle": "قراءة التقرير والتفاصيل ←",
       "closeArticle": "إغلاق التقرير",
       "posts": [
         {
@@ -228,16 +228,16 @@ export const translations = {
       "contactTitle": "التواصل المؤسسي والشبكات",
       "phoneLabel": "هاتف / واتساب:",
       "emailLabel": "بريد إلكتروني:",
-      "instaBtn": "📷 إنستغرام",
-      "fbBtn": "🌐 فيسبوك",
-      "coverageNote": "📍 فلسطين • خدماتنا تغطي النطاق الإقليمي والدولي",
+      "instaBtn": "إنستغرام",
+      "fbBtn": "فيسبوك",
+      "coverageNote": "فلسطين • خدماتنا تغطي النطاق الإقليمي والدولي",
       "legalNotice": "جميع الحقوق محفوظة © 2026 شركة شات للتنمية والتطوير (SHAT Development & Growth).",
       "privacyPledge": "ملتزمون بأعلى معايير السرية، النزاهة، وحماية البيانات المؤسسية."
 },
 
     dir: "rtl",
     langName: "العربية",
-    flag: "🌐",
+    flag: "",
     companyName: "شركة شات للتنمية والتطوير",
     companyShortName: "شات",
     companyTagline: "بناء القدرات • تعزيز المؤسسات • تطوير النتائج",
@@ -247,7 +247,7 @@ export const translations = {
     
     // Navigation
     nav: {
-      academy: "🎓 مساحتي في المودل",
+      academy: "مساحتي في المودل",
       s01: "اكتشف SHAT",
       s02: "قصتنا",
       s03: "ماذا نصنع؟",
@@ -459,9 +459,9 @@ export const translations = {
       "contactTitle": "Contacto y Redes Profesionales",
       "phoneLabel": "Tel / WhatsApp:",
       "emailLabel": "Correo oficial:",
-      "instaBtn": "📷 Instagram",
-      "fbBtn": "🌐 Facebook",
-      "coverageNote": "📍 Palestina • Alcance operativo: Regional e Internacional",
+      "instaBtn": "Instagram",
+      "fbBtn": "Facebook",
+      "coverageNote": "Palestina • Alcance operativo: Regional e Internacional",
       "legalNotice": "Todos los derechos reservados © 2026 SHAT Development & Growth.",
       "privacyPledge": "Compromiso estricto con la confidencialidad institucional y la protección de datos."
 },
@@ -877,7 +877,7 @@ export const translations = {
     // Footer
     
     academy: {
-      "navAcademy": "🎓 الأكاديمية",
+      "navAcademy": "الأكاديمية",
       "badge": "أكاديمية شات للقيادة والتطوير المؤسسي",
       "title": "منصة بناء القدرات وإعداد الخبراء والممارسين",
       "subtitle": "برامج تدريبية وتطبيقية متقدمة للمنظمات والكوادر الإنسانية والتنموية وفق أعلى المعايير والمواثيق العالمية (CHS, Sphere, OECD DAC, PSEA).",
@@ -1056,7 +1056,7 @@ export const translations = {
 },
 
     academy: {
-      "navAcademy": "🎓 Academia SHAT",
+      "navAcademy": "Academia SHAT",
       "badge": "Academia SHAT para el Liderazgo y Desarrollo Institucional",
       "title": "Plataforma de Fortalecimiento de Capacidades y Excelencia",
       "subtitle": "Programas avanzados para profesionales humanitarios y de desarrollo, alineados con normas globales (CHS, Sphere, OCDE DAC, PSEA).",
@@ -1254,7 +1254,7 @@ footer: {
       "filterEvaluation": "Field Evaluation",
       "filterGovernance": "Governance & Systems",
       "filterAcademy": "Digital Academy",
-      "readArticle": "Read Full Report 📄",
+      "readArticle": "Read Full Report →",
       "closeArticle": "Close Report",
       "posts": [
         {
@@ -1423,9 +1423,9 @@ footer: {
       "contactTitle": "Corporate Engagement & Networks",
       "phoneLabel": "Phone / WhatsApp:",
       "emailLabel": "Official Email:",
-      "instaBtn": "📷 Instagram",
-      "fbBtn": "🌐 Facebook",
-      "coverageNote": "📍 Palestine • Operational Scope: Regional & International",
+      "instaBtn": "Instagram",
+      "fbBtn": "Facebook",
+      "coverageNote": "Palestine • Operational Scope: Regional & International",
       "legalNotice": "All rights reserved © 2026 SHAT Development & Growth.",
       "privacyPledge": "Strictly upholding non-disclosure, institutional confidentiality, and enterprise data protection standards."
 },
@@ -1441,7 +1441,7 @@ footer: {
     pillConsulting: "CONSULTING",
 
     nav: {
-      academy: "🎓 My Moodle Portal",
+      academy: "My Moodle Portal",
       s01: "Discover SHAT",
       s02: "Our Story",
       s03: "What We Make",
@@ -1930,7 +1930,7 @@ footer: {
 
     
     academy: {
-      "navAcademy": "🎓 SHAT Academy",
+      "navAcademy": "SHAT Academy",
       "badge": "SHAT Academy for Leadership & Institutional Growth",
       "title": "Executive Capacity Building & Professional Mastery",
       "subtitle": "Advanced applied learning programs for humanitarian and institutional development practitioners, aligned with global standards (CHS, Sphere, OECD DAC, PSEA).",
@@ -2128,7 +2128,7 @@ footer: {
       "filterEvaluation": "Évaluation de Terrain",
       "filterGovernance": "Gouvernance & Systèmes",
       "filterAcademy": "Académie Numérique",
-      "readArticle": "Lire le Rapport Détaillé 📄",
+      "readArticle": "Lire le Rapport Détaillé →",
       "closeArticle": "Fermer le Rapport",
       "posts": [
         {
@@ -2297,9 +2297,9 @@ footer: {
       "contactTitle": "Engagement & Réseaux Professionnels",
       "phoneLabel": "Tél / WhatsApp :",
       "emailLabel": "Email officiel :",
-      "instaBtn": "📷 Instagram",
-      "fbBtn": "🌐 Facebook",
-      "coverageNote": "📍 Palestine • Portée opérationnelle: Régionale & Internationale",
+      "instaBtn": "Instagram",
+      "fbBtn": "Facebook",
+      "coverageNote": "Palestine • Portée opérationnelle: Régionale & Internationale",
       "legalNotice": "Tous droits réservés © 2026 SHAT Développement & Croissance.",
       "privacyPledge": "Engagement absolu envers la confidentialité institutionnelle et la protection des données."
 },
@@ -2315,7 +2315,7 @@ footer: {
     pillConsulting: "CONSEIL",
 
     nav: {
-      academy: "🎓 Académie SHAT",
+      academy: "Académie SHAT",
       home: "Accueil",
       about: "À propos de SHAT",
       services: "Nos interventions",
@@ -2756,7 +2756,7 @@ footer: {
 
     
     academy: {
-      "navAcademy": "🎓 Académie SHAT",
+      "navAcademy": "Académie SHAT",
       "badge": "Académie SHAT pour le Leadership et le Développement Institutionnel",
       "title": "Plateforme de Renforcement des Capacités & d'Excellence Professionnelle",
       "subtitle": "Programmes appliqués de haut niveau pour les acteurs humanitaires et du développement, conformes aux normes internationales (CHS, Sphere, OECD DAC, PSEA).",
@@ -3064,9 +3064,9 @@ footer: {
       "contactTitle": "Contacto y Redes Profesionales",
       "phoneLabel": "Tel / WhatsApp:",
       "emailLabel": "Correo oficial:",
-      "instaBtn": "📷 Instagram",
-      "fbBtn": "🌐 Facebook",
-      "coverageNote": "📍 Palestina • Alcance operativo: Regional e Internacional",
+      "instaBtn": "Instagram",
+      "fbBtn": "Facebook",
+      "coverageNote": "Palestina • Alcance operativo: Regional e Internacional",
       "legalNotice": "Todos los derechos reservados © 2026 SHAT Development & Growth.",
       "privacyPledge": "Compromiso estricto con la confidencialidad institucional y la protección de datos."
 },
@@ -3651,9 +3651,9 @@ footer: {
       "contactTitle": "Contatti Istituzionali e Reti",
       "phoneLabel": "Tel / WhatsApp:",
       "emailLabel": "Email ufficiale:",
-      "instaBtn": "📷 Instagram",
-      "fbBtn": "🌐 Facebook",
-      "coverageNote": "📍 Palestina • Ambito operativo: Regionale e Internazionale",
+      "instaBtn": "Instagram",
+      "fbBtn": "Facebook",
+      "coverageNote": "Palestina • Ambito operativo: Regionale e Internazionale",
       "legalNotice": "Tutti i diritti riservati © 2026 SHAT Development & Growth.",
       "privacyPledge": "Massimo impegno verso la riservatezza istituzionale e la protezione dei dati."
 },
@@ -3669,7 +3669,7 @@ footer: {
     pillConsulting: "CONSULENZA",
 
     nav: {
-      academy: "🎓 Accademia SHAT",
+      academy: "Accademia SHAT",
       home: "Home",
       about: "Chi siamo",
       services: "Cosa facciamo",
@@ -4110,7 +4110,7 @@ footer: {
 
     
     academy: {
-      "navAcademy": "🎓 Accademia SHAT",
+      "navAcademy": "Accademia SHAT",
       "badge": "Accademia SHAT per la Leadership e lo Sviluppo Istituzionale",
       "title": "Piattaforma di Potenziamento delle Capacità ed Eccellenza",
       "subtitle": "Programmi avanzati per professionisti umanitari e dello sviluppo, conformi agli standard internazionali (CHS, Sphere, OCSE DAC, PSEA).",

@@ -49,7 +49,7 @@ export async function renderAcademyDashboardPage() {
         <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;">
           <div>
             <span style="background: rgba(255,255,255,0.18); padding: 4px 10px; border-radius: var(--radius-full); font-size: 0.76rem; font-weight: 700; display: inline-block; margin-bottom: 8px;">
-              🚀 متابعة التعلم (Continue Learning)
+              ★ متابعة التعلم (Continue Learning)
             </span>
             <h2 style="font-size: var(--font-size-h3); margin: 0 0 4px; font-weight: 800; color: #ffffff;">
               ${primaryCourse.title || 'دبلوم المعيار الإنساني الأساسي (CHS)'}
@@ -77,7 +77,7 @@ export async function renderAcademyDashboardPage() {
       <!-- Action Priority Row -->
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-md); margin-bottom: var(--space-xl);">
         ${Card({
-          title: '📌 النشاط التالي المستحق',
+          title: '◈ النشاط التالي المستحق',
           subtitle: 'مسار المعيار الإنساني الأساسي CHS',
           children: `
             <div style="font-size: var(--font-size-body-sm); color: var(--text-secondary); margin-bottom: var(--space-md);">
@@ -93,7 +93,7 @@ export async function renderAcademyDashboardPage() {
         })}
 
         ${Card({
-          title: '⏱️ التقييمات والاختبارات',
+          title: '◷ التقييمات والاختبارات',
           subtitle: 'جلسات التقييم المجدولة',
           children: `
             <div style="font-size: var(--font-size-body-sm); color: var(--text-secondary); margin-bottom: var(--space-md);">
@@ -109,7 +109,7 @@ export async function renderAcademyDashboardPage() {
         })}
 
         ${Card({
-          title: '☁️ حالة مستودع Google Drive',
+          title: '◈️ حالة مستودع Google Drive',
           subtitle: 'المستودع السحابي المؤسسي (5TB)',
           children: `
             <div style="font-size: var(--font-size-body-sm); color: var(--text-muted); margin-bottom: var(--space-md);">
@@ -130,7 +130,7 @@ export async function renderAcademyDashboardPage() {
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-md); flex-wrap: wrap; gap: 8px;">
           <div>
             <h2 style="font-size: var(--font-size-h3); color: var(--shat-navy-950); margin: 0;">
-              📚 الحقائب والبرامج التدريبية المعتمدة
+              ▪ الحقائب والبرامج التدريبية المعتمدة
             </h2>
             <div style="font-size: var(--font-size-caption); color: var(--text-muted);">
               جميع المساقات تمنح شهادات معتمدة برقم تحقق دولي بعد إكمال التكليفات والتقييم.

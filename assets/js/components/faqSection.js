@@ -70,7 +70,7 @@ export function renderFaqSection(lang = 'ar') {
         <!-- Header -->
         <div style="text-align: center; margin-bottom: 40px;">
           <div style="display: inline-flex; align-items: center; gap: 8px; background: #E8F5E9; color: var(--shat-green, #1E7E34); padding: 5px 16px; border-radius: 999px; font-size: 0.84rem; font-weight: 800; margin-bottom: 12px;">
-            <span>❓</span>
+            <span>◈</span>
             <span>${txt('الأسئلة الأكثر تداولاً • إجابات واضحة ومباشرة', 'Frequently Asked Questions • Direct Answers', 'Foire Aux Questions')}</span>
           </div>
           <h2 style="font-size: 2rem; font-weight: 900; color: var(--shat-navy, #0B1E36); margin: 0 0 14px; line-height: 1.3;">
@@ -88,7 +88,7 @@ export function renderFaqSection(lang = 'ar') {
         <!-- Live Instant Search Bar -->
         <div style="margin-bottom: 28px;">
           <div style="position: relative;">
-            <span style="position: absolute; ${isRtl ? 'right' : 'left'}: 16px; top: 50%; transform: translateY(-50%); font-size: 1.15rem; color: #94A3B8;">🔍</span>
+            <span style="position: absolute; ${isRtl ? 'right' : 'left'}: 16px; top: 50%; transform: translateY(-50%); font-size: 1.15rem; color: #94A3B8;">◈</span>
             <input
               type="text"
               id="faq-search-input"
@@ -131,7 +131,7 @@ export function renderFaqSection(lang = 'ar') {
             font-size: 0.85rem;
             font-weight: 700;
             cursor: pointer;
-          ">${txt('📜 الشهادات والاعتمادات', 'Certificates & Accreditations', 'Certifications')}</button>
+          ">${txt('▪ الشهادات والاعتمادات', 'Certificates & Accreditations', 'Certifications')}</button>
 
           <button type="button" class="faq-cat-btn" data-cat="registration" style="
             background: #FFFFFF;
@@ -142,7 +142,7 @@ export function renderFaqSection(lang = 'ar') {
             font-size: 0.85rem;
             font-weight: 700;
             cursor: pointer;
-          ">${txt('✍️ التسجيل والاستمارات', 'Registration & Forms', 'Inscriptions')}</button>
+          ">${txt('▪ التسجيل والاستمارات', 'Registration & Forms', 'Inscriptions')}</button>
 
           <button type="button" class="faq-cat-btn" data-cat="payment" style="
             background: #FFFFFF;
@@ -153,7 +153,7 @@ export function renderFaqSection(lang = 'ar') {
             font-size: 0.85rem;
             font-weight: 700;
             cursor: pointer;
-          ">${txt('💳 الرسوم وطرق الدفع', 'Fees & Payment', 'Paiements')}</button>
+          ">${txt('▪ الرسوم وطرق الدفع', 'Fees & Payment', 'Paiements')}</button>
 
           <button type="button" class="faq-cat-btn" data-cat="consulting" style="
             background: #FFFFFF;
@@ -164,7 +164,7 @@ export function renderFaqSection(lang = 'ar') {
             font-size: 0.85rem;
             font-weight: 700;
             cursor: pointer;
-          ">${txt('🏛️ خدمات المنظمات', 'NGO Consulting', 'Services ONG')}</button>
+          ">${txt('▪ خدمات المنظمات', 'NGO Consulting', 'Services ONG')}</button>
         </div>
 
         <!-- FAQ Items List -->
@@ -190,7 +190,7 @@ export function renderFaqSection(lang = 'ar') {
             align-items: center;
             gap: 8px;
           ">
-            <span>💬 ${txt('تحدث معنا عبر واتساب الآن', 'Chat via WhatsApp Now', 'Discuter sur WhatsApp')}</span>
+            <span>✉ ${txt('تحدث معنا عبر واتساب الآن', 'Chat via WhatsApp Now', 'Discuter sur WhatsApp')}</span>
           </a>
         </div>
 

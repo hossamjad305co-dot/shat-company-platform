@@ -192,7 +192,7 @@ export const standardsExplorer = {
               0 / ${item.checklist.length} ${txt('بنود محققة', 'items verified', 'éléments')}
             </div>
             <button type="button" class="btn-clean btn-sm btn-generate-audit-report" style="width: 100%; background: var(--shat-navy); color: #FFFFFF; font-size: 0.74rem; font-weight: 800; padding: 6px 10px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; box-shadow: 0 2px 6px rgba(15,46,74,0.2);">
-              📄 ${txt('تصدير تقرير (PDF)', 'Export Audit (PDF)', 'Rapport PDF')}
+              ⎙ ${txt('تصدير تقرير (PDF)', 'Export Audit (PDF)', 'Rapport PDF')}
             </button>
           </div>
         </div>
@@ -216,7 +216,7 @@ export const standardsExplorer = {
         <!-- Linked Training Track & Consulting Footer -->
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-top: 1px solid var(--border-light); padding-top: 16px;">
           <div style="display: flex; align-items: center; gap: 8px;">
-            <span style="font-size: 1.1rem;">🎓</span>
+            <span style="font-size: 1.1rem; color: var(--shat-green);">◈</span>
             <div>
               <div style="font-size: 0.74rem; color: var(--text-muted); font-weight: 700;">${txt('المسار الأكاديمي المرتبط:', 'Associated Academy Track:', 'Cursus Lié :')}</div>
               <div style="font-weight: 800; font-size: 0.88rem; color: var(--shat-navy);">${item.linkedCourseTitleAr}</div>
@@ -225,7 +225,7 @@ export const standardsExplorer = {
 
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
             <button type="button" class="btn-clean btn-sm btn-generate-audit-report" style="background: #10B981; color: #FFFFFF; font-weight: 800; border-radius: 6px; padding: 7px 14px; box-shadow: 0 2px 8px rgba(16,185,129,0.25);">
-              📄 ${txt('تصدير تقرير التدقيق المعياري (PDF / طباعة)', 'Export Audit Report (PDF)', 'Rapport de Conformité')}
+              ⎙ ${txt('تصدير تقرير التدقيق المعياري (PDF / طباعة)', 'Export Audit Report (PDF)', 'Rapport de Conformité')}
             </button>
             <a href="#/course/${item.linkedCourse}" class="btn-clean btn-sm" style="background: var(--shat-navy); color: #FFFFFF; font-weight: 700;">
               <span>${txt('تصفح المنهاج التدريبي', 'View Curriculum', 'Voir le Programme')}</span>
@@ -411,12 +411,12 @@ export const standardsExplorer = {
         <!-- Section 2: Critical Compliance Gaps -->
         <div style="margin-bottom: 24px;">
           <h4 style="font-size: 1rem; font-weight: 800; color: #DC2626; display: flex; align-items: center; gap: 8px; margin: 0 0 10px 0;">
-            <span>⚠️</span>
+            <span>▲️</span>
             <span>${txt('فجوات الامتثال والمخاطر الميدانية المرصودة:', 'Identified Compliance Gaps & Risks:', 'Écarts de Conformité & Risques Identifiés :')} (${gapItems.length})</span>
           </h4>
           ${gapItems.length === 0 ? `
             <div style="padding: 14px; background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 6px; font-size: 0.85rem; color: #166534; text-align: center; font-weight: 700;">
-              ${txt('🎉 مبروك! امتثال كامل 100% لكافة البنود المعتمدة في هذا المعيار.', 'Congratulations! 100% full compliance with this standard.', 'Félicitations ! Conformité totale 100%.')}
+              ${txt('✓ امتثال كامل 100% لكافة البنود المعتمدة في هذا المعيار.', '100% full compliance with this standard.', 'Conformité totale 100%.')}
             </div>
           ` : `
             <div>
@@ -462,7 +462,7 @@ export const standardsExplorer = {
           </div>
 
           <div class="audit-seal-box">
-            <div style="font-size: 1.5rem; margin-bottom: 4px;">🛡️</div>
+            <div style="font-size: 1.5rem; margin-bottom: 4px; color: var(--shat-navy);">◈</div>
             <div style="font-size: 0.75rem; font-weight: 900; color: var(--shat-navy); letter-spacing: 0.5px;">SHAT VERIFIED AUDIT</div>
             <div style="font-size: 0.68rem; color: var(--shat-green); font-weight: 800;">معتمد • تدقيق رسمي</div>
             <div style="font-size: 0.64rem; font-family: var(--font-mono); color: #94A3B8; margin-top: 2px;">${refNumber}</div>
@@ -479,10 +479,10 @@ export const standardsExplorer = {
 
         <div style="display: flex; gap: 10px;">
           <a href="#/contact" class="btn-clean btn-sm" style="background: var(--bg-subtle); color: var(--shat-navy); border: 1px solid var(--border-light); font-weight: 700;">
-            💬 ${txt('طلب استشارة تنفيذية مخصصة', 'Request Advisory', 'Demande de Conseil')}
+            ✉ ${txt('طلب استشارة تنفيذية مخصصة', 'Request Advisory', 'Demande de Conseil')}
           </a>
           <button type="button" class="btn-clean btn-primary btn-md allow-print" id="btn-trigger-print-audit" style="background: var(--shat-navy); font-weight: 800; box-shadow: 0 4px 14px rgba(15,46,74,0.3);">
-            🖨️ ${txt('طباعة التقرير / حفظ كـ PDF', 'Print / Save as PDF', 'Imprimer / Enregistrer PDF')}
+            ⎙ ${txt('طباعة التقرير / حفظ كـ PDF', 'Print / Save as PDF', 'Imprimer / Enregistrer PDF')}
           </button>
         </div>
       </div>

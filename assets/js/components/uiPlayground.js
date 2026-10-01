@@ -11,7 +11,7 @@ export function renderUIPlayground() {
         <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: var(--space-md); position: relative; z-index: 2;">
           <div>
             <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(75, 136, 52, 0.25); border: 1px solid var(--shat-green-600); color: #a7f3d0; padding: 4px 12px; border-radius: var(--radius-full); font-size: 0.78rem; font-weight: 700; margin-bottom: 8px;">
-              🛠️ SHAT DESIGN SYSTEM PLAYGROUND — PHASE 2
+              ◈ SHAT DESIGN SYSTEM PLAYGROUND — PHASE 2
             </div>
             <h1 style="font-size: var(--font-size-h1); font-weight: var(--font-weight-extrabold); margin: 0 0 6px 0; color: var(--shat-white);">
               مختبر ومستعرض مكونات التصميم الموحد
@@ -22,7 +22,7 @@ export function renderUIPlayground() {
           </div>
           <div style="display: flex; gap: 8px;">
             <button id="btn-toggle-playground-dir" class="btn btn-outline" style="background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.3);">
-              🔄 تبديل الاتجاه (RTL ⇄ LTR)
+              ⇄ تبديل الاتجاه (RTL ⇄ LTR)
             </button>
             <a href="#/home" class="btn btn-primary">
               العودة للرئيسية ↗
@@ -175,7 +175,7 @@ export function renderUIPlayground() {
             <div class="form-group">
               <label class="form-label">رقم الهوية الوطنية (National ID) <span class="required-mark">*</span></label>
               <input type="text" class="form-input has-error" placeholder="9 أرقام" value="400123">
-              <span class="form-error-msg">⚠️ رقم الهوية يجب أن يتكون من 9 أرقام صحيحة</span>
+              <span class="form-error-msg">✕ رقم الهوية يجب أن يتكون من 9 أرقام صحيحة</span>
             </div>
 
             <div class="form-group">
@@ -203,10 +203,10 @@ export function renderUIPlayground() {
         </h2>
         <div class="card">
           <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-            <button class="btn btn-outline" onclick="window.dispatchPlaygroundToast('success')">🟢 تجربة إشعار نجاح (Success)</button>
-            <button class="btn btn-outline" onclick="window.dispatchPlaygroundToast('warning')">🟠 تجربة إشعار تحذير (Warning)</button>
-            <button class="btn btn-outline" onclick="window.dispatchPlaygroundToast('error')">🔴 تجربة إشعار خطأ (Error)</button>
-            <button class="btn btn-outline" onclick="window.dispatchPlaygroundToast('info')">🔵 تجربة إشعار معلومات (Info)</button>
+            <button class="btn btn-outline" onclick="window.dispatchPlaygroundToast('success')">✓ تجربة إشعار نجاح (Success)</button>
+            <button class="btn btn-outline" onclick="window.dispatchPlaygroundToast('warning')">▲ تجربة إشعار تحذير (Warning)</button>
+            <button class="btn btn-outline" onclick="window.dispatchPlaygroundToast('error')">✕ تجربة إشعار خطأ (Error)</button>
+            <button class="btn btn-outline" onclick="window.dispatchPlaygroundToast('info')">◈ تجربة إشعار معلومات (Info)</button>
           </div>
         </div>
       </section>
@@ -234,7 +234,7 @@ export function renderUIPlayground() {
 
           <!-- Empty State -->
           <div class="empty-state">
-            <div class="empty-state-icon">📚</div>
+            <div class="empty-state-icon">◈</div>
             <div class="empty-state-title">لا توجد تكليفات مستحقة حالياً</div>
             <div class="empty-state-desc">لقد أكملت جميع التكليفات المطلوبة لهذا الأسبوع وفق خطة المساق التدريبي.</div>
             <button class="btn btn-primary btn-sm">استعراض المواد الإثرائية</button>
@@ -259,10 +259,10 @@ window.dispatchPlaygroundToast = function(type) {
   toast.className = `toast toast-${type}`;
   
   const messages = {
-    success: '✅ تم حفظ التعديلات في مسودة المحتوى بنجاح.',
-    warning: '⚠️ مساحة التخزين السحابية بلغت 80% من سعة 5TB المخصصة.',
-    error: '❌ حدث خطأ في المصادقة. يرجى التأكد من الرمز المدخل.',
-    info: 'ℹ️ ستبدأ جلسة الاختبار الفصلي بعد 15 دقيقة.'
+    success: '✓ تم حفظ التعديلات في مسودة المحتوى بنجاح.',
+    warning: '▲ مساحة التخزين السحابية بلغت 80% من سعة 5TB المخصصة.',
+    error: '✕ حدث خطأ في المصادقة. يرجى التأكد من الرمز المدخل.',
+    info: '◈ ستبدأ جلسة الاختبار الفصلي بعد 15 دقيقة.'
   };
 
   toast.innerHTML = `

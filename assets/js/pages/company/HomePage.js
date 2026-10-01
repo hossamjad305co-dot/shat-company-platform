@@ -186,16 +186,16 @@ export async function renderCompanyHomePage() {
 
   // 10 Foundational Principles (Domain 05: Professional Approach)
   const professionalPrinciples = [
-    { en: 'Evidence-Based Practice', ar: 'الممارسة القائمة على الأدلة', icon: '📊' },
-    { en: 'Competency-Based Development', ar: 'التطوير القائم على الكفاءات', icon: '🎯' },
-    { en: 'Human Rights-Based Approach', ar: 'النهج القائم على حقوق الإنسان', icon: '⚖️' },
-    { en: 'Do No Harm', ar: 'مبدأ عدم الإضرار', icon: '🛡️' },
-    { en: 'Accountability', ar: 'المساءلة المؤسسية', icon: '🤝' },
-    { en: 'Inclusion & Non-Discrimination', ar: 'الشمول وعدم التمييز', icon: '🌐' },
-    { en: 'Safeguarding & Protection', ar: 'الحماية وصون السلامة', icon: '🔒' },
+    { en: 'Evidence-Based Practice', ar: 'الممارسة القائمة على الأدلة', icon: '▲' },
+    { en: 'Competency-Based Development', ar: 'التطوير القائم على الكفاءات', icon: '★' },
+    { en: 'Human Rights-Based Approach', ar: 'النهج القائم على حقوق الإنسان', icon: '◈️' },
+    { en: 'Do No Harm', ar: 'مبدأ عدم الإضرار', icon: '◈' },
+    { en: 'Accountability', ar: 'المساءلة المؤسسية', icon: '✉' },
+    { en: 'Inclusion & Non-Discrimination', ar: 'الشمول وعدم التمييز', icon: '◈' },
+    { en: 'Safeguarding & Protection', ar: 'الحماية وصون السلامة', icon: '◈' },
     { en: 'Ethical Practice', ar: 'الممارسة الأخلاقية والنزاهة', icon: '⭐' },
-    { en: 'Confidentiality & Data Protection', ar: 'السرية وحماية البيانات', icon: '📑' },
-    { en: 'Quality & Continuous Improvement', ar: 'الجودة والتحسين المستمر', icon: '📈' }
+    { en: 'Confidentiality & Data Protection', ar: 'السرية وحماية البيانات', icon: '▪' },
+    { en: 'Quality & Continuous Improvement', ar: 'الجودة والتحسين المستمر', icon: '▲' }
   ];
 
   return `
@@ -206,7 +206,7 @@ export async function renderCompanyHomePage() {
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-2xl); align-items: center;">
             <div>
               <div class="hero-badge-pill" style="display: inline-flex; align-items: center; gap: 8px; background: var(--shat-green-100); color: var(--shat-green-950); padding: 6px 14px; border-radius: var(--radius-full); font-size: var(--font-size-caption); font-weight: 700; margin-bottom: var(--space-md); border: 1px solid var(--shat-green-200);">
-                <span>✨</span>
+                <span>✦</span>
                 <span>بناء القدرات • تعزيز المؤسسات • تطوير النتائج</span>
               </div>
               <h1 style="font-size: clamp(2rem, 4vw, 2.75rem); color: var(--shat-navy-950); line-height: 1.25; font-weight: 800; margin-bottom: var(--space-md);">
@@ -217,14 +217,14 @@ export async function renderCompanyHomePage() {
               </p>
               <div style="display: flex; gap: var(--space-md); flex-wrap: wrap;">
                 <a href="#/academy" class="shat-btn shat-btn-primary shat-btn-lg" style="text-decoration: none;">
-                  <span>🎓 دخول منصة التعلم والأكاديمية</span>
+                  <span>◈ دخول منصة التعلم والأكاديمية</span>
                   <span class="shat-icon-directional">←</span>
                 </a>
                 <a href="#/tracks" class="shat-btn shat-btn-secondary shat-btn-lg" style="text-decoration: none;">
                   <span>استكشف المسارات الاستشارية</span>
                 </a>
                 <a href="#/apply" class="shat-btn shat-btn-outline shat-btn-lg" style="text-decoration: none; border-color: var(--shat-green-600); color: var(--shat-green-800);">
-                  <span>📝 طلب الالتحاق والتدريب</span>
+                  <span>▪ طلب الالتحاق والتدريب</span>
                 </a>
               </div>
             </div>
@@ -289,7 +289,7 @@ export async function renderCompanyHomePage() {
 
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-xl);">
             <div class="shat-card" style="border-inline-start: 5px solid var(--shat-navy-900); padding: var(--space-xl);">
-              <div style="font-size: 2.2rem; margin-bottom: var(--space-sm);">🏛️</div>
+              <div style="font-size: 2.2rem; margin-bottom: var(--space-sm);">◈</div>
               <h3 style="font-size: var(--font-size-h3); color: var(--shat-navy-950); margin-bottom: var(--space-xs);">
                 الركيزة الأولى: الاستشارات والتطوير المؤسسي
               </h3>
@@ -302,7 +302,7 @@ export async function renderCompanyHomePage() {
             </div>
 
             <div class="shat-card" style="border-inline-start: 5px solid var(--shat-green-700); padding: var(--space-xl);">
-              <div style="font-size: 2.2rem; margin-bottom: var(--space-sm);">🎓</div>
+              <div style="font-size: 2.2rem; margin-bottom: var(--space-sm);">◈</div>
               <h3 style="font-size: var(--font-size-h3); color: var(--shat-navy-950); margin-bottom: var(--space-xs);">
                 الركيزة الثانية: التدريب وبناء القدرات المتخصصة
               </h3>
@@ -322,7 +322,7 @@ export async function renderCompanyHomePage() {
         <div class="shat-container">
           <div style="text-align: center; max-width: 780px; margin: 0 auto var(--space-2xl) auto;">
             <div style="display: inline-flex; align-items: center; gap: 6px; background: var(--shat-navy-100); color: var(--shat-navy-900); padding: 4px 12px; border-radius: var(--radius-full); font-size: 0.8rem; font-weight: 800; margin-bottom: 10px;">
-              <span>⚙️ منهجية العمل المعتمدة</span>
+              <span>⚙ منهجية العمل المعتمدة</span>
             </div>
             <h2 style="font-size: var(--font-size-h2); color: var(--shat-navy-950); margin-bottom: var(--space-xs);">
               كيف نعمل؟ — نموذج التدخل من الاحتياج إلى النتائج
@@ -352,7 +352,7 @@ export async function renderCompanyHomePage() {
         <div class="shat-container">
           <div style="text-align: center; max-width: 820px; margin: 0 auto var(--space-2xl) auto;">
             <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(34, 197, 94, 0.15); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.3); padding: 5px 14px; border-radius: var(--radius-full); font-size: 0.82rem; font-weight: 800; margin-bottom: var(--space-sm);">
-              <span>🌐 المرجعيات والمعايير الدولية المعتمدة</span>
+              <span>◈ المرجعيات والمعايير الدولية المعتمدة</span>
             </div>
             <h2 style="font-size: clamp(1.8rem, 3.5vw, 2.4rem); color: #ffffff; margin-bottom: var(--space-sm); font-weight: 800;">
               منظومة المعايير الدولية وتطبيقاتها المؤسسية في شات
@@ -386,7 +386,7 @@ export async function renderCompanyHomePage() {
                   <!-- Why it matters -->
                   <div style="margin-bottom: var(--space-sm);">
                     <div style="font-size: 0.8rem; font-weight: 800; color: #fde047; margin-bottom: 3px;">
-                      🎯 ما هو المعيار وقيمته المؤسسية؟
+                      ★ ما هو المعيار وقيمته المؤسسية؟
                     </div>
                     <p style="font-size: 0.9rem; color: #e2e8f0; line-height: 1.6; margin: 0;">
                       ${st.whyItMatters}
@@ -396,7 +396,7 @@ export async function renderCompanyHomePage() {
                   <!-- How SHAT applies it -->
                   <div style="margin-bottom: var(--space-sm); background: rgba(0,0,0,0.25); padding: 10px 12px; border-radius: 6px; border-right: 3px solid #38bdf8;">
                     <div style="font-size: 0.8rem; font-weight: 800; color: #38bdf8; margin-bottom: 3px;">
-                      ⚡ كيف تطبقه شات ميدانياً؟
+                      ★ كيف تطبقه شات ميدانياً؟
                     </div>
                     <p style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6; margin: 0;">
                       ${st.howShatApplies}
@@ -406,7 +406,7 @@ export async function renderCompanyHomePage() {
                   <!-- Tangible Deliverable -->
                   <div style="background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.25); padding: 10px 12px; border-radius: 6px; margin-bottom: var(--space-md);">
                     <div style="font-size: 0.78rem; font-weight: 800; color: #86efac; margin-bottom: 2px;">
-                      📦 المخرج المؤسسي المحقق:
+                      ✓ المخرج المؤسسي المحقق:
                     </div>
                     <div style="font-size: 0.85rem; color: #f1f5f9; line-height: 1.5;">
                       ${st.deliverable}
@@ -432,7 +432,7 @@ export async function renderCompanyHomePage() {
         <div class="shat-container">
           <div style="text-align: center; max-width: 720px; margin: 0 auto var(--space-2xl) auto;">
             <div style="display: inline-flex; align-items: center; gap: 6px; background: var(--shat-green-100); color: var(--shat-green-950); padding: 4px 12px; border-radius: var(--radius-full); font-size: 0.8rem; font-weight: 800; margin-bottom: 10px;">
-              <span>📚 مجالاتنا التدريبية التخصصية</span>
+              <span>▪ مجالاتنا التدريبية التخصصية</span>
             </div>
             <h2 style="font-size: var(--font-size-h2); color: var(--shat-navy-950); margin-bottom: var(--space-xs);">
               الحقائب والمجالات التدريبية المتخصصة
@@ -479,7 +479,7 @@ export async function renderCompanyHomePage() {
         <div class="shat-container">
           <div style="text-align: center; max-width: 760px; margin: 0 auto var(--space-2xl) auto;">
             <div style="display: inline-flex; align-items: center; gap: 6px; background: var(--shat-navy-100); color: var(--shat-navy-950); padding: 4px 12px; border-radius: var(--radius-full); font-size: 0.8rem; font-weight: 800; margin-bottom: 10px;">
-              <span>🧭 المنهجية والقيم المهنية</span>
+              <span>◈ المنهجية والقيم المهنية</span>
             </div>
             <h2 style="font-size: var(--font-size-h2); color: var(--shat-navy-950); margin-bottom: var(--space-xs);">
               منهجيتنا المهنية — المبادئ العشرة الحاكمة

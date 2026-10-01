@@ -49,10 +49,10 @@ export async function renderAdminCMSPage() {
 
         <div style="display: flex; gap: 8px;">
           <button type="button" id="btn-open-global-media" class="shat-btn shat-btn-secondary shat-btn-sm">
-            🖼️ مكتبة الوسائط
+            ◈ مكتبة الوسائط
           </button>
           <button type="button" id="btn-create-new-post" class="shat-btn shat-btn-primary shat-btn-sm">
-            ➕ منشور جديد
+            + منشور جديد
           </button>
         </div>
       </div>
@@ -81,7 +81,7 @@ function renderPostsList(posts) {
   if (posts.length === 0) {
     return `
       <div style="text-align: center; padding: 48px 20px; color: var(--text-muted);">
-        <div style="font-size: 3rem; margin-bottom: 12px;">📰</div>
+        <div style="font-size: 3rem; margin-bottom: 12px;">▪</div>
         <h4 style="color: var(--shat-navy-900); margin-bottom: 6px;">لا توجد منشورات حالياً</h4>
         <p style="font-size: var(--font-size-body-sm); margin: 0;">اضغط على "منشور جديد" لإنشاء أول مقال في المنصة</p>
       </div>
@@ -133,7 +133,7 @@ function renderPostsList(posts) {
               <td data-label="الإجراءات">
                 <div style="display: flex; gap: 6px; flex-wrap: wrap;">
                   <button type="button" class="shat-btn shat-btn-secondary shat-btn-sm btn-edit-post" data-id="${p.id}">
-                    ✏️ تعديل
+                    ▪️ تعديل
                   </button>
                   ${p.status === CMSPostStatus.PUBLISHED ? `
                     <button type="button" class="shat-btn shat-btn-outline shat-btn-sm btn-unpublish-post" data-id="${p.id}" style="color: #d97706; border-color: #fde68a;">
@@ -141,11 +141,11 @@ function renderPostsList(posts) {
                     </button>
                   ` : `
                     <button type="button" class="shat-btn shat-btn-primary shat-btn-sm btn-publish-post" data-id="${p.id}">
-                      نشر 🚀
+                      نشر ★
                     </button>
                   `}
                   <button type="button" class="shat-btn shat-btn-ghost shat-btn-sm btn-delete-post" data-id="${p.id}" style="color: #dc2626;" title="حذف">
-                    🗑️
+                    ✕
                   </button>
                 </div>
               </td>

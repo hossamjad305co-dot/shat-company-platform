@@ -123,12 +123,12 @@ export class SyllabusViewer {
         <!-- Top Toolbar -->
         <div style="background: var(--shat-navy, #0B1E36); color: #FFFFFF; padding: 14px 24px; display: flex; justify-content: space-between; align-items: center;">
           <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 1.25rem;">📄</span>
+            <span style="font-size: 1.1rem; color: var(--shat-green);">▪</span>
             <span style="font-weight: 800; font-size: 0.95rem;">الخطة التدريبية المعتمدة • Course Syllabus</span>
           </div>
           <div style="display: flex; gap: 8px; align-items: center;">
             <button id="btn-print-syllabus" class="btn-clean" style="background: #1E7E34; color: #FFFFFF; font-weight: 700; font-size: 0.82rem; padding: 6px 14px; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px;">
-              <span>🖨️ طباعة / حفظ PDF</span>
+              <span>⎙ طباعة / حفظ PDF</span>
             </button>
             <button id="btn-close-syllabus" style="background: transparent; border: none; color: #94A3B8; font-size: 1.3rem; cursor: pointer; padding: 2px 8px;">✕</button>
           </div>
@@ -193,17 +193,17 @@ export class SyllabusViewer {
           </div>
 
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; font-size: 0.86rem; color: #334155; padding-top: 14px; border-top: 1px solid #E2E8F0;">
-            <div><strong>👨‍🏫 الخبير والمدرب:</strong> ${s.instructor}</div>
-            <div><strong>⏱️ الساعات المعتمدة:</strong> ${s.hours}</div>
-            <div><strong>🎯 المستوى:</strong> ${s.level}</div>
-            <div><strong>🏛️ جهة الاعتماد:</strong> ${s.accreditation}</div>
+            <div><strong>▪ الخبير والمدرب:</strong> ${s.instructor}</div>
+            <div><strong>◷ الساعات المعتمدة:</strong> ${s.hours}</div>
+            <div><strong>★ المستوى:</strong> ${s.level}</div>
+            <div><strong>◈ جهة الاعتماد:</strong> ${s.accreditation}</div>
           </div>
         </div>
 
         <!-- Target Audience -->
         <div style="margin-bottom: 22px;">
           <h3 style="font-size: 1.05rem; font-weight: 800; color: #0B1E36; margin: 0 0 8px; display: flex; align-items: center; gap: 8px;">
-            <span>👥</span>
+            <span>◈</span>
             <span>الفئة المستهدفة وشروط الالتحاق:</span>
           </h3>
           <p style="font-size: 0.9rem; color: #475569; margin: 0; line-height: 1.7;">
@@ -214,7 +214,7 @@ export class SyllabusViewer {
         <!-- Learning Objectives -->
         <div style="margin-bottom: 24px;">
           <h3 style="font-size: 1.05rem; font-weight: 800; color: #0B1E36; margin: 0 0 10px; display: flex; align-items: center; gap: 8px;">
-            <span>🎯</span>
+            <span>★</span>
             <span>مخرجات التعلم والجدارات المستهدفة (Competencies):</span>
           </h3>
           <ul style="margin: 0; padding-inline-start: 22px; font-size: 0.9rem; color: #475569; line-height: 1.8;">
@@ -225,7 +225,7 @@ export class SyllabusViewer {
         <!-- Modules Breakdown -->
         <div style="margin-bottom: 24px;">
           <h3 style="font-size: 1.05rem; font-weight: 800; color: #0B1E36; margin: 0 0 12px; display: flex; align-items: center; gap: 8px;">
-            <span>📚</span>
+            <span>▪</span>
             <span>مخطط الوحدات والمحاور التدريبية التفصيلية:</span>
           </h3>
           <div style="border: 1px solid #E2E8F0; border-radius: 10px; overflow: hidden;">
@@ -261,7 +261,7 @@ export class SyllabusViewer {
             للاستفسار عن الدفعات القادمة: <a href="https://wa.me/972592879621" target="_blank" style="color: #1E7E34; font-weight: 700;">+972 59 287 9621</a>
           </div>
           <a href="${s.formUrl}" class="btn-clean btn-green" style="font-weight: 800; padding: 10px 22px; border-radius: 8px;">
-            <span>✍️ فتح استمارة التسجيل الرسمية</span>
+            <span>✓ فتح استمارة التسجيل الرسمية</span>
             <span>←</span>
           </a>
         </div>

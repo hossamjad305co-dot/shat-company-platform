@@ -70,7 +70,7 @@ export async function bindNewsEvents() {
     if (posts.length === 0) {
       container.innerHTML = `
         <div style="grid-column: 1 / -1; text-align: center; padding: 60px 0; color: var(--text-muted);">
-          <div style="font-size: 2.5rem; margin-bottom: 12px;">📰</div>
+          <div style="font-size: 2.5rem; margin-bottom: 12px; color: var(--shat-green);">✦</div>
           <h3 style="color: var(--shat-navy); margin-bottom: 8px;">
             ${txt('لا توجد منشورات جديدة حالياً', 'No publications available currently', 'Aucune publication pour le moment')}
           </h3>
@@ -93,7 +93,7 @@ export async function bindNewsEvents() {
                 ${p.categoryLabel || p.category}
               </span>
               <span style="font-size: 0.78rem; color: var(--text-muted);">
-                📅 ${new Date(p.createdAt || Date.now()).toLocaleDateString(currentLang === 'ar' ? 'ar-EG' : (currentLang === 'fr' ? 'fr-FR' : 'en-US'))}
+                ◷ ${new Date(p.createdAt || Date.now()).toLocaleDateString(currentLang === 'ar' ? 'ar-EG' : (currentLang === 'fr' ? 'fr-FR' : 'en-US'))}
               </span>
             </div>
 
@@ -136,9 +136,9 @@ export async function bindNewsEvents() {
             <div style="margin-bottom: 16px;">
               <img src="${post.coverImage || 'assets/logo/logo-banner.jpg'}" alt="${post.title}" style="width: 100%; max-height: 260px; object-fit: cover; border-radius: var(--radius-xs); margin-bottom: 14px;" onerror="this.onerror=null; this.src='assets/logo/logo-banner.jpg';">
               <div style="display: flex; gap: 12px; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px;">
-                <span>🏷️ ${post.categoryLabel || post.category}</span>
-                <span>📅 ${new Date(post.createdAt || Date.now()).toLocaleDateString(currentLang === 'ar' ? 'ar-EG' : (currentLang === 'fr' ? 'fr-FR' : 'en-US'))}</span>
-                <span>✍️ ${post.author || 'SHAT'}</span>
+                <span>▪ ${post.categoryLabel || post.category}</span>
+                <span>◷ ${new Date(post.createdAt || Date.now()).toLocaleDateString(currentLang === 'ar' ? 'ar-EG' : (currentLang === 'fr' ? 'fr-FR' : 'en-US'))}</span>
+                <span>▪ ${post.author || 'SHAT'}</span>
               </div>
               <div style="font-size: 0.95rem; line-height: 1.8; color: var(--text-main); white-space: pre-wrap;">
                 ${post.content}

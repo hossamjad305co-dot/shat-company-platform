@@ -23,7 +23,7 @@ export function renderTeacherDashboardView(lang = 'ar') {
       'Suivi des dossiers académiques, évaluation des devoirs de terrain et enregistrement des rétroactions pédagogiques conformes aux normes internationales.'
     ),
     btnBackAcademy: txt('← العودة للأكاديمية', '← Back to Academy', '← Retour à l’Académie'),
-    btnRefresh: txt('🔄 تحديث البيانات', '🔄 Refresh Data', '🔄 Actualiser'),
+    btnRefresh: txt('↻ تحديث البيانات', '↻ Refresh Data', '↻ Actualiser'),
     courseSelectLabel: txt('المساق التدريبي النشط:', 'Active Course Track:', 'Cursus Actif :'),
     courseSyncing: txt('جاري مزامنة بيانات المساق...', 'Syncing course data...', 'Synchronisation du cursus...'),
     kpiCourses: txt('المساقات المكلف بها (My Courses)', 'Assigned Courses', 'Cursus Assignés'),
@@ -284,7 +284,7 @@ export async function bindTeacherEvents() {
             <tr style="border-bottom: 1px solid var(--border-light); transition: background 0.15s;" onmouseover="this.style.background='#F8FAFC'" onmouseout="this.style.background='transparent'">
               <td style="padding: 16px 20px;">
                 <div style="font-weight: 800; color: var(--shat-navy); cursor: pointer;" class="student-profile-link" data-student-id="${student.studentId}">
-                  ${student.fullNameAr} 🔍
+                  ${student.fullNameAr} <span style="font-size: 0.75rem; opacity: 0.5;">•</span>
                 </div>
                 <div style="font-size: 0.78rem; color: var(--text-muted);">${txt('معرّف المتدرب:', 'ID:', 'ID :')} ${student.studentId}</div>
               </td>
@@ -309,13 +309,13 @@ export async function bindTeacherEvents() {
                 ${latestSub ? (
                   latestSub.status === 'graded'
                     ? `<span style="font-weight: 800; color: var(--shat-green); font-size: 0.88rem;">✓ ${txt('تم الرصد', 'Graded', 'Noté')} (${latestSub.grade}/100)</span>`
-                    : `<span style="font-weight: 800; color: #D97706; font-size: 0.88rem;">⏳ ${txt('بانتظار التقييم', 'Pending Review', 'En attente')}</span>`
+                    : `<span style="font-weight: 800; color: #D97706; font-size: 0.88rem;">◷ ${txt('بانتظار التقييم', 'Pending Review', 'En attente')}</span>`
                 ) : `<span style="color: var(--text-muted); font-size: 0.84rem;">${txt('لم يسلّم بعد', 'Not submitted', 'Non remis')}</span>`}
               </td>
               <td style="padding: 16px 20px; text-align: ${isRtl ? 'left' : 'right'};">
                 <div style="display: flex; gap: 8px; justify-content: flex-end; align-items: center;">
                   <button class="btn-clean btn-secondary btn-sm btn-open-student-profile" data-student-id="${student.studentId}" title="${txt('عرض الملف الأكاديمي', 'View Profile', 'Consulter le Profil')}">
-                    <span>👤 ${txt('الملف', 'Profile', 'Profil')}</span>
+                    <span>▪ ${txt('الملف', 'Profile', 'Profil')}</span>
                   </button>
                   ${latestSub ? `
                     <button class="btn-clean btn-primary btn-sm btn-open-grade-modal" 
@@ -324,7 +324,7 @@ export async function bindTeacherEvents() {
                       data-file-name="${latestSub.fileName}"
                       data-grade="${latestSub.grade || ''}"
                       data-feedback="${encodeURIComponent(latestSub.instructorFeedback || '')}">
-                      <span>✍️ ${txt('تقييم', 'Grade', 'Noter')}</span>
+                      <span>✓ ${txt('تقييم', 'Grade', 'Noter')}</span>
                     </button>
                   ` : ''}
                 </div>
@@ -408,7 +408,7 @@ export async function bindTeacherEvents() {
               <span style="color: var(--shat-green); font-weight: 700;">${txt('مكتمل 100%', '100% Completed', '100% Validé')}</span>
             </div>
             <div style="padding: 10px 14px; display: flex; justify-content: space-between; font-size: 0.84rem; background: var(--bg-subtle);">
-              <span>⏳ ${txt('الفصل 3: مصفوفة التدقيق والامتثال المؤسسي للالتزامات التسعة', 'Chapter 3: Institutional Compliance & 9 Commitments Matrix', 'Chapitre 3: Matrice de Conformité aux 9 Engagements')}</span>
+              <span>◷ ${txt('الفصل 3: مصفوفة التدقيق والامتثال المؤسسي للالتزامات التسعة', 'Chapter 3: Institutional Compliance & 9 Commitments Matrix', 'Chapitre 3: Matrice de Conformité aux 9 Engagements')}</span>
               <span style="color: #D97706; font-weight: 700;">${txt('قيد المتابعة 40%', 'In Progress 40%', 'En Cours 40%')}</span>
             </div>
           </div>
@@ -434,7 +434,7 @@ export async function bindTeacherEvents() {
               </span>
             </div>
             <div style="font-size: 0.84rem; color: var(--text-secondary); background: var(--bg-subtle); padding: 10px; border-radius: var(--radius-xs); border: 1px solid var(--border-light);">
-              💬 <strong>${txt('التغذية الراجعة الأكاديمية:', 'Academic Feedback:', 'Rétroaction Pédagogique :')}</strong> "${txt('عمل منهجي متميز والتزام دقيق بمبادئ سرية الشكاوى ومصفوفة تتبع الملاحظات. أحسنت.', 'Exceptional methodical delivery with strict compliance to complaints confidentiality and tracking matrix. Well done.', 'Travail méthodique exemplaire avec un respect rigoureux de la confidentialité des alertes et du suivi. Félicitations.')}"
+              ▪ <strong>${txt('التغذية الراجعة الأكاديمية:', 'Academic Feedback:', 'Rétroaction Pédagogique :')}</strong> "${txt('عمل منهجي متميز والتزام دقيق بمبادئ سرية الشكاوى ومصفوفة تتبع الملاحظات. أحسنت.', 'Exceptional methodical delivery with strict compliance to complaints confidentiality and tracking matrix. Well done.', 'Travail méthodique exemplaire avec un respect rigoureux de la confidentialité des alertes et du suivi. Félicitations.')}"
             </div>
           </div>
         </div>
@@ -480,9 +480,9 @@ export async function bindTeacherEvents() {
               ${txt('المتدرب:', 'Trainee:', 'Stagiaire :')} <strong>${studentName}</strong>
             </div>
             <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; align-items: center; justify-content: space-between;">
-              <span>📄 ${txt('الملف المرفوع:', 'Submitted File:', 'Fichier Déposé :')} <strong>${fileName}</strong></span>
+              <span>▪ ${txt('الملف المرفوع:', 'Submitted File:', 'Fichier Déposé :')} <strong>${fileName}</strong></span>
               <a href="/api/files/download/${subId}-file" target="_blank" class="btn-clean btn-secondary btn-sm" download="${fileName}">
-                <span>${txt('تنزيل الملف الميداني 📥', 'Download Deliverable 📥', 'Télécharger le Devoir 📥')}</span>
+                <span>${txt('تنزيل الملف الميداني ↓', 'Download Deliverable ↓', 'Télécharger le Devoir ↓')}</span>
               </a>
             </div>
           </div>

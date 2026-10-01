@@ -47,8 +47,8 @@ SHAT provides accredited master diplomas and institutional readiness audits.`,
 8. Personnel qualifié et managé avec équité.
 9. Gestion responsable et transparente des ressources.`,
       actions: [
-        { labelAr: '🎓 دبلوم CHS في الأكاديمية', labelEn: 'CHS Course Track', url: '#/course/shat-chs-master' },
-        { labelAr: '⚡ استعراض معايير CHS', labelEn: 'Standards Explorer', url: '#/standards' }
+        { labelAr: '◈ دبلوم CHS في الأكاديمية', labelEn: 'CHS Course Track', url: '#/course/shat-chs-master' },
+        { labelAr: '▪ استعراض معايير CHS', labelEn: 'Standards Explorer', url: '#/standards' }
       ]
     },
     {
@@ -76,8 +76,8 @@ We assist humanitarian organizations in drafting and certifying IASC-compliant P
 - Cellules d'enquête indépendantes garantissant la protection des lanceurs d'alerte.
 - Protocoles stricts de recrutement éthique et de vérification d'antécédents.`,
       actions: [
-        { labelAr: '🛡️ استعراض معيار PSEA', labelEn: 'PSEA Standard', url: '#/standards' },
-        { labelAr: '💬 طلب استشارة صون السلامة', labelEn: 'Request Advisory', url: '#/contact' }
+        { labelAr: '◈ استعراض معيار PSEA', labelEn: 'PSEA Standard', url: '#/standards' },
+        { labelAr: '✉ طلب استشارة صون السلامة', labelEn: 'Request Advisory', url: '#/contact' }
       ]
     },
     {
@@ -111,7 +111,7 @@ The program includes 40 accredited hours and real-world form simulations.`,
 5. Suivi régulier et réévaluation continue.
 6. Clôture méthodique du dossier ou transfert sécurisé.`,
       actions: [
-        { labelAr: '🎓 تفاصيل مسار إدارة الحالة', labelEn: 'Case Management Course', url: '#/course/shat-case-management' }
+        { labelAr: '◈ تفاصيل مسار إدارة الحالة', labelEn: 'Case Management Course', url: '#/course/shat-case-management' }
       ]
     },
     {
@@ -139,7 +139,7 @@ You can launch the diagnostic tool right now to receive a customized maturity re
 3. Suivi, Évaluation et Apprentissage (MEAL).
 4. Gouvernance Institutionnelle et Procédures (SOP).`,
       actions: [
-        { labelAr: '🧭 بدء التقييم والتشخيص الآن', labelEn: 'Launch Diagnostic Tool', action: 'launch_diagnostic' }
+        { labelAr: '◈ بدء التقييم والتشخيص الآن', labelEn: 'Launch Diagnostic Tool', action: 'launch_diagnostic' }
       ]
     }
   ],
@@ -165,9 +165,9 @@ You can launch the diagnostic tool right now to receive a customized maturity re
         sender: 'advisor',
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         text: txt(
-          'مرحباً بك! أنا مستشار شات المؤسسي الذكي 🤖. كيف يمكنني مساعدتك اليوم في معايير العمل الإنساني (CHS & Sphere)، أطر الحماية وصون السلامة (PSEA)، أو البرامج التدريبية المعتمدة؟',
-          'Hello! I am SHAT AI Institutional Advisor 🤖. How can I assist you today with humanitarian standards (CHS & Sphere), safeguarding frameworks (PSEA), or accredited training programs?',
-          'Bonjour ! Je suis le Conseiller Institutionnel IA de SHAT 🤖. Comment puis-je vous aider concernant les normes humanitaires (CHS & Sphère), la sauvegarde (PSEA) ou les cursus certifiés ?'
+          'مرحباً بك! أنا مستشار شات المؤسسي الذكي ✦. كيف يمكنني مساعدتك اليوم في معايير العمل الإنساني (CHS & Sphere)، أطر الحماية وصون السلامة (PSEA)، أو البرامج التدريبية المعتمدة؟',
+          'Hello! I am SHAT AI Institutional Advisor ✦. How can I assist you today with humanitarian standards (CHS & Sphere), safeguarding frameworks (PSEA), or accredited training programs?',
+          'Bonjour ! Je suis le Conseiller Institutionnel IA de SHAT ✦. Comment puis-je vous aider concernant les normes humanitaires (CHS & Sphère), la sauvegarde (PSEA) ou les cursus certifiés ?'
         ),
         actions: [
           { labelAr: 'ما هي معايير CHS 2024؟', labelEn: 'What is CHS 2024?', prompt: 'ما هو المعيار الإنساني الأساسي CHS؟' },
@@ -207,7 +207,7 @@ You can launch the diagnostic tool right now to receive a customized maturity re
         cursor: pointer;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       ">
-        <span style="font-size: 1.4rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));">🤖</span>
+        <span style="font-size: 1.3rem; font-weight: 900; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); color: #FFFFFF;">✦</span>
         <div style="text-align: ${isAr ? 'right' : 'left'};">
           <div style="font-size: 0.85rem; font-weight: 900; line-height: 1.2;">
             ${txt('مستشار شات الذكي', 'SHAT AI Advisor', 'Conseiller IA')}
@@ -246,8 +246,8 @@ You can launch the diagnostic tool right now to receive a customized maturity re
           border-bottom: 2px solid #10B981;
         ">
           <div style="display: flex; align-items: center; gap: 10px;">
-            <div style="width: 36px; height: 36px; border-radius: 50%; background: #10B981; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-shadow: 0 2px 8px rgba(16,185,129,0.3);">
-              🤖
+            <div style="width: 36px; height: 36px; border-radius: 50%; background: #10B981; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 900; box-shadow: 0 2px 8px rgba(16,185,129,0.3); color: #FFFFFF;">
+              ✦
             </div>
             <div>
               <div style="font-weight: 900; font-size: 0.95rem; color: #FFFFFF;">
@@ -260,8 +260,8 @@ You can launch the diagnostic tool right now to receive a customized maturity re
           </div>
 
           <div style="display: flex; gap: 6px;">
-            <button id="btn-advisor-clear" title="${txt('مسح المحادثة', 'Clear Chat', 'Effacer')}" style="background: rgba(255,255,255,0.1); border: none; color: #CBD5E1; font-size: 0.8rem; width: 28px; height: 28px; border-radius: 6px; cursor: pointer;">
-              🔄
+            <button id="btn-advisor-clear" title="${txt('مسح المحادثة', 'Clear Chat', 'Effacer')}" style="background: rgba(255,255,255,0.1); border: none; color: #CBD5E1; font-size: 0.9rem; width: 28px; height: 28px; border-radius: 6px; cursor: pointer;">
+              ↻
             </button>
             <button id="btn-advisor-close" title="${txt('إغلاق', 'Close', 'Fermer')}" style="background: rgba(255,255,255,0.1); border: none; color: #FFFFFF; font-size: 1rem; width: 28px; height: 28px; border-radius: 6px; cursor: pointer;">
               ✕
@@ -308,7 +308,7 @@ You can launch the diagnostic tool right now to receive a customized maturity re
               cursor: pointer;
               box-shadow: 0 2px 8px rgba(30,126,52,0.25);
             ">
-              <span>➤</span>
+              <span>→</span>
             </button>
           </form>
 
@@ -320,7 +320,7 @@ You can launch the diagnostic tool right now to receive a customized maturity re
               target="_blank"
               style="font-size: 0.72rem; color: #059669; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;"
             >
-              <span>💬 ${txt('تحدث مباشرة مع خبير شركة شات عبر واتساب', 'Chat with a Senior Expert via WhatsApp', 'Contacter un expert via WhatsApp')}</span>
+              <span>✉ ${txt('تحدث مباشرة مع خبير شركة شات عبر واتساب', 'Chat with a Senior Expert via WhatsApp', 'Contacter un expert via WhatsApp')}</span>
             </a>
           </div>
         </div>
@@ -422,9 +422,9 @@ Feel free to explore our Standards Guide, take the Institutional Diagnostic, or 
             `Merci pour votre demande. SHAT Development & Growth propose un accompagnement institutionnel d'excellence ancré dans les référentiels internationaux. Explorez nos guides ou contactez nos consultants.`
           ),
           actions: [
-            { labelAr: '⚡ استعراض المعايير الدولية', labelEn: 'Standards Explorer', url: '#/standards' },
-            { labelAr: '🧭 فحص الجاهزية المؤسسية', labelEn: 'Institutional Diagnostic', action: 'launch_diagnostic' },
-            { labelAr: '💬 حجز استشارة تنفيذية', labelEn: 'Book Consultation', url: '#/contact' }
+            { labelAr: '▪ استعراض المعايير الدولية', labelEn: 'Standards Explorer', url: '#/standards' },
+            { labelAr: '◈ فحص الجاهزية المؤسسية', labelEn: 'Institutional Diagnostic', action: 'launch_diagnostic' },
+            { labelAr: '✉ حجز استشارة تنفيذية', labelEn: 'Book Consultation', url: '#/contact' }
           ]
         });
       }

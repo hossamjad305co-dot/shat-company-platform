@@ -100,7 +100,7 @@ function renderApplicationsTable(apps) {
   if (apps.length === 0) {
     return `
       <div style="text-align: center; padding: 48px 20px; color: var(--text-muted);">
-        <div style="font-size: 3rem; margin-bottom: 12px;">📑</div>
+        <div style="font-size: 3rem; margin-bottom: 12px;">▪</div>
         <h4 style="color: var(--shat-navy-900); margin-bottom: 6px;">لا توجد طلبات في هذا التصنيف</h4>
         <p style="font-size: var(--font-size-body-sm); margin: 0;">ستظهر الطلبات الجديدة هنا فور تقديمها من المتدربين</p>
       </div>
@@ -148,7 +148,7 @@ function renderApplicationsTable(apps) {
               </td>
               <td data-label="الإجراءات">
                 <button type="button" class="shat-btn shat-btn-secondary shat-btn-sm btn-open-review" data-id="${a.id}">
-                  🔍 مراجعة واعتماد
+                  ◈ مراجعة واعتماد
                 </button>
               </td>
             </tr>

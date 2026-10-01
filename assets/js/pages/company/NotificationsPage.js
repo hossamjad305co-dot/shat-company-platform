@@ -23,7 +23,7 @@ export function renderNotificationsPage() {
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
           <div>
             <h1 style="font-size: var(--font-size-h3); color: var(--shat-navy-950); margin: 0 0 4px; font-weight: 800;">
-              🔔 الإشعارات والتنبيهات
+              ✉ الإشعارات والتنبيهات
             </h1>
             <span style="font-size: var(--font-size-caption); color: var(--text-muted);">
               ${unreadCount > 0 ? `لديك ${unreadCount} إشعارات جديدة غير مقروءة` : 'جميع الإشعارات مقروءة'}
@@ -41,7 +41,7 @@ export function renderNotificationsPage() {
         <div class="notifications-container" style="display: flex; flex-direction: column; gap: 12px;">
           ${notifications.length === 0 ? `
             <div style="text-align: center; padding: 48px 20px; background: #ffffff; border-radius: var(--radius-xl); border: 1px solid var(--border-subtle); color: var(--text-muted);">
-              <div style="font-size: 2.8rem; margin-bottom: 8px;">🔕</div>
+              <div style="font-size: 2.8rem; margin-bottom: 8px;">◈</div>
               <h3 style="color: var(--shat-navy-900); margin-bottom: 4px; font-size: 1.1rem;">لا توجد إشعارات حالياً</h3>
               <p style="font-size: 0.88rem; margin: 0;">ستصلك إشعارات حالة طلبات التسجيل، مواعيد التكليفات والدروس الجديدة هنا.</p>
             </div>

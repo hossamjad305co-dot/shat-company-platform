@@ -13,34 +13,34 @@ export function MobileBottomNav({ currentRoute = 'home' } = {}) {
 
   if (role === 'admin' || role === 'super_admin') {
     navItems = [
-      { id: 'admin', label: 'الإدارة', icon: '⚡', href: '#/admin' },
-      { id: 'cms', label: 'المحتوى', icon: '📰', href: '#/admin/cms' },
-      { id: 'apps', label: 'الطلبات', icon: '📑', href: '#/admin/applications' },
-      { id: 'audit', label: 'الرقابة', icon: '📜', href: '#/admin/audit' },
-      { id: 'settings', label: 'الإعدادات', icon: '⚙️', href: '#/admin/settings' }
+      { id: 'admin', label: 'الإدارة', icon: '⚙', href: '#/admin' },
+      { id: 'cms', label: 'المحتوى', icon: '▪', href: '#/admin/cms' },
+      { id: 'apps', label: 'الطلبات', icon: '▪', href: '#/admin/applications' },
+      { id: 'audit', label: 'الرقابة', icon: '◈', href: '#/admin/audit' },
+      { id: 'settings', label: 'الإعدادات', icon: '⚙', href: '#/admin/settings' }
     ];
   } else if (role === 'teacher' || role === 'instructor') {
     navItems = [
-      { id: 'home', label: 'الرئيسية', icon: '🏠', href: '#/home' },
-      { id: 'teacher', label: 'لوحة المدرب', icon: '👨‍🏫', href: '#/teacher' },
-      { id: 'courses', label: 'دوراتي', icon: '📚', href: '#/academy' },
-      { id: 'profile', label: 'حسابي', icon: '👤', href: '#/profile' }
+      { id: 'home', label: 'الرئيسية', icon: '◈', href: '#/home' },
+      { id: 'teacher', label: 'لوحة المدرب', icon: '▪', href: '#/teacher' },
+      { id: 'courses', label: 'دوراتي', icon: '▪', href: '#/academy' },
+      { id: 'profile', label: 'حسابي', icon: '▪', href: '#/profile' }
     ];
   } else if (role === 'student') {
     navItems = [
-      { id: 'home', label: 'الرئيسية', icon: '🏠', href: '#/home' },
-      { id: 'academy', label: 'لوحتي', icon: '🎓', href: '#/academy' },
-      { id: 'assignments', label: 'التكليفات', icon: '📝', href: '#/academy/assignments' },
-      { id: 'notifications', label: 'الإشعارات', icon: '🔔', href: '#/notifications', badge: unreadNotifs },
-      { id: 'profile', label: 'حسابي', icon: '👤', href: '#/profile' }
+      { id: 'home', label: 'الرئيسية', icon: '◈', href: '#/home' },
+      { id: 'academy', label: 'لوحتي', icon: '★', href: '#/academy' },
+      { id: 'assignments', label: 'التكليفات', icon: '▪', href: '#/academy/assignments' },
+      { id: 'notifications', label: 'الإشعارات', icon: '▪', href: '#/notifications', badge: unreadNotifs },
+      { id: 'profile', label: 'حسابي', icon: '▪', href: '#/profile' }
     ];
   } else {
     navItems = [
-      { id: 'home', label: 'الرئيسية', icon: '🏠', href: '#/home' },
-      { id: 'tracks', label: 'المسارات', icon: '🧭', href: '#/tracks' },
-      { id: 'academy', label: 'الأكاديمية', icon: '🎓', href: '#/academy' },
-      { id: 'apply', label: 'التسجيل', icon: '✍️', href: '#/apply' },
-      { id: 'login', label: 'دخول', icon: '🔑', href: '#/auth/login' }
+      { id: 'home', label: 'الرئيسية', icon: '◈', href: '#/home' },
+      { id: 'tracks', label: 'المسارات', icon: '▪', href: '#/tracks' },
+      { id: 'academy', label: 'الأكاديمية', icon: '★', href: '#/academy' },
+      { id: 'apply', label: 'التسجيل', icon: '✓', href: '#/apply' },
+      { id: 'login', label: 'دخول', icon: '▪', href: '#/auth/login' }
     ];
   }
 

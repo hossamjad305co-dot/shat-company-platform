@@ -52,7 +52,7 @@ export function renderStudentDashboardView(lang = 'ar') {
     sessionActive: txt('جلسة موثقة', 'Authenticated Session', 'Session Sécurisée'),
     welcome: txt('مرحباً بك،', 'Welcome,', 'Bienvenue,'),
     trainingId: txt('الرقم التدريبي:', 'Trainee ID:', 'Matricule :'),
-    btnClassroom: txt('📚 قاعة المحاضرات الحالية', '📚 Open Classroom', '📚 Salle de Cours'),
+    btnClassroom: txt('◈ قاعة المحاضرات الحالية', '◈ Open Classroom', '◈ Salle de Cours'),
     btnLogout: txt('تسجيل الخروج', 'Sign Out', 'Déconnexion'),
     continueBadge: txt('▶ تابع من حيث توقفت • Continue Learning', '▶ Continue Learning', '▶ Reprendre la Formation'),
     courseTitle: txt(
@@ -93,8 +93,8 @@ export function renderStudentDashboardView(lang = 'ar') {
       'Travail méthodique exemplaire avec un respect rigoureux de la confidentialité des alertes et du suivi. Félicitations.'
     ),
     task1ScoreLabel: txt('الدرجة المستحقة', 'Final Score', 'Note Obtenue'),
-    task1Btn: txt('معاينة التسليم 📄', 'View Submission 📄', 'Consulter la Copie 📄'),
-    task2Badge: txt('⏳ بانتظار التسليم • Due: Oct 4', '⏳ Pending Submission • Due: Oct 4', '⏳ En Attente de Dépôt • 4 Octobre'),
+    task1Btn: txt('معاينة التسليم ▪', 'View Submission ▪', 'Consulter la Copie ▪'),
+    task2Badge: txt('◷ بانتظار التسليم • Due: Oct 4', '◷ Pending Submission • Due: Oct 4', '◷ En Attente de Dépôt • 4 Octobre'),
     task2Remaining: txt('متبقي 4 أيام', '4 days remaining', '4 jours restants'),
     task2Title: txt(
       'التكليف #2: مصفوفة التدقيق والامتثال لمعايير CHS التسعة في الميدان',
@@ -106,7 +106,7 @@ export function renderStudentDashboardView(lang = 'ar') {
       'Applying institutional self-assessment tools on emergency response scenarios to identify accountability gaps.',
       'Application des outils d’auto-évaluation sur un scénario d’urgence pour diagnostiquer les écarts de redevabilité.'
     ),
-    task2Btn: txt('تسليم الحل الميداني الآن 📤', 'Submit Solution Now 📤', 'Déposer la Solution 📤'),
+    task2Btn: txt('تسليم الحل الميداني الآن ↑', 'Submit Solution Now ↑', 'Déposer la Solution ↑'),
     driveTitle: txt(
       'الحقائب التدريبية والمراجع المعتمدة (تنزيل سحابي مباشر وآمن)',
       'Accredited Course Packages & Materials (Secure Direct Cloud Download)',
@@ -131,7 +131,7 @@ export function renderStudentDashboardView(lang = 'ar') {
                 <span style="font-size: 0.8rem; color: #94A3B8;">• ${t.sessionActive}</span>
               </div>
               <h1 style="font-size: 1.95rem; font-weight: 900; margin-bottom: 6px; color: #FFFFFF;">
-                ${t.welcome} ${studentName} 👋
+                ${t.welcome} ${studentName}
               </h1>
               <p style="font-size: 0.92rem; color: #CBD5E1; margin: 0;">
                 ${t.trainingId} <strong style="font-family: var(--font-mono); color: #86EFAC;">${user.maskedNationalId || 'SHAT-TR-2026'}</strong> • ${user.email}
@@ -140,10 +140,10 @@ export function renderStudentDashboardView(lang = 'ar') {
 
             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
               <button id="btn-student-view-cert" class="btn-clean btn-sm" style="background: rgba(16, 185, 129, 0.22); color: #6EE7B7; border: 1px solid rgba(52, 211, 153, 0.4); font-weight: 800; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
-                <span>📜 ${txt('شهاداتي المعتمدة', 'My Certificates', 'Mes Certificats')}</span>
+                <span>◈ ${txt('شهاداتي المعتمدة', 'My Certificates', 'Mes Certificats')}</span>
               </button>
               <button id="btn-student-id-card" class="btn-clean btn-sm" style="background: rgba(255, 255, 255, 0.16); color: #FFFFFF; border: 1px solid rgba(255, 255, 255, 0.28); font-weight: 800; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
-                <span>🪪 ${txt('بطاقة الحضور والباركود الرقمي', 'Digital Admission Pass', 'Pass Numérique')}</span>
+                <span>◈ ${txt('بطاقة الحضور والباركود الرقمي', 'Digital Admission Pass', 'Pass Numérique')}</span>
               </button>
               <a href="#/course/shat-chs-master" class="btn-clean btn-green btn-sm">
                 <span>${t.btnClassroom}</span>
@@ -192,7 +192,7 @@ export function renderStudentDashboardView(lang = 'ar') {
               </div>
               <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                 <button type="button" id="btn-hero-take-exam" class="btn-clean btn-sm" style="background: var(--shat-green); color: #FFFFFF; font-weight: 800; border-radius: 6px; padding: 8px 16px; box-shadow: 0 3px 10px rgba(30,126,52,0.25);">
-                  <span>📝 ${txt('الاختبار والشهادة المعتمدة', 'Exam & Certificate', 'Examen & Certificat')}</span>
+                  <span>✓ ${txt('الاختبار والشهادة المعتمدة', 'Exam & Certificate', 'Examen & Certificat')}</span>
                 </button>
                 <a href="#/course/shat-chs-master" class="btn-clean btn-primary btn-md" style="font-weight: 700;">
                   <span>${t.btnResume}</span>
@@ -248,7 +248,7 @@ export function renderStudentDashboardView(lang = 'ar') {
                     ${t.task1Title}
                   </h4>
                   <div style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; background: #FFFFFF; padding: 10px 14px; border-radius: var(--radius-xs); border: 1px solid var(--border-light); margin-top: 8px;">
-                    💬 <strong>${txt('ملاحظات المدرب:', 'Trainer Feedback:', 'Commentaires du Formateur :')}</strong> "${t.task1Feedback}"
+                    ▪ <strong>${txt('ملاحظات المدرب:', 'Trainer Feedback:', 'Commentaires du Formateur :')}</strong> "${t.task1Feedback}"
                   </div>
                 </div>
 
@@ -304,36 +304,36 @@ export function renderStudentDashboardView(lang = 'ar') {
               <!-- Doc 1 -->
               <div style="background: var(--bg-subtle); padding: 18px; border-radius: var(--radius-xs); border: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center;">
                 <div>
-                  <div style="font-weight: 800; font-size: 0.92rem; color: var(--shat-navy); margin-bottom: 4px;">📄 CHS_Core_Handbook.pdf</div>
+                  <div style="font-weight: 800; font-size: 0.92rem; color: var(--shat-navy); margin-bottom: 4px;">▪ CHS_Core_Handbook.pdf</div>
                   <div style="font-size: 0.78rem; color: var(--text-muted);">4.8 MB • ${txt('وثيقة معتمدة', 'Accredited Document', 'Document Homologué')}</div>
                 </div>
                 <a href="/api/files/download/file-chs-01" class="btn-clean btn-green btn-sm" download="CHS_Handbook.pdf">
                   <span>${t.downloadBtn}</span>
-                  <span>📥</span>
+                  <span>↓</span>
                 </a>
               </div>
 
               <!-- Doc 2 -->
               <div style="background: var(--bg-subtle); padding: 18px; border-radius: var(--radius-xs); border: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center;">
                 <div>
-                  <div style="font-weight: 800; font-size: 0.92rem; color: var(--shat-navy); margin-bottom: 4px;">📊 AAP_Accountability_Toolkit.pptx</div>
+                  <div style="font-weight: 800; font-size: 0.92rem; color: var(--shat-navy); margin-bottom: 4px;">▪ AAP_Accountability_Toolkit.pptx</div>
                   <div style="font-size: 0.78rem; color: var(--text-muted);">12.3 MB • ${txt('عرض تقديمي للمحاضرات', 'Lecture Slides', 'Présentation Didactique')}</div>
                 </div>
                 <a href="/api/files/download/file-chs-02" class="btn-clean btn-green btn-sm" download="AAP_Toolkit.pptx">
                   <span>${t.downloadBtn}</span>
-                  <span>📥</span>
+                  <span>↓</span>
                 </a>
               </div>
 
               <!-- Doc 3 -->
               <div style="background: var(--bg-subtle); padding: 18px; border-radius: var(--radius-xs); border: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center;">
                 <div>
-                  <div style="font-weight: 800; font-size: 0.92rem; color: var(--shat-navy); margin-bottom: 4px;">📑 CHS_Compliance_Matrix.xlsx</div>
+                  <div style="font-weight: 800; font-size: 0.92rem; color: var(--shat-navy); margin-bottom: 4px;">▪ CHS_Compliance_Matrix.xlsx</div>
                   <div style="font-size: 0.78rem; color: var(--text-muted);">1.2 MB • ${txt('جداول إلكترونية للتدقيق', 'Audit Spreadsheet', 'Tableur d’Audit')}</div>
                 </div>
                 <a href="/api/files/download/file-chs-03" class="btn-clean btn-green btn-sm" download="CHS_Matrix.xlsx">
                   <span>${t.downloadBtn}</span>
-                  <span>📥</span>
+                  <span>↓</span>
                 </a>
               </div>
             </div>
@@ -429,7 +429,7 @@ export function bindStudentEvents() {
 
           <button type="submit" id="btn-confirm-submission" class="btn-clean btn-primary btn-lg" style="width: 100%; justify-content: center;">
             <span>${txt('تأكيد ورفع التسليم للمدرب الأكاديمي', 'Confirm & Upload Submission', 'Confirmer et Déposer le Devoir')}</span>
-            <span>📤</span>
+            <span>↑</span>
           </button>
         </form>
       `;
@@ -466,7 +466,7 @@ export function bindStudentEvents() {
             showToast(txt('تعذر إتمام التسليم: ', 'Failed to submit assignment: ', 'Échec de la soumission : ') + e.message, 'error');
             if (btnConfirm) {
               btnConfirm.disabled = false;
-              btnConfirm.innerHTML = `<span>${txt('تأكيد ورفع التسليم للمدرب الأكاديمي', 'Confirm & Upload Submission', 'Confirmer et Déposer le Devoir')}</span><span>📤</span>`;
+              btnConfirm.innerHTML = `<span>${txt('تأكيد ورفع التسليم للمدرب الأكاديمي', 'Confirm & Upload Submission', 'Confirmer et Déposer le Devoir')}</span><span>↑</span>`;
             }
           }
         });
@@ -654,11 +654,11 @@ function openStudentPassModal(lang = 'ar') {
             ${txt('دبلوم المعيار الإنساني الأساسي (CHS) وتصميم التدخلات', 'Core Humanitarian Standard (CHS) Diploma', 'Diplôme Norme Humanitaire Fondamentale (CHS)')}
           </div>
           <div style="font-size: 0.78rem; color: #3B82F6; margin-top: 4px; display: flex; gap: 12px; flex-wrap: wrap;">
-            <span>👨‍🏫 المدرب: د. أسامة المنصور</span>
+            <span>❖ المدرب: د. أسامة المنصور</span>
             <span>•</span>
-            <span>⏱️ 40 ساعة تدريبية</span>
+            <span>◷ 40 ساعة تدريبية</span>
             <span>•</span>
-            <span>📍 قاعة التدريب المباشر والافتراضي</span>
+            <span>• قاعة التدريب المباشر والافتراضي</span>
           </div>
         </div>
 
@@ -678,7 +678,7 @@ function openStudentPassModal(lang = 'ar') {
       </button>
 
       <button type="button" class="btn-clean btn-primary btn-md allow-print" id="btn-trigger-print-pass" style="background: var(--shat-navy); font-weight: 800; box-shadow: 0 4px 14px rgba(15,46,74,0.3);">
-        🖨️ ${txt('طباعة البطاقة / حفظ كـ PDF', 'Print / Save Pass (PDF)', 'Imprimer le Pass (PDF)')}
+        ⎙ ${txt('طباعة البطاقة / حفظ كـ PDF', 'Print / Save Pass (PDF)', 'Imprimer le Pass (PDF)')}
       </button>
     </div>
   `;

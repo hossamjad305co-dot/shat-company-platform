@@ -16,7 +16,7 @@ export function MobileHeader({ title = '', backRoute = null, showNotification = 
         <div style="display: flex; align-items: center; gap: 10px;">
           ${backRoute ? `
             <a href="${backRoute}" class="mobile-header-back-btn" style="color: #ffffff; text-decoration: none; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: var(--radius-full); background: rgba(255,255,255,0.12);" aria-label="الرجوع">
-              <span style="font-size: 1.2rem; transform: scaleX(-1);">➜</span>
+              <span style="font-size: 1.2rem; transform: scaleX(-1);">→</span>
             </a>
             <span style="font-size: 1rem; font-weight: 800; color: #ffffff; max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
               ${title}
@@ -36,7 +36,7 @@ export function MobileHeader({ title = '', backRoute = null, showNotification = 
         <div style="display: flex; align-items: center; gap: 8px;">
           ${showNotification ? `
             <a href="#/notifications" class="mobile-notif-trigger" style="position: relative; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; color: #ffffff; text-decoration: none;" aria-label="الإشعارات">
-              <span style="font-size: 1.25rem;">🔔</span>
+              <span style="font-size: 1.25rem;">✉</span>
               ${unreadCount > 0 ? `
                 <span style="position: absolute; top: 6px; inset-inline-end: 6px; background: #ef4444; color: #ffffff; font-size: 0.68rem; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid #0F2E4A;">
                   ${unreadCount > 9 ? '9+' : unreadCount}

@@ -194,7 +194,7 @@ export const toolkitsLibrary = {
                 </span>
 
                 <button class="btn-clean btn-primary btn-sm btn-open-toolkit-preview" data-toolkit="${tk.id}">
-                  <span>👁️ ${txt('معاينة وتحميل النموذج', 'Preview & Download', 'Aperçu & Téléchargement')}</span>
+                  <span>◈ ${txt('معاينة وتحميل النموذج', 'Preview & Download', 'Aperçu & Téléchargement')}</span>
                 </button>
               </div>
             </div>
@@ -250,7 +250,7 @@ export const toolkitsLibrary = {
         </div>
 
         <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: var(--radius-xs); padding: 14px; margin-bottom: 20px; font-size: 0.84rem; color: #166534; line-height: 1.6;">
-          🔒 ${txt(
+          ◈ ${txt(
             'هذا النموذج مملوك لشركة شات ومتاح للاستخدام المهني غير التجاري للمنظمات الإنسانية والتنموية الشريكة والمتدربين المعتمدين.',
             'Licensed for non-commercial institutional use by SHAT partner organizations and certified trainees.',
             'Licence d’utilisation non commerciale réservée aux organisations partenaires et stagiaires certifiés.'
@@ -264,10 +264,10 @@ export const toolkitsLibrary = {
           
           <div style="display: flex; gap: 8px;">
             <button type="button" class="btn-clean btn-sm allow-print" onclick="window.print();" style="background: var(--bg-subtle); color: var(--shat-navy); border: 1px solid var(--border-light); font-weight: 700;">
-              🖨️ ${txt('طباعة القائمة', 'Print Checklist', 'Imprimer')}
+              ⎙ ${txt('طباعة القائمة', 'Print Checklist', 'Imprimer')}
             </button>
             <button type="button" class="btn-clean btn-primary btn-sm btn-download-tk-direct" data-title="${isRtl ? tk.titleAr : tk.titleEn}">
-              <span>📥 ${txt('تحميل الحقيبة الرسمية', 'Download Toolkit', 'Télécharger')}</span>
+              <span>↓ ${txt('تحميل الحقيبة الرسمية', 'Download Toolkit', 'Télécharger')}</span>
             </button>
           </div>
         </div>

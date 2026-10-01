@@ -39,7 +39,7 @@ export async function renderAssignmentsPage() {
                 <div style="font-size: var(--font-size-caption); color: var(--text-muted); margin-top: 4px;">${a.courseTitle}</div>
               </div>
               <div style="display: flex; align-items: center; gap: 8px;">
-                <span class="shat-badge shat-badge-warning">📅 الموعد النهائي: ${a.deadline}</span>
+                <span class="shat-badge shat-badge-warning">◷ الموعد النهائي: ${a.deadline}</span>
                 ${StatusBadge({ status: a.status, label: a.status === 'graded' ? `تم التقييم (${a.score})` : 'بانتظار التسليم' })}
               </div>
             </div>
@@ -54,7 +54,7 @@ export async function renderAssignmentsPage() {
               </div>
               <div style="display: flex; gap: var(--space-sm);">
                 <button type="button" class="shat-btn shat-btn-outline shat-btn-sm" onclick="alert('منطقة رفع الملفات - يتم ربط التخزين عند تفعيل Google Drive')">
-                  <span>📎 إرفاق ملف الحل</span>
+                  <span>▪ إرفاق ملف الحل</span>
                 </button>
                 <button type="button" class="shat-btn shat-btn-primary shat-btn-sm" onclick="alert('تم استلام تسليمك مبدئياً وحفظه في سجل الطالب المحلي')">
                   <span>تأكيد التسليم</span>
@@ -63,7 +63,7 @@ export async function renderAssignmentsPage() {
             </div>
           </div>
         `).join('') : EmptyState({
-          icon: '📝',
+          icon: '▪',
           title: 'لا توجد تكليفات مستحقة حالياً',
           description: 'جميع التكليفات مسلّمة أو لم يقم المدرب بإضافة مهام جديدة بعد.'
         })}

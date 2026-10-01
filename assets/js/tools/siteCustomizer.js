@@ -79,7 +79,7 @@ export const DEFAULT_SITE_CONFIG = {
   
   // Top Announcement Bar
   announcementActive: true,
-  announcementTextAr: '🚀 انطلاق التسجيل في برامج ودبلومات الربع الأخير لعام 2026 وفق معايير CHS وPSEA',
+  announcementTextAr: '★ انطلاق التسجيل في برامج ودبلومات الربع الأخير لعام 2026 وفق معايير CHS وPSEA',
   announcementTextEn: 'Registration open for Q4 2026 humanitarian diplomas & institutional capacity tracks',
   
   // Hero Section Customization
@@ -186,8 +186,8 @@ export const siteCustomizer = {
         <!-- Header -->
         <div style="background: linear-gradient(135deg, var(--shat-navy, #0F2E4A) 0%, #061523 100%); color: #FFFFFF; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--shat-green, #10B981); flex-shrink: 0;">
           <div style="display: flex; align-items: center; gap: 14px;">
-            <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(16,185,129,0.25); border: 1px solid rgba(16,185,129,0.5); display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
-              🎨
+            <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(16,185,129,0.25); border: 1px solid rgba(16,185,129,0.5); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: #10B981; font-weight: 900;">
+              ◈
             </div>
             <div>
               <div style="display: flex; align-items: center; gap: 8px;">
@@ -207,23 +207,23 @@ export const siteCustomizer = {
         <!-- Navigation Tabs -->
         <div style="display: flex; gap: 4px; background: #F1F5F9; padding: 8px 16px; border-bottom: 1px solid var(--border-light); overflow-x: auto; flex-shrink: 0;">
           <button type="button" class="customizer-tab-btn active" data-tab="tab-theme" style="padding: 8px 16px; font-size: 0.86rem; font-weight: 800; border-radius: 6px; border: none; cursor: pointer; background: #FFFFFF; color: var(--shat-navy, #0F2E4A); box-shadow: 0 1px 3px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 6px;">
-            <span>🎨</span>
+            <span>◈</span>
             <span>${txt('المظهر والألوان', 'Theme & Palette', 'Thème & Couleurs')}</span>
           </button>
           <button type="button" class="customizer-tab-btn" data-tab="tab-identity" style="padding: 8px 16px; font-size: 0.86rem; font-weight: 700; border-radius: 6px; border: none; cursor: pointer; background: transparent; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
-            <span>🏛️</span>
+            <span>◈</span>
             <span>${txt('الهوية والنصوص', 'Branding & Copy', 'Identité & Textes')}</span>
           </button>
           <button type="button" class="customizer-tab-btn" data-tab="tab-contacts" style="padding: 8px 16px; font-size: 0.86rem; font-weight: 700; border-radius: 6px; border: none; cursor: pointer; background: transparent; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
-            <span>🌐</span>
+            <span>✉</span>
             <span>${txt('الاتصال والتواصل', 'Contacts & Social', 'Contacts & Réseaux')}</span>
           </button>
           <button type="button" class="customizer-tab-btn" data-tab="tab-forms" style="padding: 8px 16px; font-size: 0.86rem; font-weight: 700; border-radius: 6px; border: none; cursor: pointer; background: transparent; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
-            <span>📋</span>
+            <span>▪</span>
             <span>${txt('روابط الاستمارات', 'Google Forms Links', 'Liens Formulaires')}</span>
           </button>
           <button type="button" class="customizer-tab-btn" data-tab="tab-sections" style="padding: 8px 16px; font-size: 0.86rem; font-weight: 700; border-radius: 6px; border: none; cursor: pointer; background: transparent; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
-            <span>⚙️</span>
+            <span>⚙</span>
             <span>${txt('ظهور الأقسام', 'Sections Visibility', 'Visibilité Sections')}</span>
           </button>
         </div>
@@ -237,7 +237,7 @@ export const siteCustomizer = {
             <div id="tab-theme" class="customizer-tab-pane" style="display: flex; flex-direction: column; gap: 18px;">
               <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 18px; box-shadow: var(--shadow-sm);">
                 <h4 style="margin: 0 0 12px 0; font-size: 0.95rem; font-weight: 800; color: var(--shat-navy); display: flex; align-items: center; gap: 8px;">
-                  <span>🎭</span>
+                  <span>◈</span>
                   <span>${txt('القوالب اللونية الجاهزة (One-Click Presets)', 'Curated Color Presets', 'Préréglages de Thème')}</span>
                 </h4>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px;">
@@ -256,7 +256,7 @@ export const siteCustomizer = {
 
               <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 18px; box-shadow: var(--shadow-sm);">
                 <h4 style="margin: 0 0 14px 0; font-size: 0.95rem; font-weight: 800; color: var(--shat-navy); display: flex; align-items: center; gap: 8px;">
-                  <span>🎛️</span>
+                  <span>◈</span>
                   <span>${txt('تخصيص الألوان التفصيلي (Custom Palette)', 'Custom Color Controls', 'Palette Personnalisée')}</span>
                 </h4>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
@@ -293,7 +293,7 @@ export const siteCustomizer = {
 
               <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 18px; box-shadow: var(--shadow-sm);">
                 <h4 style="margin: 0 0 14px 0; font-size: 0.95rem; font-weight: 800; color: var(--shat-navy); display: flex; align-items: center; gap: 8px;">
-                  <span>🔤</span>
+                  <span>◈</span>
                   <span>${txt('الخطوط وانحناء الحواف (Typography & Geometry)', 'Typography & Geometry', 'Typographie & Rayon')}</span>
                 </h4>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
@@ -323,7 +323,7 @@ export const siteCustomizer = {
             <div id="tab-identity" class="customizer-tab-pane" style="display: none; flex-direction: column; gap: 18px;">
               <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 18px; box-shadow: var(--shadow-sm);">
                 <h4 style="margin: 0 0 14px 0; font-size: 0.95rem; font-weight: 800; color: var(--shat-navy);">
-                  🏛️ ${txt('عناوين وهوية المنصة', 'Platform Titles & Identity', 'Identité & Titres')}
+                  ◈ ${txt('عناوين وهوية المنصة', 'Platform Titles & Identity', 'Identité & Titres')}
                 </h4>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px;">
                   <div>
@@ -347,7 +347,7 @@ export const siteCustomizer = {
 
               <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 18px; box-shadow: var(--shadow-sm);">
                 <h4 style="margin: 0 0 14px 0; font-size: 0.95rem; font-weight: 800; color: var(--shat-navy);">
-                  📢 ${txt('شريط الإعلانات العاجل والواجهة الرئيسية', 'Announcement Banner & Hero Copy', 'Bandeau & Hero')}
+                  ★ ${txt('شريط الإعلانات العاجل والواجهة الرئيسية', 'Announcement Banner & Hero Copy', 'Bandeau & Hero')}
                 </h4>
                 <div style="display: flex; flex-direction: column; gap: 14px;">
                   <div>
@@ -370,7 +370,7 @@ export const siteCustomizer = {
             <div id="tab-contacts" class="customizer-tab-pane" style="display: none; flex-direction: column; gap: 18px;">
               <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 18px; box-shadow: var(--shadow-sm);">
                 <h4 style="margin: 0 0 14px 0; font-size: 0.95rem; font-weight: 800; color: var(--shat-navy);">
-                  🌐 ${txt('بيانات الاتصال الرسمية', 'Official Contact Details', 'Coordonnées')}
+                  ✉ ${txt('بيانات الاتصال الرسمية', 'Official Contact Details', 'Coordonnées')}
                 </h4>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px;">
                   <div>
@@ -394,7 +394,7 @@ export const siteCustomizer = {
 
               <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 18px; box-shadow: var(--shadow-sm);">
                 <h4 style="margin: 0 0 14px 0; font-size: 0.95rem; font-weight: 800; color: var(--shat-navy);">
-                  📱 ${txt('قنوات التواصل الاجتماعي الرسمية المعتمدة', 'Official Verified Social Channels', 'Réseaux Sociaux Officiels')}
+                  ◈ ${txt('قنوات التواصل الاجتماعي الرسمية المعتمدة', 'Official Verified Social Channels', 'Réseaux Socials Officiels')}
                 </h4>
                 <div style="display: flex; flex-direction: column; gap: 12px;">
                   <div>
@@ -417,7 +417,7 @@ export const siteCustomizer = {
             <div id="tab-forms" class="customizer-tab-pane" style="display: none; flex-direction: column; gap: 18px;">
               <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 18px; box-shadow: var(--shadow-sm);">
                 <h4 style="margin: 0 0 14px 0; font-size: 0.95rem; font-weight: 800; color: var(--shat-navy);">
-                  📋 ${txt('روابط استمارات Google Forms المعتمدة', 'Verified Google Form URLs', 'Liens Google Forms')}
+                  ▪ ${txt('روابط استمارات Google Forms المعتمدة', 'Verified Google Form URLs', 'Liens Google Forms')}
                 </h4>
                 <div style="display: flex; flex-direction: column; gap: 14px;">
                   <div>
@@ -444,7 +444,7 @@ export const siteCustomizer = {
             <div id="tab-sections" class="customizer-tab-pane" style="display: none; flex-direction: column; gap: 18px;">
               <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 18px; box-shadow: var(--shadow-sm);">
                 <h4 style="margin: 0 0 14px 0; font-size: 0.95rem; font-weight: 800; color: var(--shat-navy);">
-                  ⚙️ ${txt('التحكم في تفعيل وظهور مكونات المنصة', 'Platform Components Toggles', 'Visibilité des Composants')}
+                  ⚙ ${txt('التحكم في تفعيل وظهور مكونات المنصة', 'Platform Components Toggles', 'Visibilité des Composants')}
                 </h4>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px;">
                   <label style="display: flex; align-items: center; gap: 10px; font-size: 0.88rem; font-weight: 700; cursor: pointer; background: #F8FAFC; padding: 10px 14px; border-radius: 6px; border: 1px solid var(--border-light);">
@@ -474,7 +474,7 @@ export const siteCustomizer = {
             <!-- Footer Action Buttons -->
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding-top: 14px; border-top: 1px solid var(--border-light); flex-shrink: 0;">
               <button type="button" id="btn-reset-customizer" class="btn-clean" style="background: #F1F5F9; color: #64748B; font-weight: 700; border: 1px solid var(--border-medium); padding: 9px 18px; font-size: 0.84rem; border-radius: 6px;">
-                <span>🔄</span>
+                <span>↺</span>
                 <span>${txt('استعادة الإعدادات الأصلية المصنعية', 'Reset to Factory Defaults', 'Réinitialiser')}</span>
               </button>
 
@@ -483,7 +483,7 @@ export const siteCustomizer = {
                   <span>${txt('إلغاء التعديل', 'Cancel', 'Annuler')}</span>
                 </button>
                 <button type="submit" class="btn-clean btn-primary" style="padding: 10px 26px; font-size: 0.9rem; font-weight: 800; background: var(--shat-green, #10B981); color: #FFFFFF; border: none; border-radius: 6px; box-shadow: 0 4px 12px rgba(16,185,129,0.35); cursor: pointer;">
-                  <span>💾</span>
+                  <span>✓</span>
                   <span>${txt('حفظ وتطبيق التغييرات فوراً', 'Save & Apply Live', 'Enregistrer et Appliquer')}</span>
                 </button>
               </div>

@@ -25,7 +25,7 @@ export function renderServicesView(lang = 'ar') {
     diagDesc: lang === 'fr'
       ? 'Évaluez la maturité de votre organisation sur 4 piliers critiques (CHS, PSEA, MEAL, Gouvernance) et obtenez une feuille de route sur mesure.'
       : (isRtl ? 'افحص مستوى نضج وجاهزية منظمتكم عبر 4 ركائز حيوية (CHS، PSEA، MEAL، الحوكمة) واحصل فوراً على تقرير نضج ومسار تطوير مخصص.' : 'Evaluate your organization’s maturity across 4 critical pillars (CHS, PSEA, MEAL, Governance) and receive a tailored capacity enhancement roadmap.'),
-    diagBtn: lang === 'fr' ? 'Lancer le Diagnostic Immédiat' : (isRtl ? '⚡ بدء التقييم الذاتي المباشر' : '⚡ Launch Diagnostic Now'),
+    diagBtn: lang === 'fr' ? 'Lancer le Diagnostic Immédiat' : (isRtl ? '◈ بدء التقييم الذاتي المباشر' : '◈ Launch Diagnostic Now'),
 
     // Pillars
     pillar1Badge: lang === 'fr' ? 'Pilier 1: Formation & Capacités' : (isRtl ? 'الركيزة الأولى: منظومة التدريب وبناء القدرات' : 'Pillar 1: Training & Capacity Development'),
@@ -212,7 +212,7 @@ export function renderServicesView(lang = 'ar') {
                           ${p.num}
                         </span>
                         <button type="button" class="btn-clean" onclick="if(window.openStandardsExplorer) window.openStandardsExplorer('${rel.standardCode}');" style="font-size: 0.72rem; color: var(--shat-navy); background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 4px; padding: 2px 7px; font-weight: 700; cursor: pointer;">
-                          ⚡ ${rel.standardCode}
+                          ◈ ${rel.standardCode}
                         </button>
                       </div>
 
@@ -226,13 +226,13 @@ export function renderServicesView(lang = 'ar') {
                           <div>
                             <span style="color: var(--text-muted); font-size: 0.72rem;">${t.linkedCourse}</span><br>
                             <a href="#/course/${rel.courseId}" style="color: var(--shat-navy); font-weight: 700; text-decoration: none;">
-                              🎓 ${rel.courseName}
+                              ✦ ${rel.courseName}
                             </a>
                           </div>
                           <div style="border-top: 1px dashed var(--border-light); padding-top: 5px;">
                             <span style="color: var(--text-muted); font-size: 0.72rem;">${t.linkedProject}</span><br>
                             <a href="#/projects" style="color: var(--shat-green); font-weight: 700; text-decoration: none;">
-                              📋 ${rel.projectCode}
+                              ▪ ${rel.projectCode}
                             </a>
                           </div>
                         </div>
@@ -327,7 +327,7 @@ export function renderServicesView(lang = 'ar') {
                     <span>${arrow}</span>
                   </a>
                   <a href="#/course/shat-psea-expert" class="btn-clean btn-secondary" style="border-color: rgba(255,255,255,0.2); color: #FFFFFF; background: transparent;">
-                    <span>🎓 ${isRtl ? 'المساق' : 'Course'}</span>
+                    <span>✦ ${isRtl ? 'المساق' : 'Course'}</span>
                   </a>
                 </div>
               </div>
@@ -359,7 +359,7 @@ export function renderServicesView(lang = 'ar') {
                     <span>${arrow}</span>
                   </a>
                   <a href="#/course/shat-oecd-eval" class="btn-clean btn-secondary" style="border-color: rgba(255,255,255,0.2); color: #FFFFFF; background: transparent;">
-                    <span>🎓 ${isRtl ? 'المساق' : 'Course'}</span>
+                    <span>✦ ${isRtl ? 'المساق' : 'Course'}</span>
                   </a>
                 </div>
               </div>

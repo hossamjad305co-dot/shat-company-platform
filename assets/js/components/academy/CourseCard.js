@@ -19,9 +19,9 @@ export function CourseCard({ course, currentLang = 'ar' }) {
         </h3>
 
         <div style="display: flex; align-items: center; gap: 8px; font-size: var(--font-size-body-sm); color: var(--text-muted); margin-bottom: var(--space-md);">
-          <span>👨‍🏫 ${course.instructor}</span>
+          <span>◈ ${course.instructor}</span>
           <span>•</span>
-          <span>⏱️ ${course.duration || 'معتمد'}</span>
+          <span>◷ ${course.duration || 'معتمد'}</span>
         </div>
 
         <p style="font-size: var(--font-size-body-sm); color: var(--text-secondary); line-height: 1.6; margin-bottom: var(--space-lg); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">

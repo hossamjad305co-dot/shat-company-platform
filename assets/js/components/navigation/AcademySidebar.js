@@ -8,23 +8,23 @@ export function AcademySidebar({ activeRoute = 'academy' }) {
   const isInstructor = authService.isInstructor();
 
   const links = [
-    { route: 'academy', label: 'لوحة التعلم (Dashboard)', icon: '📊', href: '#/academy' },
-    { route: 'academy/courses', label: 'المساقات والحقائب', icon: '📚', href: '#/academy' },
-    { route: 'academy/assignments', label: 'التكليفات والأنشطة', icon: '📝', href: '#/academy/assignments' },
-    { route: 'academy/exams', label: 'الاختبارات والتقييم', icon: '⏱️', href: '#/academy/exams' },
-    { route: 'academy/grades', label: 'سجل الدرجات', icon: '🎖️', href: '#/academy/grades' },
-    { route: 'academy/files', label: 'مستودع درايف (5TB)', icon: '☁️', href: '#/academy/files' }
+    { route: 'academy', label: 'لوحة التعلم (Dashboard)', icon: '▪', href: '#/academy' },
+    { route: 'academy/courses', label: 'المساقات والحقائب', icon: '▪', href: '#/academy' },
+    { route: 'academy/assignments', label: 'التكليفات والأنشطة', icon: '▪', href: '#/academy/assignments' },
+    { route: 'academy/exams', label: 'الاختبارات والتقييم', icon: '◷', href: '#/academy/exams' },
+    { route: 'academy/grades', label: 'سجل الدرجات', icon: '★', href: '#/academy/grades' },
+    { route: 'academy/files', label: 'مستودع درايف (5TB)', icon: '◈', href: '#/academy/files' }
   ];
 
   const teacherLinks = (isInstructor || isAdmin) ? [
-    { route: 'teacher/builder', label: 'منشئ المناهج (Course Builder)', icon: '🛠️', href: '#/teacher/builder' },
-    { route: 'teacher/grading', label: 'مركز التصحيح (Grading Queue)', icon: '✍️', href: '#/teacher/grading' }
+    { route: 'teacher/builder', label: 'منشئ المناهج (Course Builder)', icon: '▪', href: '#/teacher/builder' },
+    { route: 'teacher/grading', label: 'مركز التصحيح (Grading Queue)', icon: '✓', href: '#/teacher/grading' }
   ] : [];
 
   const adminLinks = isAdmin ? [
-    { route: 'admin/users', label: 'إدارة المستخدمين والصلاحيات', icon: '👥', href: '#/admin/users' },
-    { route: 'admin/integrations', label: 'مركز الربط السحابي', icon: '🔌', href: '#/admin/integrations' },
-    { route: 'admin/audit', label: 'سجلات الرقابة والعمليات', icon: '📜', href: '#/admin/audit' }
+    { route: 'admin/users', label: 'إدارة المستخدمين والصلاحيات', icon: '▪', href: '#/admin/users' },
+    { route: 'admin/integrations', label: 'مركز الربط السحابي', icon: '◈', href: '#/admin/integrations' },
+    { route: 'admin/audit', label: 'سجلات الرقابة والعمليات', icon: '▪', href: '#/admin/audit' }
   ] : [];
 
   return `

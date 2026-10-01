@@ -47,7 +47,7 @@ export function renderToolkitsView(lang = 'ar') {
           <!-- Feature Highlights Grid -->
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 32px;">
             <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 12px; padding: 18px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow-sm);">
-              <span style="font-size: 2rem;">📊</span>
+              <span style="font-size: 1.5rem; font-weight: 900; color: #166534;">▲</span>
               <div>
                 <div style="font-weight: 800; font-size: 0.95rem; color: var(--shat-navy);">مصفوفات MEAL الذكية</div>
                 <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">مؤشرات أداء وجداول جمع بيانات</div>
@@ -55,7 +55,7 @@ export function renderToolkitsView(lang = 'ar') {
             </div>
 
             <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 12px; padding: 18px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow-sm);">
-              <span style="font-size: 2rem;">🛡️</span>
+              <span style="font-size: 1.5rem; font-weight: 900; color: #0F2E4A;">◈</span>
               <div>
                 <div style="font-weight: 800; font-size: 0.95rem; color: var(--shat-navy);">سياسات PSEA وصون السلامة</div>
                 <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">مسارات إحالة وتدقيق مسبق معتمد</div>
@@ -63,7 +63,7 @@ export function renderToolkitsView(lang = 'ar') {
             </div>
 
             <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 12px; padding: 18px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow-sm);">
-              <span style="font-size: 2rem;">🤝</span>
+              <span style="font-size: 1.5rem; font-weight: 900; color: #D97706;">❖</span>
               <div>
                 <div style="font-weight: 800; font-size: 0.95rem; color: var(--shat-navy);">ملفات ونماذج إدارة الحالة</div>
                 <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">استمارات تقييم وموافقة مستنيرة</div>
@@ -98,7 +98,7 @@ export function renderToolkitsView(lang = 'ar') {
 
             <div>
               <a href="#/contact" class="btn-clean" style="background: #10B981; color: #FFFFFF; font-weight: 800; padding: 14px 28px; border-radius: 10px; font-size: 1rem; box-shadow: 0 4px 14px rgba(16,185,129,0.3); display: inline-flex; align-items: center; gap: 8px;">
-                <span>💬 ${txt('تواصل مع مستشار النظم والأدلة', 'Consult with a Systems Expert', 'Contacter un Consultant')}</span>
+                <span>✉ ${txt('تواصل مع مستشار النظم والأدلة', 'Consult with a Systems Expert', 'Contacter un Consultant')}</span>
                 <span>${arrow}</span>
               </a>
             </div>

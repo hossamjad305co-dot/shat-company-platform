@@ -34,7 +34,7 @@ export function renderAdminSettingsPage() {
       <div style="max-width: 800px;">
         <div class="shat-card" style="background: #ffffff; border-radius: var(--radius-xl); padding: 28px; box-shadow: var(--shadow-sm); margin-bottom: 24px;">
           <h3 style="font-size: var(--font-size-h4); color: var(--shat-navy-950); margin: 0 0 12px; display: flex; align-items: center; gap: 8px;">
-            📝 إعدادات مسار تسجيل الطلاب في المساقات
+            ▪ إعدادات مسار تسجيل الطلاب في المساقات
           </h3>
           <p style="font-size: var(--font-size-body-sm); color: var(--text-secondary); margin-bottom: 24px; line-height: 1.6;">
             حدد كيفية استقبال طلبات الالتحاق بالدورات التدريبية المعتمدة عبر المنصة:
@@ -81,7 +81,7 @@ export function renderAdminSettingsPage() {
 
             <!-- Save Settings Button -->
             <button type="submit" id="btn-save-settings" class="shat-btn shat-btn-primary" style="min-height: 46px; font-weight: 700; padding: 0 24px;">
-              💾 حفظ الإعدادات وسياسات التسجيل
+              ✓ حفظ الإعدادات وسياسات التسجيل
             </button>
             <span id="settings-save-feedback" style="display: none; margin-inline-start: 12px; color: #059669; font-weight: 700; font-size: 0.9rem;">✓ تم الحفظ بنجاح</span>
           </form>
@@ -90,7 +90,7 @@ export function renderAdminSettingsPage() {
         <!-- Google Drive Integration Info -->
         <div class="shat-card" style="background: #ffffff; border-radius: var(--radius-xl); padding: 24px; box-shadow: var(--shadow-sm);">
           <h3 style="font-size: var(--font-size-h4); color: var(--shat-navy-950); margin: 0 0 10px; display: flex; align-items: center; gap: 8px;">
-            ☁️ تكامل المستودع السحابي (Google Drive 5TB)
+            ◈️ تكامل المستودع السحابي (Google Drive 5TB)
           </h3>
           <p style="font-size: var(--font-size-body-sm); color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px;">
             يتم التنزيل المباشر للملفات التعليمية عبر وسيط المنصة الأمني لمنع كشف روابط التخزين السحابية للمستخدمين غير المصرح لهم.

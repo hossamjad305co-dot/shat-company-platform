@@ -49,7 +49,7 @@ export function renderAdminIntegrationsPage() {
         })}
 
         ${Card({
-          title: '🛡️ تعهد النزاهة التقنية (Zero-Mock Disclosure)',
+          title: '◈ تعهد النزاهة التقنية (Zero-Mock Disclosure)',
           subtitle: 'مبادئ الأمان والشفافية في منصة شات',
           children: `
             <p style="font-size: var(--font-size-body-sm); color: var(--text-secondary); line-height: 1.7; margin: 0;">

@@ -51,8 +51,8 @@ export class WhatsAppConcierge {
         <div style="background: linear-gradient(135deg, #0B1E36 0%, #16365C 100%); color: #FFFFFF; padding: 18px 20px;">
           <div style="display: flex; justify-content: space-between; align-items: flex-start;">
             <div style="display: flex; align-items: center; gap: 10px;">
-              <div style="width: 40px; height: 40px; border-radius: 50%; background: #1E7E34; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
-                💬
+              <div style="width: 40px; height: 40px; border-radius: 50%; background: #1E7E34; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: #FFFFFF; font-weight: 800; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+                ✉
               </div>
               <div>
                 <div style="font-weight: 800; font-size: 0.96rem; line-height: 1.3;">شركة شات للتنمية والتطوير</div>
@@ -65,39 +65,39 @@ export class WhatsAppConcierge {
             <button id="btn-close-concierge" style="background: transparent; border: none; color: #94A3B8; font-size: 1.2rem; cursor: pointer; padding: 2px 6px;">✕</button>
           </div>
           <p style="font-size: 0.82rem; color: #CBD5E1; margin: 12px 0 0; line-height: 1.5;">
-            مرحباً بك! 👋 اختر موضوع استفسارك للتواصل الفوري والمباشر مع المستشار المختص عبر واتساب:
+            مرحباً بك! اختر موضوع استفسارك للتواصل الفوري والمباشر مع المستشار المختص عبر واتساب:
           </p>
         </div>
 
         <!-- Quick Action Query Chips -->
         <div style="padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; max-height: 280px; overflow-y: auto; background: #F8FAFC;">
           <button class="concierge-chip" data-msg="مرحباً شركة شات، أود الاستفسار والتسجيل في دورة إدارة الحالة Case Management (د. محمد إسليم)">
-            <span>🤝</span>
+            <span>▪</span>
             <span>دورة إدارة الحالة (د. محمد إسليم)</span>
           </button>
 
           <button class="concierge-chip" data-msg="مرحباً شركة شات، أود الاستفسار والتسجيل في دورة مهارات العرض والتقديم Presentation Skills (م. مهدي الملاحي)">
-            <span>🎤</span>
+            <span>▪</span>
             <span>دورة مهارات العرض (م. مهدي الملاحي)</span>
           </button>
 
           <button class="concierge-chip" data-msg="مرحباً شركة شات، أود الاستفسار عن دبلوم الممارس الإنساني وبناء القدرات (CHS Master) والمنح المتاحة">
-            <span>🛡️</span>
+            <span>▪</span>
             <span>دبلوم معيار CHS الإنساني</span>
           </button>
 
           <button class="concierge-chip" data-msg="مرحباً شركة شات، نود طلب استشارة مؤسسية لتطوير النظم واللوائح التشغيلية أو تقييم مشاريع لجمعيتنا/مؤسستنا">
-            <span>🏛️</span>
+            <span>▪</span>
             <span>طلب استشارة وبناء قدرات لمؤسسة</span>
           </button>
 
           <button class="concierge-chip" data-msg="مرحباً شركة شات، أود الاستفسار عن التحقق من صحة واعتماد شهادة صادرة برقم تسلسلي">
-            <span>📜</span>
+            <span>▪</span>
             <span>التحقق من صحة شهادة صادرة</span>
           </button>
 
           <button class="concierge-chip" data-msg="مرحباً شركة شات، أود الاستفسار عن الرسوم وطرق الدفع المتاحة (بنك فلسطين، بال باي، جوال باي، كاش)">
-            <span>💳</span>
+            <span>▪</span>
             <span>طرق الدفع والرسوم والمنح الجزئية</span>
           </button>
         </div>

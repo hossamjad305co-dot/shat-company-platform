@@ -2,7 +2,7 @@
 export default {
   dir: 'rtl',
   langName: 'العربية',
-  flag: '🌐',
+  flag: '',
   companyName: 'شركة شات للتنمية والتطوير',
   companyNameEn: 'SHAT Development & Growth',
   companyTagline: 'بناء القدرات • تعزيز المؤسسات • تطوير النتائج',

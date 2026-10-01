@@ -71,11 +71,11 @@ export async function renderLessonViewPage(courseId, lessonId) {
             ${lesson.title}
           </h1>
           <div style="display: flex; align-items: center; gap: 12px; font-size: var(--font-size-body-sm); color: var(--text-muted); flex-wrap: wrap;">
-            <span>⏱️ المدة التقديرية: <strong>${lesson.duration || '45 دقيقة'}</strong></span>
+            <span>◷ المدة التقديرية: <strong>${lesson.duration || '45 دقيقة'}</strong></span>
             <span>•</span>
-            <span>🎯 النوع: <strong>${lesson.type === 'video' ? 'محاضرة مرئية' : 'قراءة تفاعلية'}</strong></span>
+            <span>★ النوع: <strong>${lesson.type === 'video' ? 'محاضرة مرئية' : 'قراءة تفاعلية'}</strong></span>
             <span>•</span>
-            <span>📊 إنجاز المساق: <strong>${progress.progressPercent}%</strong></span>
+            <span>▲ إنجاز المساق: <strong>${progress.progressPercent}%</strong></span>
           </div>
         </div>
 
@@ -95,7 +95,7 @@ export async function renderLessonViewPage(courseId, lessonId) {
         <!-- Lesson Core Text Body (Comfortable Mobile Typography) -->
         <article class="shat-card" style="padding: clamp(18px, 4vw, 32px); margin-bottom: 24px; line-height: 1.8; font-size: var(--font-size-body); color: var(--text-primary); border: 1px solid var(--border-subtle);">
           <div style="background: var(--shat-green-100); border-inline-start: 4px solid var(--shat-green-700); padding: 12px 16px; border-radius: var(--radius-sm); margin-bottom: 20px; font-size: var(--font-size-body-sm); color: var(--shat-green-950); font-weight: 600;">
-            💡 ملخص الدرس ومحاوره: ${lesson.summary || 'استيعاب المفاهيم الأساسية والتطبيق الميداني المعتمد.'}
+            ★ ملخص الدرس ومحاوره: ${lesson.summary || 'استيعاب المفاهيم الأساسية والتطبيق الميداني المعتمد.'}
           </div>
 
           <div style="white-space: pre-line; margin-bottom: 20px;">
@@ -107,7 +107,7 @@ export async function renderLessonViewPage(courseId, lessonId) {
         ${lesson.files && lesson.files.length > 0 ? `
           <div style="margin-bottom: 28px;">
             <h3 style="font-size: var(--font-size-h4); color: var(--shat-navy-950); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-              <span>📁</span>
+              <span>◈</span>
               <span>المواد التدريبية وملفات الدرس</span>
             </h3>
 
@@ -115,7 +115,7 @@ export async function renderLessonViewPage(courseId, lessonId) {
               ${lesson.files.map((file, fIdx) => `
                 <div class="shat-card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding: 14px 18px; border: 1px solid var(--border-prominent);">
                   <div style="display: flex; align-items: center; gap: 12px;">
-                    <span style="font-size: 1.8rem;">📄</span>
+                    <span style="font-size: 1.8rem;">▪</span>
                     <div>
                       <div style="font-weight: 700; color: var(--shat-navy-950); font-size: var(--font-size-body-sm);">${file.name}</div>
                       <div style="font-size: var(--font-size-caption); color: var(--text-muted);">${file.type || 'PDF'} • ${file.size || 'معتمد'} • وسيط Google Drive محمي</div>
@@ -174,7 +174,7 @@ export async function renderLessonViewPage(courseId, lessonId) {
             </a>
           ` : `
             <a href="#/course/${courseId}" class="shat-btn shat-btn-primary" style="flex: 1; text-align: center; text-decoration: none; min-height: 44px; display: flex; align-items: center; justify-content: center;">
-              <span>إنهاء المساق 🏆</span>
+              <span>إنهاء المساق ★</span>
             </a>
           `}
         </nav>

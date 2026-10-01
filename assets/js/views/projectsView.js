@@ -303,7 +303,7 @@ export function renderProjectsView(lang = 'ar') {
           <div style="background: linear-gradient(135deg, #071527 0%, #0F2E4A 60%, #16426C 100%); color: #FFFFFF; border-radius: 16px; padding: clamp(20px, 3vw, 32px); margin-top: 32px; box-shadow: 0 10px 25px rgba(15,46,74,0.18); border: 1px solid rgba(255,255,255,0.1);">
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 14px;">
               <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="font-size: 1.5rem;">📊</span>
+                <span style="font-size: 1.3rem; font-weight: 900; color: #6EE7B7;">▲</span>
                 <div>
                   <h2 style="font-size: 1.15rem; font-weight: 900; margin: 0; color: #FFFFFF;">
                     ${txt('لوحة المؤشرات التنموية الحية وإدارة الأثر (M&E Live Impact Dashboard)', 'Live M&E & Impact Telemetry Dashboard', 'Tableau de Bord M&E et Impact')}
@@ -404,7 +404,7 @@ export function renderProjectsView(lang = 'ar') {
                           ${p.code}
                         </span>
                         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">
-                          ⏱️ ${duration}
+                          • ${duration}
                         </span>
                       </div>
 
@@ -417,10 +417,10 @@ export function renderProjectsView(lang = 'ar') {
                       <!-- Standard Tag with Tool Trigger -->
                       <div style="margin-bottom: 14px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
                         <button type="button" class="btn-clean" onclick="if(window.openStandardsExplorer) window.openStandardsExplorer('${p.standardCode}');" style="background: #EFF6FF; color: #1D4ED8; font-size: 0.78rem; font-weight: 700; padding: 4px 10px; border-radius: 4px; border: 1px solid #BFDBFE; cursor: pointer;">
-                          ⚡ ${t.standardLabel} ${p.standardLabel}
+                          ◈ ${t.standardLabel} ${p.standardLabel}
                         </button>
                         <a href="#/course/${p.linkedCourseId}" style="font-size: 0.78rem; color: var(--shat-green); font-weight: 700; text-decoration: none;">
-                          🎓 ${linkedTitle}
+                          ✦ ${linkedTitle}
                         </a>
                       </div>
 
@@ -431,7 +431,7 @@ export function renderProjectsView(lang = 'ar') {
                       <!-- M&E Indicator Tracking Table (ITT) Widget -->
                       <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 12px 14px; margin-bottom: 16px;">
                         <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.76rem; font-weight: 800; color: var(--shat-navy); margin-bottom: 8px;">
-                          <span>📈 ${txt('مؤشر الامتثال والأداء الميداني (M&E Indicator):', 'M&E Key Indicator Matrix:', 'Indicateur M&E :')}</span>
+                          <span>▲ ${txt('مؤشر الامتثال والأداء الميداني (M&E Indicator):', 'M&E Key Indicator Matrix:', 'Indicateur M&E :')}</span>
                           <span style="color: var(--shat-green);">${stage}</span>
                         </div>
                         
@@ -465,10 +465,10 @@ export function renderProjectsView(lang = 'ar') {
                     <div style="border-top: 1px solid var(--border-light); padding-top: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
                       <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                         <button type="button" class="btn-clean btn-view-brief" data-project="${p.code}" style="background: var(--shat-navy); color: #FFFFFF; font-size: 0.8rem; font-weight: 700; padding: 6px 12px; border-radius: var(--radius-xs); box-shadow: 0 2px 6px rgba(15,46,74,0.2);">
-                          📄 ${t.btnViewBrief}
+                          ▪ ${t.btnViewBrief}
                         </button>
                         <button type="button" class="btn-clean btn-download-case" data-project="${p.code}" style="background: #F1F5F9; color: var(--shat-navy); border: 1px solid var(--border-light); font-size: 0.8rem; font-weight: 700; padding: 6px 12px; border-radius: var(--radius-xs);">
-                          📥 ${t.btnDownloadSummary}
+                          ↓ ${t.btnDownloadSummary}
                         </button>
                       </div>
 
@@ -496,7 +496,7 @@ export function renderProjectsView(lang = 'ar') {
                   <span>${arrow}</span>
                 </a>
                 <button type="button" class="btn-clean btn-green btn-lg btn-island" onclick="if(window.openDiagnosticAssessment) window.openDiagnosticAssessment();">
-                  <span>⚡ ${txt('فحص الجاهزية المؤسسية للمشروع', 'Project Readiness Diagnostic', 'Diagnostic de Projet')}</span>
+                  <span>◈ ${txt('فحص الجاهزية المؤسسية للمشروع', 'Project Readiness Diagnostic', 'Diagnostic de Projet')}</span>
                 </button>
               </div>
             </div>
@@ -585,7 +585,7 @@ function openProjectBriefModal(project, lang = 'ar') {
       <div class="modal-window" style="max-width: 820px; max-height: 92vh; display: flex; flex-direction: column;">
         <div class="modal-top no-print" style="border-bottom: 2px solid var(--shat-navy); padding: 16px 24px;">
           <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 1.4rem;">📄</span>
+            <span style="font-size: 1.3rem;">▪</span>
             <h3 style="font-size: 1.15rem; font-weight: 900; color: var(--shat-navy); margin: 0;">
               ${txt('وثيقة ملخص التدخل الميداني المعتمد', 'Official Project Brief & Evaluation Sheet', 'Fiche Synthèse de Projet Homologué')}
             </h3>
@@ -712,7 +712,7 @@ function openProjectBriefModal(project, lang = 'ar') {
       </button>
 
       <button type="button" class="btn-clean btn-primary btn-md allow-print" id="btn-print-brief" style="background: var(--shat-navy); font-weight: 800; box-shadow: 0 4px 14px rgba(15,46,74,0.3);">
-        🖨️ ${txt('طباعة الملخص / حفظ كـ PDF', 'Print / Save as PDF', 'Imprimer le Document (PDF)')}
+        ⎙ ${txt('طباعة الملخص / حفظ كـ PDF', 'Print / Save as PDF', 'Imprimer le Document (PDF)')}
       </button>
     </div>
   `;
