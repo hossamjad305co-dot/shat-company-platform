@@ -1799,4 +1799,143 @@ p {
   }
 }
 
+/* ========================================================================== */
+/* Executive Admin Portal & Dashboard Design Tokens                          */
+/* ========================================================================== */
+.admin-portal-layout {
+  display: flex;
+  min-height: 90vh;
+  background: #F8FAFC;
+  margin-top: 70px;
+}
 
+.admin-sidebar {
+  width: 290px;
+  background: linear-gradient(180deg, #071324 0%, #0B1E36 100%);
+  color: #FFFFFF;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 4px 0 24px rgba(7, 19, 36, 0.15);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.admin-sidebar-nav {
+  padding: 16px 14px;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-nav-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 16px;
+  border-radius: 10px;
+  background: transparent;
+  color: #94A3B8;
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-align: right;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.admin-nav-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #FFFFFF;
+  transform: translateX(-3px);
+}
+
+[dir="ltr"] .admin-nav-item:hover {
+  transform: translateX(3px);
+  text-align: left;
+}
+
+.admin-nav-item.active {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+  color: #FFFFFF !important;
+  font-weight: 800;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.admin-kpi-card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 20px rgba(11, 30, 54, 0.05);
+  border: 1px solid #E2E8F0;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-kpi-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(11, 30, 54, 0.1);
+}
+
+.admin-kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+.admin-kpi-card.kpi-emerald::before {
+  background: linear-gradient(90deg, #10B981, #34D399);
+}
+.admin-kpi-card.kpi-blue::before {
+  background: linear-gradient(90deg, #3B82F6, #60A5FA);
+}
+.admin-kpi-card.kpi-purple::before {
+  background: linear-gradient(90deg, #8B5CF6, #A78BFA);
+}
+.admin-kpi-card.kpi-amber::before {
+  background: linear-gradient(90deg, #F59E0B, #FBBF24);
+}
+
+@media (max-width: 991px) {
+  .admin-portal-layout {
+    flex-direction: column;
+  }
+  .admin-sidebar {
+    position: fixed;
+    top: 70px;
+    bottom: 0;
+    right: 0;
+    z-index: 1050;
+    transform: translateX(100%);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.45);
+  }
+  [dir="ltr"] .admin-sidebar {
+    right: auto;
+    left: 0;
+    transform: translateX(-100%);
+  }
+  .admin-sidebar.open {
+    transform: translateX(0);
+  }
+  .admin-top-toggle-bar {
+    display: flex !important;
+  }
+  #btn-close-admin-sidebar {
+    display: block !important;
+  }
+  .admin-main-content {
+    padding: 16px 14px !important;
+  }
+}

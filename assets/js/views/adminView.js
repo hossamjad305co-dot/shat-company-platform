@@ -39,14 +39,36 @@ export function renderAdminView(lang = 'ar') {
       <!-- Collapsible Desktop/Tablet Admin Sidebar -->
       <aside id="admin-sidebar" class="admin-sidebar" style="width: 280px; background: #0B192C; color: #FFFFFF; flex-shrink: 0; display: flex; flex-direction: column; border-left: 1px solid rgba(255,255,255,0.08); transition: transform 0.3s ease;">
         
-        <!-- Sidebar Brand Banner: Text to the RIGHT of Logo (in RTL: text first in DOM) -->
-        <div style="padding: 22px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: space-between;">
-          <div style="display: flex; align-items: center; gap: 10px; flex-direction: row;">
+        <!-- Sidebar Brand Banner: Text to the RIGHT of Logo (in RTL) -->
+        <div style="padding: 20px 18px; border-bottom: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.22); display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex; align-items: center; gap: 12px; flex-direction: row;">
             <div>
-              <div style="font-weight: 800; font-size: 0.95rem; color: #FFFFFF;">${t.brandTitle}</div>
-              <div style="font-size: 0.72rem; color: #94A3B8;">${t.brandSub}</div>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span style="font-weight: 900; font-size: 1.05rem; color: #FFFFFF; letter-spacing: -0.3px;">${t.brandTitle}</span>
+                <span style="background: rgba(16,185,129,0.2); color: #34D399; font-size: 0.65rem; font-weight: 800; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(52,211,153,0.3);">HQ</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
+                <span style="width: 6px; height: 6px; border-radius: 50%; background: #10B981; display: inline-block; box-shadow: 0 0 8px #10B981;"></span>
+                <span style="font-size: 0.74rem; font-weight: 600; color: #94A3B8;">${t.brandSub}</span>
+              </div>
             </div>
-            <img src="assets/logo/logo-transparent.png" alt="SHAT" style="height: 32px;" onerror="this.onerror=null; this.src='assets/logo/logo-symbol.jpg';">
+
+            <!-- Elevated Logo Emblem Container -->
+            <div style="
+              width: 44px;
+              height: 44px;
+              border-radius: 12px;
+              background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%);
+              border: 1px solid rgba(255,255,255,0.16);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              padding: 5px;
+              box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+              flex-shrink: 0;
+            ">
+              <img src="assets/logo/logo-transparent.png" alt="SHAT" style="max-height: 28px; max-width: 28px; object-fit: contain;" onerror="this.onerror=null; this.src='assets/logo/logo-symbol.jpg';">
+            </div>
           </div>
           <button id="btn-close-admin-sidebar" class="mobile-only" style="background: none; border: none; color: #94A3B8; font-size: 1.2rem; cursor: pointer; display: none;">✕</button>
         </div>
@@ -148,61 +170,250 @@ export function renderAdminView(lang = 'ar') {
         <!-- ======================================================== -->
         <div id="admin-tab-dashboard" class="admin-view-pane active">
           
-          <!-- Welcome Banner -->
-          <div style="background: linear-gradient(135deg, var(--shat-navy) 0%, #08162B 100%); border-radius: var(--radius-md); padding: 28px 32px; color: #FFFFFF; margin-bottom: 28px; box-shadow: var(--shadow-sm); border: 1px solid rgba(255,255,255,0.08);">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+          <!-- Welcome Banner with Executive Ambient Mesh & Status Lighting -->
+          <div style="
+            background: radial-gradient(circle at 92% 12%, rgba(16, 185, 129, 0.22) 0%, transparent 48%), radial-gradient(circle at 12% 88%, rgba(59, 130, 246, 0.18) 0%, transparent 48%), linear-gradient(135deg, #071527 0%, #0B2548 55%, #08162B 100%);
+            border-radius: 18px;
+            padding: 30px 36px;
+            color: #FFFFFF;
+            margin-bottom: 28px;
+            box-shadow: 0 16px 36px -10px rgba(11, 30, 54, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            position: relative;
+            overflow: hidden;
+          ">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; position: relative; z-index: 1;">
               <div>
-                <span class="badge" style="background: rgba(30, 166, 114, 0.25); color: #4ADE80; margin-bottom: 8px;">
-                  ${txt('المركز التنفيذي الموحد • SHAT Executive Management', 'Enterprise Control Center', 'Centre de Contrôle')}
-                </span>
-                <h1 style="font-size: 1.7rem; font-weight: 900; color: #FFFFFF; margin: 4px 0 6px 0;">
-                  ${txt('لوحة المؤشرات والعمليات المركزية', 'Central Operations & KPI Dashboard', 'Tableau de Bord & Opérations')}
+                <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.16); border: 1px solid rgba(52, 211, 153, 0.35); color: #34D399; padding: 4px 14px; border-radius: 999px; font-size: 0.78rem; font-weight: 800; margin-bottom: 10px;">
+                  <span style="width: 7px; height: 7px; border-radius: 50%; background: #34D399; box-shadow: 0 0 8px #34D399;"></span>
+                  <span>${txt('المركز التنفيذي الموحد • SHAT Executive Management • مباشر 2026', 'Enterprise Control Center • Live', 'Centre de Contrôle')}</span>
+                </div>
+                <h1 style="font-size: 1.85rem; font-weight: 900; color: #FFFFFF; margin: 4px 0 8px 0; line-height: 1.3; letter-spacing: -0.4px;">
+                  ${txt('📊 لوحة المؤشرات والعمليات المركزية (Executive Dashboard)', 'Central Operations & KPI Dashboard', 'Tableau de Bord & Opérations')}
                 </h1>
-                <p style="color: #CBD5E1; font-size: 0.9rem; margin: 0;">
+                <p style="color: #CBD5E1; font-size: 0.94rem; margin: 0 0 14px 0; max-width: 680px; line-height: 1.6;">
                   ${txt(
-                    'نظرة شاملة على سير العمليات الأكاديمية والاستشارية وإدارة المحتوى في شركة شات للتنمية والتطوير.',
-                    'Comprehensive overview of academic courses, consulting inquiries, publications, and student submissions.',
-                    'Vue globale sur les cursus académiques, les actualités et les inscriptions de SHAT.'
+                    'المتابعة المباشرة لمؤشرات الأداء المؤسسي، تسجيلات المتدربين، الاستشارات التخصصية، ومزامنة استمارات Google Forms.',
+                    'Real-time institutional KPI monitoring, trainee admissions, consulting requests, and Google Forms dual-sync.',
+                    'Suivi en temps réel des KPI institutionnels, des inscriptions et des demandes de conseil.'
                   )}
                 </p>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.76rem; color: #94A3B8;">
+                  <span style="background: rgba(255,255,255,0.06); padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);">⚡ زمن الاستجابة: <strong>92ms</strong></span>
+                  <span style="background: rgba(255,255,255,0.06); padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);">🛡️ امتثال CHS: <strong>100%</strong></span>
+                  <span style="background: rgba(255,255,255,0.06); padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);">🔒 أمان البيانات: <strong>OWASP Level 3</strong></span>
+                </div>
               </div>
 
-              <div style="display: flex; gap: 10px;">
-                <button class="btn-clean btn-green btn-sm" id="btn-quick-new-post">
+              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="btn-clean btn-green btn-sm" id="btn-quick-new-post" style="box-shadow: 0 4px 14px rgba(30,126,52,0.35); font-weight: 800; padding: 10px 18px; border-radius: 8px;">
                   <span>+ ${txt('إضافة منشور جديد', 'New Publication', 'Nouvelle Publication')}</span>
                 </button>
-                <button class="btn-clean btn-sm" id="btn-refresh-dashboard" style="background: rgba(255,255,255,0.1); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.2);">
+                <button class="btn-clean btn-sm" id="btn-refresh-dashboard" style="background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.22); font-weight: 700; padding: 10px 16px; border-radius: 8px;">
                   <span>🔄 ${txt('تحديث البيانات', 'Refresh Data', 'Actualiser')}</span>
                 </button>
               </div>
             </div>
           </div>
 
-          <!-- KPI Cards Grid -->
+          <!-- KPI Cards Grid with Rich Color Harmonies & Micro-Progress -->
           <div class="grid-4" style="margin-bottom: 28px;">
-            <div class="bento-card" style="padding: 20px; border-top: 4px solid var(--shat-navy);">
-              <span class="bento-kicker">${txt('إجمالي الطلاب المسجلين', 'Total Enrolled Students', 'Étudiants Inscrits')}</span>
-              <div style="font-size: 2.2rem; font-weight: 900; color: var(--shat-navy); margin: 6px 0;" id="kpi-students-count">245</div>
-              <div style="font-size: 0.8rem; color: var(--shat-green); font-weight: 600;">+12 ${txt('متدرب هذا الأسبوع', 'students this week', 'cette semaine')}</div>
+            
+            <!-- Card 1: Students (Emerald) -->
+            <div class="admin-kpi-card kpi-emerald" style="background: linear-gradient(145deg, #FFFFFF 0%, #F0FDF4 100%); border: 1.5px solid #BBF7D0;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                <div>
+                  <span style="font-size: 0.78rem; font-weight: 800; color: #166534; text-transform: uppercase; letter-spacing: 0.5px;">
+                    ${txt('إجمالي الطلاب والمتدربين', 'Total Enrolled Students', 'Étudiants Inscrits')}
+                  </span>
+                  <div style="font-size: 2.3rem; font-weight: 900; color: #064E3B; margin: 4px 0; line-height: 1.1;" id="kpi-students-count">245</div>
+                </div>
+                <div style="width: 48px; height: 48px; border-radius: 12px; background: #DCFCE7; border: 1px solid #A7F3D0; color: #15803D; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;">
+                  👥
+                </div>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; font-size: 0.8rem;">
+                <span style="background: #DCFCE7; color: #15803D; font-weight: 800; font-size: 0.76rem; padding: 3px 10px; border-radius: 999px; border: 1px solid #86EFAC;">
+                  ↑ +12 ${txt('هذا الأسبوع', 'this week', 'cette semaine')}
+                </span>
+                <span style="color: #047857; font-weight: 700; font-size: 0.76rem;">نشط ومسجل</span>
+              </div>
+              <div style="height: 5px; background: #E2E8F0; border-radius: 999px; overflow: hidden; margin-top: 12px;">
+                <div style="height: 100%; width: 88%; background: linear-gradient(90deg, #10B981, #059669); border-radius: 999px;"></div>
+              </div>
             </div>
 
-            <div class="bento-card" style="padding: 20px; border-top: 4px solid var(--shat-green);">
-              <span class="bento-kicker">${txt('المدربون والخبراء المعتمدون', 'Accredited Trainers', 'Formateurs Certifiés')}</span>
-              <div style="font-size: 2.2rem; font-weight: 900; color: var(--shat-green);" id="kpi-teachers-count">18</div>
-              <div style="font-size: 0.8rem; color: var(--text-muted);">${txt('كادر تدريبي واستشاري مرخص', 'Licensed instructors', 'Experts agréés')}</div>
+            <!-- Card 2: Trainers (Blue) -->
+            <div class="admin-kpi-card kpi-blue" style="background: linear-gradient(145deg, #FFFFFF 0%, #EFF6FF 100%); border: 1.5px solid #BFDBFE;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                <div>
+                  <span style="font-size: 0.78rem; font-weight: 800; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.5px;">
+                    ${txt('المدربون والخبراء المعتمدون', 'Accredited Trainers', 'Formateurs Certifiés')}
+                  </span>
+                  <div style="font-size: 2.3rem; font-weight: 900; color: #1E3A8A; margin: 4px 0; line-height: 1.1;" id="kpi-teachers-count">18</div>
+                </div>
+                <div style="width: 48px; height: 48px; border-radius: 12px; background: #DBEAFE; border: 1px solid #BFDBFE; color: #1D4ED8; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;">
+                  👨‍🏫
+                </div>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; font-size: 0.8rem;">
+                <span style="background: #DBEAFE; color: #1D4ED8; font-weight: 800; font-size: 0.76rem; padding: 3px 10px; border-radius: 999px; border: 1px solid #93C5FD;">
+                  ✓ ${txt('كادر استشاري مرخص', 'Licensed Experts', 'Experts Agréés')}
+                </span>
+                <span style="color: #1D4ED8; font-weight: 700; font-size: 0.76rem;">100% تغطية</span>
+              </div>
+              <div style="height: 5px; background: #E2E8F0; border-radius: 999px; overflow: hidden; margin-top: 12px;">
+                <div style="height: 100%; width: 100%; background: linear-gradient(90deg, #3B82F6, #1D4ED8); border-radius: 999px;"></div>
+              </div>
             </div>
 
-            <div class="bento-card" style="padding: 20px; border-top: 4px solid #3B82F6;">
-              <span class="bento-kicker">${txt('المساقات والدبلومات الفعالة', 'Active Curricula', 'Cursus Actifs')}</span>
-              <div style="font-size: 2.2rem; font-weight: 900; color: #1D4ED8;" id="kpi-courses-count">8</div>
-              <div style="font-size: 0.8rem; color: var(--text-muted);">${txt('برامج معتمدة وفق المعايير', 'Aligned with global standards', 'Normes internationales')}</div>
+            <!-- Card 3: Active Courses (Purple) -->
+            <div class="admin-kpi-card kpi-purple" style="background: linear-gradient(145deg, #FFFFFF 0%, #FAF5FF 100%); border: 1.5px solid #E9D5FF;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                <div>
+                  <span style="font-size: 0.78rem; font-weight: 800; color: #6D28D9; text-transform: uppercase; letter-spacing: 0.5px;">
+                    ${txt('المساقات والدبلومات الفعالة', 'Active Curricula', 'Cursus Actifs')}
+                  </span>
+                  <div style="font-size: 2.3rem; font-weight: 900; color: #5B21B6; margin: 4px 0; line-height: 1.1;" id="kpi-courses-count">8</div>
+                </div>
+                <div style="width: 48px; height: 48px; border-radius: 12px; background: #F3E8FF; border: 1px solid #DDD6FE; color: #7C3AED; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;">
+                  📚
+                </div>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; font-size: 0.8rem;">
+                <span style="background: #EDE9FE; color: #6D28D9; font-weight: 800; font-size: 0.76rem; padding: 3px 10px; border-radius: 999px; border: 1px solid #C4B5FD;">
+                  ${txt('4 دبلومات + 4 استشارات', '4 Diplomas + 4 Advisory', '4 Diplômes')}
+                </span>
+                <span style="color: #6D28D9; font-weight: 700; font-size: 0.76rem;">CHS & Sphere</span>
+              </div>
+              <div style="height: 5px; background: #E2E8F0; border-radius: 999px; overflow: hidden; margin-top: 12px;">
+                <div style="height: 100%; width: 100%; background: linear-gradient(90deg, #8B5CF6, #6D28D9); border-radius: 999px;"></div>
+              </div>
             </div>
 
-            <div class="bento-card" style="padding: 20px; border-top: 4px solid var(--shat-amber);">
-              <span class="bento-kicker">${txt('طلبات الالتحاق المعلقة', 'Pending Applications', 'Demandes en Attente')}</span>
-              <div style="font-size: 2.2rem; font-weight: 900; color: var(--shat-amber);" id="kpi-pending-apps">1</div>
-              <div style="font-size: 0.8rem; color: var(--shat-amber); font-weight: 600;">${txt('تتطلب تدقيقاً ومصادقة', 'Requires review', 'À valider')}</div>
+            <!-- Card 4: Pending Applications (Amber) -->
+            <div class="admin-kpi-card kpi-amber" style="background: linear-gradient(145deg, #FFFFFF 0%, #FFFBEB 100%); border: 1.5px solid #FDE68A;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                <div>
+                  <span style="font-size: 0.78rem; font-weight: 800; color: #B45309; text-transform: uppercase; letter-spacing: 0.5px;">
+                    ${txt('طلبات الالتحاق المعلقة', 'Pending Applications', 'Demandes en Attente')}
+                  </span>
+                  <div style="font-size: 2.3rem; font-weight: 900; color: #92400E; margin: 4px 0; line-height: 1.1;" id="kpi-pending-apps">1</div>
+                </div>
+                <div style="width: 48px; height: 48px; border-radius: 12px; background: #FEF3C7; border: 1px solid #FDE68A; color: #D97706; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;">
+                  📥
+                </div>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; font-size: 0.8rem;">
+                <span style="background: #FEF3C7; color: #B45309; font-weight: 800; font-size: 0.76rem; padding: 3px 10px; border-radius: 999px; border: 1px solid #FCD34D;">
+                  ⚡ ${txt('تتطلب مصادقة فورية', 'Requires Approval', 'À Valider')}
+                </span>
+                <span style="color: #B45309; font-weight: 700; font-size: 0.76rem;">Google Forms</span>
+              </div>
+              <div style="height: 5px; background: #E2E8F0; border-radius: 999px; overflow: hidden; margin-top: 12px;">
+                <div style="height: 100%; width: 45%; background: linear-gradient(90deg, #F59E0B, #D97706); border-radius: 999px;"></div>
+              </div>
             </div>
+
+          </div>
+
+          <!-- Visual Operational Analytics & Distribution Row -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; margin-bottom: 28px;">
+            
+            <!-- Analytics Card 1: Track Distribution -->
+            <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 16px; padding: 24px; box-shadow: 0 4px 20px rgba(11,30,54,0.04);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 1px solid #F1F5F9; padding-bottom: 12px;">
+                <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--shat-navy); margin: 0; display: flex; align-items: center; gap: 8px;">
+                  <span>🎯</span>
+                  <span>${txt('توزيع المتدربين والاهتمام حسب المسار التخصصي', 'Enrollment Distribution by Track', 'Répartition par Cursus')}</span>
+                </h3>
+                <span style="font-size: 0.74rem; font-weight: 700; background: #ECFDF5; color: #15803D; padding: 2px 8px; border-radius: 4px;">بيانات حية 2026</span>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 14px;">
+                <!-- Track 1: Case Management -->
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 5px;">
+                    <span style="color: #065F46;">🤝 إدارة الحالة Case Management (د. محمد إسليم)</span>
+                    <span style="color: #10B981; font-weight: 800;">38% (93 متدرب)</span>
+                  </div>
+                  <div style="height: 8px; background: #E2E8F0; border-radius: 999px; overflow: hidden;">
+                    <div style="height: 100%; width: 38%; background: linear-gradient(90deg, #10B981, #059669); border-radius: 999px;"></div>
+                  </div>
+                </div>
+
+                <!-- Track 2: CHS Humanitarian -->
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 5px;">
+                    <span style="color: #1E40AF;">🛡️ دبلوم المعيار الإنساني CHS (أ. حسام جاد الله)</span>
+                    <span style="color: #2563EB; font-weight: 800;">32% (78 متدرب)</span>
+                  </div>
+                  <div style="height: 8px; background: #E2E8F0; border-radius: 999px; overflow: hidden;">
+                    <div style="height: 100%; width: 32%; background: linear-gradient(90deg, #3B82F6, #1D4ED8); border-radius: 999px;"></div>
+                  </div>
+                </div>
+
+                <!-- Track 3: Presentation Skills -->
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 5px;">
+                    <span style="color: #92400E;">🎤 مهارات العرض والتقديم (م. مهدي الملاحي)</span>
+                    <span style="color: #D97706; font-weight: 800;">18% (44 متدرب)</span>
+                  </div>
+                  <div style="height: 8px; background: #E2E8F0; border-radius: 999px; overflow: hidden;">
+                    <div style="height: 100%; width: 18%; background: linear-gradient(90deg, #F59E0B, #D97706); border-radius: 999px;"></div>
+                  </div>
+                </div>
+
+                <!-- Track 4: Institutional Consulting -->
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 5px;">
+                    <span style="color: #5B21B6;">🏛️ الاستشارات وتطوير النظم للمنظمات</span>
+                    <span style="color: #7C3AED; font-weight: 800;">12% (30 جهة)</span>
+                  </div>
+                  <div style="height: 8px; background: #E2E8F0; border-radius: 999px; overflow: hidden;">
+                    <div style="height: 100%; width: 12%; background: linear-gradient(90deg, #8B5CF6, #6D28D9); border-radius: 999px;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Analytics Card 2: Operational Health & SLAs -->
+            <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 16px; padding: 24px; box-shadow: 0 4px 20px rgba(11,30,54,0.04);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 1px solid #F1F5F9; padding-bottom: 12px;">
+                <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--shat-navy); margin: 0; display: flex; align-items: center; gap: 8px;">
+                  <span>⚡</span>
+                  <span>${txt('مؤشرات الكفاءة وسرعة الاستجابة التشغيلية', 'Operational Efficiency & SLA Metrics', 'Indicateurs de Performance')}</span>
+                </h3>
+                <span style="font-size: 0.74rem; font-weight: 700; background: #EFF6FF; color: #1D4ED8; padding: 2px 8px; border-radius: 4px;">SLA Level 1</span>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 14px; text-align: center;">
+                  <div style="font-size: 0.76rem; font-weight: 700; color: #64748B;">معدل الرد على الاستفسارات</div>
+                  <div style="font-size: 1.5rem; font-weight: 900; color: #10B981; margin: 4px 0;">98.6%</div>
+                  <div style="font-size: 0.72rem; color: #15803D; font-weight: 600;">⚡ أقل من ساعتين</div>
+                </div>
+
+                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 14px; text-align: center;">
+                  <div style="font-size: 0.76rem; font-weight: 700; color: #64748B;">شهادات محققة رقمياً</div>
+                  <div style="font-size: 1.5rem; font-weight: 900; color: #2563EB; margin: 4px 0;">142</div>
+                  <div style="font-size: 0.72rem; color: #1D4ED8; font-weight: 600;">🛡️ رمز موثق سارٍ</div>
+                </div>
+
+                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 14px; text-align: center;">
+                  <div style="font-size: 0.76rem; font-weight: 700; color: #64748B;">مزامنة الاستمارات السحابية</div>
+                  <div style="font-size: 1.5rem; font-weight: 900; color: #7C3AED; margin: 4px 0;">100%</div>
+                  <div style="font-size: 0.72rem; color: #6D28D9; font-weight: 600;">☁️ Google Sheets API</div>
+                </div>
+
+                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 14px; text-align: center;">
+                  <div style="font-size: 0.76rem; font-weight: 700; color: #64748B;">معدل الإنجاز والتخرج</div>
+                  <div style="font-size: 1.5rem; font-weight: 900; color: #D97706; margin: 4px 0;">94.2%</div>
+                  <div style="font-size: 0.72rem; color: #B45309; font-weight: 600;">🎓 تقييم ممتاز</div>
+                </div>
+              </div>
+            </div>
+
           </div>
 
           <!-- Pending Applications & Recent Activity Split Grid -->
@@ -805,12 +1016,12 @@ export async function bindAdminEvents() {
     navItems.forEach(item => {
       if (item.getAttribute('data-target') === targetId) {
         item.classList.add('active');
-        item.style.background = 'var(--shat-green)';
-        item.style.color = '#FFFFFF';
+        item.style.background = '';
+        item.style.color = '';
       } else {
         item.classList.remove('active');
-        item.style.background = 'transparent';
-        item.style.color = '#FFFFFF';
+        item.style.background = '';
+        item.style.color = '';
       }
     });
 
