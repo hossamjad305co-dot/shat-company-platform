@@ -734,7 +734,12 @@ export function renderAdminView(lang = 'ar') {
                   ${txt('قبول واعتماد المتدربين مع التفعيل التلقائي لحساباتهم في الأكاديمية.', 'Approve applicants with automatic account activation.', 'Validez les candidatures des stagiaires.')}
                 </p>
               </div>
-              <button id="btn-refresh-apps-tab" class="btn-clean btn-sm" style="background: var(--bg-subtle); border: 1px solid var(--border-light);">🔄 ${txt('تحديث', 'Refresh', 'Actualiser')}</button>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <button id="btn-export-apps-csv" class="btn-clean btn-sm" style="background: #10B981; color: #FFFFFF; font-weight: 800; border-radius: 6px; padding: 7px 14px; box-shadow: 0 2px 8px rgba(16,185,129,0.25);">
+                  📊 ${txt('تصدير كشيت Excel (CSV معتمد)', 'Export Excel / CSV', 'Exporter CSV')}
+                </button>
+                <button id="btn-refresh-apps-tab" class="btn-clean btn-sm" style="background: var(--bg-subtle); border: 1px solid var(--border-light);">🔄 ${txt('تحديث', 'Refresh', 'Actualiser')}</button>
+              </div>
             </div>
             <div style="overflow-x: auto;">
               <table style="width: 100%; border-collapse: collapse; text-align: ${isRtl ? 'right' : 'left'}; font-size: 0.9rem;">
@@ -1781,6 +1786,22 @@ export async function bindAdminEvents() {
     };
   }
 
+  // --- Applications CSV Export & Refresh Binding ---
+  const btnRefreshAppsTab = document.getElementById('btn-refresh-apps-tab');
+  if (btnRefreshAppsTab) {
+    btnRefreshAppsTab.onclick = () => {
+      loadApplications();
+      showToast(txt('تم تحديث قائمة الطلبات!', 'Applications list refreshed!', 'Liste actualisée !'), 'info');
+    };
+  }
+
+  const btnExportAppsCsv = document.getElementById('btn-export-apps-csv');
+  if (btnExportAppsCsv) {
+    btnExportAppsCsv.onclick = () => {
+      exportApplicationsToCSV(currentLang);
+    };
+  }
+
   // Initial Load on Entry
   loadDashboardData();
   loadPosts();
@@ -1910,6 +1931,65 @@ async function loadApplications() {
       });
     }
   } catch (e) {}
+}
+
+async function exportApplicationsToCSV(lang = 'ar') {
+  const isRtl = lang === 'ar';
+  const txt = (ar, en, fr) => (lang === 'fr' ? fr || en : (lang === 'en' ? en : ar));
+
+  try {
+    const res = await api.getApplications();
+    const apps = res && res.applications ? res.applications : [];
+
+    if (apps.length === 0) {
+      showToast(txt('لا توجد طلبات تسجيل متاحة للتصدير حالياً.', 'No applications found to export.', 'Aucune candidature à exporter.'), 'warning');
+      return;
+    }
+
+    const headers = [
+      txt('رقم الطلب', 'Application ID', 'ID'),
+      txt('اسم المتقدم الكامل', 'Full Name', 'Nom Complet'),
+      txt('المساق / البرنامج التدريبي', 'Course Track', 'Cursus'),
+      txt('البريد الإلكتروني', 'Email Address', 'Courriel'),
+      txt('رقم الهاتف والواتساب', 'Phone Number', 'Téléphone'),
+      txt('المؤسسة / جهة العمل', 'Organization', 'Organisation'),
+      txt('المؤهل العلمي', 'Qualification', 'Diplôme'),
+      txt('تاريخ التقديم', 'Submission Date', 'Date de Dépôt'),
+      txt('الحالة الإدارية', 'Status', 'Statut')
+    ];
+
+    const rows = apps.map(app => [
+      `"${(app.id || '').replace(/"/g, '""')}"`,
+      `"${(app.fullName || '').replace(/"/g, '""')}"`,
+      `"${(app.courseTitle || '').replace(/"/g, '""')}"`,
+      `"${(app.email || '').replace(/"/g, '""')}"`,
+      `"${(app.phone || '').replace(/"/g, '""')}"`,
+      `"${(app.organization || 'مستقل').replace(/"/g, '""')}"`,
+      `"${(app.qualification || '').replace(/"/g, '""')}"`,
+      `"${new Date(app.createdAt || Date.now()).toLocaleDateString(isRtl ? 'ar-EG' : 'en-US')}"`,
+      `"${app.status === 'approved' ? txt('مقبول ومسجل', 'Approved', 'Validé') : (app.status === 'rejected' ? txt('مرفوض', 'Rejected', 'Refusé') : txt('قيد المراجعة', 'Pending', 'En Attente'))}"`
+    ]);
+
+    const csvContent = [headers.map(h => `"${h}"`).join(','), ...rows.map(r => r.join(','))].join('\r\n');
+
+    // Add UTF-8 Byte Order Mark (BOM) so Microsoft Excel opens Arabic without encoding glitches
+    const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `shat_applications_export_${new Date().toISOString().slice(0, 10)}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    showToast(
+      txt(`✓ تم تصدير ${apps.length} طلب إلى ملف Excel (CSV معتمد) بنجاح!`, `✓ Successfully exported ${apps.length} applications to CSV!`, `✓ ${apps.length} candidatures exportées en CSV avec succès !`),
+      'success'
+    );
+  } catch (err) {
+    showToast(txt('تعذر تصدير الملف: ', 'Export error: ', 'Erreur d\'export : ') + err.message, 'error');
+  }
 }
 
 async function loadForms() {

@@ -4,7 +4,7 @@ import { api } from './services/api/apiClient.js';
 import { renderHomeView, bindHomeEvents } from './views/homeView.js';
 import { renderAboutView } from './views/aboutView.js';
 import { renderServicesView } from './views/servicesView.js';
-import { renderStandardsView } from './views/standardsView.js';
+import { renderStandardsView, bindStandardsEvents } from './views/standardsView.js';
 import { renderDeliveryView } from './views/deliveryView.js';
 import { renderProjectsView, bindProjectsEvents } from './views/projectsView.js';
 import { renderNewsView, bindNewsEvents } from './views/newsView.js';
@@ -36,6 +36,7 @@ class SimpleRouter {
       'contact': renderContactView,
       'login': renderLoginView,
       'student': renderStudentDashboardView,
+      'student-dashboard': renderStudentDashboardView,
       'teacher': renderTeacherDashboardView,
       'admin': renderAdminView,
       'course': renderCourseDetailView,
@@ -108,7 +109,7 @@ class SimpleRouter {
       bindHomeEvents();
     } else if (activeRoute === 'login') {
       bindLoginEvents();
-    } else if (activeRoute === 'student') {
+    } else if (activeRoute === 'student' || activeRoute === 'student-dashboard') {
       bindStudentEvents();
     } else if (activeRoute === 'teacher') {
       bindTeacherEvents();
@@ -126,6 +127,8 @@ class SimpleRouter {
       bindNewsEvents();
     } else if (activeRoute === 'verify' || activeRoute === 'verify-certificate') {
       bindVerifyEvents();
+    } else if (activeRoute === 'standards' || activeRoute === 'references') {
+      bindStandardsEvents();
     }
 
     // Consultation Inquiry Form Handler (Contact View)

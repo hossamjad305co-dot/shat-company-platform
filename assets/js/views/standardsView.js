@@ -2,6 +2,7 @@
 // Deep Dive International & Humanitarian Standards Guide with Direct Interactive Tool Integration
 // 100% Trilingual Support (AR, EN, FR) & WCAG AAA High Contrast Design
 import { content } from '../content.js';
+import { standardsExplorer } from '../tools/standardsExplorer.js';
 
 export function renderStandardsView(lang = 'ar') {
   const d = content[lang] || content.ar;
@@ -112,8 +113,15 @@ export function renderStandardsView(lang = 'ar') {
         </div>
       </section>
 
+      <!-- Live Interactive Standards Checklist & Audit Report Engine -->
+      <section class="section" style="padding-top: 48px; padding-bottom: 24px;">
+        <div class="container">
+          ${standardsExplorer.renderSection(lang)}
+        </div>
+      </section>
+
       <!-- Standards Bento Grid -->
-      <section class="section">
+      <section class="section" style="padding-top: 24px;">
         <div class="container">
           <div class="bento-grid grid-2">
             ${list.map(st => {
@@ -208,3 +216,9 @@ export function renderStandardsView(lang = 'ar') {
     </div>
   `;
 }
+
+export function bindStandardsEvents() {
+  const currentLang = localStorage.getItem('shat_platform_lang') || 'ar';
+  standardsExplorer.init(currentLang);
+}
+
