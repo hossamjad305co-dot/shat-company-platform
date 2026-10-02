@@ -166,9 +166,9 @@ export function renderStudentDashboardView(lang = 'ar') {
                   </h1>
                   <p style="font-size: 0.9rem; color: #CBD5E1; margin: 0; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
                     <span>${t.trainingId}</span>
-                    <strong style="font-family: var(--font-mono); color: #86EFAC; background: rgba(255,255,255,0.08); padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.12);">${user.maskedNationalId || 'SHAT-TR-2026'}</strong>
+                    <strong style="font-family: var(--font-mono); color: #86EFAC; background: rgba(255,255,255,0.08); padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.12);">${user.maskedNationalId || 'SHAT-TR-2026-904'}</strong>
                     <span style="opacity: 0.5;">•</span>
-                    <span style="color: #94A3B8;">${user.email}</span>
+                    <span style="color: #94A3B8;">${user.email || 'student@shat-company.ps'}</span>
                   </p>
                 </div>
               </div>

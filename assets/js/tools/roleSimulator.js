@@ -30,9 +30,11 @@ export const roleSimulator = {
       user: {
         id: 'student-01',
         role: 'student',
-        username: '1098765432',
-        fullNameAr: 'أحمد خليل منصور (متدرب)',
-        fullNameEn: 'Ahmed Khalil (Student)',
+        username: 'student.ahmed',
+        fullNameAr: 'أحمد خليل منصور',
+        fullNameEn: 'Ahmed Khalil Mansoor',
+        email: 'ahmed.khalil@shat-company.ps',
+        maskedNationalId: 'SHAT-TR-2026-904',
         token: 'sim_student_' + Date.now()
       }
     },
@@ -47,8 +49,9 @@ export const roleSimulator = {
         id: 'teacher-01',
         role: 'teacher',
         username: 'osama',
-        fullNameAr: 'د. أسامة المنصور (مدرب معتمد)',
-        fullNameEn: 'Dr. Osama Al-Mansoor (Trainer)',
+        fullNameAr: 'د. أسامة المنصور',
+        fullNameEn: 'Dr. Osama Al-Mansoor',
+        email: 'dr.osama@shat-company.ps',
         assignedCourses: ['shat-chs-master', 'shat-psea-expert'],
         token: 'sim_teacher_' + Date.now()
       }
@@ -64,8 +67,9 @@ export const roleSimulator = {
         id: 'admin-01',
         role: 'admin',
         username: 'admin',
-        fullNameAr: 'أ. حسام جاد الله (الإدارة العامة)',
-        fullNameEn: 'Hossam Jadallah (Super Admin)',
+        fullNameAr: 'أ. حسام جاد الله',
+        fullNameEn: 'Hossam Jadallah',
+        email: 'management@shat-company.ps',
         token: 'sim_admin_' + Date.now()
       }
     }

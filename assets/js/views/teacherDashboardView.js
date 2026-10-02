@@ -316,8 +316,9 @@ export async function bindTeacherEvents() {
   }
 
   if (greetingEl) {
-    const trainerName = currentLang === 'ar' ? (currentUser.fullNameAr || currentUser.username) : (currentUser.fullNameEn || currentUser.username);
-    greetingEl.textContent = `${txt('مرحباً بك د.', 'Welcome Dr.', 'Bienvenue Dr.')} ${trainerName}`;
+    const rawTrainerName = currentLang === 'ar' ? (currentUser.fullNameAr || currentUser.username) : (currentUser.fullNameEn || currentUser.username);
+    const cleanTrainerName = rawTrainerName.replace(/^(د\.\s*|Dr\.\s*)/i, '');
+    greetingEl.textContent = `${txt('مرحباً بك د.', 'Welcome Dr.', 'Bienvenue Dr.')} ${cleanTrainerName}`;
   }
 
   let teacherCourses = [];
