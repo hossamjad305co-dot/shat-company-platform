@@ -121,168 +121,320 @@ export function renderStudentDashboardView(lang = 'ar') {
   return `
     <div class="view-student-dashboard" style="padding-bottom: 100px;">
       
-      <!-- Top Overview Greeting Banner -->
-      <section class="student-header-section" style="background: linear-gradient(135deg, var(--shat-navy-deep) 0%, var(--shat-navy) 100%); color: #FFFFFF; padding: 48px 0 36px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+      <!-- Top Overview Greeting Banner with Double-Bezel Hardware Architecture -->
+      <section class="student-header-section" style="padding: 40px 0 20px 0;">
         <div class="container">
-          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
-            <div>
-              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                <span class="badge" style="background: rgba(75, 136, 52, 0.25); color: #86EFAC; border: 1px solid rgba(75, 136, 52, 0.4);">
-                  ${t.badge}
-                </span>
-                <span style="font-size: 0.8rem; color: #94A3B8;">• ${t.sessionActive}</span>
-              </div>
-              <h1 style="font-size: 1.95rem; font-weight: 900; margin-bottom: 6px; color: #FFFFFF;">
-                ${t.welcome} ${studentName}
-              </h1>
-              <p style="font-size: 0.92rem; color: #CBD5E1; margin: 0;">
-                ${t.trainingId} <strong style="font-family: var(--font-mono); color: #86EFAC;">${user.maskedNationalId || 'SHAT-TR-2026'}</strong> • ${user.email}
-              </p>
-            </div>
+          <div class="portal-hero-banner">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; position: relative; z-index: 2;">
+              
+              <!-- Trainee Profile Info with Glowing Status & Avatar -->
+              <div style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
+                <div style="
+                  width: 64px;
+                  height: 64px;
+                  border-radius: 18px;
+                  background: linear-gradient(135deg, #10B981 0%, #059669 50%, #0B2548 100%);
+                  color: #FFFFFF;
+                  font-size: 1.7rem;
+                  font-weight: 900;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.35);
+                  border: 2px solid rgba(255, 255, 255, 0.25);
+                  flex-shrink: 0;
+                ">
+                  ${studentName.charAt(0)}
+                </div>
 
-            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-              <button id="btn-student-view-cert" class="btn-clean btn-sm" style="background: rgba(16, 185, 129, 0.22); color: #6EE7B7; border: 1px solid rgba(52, 211, 153, 0.4); font-weight: 800; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
-                <span style="display: inline-flex; align-items: center; gap: 6px;">${icons.award('icon-inline', 15)} <span>${txt('شهاداتي المعتمدة', 'My Certificates', 'Mes Certificats')}</span></span>
-              </button>
-              <button id="btn-student-id-card" class="btn-clean btn-sm" style="background: rgba(255, 255, 255, 0.16); color: #FFFFFF; border: 1px solid rgba(255, 255, 255, 0.28); font-weight: 800; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
-                <span style="display: inline-flex; align-items: center; gap: 6px;">${icons.idCard('icon-inline', 15)} <span>${txt('بطاقة الحضور والباركود الرقمي', 'Digital Admission Pass', 'Pass Numérique')}</span></span>
-              </button>
-              <a href="#/course/shat-chs-master" class="btn-clean btn-green btn-sm">
-                <span style="display: inline-flex; align-items: center; gap: 6px;">${icons.graduationCap('icon-inline', 15)} <span>${t.btnClassroom}</span></span>
-              </a>
-              <button id="btn-student-logout" class="btn-clean btn-sm" style="background: rgba(239, 68, 68, 0.15); color: #FCA5A5; border: 1px solid rgba(239, 68, 68, 0.3);">
-                <span>${t.btnLogout}</span>
-              </button>
+                <div>
+                  <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px; flex-wrap: wrap;">
+                    <span class="badge" style="background: rgba(16, 185, 129, 0.2); color: #86EFAC; border: 1px solid rgba(52, 211, 153, 0.4); font-weight: 800; font-size: 0.78rem; padding: 4px 12px; border-radius: 999px;">
+                      ${t.badge}
+                    </span>
+                    <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; color: #94A3B8; font-weight: 600;">
+                      <span class="portal-pulse-dot"></span>
+                      <span>${t.sessionActive} • 2026</span>
+                    </span>
+                  </div>
+                  <h1 style="font-size: 1.95rem; font-weight: 900; margin: 0 0 6px 0; color: #FFFFFF; letter-spacing: -0.4px;">
+                    ${t.welcome} ${studentName}
+                  </h1>
+                  <p style="font-size: 0.9rem; color: #CBD5E1; margin: 0; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                    <span>${t.trainingId}</span>
+                    <strong style="font-family: var(--font-mono); color: #86EFAC; background: rgba(255,255,255,0.08); padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.12);">${user.maskedNationalId || 'SHAT-TR-2026'}</strong>
+                    <span style="opacity: 0.5;">•</span>
+                    <span style="color: #94A3B8;">${user.email}</span>
+                  </p>
+                </div>
+              </div>
+
+              <!-- Executive Action Command Bar -->
+              <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+                <button id="btn-student-id-card" class="btn-clean btn-sm" style="background: rgba(255, 255, 255, 0.12); color: #FFFFFF; border: 1px solid rgba(255, 255, 255, 0.25); font-weight: 800; box-shadow: 0 4px 12px rgba(0,0,0,0.25); border-radius: 10px; padding: 9px 15px;">
+                  <span style="display: inline-flex; align-items: center; gap: 6px;">${icons.idCard('icon-inline', 15)} <span>${txt('بطاقة الحضور والباركود الرقمي', 'Digital Admission Pass', 'Pass Numérique')}</span></span>
+                </button>
+                <button id="btn-student-view-cert" class="btn-clean btn-sm" style="background: rgba(16, 185, 129, 0.22); color: #6EE7B7; border: 1px solid rgba(52, 211, 153, 0.45); font-weight: 800; box-shadow: 0 4px 14px rgba(16,185,129,0.2); border-radius: 10px; padding: 9px 15px;">
+                  <span style="display: inline-flex; align-items: center; gap: 6px;">${icons.award('icon-inline', 15)} <span>${txt('شهاداتي المعتمدة', 'My Certificates', 'Mes Certificats')}</span></span>
+                </button>
+                <a href="#/course/shat-chs-master" class="btn-clean btn-green btn-sm" style="font-weight: 800; border-radius: 10px; padding: 9px 16px; box-shadow: 0 4px 14px rgba(30,126,52,0.35);">
+                  <span style="display: inline-flex; align-items: center; gap: 6px;">${icons.graduationCap('icon-inline', 15)} <span>${t.btnClassroom}</span></span>
+                </a>
+                <button id="btn-student-logout" class="btn-clean btn-sm" style="background: rgba(239, 68, 68, 0.15); color: #FCA5A5; border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 10px; padding: 9px 14px;">
+                  <span>${t.btnLogout}</span>
+                </button>
+              </div>
+
             </div>
           </div>
         </div>
       </section>
 
       <!-- Main Content Container -->
-      <section class="section" style="padding-top: 36px;">
+      <section class="section" style="padding-top: 24px;">
         <div class="container">
           
-          <!-- Continue Learning Hero Card (Mobile-First Masterpiece) -->
-          <div class="bento-card continue-learning-card" style="border: 2px solid rgba(75, 136, 52, 0.2); background: linear-gradient(135deg, #FFFFFF 0%, var(--shat-green-light) 100%); margin-bottom: 32px; padding: 28px; box-shadow: var(--shadow-sm);">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 20px;">
-              <div>
-                <span class="badge" style="background: var(--shat-navy); color: #FFFFFF; font-size: 0.78rem; font-weight: 700; margin-bottom: 8px; display: inline-block;">
-                  ${t.continueBadge}
-                </span>
-                <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--shat-navy); margin: 6px 0;">
-                  ${t.courseTitle}
-                </h2>
-                <div style="font-size: 0.92rem; color: var(--text-secondary); font-weight: 600;">
-                  ${t.courseSubtitle}
+          <!-- Double-Bezel Continue Learning Hero Feature Card -->
+          <div class="portal-bezel-wrapper" style="margin-bottom: 32px;">
+            <div class="portal-bezel-inner" style="background: linear-gradient(135deg, #FFFFFF 0%, #F0FDF4 50%, #DCFCE7 100%); border: 1.5px solid #BBF7D0; padding: 32px;">
+              
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; margin-bottom: 22px;">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap;">
+                    <span class="badge" style="background: #0F2E4A; color: #FFFFFF; font-size: 0.76rem; font-weight: 800; padding: 4px 12px; border-radius: 999px;">
+                      ${t.continueBadge}
+                    </span>
+                    <span style="background: #FEF3C7; color: #92400E; font-size: 0.74rem; font-weight: 800; padding: 3px 10px; border-radius: 999px; border: 1px solid #FCD34D;">
+                      ${txt('الفصل الثاني • قيد الدراسة الآن', 'Chapter 2 • In Progress', 'Chapitre 2 • En cours')}
+                    </span>
+                  </div>
+                  <h2 style="font-size: 1.48rem; font-weight: 900; color: #0F2E4A; margin: 4px 0 6px 0; letter-spacing: -0.3px;">
+                    ${t.courseTitle}
+                  </h2>
+                  <div style="font-size: 0.94rem; color: #334155; font-weight: 600; line-height: 1.5;">
+                    ${t.courseSubtitle}
+                  </div>
+                </div>
+
+                <div style="text-align: end; min-width: 140px; background: rgba(255,255,255,0.7); padding: 12px 18px; border-radius: 14px; border: 1px solid rgba(16, 185, 129, 0.25); box-shadow: 0 4px 12px rgba(16,185,129,0.08);">
+                  <div style="font-size: 0.8rem; color: #64748B; font-weight: 700; text-transform: uppercase; margin-bottom: 2px;">${t.progressLabel}</div>
+                  <div style="font-size: 2.4rem; font-weight: 900; color: #047857; line-height: 1; font-family: var(--font-mono);">72%</div>
+                  <div style="font-size: 0.72rem; color: #10B981; font-weight: 700; margin-top: 4px;">+18% ${txt('خلال هذا الأسبوع', 'this week', 'cette semaine')}</div>
                 </div>
               </div>
 
-              <div style="text-align: end; min-width: 130px;">
-                <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px;">${t.progressLabel}</div>
-                <div style="font-size: 2.2rem; font-weight: 900; color: var(--shat-green); line-height: 1;">72%</div>
+              <!-- Visual Progress Bar with Milestones -->
+              <div style="margin-bottom: 20px;">
+                <div style="width: 100%; height: 12px; background: rgba(15, 46, 74, 0.08); border-radius: 99px; overflow: hidden; position: relative;">
+                  <div style="width: 72%; height: 100%; background: linear-gradient(90deg, #10B981 0%, #059669 100%); border-radius: 99px; transition: width 0.8s ease; box-shadow: 0 0 10px rgba(16,185,129,0.5);"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.72rem; color: #64748B; font-weight: 700; font-family: var(--font-mono);">
+                  <span>0% ${txt('البداية', 'Start', 'Début')}</span>
+                  <span>25% ${txt('الفصل 1', 'Ch. 1', 'Ch. 1')}</span>
+                  <span>50% ${txt('الفصل 2', 'Ch. 2', 'Ch. 2')}</span>
+                  <span style="color: #047857; font-weight: 900;">72% ${txt('موقعك الحالي', 'Current', 'Position')}</span>
+                  <span>100% ${txt('الشهادة', 'Diploma', 'Diplôme')}</span>
+                </div>
               </div>
-            </div>
 
-            <!-- Visual Progress Bar -->
-            <div style="width: 100%; height: 10px; background: rgba(15, 46, 74, 0.08); border-radius: 99px; overflow: hidden; margin-bottom: 20px;">
-              <div style="width: 72%; height: 100%; background: linear-gradient(90deg, var(--shat-green) 0%, var(--shat-green-light-accent) 100%); border-radius: 99px; transition: width 0.8s ease;"></div>
-            </div>
+              <!-- Curricular Roadmap Timeline Widget -->
+              <div style="background: rgba(255,255,255,0.7); border-radius: 14px; border: 1px solid rgba(16, 185, 129, 0.2); padding: 18px 20px; margin-bottom: 22px;">
+                <div style="font-size: 0.8rem; font-weight: 800; color: #0F2E4A; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px;">
+                  ${txt('خارطة التقدم الأكاديمي للمساق (Syllabus Roadmap)', 'Course Syllabus Roadmap', 'Parcours Pédagogique du Cursus')}
+                </div>
+                
+                <div class="roadmap-timeline-container">
+                  <div class="roadmap-timeline-bar">
+                    <div class="roadmap-timeline-bar-fill" style="width: 65%;"></div>
+                  </div>
 
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
-              <div style="font-size: 0.88rem; color: var(--text-muted);">
-                ${t.instructorLabel} <strong>${t.instructorName}</strong> • ${t.hoursMeta}
+                  <!-- Step 1: Completed -->
+                  <div class="roadmap-timeline-step completed">
+                    <div class="roadmap-timeline-node">✓</div>
+                    <div>
+                      <div style="font-weight: 800; font-size: 0.84rem; color: #166534;">${txt('الفصل 1: الإطار التأسيسي', 'Ch. 1: Conceptual Framework', 'Ch. 1: Cadre Conceptuel')}</div>
+                      <div style="font-size: 0.72rem; color: #64748B;">100% • ${txt('تم الإنجاز بالكامل', 'Fully Completed', 'Validé à 100%')}</div>
+                    </div>
+                  </div>
+
+                  <!-- Step 2: Active -->
+                  <div class="roadmap-timeline-step active">
+                    <div class="roadmap-timeline-node">2</div>
+                    <div>
+                      <div style="font-weight: 900; font-size: 0.84rem; color: #0F2E4A;">${txt('الفصل 2: المساءلة وAAP', 'Ch. 2: Accountability & AAP', 'Ch. 2: Redevabilité & AAP')}</div>
+                      <div style="font-size: 0.72rem; color: #059669; font-weight: 700;">${txt('قيد الدراسة • الدرس 4', 'Active • Lesson 4', 'En Cours • Leçon 4')}</div>
+                    </div>
+                  </div>
+
+                  <!-- Step 3: Upcoming -->
+                  <div class="roadmap-timeline-step upcoming">
+                    <div class="roadmap-timeline-node">3</div>
+                    <div>
+                      <div style="font-weight: 700; font-size: 0.84rem; color: #64748B;">${txt('الفصل 3: مصفوفة الامتثال', 'Ch. 3: Field Audit Matrix', 'Ch. 3: Matrice d’Audit')}</div>
+                      <div style="font-size: 0.72rem; color: #94A3B8;">${txt('يبدأ في 12 أكتوبر', 'Starts Oct 12', 'Débute le 12 Octobre')}</div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <button type="button" id="btn-hero-take-exam" class="btn-clean btn-sm" style="background: var(--shat-green); color: #FFFFFF; font-weight: 800; border-radius: 6px; padding: 8px 16px; box-shadow: 0 3px 10px rgba(30,126,52,0.25);">
-                  <span>${txt('الاختبار والشهادة المعتمدة', 'Exam & Certificate', 'Examen & Certificat')}</span>
-                </button>
-                <a href="#/course/shat-chs-master" class="btn-clean btn-primary btn-md" style="font-weight: 700;">
-                  <span>${t.btnResume}</span>
-                  <span>${arrow}</span>
-                </a>
+
+              <!-- Footer with Faculty Details & Button-in-Button Action -->
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; border-top: 1px solid rgba(16, 185, 129, 0.2); padding-top: 18px;">
+                <div style="display: flex; align-items: center; gap: 10px; font-size: 0.88rem; color: #475569;">
+                  <span style="width: 32px; height: 32px; border-radius: 50%; background: #0F2E4A; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8rem;">
+                    أ
+                  </span>
+                  <div>
+                    <div>${t.instructorLabel} <strong style="color: #0F2E4A;">${t.instructorName}</strong></div>
+                    <div style="font-size: 0.76rem; color: #64748B;">${t.hoursMeta}</div>
+                  </div>
+                </div>
+
+                <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+                  <button type="button" id="btn-hero-take-exam" class="btn-clean btn-sm" style="background: #10B981; color: #FFFFFF; font-weight: 800; border-radius: 10px; padding: 10px 18px; box-shadow: 0 4px 14px rgba(16,185,129,0.3); border: none;">
+                    <span style="display: inline-flex; align-items: center; gap: 6px;">${icons.award('icon-inline', 15)} <span>${txt('الاختبار والشهادة المعتمدة', 'Exam & Certificate', 'Examen & Certificat')}</span></span>
+                  </button>
+
+                  <a href="#/course/shat-chs-master" class="btn-bubble-action btn-primary" style="background: #0F2E4A; color: #FFFFFF; box-shadow: 0 4px 16px rgba(15,46,74,0.35);">
+                    <span>${t.btnResume}</span>
+                    <span class="btn-icon-bubble">${arrowIcon}</span>
+                  </a>
+                </div>
               </div>
+
             </div>
           </div>
 
-          <!-- 3-Column Metrics Grid -->
-          <div class="bento-grid grid-3" style="margin-bottom: 36px;">
-            <div class="bento-card" style="padding: 24px; border-top: 4px solid var(--shat-navy);">
-              <span class="bento-kicker">${t.kpiActiveCourses}</span>
-              <div style="font-size: 2.2rem; font-weight: 900; color: var(--shat-navy); margin: 6px 0;">${t.kpiActiveCount}</div>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">CHS Master, SPHERE Core, PSEA Safeguarding</p>
+          <!-- 4-Column Asymmetrical Metrics Grid -->
+          <div class="grid-4" style="margin-bottom: 36px;">
+            
+            <!-- Card 1: Active Tracks (Navy) -->
+            <div class="portal-kpi-card-v2 kpi-navy">
+              <div>
+                <span style="font-size: 0.78rem; font-weight: 800; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.5px;">${t.kpiActiveCourses}</span>
+                <div style="font-size: 2.2rem; font-weight: 900; color: #0F2E4A; margin: 4px 0;">${t.kpiActiveCount}</div>
+                <div style="display: flex; gap: 4px; flex-wrap: wrap; margin-top: 6px;">
+                  <span class="badge" style="background: #EFF6FF; color: #1E40AF; font-size: 0.7rem; font-weight: 700;">CHS Master</span>
+                  <span class="badge" style="background: #EFF6FF; color: #1E40AF; font-size: 0.7rem; font-weight: 700;">SPHERE Core</span>
+                  <span class="badge" style="background: #EFF6FF; color: #1E40AF; font-size: 0.7rem; font-weight: 700;">PSEA</span>
+                </div>
+              </div>
+              <div style="font-size: 0.78rem; color: #64748B; margin-top: 14px; border-top: 1px solid #F1F5F9; padding-top: 8px;">
+                ${txt('مسارات معتمدة دولياً ومسجلة', 'International Accredited Tracks', 'Cursus Homologués')}
+              </div>
             </div>
 
-            <div class="bento-card" style="padding: 24px; border-top: 4px solid var(--shat-amber);">
-              <span class="bento-kicker">${t.kpiTasks}</span>
-              <div style="font-size: 2.2rem; font-weight: 900; color: #D97706; margin: 6px 0;">${t.kpiTasksCount}</div>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">${t.kpiTasksDesc}</p>
+            <!-- Card 2: Tasks (Amber) -->
+            <div class="portal-kpi-card-v2 kpi-amber">
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-size: 0.78rem; font-weight: 800; color: #B45309; text-transform: uppercase; letter-spacing: 0.5px;">${t.kpiTasks}</span>
+                  <span class="portal-pulse-dot-amber"></span>
+                </div>
+                <div style="font-size: 2.2rem; font-weight: 900; color: #D97706; margin: 4px 0;">${t.kpiTasksCount}</div>
+                <p style="font-size: 0.84rem; color: #92400E; margin: 0; font-weight: 600;">
+                  ${t.kpiTasksDesc}
+                </p>
+              </div>
+              <div style="display: flex; align-items: center; gap: 6px; font-size: 0.76rem; color: #B45309; font-weight: 800; margin-top: 14px; background: #FEF3C7; padding: 4px 8px; border-radius: 6px;">
+                <span>⏳ ${txt('متبقي 4 أيام على التكليف القادم', '4 days left on next task', '4 jours restants')}</span>
+              </div>
             </div>
 
-            <div class="bento-card" style="padding: 24px; border-top: 4px solid var(--shat-green);">
-              <span class="bento-kicker">${t.kpiGrade}</span>
-              <div style="font-size: 2.2rem; font-weight: 900; color: var(--shat-green); margin: 6px 0;">94 / 100</div>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">${t.kpiGradeDesc}</p>
+            <!-- Card 3: Grade (Emerald) -->
+            <div class="portal-kpi-card-v2 kpi-emerald">
+              <div>
+                <span style="font-size: 0.78rem; font-weight: 800; color: #047857; text-transform: uppercase; letter-spacing: 0.5px;">${t.kpiGrade}</span>
+                <div style="font-size: 2.2rem; font-weight: 900; color: #059669; margin: 4px 0; font-family: var(--font-mono);">94 / 100</div>
+                <p style="font-size: 0.84rem; color: #166534; margin: 0; font-weight: 700;">
+                  ★ ${t.kpiGradeDesc}
+                </p>
+              </div>
+              <div style="font-size: 0.76rem; color: #047857; font-weight: 700; margin-top: 14px; border-top: 1px solid #F1F5F9; padding-top: 8px;">
+                ${txt('ضمن أعلى 5% من المتدربين في الدفعة', 'Top 5% in Current Cohort', 'Top 5% de la Promotion')}
+              </div>
             </div>
+
+            <!-- Card 4: Hours & Accredited CPD (Purple) -->
+            <div class="portal-kpi-card-v2 kpi-purple">
+              <div>
+                <span style="font-size: 0.78rem; font-weight: 800; color: #6D28D9; text-transform: uppercase; letter-spacing: 0.5px;">${txt('الساعات المعتمدة', 'Accredited Hours', 'Heures Validées')}</span>
+                <div style="font-size: 2.2rem; font-weight: 900; color: #7C3AED; margin: 4px 0; font-family: var(--font-mono);">40 / 40h</div>
+                <p style="font-size: 0.84rem; color: #5B21B6; margin: 0; font-weight: 600;">
+                  ${txt('معتمدة رسمياً وموثقة رقمياً', 'Officially Certified & Logged', 'Homologation Officielle')}
+                </p>
+              </div>
+              <div style="font-size: 0.76rem; color: #6D28D9; font-weight: 700; margin-top: 14px; border-top: 1px solid #F1F5F9; padding-top: 8px;">
+                CPD Certified • UK / Geneva Standards
+              </div>
+            </div>
+
           </div>
 
-          <!-- Section: Assignments & Tasks (Mobile-First Cards) -->
-          <div class="bento-card" style="margin-bottom: 36px; padding: 28px;">
-            <div class="bento-header" style="border-bottom: 1px solid var(--border-light); padding-bottom: 16px; margin-bottom: 24px;">
+          <!-- Section: Assignments & Field Tasks (Elevated Agency Cards) -->
+          <div class="bento-card" style="margin-bottom: 36px; padding: 28px; border-radius: 18px; border: 1px solid #E2E8F0; box-shadow: 0 4px 20px rgba(11,30,54,0.05);">
+            <div class="bento-header" style="border-bottom: 1px solid var(--border-light); padding-bottom: 16px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
               <div>
                 <span class="bento-kicker">${t.assignmentsSectionKicker}</span>
-                <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--shat-navy); margin: 4px 0;">
+                <h3 style="font-size: 1.35rem; font-weight: 900; color: var(--shat-navy); margin: 4px 0;">
                   ${t.assignmentsSectionTitle}
                 </h3>
               </div>
-              <span class="badge" style="background: #FEF3C7; color: #92400E; font-weight: 700;">${t.assignmentsSectionBadge}</span>
+              <span class="badge" style="background: #FEF3C7; color: #92400E; font-weight: 800; font-size: 0.82rem; padding: 6px 14px; border-radius: 999px; border: 1px solid #FCD34D;">
+                ${t.assignmentsSectionBadge}
+              </span>
             </div>
 
-            <div class="assignments-list-wrapper" style="display: flex; flex-direction: column; gap: 16px;">
+            <div class="assignments-list-wrapper" style="display: flex; flex-direction: column; gap: 18px;">
               
               <!-- Assignment Card 1: Graded -->
-              <div class="assignment-item-card" style="background: var(--bg-subtle); border-radius: var(--radius-sm); border: 1px solid var(--border-light); padding: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+              <div class="assignment-item-card" style="background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%); border-radius: 14px; border: 1px solid #E2E8F0; padding: 22px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
                 <div style="flex: 1; min-width: 260px;">
-                  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                    <span class="badge" style="background: #DCFCE7; color: #166534; font-weight: 700; font-size: 0.78rem;">${t.task1Badge}</span>
-                    <span style="font-size: 0.8rem; color: var(--text-muted);">${t.task1Due}</span>
+                  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap;">
+                    <span class="badge" style="background: #DCFCE7; color: #166534; font-weight: 800; font-size: 0.78rem; padding: 3px 10px; border-radius: 999px; border: 1px solid #86EFAC;">
+                      ✓ ${t.task1Badge}
+                    </span>
+                    <span style="font-size: 0.82rem; color: #64748B; font-weight: 600;">${t.task1Due}</span>
                   </div>
-                  <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--shat-navy); margin: 0 0 6px 0;">
+                  <h4 style="font-size: 1.1rem; font-weight: 800; color: #0F2E4A; margin: 0 0 8px 0;">
                     ${t.task1Title}
                   </h4>
-                  <div style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; background: #FFFFFF; padding: 10px 14px; border-radius: var(--radius-xs); border: 1px solid var(--border-light); margin-top: 8px;">
-                    <strong>${txt('ملاحظات المدرب:', 'Trainer Feedback:', 'Commentaires du Formateur :')}</strong> "${t.task1Feedback}"
+                  <div style="font-size: 0.88rem; color: #334155; line-height: 1.6; background: #FFFFFF; padding: 12px 16px; border-radius: 10px; border: 1px solid #E2E8F0; margin-top: 10px; border-inline-start: 4px solid #10B981;">
+                    <strong style="color: #0F2E4A;">${txt('التغذية الراجعة من المدرب د. أسامة:', 'Trainer Feedback (Dr. Osama):', 'Rétroaction du Formateur :')}</strong>
+                    <p style="margin: 4px 0 0 0; font-style: italic; color: #475569;">"${t.task1Feedback}"</p>
                   </div>
                 </div>
 
-                <div style="text-align: end; min-width: 140px;">
-                  <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 2px;">${t.task1ScoreLabel}</div>
-                  <div style="font-size: 1.8rem; font-weight: 900; color: var(--shat-green); font-family: var(--font-mono); margin-bottom: 8px;">
+                <div style="text-align: end; min-width: 150px; background: #F0FDF4; padding: 16px 20px; border-radius: 14px; border: 1px solid #BBF7D0;">
+                  <div style="font-size: 0.78rem; color: #166534; font-weight: 800; text-transform: uppercase; margin-bottom: 2px;">${t.task1ScoreLabel}</div>
+                  <div style="font-size: 2rem; font-weight: 900; color: #059669; font-family: var(--font-mono); margin-bottom: 10px;">
                     94 / 100
                   </div>
-                  <a href="/api/files/download/sub-01-file" class="btn-clean btn-secondary btn-sm" download="submission_review.pdf">
-                    <span>${t.task1Btn}</span>
+                  <a href="/api/files/download/sub-01-file" class="btn-clean btn-secondary btn-sm" download="submission_review.pdf" style="font-weight: 800; border-radius: 8px;">
+                    <span style="display: inline-flex; align-items: center; gap: 6px;">${icons.download('icon-inline', 14)} <span>${t.task1Btn}</span></span>
                   </a>
                 </div>
               </div>
 
               <!-- Assignment Card 2: Due Oct 4 (Pending) -->
-              <div class="assignment-item-card" style="background: #FFFFFF; border-radius: var(--radius-sm); border: 2px solid #FCD34D; padding: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+              <div class="assignment-item-card" style="background: #FFFFFF; border-radius: 14px; border: 2px solid #FCD34D; padding: 22px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 18px; box-shadow: 0 4px 16px rgba(217,119,6,0.08);">
                 <div style="flex: 1; min-width: 260px;">
-                  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                    <span class="badge" style="background: #FEF3C7; color: #B45309; font-weight: 800; font-size: 0.78rem;">${t.task2Badge}</span>
-                    <span style="font-size: 0.8rem; color: #B45309; font-weight: 600;">${t.task2Remaining}</span>
+                  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap;">
+                    <span class="badge" style="background: #FEF3C7; color: #B45309; font-weight: 900; font-size: 0.78rem; padding: 3px 10px; border-radius: 999px; border: 1px solid #F59E0B;">
+                      ⏳ ${t.task2Badge}
+                    </span>
+                    <span style="font-size: 0.82rem; color: #B45309; font-weight: 700; background: #FFFBEB; padding: 2px 8px; border-radius: 6px;">${t.task2Remaining}</span>
                   </div>
-                  <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--shat-navy); margin: 0 0 6px 0;">
+                  <h4 style="font-size: 1.1rem; font-weight: 800; color: #0F2E4A; margin: 0 0 8px 0;">
                     ${t.task2Title}
                   </h4>
-                  <p style="font-size: 0.86rem; color: var(--text-muted); margin: 0;">
+                  <p style="font-size: 0.88rem; color: #475569; margin: 0; line-height: 1.6;">
                     ${t.task2Desc}
                   </p>
                 </div>
 
-                <div style="text-align: end; min-width: 140px;">
-                  <button class="btn-clean btn-primary btn-sm btn-open-submit-modal" data-assign="assign-02" data-title="${t.task2Title}">
-                    <span>${t.task2Btn}</span>
+                <div style="text-align: end; min-width: 150px;">
+                  <button class="btn-clean btn-primary btn-md btn-open-submit-modal" data-assign="assign-02" data-title="${t.task2Title}" style="font-weight: 800; border-radius: 10px; padding: 12px 20px; box-shadow: 0 4px 14px rgba(15,46,74,0.3); background: #0F2E4A;">
+                    <span style="display: inline-flex; align-items: center; gap: 6px;">${icons.upload('icon-inline', 15)} <span>${t.task2Btn}</span></span>
                   </button>
                 </div>
               </div>
@@ -290,48 +442,57 @@ export function renderStudentDashboardView(lang = 'ar') {
             </div>
           </div>
 
-          <!-- Section: Secure Google Drive Materials -->
-          <div class="bento-card" style="border-top: 4px solid var(--shat-green); padding: 28px;">
+          <!-- Section: Secure Academic Cloud Repository -->
+          <div class="bento-card" style="border-top: 4px solid #10B981; padding: 28px; border-radius: 18px; border: 1px solid #E2E8F0;">
             <div class="bento-header" style="border-bottom: 1px solid var(--border-light); padding-bottom: 14px; margin-bottom: 20px;">
               <div>
                 <span class="bento-kicker">${txt('المستودع السحابي للمساق', 'Course Cloud Repository', 'Espace Ressources Cloud')}</span>
-                <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--shat-navy); margin: 4px 0;">
+                <h3 style="font-size: 1.3rem; font-weight: 900; color: #0F2E4A; margin: 4px 0;">
                   ${t.driveTitle}
                 </h3>
               </div>
-              <span style="font-size: 0.82rem; color: var(--text-muted);">${t.driveSubtitle}</span>
+              <span style="font-size: 0.84rem; color: #64748B; font-weight: 600; background: #F1F5F9; padding: 4px 10px; border-radius: 6px;">${t.driveSubtitle}</span>
             </div>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
               <!-- Doc 1 -->
-              <div style="background: var(--bg-subtle); padding: 18px; border-radius: var(--radius-xs); border: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center;">
+              <div style="background: #F8FAFC; padding: 20px; border-radius: 12px; border: 1px solid #E2E8F0; display: flex; justify-content: space-between; align-items: center; transition: transform 0.2s ease;">
                 <div>
-                  <div style="font-weight: 800; font-size: 0.92rem; color: var(--shat-navy); margin-bottom: 4px;">CHS_Core_Handbook.pdf</div>
-                  <div style="font-size: 0.78rem; color: var(--text-muted);">4.8 MB • ${txt('وثيقة معتمدة', 'Accredited Document', 'Document Homologué')}</div>
+                  <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                    <span style="background: #FEE2E2; color: #B91C1C; font-size: 0.68rem; font-weight: 800; padding: 2px 6px; border-radius: 4px;">PDF</span>
+                    <span style="font-weight: 800; font-size: 0.94rem; color: #0F2E4A;">CHS_Core_Handbook.pdf</span>
+                  </div>
+                  <div style="font-size: 0.78rem; color: #64748B;">4.8 MB • ${txt('وثيقة معتمدة دولياً', 'Accredited Document', 'Document Homologué')}</div>
                 </div>
-                <a href="/api/files/download/file-chs-01" class="btn-clean btn-green btn-sm" download="CHS_Handbook.pdf">
+                <a href="/api/files/download/file-chs-01" class="btn-clean btn-green btn-sm" download="CHS_Handbook.pdf" style="font-weight: 800; border-radius: 8px;">
                   <span style="display: inline-flex; align-items: center; gap: 4px;">${icons.download('icon-inline', 14)} <span>${t.downloadBtn}</span></span>
                 </a>
               </div>
 
               <!-- Doc 2 -->
-              <div style="background: var(--bg-subtle); padding: 18px; border-radius: var(--radius-xs); border: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center;">
+              <div style="background: #F8FAFC; padding: 20px; border-radius: 12px; border: 1px solid #E2E8F0; display: flex; justify-content: space-between; align-items: center; transition: transform 0.2s ease;">
                 <div>
-                  <div style="font-weight: 800; font-size: 0.92rem; color: var(--shat-navy); margin-bottom: 4px;">AAP_Accountability_Toolkit.pptx</div>
-                  <div style="font-size: 0.78rem; color: var(--text-muted);">12.3 MB • ${txt('عرض تقديمي للمحاضرات', 'Lecture Slides', 'Présentation Didactique')}</div>
+                  <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                    <span style="background: #FFEDD5; color: #C2410C; font-size: 0.68rem; font-weight: 800; padding: 2px 6px; border-radius: 4px;">PPTX</span>
+                    <span style="font-weight: 800; font-size: 0.94rem; color: #0F2E4A;">AAP_Accountability_Toolkit.pptx</span>
+                  </div>
+                  <div style="font-size: 0.78rem; color: #64748B;">12.3 MB • ${txt('عرض تقديمي للمحاضرات', 'Lecture Slides', 'Présentation Didactique')}</div>
                 </div>
-                <a href="/api/files/download/file-chs-02" class="btn-clean btn-green btn-sm" download="AAP_Toolkit.pptx">
+                <a href="/api/files/download/file-chs-02" class="btn-clean btn-green btn-sm" download="AAP_Toolkit.pptx" style="font-weight: 800; border-radius: 8px;">
                   <span style="display: inline-flex; align-items: center; gap: 4px;">${icons.download('icon-inline', 14)} <span>${t.downloadBtn}</span></span>
                 </a>
               </div>
 
               <!-- Doc 3 -->
-              <div style="background: var(--bg-subtle); padding: 18px; border-radius: var(--radius-xs); border: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center;">
+              <div style="background: #F8FAFC; padding: 20px; border-radius: 12px; border: 1px solid #E2E8F0; display: flex; justify-content: space-between; align-items: center; transition: transform 0.2s ease;">
                 <div>
-                  <div style="font-weight: 800; font-size: 0.92rem; color: var(--shat-navy); margin-bottom: 4px;">CHS_Compliance_Matrix.xlsx</div>
-                  <div style="font-size: 0.78rem; color: var(--text-muted);">1.2 MB • ${txt('جداول إلكترونية للتدقيق', 'Audit Spreadsheet', 'Tableur d’Audit')}</div>
+                  <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                    <span style="background: #DCFCE7; color: #15803D; font-size: 0.68rem; font-weight: 800; padding: 2px 6px; border-radius: 4px;">XLSX</span>
+                    <span style="font-weight: 800; font-size: 0.94rem; color: #0F2E4A;">CHS_Compliance_Matrix.xlsx</span>
+                  </div>
+                  <div style="font-size: 0.78rem; color: #64748B;">1.2 MB • ${txt('جداول إلكترونية للتدقيق', 'Audit Spreadsheet', 'Tableur d’Audit')}</div>
                 </div>
-                <a href="/api/files/download/file-chs-03" class="btn-clean btn-green btn-sm" download="CHS_Matrix.xlsx">
+                <a href="/api/files/download/file-chs-03" class="btn-clean btn-green btn-sm" download="CHS_Matrix.xlsx" style="font-weight: 800; border-radius: 8px;">
                   <span style="display: inline-flex; align-items: center; gap: 4px;">${icons.download('icon-inline', 14)} <span>${t.downloadBtn}</span></span>
                 </a>
               </div>

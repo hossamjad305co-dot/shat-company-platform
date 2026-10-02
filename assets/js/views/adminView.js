@@ -49,7 +49,7 @@ export function renderAdminView(lang = 'ar') {
                 <span style="background: rgba(16,185,129,0.2); color: #34D399; font-size: 0.65rem; font-weight: 800; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(52,211,153,0.3);">HQ</span>
               </div>
               <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
-                <span style="width: 6px; height: 6px; border-radius: 50%; background: #10B981; display: inline-block; box-shadow: 0 0 8px #10B981;"></span>
+                <span class="portal-pulse-dot"></span>
                 <span style="font-size: 0.74rem; font-weight: 600; color: #94A3B8;">${t.brandSub}</span>
               </div>
             </div>
@@ -172,24 +172,14 @@ export function renderAdminView(lang = 'ar') {
         <div id="admin-tab-dashboard" class="admin-view-pane active">
           
           <!-- Welcome Banner with Executive Ambient Mesh & Status Lighting -->
-          <div style="
-            background: radial-gradient(circle at 92% 12%, rgba(16, 185, 129, 0.22) 0%, transparent 48%), radial-gradient(circle at 12% 88%, rgba(59, 130, 246, 0.18) 0%, transparent 48%), linear-gradient(135deg, #071527 0%, #0B2548 55%, #08162B 100%);
-            border-radius: 18px;
-            padding: 30px 36px;
-            color: #FFFFFF;
-            margin-bottom: 28px;
-            box-shadow: 0 16px 36px -10px rgba(11, 30, 54, 0.35);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            position: relative;
-            overflow: hidden;
-          ">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; position: relative; z-index: 1;">
+          <div class="portal-hero-banner" style="margin-bottom: 28px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; position: relative; z-index: 2;">
               <div>
-                <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.16); border: 1px solid rgba(52, 211, 153, 0.35); color: #34D399; padding: 4px 14px; border-radius: 999px; font-size: 0.78rem; font-weight: 800; margin-bottom: 10px;">
-                  <span style="width: 7px; height: 7px; border-radius: 50%; background: #34D399; box-shadow: 0 0 8px #34D399;"></span>
+                <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.18); border: 1px solid rgba(52, 211, 153, 0.35); color: #86EFAC; padding: 5px 14px; border-radius: 999px; font-size: 0.78rem; font-weight: 800; margin-bottom: 10px;">
+                  <span class="portal-pulse-dot"></span>
                   <span>${txt('المركز التنفيذي الموحد • SHAT Executive Management • مباشر 2026', 'Enterprise Control Center • Live', 'Centre de Contrôle')}</span>
                 </div>
-                <h1 style="font-size: 1.85rem; font-weight: 900; color: #FFFFFF; margin: 4px 0 8px 0; line-height: 1.3; letter-spacing: -0.4px;">
+                <h1 style="font-size: 1.95rem; font-weight: 900; color: #FFFFFF; margin: 4px 0 8px 0; line-height: 1.3; letter-spacing: -0.4px;">
                   ${txt('لوحة المؤشرات والعمليات المركزية (Executive Dashboard)', 'Central Operations & KPI Dashboard', 'Tableau de Bord & Opérations')}
                 </h1>
                 <p style="color: #CBD5E1; font-size: 0.94rem; margin: 0 0 14px 0; max-width: 680px; line-height: 1.6;">
@@ -199,18 +189,18 @@ export function renderAdminView(lang = 'ar') {
                     'Suivi en temps réel des KPI institutionnels, des inscriptions et des demandes de conseil.'
                   )}
                 </p>
-                <div style="display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.76rem; color: #94A3B8;">
-                  <span style="background: rgba(255,255,255,0.06); padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);">• زمن الاستجابة: <strong>92ms</strong></span>
-                  <span style="background: rgba(255,255,255,0.06); padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);">امتثال CHS: <strong>100%</strong></span>
-                  <span style="background: rgba(255,255,255,0.06); padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);">أمان البيانات: <strong>OWASP Level 3</strong></span>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap; font-size: 0.78rem; color: #94A3B8;">
+                  <span style="background: rgba(255,255,255,0.08); padding: 4px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); color: #E2E8F0;">• زمن الاستجابة: <strong style="color: #86EFAC;">92ms</strong></span>
+                  <span style="background: rgba(255,255,255,0.08); padding: 4px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); color: #E2E8F0;">امتثال CHS: <strong style="color: #86EFAC;">100%</strong></span>
+                  <span style="background: rgba(255,255,255,0.08); padding: 4px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); color: #E2E8F0;">أمان البيانات: <strong style="color: #86EFAC;">OWASP Level 3</strong></span>
                 </div>
               </div>
 
               <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <button class="btn-clean btn-green btn-sm" id="btn-quick-new-post" style="box-shadow: 0 4px 14px rgba(30,126,52,0.35); font-weight: 800; padding: 10px 18px; border-radius: 8px;">
+                <button class="btn-clean btn-green btn-sm" id="btn-quick-new-post" style="box-shadow: 0 4px 16px rgba(30,126,52,0.4); font-weight: 800; padding: 11px 20px; border-radius: 10px;">
                   <span>+ ${txt('إضافة منشور جديد', 'New Publication', 'Nouvelle Publication')}</span>
                 </button>
-                <button class="btn-clean btn-sm" id="btn-refresh-dashboard" style="background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.22); font-weight: 700; padding: 10px 16px; border-radius: 8px;">
+                <button class="btn-clean btn-sm" id="btn-refresh-dashboard" style="background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.25); font-weight: 700; padding: 11px 18px; border-radius: 10px;">
                   <span>${txt('تحديث البيانات', 'Refresh Data', 'Actualiser')}</span>
                 </button>
               </div>
@@ -221,7 +211,7 @@ export function renderAdminView(lang = 'ar') {
           <div class="grid-4" style="margin-bottom: 28px;">
             
             <!-- Card 1: Students (Emerald) -->
-            <div class="admin-kpi-card kpi-emerald" style="background: linear-gradient(145deg, #FFFFFF 0%, #F0FDF4 100%); border: 1.5px solid #BBF7D0;">
+            <div class="portal-kpi-card-v2 kpi-emerald" style="border: 1.5px solid #BBF7D0;">
               <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
                 <div>
                   <span style="font-size: 0.78rem; font-weight: 800; color: #166534; text-transform: uppercase; letter-spacing: 0.5px;">
@@ -245,7 +235,7 @@ export function renderAdminView(lang = 'ar') {
             </div>
 
             <!-- Card 2: Trainers (Blue) -->
-            <div class="admin-kpi-card kpi-blue" style="background: linear-gradient(145deg, #FFFFFF 0%, #EFF6FF 100%); border: 1.5px solid #BFDBFE;">
+            <div class="portal-kpi-card-v2 kpi-navy" style="border: 1.5px solid #BFDBFE;">
               <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
                 <div>
                   <span style="font-size: 0.78rem; font-weight: 800; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.5px;">
@@ -269,7 +259,7 @@ export function renderAdminView(lang = 'ar') {
             </div>
 
             <!-- Card 3: Active Courses (Purple) -->
-            <div class="admin-kpi-card kpi-purple" style="background: linear-gradient(145deg, #FFFFFF 0%, #FAF5FF 100%); border: 1.5px solid #E9D5FF;">
+            <div class="portal-kpi-card-v2 kpi-purple" style="border: 1.5px solid #E9D5FF;">
               <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
                 <div>
                   <span style="font-size: 0.78rem; font-weight: 800; color: #6D28D9; text-transform: uppercase; letter-spacing: 0.5px;">
@@ -293,7 +283,7 @@ export function renderAdminView(lang = 'ar') {
             </div>
 
             <!-- Card 4: Pending Applications (Amber) -->
-            <div class="admin-kpi-card kpi-amber" style="background: linear-gradient(145deg, #FFFFFF 0%, #FFFBEB 100%); border: 1.5px solid #FDE68A;">
+            <div class="portal-kpi-card-v2 kpi-amber" style="border: 1.5px solid #FDE68A;">
               <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
                 <div>
                   <span style="font-size: 0.78rem; font-weight: 800; color: #B45309; text-transform: uppercase; letter-spacing: 0.5px;">

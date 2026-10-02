@@ -47,102 +47,201 @@ export function renderTeacherDashboardView(lang = 'ar') {
   };
 
   return `
-    <div class="teacher-portal-wrapper" style="padding-top: 48px; padding-bottom: 80px; min-height: 90vh; background: var(--bg-body);">
+    <div class="teacher-portal-wrapper" style="padding-top: 36px; padding-bottom: 80px; min-height: 90vh; background: var(--bg-body);">
       <div class="container">
         
-        <!-- Header Banner -->
-        <div style="background: linear-gradient(135deg, var(--shat-navy) 0%, var(--shat-navy-deep) 100%); border-radius: var(--radius-md); padding: 32px; color: #FFFFFF; margin-bottom: 28px; box-shadow: var(--shadow-sm); border: 1px solid rgba(255,255,255,0.08);">
-          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
-            <div>
-              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                <span class="badge" style="background: rgba(30, 166, 114, 0.2); color: #4ADE80; border: 1px solid rgba(74, 222, 128, 0.3);">
-                  ${t.badge}
-                </span>
-                <span style="font-size: 0.82rem; color: #94A3B8;">• ${t.sessionActive}</span>
+        <!-- Executive Faculty Hero Banner with Double-Bezel Hardware Frame -->
+        <div class="portal-hero-banner" style="margin-bottom: 28px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; position: relative; z-index: 2;">
+            
+            <!-- Faculty Identity & Status Info -->
+            <div style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
+              <div style="
+                width: 64px;
+                height: 64px;
+                border-radius: 18px;
+                background: linear-gradient(135deg, #0F2E4A 0%, #1E40AF 60%, #10B981 100%);
+                color: #FFFFFF;
+                font-size: 1.6rem;
+                font-weight: 900;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 8px 24px rgba(15, 46, 74, 0.4);
+                border: 2px solid rgba(255, 255, 255, 0.25);
+                flex-shrink: 0;
+              ">
+                د
               </div>
-              <h1 style="font-size: 1.85rem; font-weight: 800; margin-bottom: 8px; color: #FFFFFF;" id="teacher-greeting">
-                ${t.title}
-              </h1>
-              <p style="color: #CBD5E1; font-size: 0.92rem; margin: 0; max-width: 620px; line-height: 1.6;">
-                ${t.desc}
-              </p>
+
+              <div>
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px; flex-wrap: wrap;">
+                  <span class="badge" style="background: rgba(16, 185, 129, 0.2); color: #86EFAC; border: 1px solid rgba(52, 211, 153, 0.4); font-weight: 800; font-size: 0.78rem; padding: 4px 12px; border-radius: 999px;">
+                    ${t.badge}
+                  </span>
+                  <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; color: #94A3B8; font-weight: 600;">
+                    <span class="portal-pulse-dot"></span>
+                    <span>${t.sessionActive} • CHS Senior Evaluator</span>
+                  </span>
+                </div>
+                <h1 style="font-size: 1.95rem; font-weight: 900; margin: 0 0 6px 0; color: #FFFFFF; letter-spacing: -0.4px;" id="teacher-greeting">
+                  ${t.title}
+                </h1>
+                <p style="color: #CBD5E1; font-size: 0.92rem; margin: 0; max-width: 680px; line-height: 1.6;">
+                  ${t.desc}
+                </p>
+              </div>
             </div>
 
+            <!-- Faculty Action Controls -->
             <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-              <a href="#/academy" class="btn-clean btn-secondary btn-sm" style="color: #FFFFFF; border-color: rgba(255,255,255,0.25); display: inline-flex; align-items: center; gap: 6px;">
+              <a href="#/academy" class="btn-clean btn-secondary btn-sm" style="color: #FFFFFF; border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.08); border-radius: 10px; padding: 10px 16px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
                 <span style="display: inline-flex; align-items: center;">${isRtl ? icons.arrowRight('icon-inline', 14) : icons.arrowLeft('icon-inline', 14)}</span>
                 <span>${t.btnBackAcademy}</span>
               </a>
-              <button id="btn-teacher-refresh" class="btn-clean btn-green btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+              <button id="btn-teacher-refresh" class="btn-clean btn-green btn-sm" style="border-radius: 10px; padding: 10px 18px; font-weight: 800; box-shadow: 0 4px 14px rgba(30,126,52,0.35); display: inline-flex; align-items: center; gap: 8px;">
                 <span style="display: inline-flex; align-items: center;">${icons.undo('icon-inline', 14)}</span>
                 <span>${t.btnRefresh}</span>
               </button>
             </div>
+
           </div>
         </div>
 
-        <!-- Course Selector Bar -->
-        <div class="bento-card" style="padding: 20px 24px; margin-bottom: 24px;">
-          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
-            <div style="display: flex; align-items: center; gap: 12px; flex: 1; min-width: 280px;">
-              <label for="teacher-course-select" style="font-weight: 800; color: var(--shat-navy); font-size: 0.95rem; white-space: nowrap;">
-                ${t.courseSelectLabel}
-              </label>
-              <select id="teacher-course-select" class="form-input" style="flex: 1; font-weight: 600;"></select>
+        <!-- Double-Bezel Course Selector Bar -->
+        <div class="portal-bezel-wrapper" style="margin-bottom: 28px;">
+          <div class="portal-bezel-inner" style="background: #FFFFFF; border: 1px solid #E2E8F0; padding: 22px 28px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 18px;">
+              <div style="display: flex; align-items: center; gap: 14px; flex: 1; min-width: 300px;">
+                <label for="teacher-course-select" style="font-weight: 900; color: #0F2E4A; font-size: 0.95rem; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px;">
+                  <span style="color: #10B981;">●</span> ${t.courseSelectLabel}
+                </label>
+                <select id="teacher-course-select" class="form-input" style="flex: 1; font-weight: 700; border-radius: 10px; border-color: #CBD5E1; padding: 10px 14px; font-size: 0.92rem;"></select>
+              </div>
+              <div id="teacher-course-meta" style="font-size: 0.88rem; color: #64748B; background: #F8FAFC; padding: 8px 16px; border-radius: 8px; border: 1px solid #E2E8F0;">
+                ${t.courseSyncing}
+              </div>
             </div>
-            <div id="teacher-course-meta" style="font-size: 0.88rem; color: var(--text-muted);">
-              ${t.courseSyncing}
-            </div>
           </div>
         </div>
 
-        <!-- 3 KPI Summary Cards -->
-        <div class="bento-grid grid-3" style="margin-bottom: 32px;">
-          <div class="bento-card" style="padding: 24px; border-top: 4px solid var(--shat-navy);">
-            <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">${t.kpiCourses}</div>
-            <div style="font-size: 2.2rem; font-weight: 900; color: var(--shat-navy);" id="stat-teacher-courses-count">3</div>
-            <div style="font-size: 0.8rem; color: var(--shat-green); margin-top: 4px; font-weight: 600;">CHS Master, SPHERE Core, PSEA</div>
-          </div>
-
-          <div class="bento-card" style="padding: 24px; border-top: 4px solid var(--shat-green);">
-            <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">${t.kpiStudents}</div>
-            <div style="font-size: 2.2rem; font-weight: 900; color: var(--shat-green);" id="stat-total-students">87</div>
-            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">${t.kpiStudentsMeta}</div>
-          </div>
-
-          <div class="bento-card" style="padding: 24px; border-top: 4px solid var(--shat-amber);">
-            <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">${t.kpiPending}</div>
-            <div style="font-size: 2.2rem; font-weight: 900; color: #D97706;" id="stat-total-submissions">14</div>
-            <div style="font-size: 0.8rem; color: #D97706; margin-top: 4px; font-weight: 600;">${t.kpiPendingMeta}</div>
-          </div>
-        </div>
-
-        <!-- Student Roster & Grading Table / Cards -->
-        <div class="bento-card" style="margin-bottom: 32px; overflow: hidden; padding: 0;">
-          <div style="padding: 20px 24px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+        <!-- 4-Card Asymmetrical Faculty KPI Bento Grid -->
+        <div class="grid-4" style="margin-bottom: 32px;">
+          
+          <!-- Card 1: Courses (Navy) -->
+          <div class="portal-kpi-card-v2 kpi-navy">
             <div>
-              <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--shat-navy); margin: 0 0 4px 0;">
-                ${t.rosterTitle}
-              </h3>
-              <p style="font-size: 0.84rem; color: var(--text-muted); margin: 0;">
-                ${t.rosterSubtitle}
-              </p>
+              <span style="font-size: 0.78rem; font-weight: 800; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.5px;">${t.kpiCourses}</span>
+              <div style="font-size: 2.3rem; font-weight: 900; color: #0F2E4A; margin: 4px 0;" id="stat-teacher-courses-count">3</div>
+              <div style="display: flex; gap: 4px; flex-wrap: wrap; margin-top: 6px;">
+                <span class="badge" style="background: #EFF6FF; color: #1E40AF; font-size: 0.72rem; font-weight: 700;">CHS Master</span>
+                <span class="badge" style="background: #EFF6FF; color: #1E40AF; font-size: 0.72rem; font-weight: 700;">SPHERE Core</span>
+              </div>
             </div>
-            <span class="badge" style="background: var(--bg-muted); color: var(--shat-navy); font-weight: 700;">
-              ${t.liveDbBadge}
-            </span>
+            <div style="font-size: 0.78rem; color: #64748B; margin-top: 14px; border-top: 1px solid #F1F5F9; padding-top: 8px;">
+              ${txt('المساقات النشطة تحت إشرافك الأكاديمي', 'Active tracks under your faculty supervision', 'Cursus actifs sous votre responsabilité')}
+            </div>
+          </div>
+
+          <!-- Card 2: Total Trainees (Emerald) -->
+          <div class="portal-kpi-card-v2 kpi-emerald">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 0.78rem; font-weight: 800; color: #047857; text-transform: uppercase; letter-spacing: 0.5px;">${t.kpiStudents}</span>
+                <span class="portal-pulse-dot"></span>
+              </div>
+              <div style="font-size: 2.3rem; font-weight: 900; color: #059669; margin: 4px 0; font-family: var(--font-mono);" id="stat-total-students">87</div>
+              <div style="font-size: 0.8rem; color: #047857; font-weight: 700;">${t.kpiStudentsMeta}</div>
+            </div>
+            <div style="font-size: 0.78rem; color: #64748B; margin-top: 14px; border-top: 1px solid #F1F5F9; padding-top: 8px;">
+              ${txt('نسبة الحضور والالتزام: 96%', 'Attendance & Engagement: 96%', 'Taux d’assiduité : 96%')}
+            </div>
+          </div>
+
+          <!-- Card 3: Pending Deliverables (Amber) -->
+          <div class="portal-kpi-card-v2 kpi-amber">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 0.78rem; font-weight: 800; color: #B45309; text-transform: uppercase; letter-spacing: 0.5px;">${t.kpiPending}</span>
+                <span class="portal-pulse-dot-amber"></span>
+              </div>
+              <div style="font-size: 2.3rem; font-weight: 900; color: #D97706; margin: 4px 0; font-family: var(--font-mono);" id="stat-total-submissions">14</div>
+              <div style="font-size: 0.8rem; color: #B45309; font-weight: 700;">${t.kpiPendingMeta}</div>
+            </div>
+            <div style="font-size: 0.78rem; color: #92400E; margin-top: 14px; border-top: 1px solid #F1F5F9; padding-top: 8px; font-weight: 700;">
+              ⚡ ${txt('مطلوب الرصد خلال 48 ساعة', 'Grading required within 48h', 'Notation requise sous 48h')}
+            </div>
+          </div>
+
+          <!-- Card 4: Cohort Evaluation & Performance (Purple) -->
+          <div class="portal-kpi-card-v2 kpi-purple">
+            <div>
+              <span style="font-size: 0.78rem; font-weight: 800; color: #6D28D9; text-transform: uppercase; letter-spacing: 0.5px;">${txt('متوسط تقييم الدفعة', 'Cohort Average Grade', 'Moyenne de Promotion')}</span>
+              <div style="font-size: 2.3rem; font-weight: 900; color: #7C3AED; margin: 4px 0; font-family: var(--font-mono);">88.4%</div>
+              <div style="font-size: 0.8rem; color: #6D28D9; font-weight: 700;">${txt('تقدير عام: جيد جداً مرتفع', 'Overall: Very Good with Distinction', 'Mention : Très Bien')}</div>
+            </div>
+            <div style="font-size: 0.78rem; color: #64748B; margin-top: 14px; border-top: 1px solid #F1F5F9; padding-top: 8px;">
+              ${txt('98% تسليمات في الموعد المحدد', '98% on-time submission rate', '98% de remises dans les délais')}
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Student Roster & Grading Desk (Agency-Level Command Table) -->
+        <div class="bento-card" style="margin-bottom: 32px; overflow: hidden; padding: 0; border-radius: 18px; border: 1px solid #E2E8F0; box-shadow: 0 4px 20px rgba(11,30,54,0.05);">
+          
+          <div style="padding: 24px 28px; border-bottom: 1px solid var(--border-light); background: #FFFFFF;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 16px;">
+              <div>
+                <h3 style="font-size: 1.3rem; font-weight: 900; color: #0F2E4A; margin: 0 0 4px 0;">
+                  ${t.rosterTitle}
+                </h3>
+                <p style="font-size: 0.88rem; color: #64748B; margin: 0;">
+                  ${t.rosterSubtitle}
+                </p>
+              </div>
+              <span class="badge" style="background: #F1F5F9; color: #0F2E4A; font-weight: 800; font-size: 0.8rem; padding: 6px 14px; border-radius: 999px; border: 1px solid #CBD5E1;">
+                ${t.liveDbBadge}
+              </span>
+            </div>
+
+            <!-- Real-Time Search & Status Filters Bar -->
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+              <div class="portal-filter-bar" style="margin-bottom: 0;">
+                <button type="button" class="portal-filter-btn active" data-filter="all">
+                  <span>${txt('جميع المتدربين', 'All Trainees', 'Tous les Stagiaires')}</span>
+                  <span class="filter-count-badge" id="filter-count-all">87</span>
+                </button>
+                <button type="button" class="portal-filter-btn" data-filter="pending">
+                  <span>${txt('بانتظار التقييم', 'Pending Review', 'En Attente')}</span>
+                  <span class="filter-count-badge" id="filter-count-pending" style="background: #FEF3C7; color: #B45309;">14</span>
+                </button>
+                <button type="button" class="portal-filter-btn" data-filter="graded">
+                  <span>${txt('تم التقييم والرصد', 'Graded & Approved', 'Notés')}</span>
+                  <span class="filter-count-badge" id="filter-count-graded" style="background: #DCFCE7; color: #166534;">73</span>
+                </button>
+              </div>
+
+              <div style="position: relative; min-width: 240px; flex: 1; max-width: 320px;">
+                <input type="text" id="teacher-roster-search" class="form-input" placeholder="${txt('بحث بالاسم أو المعرف التدريبي...', 'Search by name or ID...', 'Recherche nom/matricule...')}" style="padding-inline-start: 36px; border-radius: 999px; font-size: 0.86rem; border-color: #CBD5E1;">
+                <span style="position: absolute; top: 50%; transform: translateY(-50%); inset-inline-start: 12px; color: #94A3B8; display: inline-flex;">
+                  ${icons.search('', 15)}
+                </span>
+              </div>
+            </div>
+
           </div>
 
           <div style="overflow-x: auto;">
-            <table style="width: 100%; border-collapse: collapse; text-align: start; font-size: 0.9rem;" id="teacher-roster-table">
+            <table class="portal-table-v2" id="teacher-roster-table">
               <thead>
-                <tr style="background: var(--bg-subtle); color: var(--shat-navy); border-bottom: 2px solid var(--border-light); font-size: 0.84rem;">
-                  <th style="padding: 14px 20px;">${t.colStudent}</th>
-                  <th style="padding: 14px 20px;">${t.colContact}</th>
-                  <th style="padding: 14px 20px;">${t.colProgress}</th>
-                  <th style="padding: 14px 20px;">${t.colSubs}</th>
-                  <th style="padding: 14px 20px;">${t.colStatus}</th>
-                  <th style="padding: 14px 20px; text-align: ${isRtl ? 'left' : 'right'};">${t.colActions}</th>
+                <tr>
+                  <th>${t.colStudent}</th>
+                  <th>${t.colContact}</th>
+                  <th>${t.colProgress}</th>
+                  <th>${t.colSubs}</th>
+                  <th>${t.colStatus}</th>
+                  <th style="text-align: ${isRtl ? 'left' : 'right'};">${t.colActions}</th>
                 </tr>
               </thead>
               <tbody id="teacher-roster-tbody">
@@ -161,7 +260,7 @@ export function renderTeacherDashboardView(lang = 'ar') {
 
     <!-- Teacher Student Profile Modal -->
     <div id="modal-student-profile-backdrop" class="modal-backdrop">
-      <div class="modal-box" style="max-width: 680px;">
+      <div class="modal-box" style="max-width: 680px; border-radius: 18px;">
         <div class="modal-header">
           <div class="modal-title" id="modal-student-profile-title">${t.modalProfileTitle}</div>
           <button id="modal-student-profile-close" class="modal-close">&times;</button>
@@ -174,7 +273,7 @@ export function renderTeacherDashboardView(lang = 'ar') {
 
     <!-- Teacher Grading Modal -->
     <div id="modal-grading-backdrop" class="modal-backdrop">
-      <div class="modal-box" style="max-width: 600px;">
+      <div class="modal-box" style="max-width: 600px; border-radius: 18px;">
         <div class="modal-header">
           <div class="modal-title" id="modal-grading-title">${t.modalGradingTitle}</div>
           <button id="modal-grading-close" class="modal-close">&times;</button>
@@ -272,72 +371,142 @@ export async function bindTeacherEvents() {
         const totalSubs = currentRoster.reduce((acc, curr) => acc + (curr.submissionsCount || 0), 0);
         if (statSubmissions) statSubmissions.textContent = totalSubs;
 
-        if (currentRoster.length === 0) {
-          tbodyEl.innerHTML = `<tr><td colspan="6" style="padding: 40px; text-align: center; color: var(--text-muted);">
-            ${txt('لم يتم تسجيل متدربين في هذا المساق بعد.', 'No trainees enrolled in this track yet.', 'Aucun stagiaire inscrit dans ce cursus pour le moment.')}
-          </td></tr>`;
-          return;
+        let activeFilter = 'all';
+        let searchQuery = '';
+
+        const countAllEl = document.getElementById('filter-count-all');
+        const countPendingEl = document.getElementById('filter-count-pending');
+        const countGradedEl = document.getElementById('filter-count-graded');
+
+        const pendingList = currentRoster.filter(s => {
+          const sub = s.submissions && s.submissions[0];
+          return sub && sub.status !== 'graded';
+        });
+        const gradedList = currentRoster.filter(s => {
+          const sub = s.submissions && s.submissions[0];
+          return sub && sub.status === 'graded';
+        });
+
+        if (countAllEl) countAllEl.textContent = currentRoster.length;
+        if (countPendingEl) countPendingEl.textContent = pendingList.length;
+        if (countGradedEl) countGradedEl.textContent = gradedList.length;
+
+        function renderRosterRows() {
+          let list = currentRoster;
+          if (activeFilter === 'pending') {
+            list = pendingList;
+          } else if (activeFilter === 'graded') {
+            list = gradedList;
+          }
+
+          if (searchQuery.trim()) {
+            const q = searchQuery.toLowerCase().trim();
+            list = list.filter(s => 
+              (s.fullNameAr && s.fullNameAr.toLowerCase().includes(q)) ||
+              (s.studentId && s.studentId.toLowerCase().includes(q)) ||
+              (s.email && s.email.toLowerCase().includes(q))
+            );
+          }
+
+          if (list.length === 0) {
+            tbodyEl.innerHTML = `<tr><td colspan="6" style="padding: 40px; text-align: center; color: var(--text-muted); font-size: 0.95rem;">
+              ${txt('لا توجد سجلات تطابق معايير البحث والفلترة المحددة.', 'No trainees match the selected filters or search query.', 'Aucun stagiaire ne correspond aux critères.')}
+            </td></tr>`;
+            return;
+          }
+
+          tbodyEl.innerHTML = list.map(student => {
+            const hasSubs = student.submissions && student.submissions.length > 0;
+            const latestSub = hasSubs ? student.submissions[0] : null;
+            const initial = (student.fullNameAr || 'م').charAt(0);
+
+            return `
+              <tr style="transition: background 0.15s;">
+                <td style="padding: 16px 20px;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <div class="student-avatar-badge" style="background: linear-gradient(135deg, #0F2E4A 0%, #059669 100%); color: #FFFFFF; box-shadow: 0 3px 10px rgba(15,46,74,0.2);">
+                      ${initial}
+                    </div>
+                    <div>
+                      <div style="font-weight: 800; color: #0F2E4A; cursor: pointer; font-size: 0.94rem;" class="student-profile-link" data-student-id="${student.studentId}">
+                        ${student.fullNameAr}
+                      </div>
+                      <div style="font-size: 0.78rem; color: #64748B; font-family: var(--font-mono); margin-top: 2px;">
+                        ${txt('المعرف:', 'ID:', 'ID :')} ${student.studentId}
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td style="padding: 16px 20px;">
+                  <div style="font-size: 0.85rem; color: #334155; font-weight: 600;">${student.email}</div>
+                  <div style="font-size: 0.78rem; color: #64748B; font-family: var(--font-mono); margin-top: 2px;">${student.phone}</div>
+                </td>
+                <td style="padding: 16px 20px;">
+                  <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="flex: 1; height: 8px; background: #E2E8F0; border-radius: 99px; overflow: hidden; width: 85px;">
+                      <div style="width: ${student.progressPercent}%; height: 100%; background: linear-gradient(90deg, #10B981, #059669); border-radius: 99px;"></div>
+                    </div>
+                    <span style="font-weight: 900; font-size: 0.86rem; color: #0F2E4A; font-family: var(--font-mono);">${student.progressPercent}%</span>
+                  </div>
+                </td>
+                <td style="padding: 16px 20px;">
+                  <span class="badge" style="background: ${hasSubs ? '#DCFCE7' : '#F1F5F9'}; color: ${hasSubs ? '#166534' : '#64748B'}; font-weight: 800; font-size: 0.78rem; padding: 4px 10px; border-radius: 999px;">
+                    ${student.submissionsCount || 1} / 5 ${txt('تسليمات', 'Submissions', 'Devoirs')}
+                  </span>
+                </td>
+                <td style="padding: 16px 20px;">
+                  ${latestSub ? (
+                    latestSub.status === 'graded'
+                      ? `<span class="badge" style="background: #DCFCE7; color: #166534; font-weight: 800; font-size: 0.78rem; padding: 4px 10px; border-radius: 999px; border: 1px solid #86EFAC;">✓ ${txt('تم الرصد', 'Graded', 'Noté')} (${latestSub.grade}/100)</span>`
+                      : `<span class="badge" style="background: #FEF3C7; color: #B45309; font-weight: 800; font-size: 0.78rem; padding: 4px 10px; border-radius: 999px; border: 1px solid #FCD34D;">⏳ ${txt('بانتظار التقييم', 'Pending Review', 'En attente')}</span>`
+                  ) : `<span class="badge" style="background: #F1F5F9; color: #64748B; font-weight: 700; font-size: 0.78rem; padding: 4px 10px; border-radius: 999px;">${txt('لم يسلّم بعد', 'Not submitted', 'Non remis')}</span>`}
+                </td>
+                <td style="padding: 16px 20px; text-align: ${isRtl ? 'left' : 'right'};">
+                  <div style="display: flex; gap: 8px; justify-content: flex-end; align-items: center;">
+                    <button class="btn-clean btn-secondary btn-sm btn-open-student-profile" data-student-id="${student.studentId}" title="${txt('عرض الملف الأكاديمي', 'View Profile', 'Consulter le Profil')}" style="border-radius: 8px; font-weight: 700;">
+                      <span>${txt('الملف الأكاديمي', 'Profile', 'Profil')}</span>
+                    </button>
+                    ${latestSub ? `
+                      <button class="btn-clean btn-primary btn-sm btn-open-grade-modal" 
+                        data-sub-id="${latestSub.id}"
+                        data-student-name="${student.fullNameAr}"
+                        data-file-name="${latestSub.fileName}"
+                        data-grade="${latestSub.grade || ''}"
+                        data-feedback="${encodeURIComponent(latestSub.instructorFeedback || '')}"
+                        style="background: #0F2E4A; border-radius: 8px; font-weight: 800;">
+                        <span>${txt('رصد الدرجة', 'Grade', 'Noter')}</span>
+                      </button>
+                    ` : ''}
+                  </div>
+                </td>
+              </tr>
+            `;
+          }).join('');
+
+          bindGradingModalButtons();
+          bindStudentProfileModalButtons();
         }
 
-        tbodyEl.innerHTML = currentRoster.map(student => {
-          const hasSubs = student.submissions && student.submissions.length > 0;
-          const latestSub = hasSubs ? student.submissions[0] : null;
+        renderRosterRows();
 
-          return `
-            <tr style="border-bottom: 1px solid var(--border-light); transition: background 0.15s;" onmouseover="this.style.background='#F8FAFC'" onmouseout="this.style.background='transparent'">
-              <td style="padding: 16px 20px;">
-                <div style="font-weight: 800; color: var(--shat-navy); cursor: pointer;" class="student-profile-link" data-student-id="${student.studentId}">
-                  ${student.fullNameAr} <span style="font-size: 0.75rem; opacity: 0.5;">•</span>
-                </div>
-                <div style="font-size: 0.78rem; color: var(--text-muted);">${txt('معرّف المتدرب:', 'ID:', 'ID :')} ${student.studentId}</div>
-              </td>
-              <td style="padding: 16px 20px;">
-                <div style="font-size: 0.85rem; color: var(--text-main);">${student.email}</div>
-                <div style="font-size: 0.78rem; color: var(--text-muted);">${student.phone}</div>
-              </td>
-              <td style="padding: 16px 20px;">
-                <div style="display: flex; align-items: center; gap: 8px;">
-                  <div style="flex: 1; height: 7px; background: #E2E8F0; border-radius: 4px; overflow: hidden; width: 80px;">
-                    <div style="width: ${student.progressPercent}%; height: 100%; background: var(--shat-green);"></div>
-                  </div>
-                  <span style="font-weight: 800; font-size: 0.85rem; color: var(--shat-navy);">${student.progressPercent}%</span>
-                </div>
-              </td>
-              <td style="padding: 16px 20px;">
-                <span class="badge" style="background: ${hasSubs ? '#DCFCE7' : '#F1F5F9'}; color: ${hasSubs ? '#166534' : '#64748B'}; font-weight: 700;">
-                  ${student.submissionsCount || 1} / 5 ${txt('تسليمات', 'Submissions', 'Devoirs')}
-                </span>
-              </td>
-              <td style="padding: 16px 20px;">
-                ${latestSub ? (
-                  latestSub.status === 'graded'
-                    ? `<span style="font-weight: 800; color: var(--shat-green); font-size: 0.88rem;">${txt('تم الرصد', 'Graded', 'Noté')} (${latestSub.grade}/100)</span>`
-                    : `<span style="font-weight: 800; color: #D97706; font-size: 0.88rem;">${txt('بانتظار التقييم', 'Pending Review', 'En attente')}</span>`
-                ) : `<span style="color: var(--text-muted); font-size: 0.84rem;">${txt('لم يسلّم بعد', 'Not submitted', 'Non remis')}</span>`}
-              </td>
-              <td style="padding: 16px 20px; text-align: ${isRtl ? 'left' : 'right'};">
-                <div style="display: flex; gap: 8px; justify-content: flex-end; align-items: center;">
-                  <button class="btn-clean btn-secondary btn-sm btn-open-student-profile" data-student-id="${student.studentId}" title="${txt('عرض الملف الأكاديمي', 'View Profile', 'Consulter le Profil')}">
-                    <span>${txt('الملف', 'Profile', 'Profil')}</span>
-                  </button>
-                  ${latestSub ? `
-                    <button class="btn-clean btn-primary btn-sm btn-open-grade-modal" 
-                      data-sub-id="${latestSub.id}"
-                      data-student-name="${student.fullNameAr}"
-                      data-file-name="${latestSub.fileName}"
-                      data-grade="${latestSub.grade || ''}"
-                      data-feedback="${encodeURIComponent(latestSub.instructorFeedback || '')}">
-                      <span>${txt('تقييم', 'Grade', 'Noter')}</span>
-                    </button>
-                  ` : ''}
-                </div>
-              </td>
-            </tr>
-          `;
-        }).join('');
+        // Bind filter tabs
+        document.querySelectorAll('.portal-filter-btn').forEach(btn => {
+          btn.onclick = () => {
+            document.querySelectorAll('.portal-filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeFilter = btn.getAttribute('data-filter') || 'all';
+            renderRosterRows();
+          };
+        });
 
-        bindGradingModalButtons();
-        bindStudentProfileModalButtons();
+        // Bind search input
+        const searchInput = document.getElementById('teacher-roster-search');
+        if (searchInput) {
+          searchInput.oninput = (e) => {
+            searchQuery = e.target.value;
+            renderRosterRows();
+          };
+        }
       }
     } catch (err) {
       if (tbodyEl) {

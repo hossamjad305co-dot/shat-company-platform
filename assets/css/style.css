@@ -2612,4 +2612,348 @@ p {
   }
 }
 
+/* ==========================================================================
+   Executive Role Portals (Student, Teacher, Admin) — High-End Agency Design
+   ========================================================================== */
+
+@keyframes portalPulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 7px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+@keyframes portalPulseAmber {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 7px rgba(217, 119, 6, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(217, 119, 6, 0); }
+}
+
+.portal-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10B981;
+  display: inline-block;
+  animation: portalPulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+  flex-shrink: 0;
+}
+
+.portal-pulse-dot-amber {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #D97706;
+  display: inline-block;
+  animation: portalPulseAmber 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+  flex-shrink: 0;
+}
+
+/* Double-Bezel Hardware Frame */
+.portal-bezel-wrapper {
+  background: rgba(15, 46, 74, 0.04);
+  border: 1px solid rgba(15, 46, 74, 0.1);
+  padding: 8px;
+  border-radius: 24px;
+  box-shadow: 0 20px 45px -15px rgba(11, 30, 54, 0.08);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portal-bezel-wrapper:hover {
+  box-shadow: 0 25px 50px -12px rgba(11, 30, 54, 0.14);
+}
+
+.portal-bezel-inner {
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Trainee & Faculty Command Banners */
+.portal-hero-banner {
+  background: radial-gradient(circle at 90% 15%, rgba(16, 185, 129, 0.18) 0%, transparent 45%),
+              radial-gradient(circle at 10% 85%, rgba(59, 130, 246, 0.14) 0%, transparent 45%),
+              linear-gradient(135deg, #071527 0%, #0B2548 55%, #08162B 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+  padding: 36px 38px;
+  border-radius: 20px;
+  box-shadow: 0 16px 36px -10px rgba(11, 30, 54, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.portal-hero-banner::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+}
+
+/* Button-in-Button Trailing Icon Concept */
+.btn-bubble-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-weight: 800;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+.btn-bubble-action .btn-icon-bubble {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.2);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+.btn-bubble-action:hover .btn-icon-bubble {
+  transform: scale(1.15) translateX(var(--btn-bubble-shift, -2px));
+}
+
+[dir="ltr"] .btn-bubble-action:hover .btn-icon-bubble {
+  transform: scale(1.15) translateX(var(--btn-bubble-shift-ltr, 2px));
+}
+
+/* Metric / Bento KPI Cards with Asymmetrical Layouts */
+.portal-kpi-card-v2 {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 18px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 18px rgba(11, 30, 54, 0.04);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.portal-kpi-card-v2:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(11, 30, 54, 0.09);
+  border-color: #CBD5E1;
+}
+
+.portal-kpi-card-v2::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 4px;
+}
+
+.portal-kpi-card-v2.kpi-emerald::before { background: linear-gradient(90deg, #10B981, #059669); }
+.portal-kpi-card-v2.kpi-navy::before { background: linear-gradient(90deg, #0F2E4A, #1E40AF); }
+.portal-kpi-card-v2.kpi-amber::before { background: linear-gradient(90deg, #F59E0B, #D97706); }
+.portal-kpi-card-v2.kpi-purple::before { background: linear-gradient(90deg, #8B5CF6, #6D28D9); }
+
+/* Curricular Roadmap Timeline */
+.roadmap-timeline-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin: 24px 0 12px 0;
+  padding: 0 8px;
+}
+
+.roadmap-timeline-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.roadmap-timeline-node {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+}
+
+.roadmap-timeline-step.completed .roadmap-timeline-node {
+  background: #DCFCE7;
+  color: #166534;
+  border: 2px solid #22C55E;
+}
+
+.roadmap-timeline-step.active .roadmap-timeline-node {
+  background: #0F2E4A;
+  color: #FFFFFF;
+  border: 2px solid #10B981;
+  box-shadow: 0 0 0 5px rgba(16, 185, 129, 0.2);
+}
+
+.roadmap-timeline-step.upcoming .roadmap-timeline-node {
+  background: #F1F5F9;
+  color: #94A3B8;
+  border: 2px solid #CBD5E1;
+}
+
+.roadmap-timeline-bar {
+  position: absolute;
+  top: 18px;
+  left: 30px;
+  right: 30px;
+  height: 3px;
+  background: #E2E8F0;
+  z-index: 1;
+}
+
+.roadmap-timeline-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #22C55E 0%, #10B981 65%, #E2E8F0 65%);
+  transition: width 0.6s ease;
+}
+
+/* Modern Filter Pill Bar */
+.portal-filter-bar {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  margin-bottom: 20px;
+}
+
+.portal-filter-btn {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.portal-filter-btn:hover {
+  border-color: #CBD5E1;
+  color: #0F2E4A;
+  background: #F8FAFC;
+}
+
+.portal-filter-btn.active {
+  background: #0F2E4A;
+  border-color: #0F2E4A;
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(15, 46, 74, 0.2);
+}
+
+.portal-filter-btn .filter-count-badge {
+  background: rgba(0, 0, 0, 0.08);
+  font-size: 0.74rem;
+  padding: 2px 7px;
+  border-radius: 999px;
+}
+
+.portal-filter-btn.active .filter-count-badge {
+  background: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+}
+
+/* Sleek Table Enhancements */
+.portal-table-v2 {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.9rem;
+}
+
+.portal-table-v2 thead th {
+  background: #F8FAFC;
+  color: #475569;
+  font-weight: 800;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 16px 20px;
+  border-bottom: 1.5px solid #E2E8F0;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.portal-table-v2 tbody tr {
+  transition: background 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.15s ease;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.portal-table-v2 tbody tr:hover {
+  background: #F8FAFC;
+}
+
+.portal-table-v2 tbody td {
+  padding: 16px 20px;
+  vertical-align: middle;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.student-avatar-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+/* Mobile Adjustments for Hero Banners & Roadmaps */
+@media (max-width: 768px) {
+  .portal-hero-banner {
+    padding: 24px 20px;
+  }
+  .roadmap-timeline-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding-inline-start: 24px;
+  }
+  .roadmap-timeline-bar {
+    top: 0;
+    bottom: 0;
+    left: 20px;
+    right: auto;
+    width: 3px;
+    height: auto;
+  }
+  [dir="rtl"] .roadmap-timeline-bar {
+    left: auto;
+    right: 20px;
+  }
+  .roadmap-timeline-step {
+    flex-direction: row;
+    gap: 12px;
+    text-align: start;
+    width: 100%;
+  }
+  .portal-kpi-card-v2 {
+    padding: 18px 16px;
+  }
+}
+
 
