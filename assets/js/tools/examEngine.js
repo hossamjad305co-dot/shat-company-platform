@@ -507,13 +507,13 @@ export const examEngine = {
             )}
           </p>
 
-          <div style="background: #F8FAFC; border: 1.5px dashed #CBD5E1; border-radius: 12px; padding: 18px; margin-bottom: 24px; display: inline-flex; align-items: center; gap: 16px; text-align: right;">
+          <div style="background: #F8FAFC; border: 1.5px dashed #CBD5E1; border-radius: 12px; padding: 18px; margin-bottom: 24px; display: inline-flex; align-items: center; gap: 16px; text-align: ${isAr ? 'right' : 'left'};">
             <div>
-              <div style="font-size: 0.78rem; font-weight: 700; color: #64748B;">الرقم التسلسلي المعتمد للشهادة:</div>
+              <div style="font-size: 0.78rem; font-weight: 700; color: #64748B;">${txt('الرقم التسلسلي المعتمد للشهادة:', 'Official Certificate Serial Number:', 'Numéro de Série Homologué :')}</div>
               <div style="font-size: 1.15rem; font-weight: 900; font-family: var(--font-mono); color: var(--shat-navy);">${cert.serial}</div>
             </div>
-            <a href="#/verify" class="btn-clean btn-sm" style="background: var(--shat-navy); color: #FFFFFF; font-weight: 700;">
-              • فحص في بوابة التحقق
+            <a href="#/${lang}/verify" class="btn-clean btn-sm" style="background: var(--shat-navy); color: #FFFFFF; font-weight: 700;">
+              • ${txt('فحص في بوابة التحقق', 'Check in Verification Portal', 'Vérifier sur le Portail')}
             </a>
           </div>
 
@@ -622,14 +622,23 @@ export const examEngine = {
       nationalId,
       programTitleAr: exam.titleAr,
       programTitleEn: exam.titleEn,
+      programTitleFr: exam.titleFr || exam.titleEn,
       hours: exam.hours,
+      hoursEn: exam.hoursEn || exam.hours,
+      hoursFr: exam.hoursFr || exam.hoursEn || exam.hours,
       leadTrainer: exam.trainerAr,
+      leadTrainerEn: exam.trainerEn || exam.trainerAr,
+      leadTrainerFr: exam.trainerFr || exam.trainerEn || exam.trainerAr,
       issueDate: today,
       grade: `امتياز مرتفع (${score}%)`,
       gradeEn: `Distinction (${score}%)`,
+      gradeFr: `Mention Très Bien (${score}%)`,
       status: 'معتمد وساري المفعول',
       statusEn: 'Officially Accredited & Active',
+      statusFr: 'Officiellement Accrédité et Valide',
       accreditationBody: 'شركة شات للتنمية والتطوير • قطاع بناء القدرات والاعتماد المهني الدولي',
+      accreditationBodyEn: 'SHAT Development & Growth • International Capacity Building Sector',
+      accreditationBodyFr: 'Société SHAT pour le Développement • Pôle International de Renforcement des Capacités',
       verificationHash: `SHA256:${Math.random().toString(36).substring(2, 10)}${Math.random().toString(36).substring(2, 10)}`,
       securityStamp: 'OFFICIAL_ACCREDITED_SEAL'
     };
@@ -716,8 +725,8 @@ export const examEngine = {
           <div style="display: flex; align-items: center; gap: 14px;">
             <img src="assets/logo/logo-transparent.png" alt="SHAT" style="height: 54px; width: auto; object-fit: contain;">
             <div>
-              <div style="font-size: 1.15rem; font-weight: 900; color: #0F2E4A; letter-spacing: 0.5px;">شركة شات للتنمية والتطوير</div>
-              <div style="font-size: 0.76rem; color: #64748B; font-weight: 700;">SHAT DEVELOPMENT & GROWTH PLATFORM</div>
+              <div style="font-size: 1.15rem; font-weight: 900; color: #0F2E4A; letter-spacing: 0.5px;">${txt('شركة شات للتنمية والتطوير', 'SHAT Development & Growth Platform', 'Société SHAT pour le Développement')}</div>
+              <div style="font-size: 0.76rem; color: #64748B; font-weight: 700;">${txt('منظومة بناء القدرات والاعتماد المؤسسي', 'CAPACITY BUILDING & INSTITUTIONAL ACCREDITATION', 'RENFORCEMENT DES CAPACITÉS & HOMOLOGATION')}</div>
             </div>
           </div>
 
@@ -747,10 +756,10 @@ export const examEngine = {
         <!-- Trainee Prominent Name -->
         <div style="text-align: center; margin-bottom: 26px;">
           <div style="font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 900; color: #0F2E4A; border-bottom: 2px dashed #94A3B8; display: inline-block; padding: 0 40px 8px;">
-            ${cert.traineeNameAr}
+            ${isAr ? cert.traineeNameAr : (cert.traineeNameEn || cert.traineeNameAr)}
           </div>
           <div style="font-size: 1.05rem; font-weight: 700; color: #64748B; margin-top: 6px; font-family: sans-serif;">
-            ${cert.traineeNameEn}
+            ${isAr ? cert.traineeNameEn : (cert.traineeNameAr || '')}
           </div>
           <div style="font-size: 0.82rem; color: #94A3B8; margin-top: 4px; font-family: var(--font-mono);">
             ID / REG: ${cert.nationalId}
@@ -765,10 +774,10 @@ export const examEngine = {
             `a satisfait avec succès à toutes les exigences didactiques et pratiques du cursus :`
           )}
           <div style="font-size: 1.25rem; font-weight: 900; color: var(--shat-green); margin: 8px 0;">
-            « ${cert.programTitleAr} »
+            « ${lang === 'fr' ? (cert.programTitleFr || cert.programTitleEn || cert.programTitleAr) : (lang === 'en' ? (cert.programTitleEn || cert.programTitleAr) : cert.programTitleAr)} »
           </div>
           <div style="font-size: 0.85rem; color: #64748B;">
-            ${cert.hours} • ${txt('التقدير العام:', 'Overall Grade:', 'Mention :')} <strong>${cert.grade}</strong>
+            ${lang === 'fr' ? (cert.hoursFr || cert.hoursEn || cert.hours) : (lang === 'en' ? (cert.hoursEn || cert.hours) : cert.hours)} • ${txt('التقدير العام:', 'Overall Grade:', 'Mention :')} <strong>${lang === 'fr' ? (cert.gradeFr || cert.gradeEn || cert.grade) : (lang === 'en' ? (cert.gradeEn || cert.grade) : cert.grade)}</strong>
           </div>
         </div>
 
@@ -778,8 +787,8 @@ export const examEngine = {
           <!-- Trainer Signature -->
           <div style="text-align: center; min-width: 170px;">
             <div style="font-size: 1.3rem; margin-bottom: 2px; font-family: 'Brush Script MT', cursive; color: #0F2E4A;">Hossam Jadallah</div>
-            <div style="font-size: 0.84rem; font-weight: 800; color: #0F2E4A;">${cert.leadTrainer}</div>
-            <div style="font-size: 0.72rem; color: #64748B;">استشاري بناء القدرات المؤسسية</div>
+            <div style="font-size: 0.84rem; font-weight: 800; color: #0F2E4A;">${isAr ? cert.leadTrainer : (cert.leadTrainerEn || cert.leadTrainer)}</div>
+            <div style="font-size: 0.72rem; color: #64748B;">${txt('استشاري بناء القدرات المؤسسية', 'Senior Capacity Development Consultant', 'Consultant Senior en Développement Institutionnel')}</div>
           </div>
 
           <!-- Official Gold Seal & QR Code -->
@@ -832,8 +841,8 @@ export const examEngine = {
           <!-- Board Sign-off -->
           <div style="text-align: center; min-width: 170px;">
             <div style="font-size: 1.3rem; margin-bottom: 2px; font-family: 'Brush Script MT', cursive; color: #0F2E4A;">Executive Board</div>
-            <div style="font-size: 0.84rem; font-weight: 800; color: #0F2E4A;">إدارة شركة شات للتنمية</div>
-            <div style="font-size: 0.72rem; color: #64748B;">تاريخ الإصدار: ${cert.issueDate}</div>
+            <div style="font-size: 0.84rem; font-weight: 800; color: #0F2E4A;">${txt('إدارة شركة شات للتنمية', 'Executive Board of SHAT', 'Direction de la Société SHAT')}</div>
+            <div style="font-size: 0.72rem; color: #64748B;">${txt('تاريخ الإصدار: ', 'Date of Issue: ', 'Date de Délivrance : ')}${cert.issueDate}</div>
           </div>
 
         </div>
@@ -841,7 +850,7 @@ export const examEngine = {
         <!-- Microprint Security Strip -->
         <div style="border-top: 1px dashed #CBD5E1; margin-top: 18px; padding-top: 8px; display: flex; justify-content: space-between; font-size: 0.66rem; color: #94A3B8; font-family: var(--font-mono);">
           <span>SECURITY TOKEN: ${cert.verificationHash}</span>
-          <span>CHECK AUTHENTICITY AT: SHAT-COMPANY-PLATFORM.VERCEL.APP/#/VERIFY</span>
+          <span>CHECK AUTHENTICITY AT: SHAT-COMPANY-PLATFORM.VERCEL.APP/#/${lang}/VERIFY</span>
         </div>
 
       </div>
@@ -853,7 +862,7 @@ export const examEngine = {
         </button>
 
         <div style="display: flex; gap: 10px;">
-          <a href="#/verify" class="btn-clean btn-sm" style="background: var(--bg-subtle); color: var(--shat-navy); border: 1px solid var(--border-light); font-weight: 700;">
+          <a href="#/${lang}/verify" class="btn-clean btn-sm" style="background: var(--bg-subtle); color: var(--shat-navy); border: 1px solid var(--border-light); font-weight: 700;">
             • ${txt('التحقق في البوابة الرقمية', 'Verify Online', 'Vérifier')}
           </a>
           <button type="button" class="btn-clean btn-primary btn-md allow-print" id="btn-print-official-cert" style="background: var(--shat-navy); font-weight: 800; box-shadow: 0 4px 14px rgba(15,46,74,0.3); display: inline-flex; align-items: center; gap: 6px;">

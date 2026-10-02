@@ -144,14 +144,14 @@ export function renderAdminView(lang = 'ar') {
         <div style="padding: 16px; border-top: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: space-between;">
           <div style="display: flex; align-items: center; gap: 8px;">
             <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--shat-green); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; color: #FFFFFF;">
-              ح
+              ${txt('ح', 'H', 'H')}
             </div>
             <div style="font-size: 0.8rem;">
-              <div style="font-weight: 700; color: #FFFFFF;" id="admin-sidebar-user">أ. حسام جاد الله</div>
+              <div style="font-weight: 700; color: #FFFFFF;" id="admin-sidebar-user">${txt('أ. حسام جاد الله', 'Mr. Hossam Jadallah', 'M. Hossam Jadallah')}</div>
               <div style="font-size: 0.7rem; color: #94A3B8;">Super Admin</div>
             </div>
           </div>
-          <a href="#/home" title="الخروج للموقع" style="color: #94A3B8; font-size: 0.9rem; text-decoration: none;">•</a>
+          <a href="#/${lang}/home" title="${txt('الخروج للموقع', 'Exit to Public Site', 'Retour au Site')}" style="color: #94A3B8; font-size: 0.9rem; text-decoration: none;">•</a>
         </div>
       </aside>
 
@@ -190,9 +190,9 @@ export function renderAdminView(lang = 'ar') {
                   )}
                 </p>
                 <div style="display: flex; gap: 10px; flex-wrap: wrap; font-size: 0.78rem; color: #94A3B8;">
-                  <span style="background: rgba(255,255,255,0.08); padding: 4px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); color: #E2E8F0;">• زمن الاستجابة: <strong style="color: #86EFAC;">92ms</strong></span>
-                  <span style="background: rgba(255,255,255,0.08); padding: 4px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); color: #E2E8F0;">امتثال CHS: <strong style="color: #86EFAC;">100%</strong></span>
-                  <span style="background: rgba(255,255,255,0.08); padding: 4px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); color: #E2E8F0;">أمان البيانات: <strong style="color: #86EFAC;">OWASP Level 3</strong></span>
+                  <span style="background: rgba(255,255,255,0.08); padding: 4px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); color: #E2E8F0;">• ${txt('زمن الاستجابة:', 'Latency:', 'Latence :')} <strong style="color: #86EFAC;">92ms</strong></span>
+                  <span style="background: rgba(255,255,255,0.08); padding: 4px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); color: #E2E8F0;">${txt('امتثال CHS:', 'CHS Compliance:', 'Conformité CHS :')} <strong style="color: #86EFAC;">100%</strong></span>
+                  <span style="background: rgba(255,255,255,0.08); padding: 4px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); color: #E2E8F0;">${txt('أمان البيانات:', 'Data Security:', 'Sécurité Données :')} <strong style="color: #86EFAC;">OWASP Level 3</strong></span>
                 </div>
               </div>
 
@@ -227,7 +227,7 @@ export function renderAdminView(lang = 'ar') {
                 <span style="background: #DCFCE7; color: #15803D; font-weight: 800; font-size: 0.76rem; padding: 3px 10px; border-radius: 999px; border: 1px solid #86EFAC;">
                   <span style="display: inline-flex; align-items: center; gap: 4px;">${icons.trendingUp('icon-inline', 13)} +12 ${txt('هذا الأسبوع', 'this week', 'cette semaine')}</span>
                 </span>
-                <span style="color: #047857; font-weight: 700; font-size: 0.76rem;">نشط ومسجل</span>
+                <span style="color: #047857; font-weight: 700; font-size: 0.76rem;">${txt('نشط ومسجل', 'Active & Enrolled', 'Actif & Inscrit')}</span>
               </div>
               <div style="height: 5px; background: #E2E8F0; border-radius: 999px; overflow: hidden; margin-top: 12px;">
                 <div style="height: 100%; width: 88%; background: linear-gradient(90deg, #10B981, #059669); border-radius: 999px;"></div>
@@ -251,7 +251,7 @@ export function renderAdminView(lang = 'ar') {
                 <span style="background: #DBEAFE; color: #1D4ED8; font-weight: 800; font-size: 0.76rem; padding: 3px 10px; border-radius: 999px; border: 1px solid #93C5FD;">
                   ${txt('كادر استشاري مرخص', 'Licensed Experts', 'Experts Agréés')}
                 </span>
-                <span style="color: #1D4ED8; font-weight: 700; font-size: 0.76rem;">100% تغطية</span>
+                <span style="color: #1D4ED8; font-weight: 700; font-size: 0.76rem;">${txt('100% تغطية', '100% Coverage', '100% Couverture')}</span>
               </div>
               <div style="height: 5px; background: #E2E8F0; border-radius: 999px; overflow: hidden; margin-top: 12px;">
                 <div style="height: 100%; width: 100%; background: linear-gradient(90deg, #3B82F6, #1D4ED8); border-radius: 999px;"></div>
@@ -318,15 +318,15 @@ export function renderAdminView(lang = 'ar') {
                   
                   <span>${txt('توزيع المتدربين والاهتمام حسب المسار التخصصي', 'Enrollment Distribution by Track', 'Répartition par Cursus')}</span>
                 </h3>
-                <span style="font-size: 0.74rem; font-weight: 700; background: #ECFDF5; color: #15803D; padding: 2px 8px; border-radius: 4px;">بيانات حية 2026</span>
+                <span style="font-size: 0.74rem; font-weight: 700; background: #ECFDF5; color: #15803D; padding: 2px 8px; border-radius: 4px;">${txt('بيانات حية 2026', 'Live Data 2026', 'Données en Direct')}</span>
               </div>
 
               <div style="display: flex; flex-direction: column; gap: 14px;">
                 <!-- Track 1: Case Management -->
                 <div>
                   <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 5px;">
-                    <span style="color: #065F46;">إدارة الحالة Case Management (د. محمد إسليم)</span>
-                    <span style="color: #10B981; font-weight: 800;">38% (93 متدرب)</span>
+                    <span style="color: #065F46;">${txt('إدارة الحالة (د. محمد إسليم)', 'Case Management (Dr. Mohammed Isleem)', 'Gestion de Cas (Dr. Mohammed Isleem)')}</span>
+                    <span style="color: #10B981; font-weight: 800;">38% (93 ${txt('متدرب', 'trainees', 'stagiaires')})</span>
                   </div>
                   <div style="height: 8px; background: #E2E8F0; border-radius: 999px; overflow: hidden;">
                     <div style="height: 100%; width: 38%; background: linear-gradient(90deg, #10B981, #059669); border-radius: 999px;"></div>
@@ -336,8 +336,8 @@ export function renderAdminView(lang = 'ar') {
                 <!-- Track 2: CHS Humanitarian -->
                 <div>
                   <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 5px;">
-                    <span style="color: #1E40AF;">دبلوم المعيار الإنساني CHS (أ. حسام جاد الله)</span>
-                    <span style="color: #2563EB; font-weight: 800;">32% (78 متدرب)</span>
+                    <span style="color: #1E40AF;">${txt('دبلوم المعيار الإنساني CHS (أ. حسام جاد الله)', 'CHS Humanitarian Diploma (Mr. Hossam Jadallah)', 'Diplôme CHS (M. Hossam Jadallah)')}</span>
+                    <span style="color: #2563EB; font-weight: 800;">32% (78 ${txt('متدرب', 'trainees', 'stagiaires')})</span>
                   </div>
                   <div style="height: 8px; background: #E2E8F0; border-radius: 999px; overflow: hidden;">
                     <div style="height: 100%; width: 32%; background: linear-gradient(90deg, #3B82F6, #1D4ED8); border-radius: 999px;"></div>
@@ -347,8 +347,8 @@ export function renderAdminView(lang = 'ar') {
                 <!-- Track 3: Presentation Skills -->
                 <div>
                   <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 5px;">
-                    <span style="color: #92400E;">مهارات العرض والتقديم (م. مهدي الملاحي)</span>
-                    <span style="color: #D97706; font-weight: 800;">18% (44 متدرب)</span>
+                    <span style="color: #92400E;">${txt('مهارات العرض والتقديم (م. مهدي الملاحي)', 'Presentation Skills (Eng. Mahdi Al-Mallahi)', 'Prise de Parole (Ing. Mahdi Al-Mallahi)')}</span>
+                    <span style="color: #D97706; font-weight: 800;">18% (44 ${txt('متدرب', 'trainees', 'stagiaires')})</span>
                   </div>
                   <div style="height: 8px; background: #E2E8F0; border-radius: 999px; overflow: hidden;">
                     <div style="height: 100%; width: 18%; background: linear-gradient(90deg, #F59E0B, #D97706); border-radius: 999px;"></div>
@@ -358,8 +358,8 @@ export function renderAdminView(lang = 'ar') {
                 <!-- Track 4: Institutional Consulting -->
                 <div>
                   <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 5px;">
-                    <span style="color: #5B21B6;">الاستشارات وتطوير النظم للمنظمات</span>
-                    <span style="color: #7C3AED; font-weight: 800;">12% (30 جهة)</span>
+                    <span style="color: #5B21B6;">${txt('الاستشارات وتطوير النظم للمنظمات', 'Institutional Advisory & Systems Development', 'Conseil Institutionnel & Systèmes')}</span>
+                    <span style="color: #7C3AED; font-weight: 800;">12% (30 ${txt('جهة', 'orgs', 'organisations')})</span>
                   </div>
                   <div style="height: 8px; background: #E2E8F0; border-radius: 999px; overflow: hidden;">
                     <div style="height: 100%; width: 12%; background: linear-gradient(90deg, #8B5CF6, #6D28D9); border-radius: 999px;"></div>
@@ -380,27 +380,27 @@ export function renderAdminView(lang = 'ar') {
 
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
                 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 14px; text-align: center;">
-                  <div style="font-size: 0.76rem; font-weight: 700; color: #64748B;">معدل الرد على الاستفسارات</div>
+                  <div style="font-size: 0.76rem; font-weight: 700; color: #64748B;">${txt('معدل الرد على الاستفسارات', 'Inquiry Response Rate', 'Taux de Réponse')}</div>
                   <div style="font-size: 1.5rem; font-weight: 900; color: #10B981; margin: 4px 0;">98.6%</div>
-                  <div style="font-size: 0.72rem; color: #15803D; font-weight: 600;">• أقل من ساعتين</div>
+                  <div style="font-size: 0.72rem; color: #15803D; font-weight: 600;">• ${txt('أقل من ساعتين', '< 2 hours', '< 2 heures')}</div>
                 </div>
 
                 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 14px; text-align: center;">
-                  <div style="font-size: 0.76rem; font-weight: 700; color: #64748B;">شهادات محققة رقمياً</div>
+                  <div style="font-size: 0.76rem; font-weight: 700; color: #64748B;">${txt('شهادات محققة رقمياً', 'Digitally Verified Certificates', 'Certificats Vérifiés')}</div>
                   <div style="font-size: 1.5rem; font-weight: 900; color: #2563EB; margin: 4px 0;">142</div>
-                  <div style="font-size: 0.72rem; color: #1D4ED8; font-weight: 600;">رمز موثق سارٍ</div>
+                  <div style="font-size: 0.72rem; color: #1D4ED8; font-weight: 600;">${txt('رمز موثق سارٍ', 'Valid Verified Hash', 'Hash Actif & Valide')}</div>
                 </div>
 
                 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 14px; text-align: center;">
-                  <div style="font-size: 0.76rem; font-weight: 700; color: #64748B;">مزامنة الاستمارات السحابية</div>
+                  <div style="font-size: 0.76rem; font-weight: 700; color: #64748B;">${txt('مزامنة الاستمارات السحابية', 'Form Cloud Sync', 'Synchro Formulaires')}</div>
                   <div style="font-size: 1.5rem; font-weight: 900; color: #7C3AED; margin: 4px 0;">100%</div>
                   <div style="font-size: 0.72rem; color: #6D28D9; font-weight: 600;">• Google Sheets API</div>
                 </div>
 
                 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 14px; text-align: center;">
-                  <div style="font-size: 0.76rem; font-weight: 700; color: #64748B;">معدل الإنجاز والتخرج</div>
+                  <div style="font-size: 0.76rem; font-weight: 700; color: #64748B;">${txt('معدل الإنجاز والتخرج', 'Graduation & Completion Rate', 'Taux de Réussite')}</div>
                   <div style="font-size: 1.5rem; font-weight: 900; color: #D97706; margin: 4px 0;">94.2%</div>
-                  <div style="font-size: 0.72rem; color: #B45309; font-weight: 600;">تقييم ممتاز</div>
+                  <div style="font-size: 0.72rem; color: #B45309; font-weight: 600;">${txt('تقييم ممتاز', 'Excellent Rating', 'Mention Très Bien')}</div>
                 </div>
               </div>
             </div>
@@ -575,19 +575,19 @@ export function renderAdminView(lang = 'ar') {
               </div>
 
               <div id="live-preview-box" style="flex: 1; border: 1px solid var(--border-light); border-radius: var(--radius-xs); padding: 18px; background: #FFFFFF; overflow-y: auto; max-height: 480px; width: 100%; transition: max-width 0.3s ease; margin: 0 auto;">
-                <div id="preview-category-badge" class="badge" style="background: #EFF6FF; color: #1D4ED8; margin-bottom: 10px;">إنساني وتطويري</div>
+                <div id="preview-category-badge" class="badge" style="background: #EFF6FF; color: #1D4ED8; margin-bottom: 10px;">${txt('إنساني وتطويري', 'Humanitarian & Development', 'Humanitaire & Développement')}</div>
                 <h2 id="preview-title" style="font-size: 1.25rem; font-weight: 800; color: var(--shat-navy); margin-bottom: 10px; line-height: 1.4;">
-                  عنوان المنشور
+                  ${txt('عنوان المنشور', 'Publication Title', 'Titre de la Publication')}
                 </h2>
                 <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;" id="preview-meta">
                   ${txt('بواسطة: أ. حسام جاد الله', 'By: SHAT Management', 'Par : Direction SHAT')} • ${new Date().toLocaleDateString(isRtl ? 'ar-EG' : 'en-US')}
                 </div>
                 <img id="preview-cover" src="assets/logo/logo-banner.jpg" alt="Preview" style="width: 100%; height: 160px; object-fit: cover; border-radius: var(--radius-xs); margin-bottom: 14px;" onerror="this.onerror=null; this.src='assets/logo/logo-banner.jpg';">
                 <p id="preview-excerpt" style="font-weight: 600; color: var(--text-main); font-size: 0.9rem; margin-bottom: 10px;">
-                  المقتطف التعريفي الموجز
+                  ${txt('المقتطف التعريفي الموجز', 'Brief Publication Summary', 'Résumé de la Publication')}
                 </p>
                 <div id="preview-body" style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.8; white-space: pre-wrap;">
-                  محتوى المنشور التفصيلي...
+                  ${txt('محتوى المنشور التفصيلي...', 'Detailed publication body text...', 'Contenu détaillé de la publication...')}
                 </div>
               </div>
             </div>
@@ -605,7 +605,7 @@ export function renderAdminView(lang = 'ar') {
                   ${txt('يمكنك تعديل محتوى وصور وحالة أي منشور منشور سابقاً وتنعكس فوراً على الموقع الرسمي.', 'Modify text, images, and status of any existing post instantly.', 'Modifiez le contenu et les images de toute publication.')}
                 </p>
               </div>
-              <span id="posts-count-badge" class="badge" style="background: var(--bg-subtle); color: var(--shat-navy);">-- منشور</span>
+              <span id="posts-count-badge" class="badge" style="background: var(--bg-subtle); color: var(--shat-navy);">-- ${txt('منشور', 'Posts', 'Publications')}</span>
             </div>
             <div style="overflow-x: auto;">
               <table style="width: 100%; border-collapse: collapse; text-align: ${isRtl ? 'right' : 'left'}; font-size: 0.9rem;">
@@ -774,7 +774,7 @@ export function renderAdminView(lang = 'ar') {
               <form id="form-import-google-url">
                 <div class="form-group">
                   <label class="form-label">${txt('رابط استمارة Google Form *', 'Google Form URL *', 'Lien Google Form *')}</label>
-                  <input type="url" id="google-form-url-input" class="form-input" style="height: 48px;" placeholder="https://docs.google.com/forms/d/e/... أو https://forms.gle/..." required>
+                  <input type="url" id="google-form-url-input" class="form-input" style="height: 48px;" placeholder="https://docs.google.com/forms/d/e/... ${txt('أو', 'or', 'ou')} https://forms.gle/..." required>
                 </div>
                 <button type="submit" class="btn-clean btn-green btn-lg">
                   <span style="display:inline-flex; align-items:center; gap:6px;">${icons.download('icon-inline', 16)} <span>${txt('استيراد وتوليد نموذج SHAT الداخلي', 'Import & Generate Native SHAT Form', 'Générer le Formulaire Natif')}</span></span>
@@ -936,7 +936,7 @@ export function renderAdminView(lang = 'ar') {
           <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 12px;">
             <div class="form-group">
               <label class="form-label">${txt('اسم المساق التدريبي أو الدبلوم *', 'Course Title *', 'Titre du Cursus *')}</label>
-              <input type="text" id="edit-course-title" class="form-input" required placeholder="مثال: دبلوم المعيار الإنساني الأساسي (CHS)">
+              <input type="text" id="edit-course-title" class="form-input" required placeholder="${txt('مثال: دبلوم المعيار الإنساني الأساسي (CHS)', 'e.g. Core Humanitarian Standard (CHS) Diploma', 'ex: Diplôme Norme Humanitaire Fondamentale (CHS)')}">
             </div>
             <div class="form-group">
               <label class="form-label">${txt('رمز المساق (Code)', 'Course Code', 'Code')}</label>
@@ -947,15 +947,15 @@ export function renderAdminView(lang = 'ar') {
           <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
             <div class="form-group">
               <label class="form-label">${txt('الساعات التدريبية', 'Training Hours', 'Heures')}</label>
-              <input type="text" id="edit-course-hours" class="form-input" placeholder="40 ساعة معتمدة">
+              <input type="text" id="edit-course-hours" class="form-input" placeholder="${txt('40 ساعة معتمدة', '40 accredited hours', '40 heures agréées')}">
             </div>
             <div class="form-group">
               <label class="form-label">${txt('المستوى الأكاديمي', 'Academic Level', 'Niveau')}</label>
-              <input type="text" id="edit-course-level" class="form-input" placeholder="تنفيذي / متقدم">
+              <input type="text" id="edit-course-level" class="form-input" placeholder="${txt('تنفيذي / متقدم', 'Executive / Advanced', 'Exécutif / Avancé')}">
             </div>
             <div class="form-group">
               <label class="form-label">${txt('الرسوم / التكلفة', 'Course Fee', 'Frais')}</label>
-              <input type="text" id="edit-course-fee" class="form-input" placeholder="150 شيكل أو منحة ممولة">
+              <input type="text" id="edit-course-fee" class="form-input" placeholder="${txt('150 شيكل أو منحة ممولة', '150 ILS or Funded Grant', '150 ILS ou Bourse')}">
             </div>
           </div>
 
@@ -963,22 +963,22 @@ export function renderAdminView(lang = 'ar') {
             <div class="form-group">
               <label class="form-label">${txt('المسار التخصصي', 'Specialized Track', 'Filière')}</label>
               <select id="edit-course-track" class="form-input">
-                <option value="humanitarian">العمل الإنساني والمعايير (CHS & Sphere)</option>
-                <option value="protection">الحماية وصون السلامة (PSEA & Safeguarding)</option>
-                <option value="evaluation">التقييم المستقل والمتابعة (OECD DAC & MEL)</option>
-                <option value="governance">الحوكمة والقيادة والتخطيط (SOPs)</option>
-                <option value="tot">إعداد وتأهيل المدربين (TOT)</option>
+                <option value="humanitarian">${txt('العمل الإنساني والمعايير (CHS & Sphere)', 'Humanitarian Action & Standards (CHS & Sphere)', 'Action Humanitaire & Normes (CHS & Sphere)')}</option>
+                <option value="protection">${txt('الحماية وصون السلامة (PSEA & Safeguarding)', 'Protection & Safeguarding (PSEA)', 'Protection & Sauvegarde (PSEA)')}</option>
+                <option value="evaluation">${txt('التقييم المستقل والمتابعة (OECD DAC & MEL)', 'Independent Evaluation & MEL (OECD DAC)', 'Évaluation Indépendante & Suivi (OECD DAC)')}</option>
+                <option value="governance">${txt('الحوكمة والقيادة والتخطيط (SOPs)', 'Governance, Leadership & Planning (SOPs)', 'Gouvernance & Leadership (SOPs)')}</option>
+                <option value="tot">${txt('إعداد وتأهيل المدربين (TOT)', 'Training of Trainers (TOT)', 'Formation de Formateurs (TOT)')}</option>
               </select>
             </div>
             <div class="form-group">
               <label class="form-label">${txt('مواعيد وأيام اللقاءات', 'Schedule', 'Horaires')}</label>
-              <input type="text" id="edit-course-schedule" class="form-input" placeholder="الأحد والأربعاء • 6:00 - 8:30 م">
+              <input type="text" id="edit-course-schedule" class="form-input" placeholder="${txt('الأحد والأربعاء • 6:00 - 8:30 م', 'Sunday & Wednesday • 6:00 - 8:30 PM', 'Dimanche & Mercredi • 18h00 - 20h30')}">
             </div>
           </div>
 
           <div class="form-group">
             <label class="form-label">${txt('المدرب المعتمد المسؤول', 'Lead Instructor', 'Formateur')}</label>
-            <input type="text" id="edit-course-instructor" class="form-input" placeholder="د. أسامة المنصور">
+            <input type="text" id="edit-course-instructor" class="form-input" placeholder="${txt('د. أسامة المنصور', 'Dr. Osama Al-Mansour', 'Dr. Osama Al-Mansour')}">
           </div>
 
           <!-- Official Forms & Google Drive Links Panel -->
@@ -1012,12 +1012,12 @@ export function renderAdminView(lang = 'ar') {
 
           <div class="form-group">
             <label class="form-label">${txt('الموجز التعريفي للمساق', 'Course Summary', 'Résumé')}</label>
-            <textarea id="edit-course-summary" class="form-input" style="min-height: 70px;" placeholder="نص وصفي شامل لأهداف المساق والنتائج المرجوة..."></textarea>
+            <textarea id="edit-course-summary" class="form-input" style="min-height: 70px;" placeholder="${txt('نص وصفي شامل لأهداف المساق والنتائج المرجوة...', 'Comprehensive description of course goals and outcomes...', 'Description complète des objectifs et résultats...')}"></textarea>
           </div>
 
           <div class="form-group">
             <label class="form-label">${txt('محاور المنهاج التفصيلية (سطر لكل محور)', 'Syllabus Modules (one per line)', 'Modules')}</label>
-            <textarea id="edit-course-syllabus" class="form-input" style="min-height: 100px; line-height: 1.6;" placeholder="الوحدة الأولى: مدخل إلى المنظومة المعيارية&#10;الوحدة الثانية: أدوات المساءلة المجتمعية&#10;الوحدة الثالثة: دراسة حالة تطبيقية ميدانية"></textarea>
+            <textarea id="edit-course-syllabus" class="form-input" style="min-height: 100px; line-height: 1.6;" placeholder="${txt('الوحدة الأولى: مدخل إلى المنظومة المعيارية\nالوحدة الثانية: أدوات المساءلة المجتمعية\nالوحدة الثالثة: دراسة حالة تطبيقية ميدانية', 'Module 1: Introduction to Standards\nModule 2: Accountability Tools\nModule 3: Field Case Study', 'Module 1 : Introduction aux Normes\nModule 2 : Outils de Redevabilité\nModule 3 : Étude de Cas Pratique')}"></textarea>
           </div>
 
           <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">

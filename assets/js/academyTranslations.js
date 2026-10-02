@@ -300,6 +300,66 @@ export const academyTranslations = {
         ]
       },
       {
+        id: "case-manager-2026",
+        code: "CM-2026",
+        track: "protection",
+        trackName: "Case Management & Field Work",
+        title: "Professional Case Manager Qualification Course (Dr. Mohammed Isleem)",
+        desc: "Advanced applied program qualifying social workers, psychologists, and NGO staff to design integrated care plans, conduct risk assessments, and establish safe referral pathways.",
+        duration: "12 Training Hours (4 Sessions)",
+        level: "Applied Professional",
+        instructorName: "Dr. Mohammed Isleem",
+        fee: "150 ILS only",
+        format: "In-Person at SHAT Interactive Hall",
+        accreditation: "Officially Certified Completion Credential",
+        syllabus: [
+          "Module 1: Case Management Foundations & Six Intervention Steps",
+          "Module 2: Comprehensive Assessment Tools, Risk Screening & Prioritization",
+          "Module 3: Individual Care Planning & Safe Multi-Sector Referral Pathways",
+          "Module 4: Monitoring, Documentation, Case Closure & Clinical Applications"
+        ]
+      },
+      {
+        id: "presentation-skills-2026",
+        code: "COMM-102",
+        track: "governance",
+        trackName: "Communications & Institutional Influence",
+        title: "Executive Presentation Skills & Public Speaking (Eng. Mahdi Al-Mallahi)",
+        desc: "Mastering public speaking, body language, vocal modulation, and crafting persuasive presentations to pitch projects and engage donors in SHAT interactive studio.",
+        duration: "12 Training Hours (4 Sessions)",
+        level: "Executive & Professional",
+        instructorName: "Eng. Mahdi Al-Mallahi",
+        fee: "120 ILS only",
+        format: "Hands-on Interactive Studio",
+        accreditation: "Officially Certified Completion Credential",
+        syllabus: [
+          "Module 1: Audience Psychology & Persuasive Storytelling Architecture",
+          "Module 2: Body Language, Vocal Dynamics & Stage Fright Control",
+          "Module 3: High-Impact Slide Design & Data Visualization for Donors",
+          "Module 4: Live Simulated Pitches & Video Jury Evaluation"
+        ]
+      },
+      {
+        id: "humanitarian-worker-diploma",
+        code: "HUM-DIP-142",
+        track: "humanitarian",
+        trackName: "Comprehensive Humanitarian Diplomas",
+        title: "Humanitarian Worker Professional Diploma: Principles to Practice",
+        desc: "Comprehensive 3-month intensive diploma covering international standards (Sphere, CHS, PSEA), Project Cycle Management, MEAL, and logistics for immediate NGO deployment.",
+        duration: "3 Months • 142 Training Hours • 13 Modules",
+        level: "Comprehensive Professional Diploma",
+        instructorName: "Senior International Humanitarian Faculty (10+ Instructors)",
+        fee: "Flexible Installments During Training",
+        format: "Blended (Interactive Labs + Field Practicum)",
+        accreditation: "Accredited Diploma with Official Graduation Ceremony",
+        syllabus: [
+          "Track 1: Global Humanitarian Standards (Sphere, CHS, Do No Harm)",
+          "Track 2: Humanitarian & Development Project Cycle Management (PCM)",
+          "Track 3: Monitoring, Evaluation, Accountability and Learning (MEAL)",
+          "Track 4: Supply Chain, Logistics, Shelter & Camp Management"
+        ]
+      },
+      {
         id: "shat-psea-expert",
         track: "protection",
         trackName: "Protection & Safeguarding",
@@ -439,7 +499,188 @@ export const academyTranslations = {
       satisfaction: "99.2%",
       satisfactionLabel: "Taux de Satisfaction et Impact"
     },
-    courses: [],
+    courses: [
+      {
+        id: "shat-chs-master",
+        code: "CHS-101",
+        track: "humanitarian",
+        trackName: "Secteur Humanitaire",
+        title: "Diplôme de la Norme Humanitaire Fondamentale (CHS) et Réponse au Développement",
+        desc: "Programme avancé qualifiant les praticiens humanitaires à mettre en œuvre les neuf engagements de la CHS et à garantir la redevabilité envers les populations affectées (AAP).",
+        duration: "45 Heures de Formation • 6 Semaines",
+        level: "Avancé",
+        instructorName: "Dr. Osama Al-Mansour",
+        fee: "250 $ (ou bourse financée)",
+        format: "Hybride (Interactif + Études de cas)",
+        accreditation: "Agréé selon CHS & Sphere",
+        syllabus: [
+          "Module 1 : Les Neuf Engagements de la Norme Humanitaire Fondamentale",
+          "Module 2 : Outils pratiques de redevabilité (AAP) et gestion des plaintes",
+          "Module 3 : Évaluation des besoins et conception des interventions",
+          "Module 4 : Simulation de cas réel et audit de la matrice de qualité"
+        ]
+      },
+      {
+        id: "case-manager-2026",
+        code: "CM-2026",
+        track: "protection",
+        trackName: "Gestion de Cas & Travail de Terrain",
+        title: "Formation Qualifiante de Gestionnaire de Cas (Dr. Mohammed Isleem)",
+        desc: "Programme appliqué avancé préparant les travailleurs sociaux et psychologues à piloter des plans de soins intégrés, évaluer les vulnérabilités et gérer les référencements sécurisés.",
+        duration: "12 Heures de Formation (4 Sessions)",
+        level: "Professionnel Appliqué",
+        instructorName: "Dr. Mohammed Isleem",
+        fee: "150 ILS seulement",
+        format: "Présentiel en Salle Interactive SHAT",
+        accreditation: "Certificat Officiel d'Accomplissement",
+        syllabus: [
+          "Module 1 : Principes fondamentaux de la gestion de cas et six étapes d'intervention",
+          "Module 2 : Outils d'évaluation globale, identification des risques et priorités",
+          "Module 3 : Élaboration du plan d'intervention individuel et circuits d'orientation sûrs",
+          "Module 4 : Suivi, documentation, clôture de dossier et études cliniques"
+        ]
+      },
+      {
+        id: "presentation-skills-2026",
+        code: "COMM-102",
+        track: "governance",
+        trackName: "Communication & Influence Institutionnelle",
+        title: "Formation aux Compétences de Présentation et Prise de Parole (Ing. Mahdi Al-Mallahi)",
+        desc: "Maîtrise de l'art oratoire, du langage corporel, de la modulation vocale et de la conception de présentations persuasives pour convaincre bailleurs et partenaires.",
+        duration: "12 Heures de Formation (4 Sessions)",
+        level: "Exécutif & Professionnel",
+        instructorName: "Ing. Mahdi Al-Mallahi",
+        fee: "120 ILS seulement",
+        format: "Atelier Pratique Interactif",
+        accreditation: "Certificat Officiel d'Accomplissement",
+        syllabus: [
+          "Module 1 : Psychologie de l'auditoire et structuration du message persuasif",
+          "Module 2 : Langage corporel, voix et gestion du trac",
+          "Module 3 : Conception de diapositives d'impact et visualisation de données",
+          "Module 4 : Simulation en direct et présentation devant jury"
+        ]
+      },
+      {
+        id: "humanitarian-worker-diploma",
+        code: "HUM-DIP-142",
+        track: "humanitarian",
+        trackName: "Diplômes Humanitaires Complets",
+        title: "Diplôme Professionnel de Travailleur Humanitaire : Des Principes à la Pratique",
+        desc: "Diplôme intensif de 3 mois couvrant les normes internationales (Sphere, CHS, PSEA), la gestion de cycle de projet, le MEAL et la logistique humanitaire.",
+        duration: "3 Mois • 142 Heures • 13 Modules",
+        level: "Diplôme Professionnel Complet",
+        instructorName: "Corps professoral d'experts internationaux (10+ formateurs)",
+        fee: "Paiement échelonné durant la formation",
+        format: "Mixte (Ateliers interactifs + Pratique de terrain)",
+        accreditation: "Diplôme Agréé avec Cérémonie Officielle",
+        syllabus: [
+          "Filière 1 : Normes Humanitaires Internationales (Sphere, CHS, Ne Pas Nuire)",
+          "Filière 2 : Gestion du Cycle de Projet Humanitaire et de Développement (PCM)",
+          "Filière 3 : Suivi, Évaluation, Redevabilité et Apprentissage (MEAL)",
+          "Filière 4 : Chaîne d'Approvisionnement, Logistique et Gestion des Camps"
+        ]
+      },
+      {
+        id: "shat-psea-expert",
+        code: "PSEA-201",
+        track: "protection",
+        trackName: "Protection & Sauvegarde",
+        title: "Programme Exécutif en Conseil de Protection et Sauvegarde (PSEA)",
+        desc: "Formation des conseillers et points focaux pour concevoir les politiques institutionnelles de sauvegarde, évaluer les risques d'exploitation et d'abus sexuels et établir des mécanismes sûrs.",
+        duration: "40 Heures de Formation • 5 Semaines",
+        level: "Exécutif & Conseil",
+        instructorName: "Mme Nada Al-Khalidi",
+        fee: "200 $",
+        format: "Virtuel Direct + Mentorat Pratique",
+        accreditation: "Conforme aux normes inter-agences PSEA et Ne Pas Nuire",
+        syllabus: [
+          "Module 1 : Fondements juridiques et humanitaires de la sauvegarde",
+          "Module 2 : Évaluation des risques institutionnels et rédaction de politiques",
+          "Module 3 : Gestion des signalements, enquêtes et protection des survivants",
+          "Module 4 : Plan d'action institutionnel et audit de conformité"
+        ]
+      },
+      {
+        id: "shat-oecd-evaluator",
+        code: "OECD-301",
+        track: "evaluation",
+        trackName: "Évaluation Indépendante",
+        title: "Spécialiste en Évaluation Externe : Les Six Critères OCDE CAD",
+        desc: "Perfectionnement des évaluateurs indépendants pour apprécier la pertinence, la cohérence, l'efficacité, l'efficience, l'impact et la durabilité selon les normes UNEG.",
+        duration: "50 Heures de Formation • 7 Semaines",
+        level: "Niveau Expert",
+        instructorName: "Dr. Osama Al-Mansour",
+        fee: "240 $",
+        format: "Hybride + Projet d'Évaluation Supervisé",
+        accreditation: "Agréé selon les critères OCDE CAD & normes UNEG",
+        syllabus: [
+          "Module 1 : Les six critères OCDE CAD et questions évaluatives stratégiques",
+          "Module 2 : Collecte de données, méthodes mixtes et échantillonnage de terrain",
+          "Module 3 : Rédaction de rapports d'évaluation indépendants et leçons apprises",
+          "Module 4 : Restitution des conclusions aux conseils de bailleurs"
+        ]
+      },
+      {
+        id: "shat-tot-professional",
+        code: "TOT-401",
+        track: "tot",
+        trackName: "Formation de Formateurs",
+        title: "Formation Professionnelle de Formateurs pour ONG Humanitaires (TOT)",
+        desc: "Maîtrise de l'ingénierie pédagogique par compétences, de la facilitation expérientielle pour adultes (cycle de Kolb) et de l'évaluation des impacts (modèle de Kirkpatrick).",
+        duration: "36 Heures de Formation • 4 Semaines",
+        level: "Praticien Professionnel",
+        instructorName: "M. Hossam Jadallah",
+        fee: "180 $",
+        format: "Ateliers Pratiques & Micro-enseignement",
+        accreditation: "Facilitateur Professionnel Certifié SHAT",
+        syllabus: [
+          "Module 1 : Psychologie de l'apprentissage des adultes et cycles expérientiels",
+          "Module 2 : Ingénierie des compétences et architecture pédagogique",
+          "Module 3 : Dynamique de groupe, résolution de conflits et facilitation",
+          "Module 4 : Projet final : Session de micro-enseignement filmée et évaluée"
+        ]
+      },
+      {
+        id: "shat-governance-strategy",
+        code: "GOV-501",
+        track: "governance",
+        trackName: "Gouvernance & Leadership",
+        title: "Gouvernance Stratégique et Leadership Institutionnel pour ONG",
+        desc: "Développement des structures de gouvernance, surveillance des conseils d'administration, conduite du changement et tableaux de bord prospectifs pour organisations civiles.",
+        duration: "32 Heures de Formation • 4 Semaines",
+        level: "Exécutif & Direction",
+        instructorName: "Dr. Khaled Al-Masri",
+        fee: "190 $",
+        format: "Séminaires Exécutifs & Études de Cas",
+        accreditation: "Conforme aux Référentiels Internationaux de Gouvernance",
+        syllabus: [
+          "Module 1 : Principes de bonne gouvernance et dynamique des conseils",
+          "Module 2 : Planification stratégique, cartographie des objectifs et risques",
+          "Module 3 : Élaboration de tableaux de bord prospectifs et indicateurs",
+          "Module 4 : Leadership transformationnel et conduite du changement"
+        ]
+      },
+      {
+        id: "shat-meal-systems",
+        code: "MEAL-601",
+        track: "evaluation",
+        trackName: "Systèmes MEAL",
+        title: "Conception et Gestion de Systèmes MEAL Intégrés",
+        desc: "Mise en place de systèmes MEAL complets, cadres logiques, indicateurs numériques, mécanismes de redevabilité communautaire et capitalisation des connaissances.",
+        duration: "40 Heures de Formation • 5 Semaines",
+        level: "Avancé",
+        instructorName: "Ing. Ahmed Ammar",
+        fee: "210 $",
+        format: "Pratique avec Outils Numériques et Cloud",
+        accreditation: "Conforme aux Normes Internationales du Développement",
+        syllabus: [
+          "Module 1 : Cadres de résultats, cadres logiques et Théorie du Changement",
+          "Module 2 : Plans de suivi des performances (PMP) et matrices d'indicateurs",
+          "Module 3 : Redevabilité communautaire, circuits de réclamation et boucles de retour",
+          "Module 4 : Tableaux de bord numériques et capitalisation des leçons apprises"
+        ]
+      }
+    ],
     verify: {
       title: "Portail Officiel de Vérification des Certificats",
       subtitle: "Vérification instantanée et sécurisée des diplômes émis par l'Académie SHAT.",

@@ -175,10 +175,10 @@ export function renderLoginView(lang = 'ar') {
             <!-- Preset Quick ID tags -->
             <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px;">
               <button type="button" class="btn-clean btn-sm btn-quick-id" data-id="1098765432" style="font-size: 0.75rem; padding: 4px 10px; background: var(--bg-subtle); border: 1px solid var(--border-medium); border-radius: 4px; color: var(--shat-navy);">
-                1098765432 (طارق الخالد)
+                1098765432 (${lang === 'ar' ? 'طارق الخالد' : 'Tariq Al-Khaled'})
               </button>
               <button type="button" class="btn-clean btn-sm btn-quick-id" data-id="401234567" style="font-size: 0.75rem; padding: 4px 10px; background: var(--bg-subtle); border: 1px solid var(--border-medium); border-radius: 4px; color: var(--shat-green);">
-                401234567 (سارة العلي)
+                401234567 (${lang === 'ar' ? 'سارة العلي' : 'Sara Al-Ali'})
               </button>
             </div>
 
@@ -195,7 +195,7 @@ export function renderLoginView(lang = 'ar') {
           <div style="background: rgba(37, 211, 102, 0.08); border: 1px solid rgba(37, 211, 102, 0.25); padding: 14px; border-radius: var(--radius-xs); margin-bottom: 18px;">
             <div style="display: flex; align-items: center; gap: 8px; font-weight: 700; color: #15803D; font-size: 0.88rem; margin-bottom: 4px;">
               <span style="display: inline-flex; width: 20px; height: 20px;">${icons.whatsapp('icon-inline', 20)}</span>
-              <span>${l.tabs?.whatsapp || 'واتساب السريع'}</span>
+              <span>${l.tabs?.whatsapp || (lang === 'fr' ? 'WhatsApp Rapide' : (lang === 'en' ? 'Quick WhatsApp' : 'واتساب السريع'))}</span>
             </div>
             <p style="margin: 0; font-size: 0.8rem; color: #166534; line-height: 1.5;">${l.whatsappSimNote}</p>
           </div>
@@ -228,7 +228,7 @@ export function renderLoginView(lang = 'ar') {
                 style="height: 48px; font-size: 1.3rem; letter-spacing: 6px; text-align: center; font-weight: 900; color: #15803D; background: #FFFFFF;"
               />
               <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 6px; text-align: center;">
-                رمز التحقق التجريبي الفوري: <strong>7264</strong> (تم إرساله للواتساب)
+                ${lang === 'ar' ? 'رمز التحقق التجريبي الفوري: <strong>7264</strong> (تم إرساله للواتساب)' : (lang === 'fr' ? 'Code OTP Démo Immédiat : <strong>7264</strong> (Envoyé sur WhatsApp)' : 'Instant Demo OTP Code: <strong>7264</strong> (Sent via WhatsApp)')}
               </div>
             </div>
 
@@ -258,28 +258,28 @@ export function renderLoginView(lang = 'ar') {
             <button type="button" class="btn-clean btn-instant-role" data-role="student" style="padding: 14px 12px; text-align: ${isRtl ? 'right' : 'left'}; background: #F8FAFC; border: 1.5px solid #CBD5E1; border-radius: var(--radius-xs); transition: all 0.2s ease;">
               <div style="margin-bottom: 6px; color: #1D4ED8; display: flex; align-items: center;">${icons.academy('role-svg', 22)}</div>
               <div style="font-weight: 800; color: #1D4ED8; font-size: 0.88rem;">${l.studentRole}</div>
-              <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">لوحة المتدرب، المقررات، والشهادات</div>
+              <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">${lang === 'ar' ? 'لوحة المتدرب، المقررات، والشهادات' : (lang === 'fr' ? 'Portail stagiaire, cours & attestations' : 'Trainee portal, courses & certificates')}</div>
             </button>
 
             <!-- Master Trainer Card -->
             <button type="button" class="btn-clean btn-instant-role" data-role="teacher" style="padding: 14px 12px; text-align: ${isRtl ? 'right' : 'left'}; background: #F8FAFC; border: 1.5px solid #CBD5E1; border-radius: var(--radius-xs); transition: all 0.2s ease;">
               <div style="margin-bottom: 6px; color: #15803D; display: flex; align-items: center;">${icons.award('role-svg', 22)}</div>
               <div style="font-weight: 800; color: #15803D; font-size: 0.88rem;">${l.teacherRole}</div>
-              <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">إدارة الفصول، التقييم، وبنوك الأسئلة</div>
+              <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">${lang === 'ar' ? 'إدارة الفصول، التقييم، وبنوك الأسئلة' : (lang === 'fr' ? 'Gestion des cours, notation & examens' : 'Course builder, grading & question bank')}</div>
             </button>
 
             <!-- Super Admin Card -->
             <button type="button" class="btn-clean btn-instant-role" data-role="admin" style="padding: 14px 12px; text-align: ${isRtl ? 'right' : 'left'}; background: #F8FAFC; border: 1.5px solid #CBD5E1; border-radius: var(--radius-xs); transition: all 0.2s ease;">
               <div style="margin-bottom: 6px; color: var(--shat-navy); display: flex; align-items: center;">${icons.shield('role-svg', 22)}</div>
               <div style="font-weight: 800; color: var(--shat-navy); font-size: 0.88rem;">${l.adminRole}</div>
-              <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">إدارة المنظومة، المحتوى، والتحكم الشامل</div>
+              <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">${lang === 'ar' ? 'إدارة المنظومة، المحتوى، والتحكم الشامل' : (lang === 'fr' ? 'Gestion système, CMS & contrôle complet' : 'System management, CMS & audit control')}</div>
             </button>
 
             <!-- Public Visitor Card -->
             <button type="button" class="btn-clean btn-instant-role" data-role="visitor" style="padding: 14px 12px; text-align: ${isRtl ? 'right' : 'left'}; background: #F8FAFC; border: 1.5px solid #CBD5E1; border-radius: var(--radius-xs); transition: all 0.2s ease;">
               <div style="margin-bottom: 6px; color: #475569; display: flex; align-items: center;">${icons.compass('role-svg', 22)}</div>
-              <div style="font-weight: 800; color: #475569; font-size: 0.88rem;">${l.visitorRole || 'الزائر العام'}</div>
-              <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">استكشاف البرامج والخدمات العامة</div>
+              <div style="font-weight: 800; color: #475569; font-size: 0.88rem;">${l.visitorRole || (isRtl ? 'الزائر العام' : (lang === 'fr' ? 'Visiteur Public' : 'Public Visitor'))}</div>
+              <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">${lang === 'ar' ? 'استكشاف البرامج والخدمات العامة' : (lang === 'fr' ? 'Explorer les cours et services' : 'Explore public courses & services')}</div>
             </button>
           </div>
         </div>

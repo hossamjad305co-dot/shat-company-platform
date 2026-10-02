@@ -56,18 +56,78 @@ class SimpleRouter {
   }
 
   setLang(lang) {
+    if (!['ar', 'en', 'fr'].includes(lang)) return;
     this.currentLang = lang;
     localStorage.setItem('shat_platform_lang', lang);
     document.documentElement.setAttribute('lang', lang);
     document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-    this.handleRoute();
+
+    // Update current URL hash to match new language
+    const rawHash = window.location.hash.replace(/^#\/?/, '').trim();
+    const [pathPart, queryString] = rawHash.split('?');
+    const segments = pathPart.split('/').filter(Boolean);
+    let subSegments = segments;
+    if (segments.length > 0 && ['ar', 'en', 'fr'].includes(segments[0])) {
+      subSegments = segments.slice(1);
+    }
+    const newPath = subSegments.join('/') || 'home';
+    const newHash = `#/${lang}/${newPath}${queryString ? '?' + queryString : ''}`;
+    if (window.location.hash !== newHash) {
+      window.location.hash = newHash;
+    } else {
+      this.handleRoute();
+    }
+  }
+
+  getRouteInfo() {
+    const rawHash = window.location.hash.replace(/^#\/?/, '').trim();
+    const [pathPart, queryString] = rawHash.split('?');
+    const segments = pathPart.split('/').filter(Boolean);
+    let lang = this.currentLang;
+    let subSegments = segments;
+    if (segments.length > 0 && ['ar', 'en', 'fr'].includes(segments[0])) {
+      lang = segments[0];
+      subSegments = segments.slice(1);
+    }
+    return {
+      lang,
+      root: subSegments[0] || 'home',
+      param: subSegments[1] || null,
+      subSegments,
+      queryString: queryString || ''
+    };
   }
 
   handleRoute() {
-    const rawHash = window.location.hash.replace('#/', '').replace('#', '').trim();
-    const [path] = rawHash.split('?');
-    const rootPath = path.split('/')[0] || 'home';
+    const rawHash = window.location.hash.replace(/^#\/?/, '').trim();
+    const [pathPart, queryString] = rawHash.split('?');
+    const segments = pathPart.split('/').filter(Boolean);
 
+    let routeLang = this.currentLang;
+    let routeSegments = [...segments];
+
+    if (segments.length > 0 && ['ar', 'en', 'fr'].includes(segments[0])) {
+      routeLang = segments[0];
+      routeSegments = segments.slice(1);
+    } else {
+      // Unprefixed route: normalize to current language
+      const targetSub = segments.join('/') || 'home';
+      const normalizedHash = `#/${this.currentLang}/${targetSub}${queryString ? '?' + queryString : ''}`;
+      window.history.replaceState(null, '', normalizedHash);
+    }
+
+    // Sync app language if route specifies a different language
+    if (routeLang !== this.currentLang) {
+      this.currentLang = routeLang;
+      localStorage.setItem('shat_platform_lang', routeLang);
+      document.documentElement.setAttribute('lang', routeLang);
+      document.documentElement.setAttribute('dir', routeLang === 'ar' ? 'rtl' : 'ltr');
+      if (window.__shat_app && window.__shat_app.currentLang !== routeLang) {
+        window.__shat_app.setLanguage(routeLang, false);
+      }
+    }
+
+    const rootPath = routeSegments[0] || 'home';
     const renderFn = this.routes[rootPath] || this.routes['home'];
     const container = document.getElementById('app-content');
     if (!container) return;
@@ -84,10 +144,18 @@ class SimpleRouter {
   }
 
   updateActiveNav(path) {
+    const cleanPath = (p) => {
+      return (p || '')
+        .replace(/^#\/?(ar|en|fr)?\/?/, '')
+        .replace(/^#\/?/, '')
+        .split('?')[0]
+        .split('/')[0] || 'home';
+    };
+
     document.querySelectorAll('.nav-link').forEach(link => {
       const href = link.getAttribute('href') || '';
-      const linkPath = href.replace('#/', '').replace('#', '').trim();
-      if (linkPath === path || (path === 'home' && linkPath === '')) {
+      const linkPath = cleanPath(href);
+      if (linkPath === path || (path === 'home' && (linkPath === '' || linkPath === 'home'))) {
         link.classList.add('active');
       } else {
         link.classList.remove('active');
@@ -97,8 +165,8 @@ class SimpleRouter {
     // Update bottom nav active indicator as well
     document.querySelectorAll('.mobile-bottom-link').forEach(link => {
       const href = link.getAttribute('href') || '';
-      const linkPath = href.replace('#/', '').replace('#', '').trim();
-      if (linkPath === path || (path === 'home' && linkPath === '')) {
+      const linkPath = cleanPath(href);
+      if (linkPath === path || (path === 'home' && (linkPath === '' || linkPath === 'home'))) {
         link.classList.add('active');
       } else {
         link.classList.remove('active');
@@ -129,7 +197,7 @@ class SimpleRouter {
     } else if (activeRoute === 'news') {
       bindNewsEvents();
     } else if (activeRoute === 'verify' || activeRoute === 'verify-certificate') {
-      bindVerifyEvents();
+      bindVerifyEvents(currentLang);
     } else if (activeRoute === 'standards' || activeRoute === 'references') {
       bindStandardsEvents();
     } else if (activeRoute === 'toolkits' || activeRoute === 'resources') {

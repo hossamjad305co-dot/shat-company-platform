@@ -27,13 +27,13 @@ export function renderStandardsView(lang = 'ar') {
     diagBtn: lang === 'fr' ? 'Lancer le Test de Conformité' : (isRtl ? 'فحص جاهزية المعايير الآن' : 'Check Compliance Now'),
 
     whyTitle: lang === 'fr' ? 'Portée et valeur pour les organisations:' : (isRtl ? 'ما هو المعيار وما قيمته للمؤسسات؟' : 'Why It Matters to Institutions:'),
-    howTitle: lang === 'fr' ? 'كيف تطبقه شركة شات ميدانياً؟' : (isRtl ? 'كيف تطبقه شركة شات ميدانياً؟' : 'How SHAT Implements It:'),
+    howTitle: lang === 'fr' ? 'Comment SHAT l’applique sur le terrain :' : (isRtl ? 'كيف تطبقه شركة شات ميدانياً؟' : 'How SHAT Implements It:'),
     delivTitle: lang === 'fr' ? 'Livrable Institutionnel Réalisé:' : (isRtl ? 'المخرج المؤسسي المحقق:' : 'Tangible Institutional Deliverable:'),
     
     btnInteractiveCheck: lang === 'fr' ? 'Explorer la Liste de Contrôle Interactive' : (isRtl ? 'فحص قائمة التحقق التفاعلية' : 'Interactive Compliance Checklist'),
     btnExploreCourse: lang === 'fr' ? 'Consulter le Cursus Certifié' : (isRtl ? 'استعراض المساق التدريبي المعتمد' : 'View Accredited Track'),
     linkedTrack: lang === 'fr' ? 'Cursus associé:' : (isRtl ? 'المساق التدريبي المرتبط:' : 'Linked Course:'),
-    linkedProject: lang === 'fr' ? 'التدخل الميداني:' : (isRtl ? 'المشروع الميداني الموثق:' : 'Field Project:')
+    linkedProject: lang === 'fr' ? 'Intervention Terrain :' : (isRtl ? 'المشروع الميداني الموثق:' : 'Field Project:')
   };
 
   // Cross-reference data

@@ -8,3 +8,4 @@ dist/
 .vscode/
 mcp_config.json
 .agents/mcp_config.json
+scratch/

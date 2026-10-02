@@ -23,7 +23,8 @@ export function renderFormsView(lang = 'ar') {
     breadcrumb: txt('استمارات ونماذج شركة شات المعتمدة (SHAT Forms)', 'SHAT Official Forms & Registration Portal', 'Formulaires Officiels SHAT'),
     btnBack: txt(`${arrow} العودة للأكاديمية`, `${arrow} Back to Academy`, `${arrow} Retour à l’Académie`),
     btnAllForms: txt('جميع الاستمارات والبرامج', 'All Programs & Forms', 'Tous les Programmes'),
-    loading: txt('جاري تهيئة منظومة الاستمارات المعتمدة...', 'Loading official forms portal...', 'Chargement du portail en cours...')
+    loading: txt('جاري تهيئة منظومة الاستمارات المعتمدة...', 'Loading official forms portal...', 'Chargement du portail en cours...'),
+    modalDetailsTitle: txt('تفاصيل طلب التسجيل', 'Registration Application Details', 'Détails de la Candidature')
   };
 
   return `
@@ -33,16 +34,16 @@ export function renderFormsView(lang = 'ar') {
         <!-- Breadcrumb & Top Navigation -->
         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
           <div style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem; color: var(--text-muted, #64748B);">
-            <a href="#/home" style="color: var(--shat-navy, #0B1E36); text-decoration: none; font-weight: 700;">${t.home}</a>
+            <a href="#/${lang}/home" style="color: var(--shat-navy, #0B1E36); text-decoration: none; font-weight: 700;">${t.home}</a>
             <span>/</span>
             <span style="font-weight: 600; color: var(--shat-green, #1E7E34);">${t.breadcrumb}</span>
           </div>
 
           <div style="display: flex; gap: 10px; align-items: center;">
-            <a href="#/forms" id="btn-show-all-forms-top" class="btn-clean" style="background: #FFFFFF; border: 1px solid var(--border-light, #E2E8F0); color: var(--shat-navy, #0B1E36); font-size: 0.85rem; padding: 7px 16px;">
+            <a href="#/${lang}/forms" id="btn-show-all-forms-top" class="btn-clean" style="background: #FFFFFF; border: 1px solid var(--border-light, #E2E8F0); color: var(--shat-navy, #0B1E36); font-size: 0.85rem; padding: 7px 16px;">
               <span>${t.btnAllForms}</span>
             </a>
-            <a href="#/academy" class="btn-clean" style="background: #FFFFFF; border: 1px solid var(--border-light, #E2E8F0); color: var(--shat-navy, #0B1E36); font-size: 0.85rem; padding: 7px 16px;">
+            <a href="#/${lang}/academy" class="btn-clean" style="background: #FFFFFF; border: 1px solid var(--border-light, #E2E8F0); color: var(--shat-navy, #0B1E36); font-size: 0.85rem; padding: 7px 16px;">
               <span>${t.btnBack}</span>
             </a>
           </div>
@@ -63,7 +64,7 @@ export function renderFormsView(lang = 'ar') {
     <div id="form-submission-modal" style="display: none; position: fixed; inset: 0; background: rgba(11,30,54,0.7); z-index: 1050; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px);">
       <div style="background: #FFFFFF; border-radius: var(--radius-lg, 16px); max-width: 650px; width: 100%; max-height: 85vh; overflow-y: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.25); border: 1px solid var(--border-light, #E2E8F0);">
         <div style="padding: 20px 24px; border-bottom: 1px solid #E2E8F0; display: flex; justify-content: space-between; align-items: center; background: #F8FAFC;">
-          <h3 id="submission-modal-title" style="margin: 0; font-size: 1.1rem; font-weight: 800; color: var(--shat-navy, #0B1E36);">تفاصيل طلب التسجيل</h3>
+          <h3 id="submission-modal-title" style="margin: 0; font-size: 1.1rem; font-weight: 800; color: var(--shat-navy, #0B1E36);">${t.modalDetailsTitle}</h3>
           <button type="button" id="btn-close-sub-modal" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; color: #64748B; display: inline-flex; align-items: center; justify-content: center;">${icons.x('', 18)}</button>
         </div>
         <div id="submission-modal-body" style="padding: 24px;"></div>
@@ -263,7 +264,7 @@ function renderFormsPortal(container, formsList, lang) {
 
         <!-- Filter Pills -->
         <div style="display: flex; gap: 8px; margin-bottom: 18px; overflow-x: auto; padding-bottom: 4px;" id="sub-filter-pills">
-          <button type="button" class="btn-clean sub-filter-pill active" data-filter="all" style="background: var(--shat-navy, #0B1E36); color: #FFFFFF; font-size: 0.82rem; padding: 5px 14px; border-radius: 20px;">الكل</button>
+          <button type="button" class="btn-clean sub-filter-pill active" data-filter="all" style="background: var(--shat-navy, #0B1E36); color: #FFFFFF; font-size: 0.82rem; padding: 5px 14px; border-radius: 20px;">${txt('الكل', 'All', 'Tous')}</button>
           ${formsList.map(f => `
             <button type="button" class="btn-clean sub-filter-pill" data-filter="${f.id}" style="background: #F1F5F9; color: #475569; font-size: 0.82rem; padding: 5px 14px; border-radius: 20px; white-space: nowrap;">
               ${f.code || f.title.substring(0, 20)}
@@ -273,17 +274,17 @@ function renderFormsPortal(container, formsList, lang) {
 
         <!-- Table Container -->
         <div style="overflow-x: auto;">
-          <table style="width: 100%; border-collapse: collapse; text-align: right; font-size: 0.88rem;" id="submissions-table">
+          <table style="width: 100%; border-collapse: collapse; text-align: ${currentLang === 'ar' ? 'right' : 'left'}; font-size: 0.88rem;" id="submissions-table">
             <thead>
               <tr style="background: #F8FAFC; border-bottom: 2px solid #E2E8F0; color: var(--shat-navy, #0B1E36);">
                 <th style="padding: 12px 14px; font-weight: 800;">#</th>
-                <th style="padding: 12px 14px; font-weight: 800;">البرنامج / الاستمارة</th>
-                <th style="padding: 12px 14px; font-weight: 800;">اسم المتقدم</th>
-                <th style="padding: 12px 14px; font-weight: 800;">رقم الهاتف</th>
-                <th style="padding: 12px 14px; font-weight: 800;">البريد الإلكتروني</th>
-                <th style="padding: 12px 14px; font-weight: 800;">تاريخ التقديم</th>
-                <th style="padding: 12px 14px; font-weight: 800;">حالة المزامنة</th>
-                <th style="padding: 12px 14px; font-weight: 800; text-align: center;">إجراء</th>
+                <th style="padding: 12px 14px; font-weight: 800;">${txt('البرنامج / الاستمارة', 'Program / Form', 'Programme / Formulaire')}</th>
+                <th style="padding: 12px 14px; font-weight: 800;">${txt('اسم المتقدم', 'Applicant Name', 'Nom du Candidat')}</th>
+                <th style="padding: 12px 14px; font-weight: 800;">${txt('رقم الهاتف', 'Phone Number', 'Téléphone')}</th>
+                <th style="padding: 12px 14px; font-weight: 800;">${txt('البريد الإلكتروني', 'Email Address', 'Courriel')}</th>
+                <th style="padding: 12px 14px; font-weight: 800;">${txt('تاريخ التقديم', 'Submission Date', 'Date de Soumission')}</th>
+                <th style="padding: 12px 14px; font-weight: 800;">${txt('حالة المزامنة', 'Sync Status', 'Statut de Synchronisation')}</th>
+                <th style="padding: 12px 14px; font-weight: 800; text-align: center;">${txt('إجراء', 'Action', 'Action')}</th>
               </tr>
             </thead>
             <tbody id="submissions-tbody">
@@ -293,7 +294,7 @@ function renderFormsPortal(container, formsList, lang) {
         </div>
 
         <div id="submissions-empty" style="display: none; padding: 40px; text-align: center; color: #64748B;">
-          <p style="font-size: 0.95rem; margin: 0;">لا توجد طلبات تسجيل مطابقة للبحث حالياً.</p>
+          <p style="font-size: 0.95rem; margin: 0;">${txt('لا توجد طلبات تسجيل مطابقة للبحث حالياً.', 'No matching applications found.', 'Aucune candidature correspondante.')}</p>
         </div>
 
       </div>

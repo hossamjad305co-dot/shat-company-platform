@@ -59,15 +59,15 @@ export function renderHomeView(lang = 'ar') {
 
             <!-- Nested Island Button Architecture -->
             <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px;">
-              <a href="#/academy" class="btn-island btn-island-primary">
+              <a href="#/${lang}/academy" class="btn-island btn-island-primary">
                 <span>${h.exploreAcademy}</span>
                 <span class="icon-circle">${arrow}</span>
               </a>
               <button type="button" class="btn-island btn-island-secondary btn-open-diagnostic">
                 <span>${txt('أداة التشخيص المؤسسي الفوري', 'Instant Readiness Diagnostic', 'Diagnostic Institutionnel')}</span>
-                <span class="icon-circle"></span>
+                <span class="icon-circle">🔍</span>
               </button>
-              <a href="#/services" class="btn-island btn-island-secondary" style="background: transparent; color: var(--shat-navy); border-color: var(--border-medium);">
+              <a href="#/${lang}/services" class="btn-island btn-island-secondary" style="background: transparent; color: var(--shat-navy); border-color: var(--border-medium);">
                 <span>${h.exploreServices}</span>
                 <span class="icon-circle" style="background: var(--bg-subtle); color: var(--shat-navy);">${arrow}</span>
               </a>
@@ -132,16 +132,16 @@ export function renderHomeView(lang = 'ar') {
                   <!-- 4 Interactive Tabs -->
                   <div style="display: flex; gap: 6px; flex-wrap: wrap;" id="finder-tabs">
                     <button type="button" class="btn-clean finder-tab active" data-track="case-management" style="background: var(--shat-navy, #0B1E36); color: #FFFFFF; font-weight: 700; font-size: 0.82rem; padding: 7px 14px; border-radius: 20px; transition: all 0.15s ease;">
-                      إدارة الحالة
+                      ${txt('إدارة الحالة', 'Case Management', 'Gestion de Cas')}
                     </button>
                     <button type="button" class="btn-clean finder-tab" data-track="presentation" style="background: #F1F5F9; color: #475569; font-weight: 700; font-size: 0.82rem; padding: 7px 14px; border-radius: 20px; transition: all 0.15s ease;">
-                      مهارات العرض
+                      ${txt('مهارات العرض', 'Presentation Skills', 'Prise de Parole')}
                     </button>
                     <button type="button" class="btn-clean finder-tab" data-track="humanitarian" style="background: #F1F5F9; color: #475569; font-weight: 700; font-size: 0.82rem; padding: 7px 14px; border-radius: 20px; transition: all 0.15s ease;">
-                      دبلوم CHS
+                      ${txt('دبلوم CHS', 'CHS Diploma', 'Diplôme CHS')}
                     </button>
                     <button type="button" class="btn-clean finder-tab" data-track="consulting" style="background: #F1F5F9; color: #475569; font-weight: 700; font-size: 0.82rem; padding: 7px 14px; border-radius: 20px; transition: all 0.15s ease;">
-                      استشارات مؤسسية
+                      ${txt('استشارات مؤسسية', 'Institutional Consulting', 'Conseil Institutionnel')}
                     </button>
                   </div>
                 </div>
@@ -183,7 +183,7 @@ export function renderHomeView(lang = 'ar') {
       </section>
 
       <!-- ==================================================================== -->
-      <!-- 3. Interactive Tools Suite Showcase (مجمع الأدوات المؤسسية)         -->
+      <!-- 3. Interactive Tools Suite Showcase                                  -->
       <!-- ==================================================================== -->
       <section class="section" style="background: #FFFFFF; padding: 70px 0;">
         <div class="container">
@@ -302,7 +302,7 @@ export function renderHomeView(lang = 'ar') {
                     <p class="bento-text" style="line-height: 1.7; font-size: 0.95rem;">${p.desc}</p>
                   </div>
                   <div class="bento-footer" style="margin-top: 20px; border-top: 1px solid var(--border-light); padding-top: 16px;">
-                    <a href="#/services" class="btn-island btn-island-secondary" style="width: 100%; justify-content: space-between;">
+                    <a href="#/${lang}/services" class="btn-island btn-island-secondary" style="width: 100%; justify-content: space-between;">
                       <span>${lang === 'fr' ? 'Détails des Solutions & Méthodologie' : (isRtl ? 'تفاصيل المنظومة والحلول الاستشارية' : 'Solutions & Advisory Details')}</span>
                       <span class="icon-circle">${arrow}</span>
                     </a>
@@ -343,7 +343,7 @@ export function renderHomeView(lang = 'ar') {
           </div>
 
           <div style="text-align: center; margin-top: 36px;">
-            <a href="#/delivery" class="btn-island btn-island-secondary">
+            <a href="#/${lang}/delivery" class="btn-island btn-island-secondary">
               <span>${h.exploreDelivery}</span>
               <span class="icon-circle">${arrow}</span>
             </a>
@@ -363,7 +363,9 @@ export function renderHomeView(lang = 'ar') {
           </div>
 
           <div class="bento-grid grid-3">
-            ${stList.map(st => `
+            ${stList.map(st => {
+              const standardRoute = st.route ? st.route.replace(/^#\/?/, `#/${lang}/`) : `#/${lang}/standards`;
+              return `
               <div class="bento-card" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: #FFFFFF; display: flex; flex-direction: column; justify-content: space-between;">
                 <div>
                   <div class="bento-header" style="margin-bottom: 10px;">
@@ -386,7 +388,7 @@ export function renderHomeView(lang = 'ar') {
                     ${lang === 'fr' ? 'Livrable Réalisé:' : (isRtl ? 'المخرج المحقق:' : 'Tangible Deliverable:')}
                   </div>
                   <div style="font-size: 0.82rem; color: #F1F5F9; margin-bottom: 12px;">${st.deliverable}</div>
-                  <a href="${st.route}" class="btn-clean btn-sm" aria-label="${txt(`استعراض مسار ${st.title} في ${st.route.includes('academy') ? 'الأكاديمية' : 'الخدمات'}`, `Explore ${st.code} track`, `Consulter le parcours ${st.code}`)}" style="width: 100%; border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.08); color: #FFFFFF; text-align: center; justify-content: center; font-weight: 700;">
+                  <a href="${standardRoute}" class="btn-clean btn-sm" aria-label="${txt(`استعراض مسار ${st.title} في ${st.route && st.route.includes('academy') ? 'الأكاديمية' : 'الخدمات'}`, `Explore ${st.code} track`, `Consulter le parcours ${st.code}`)}" style="width: 100%; border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.08); color: #FFFFFF; text-align: center; justify-content: center; font-weight: 700;">
                     <span>${st.route && st.route.includes('academy')
                       ? (lang === 'fr' ? `Parcours Académique: ${st.code}` : (isRtl ? `مسار الأكاديمية: ${st.code}` : `${st.code} Academy Track`))
                       : (lang === 'fr' ? `Services Conseil: ${st.code}` : (isRtl ? `الخدمات الاستشارية: ${st.code}` : `${st.code} Consulting`))}</span>
@@ -394,11 +396,12 @@ export function renderHomeView(lang = 'ar') {
                   </a>
                 </div>
               </div>
-            `).join('')}
+            `;
+            }).join('')}
           </div>
 
           <div style="text-align: center; margin-top: 36px;">
-            <a href="#/standards" class="btn-island btn-island-primary" style="background: #10B981; border-color: #10B981;">
+            <a href="#/${lang}/standards" class="btn-island btn-island-primary" style="background: #10B981; border-color: #10B981;">
               <span>${h.viewAllStandards}</span>
               <span class="icon-circle">${arrow}</span>
             </a>
@@ -432,7 +435,7 @@ export function renderHomeView(lang = 'ar') {
                   </div>
 
                   <div class="bento-footer" style="display: flex; gap: 8px; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-light); padding-top: 12px; margin-top: 14px;">
-                    <a href="#/course/shat-chs-master" class="btn-clean btn-sm" style="background: var(--bg-subtle); color: var(--shat-navy); border: 1px solid var(--border-light); font-weight: 700;">
+                    <a href="#/${lang}/course/shat-chs-master" class="btn-clean btn-sm" style="background: var(--bg-subtle); color: var(--shat-navy); border: 1px solid var(--border-light); font-weight: 700;">
                       <span>${txt('المقرر المرتبط', 'Linked Course', 'Cursus Lié')}</span>
                     </a>
                     <button class="btn-clean btn-green btn-sm btn-open-reg-modal" data-course="general">
@@ -602,7 +605,7 @@ export function renderHomeView(lang = 'ar') {
                   : (isRtl ? 'تواصل مع فريق خبرائنا الاستشاري لبحث احتياجاتكم المؤسسية أو تصميم برامج تدريبية مخصصة لفرق عملكم وفق معايير الجودة الدولية.' : 'Connect with our advisory team to discuss institutional needs or design tailored capacity-building programs aligned with global standards.')}
               </p>
               <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
-                <a href="#/contact" class="btn-island btn-island-primary">
+                <a href="#/${lang}/contact" class="btn-island btn-island-primary">
                   <span>${d.nav.requestConsultation}</span>
                   <span class="icon-circle">${arrow}</span>
                 </a>
@@ -633,57 +636,109 @@ export function bindHomeEvents() {
   const finderTabs = document.querySelectorAll('.finder-tab');
   const finderContent = document.getElementById('finder-showcase-content');
 
+  const isRtl = currentLang === 'ar';
+  const txt = (ar, en, fr) => (currentLang === 'fr' ? fr || en : (currentLang === 'en' ? en : ar));
+  const arrow = isRtl ? icons.arrowLeft('', 16) : icons.arrowRight('', 16);
+
   const TRACKS_DATA = {
     'case-management': {
-      title: 'دورة إعداد وتأهيل مدير حالة Case Management (د. محمد إسليم)',
+      titleAr: 'دورة إعداد وتأهيل مدير حالة Case Management (د. محمد إسليم)',
+      titleEn: 'Comprehensive Case Management Professional Certification',
+      titleFr: 'Certification Professionnelle en Gestion de Cas Intégrée',
       code: 'SHAT-FORM-01',
-      badge: 'إدارة الحالة والعمل الإنساني الميداني',
+      badgeAr: 'إدارة الحالة والعمل الإنساني الميداني',
+      badgeEn: 'Case Management & Humanitarian Action',
+      badgeFr: 'Gestion de Cas & Action Humanitaire',
       badgeColor: '#1E7E34',
       badgeBg: '#E8F5E9',
-      trainer: 'د. محمد إسليم • استشاري إدارة الحالة والرعاية المتكاملة',
-      hours: '30 ساعة تدريبية وتطبيق إكلينيكي',
-      fee: 'رسوم مدعومة جزئياً',
-      desc: 'برنامج تطبيقي متقدم يؤهل الأخصائيين الاجتماعيين والنفسيين وكوادر المنظمات لإدارة خطط الرعاية المتكاملة، تقييم الاحتياجات، وإحالة الحالات وفق أدلة العمل المعتمدة.',
-      formUrl: '#/forms?id=case-manager-2026',
+      trainerAr: 'د. محمد إسليم • استشاري إدارة الحالة والرعاية المتكاملة',
+      trainerEn: 'Dr. Mohammed Isleem • Case Management & Social Care Consultant',
+      trainerFr: 'Dr. Mohammed Isleem • Consultant en Gestion de Cas & Soins Intégrés',
+      hoursAr: '30 ساعة تدريبية وتطبيق إكلينيكي',
+      hoursEn: '30 Credit Hours & Clinical Practice',
+      hoursFr: '30 Heures Certifiées & Pratique Clinique',
+      feeAr: 'رسوم مدعومة جزئياً',
+      feeEn: 'Partially Subsidized Tuition',
+      feeFr: 'Frais Partiellement Subventionnés',
+      descAr: 'برنامج تطبيقي متقدم يؤهل الأخصائيين الاجتماعيين والنفسيين وكوادر المنظمات لإدارة خطط الرعاية المتكاملة، تقييم الاحتياجات، وإحالة الحالات وفق أدلة العمل المعتمدة.',
+      descEn: 'Applied professional program qualifying social workers and NGO practitioners in integrated care planning, risk profiling, and accredited referral protocols.',
+      descFr: 'Programme pratique professionnalisant pour les travailleurs sociaux et humanitaires dans la planification des soins, l’évaluation et les circuits de référencement.',
+      formUrl: `#/${currentLang}/forms?id=case-manager-2026`,
       iconKey: 'users'
     },
     'presentation': {
-      title: 'دورة مهارات العرض والتقديم Presentation Skills (م. مهدي الملاحي)',
+      titleAr: 'دورة مهارات العرض والتقديم Presentation Skills (م. مهدي الملاحي)',
+      titleEn: 'Executive Presentation, Public Speaking & Influence (Eng. Mahdi Al-Malahi)',
+      titleFr: 'Prise de Parole en Public & Communication d’Influence (Ing. Mahdi Al-Malahi)',
       code: 'SHAT-FORM-02',
-      badge: 'مهارات التواصل والإلقاء والتأثير',
+      badgeAr: 'مهارات التواصل والإلقاء والتأثير',
+      badgeEn: 'Communication, Public Speaking & Pitching',
+      badgeFr: 'Communication & Prise de Parole',
       badgeColor: '#D97706',
       badgeBg: '#FEF3C7',
-      trainer: 'م. مهدي الملاحي • استشاري التواصل المؤسسي والعرض الفعال',
-      hours: '24 ساعة تدريبية وتطبيق عملي',
-      fee: 'رسوم تفضيلية',
-      desc: 'تمكين قادة المشاريع والمدربين من هندسة العروض التقديمية الاحترافية، إتقان لغة الجسد، إدارة منصات التحدث أمام الجمهور، وصياغة الرسائل المقنعة للمانحين وأصحاب المصلحة.',
-      formUrl: '#/forms?id=presentation-skills-2026',
+      trainerAr: 'م. مهدي الملاحي • استشاري التواصل المؤسسي والعرض الفعال',
+      trainerEn: 'Eng. Mahdi Al-Malahi • Corporate Communication & High-Impact Speaking Consultant',
+      trainerFr: 'Ing. Mahdi Al-Malahi • Consultant en Communication Stratégique & Prise de Parole',
+      hoursAr: '24 ساعة تدريبية وتطبيق عملي',
+      hoursEn: '24 Credit Hours & Live Studio Labs',
+      hoursFr: '24 Heures Certifiées & Pratique Studio',
+      feeAr: 'رسوم تفضيلية',
+      feeEn: 'Preferential Institutional Rate',
+      feeFr: 'Tarif Préférentiel Institutionnel',
+      descAr: 'تمكين قادة المشاريع والمدربين من هندسة العروض التقديمية الاحترافية، إتقان لغة الجسد، إدارة منصات التحدث أمام الجمهور، وصياغة الرسائل المقنعة للمانحين وأصحاب المصلحة.',
+      descEn: 'Empowering project managers and executives to design persuasive executive decks, master non-verbal communication, and deliver high-stakes donor pitches.',
+      descFr: 'Formation intensive pour dirigeants et chefs de projets : conception de présentations percutantes, maîtrise de l’expression orale et plaidoyer bailleurs.',
+      formUrl: `#/${currentLang}/forms?id=presentation-skills-2026`,
       iconKey: 'chat'
     },
     'humanitarian': {
-      title: 'دبلوم الممارس الإنساني وبناء القدرات المؤسسية (CHS Master)',
+      titleAr: 'دبلوم الممارس الإنساني وبناء القدرات المؤسسية (CHS Master)',
+      titleEn: 'Humanitarian Practitioner Diploma & Institutional Capacity (CHS Master)',
+      titleFr: 'Diplôme du Praticien Humanitaire & Renforcement Institutionnel (CHS Master)',
       code: 'SHAT-FORM-03',
-      badge: 'المعايير الدولية وجودة الاستجابة الإنسانية',
+      badgeAr: 'المعايير الدولية وجودة الاستجابة الإنسانية',
+      badgeEn: 'Global Standards & Humanitarian Quality',
+      badgeFr: 'Normes Internationales & Qualité Humanitaire',
       badgeColor: '#2563EB',
       badgeBg: '#EFF6FF',
-      trainer: 'أ. حسام جاد الله • نخبة خبراء ومستشاري شركة شات',
-      hours: '60 ساعة معتمدة دولياً',
-      fee: 'منحة تدريبية وبناء قدرات',
-      desc: 'تأهيل متعمق في المعيار الإنساني الأساسي للجودة والمساءلة (CHS)، صون السلامة والحماية من الاستغلال الجنسي والاعتداء (PSEA)، وتصميم مؤشرات المتابعة والتقييم (MEAL).',
-      formUrl: '#/forms?id=humanitarian-worker-2026',
+      trainerAr: 'أ. حسام جاد الله • نخبة خبراء ومستشاري شركة شات',
+      trainerEn: 'Hossam Jadallah • Lead International Accreditation Consultant & Senior Faculty',
+      trainerFr: 'Hossam Jadallah • Consultant Senior en Accréditation Internationale',
+      hoursAr: '60 ساعة معتمدة دولياً',
+      hoursEn: '60 Internationally Accredited Hours',
+      hoursFr: '60 Heures Agréées Internationalement',
+      feeAr: 'منحة تدريبية وبناء قدرات',
+      feeEn: 'Merit-Based Capacity Grant',
+      feeFr: 'Bourse de Renforcement des Capacités',
+      descAr: 'تأهيل متعمق في المعيار الإنساني الأساسي للجودة والمساءلة (CHS)، صون السلامة والحماية من الاستغلال الجنسي والاعتداء (PSEA)، وتصميم مؤشرات المتابعة والتقييم (MEAL).',
+      descEn: 'Comprehensive mastery of the Core Humanitarian Standard (CHS), PSEA safeguarding, OECD DAC evaluation frameworks, and rigorous MEAL monitoring systems.',
+      descFr: 'Maîtrise approfondie de la Norme Humanitaire Fondamentale (CHS), de la sauvegarde PEAS, des critères OCDE/CAD et des systèmes MEAL de suivi et d’impact.',
+      formUrl: `#/${currentLang}/forms?id=humanitarian-worker-2026`,
       iconKey: 'book'
     },
     'consulting': {
-      title: 'استمارة الاستشارات المؤسسية وبناء القدرات وتطوير النظم',
+      titleAr: 'استمارة الاستشارات المؤسسية وبناء القدرات وتطوير النظم',
+      titleEn: 'Institutional Advisory, Systems Development & Accreditation Inquiry',
+      titleFr: 'Demande de Conseil Institutionnel & Développement des Systèmes',
       code: 'SHAT-FORM-04',
-      badge: 'التدخلات الاستشارية المتقدمة للمنظمات',
+      badgeAr: 'التدخلات الاستشارية المتقدمة للمنظمات',
+      badgeEn: 'Executive Advisory & Systems Auditing',
+      badgeFr: 'Conseil Institutionnel & Audit des Systèmes',
       badgeColor: '#7C3AED',
       badgeBg: '#F5F3FF',
-      trainer: 'فريق الخبراء والاستشاريين المعتمدين لشركة شات',
-      hours: 'وفق نطاق التدخل المؤسسي',
-      fee: 'يحدد وفق موازنة التدخل',
-      desc: 'خدمات استشارية متخصصة في تأهيل المنظمات للحصول على شهادة CHS، إعداد الأدلة التشغيلية SOPs، مراجعة سياسات الحوكمة، وإجراء التقييم الخارجي المستقل وفق معايير OECD DAC.',
-      formUrl: '#/forms?id=consulting-inquiry-2026',
+      trainerAr: 'فريق الخبراء والاستشاريين المعتمدين لشركة شات',
+      trainerEn: 'SHAT Senior International Advisory Board & Certified Fellows',
+      trainerFr: 'Collège des Consultants Internationaux Certifiés SHAT',
+      hoursAr: 'وفق نطاق التدخل المؤسسي',
+      hoursEn: 'Tailored Scope of Work (SOW)',
+      hoursFr: 'Selon le Cahier des Charges',
+      feeAr: 'يحدد وفق موازنة التدخل',
+      feeEn: 'Determined by Project Intervention Budget',
+      feeFr: 'Établi selon le Budget d’Intervention',
+      descAr: 'خدمات استشارية متخصصة في تأهيل المنظمات للحصول على شهادة CHS، إعداد الأدلة التشغيلية SOPs، مراجعة سياسات الحوكمة، وإجراء التقييم الخارجي المستقل وفق معايير OECD DAC.',
+      descEn: 'Dedicated advisory missions assisting civil society organizations in CHS certification readiness, institutional SOP drafting, governance reform, and external evaluations.',
+      descFr: 'Missions d’accompagnement spécialisées : préparation à la certification CHS, rédaction des manuels SOP, révision de la gouvernance et évaluations externes OCDE/CAD.',
+      formUrl: `#/${currentLang}/forms?id=consulting-inquiry-2026`,
       iconKey: 'award'
     }
   };
@@ -692,13 +747,20 @@ export function bindHomeEvents() {
     if (!finderContent) return;
     const t = TRACKS_DATA[trackKey] || TRACKS_DATA['case-management'];
 
+    const title = txt(t.titleAr, t.titleEn, t.titleFr);
+    const badge = txt(t.badgeAr, t.badgeEn, t.badgeFr);
+    const trainer = txt(t.trainerAr, t.trainerEn, t.trainerFr);
+    const hours = txt(t.hoursAr, t.hoursEn, t.hoursFr);
+    const fee = txt(t.feeAr, t.feeEn, t.feeFr);
+    const desc = txt(t.descAr, t.descEn, t.descFr);
+
     finderContent.innerHTML = `
-      <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 16px;">
+      <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 16px; text-align: ${isRtl ? 'right' : 'left'};">
         <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
           <div>
             <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 8px;">
               <span style="background: ${t.badgeBg}; color: ${t.badgeColor}; font-size: 0.78rem; font-weight: 800; padding: 3px 10px; border-radius: 6px;">
-                ${t.badge}
+                ${badge}
               </span>
               <span style="font-size: 0.76rem; font-family: monospace; background: #FFFFFF; border: 1px solid #E2E8F0; padding: 2px 8px; border-radius: 4px; color: #64748B;">
                 ${t.code}
@@ -706,25 +768,25 @@ export function bindHomeEvents() {
             </div>
             <h4 style="font-size: 1.25rem; font-weight: 900; color: #0B1E36; margin: 0 0 8px; line-height: 1.4; display: flex; align-items: center; gap: 8px;">
               <span style="color: ${t.badgeColor}; display: inline-flex; align-items: center;">${(icons[t.iconKey] || icons.book)('', 22)}</span>
-              <span>${t.title}</span>
+              <span>${title}</span>
             </h4>
           </div>
 
           <a href="${t.formUrl}" class="btn-clean btn-green" style="font-weight: 800; padding: 10px 22px; border-radius: 8px; box-shadow: 0 4px 12px rgba(30,126,52,0.2); white-space: nowrap; display: inline-flex; align-items: center; gap: 6px;">
-            <span>فتح الاستمارة المباشرة</span>
-            <span style="display:inline-flex; align-items:center;">${icons.arrowLeft('', 16)}</span>
+            <span>${txt('فتح الاستمارة المباشرة', 'Open Direct Form', 'Ouvrir le Formulaire')}</span>
+            <span style="display:inline-flex; align-items:center;">${arrow}</span>
           </a>
         </div>
 
         <p style="font-size: 0.92rem; color: #475569; line-height: 1.7; margin: 0;">
-          ${t.desc}
+          ${desc}
         </p>
 
         <div style="display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.85rem; color: #334155; padding-top: 14px; border-top: 1px solid #E2E8F0;">
-          <div><strong>المدرب / الخبير:</strong> ${t.trainer}</div>
-          <div><strong>الساعات:</strong> ${t.hours}</div>
-          <div><strong>الرسوم:</strong> <span style="color: #1E7E34; font-weight: 700;">${t.fee}</span></div>
-          <div><strong>• حالة التسجيل:</strong> <span style="color: #166534; font-weight: 800;">متاح للتسجيل الفوري</span></div>
+          <div><strong>${txt('المدرب / الخبير:', 'Instructor / Expert:', 'Formateur / Expert :')}</strong> ${trainer}</div>
+          <div><strong>${txt('الساعات:', 'Hours:', 'Volume horaire :')}</strong> ${hours}</div>
+          <div><strong>${txt('الرسوم:', 'Fees:', 'Frais :')}</strong> <span style="color: #1E7E34; font-weight: 700;">${fee}</span></div>
+          <div><strong>${txt('• حالة التسجيل:', '• Status:', '• Statut :')}</strong> <span style="color: #166534; font-weight: 800;">${txt('متاح للتسجيل الفوري', 'Open for Registration', 'Inscriptions Ouvertes')}</span></div>
         </div>
       </div>
     `;

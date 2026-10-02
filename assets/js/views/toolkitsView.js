@@ -50,24 +50,24 @@ export function renderToolkitsView(lang = 'ar') {
             <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 12px; padding: 18px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow-sm);">
               <span style="display: inline-flex; align-items: center; color: #166534;">${icons.dashboard('', 24)}</span>
               <div>
-                <div style="font-weight: 800; font-size: 0.95rem; color: var(--shat-navy);">مصفوفات MEAL الذكية</div>
-                <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">مؤشرات أداء وجداول جمع بيانات</div>
+                <div style="font-weight: 800; font-size: 0.95rem; color: var(--shat-navy);">${txt('مصفوفات MEAL الذكية', 'Smart MEAL Matrices', 'Matrices MEAL Intelligentes')}</div>
+                <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">${txt('مؤشرات أداء وجداول جمع بيانات', 'KPI indicators & data collection tables', 'Indicateurs KPI & collecte de données')}</div>
               </div>
             </div>
 
             <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 12px; padding: 18px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow-sm);">
-              <span style="font-size: 1.5rem; font-weight: 900; color: #0F2E4A;"></span>
+              <span style="font-size: 1.5rem; font-weight: 900; color: #0F2E4A;">🛡️</span>
               <div>
-                <div style="font-weight: 800; font-size: 0.95rem; color: var(--shat-navy);">سياسات PSEA وصون السلامة</div>
-                <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">مسارات إحالة وتدقيق مسبق معتمد</div>
+                <div style="font-weight: 800; font-size: 0.95rem; color: var(--shat-navy);">${txt('سياسات PSEA وصون السلامة', 'PSEA & Safeguarding Policies', 'Politiques PSEA & Sauvegarde')}</div>
+                <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">${txt('مسارات إحالة وتدقيق مسبق معتمد', 'Accredited referral pathways & screening', 'Circuits de référencement & audit')}</div>
               </div>
             </div>
 
             <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 12px; padding: 18px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow-sm);">
-              <span style="font-size: 1.5rem; font-weight: 900; color: #D97706;"></span>
+              <span style="font-size: 1.5rem; font-weight: 900; color: #D97706;">📋</span>
               <div>
-                <div style="font-weight: 800; font-size: 0.95rem; color: var(--shat-navy);">ملفات ونماذج إدارة الحالة</div>
-                <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">استمارات تقييم وموافقة مستنيرة</div>
+                <div style="font-weight: 800; font-size: 0.95rem; color: var(--shat-navy);">${txt('ملفات ونماذج إدارة الحالة', 'Case Management Protocols & Forms', 'Formulaires & Protocoles de Gestion de Cas')}</div>
+                <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">${txt('استمارات تقييم وموافقة مستنيرة', 'Assessment & informed consent tools', 'Évaluations & consentement éclairé')}</div>
               </div>
             </div>
           </div>
@@ -98,7 +98,7 @@ export function renderToolkitsView(lang = 'ar') {
             </div>
 
             <div>
-              <a href="#/contact" class="btn-clean" style="background: #10B981; color: #FFFFFF; font-weight: 800; padding: 14px 28px; border-radius: 10px; font-size: 1rem; box-shadow: 0 4px 14px rgba(16,185,129,0.3); display: inline-flex; align-items: center; gap: 8px;">
+              <a href="#/${lang}/contact" class="btn-clean" style="background: #10B981; color: #FFFFFF; font-weight: 800; padding: 14px 28px; border-radius: 10px; font-size: 1rem; box-shadow: 0 4px 14px rgba(16,185,129,0.3); display: inline-flex; align-items: center; gap: 8px;">
                 <span style="display: inline-flex; align-items: center;">${icons.chat('', 18)}</span>
                 <span>${txt('تواصل مع مستشار النظم والأدلة', 'Consult with a Systems Expert', 'Contacter un Consultant')}</span>
                 <span>${arrow}</span>

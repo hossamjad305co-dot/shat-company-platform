@@ -648,6 +648,12 @@ function openStudentPassModal(lang = 'ar') {
 
   const isRtl = lang === 'ar';
   const txt = (ar, en, fr) => (lang === 'fr' ? fr || en : (lang === 'en' ? en : ar));
+
+  const titleEl = document.getElementById('modal-admission-pass-title');
+  if (titleEl) {
+    titleEl.textContent = txt('بطاقة الحضور والباركود الرقمي المعتمد', 'Official Digital Admission Pass & Barcode', 'Badge Numérique d’Admission & Code-barres');
+  }
+
   const user = api.currentUser || {
     id: 'student-01',
     fullNameAr: 'أحمد خليل المصري',

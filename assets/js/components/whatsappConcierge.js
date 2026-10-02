@@ -1,3 +1,7 @@
+// assets/js/components/whatsappConcierge.js
+// Dedicated WhatsApp Concierge Floating Widget
+// 100% Trilingual Architecture (Arabic, English, French)
+
 import { icons } from '../icons.js';
 
 export class WhatsAppConcierge {
@@ -12,19 +16,39 @@ export class WhatsAppConcierge {
   init() {
     this.createDom();
     this.bindEvents();
+
+    window.addEventListener('shat_lang_changed', () => {
+      this.reRender();
+    });
+  }
+
+  getLang() {
+    return localStorage.getItem('shat_platform_lang') || 'ar';
+  }
+
+  reRender() {
+    const existing = document.getElementById('shat-concierge-container');
+    if (existing) existing.remove();
+    this.createDom();
+    this.bindEvents();
   }
 
   createDom() {
     if (document.getElementById('shat-concierge-container')) return;
+
+    const lang = this.getLang();
+    const isRtl = lang === 'ar';
+    const txt = (ar, en, fr) => (lang === 'fr' ? fr || en : (lang === 'en' ? en : ar));
 
     const container = document.createElement('div');
     container.id = 'shat-concierge-container';
     container.style.cssText = `
       position: fixed;
       bottom: 24px;
-      left: 24px;
+      ${isRtl ? 'left: 24px;' : 'right: 24px;'}
       z-index: 9999;
       font-family: inherit;
+      direction: ${isRtl ? 'rtl' : 'ltr'};
     `;
 
     container.innerHTML = `
@@ -32,7 +56,7 @@ export class WhatsAppConcierge {
       <div id="shat-concierge-card" style="
         position: absolute;
         bottom: 70px;
-        left: 0;
+        ${isRtl ? 'left: 0;' : 'right: 0;'}
         width: 340px;
         max-width: calc(100vw - 32px);
         background: #FFFFFF;
@@ -44,6 +68,7 @@ export class WhatsAppConcierge {
         transform: translateY(12px) scale(0.95);
         opacity: 0;
         transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        text-align: ${isRtl ? 'right' : 'left'};
       ">
         <!-- Card Header -->
         <div style="background: linear-gradient(135deg, #0B1E36 0%, #16365C 100%); color: #FFFFFF; padding: 18px 20px;">
@@ -53,57 +78,59 @@ export class WhatsAppConcierge {
                 ${icons.whatsapp('', 22)}
               </div>
               <div>
-                <div style="font-weight: 800; font-size: 0.96rem; line-height: 1.3;">شركة شات للتنمية والتطوير</div>
+                <div style="font-weight: 800; font-size: 0.96rem; line-height: 1.3;">
+                  ${txt('شركة شات للتنمية والتطوير', 'SHAT Development & Growth', 'Société SHAT pour le Développement')}
+                </div>
                 <div style="font-size: 0.74rem; color: #86EFAC; display: flex; align-items: center; gap: 4px; margin-top: 2px;">
                   <span style="width: 7px; height: 7px; border-radius: 50%; background: #22C55E; display: inline-block;"></span>
-                  <span>فريق خدمة العملاء متصل الآن</span>
+                  <span>${txt('فريق خدمة العملاء متصل الآن', 'Advisory Team Online Now', 'Équipe Conseil En Ligne')}</span>
                 </div>
               </div>
             </div>
-            <button id="btn-close-concierge" style="background: transparent; border: none; color: #94A3B8; cursor: pointer; padding: 2px 6px; display: inline-flex; align-items: center; justify-content: center;" aria-label="إغلاق">${icons.x('', 16)}</button>
+            <button id="btn-close-concierge" style="background: transparent; border: none; color: #94A3B8; cursor: pointer; padding: 2px 6px; display: inline-flex; align-items: center; justify-content: center;" aria-label="${txt('إغلاق', 'Close', 'Fermer')}">
+              ${icons.x('', 16)}
+            </button>
           </div>
           <p style="font-size: 0.82rem; color: #CBD5E1; margin: 12px 0 0; line-height: 1.5;">
-            مرحباً بك! اختر موضوع استفسارك للتواصل الفوري والمباشر مع المستشار المختص عبر واتساب:
+            ${txt(
+              'مرحباً بك! اختر موضوع استفسارك للتواصل الفوري والمباشر مع المستشار المختص عبر واتساب:',
+              'Welcome! Select an inquiry topic for direct WhatsApp communication with our senior advisor:',
+              'Bienvenue ! Choisissez votre sujet pour contacter directement notre conseiller sur WhatsApp :'
+            )}
           </p>
         </div>
 
         <!-- Quick Action Query Chips -->
         <div style="padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; max-height: 280px; overflow-y: auto; background: #F8FAFC;">
-          <button class="concierge-chip" data-msg="مرحباً شركة شات، أود الاستفسار والتسجيل في دورة إدارة الحالة Case Management (د. محمد إسليم)">
-            
-            <span>دورة إدارة الحالة (د. محمد إسليم)</span>
+          <button class="concierge-chip" data-msg="${txt('مرحباً شركة شات، أود الاستفسار والتسجيل في دورة إدارة الحالة Case Management (د. محمد إسليم)', 'Hello SHAT Company, I would like to inquire about the Case Management Course (Dr. Mohammed Isleem)', 'Bonjour Société SHAT, je souhaite des informations sur la formation en Gestion de Cas (Dr. Mohammed Isleem)')}">
+            <span>${txt('دورة إدارة الحالة (د. محمد إسليم)', 'Case Management Course (Dr. Isleem)', 'Formation Gestion de Cas (Dr. Isleem)')}</span>
           </button>
 
-          <button class="concierge-chip" data-msg="مرحباً شركة شات، أود الاستفسار والتسجيل في دورة مهارات العرض والتقديم Presentation Skills (م. مهدي الملاحي)">
-            
-            <span>دورة مهارات العرض (م. مهدي الملاحي)</span>
+          <button class="concierge-chip" data-msg="${txt('مرحباً شركة شات، أود الاستفسار والتسجيل في دورة مهارات العرض والتقديم Presentation Skills (م. مهدي الملاحي)', 'Hello SHAT Company, I would like to inquire about Presentation Skills (Eng. Mahdi Al-Malahi)', 'Bonjour Société SHAT, je souhaite des informations sur la formation Prise de Parole (Ing. Mahdi Al-Malahi)')}">
+            <span>${txt('دورة مهارات العرض (م. مهدي الملاحي)', 'Presentation Skills (Eng. Al-Malahi)', 'Prise de Parole (Ing. Al-Malahi)')}</span>
           </button>
 
-          <button class="concierge-chip" data-msg="مرحباً شركة شات، أود الاستفسار عن دبلوم الممارس الإنساني وبناء القدرات (CHS Master) والمنح المتاحة">
-            
-            <span>دبلوم معيار CHS الإنساني</span>
+          <button class="concierge-chip" data-msg="${txt('مرحباً شركة شات، أود الاستفسار عن دبلوم الممارس الإنساني وبناء القدرات (CHS Master) والمنح المتاحة', 'Hello SHAT Company, I would like to inquire about the CHS Master Diploma and available scholarships', 'Bonjour Société SHAT, je souhaite des informations sur le Diplôme CHS Master et les bourses disponibles')}">
+            <span>${txt('دبلوم معيار CHS الإنساني والمنح', 'CHS Master Diploma & Scholarships', 'Diplôme Norme CHS & Bourses')}</span>
           </button>
 
-          <button class="concierge-chip" data-msg="مرحباً شركة شات، نود طلب استشارة مؤسسية لتطوير النظم واللوائح التشغيلية أو تقييم مشاريع لجمعيتنا/مؤسستنا">
-            
-            <span>طلب استشارة وبناء قدرات لمؤسسة</span>
+          <button class="concierge-chip" data-msg="${txt('مرحباً شركة شات، نود طلب استشارة مؤسسية لتطوير النظم واللوائح التشغيلية أو تقييم مشاريع لجمعيتنا/مؤسستنا', 'Hello SHAT Company, we would like to request institutional advisory for systems/SOPs development or project evaluation', 'Bonjour Société SHAT, nous sollicitons un conseil institutionnel pour le développement des SOPs ou l\'évaluation de projets')}">
+            <span>${txt('طلب استشارة وبناء قدرات لمؤسسة', 'Institutional Advisory Request', 'Demande de Conseil Institutionnel')}</span>
           </button>
 
-          <button class="concierge-chip" data-msg="مرحباً شركة شات، أود الاستفسار عن التحقق من صحة واعتماد شهادة صادرة برقم تسلسلي">
-            
-            <span>التحقق من صحة شهادة صادرة</span>
+          <button class="concierge-chip" data-msg="${txt('مرحباً شركة شات، أود الاستفسار عن التحقق من صحة واعتماد شهادة صادرة برقم تسلسلي', 'Hello SHAT Company, I would like to verify the authenticity of an accredited certificate', 'Bonjour Société SHAT, je souhaite vérifier l\'authenticité d\'un certificat officiel')}">
+            <span>${txt('التحقق من صحة شهادة صادرة', 'Certificate Verification Inquiry', 'Vérification de Certificat')}</span>
           </button>
 
-          <button class="concierge-chip" data-msg="مرحباً شركة شات، أود الاستفسار عن الرسوم وطرق الدفع المتاحة (بنك فلسطين، بال باي، جوال باي، كاش)">
-            
-            <span>طرق الدفع والرسوم والمنح الجزئية</span>
+          <button class="concierge-chip" data-msg="${txt('مرحباً شركة شات، أود الاستفسار عن الرسوم وطرق الدفع المتاحة (بنك فلسطين، بال باي، جوال باي، كاش)', 'Hello SHAT Company, I would like to inquire about fees and payment options', 'Bonjour Société SHAT, je souhaite des informations sur les frais et moyens de paiement')}">
+            <span>${txt('طرق الدفع والرسوم والمنح الجزئية', 'Payment Methods & Subsidies', 'Frais & Moyens de Paiement')}</span>
           </button>
         </div>
 
         <!-- Custom Message Input Box -->
         <div style="padding: 12px 16px; background: #FFFFFF; border-top: 1px solid #E2E8F0;">
           <form id="concierge-custom-form" style="display: flex; gap: 8px;">
-            <input type="text" id="concierge-custom-text" placeholder="اكتب استفسارك المخصص..." style="
+            <input type="text" id="concierge-custom-text" placeholder="${txt('اكتب استفسارك المخصص...', 'Type your custom inquiry...', 'Écrivez votre message personnalisé...')}" style="
               flex: 1;
               padding: 9px 12px;
               border: 1px solid #CBD5E1;
@@ -124,27 +151,27 @@ export class WhatsAppConcierge {
               display: flex;
               align-items: center;
               justify-content: center;
-            ">إرسال</button>
+            ">${txt('إرسال', 'Send', 'Envoyer')}</button>
           </form>
         </div>
 
         <!-- Social Channels Footer -->
         <div style="padding: 10px 16px; background: #F1F5F9; border-top: 1px solid #E2E8F0; display: flex; justify-content: space-between; align-items: center; font-size: 0.74rem; color: #64748B;">
-          <span>تابع منصاتنا الرسمية:</span>
+          <span>${txt('تابع منصاتنا الرسمية:', 'Official Channels:', 'Canaux Officiels :')}</span>
           <div style="display: flex; gap: 10px;">
             <a href="${this.fbUrl}" target="_blank" rel="noopener" style="color: #1877F2; text-decoration: none; font-weight: 700; display: flex; align-items: center; gap: 3px;">
-              <span>فيسبوك</span>
+              <span>Facebook</span>
             </a>
             <span>•</span>
             <a href="${this.igUrl}" target="_blank" rel="noopener" style="color: #E1306C; text-decoration: none; font-weight: 700; display: flex; align-items: center; gap: 3px;">
-              <span>انستغرام</span>
+              <span>Instagram</span>
             </a>
           </div>
         </div>
       </div>
 
       <!-- Trigger Floating Button -->
-      <button id="btn-toggle-concierge" type="button" aria-label="WhatsApp Concierge" style="
+      <button id="btn-toggle-concierge" type="button" aria-label="${txt('المساعد الفوري وتواصل واتساب', 'Instant WhatsApp Concierge', 'Concierge WhatsApp')}" style="
         width: 58px;
         height: 58px;
         border-radius: 50%;
@@ -167,7 +194,7 @@ export class WhatsAppConcierge {
         <span style="
           position: absolute;
           top: 0;
-          right: 0;
+          ${isRtl ? 'right: 0;' : 'left: 0;'}
           width: 14px;
           height: 14px;
           background: #DC2626;
@@ -177,38 +204,40 @@ export class WhatsAppConcierge {
       </button>
     `;
 
-    // Style for chips
-    const styleEl = document.createElement('style');
-    styleEl.textContent = `
-      .concierge-chip {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 9px 12px;
-        background: #FFFFFF;
-        border: 1px solid #E2E8F0;
-        border-radius: 10px;
-        font-size: 0.82rem;
-        font-weight: 700;
-        color: #1E293B;
-        cursor: pointer;
-        text-align: right;
-        transition: all 0.15s ease;
-      }
-      .concierge-chip:hover {
-        background: #F0FDF4;
-        border-color: #22C55E;
-        color: #15803D;
-        transform: translateX(-3px);
-      }
-      #btn-toggle-concierge:hover {
-        transform: scale(1.08);
-      }
-      #btn-toggle-concierge:active {
-        transform: scale(0.95);
-      }
-    `;
-    document.head.appendChild(styleEl);
+    // Style for chips if not added
+    if (!document.getElementById('shat-concierge-styles')) {
+      const styleEl = document.createElement('style');
+      styleEl.id = 'shat-concierge-styles';
+      styleEl.textContent = `
+        .concierge-chip {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 9px 12px;
+          background: #FFFFFF;
+          border: 1px solid #E2E8F0;
+          border-radius: 10px;
+          font-size: 0.82rem;
+          font-weight: 700;
+          color: #1E293B;
+          cursor: pointer;
+          transition: all 0.15s ease;
+        }
+        .concierge-chip:hover {
+          background: #F0FDF4;
+          border-color: #22C55E;
+          color: #15803D;
+          transform: translateY(-1px);
+        }
+        #btn-toggle-concierge:hover {
+          transform: scale(1.08);
+        }
+        #btn-toggle-concierge:active {
+          transform: scale(0.95);
+        }
+      `;
+      document.head.appendChild(styleEl);
+    }
 
     document.body.appendChild(container);
   }

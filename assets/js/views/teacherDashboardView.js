@@ -71,7 +71,7 @@ export function renderTeacherDashboardView(lang = 'ar') {
                 border: 2px solid rgba(255, 255, 255, 0.25);
                 flex-shrink: 0;
               ">
-                د
+                ${txt('د', 'Dr', 'Dr')}
               </div>
 
               <div>
@@ -95,7 +95,7 @@ export function renderTeacherDashboardView(lang = 'ar') {
 
             <!-- Faculty Action Controls -->
             <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-              <a href="#/academy" class="btn-clean btn-secondary btn-sm" style="color: #FFFFFF; border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.08); border-radius: 10px; padding: 10px 16px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+              <a href="#/${lang}/academy" class="btn-clean btn-secondary btn-sm" style="color: #FFFFFF; border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.08); border-radius: 10px; padding: 10px 16px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
                 <span style="display: inline-flex; align-items: center;">${isRtl ? icons.arrowRight('icon-inline', 14) : icons.arrowLeft('icon-inline', 14)}</span>
                 <span>${t.btnBackAcademy}</span>
               </a>

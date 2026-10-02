@@ -38,7 +38,7 @@ export function renderServicesView(lang = 'ar') {
     portfoliosDesc: lang === 'fr' ? 'Programmes certifiés répondant aux besoins de compétences dans 8 secteurs vitaux.' : (isRtl ? 'حقائب تنفيذية معتمدة قائمة على الاحتياجات والجدارات ومترابطة مع المعايير والمشاريع الميدانية.' : 'Certified curricula designed around competencies across 8 vital sectors, interconnected with standards and projects.'),
     
     pillar2Badge: lang === 'fr' ? 'Pilier 2: Conseil Institutionnel' : (isRtl ? 'الركيزة الثانية: الاستشارات والتطوير المؤسسي' : 'Pillar 2: Institutional Consulting'),
-    pillar2Title: lang === 'fr' ? 'منظومة الاستشارات (8 مجالات تدخل)' : (isRtl ? 'منظومة الاستشارات وبناء النظم (8 مجالات استشارية)' : 'The Consulting & Systems Architecture (8 Domains)'),
+    pillar2Title: lang === 'fr' ? 'Architecture de Conseil Institutionnel (8 Domaines)' : (isRtl ? 'منظومة الاستشارات وبناء النظم (8 مجالات استشارية)' : 'The Consulting & Systems Architecture (8 Domains)'),
     pillar2Desc: lang === 'fr' ? 'Aider les organisations à structurer leurs politiques et optimiser leurs processus.' : (isRtl ? 'مساعدة المؤسسات على فهم الواقع وتحديد الفجوات وبناء الأنظمة والسياسات الداخلية وضبط الجودة.' : 'Assisting organizations in gap analysis, policy development, internal governance, and quality management.'),
     
     specBadge: lang === 'fr' ? 'Spécialisations Avancées' : (isRtl ? 'تخصصات استشارية رفيعة المستوى' : 'Advanced Advisory Domains'),
@@ -51,7 +51,7 @@ export function renderServicesView(lang = 'ar') {
     linkedProject: lang === 'fr' ? 'Projet terrain:' : (isRtl ? 'التدخل الميداني الموثق:' : 'Field Project:'),
     btnExploreCourse: lang === 'fr' ? 'Consulter le Cursus' : (isRtl ? 'استعراض المساق المعتمد' : 'View Course'),
     btnRequestConsult: lang === 'fr' ? 'Demande de Conseil' : (isRtl ? 'طلب استشارة بهذا المجال' : 'Request Advisory'),
-    btnPseaConsult: lang === 'fr' ? 'طلب استشارة PSEA' : (isRtl ? 'طلب استشارة في الحماية وصون السلامة' : 'Request Safeguarding Advisory'),
+    btnPseaConsult: lang === 'fr' ? 'Demande de Conseil en Sauvegarde (PSEA)' : (isRtl ? 'طلب استشارة في الحماية وصون السلامة' : 'Request Safeguarding Advisory'),
     btnOecdEval: lang === 'fr' ? "Demande d'Évaluation Externe" : (isRtl ? 'طلب تقييم خارجي مستقل لمشروع' : 'Request Independent Evaluation')
   };
 

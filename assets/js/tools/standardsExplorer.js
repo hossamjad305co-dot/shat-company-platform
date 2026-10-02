@@ -285,6 +285,12 @@ export const standardsExplorer = {
 
     const isRtl = lang === 'ar';
     const txt = (ar, en, fr) => (lang === 'fr' ? fr || en : (lang === 'en' ? en : ar));
+
+    const titleEl = document.getElementById('modal-audit-report-title');
+    if (titleEl) {
+      titleEl.textContent = txt('تقرير التدقيق المعياري والامتثال الميداني المعتمد', 'Accredited Standards & Field Compliance Audit Report', 'Rapport d’Audit Normatif et de Conformité Terrain');
+    }
+
     const item = this.data.find(d => d.id === stdId) || this.data[0];
 
     const total = item.checklist.length;

@@ -9,10 +9,11 @@ export function renderDeliveryView(lang = 'ar') {
   const isRtl = lang === 'ar';
   const arrow = isRtl ? icons.arrowLeft('icon-inline', 14) : icons.arrowRight('icon-inline', 14);
 
+  const companyNameStr = lang === 'ar' ? 'شركة شات للتنمية والتطوير' : (lang === 'fr' ? 'SHAT Développement & Croissance' : 'SHAT Development & Growth');
   const t = {
-    badge: `${dm.slogan || 'من الاحتياج إلى النتائج • From Needs to Results'} • شركة شات للتنمية والتطوير (SHAT Platform)`,
-    title: dm.title || (isRtl ? 'نموذج التدخل: كيف نعمل؟' : 'Our Delivery Model'),
-    desc: dm.subtitle || (isRtl ? 'دورة عمل متكاملة من 6 مراحل لضمان جودة الأداء وتحقيق نتائج قابلة للقياس والاستدامة' : 'A 6-phase operational cycle ensuring seamless transition from diagnosis to sustainable impact.'),
+    badge: `${dm.slogan || (lang === 'fr' ? 'Des Besoins aux Résultats' : (isRtl ? 'من الاحتياج إلى النتائج' : 'From Needs to Results'))} • ${companyNameStr}`,
+    title: dm.title || (isRtl ? 'نموذج التدخل: كيف نعمل؟' : (lang === 'fr' ? "Notre Modèle d'Intervention" : 'Our Delivery Model')),
+    desc: dm.subtitle || (isRtl ? 'دورة عمل متكاملة من 6 مراحل لضمان جودة الأداء وتحقيق نتائج قابلة للقياس والاستدامة' : (lang === 'fr' ? 'Un cycle intégré en 6 phases garantissant l’excellence et l’impact.' : 'A 6-phase operational cycle ensuring seamless transition from diagnosis to sustainable impact.')),
     ctaTitle: lang === 'fr' 
       ? 'Souhaitez-vous déployer ce modèle au sein de votre organisation ?'
       : (isRtl ? 'هل ترغب في تطبيق هذا النموذج في مؤسستك؟' : 'Would you like to deploy this model in your organization?'),
@@ -20,7 +21,7 @@ export function renderDeliveryView(lang = 'ar') {
       ? 'Nos experts analysent vos réalités institutionnelles et conçoivent un accompagnement sur mesure selon ces 6 phases.'
       : (isRtl ? 'يقوم خبراؤنا بدراسة واقع مؤسستكم وتصميم تدخل استشاري أو تدريبي متكامل وفق المراحل الست.' : 'Our consultants analyze your institutional reality and engineer a tailored intervention mapped across the 6 phases.'),
     ctaBtn: lang === 'fr' ? 'Demander une Proposition Technique' : (isRtl ? 'طلب استشارة وعرض فني مخصص' : 'Request Tailored Advisory Proposal'),
-    diagBtn: isRtl ? 'فحص جاهزية المؤسسة للتدخل' : 'Check Readiness for Intervention'
+    diagBtn: isRtl ? 'فحص جاهزية المؤسسة للتدخل' : (lang === 'fr' ? 'Évaluer la Préparation Institutionnelle' : 'Check Readiness for Intervention')
   };
 
   return `
@@ -48,15 +49,15 @@ export function renderDeliveryView(lang = 'ar') {
                       <span class="step-number" style="font-family: var(--font-mono); font-size: 1.3rem;">${st.num}</span>
                       <span class="bento-kicker" style="font-size: 0.78rem;">${st.en}</span>
                     </div>
-                    <h3 class="bento-title" style="font-size: 1.25rem; font-weight: 900; margin-bottom: 8px;">${st.ar || st.title}</h3>
+                    <h3 class="bento-title" style="font-size: 1.25rem; font-weight: 900; margin-bottom: 8px;">${st.title || st.ar || st.en}</h3>
                     <p class="bento-text" style="font-size: 0.94rem; line-height: 1.7; color: var(--text-secondary);">${st.desc}</p>
                   </div>
                   <div style="border-top: 1px dashed var(--border-light); padding-top: 12px; margin-top: 16px; display: flex; justify-content: space-between; align-items: center;">
                     <span style="font-size: 0.76rem; color: var(--shat-green); font-weight: 800;">
-                      ${isRtl ? `المرحلة التنفيذية 0${idx + 1}` : `Phase 0${idx + 1}`}
+                      ${isRtl ? `المرحلة التنفيذية 0${idx + 1}` : (lang === 'fr' ? `Phase Exécutive 0${idx + 1}` : `Execution Phase 0${idx + 1}`)}
                     </span>
-                    <button type="button" class="btn-clean" onclick="if(window.openToolkitsLibrary) window.openToolkitsLibrary();" style="font-size: 0.74rem; color: var(--shat-navy); font-weight: 700; background: transparent; cursor: pointer; text-decoration: underline;">
-                      ${isRtl ? 'الأدوات المقترنة' : 'Matched Toolkits'}
+                    <button type="button" class="btn-clean" onclick="if(window.openToolkitsLibrary) window.openToolkitsLibrary('${lang}');" style="font-size: 0.74rem; color: var(--shat-navy); font-weight: 700; background: transparent; cursor: pointer; text-decoration: underline;">
+                      ${isRtl ? 'الأدوات المقترنة' : (lang === 'fr' ? 'Boîtes à outils associées' : 'Matched Toolkits')}
                     </button>
                   </div>
                 </div>
@@ -72,11 +73,11 @@ export function renderDeliveryView(lang = 'ar') {
                 ${t.ctaDesc}
               </p>
               <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-                <a href="#/contact" class="btn-clean btn-primary btn-lg btn-island">
+                <a href="#/${lang}/contact" class="btn-clean btn-primary btn-lg btn-island">
                   <span>${t.ctaBtn}</span>
                   <span>${arrow}</span>
                 </a>
-                <button type="button" class="btn-clean btn-green btn-lg btn-island" onclick="if(window.openDiagnosticAssessment) window.openDiagnosticAssessment();">
+                <button type="button" class="btn-clean btn-green btn-lg btn-island" onclick="if(window.openDiagnosticAssessment) window.openDiagnosticAssessment('${lang}');">
                   <span>${t.diagBtn}</span>
                 </button>
               </div>

@@ -9,21 +9,37 @@ export const UPCOMING_COHORTS = [
     courseId: 'shat-case-management',
     titleAr: 'دورة إعداد وتأهيل مدير حالة Case Management',
     titleEn: 'Case Management Professional Qualification Course',
-    trainer: 'د. محمد إسليم',
-    trainerRole: 'استشاري إدارة الحالة والرعاية المتكاملة',
+    titleFr: 'Formation Professionnelle de Gestionnaire de Cas',
+    trainerAr: 'د. محمد إسليم',
+    trainerEn: 'Dr. Mohammed Isleem',
+    trainerFr: 'Dr. Mohammed Isleem',
+    trainerRoleAr: 'استشاري إدارة الحالة والرعاية المتكاملة',
+    trainerRoleEn: 'Case Management & Integrated Care Consultant',
+    trainerRoleFr: 'Consultant en Gestion de Cas & Soins Intégrés',
     startDate: '2026-10-20',
-    startDateFormatted: '20 أكتوبر 2026',
+    startDateFormattedAr: '20 أكتوبر 2026',
+    startDateFormattedEn: 'October 20, 2026',
+    startDateFormattedFr: '20 Octobre 2026',
     scheduleAr: 'أيام الأحد والثلاثاء والخميس • 5:00 - 7:30 مساءً',
     scheduleEn: 'Sun, Tue, Thu • 5:00 - 7:30 PM',
-    duration: '30 ساعة تدريبية وتطبيق إكلينيكي',
-    mode: 'عن بُعد (Zoom تفاعلي) + قاعات تطبيق',
+    scheduleFr: 'Dim, Mar, Jeu • 17h00 - 19h30',
+    durationAr: '30 ساعة تدريبية وتطبيق إكلينيكي',
+    durationEn: '30 Training Hours & Clinical Practice',
+    durationFr: '30 Heures de Formation & Pratique Clinique',
+    modeAr: 'عن بُعد (Zoom تفاعلي) + قاعات تطبيق',
+    modeEn: 'Remote (Interactive Zoom) + Practical Labs',
+    modeFr: 'À Distance (Zoom Interactif) + Ateliers',
     modeKey: 'online',
     category: 'case-management',
     seatsTotal: 25,
     seatsRemaining: 5,
-    fee: 'رسوم مدعومة جزئياً',
+    feeAr: 'رسوم مدعومة جزئياً',
+    feeEn: 'Partially Subsidized Fee',
+    feeFr: 'Frais Partiellement Subventionnés',
     formUrl: '#/forms?id=case-manager-2026',
-    badge: 'الدفعة 4 • مقاعد محدودة',
+    badgeAr: 'الدفعة 4 • مقاعد محدودة',
+    badgeEn: 'Cohort 4 • Limited Seats',
+    badgeFr: 'Cohorte 4 • Places Limitées',
     badgeColor: '#1E7E34',
     badgeBg: '#E8F5E9'
   },
@@ -32,21 +48,37 @@ export const UPCOMING_COHORTS = [
     courseId: 'shat-presentation-skills',
     titleAr: 'البرنامج التنفيذي في مهارات العرض والتقديم والتأثير الجماهيري',
     titleEn: 'Executive Presentation Skills & Public Speaking',
-    trainer: 'م. مهدي الملاحي',
-    trainerRole: 'استشاري التواصل المؤسسي والعرض الفعال',
+    titleFr: 'Programme Exécutif en Maîtrise de la Présentation & Prise de Parole',
+    trainerAr: 'م. مهدي الملاحي',
+    trainerEn: 'Eng. Mahdi Al-Mallahi',
+    trainerFr: 'Ing. Mahdi Al-Mallahi',
+    trainerRoleAr: 'استشاري التواصل المؤسسي والعرض الفعال',
+    trainerRoleEn: 'Institutional Communications & Executive Presentation Consultant',
+    trainerRoleFr: 'Consultant en Communication Institutionnelle & Prise de Parole',
     startDate: '2026-10-15',
-    startDateFormatted: '15 أكتوبر 2026',
+    startDateFormattedAr: '15 أكتوبر 2026',
+    startDateFormattedEn: 'October 15, 2026',
+    startDateFormattedFr: '15 Octobre 2026',
     scheduleAr: 'أيام السبت والاثنين والأربعاء • 6:00 - 8:30 مساءً',
     scheduleEn: 'Sat, Mon, Wed • 6:00 - 8:30 PM',
-    duration: '24 ساعة تدريبية وتطبيق مسرحي',
-    mode: 'وجاهي + بث تفاعلي متزامن',
+    scheduleFr: 'Sam, Lun, Mer • 18h00 - 20h30',
+    durationAr: '24 ساعة تدريبية وتطبيق مسرحي',
+    durationEn: '24 Training Hours & Stage Application',
+    durationFr: '24 Heures de Formation & Pratique Scénique',
+    modeAr: 'وجاهي + بث تفاعلي متزامن',
+    modeEn: 'In-Person + Simultaneous Interactive Stream',
+    modeFr: 'Présentiel + Diffusion Interactive Simultanée',
     modeKey: 'hybrid',
     category: 'presentation',
     seatsTotal: 20,
     seatsRemaining: 3,
-    fee: 'رسوم تفضيلية',
+    feeAr: 'رسوم تفضيلية',
+    feeEn: 'Preferential Fee',
+    feeFr: 'Tarif Préférentiel',
     formUrl: '#/forms?id=presentation-skills-2026',
-    badge: 'الدفعة 3 • يغلق التسجيل قريباً',
+    badgeAr: 'الدفعة 3 • يغلق التسجيل قريباً',
+    badgeEn: 'Cohort 3 • Closing Soon',
+    badgeFr: 'Cohorte 3 • Inscription Bientôt Clôturée',
     badgeColor: '#92400E',
     badgeBg: '#FEF3C7'
   },
@@ -55,21 +87,37 @@ export const UPCOMING_COHORTS = [
     courseId: 'shat-chs-master',
     titleAr: 'دبلوم الممارس الإنساني وبناء القدرات المؤسسية (CHS Master)',
     titleEn: 'Core Humanitarian Standard (CHS) Master Diploma',
-    trainer: 'أ. حسام جاد الله وفريق الخبراء',
-    trainerRole: 'خبير الامتثال الإنساني والجودة والمساءلة',
+    titleFr: 'Diplôme de Maîtrise de la Norme Humanitaire Fondamentale (CHS)',
+    trainerAr: 'أ. حسام جاد الله وفريق الخبراء',
+    trainerEn: 'Mr. Hossam Jadallah & Faculty Board',
+    trainerFr: 'M. Hossam Jadallah & Corps Pédagogique',
+    trainerRoleAr: 'خبير الامتثال الإنساني والجودة والمساءلة',
+    trainerRoleEn: 'Humanitarian Compliance, Quality & Accountability Expert',
+    trainerRoleFr: 'Expert en Conformité Humanitaire, Qualité et Redevabilité',
     startDate: '2026-11-01',
-    startDateFormatted: '1 نوفمبر 2026',
+    startDateFormattedAr: '1 نوفمبر 2026',
+    startDateFormattedEn: 'November 1, 2026',
+    startDateFormattedFr: '1 Novembre 2026',
     scheduleAr: 'أيام الجمعة والسبت • 4:00 - 8:00 مساءً',
     scheduleEn: 'Fri & Sat • 4:00 - 8:00 PM',
-    duration: '60 ساعة تدريبية معتمدة دولياً',
-    mode: 'عن بُعد (غرف محاكاة وتطبيقات دولية)',
+    scheduleFr: 'Ven & Sam • 16h00 - 20h00',
+    durationAr: '60 ساعة تدريبية معتمدة دولياً',
+    durationEn: '60 Internationally Accredited Training Hours',
+    durationFr: '60 Heures de Formation Internationalement Agréées',
+    modeAr: 'عن بُعد (غرف محاكاة وتطبيقات دولية)',
+    modeEn: 'Remote (Simulation Labs & Global Exercises)',
+    modeFr: 'À Distance (Laboratoires de Simulation & Pratiques)',
     modeKey: 'online',
     category: 'humanitarian',
     seatsTotal: 30,
     seatsRemaining: 11,
-    fee: 'منحة تدريبية وبناء قدرات',
+    feeAr: 'منحة تدريبية وبناء قدرات',
+    feeEn: 'Capacity Grant Subsidized',
+    feeFr: 'Bourse de Renforcement des Capacités',
     formUrl: '#/forms?id=humanitarian-worker-2026',
-    badge: 'الدفعة الخريفية • معتمد دولياً',
+    badgeAr: 'الدفعة الخريفية • معتمد دولياً',
+    badgeEn: 'Fall Cohort • Globally Accredited',
+    badgeFr: 'Cohorte d’Automne • Agréé Internationalement',
     badgeColor: '#2563EB',
     badgeBg: '#EFF6FF'
   },
@@ -78,21 +126,37 @@ export const UPCOMING_COHORTS = [
     courseId: 'shat-consulting-program',
     titleAr: 'برنامج التدخل الاستشاري وتطوير النظم والحوكمة للمنظمات',
     titleEn: 'Institutional Consulting & Governance Systems Program',
-    trainer: 'نخبة مستشاري ومراجعي شركة شات',
-    trainerRole: 'مستشارون معتمدون في نظم OECD DAC و CHS',
+    titleFr: 'Programme de Conseil Institutionnel et Développement des Systèmes',
+    trainerAr: 'نخبة مستشاري ومراجعي شركة شات',
+    trainerEn: 'SHAT Senior Institutional Advisory Panel',
+    trainerFr: 'Groupe d’Experts et Auditeurs SHAT',
+    trainerRoleAr: 'مستشارون معتمدون في نظم OECD DAC و CHS',
+    trainerRoleEn: 'Certified Advisors in OECD DAC & CHS Frameworks',
+    trainerRoleFr: 'Conseillers Agréés aux Cadres OCDE CAD & CHS',
     startDate: 'متاح على مدار العام',
-    startDateFormatted: 'يبدأ فور توقيع نطاق العمل (SOW)',
+    startDateFormattedAr: 'يبدأ فور توقيع نطاق العمل (SOW)',
+    startDateFormattedEn: 'Immediate Upon SOW Agreement',
+    startDateFormattedFr: 'Immédiat après signature du cahier des charges (SOW)',
     scheduleAr: 'جلسات استشارية مرنة وميدانية',
     scheduleEn: 'Flexible & On-site Consulting Sessions',
-    duration: 'وفق نطاق التدخل (من 1 إلى 6 أشهر)',
-    mode: 'تدخل ميداني واستشاري متكامل',
+    scheduleFr: 'Sessions de Conseil Flexibles et sur le Terrain',
+    durationAr: 'وفق نطاق التدخل (من 1 إلى 6 أشهر)',
+    durationEn: 'Customized Scope (1 to 6 Months)',
+    durationFr: 'Sur Mesure (1 à 6 Mois)',
+    modeAr: 'تدخل ميداني واستشاري متكامل',
+    modeEn: 'Integrated Advisory & Field Deployment',
+    modeFr: 'Intervention Complète sur le Terrain et Conseil',
     modeKey: 'onsite',
     category: 'consulting',
     seatsTotal: 8,
     seatsRemaining: 2,
-    fee: 'وفق موازنة التدخل المؤسسي',
+    feeAr: 'وفق موازنة التدخل المؤسسي',
+    feeEn: 'According to Institutional SOW Budget',
+    feeFr: 'Selon le Budget du Cadre d’Intervention',
     formUrl: '#/forms?id=consulting-inquiry-2026',
-    badge: 'استشارات مؤسسية مخصصة',
+    badgeAr: 'استشارات مؤسسية مخصصة',
+    badgeEn: 'Tailored Institutional Advisory',
+    badgeFr: 'Conseil Institutionnel Personnalisé',
     badgeColor: '#7C3AED',
     badgeBg: '#F5F3FF'
   }
@@ -201,7 +265,7 @@ export function renderTrainingCalendarSection(lang = 'ar') {
               ${txt('تمنح شركة شات للتنمية والتطوير شهادات معتمدة رسمياً ومزودة برقم تسلسلي موثق ورمز QR يمكن التحقق منه دولياً.', 'Official verified certificates with cryptographic serial IDs and QR codes are issued upon completion.', 'Des certificats officiels avec numéro de série cryptographique sont délivrés à la fin de la formation.')}
             </div>
           </div>
-          <a href="#/verify" class="btn-clean" style="background: #FFFFFF; border: 1px solid #CBD5E1; color: var(--shat-navy, #0B1E36); font-weight: 700; padding: 8px 18px; border-radius: 8px; font-size: 0.86rem;">
+          <a href="#/${lang}/verify" class="btn-clean" style="background: #FFFFFF; border: 1px solid #CBD5E1; color: var(--shat-navy, #0B1E36); font-weight: 700; padding: 8px 18px; border-radius: 8px; font-size: 0.86rem;">
             <span>${txt('بوابة فحص الشهادات', 'Certificate Verification Portal', 'Portail de Vérification')}</span>
           </a>
         </div>
@@ -214,6 +278,7 @@ export function renderTrainingCalendarSection(lang = 'ar') {
 function renderCohortCard(c, lang) {
   const isRtl = lang === 'ar';
   const txt = (ar, en, fr) => (lang === 'fr' ? fr || en : (lang === 'en' ? en : ar));
+  const localizedFormUrl = c.formUrl.replace('#/', `#/${lang}/`);
 
   return `
     <div class="cohort-item-card" data-category="${c.category}" style="
@@ -231,24 +296,23 @@ function renderCohortCard(c, lang) {
         <!-- Top Badges -->
         <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 14px;">
           <span style="background: ${c.badgeBg}; color: ${c.badgeColor}; font-size: 0.78rem; font-weight: 800; padding: 4px 10px; border-radius: 6px;">
-            ${c.badge}
+            ${txt(c.badgeAr, c.badgeEn, c.badgeFr)}
           </span>
           <span style="font-size: 0.8rem; font-weight: 700; color: #64748B; background: #F1F5F9; padding: 3px 8px; border-radius: 4px;">
-            ${c.mode}
+            ${txt(c.modeAr, c.modeEn, c.modeFr)}
           </span>
         </div>
 
         <!-- Title -->
         <h3 style="font-size: 1.15rem; font-weight: 900; color: var(--shat-navy, #0B1E36); margin: 0 0 10px; line-height: 1.4;">
-          ${isRtl ? c.titleAr : c.titleEn}
+          ${txt(c.titleAr, c.titleEn, c.titleFr)}
         </h3>
 
         <!-- Trainer -->
         <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px; font-size: 0.88rem; color: #334155;">
-          
           <div>
-            <strong>${c.trainer}</strong>
-            <div style="font-size: 0.76rem; color: #64748B;">${c.trainerRole}</div>
+            <strong>${txt(c.trainerAr, c.trainerEn, c.trainerFr)}</strong>
+            <div style="font-size: 0.76rem; color: #64748B;">${txt(c.trainerRoleAr, c.trainerRoleEn, c.trainerRoleFr)}</div>
           </div>
         </div>
 
@@ -256,15 +320,15 @@ function renderCohortCard(c, lang) {
         <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 12px 14px; margin-bottom: 18px; display: flex; flex-direction: column; gap: 6px; font-size: 0.84rem; color: #475569;">
           <div style="display: flex; justify-content: space-between;">
             <span><strong>${txt('تاريخ الانطلاق:', 'Start Date:', 'Date de Début :')}</strong></span>
-            <span style="font-weight: 800; color: var(--shat-navy, #0B1E36);">${c.startDateFormatted}</span>
+            <span style="font-weight: 800; color: var(--shat-navy, #0B1E36);">${txt(c.startDateFormattedAr, c.startDateFormattedEn, c.startDateFormattedFr)}</span>
           </div>
           <div style="display: flex; justify-content: space-between;">
             <span><strong>${txt('الساعات المعتمدة:', 'Hours:', 'Volume :')}</strong></span>
-            <span>${c.duration}</span>
+            <span>${txt(c.durationAr, c.durationEn, c.durationFr)}</span>
           </div>
           <div style="display: flex; justify-content: space-between;">
             <span><strong>${txt('المواعيد:', 'Schedule:', 'Horaires :')}</strong></span>
-            <span>${isRtl ? c.scheduleAr : c.scheduleEn}</span>
+            <span>${txt(c.scheduleAr, c.scheduleEn, c.scheduleFr)}</span>
           </div>
         </div>
 
@@ -284,7 +348,7 @@ function renderCohortCard(c, lang) {
 
       <!-- Action Button -->
       <div>
-        <a href="${c.formUrl}" class="btn-clean btn-green" style="
+        <a href="${localizedFormUrl}" class="btn-clean btn-green" style="
           width: 100%;
           display: flex;
           align-items: center;

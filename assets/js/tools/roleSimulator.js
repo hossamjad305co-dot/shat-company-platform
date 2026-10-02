@@ -16,6 +16,7 @@ export const roleSimulator = {
       id: 'visitor',
       labelAr: 'زائر استكشافي',
       labelEn: 'Public Visitor',
+      labelFr: 'Visiteur Public',
       iconFn: () => icons.compass('sim-icon', 13),
       route: '#/home',
       badgeColor: '#64748B'
@@ -24,6 +25,7 @@ export const roleSimulator = {
       id: 'student',
       labelAr: 'متدرب معتمد',
       labelEn: 'Student Trainee',
+      labelFr: 'Stagiaire Certifié',
       iconFn: () => icons.academy('sim-icon', 13),
       route: '#/student',
       badgeColor: '#2563EB',
@@ -42,6 +44,7 @@ export const roleSimulator = {
       id: 'teacher',
       labelAr: 'خبير مدرب',
       labelEn: 'Master Trainer',
+      labelFr: 'Formateur Expert',
       iconFn: () => icons.award('sim-icon', 13),
       route: '#/teacher',
       badgeColor: '#166534',
@@ -60,6 +63,7 @@ export const roleSimulator = {
       id: 'admin',
       labelAr: 'المدير التنفيذي',
       labelEn: 'Executive Admin',
+      labelFr: 'Directeur Exécutif',
       iconFn: () => icons.shield('sim-icon', 13),
       route: '#/admin',
       badgeColor: '#0F2E4A',
@@ -101,10 +105,11 @@ export const roleSimulator = {
               const isActive = (r.id === 'teacher' && currentRole === 'teacher') ||
                                (r.id === 'instructor' && currentRole === 'teacher') ||
                                (r.id === currentRole);
+              const label = lang === 'ar' ? r.labelAr : (lang === 'fr' ? r.labelFr : r.labelEn);
               return `
                 <button type="button" class="btn-clean sim-role-btn ${isActive ? 'active' : ''}" data-role-id="${r.id}" style="display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 20px; font-size: 0.74rem; font-weight: 800; border: 1px solid ${isActive ? '#10B981' : 'rgba(255,255,255,0.18)'}; background: ${isActive ? 'rgba(16,185,129,0.2)' : 'rgba(255,255,255,0.05)'}; color: ${isActive ? '#6EE7B7' : '#E2E8F0'}; transition: all 0.15s ease;">
                   <span style="display: inline-flex; align-items: center;">${r.iconFn()}</span>
-                  <span>${isRtl ? r.labelAr : r.labelEn}</span>
+                  <span>${label}</span>
                   ${isActive ? '<span style="font-size: 0.65rem; color: #10B981;">●</span>' : ''}
                 </button>
               `;
@@ -134,7 +139,7 @@ export const roleSimulator = {
         if (window.openSiteCustomizer) {
           window.openSiteCustomizer(lang);
         } else {
-          showToast('أداة تخصيص المنصة قيد التحميل...', 'info');
+          showToast(txt('أداة تخصيص المنصة قيد التحميل...', 'Loading platform customizer...', 'Outil de personnalisation en cours de chargement...'), 'info');
         }
       };
     }
@@ -148,19 +153,21 @@ export const roleSimulator = {
         if (roleId === 'visitor') {
           await api.logout();
           showToast(txt('تم تفعيل وضع الزائر العام', 'Switched to Public Visitor view', 'Mode Visiteur Public activé'), 'info');
-          window.location.hash = '#/home';
+          window.location.hash = `#/${lang}/home`;
         } else {
           // Store simulated identity
           localStorage.setItem('shat_current_user', JSON.stringify(roleObj.user));
           // Update apiClient cached user
           api.currentUser = roleObj.user;
 
+          const roleName = lang === 'ar' ? roleObj.labelAr : (lang === 'fr' ? roleObj.labelFr : roleObj.labelEn);
           showToast(
-            txt(`تم التبديل الفوري لدور: ${roleObj.labelAr}`, `Switched instantly to: ${roleObj.labelEn}`, `Basculé en mode : ${roleObj.labelEn}`),
+            txt(`تم التبديل الفوري لدور: ${roleName}`, `Switched instantly to: ${roleName}`, `Basculé en mode : ${roleName}`),
             'success'
           );
 
-          window.location.hash = roleObj.route;
+          const targetSub = roleObj.route.replace(/^#\/?/, '');
+          window.location.hash = `#/${lang}/${targetSub}`;
         }
 
         // Trigger platform re-render

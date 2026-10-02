@@ -1,3 +1,7 @@
+// assets/js/components/faqSection.js
+// Interactive FAQ Section with Live Search Filter & Category Pills
+// 100% Trilingual Architecture (Arabic, English, French)
+
 import { icons } from '../icons.js';
 
 export const FAQ_ITEMS = [
@@ -6,54 +10,78 @@ export const FAQ_ITEMS = [
     category: 'accreditation',
     questionAr: 'ما هي الاعتمادات الرسمية لشهادات شركة شات وكيف يتم التحقق منها؟',
     questionEn: 'What are the official accreditations of SHAT certificates and how to verify them?',
-    answerAr: `تعتمد شركة شات للتنمية والتطوير معايير الجودة والمساءلة الدولية (CHS Alliance & Sphere Standards). تصدر جميع الشهادات بختم رسمي مشفر، رقم تسلسلي فريد، ورمز استجابة سريعة (QR Code). يمكن لأي جهة توظيف أو منظمة مانحة التحقق الفوري من صحة وأصالة الشهادة عبر <a href="#/verify" style="color: #1E7E34; font-weight: 700; text-decoration: underline;">بوابة التحقق الرقمي الرسمية</a> بالمنصة.`,
-    answerEn: `SHAT certificates follow international standards (CHS Alliance & Sphere). Each certificate includes a unique cryptographic serial number and QR code verifiable on our official portal.`
+    questionFr: 'Quelles sont les accréditations officielles des certificats SHAT et comment les vérifier ?',
+    answerAr: (lang) => `تعتمد شركة شات للتنمية والتطوير معايير الجودة والمساءلة الدولية (CHS Alliance & Sphere Standards). تصدر جميع الشهادات بختم رسمي مشفر، رقم تسلسلي فريد، ورمز استجابة سريعة (QR Code). يمكن لأي جهة توظيف أو منظمة مانحة التحقق الفوري من صحة وأصالة الشهادة عبر <a href="#/${lang}/verify" style="color: #1E7E34; font-weight: 700; text-decoration: underline;">بوابة التحقق الرقمي الرسمية</a> بالمنصة.`,
+    answerEn: (lang) => `SHAT certificates adhere to international standards (CHS Alliance & Sphere Standards). Each credential is issued with an encrypted seal, unique serial number, and dynamic QR code verifiable instantly through our official <a href="#/${lang}/verify" style="color: #1E7E34; font-weight: 700; text-decoration: underline;">Digital Verification Portal</a>.`,
+    answerFr: (lang) => `Les certificats SHAT sont conformes aux standards internationaux (CHS Alliance & Sphère). Chaque diplôme comporte un sceau crypté, un numéro de série unique et un QR code vérifiable directement sur notre <a href="#/${lang}/verify" style="color: #1E7E34; font-weight: 700; text-decoration: underline;">Portail de Vérification Officiel</a>.`
   },
   {
     id: 'faq-registration',
     category: 'registration',
     questionAr: 'كيف أتمكن من التسجيل في الدورات عبر استمارات Google Forms المعتمدة؟',
     questionEn: 'How do I register via the accredited Google Forms?',
-    answerAr: `وفرت المنصة نظام مزامنة مزدوج يتيح لك التسجيل مباشرة من داخل المنصة عبر <a href="#/forms" style="color: #1E7E34; font-weight: 700; text-decoration: underline;">بوابة الاستمارات المعتمدة</a>، أو فتح الرابط الرسمي في Google Forms. يتم حفظ مسودات بياناتك تلقائياً لمنع فقدانها، ويصلك إشعار تأكيد فوري بالقبول والخطوات اللاحقة.`,
-    answerEn: `You can apply directly via our accredited Forms Portal (#/forms) or open Google Forms. Drafts are auto-saved and immediate confirmation is provided.`
+    questionFr: 'Comment s’inscrire via les formulaires agréés ?',
+    answerAr: (lang) => `وفرت المنصة نظام مزامنة مزدوج يتيح لك التسجيل مباشرة من داخل المنصة عبر <a href="#/${lang}/forms" style="color: #1E7E34; font-weight: 700; text-decoration: underline;">بوابة الاستمارات المعتمدة</a>، أو فتح الرابط الرسمي في Google Forms. يتم حفظ مسودات بياناتك تلقائياً لمنع فقدانها، ويصلك إشعار تأكيد فوري بالقبول والخطوات اللاحقة.`,
+    answerEn: (lang) => `The platform provides a dual-sync registration engine. You can enroll directly via our <a href="#/${lang}/forms" style="color: #1E7E34; font-weight: 700; text-decoration: underline;">Accredited Forms Portal</a> or through official Google Forms. Draft entries are automatically cached to avoid data loss.`,
+    answerFr: (lang) => `La plateforme propose une double synchronisation : inscrivez-vous directement via le <a href="#/${lang}/forms" style="color: #1E7E34; font-weight: 700; text-decoration: underline;">Portail des Formulaires Agréés</a> ou via Google Forms. Vos brouillons sont sauvegardés en temps réel.`
   },
   {
     id: 'faq-payment',
     category: 'payment',
     questionAr: 'ما هي طرق الدفع المتاحة لرسوم الدورات داخل فلسطين وخارجها؟',
     questionEn: 'What payment methods are available locally and internationally?',
-    answerAr: `نقدم خيارات دفع ميسرة وآمنة تشمل:
+    questionFr: 'Quels sont les modes de paiement disponibles localement et à l’international ?',
+    answerAr: () => `نقدم خيارات دفع ميسرة وآمنة تشمل:
     <ul style="margin: 8px 0 0; padding-inline-start: 20px; line-height: 1.8;">
       <li><strong>التحويل البنكي المباشر:</strong> بنك فلسطين (حساب رسمي باسم شركة شات للتنمية والتطوير).</li>
       <li><strong>المحافظ الإلكترونية:</strong> جوال باي (Jawwal Pay) وبال باي (PalPay).</li>
       <li><strong>التحويل الدولي:</strong> ويسترن يونيون (Western Union) أو موني جرام للطلاب من خارج فلسطين.</li>
       <li><strong>السداد النقدي:</strong> عبر مراكز التنسيق المعتمدة لشركة شات.</li>
     </ul>`,
-    answerEn: `Payment options include Bank of Palestine direct transfer, Jawwal Pay, PalPay, Western Union for international trainees, and cash at official partners.`
+    answerEn: () => `We offer flexible and accredited payment options:
+    <ul style="margin: 8px 0 0; padding-inline-start: 20px; line-height: 1.8;">
+      <li><strong>Direct Bank Transfer:</strong> Bank of Palestine (Official corporate account for SHAT Development & Growth).</li>
+      <li><strong>Digital Wallets:</strong> Jawwal Pay and PalPay.</li>
+      <li><strong>International Wire:</strong> Western Union / MoneyGram for regional and overseas trainees.</li>
+      <li><strong>Physical Payment:</strong> Via authorized SHAT partner centers.</li>
+    </ul>`,
+    answerFr: () => `Nous mettons à disposition des moyens de règlement flexibles et sécurisés :
+    <ul style="margin: 8px 0 0; padding-inline-start: 20px; line-height: 1.8;">
+      <li><strong>Virement Bancaire Direct :</strong> Bank of Palestine (compte officiel Société SHAT).</li>
+      <li><strong>Portefeuilles Électroniques :</strong> Jawwal Pay et PalPay.</li>
+      <li><strong>Transfert International :</strong> Western Union ou MoneyGram pour les candidats hors Palestine.</li>
+      <li><strong>Paiement Comptant :</strong> Auprès des centres de coordination agréés SHAT.</li>
+    </ul>`
   },
   {
     id: 'faq-online-zoom',
     category: 'courses',
     questionAr: 'هل الدورات متاحة عبر زووم تفاعلي للمتدربين من مختلف المحافظات والدول؟',
     questionEn: 'Are courses available live on Zoom for regional trainees?',
-    answerAr: `نعم، كافة البرامج التدريبية الكبرى مصممة بنموذج التعليم المدمج والافتراضي عالي التفاعل عبر Zoom Pro وغرف المحاكاة وتطبيقات العمل الجماعي المباشرة، مع تسجيل كافة الجلسات وتوفيرها للمتدربين عبر المنصة لمراجعتها في أي وقت.`,
-    answerEn: `Yes, all major programs are delivered via interactive Zoom Pro sessions with breakout simulation rooms, and all sessions are recorded for on-demand review.`
+    questionFr: 'Les cours sont-ils dispensés en direct sur Zoom pour les candidats régionaux ?',
+    answerAr: () => `نعم، كافة البرامج التدريبية الكبرى مصممة بنموذج التعليم المدمج والافتراضي عالي التفاعل عبر Zoom Pro وغرف المحاكاة وتطبيقات العمل الجماعي المباشرة، مع تسجيل كافة الجلسات وتوفيرها للمتدربين عبر المنصة لمراجعتها في أي وقت.`,
+    answerEn: () => `Yes, all flagship professional programs operate under a blended, highly interactive virtual model via Zoom Pro with live breakout simulation rooms. Sessions are recorded and accessible anytime on the student dashboard.`,
+    answerFr: () => `Oui, l’ensemble des cycles de formation sont assurés en direct sur Zoom Pro avec ateliers en sous-groupes interactifs. Tous les modules enregistrés sont réécoutables sur l'espace apprenant.`
   },
   {
     id: 'faq-scholarships',
     category: 'payment',
     questionAr: 'هل تتوفر منح تدريبية جزئية أو خصومات للمجموعات وكوادر الجمعيات؟',
     questionEn: 'Are partial scholarships or NGO group discounts available?',
-    answerAr: `نعم، تخصص شركة شات سنوياً مقاعد مدعومة جزئياً لخريجي العمل الاجتماعي والإنساني والعاملين في منظمات المجتمع المدني المحلية، بالإضافة إلى خصومات خاصة للترشيحات الجماعية (3 متدربين فأكثر من نفس المؤسسة). يمكنك تحديد طلب منحة عند تعبئة الاستمارة.`,
-    answerEn: `Yes, SHAT allocates partially sponsored seats for humanitarian graduates and civil society staff, alongside NGO group discounts.`
+    questionFr: 'Des bourses partielles ou tarifs de groupe ONG sont-ils proposés ?',
+    answerAr: () => `نعم، تخصص شركة شات سنوياً مقاعد مدعومة جزئياً لخريجي العمل الاجتماعي والإنساني والعاملين في منظمات المجتمع المدني المحلية، بالإضافة إلى خصومات خاصة للترشيحات الجماعية (3 متدربين فأكثر من نفس المؤسسة). يمكنك تحديد طلب منحة عند تعبئة الاستمارة.`,
+    answerEn: () => `Yes, SHAT allocates annual subsidized fellowship seats for humanitarian graduates, social workers, and grassroots NGO staff, alongside group discounts for institutional cohorts (3+ members).`,
+    answerFr: () => `Oui, la Société SHAT subventionne chaque année des places pour les diplômés de l'action humanitaire et sociale, et propose des réductions institutionnelles pour les groupes à partir de 3 inscrits.`
   },
   {
     id: 'faq-consulting',
     category: 'consulting',
     questionAr: 'كيف تخدم شركة شات المنظمات والمؤسسات والجمعيات في تطوير النظم والحوكمة؟',
     questionEn: 'How does SHAT support NGOs with governance and institutional systems?',
-    answerAr: `نقدم تدخلات استشارية متكاملة تشمل: تشخيص الجاهزية المؤسسية، إعداد ومراجعة الأدلة التشغيلية SOPs، تأهيل المنظمات للحصول على شهادة CHS، تدريب الكوادر الميدانية، وتصميم نظم المتابعة والتقييم (MEAL). يمكنك تقديم طلب تدخل فوري عبر <a href="#/forms?id=consulting-inquiry-2026" style="color: #1E7E34; font-weight: 700; text-decoration: underline;">استمارة الاستشارات المؤسسية</a>.`,
-    answerEn: `We provide end-to-end consulting: readiness audits, operational SOPs, CHS certification coaching, MEAL framework design, and field evaluations.`
+    questionFr: 'Comment SHAT accompagne-t-elle les ONG dans la gouvernance et les systèmes ?',
+    answerAr: (lang) => `نقدم تدخلات استشارية متكاملة تشمل: تشخيص الجاهزية المؤسسية، إعداد ومراجعة الأدلة التشغيلية SOPs، تأهيل المنظمات للحصول على شهادة CHS، تدريب الكوادر الميدانية، وتصميم نظم المتابعة والتقييم (MEAL). يمكنك تقديم طلب تدخل فوري عبر <a href="#/${lang}/forms?id=consulting-inquiry-2026" style="color: #1E7E34; font-weight: 700; text-decoration: underline;">استمارة الاستشارات المؤسسية</a>.`,
+    answerEn: (lang) => `We provide end-to-end advisory interventions: institutional maturity audits, standard operating procedures (SOPs) development, CHS accreditation coaching, and MEAL system design. Request an advisory mission via the <a href="#/${lang}/forms?id=consulting-inquiry-2026" style="color: #1E7E34; font-weight: 700; text-decoration: underline;">Consulting Inquiry Form</a>.`,
+    answerFr: (lang) => `Nous déployons des missions d'assistance sur mesure : diagnostic organisationnel, rédaction de manuels SOP, accompagnement à la certification CHS et conception de systèmes MEAL. Déposez votre demande via le <a href="#/${lang}/forms?id=consulting-inquiry-2026" style="color: #1E7E34; font-weight: 700; text-decoration: underline;">Formulaire de Conseil Institutionnel</a>.`
   }
 ];
 
@@ -68,11 +96,10 @@ export function renderFaqSection(lang = 'ar') {
         <!-- Header -->
         <div style="text-align: center; margin-bottom: 40px;">
           <div style="display: inline-flex; align-items: center; gap: 8px; background: #E8F5E9; color: var(--shat-green, #1E7E34); padding: 5px 16px; border-radius: 999px; font-size: 0.84rem; font-weight: 800; margin-bottom: 12px;">
-            
-            <span>${txt('الأسئلة الأكثر تداولاً • إجابات واضحة ومباشرة', 'Frequently Asked Questions • Direct Answers', 'Foire Aux Questions')}</span>
+            <span>${txt('الأسئلة الأكثر تداولاً • إجابات واضحة ومباشرة', 'Frequently Asked Questions • Direct Answers', 'Foire Aux Questions • Réponses Claires')}</span>
           </div>
           <h2 style="font-size: 2rem; font-weight: 900; color: var(--shat-navy, #0B1E36); margin: 0 0 14px; line-height: 1.3;">
-            ${txt('كل ما تحتاج معرفته عن البرامج والشهادات والاستشارات', 'Everything You Need to Know About Our Programs', 'Tout Ce Que Vous Devez Savoir')}
+            ${txt('كل ما تحتاج معرفته عن البرامج والشهادات والاستشارات', 'Everything You Need to Know About Our Programs', 'Tout Ce Que Vous Devez Savoir sur Nos Formations')}
           </h2>
           <p style="font-size: 1rem; color: #475569; margin: 0;">
             ${txt(
@@ -86,14 +113,13 @@ export function renderFaqSection(lang = 'ar') {
         <!-- Live Instant Search Bar -->
         <div style="margin-bottom: 28px;">
           <div style="position: relative;">
-            <span style="position: absolute; ${isRtl ? 'right' : 'left'}: 16px; top: 50%; transform: translateY(-50%); font-size: 1.15rem; color: #94A3B8;"></span>
             <input
               type="text"
               id="faq-search-input"
-              placeholder="${txt('ابحث في الأسئلة الشائعة (مثال: شهادة، دفع، زووم، استشارة، شروط)...', 'Search FAQ by keyword (e.g. certificate, payment, zoom)...', 'Rechercher dans la FAQ...')}"
+              placeholder="${txt('ابحث في الأسئلة الشائعة (مثال: شهادة، دفع، زووم، استشارة، شروط)...', 'Search FAQ by keyword (e.g. certificate, payment, zoom)...', 'Rechercher dans la FAQ (ex: certificat, paiement, zoom)...')}"
               style="
                 width: 100%;
-                padding: 14px 44px;
+                padding: 14px 20px;
                 background: #FFFFFF;
                 border: 2px solid #E2E8F0;
                 border-radius: 12px;
@@ -176,7 +202,7 @@ export function renderFaqSection(lang = 'ar') {
             <h3 style="font-size: 1.15rem; font-weight: 800; margin: 0 0 6px;">${txt('هل لديك استفسار آخر لم تجد إجابته هنا؟', 'Still Have More Questions?', 'Vous Avez d\'Autres Questions ?')}</h3>
             <p style="font-size: 0.88rem; color: #CBD5E1; margin: 0;">${txt('فريق الاستشارات والتسجيل متواجد لمساعدتك والإجابة على أي تساؤل فوراً.', 'Our advisory team is available to assist you via instant WhatsApp chat.', 'Notre équipe est disponible pour vous assister via WhatsApp.')}</p>
           </div>
-          <a href="https://wa.me/972592879621?text=${encodeURIComponent('مرحباً شركة شات، لدي استفسار إضافي أود طرحه:')}" target="_blank" rel="noopener" class="btn-clean" style="
+          <a href="https://wa.me/972592879621?text=${encodeURIComponent(txt('مرحباً شركة شات، لدي استفسار إضافي أود طرحه:', 'Hello SHAT Company, I have an inquiry:', 'Bonjour Société SHAT, j\'ai une question :'))}" target="_blank" rel="noopener" class="btn-clean" style="
             background: #0F5132;
             color: #FFFFFF;
             font-weight: 800;
@@ -201,8 +227,9 @@ export function renderFaqSection(lang = 'ar') {
 
 function renderFaqItem(item, idx, lang) {
   const isRtl = lang === 'ar';
-  const q = isRtl ? item.questionAr : item.questionEn;
-  const a = isRtl ? item.answerAr : item.answerEn;
+  const q = lang === 'fr' ? (item.questionFr || item.questionEn) : (lang === 'en' ? item.questionEn : item.questionAr);
+  const aFn = lang === 'fr' ? (item.answerFr || item.answerEn) : (lang === 'en' ? item.answerEn : item.answerAr);
+  const a = typeof aFn === 'function' ? aFn(lang) : aFn;
 
   return `
     <div class="faq-item-card" data-category="${item.category}" style="
@@ -245,6 +272,7 @@ function renderFaqItem(item, idx, lang) {
         line-height: 1.75;
         border-top: 1px solid #F1F5F9;
         background: #FAFAFA;
+        text-align: ${isRtl ? 'right' : 'left'};
       ">
         <div style="padding-top: 16px;">
           ${a}

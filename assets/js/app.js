@@ -21,6 +21,7 @@ import { examEngine } from './tools/examEngine.js';
 
 class Application {
   constructor() {
+    window.__shat_app = this;
     initLoadingScreen();
     this.currentLang = localStorage.getItem('shat_platform_lang') || 'ar';
     this.init();
@@ -68,12 +69,14 @@ class Application {
     roleSimulator.bindEvents(this.currentLang);
   }
 
-  setLanguage(lang) {
+  setLanguage(lang, triggerRouter = true) {
     if (!['ar', 'en', 'fr'].includes(lang)) return;
     this.currentLang = lang;
     localStorage.setItem('shat_platform_lang', lang);
     this.applyLanguage(lang);
-    router.setLang(lang);
+    if (triggerRouter) {
+      router.setLang(lang);
+    }
     this.renderRoleSimulator();
     this.renderHeader();
     this.renderMobileDrawer();
@@ -99,9 +102,20 @@ class Application {
     if (topMotto && d.topBar) {
       topMotto.textContent = d.topBar.motto;
     }
-    const topWhatsapp = document.getElementById('top-bar-whatsapp');
-    if (topWhatsapp && d.topBar) {
-      topWhatsapp.textContent = d.topBar.whatsapp;
+    const topContacts = document.getElementById('top-bar-contacts');
+    if (topContacts) {
+      const formsTxt = lang === 'ar' ? 'الاستمارات المعتمدة' : (lang === 'fr' ? 'Formulaires Homologués' : 'Certified Forms');
+      const verifyTxt = lang === 'ar' ? 'التحقق من الشهادات' : (lang === 'fr' ? 'Vérification des Certificats' : 'Verify Certificates');
+      const waTxt = lang === 'ar' ? 'واتساب: +972 59 287 9621' : (lang === 'fr' ? 'WhatsApp : +972 59 287 9621' : 'WhatsApp: +972 59 287 9621');
+      topContacts.innerHTML = `
+        <a href="#/${lang}/forms" style="color: #4ADE80; font-weight: 700; text-decoration: none;">${formsTxt}</a>
+        <span style="opacity: 0.3;">|</span>
+        <a href="#/${lang}/verify" style="color: #FCD34D; font-weight: 700; text-decoration: none;">${verifyTxt}</a>
+        <span style="opacity: 0.3;">|</span>
+        <a href="https://wa.me/972592879621" target="_blank" rel="noopener" id="top-bar-whatsapp">${waTxt}</a>
+        <span style="opacity: 0.3;">|</span>
+        <a href="mailto:shat.company26@gmail.com">shat.company26@gmail.com</a>
+      `;
     }
   }
 
@@ -111,21 +125,22 @@ class Application {
     const nav = d.nav;
     const user = api.currentUser;
     const isRtl = this.currentLang === 'ar';
+    const lang = this.currentLang;
 
     // Desktop Navigation Links
     const navContainer = document.getElementById('site-desktop-nav');
     if (navContainer) {
       navContainer.innerHTML = `
-        <a href="#/home" class="nav-link">${nav.home}</a>
-        <a href="#/about" class="nav-link">${nav.about}</a>
-        <a href="#/services" class="nav-link">${nav.services}</a>
-        <a href="#/standards" class="nav-link">${nav.standards}</a>
-        <a href="#/projects" class="nav-link">${nav.projects || (this.currentLang === 'fr' ? 'Projets' : 'المشاريع')}</a>
-        <a href="#/toolkits" class="nav-link">${this.currentLang === 'fr' ? 'Outils' : (this.currentLang === 'en' ? 'Toolkits' : 'الأدلة والنماذج')}</a>
-        <a href="#/news" class="nav-link">${nav.news || (this.currentLang === 'fr' ? 'Actualités' : 'الأخبار')}</a>
-        <a href="#/academy" class="nav-link">${nav.academy}</a>
-        <a href="#/verify" class="nav-link">${this.currentLang === 'fr' ? 'Vérification' : (this.currentLang === 'en' ? 'Verify' : 'التحقق')}</a>
-        <a href="#/contact" class="nav-link">${nav.contact}</a>
+        <a href="#/${lang}/home" class="nav-link">${nav.home}</a>
+        <a href="#/${lang}/about" class="nav-link">${nav.about}</a>
+        <a href="#/${lang}/services" class="nav-link">${nav.services}</a>
+        <a href="#/${lang}/standards" class="nav-link">${nav.standards}</a>
+        <a href="#/${lang}/projects" class="nav-link">${nav.projects || (lang === 'fr' ? 'Projets' : (lang === 'en' ? 'Projects' : 'المشاريع'))}</a>
+        <a href="#/${lang}/toolkits" class="nav-link">${lang === 'fr' ? 'Outils' : (lang === 'en' ? 'Toolkits' : 'الأدلة والنماذج')}</a>
+        <a href="#/${lang}/news" class="nav-link">${nav.news || (lang === 'fr' ? 'Actualités' : (lang === 'en' ? 'News' : 'الأخبار'))}</a>
+        <a href="#/${lang}/academy" class="nav-link">${nav.academy}</a>
+        <a href="#/${lang}/verify" class="nav-link">${lang === 'fr' ? 'Vérification' : (lang === 'en' ? 'Verify' : 'التحقق')}</a>
+        <a href="#/${lang}/contact" class="nav-link">${nav.contact}</a>
       `;
     }
 
@@ -133,32 +148,32 @@ class Application {
     if (brandEl) brandEl.textContent = c.name;
     const subEl = document.getElementById('header-brand-sub');
     if (subEl) {
-      subEl.textContent = this.currentLang === 'ar' 
+      subEl.textContent = lang === 'ar' 
         ? c.nameEn 
-        : (this.currentLang === 'fr' ? 'SHAT Plateforme Institutionnelle' : 'SHAT Institutional Platform');
+        : (lang === 'fr' ? 'SHAT Plateforme Institutionnelle' : 'SHAT Institutional Platform');
     }
 
     // Dynamic Language Selector Label
-    const langLabel = this.currentLang === 'ar' 
+    const langLabel = lang === 'ar' 
       ? 'العربية' 
-      : (this.currentLang === 'fr' ? 'Français' : 'English');
+      : (lang === 'fr' ? 'Français' : 'English');
 
     // Language Dropdown HTML Component
     const langPickerHtml = `
       <div class="lang-switch-dropdown" style="position: relative; display: inline-block;">
-        <button id="btn-lang-selector" class="btn-clean btn-secondary btn-sm" style="display: flex; align-items: center; gap: 6px; font-weight: 700; padding: 6px 12px; border-radius: var(--radius-xs);" title="اختيار اللغة / Select Language / Choisir la langue">
+        <button id="btn-lang-selector" class="btn-clean btn-secondary btn-sm" style="display: flex; align-items: center; gap: 6px; font-weight: 700; padding: 6px 12px; border-radius: var(--radius-xs);" title="${lang === 'ar' ? 'اختيار اللغة' : (lang === 'fr' ? 'Choisir la langue' : 'Select Language')}">
           <span style="display: flex; align-items: center;">${icons.globe('lang-globe', 16)}</span>
           <span>${langLabel}</span>
           <span style="display:inline-flex; align-items:center; opacity: 0.7;">${icons.chevronDown('', 12)}</span>
         </button>
         <div id="lang-dropdown-menu" style="display: none; position: absolute; top: calc(100% + 4px); ${isRtl ? 'left: 0;' : 'right: 0;'} background: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-xs); box-shadow: var(--shadow-md); z-index: 1000; min-width: 140px; overflow: hidden; padding: 4px 0;">
-          <button class="btn-clean lang-option-btn ${this.currentLang === 'ar' ? 'active' : ''}" data-lang="ar" style="width: 100%; text-align: ${isRtl ? 'right' : 'left'}; padding: 8px 14px; font-size: 0.85rem; font-weight: ${this.currentLang === 'ar' ? '800' : '600'}; color: ${this.currentLang === 'ar' ? 'var(--shat-green)' : 'var(--shat-navy)'}; display: flex; align-items: center; gap: 8px; border: none; background: ${this.currentLang === 'ar' ? 'var(--bg-subtle)' : 'transparent'};">
+          <button class="btn-clean lang-option-btn ${lang === 'ar' ? 'active' : ''}" data-lang="ar" style="width: 100%; text-align: ${isRtl ? 'right' : 'left'}; padding: 8px 14px; font-size: 0.85rem; font-weight: ${lang === 'ar' ? '800' : '600'}; color: ${lang === 'ar' ? 'var(--shat-green)' : 'var(--shat-navy)'}; display: flex; align-items: center; gap: 8px; border: none; background: ${lang === 'ar' ? 'var(--bg-subtle)' : 'transparent'};">
             <span>AR</span> <span>العربية</span>
           </button>
-          <button class="btn-clean lang-option-btn ${this.currentLang === 'en' ? 'active' : ''}" data-lang="en" style="width: 100%; text-align: ${isRtl ? 'right' : 'left'}; padding: 8px 14px; font-size: 0.85rem; font-weight: ${this.currentLang === 'en' ? '800' : '600'}; color: ${this.currentLang === 'en' ? 'var(--shat-green)' : 'var(--shat-navy)'}; display: flex; align-items: center; gap: 8px; border: none; background: ${this.currentLang === 'en' ? 'var(--bg-subtle)' : 'transparent'};">
+          <button class="btn-clean lang-option-btn ${lang === 'en' ? 'active' : ''}" data-lang="en" style="width: 100%; text-align: ${isRtl ? 'right' : 'left'}; padding: 8px 14px; font-size: 0.85rem; font-weight: ${lang === 'en' ? '800' : '600'}; color: ${lang === 'en' ? 'var(--shat-green)' : 'var(--shat-navy)'}; display: flex; align-items: center; gap: 8px; border: none; background: ${lang === 'en' ? 'var(--bg-subtle)' : 'transparent'};">
             <span>EN</span> <span>English</span>
           </button>
-          <button class="btn-clean lang-option-btn ${this.currentLang === 'fr' ? 'active' : ''}" data-lang="fr" style="width: 100%; text-align: ${isRtl ? 'right' : 'left'}; padding: 8px 14px; font-size: 0.85rem; font-weight: ${this.currentLang === 'fr' ? '800' : '600'}; color: ${this.currentLang === 'fr' ? 'var(--shat-green)' : 'var(--shat-navy)'}; display: flex; align-items: center; gap: 8px; border: none; background: ${this.currentLang === 'fr' ? 'var(--bg-subtle)' : 'transparent'};">
+          <button class="btn-clean lang-option-btn ${lang === 'fr' ? 'active' : ''}" data-lang="fr" style="width: 100%; text-align: ${isRtl ? 'right' : 'left'}; padding: 8px 14px; font-size: 0.85rem; font-weight: ${lang === 'fr' ? '800' : '600'}; color: ${lang === 'fr' ? 'var(--shat-green)' : 'var(--shat-navy)'}; display: flex; align-items: center; gap: 8px; border: none; background: ${lang === 'fr' ? 'var(--bg-subtle)' : 'transparent'};">
             <span>FR</span> <span>Français</span>
           </button>
         </div>
@@ -168,30 +183,39 @@ class Application {
     // Header Actions (Right Side)
     const headerActions = document.getElementById('site-header-actions');
     if (headerActions) {
+      const searchTitle = lang === 'ar' ? 'البحث الشامل (Ctrl+K)' : (lang === 'fr' ? 'Recherche Globale (Ctrl+K)' : 'Global Search (Ctrl+K)');
+      const searchLabel = isRtl ? 'بحث...' : (lang === 'fr' ? 'Recherche...' : 'Search...');
+
       if (user) {
-        let portalRoute = '#/student';
-        let portalLabel = this.currentLang === 'ar' ? 'لوحة المتدرب' : (this.currentLang === 'fr' ? 'Portail Stagiaire' : 'Trainee Portal');
+        let portalRoute = `#/${lang}/student`;
+        let portalLabel = lang === 'ar' ? 'لوحة المتدرب' : (lang === 'fr' ? 'Portail Stagiaire' : 'Trainee Portal');
         if (user.role === 'teacher') {
-          portalRoute = '#/teacher';
-          portalLabel = this.currentLang === 'ar' ? 'بوابة المدرب' : (this.currentLang === 'fr' ? 'Portail Formateur' : 'Trainer Portal');
+          portalRoute = `#/${lang}/teacher`;
+          portalLabel = lang === 'ar' ? 'بوابة المدرب' : (lang === 'fr' ? 'Portail Formateur' : 'Trainer Portal');
         } else if (user.role === 'admin') {
-          portalRoute = '#/admin';
-          portalLabel = this.currentLang === 'ar' ? 'المركز الإداري' : (this.currentLang === 'fr' ? 'Centre Admin' : 'Admin Center');
+          portalRoute = `#/${lang}/admin`;
+          portalLabel = lang === 'ar' ? 'المركز الإداري' : (lang === 'fr' ? 'Centre Admin' : 'Admin Center');
         }
 
-        const logoutLabel = this.currentLang === 'ar' ? 'خروج' : (this.currentLang === 'fr' ? 'Quitter' : 'Logout');
-        const notifTooltip = this.currentLang === 'ar' ? 'التنبيهات المؤسسية' : (this.currentLang === 'fr' ? 'Notifications' : 'Notifications');
+        const logoutLabel = lang === 'ar' ? 'خروج' : (lang === 'fr' ? 'Quitter' : 'Logout');
+        const notifTooltip = lang === 'ar' ? 'التنبيهات المؤسسية' : (lang === 'fr' ? 'Notifications' : 'Notifications');
 
         const searchBtnHtml = `
-          <button id="btn-spotlight-search" class="btn-clean btn-sm" style="display: flex; align-items: center; gap: 5px; padding: 6px 10px; background: var(--bg-subtle); border: 1px solid var(--border-light); border-radius: var(--radius-xs); color: var(--shat-navy); font-weight: 700; cursor: pointer; flex-shrink: 0;" title="البحث الشامل (Ctrl+K)">
+          <button id="btn-spotlight-search" class="btn-clean btn-sm" style="display: flex; align-items: center; gap: 5px; padding: 6px 10px; background: var(--bg-subtle); border: 1px solid var(--border-light); border-radius: var(--radius-xs); color: var(--shat-navy); font-weight: 700; cursor: pointer; flex-shrink: 0;" title="${searchTitle}">
             <span style="display: flex; align-items: center; color: var(--shat-navy);">${icons.search('search-icon', 15)}</span>
-            <span class="search-text-label" style="font-size: 0.80rem;">${isRtl ? 'بحث...' : 'Search...'}</span>
+            <span class="search-text-label" style="font-size: 0.80rem;">${searchLabel}</span>
             <kbd class="search-kbd-hint" style="font-size: 0.65rem; padding: 1px 4px; background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 3px; font-family: var(--font-mono); color: var(--text-muted);">Ctrl+K</kbd>
           </button>
         `;
 
-        const shortDisplayName = (user.fullNameAr || user.username || '').split(' ')[0] + ' ' + ((user.fullNameAr || user.username || '').split(' ')[1] || '');
-        const roleBadge = user.role === 'admin' ? 'إشراف عام' : (user.role === 'teacher' ? 'مدرب معتمد' : 'متدرب');
+        const rawName = (lang === 'ar' ? user.fullNameAr : (user.fullNameEn || user.fullNameAr || user.username)) || '';
+        const nameParts = rawName.split(' ');
+        const shortDisplayName = nameParts[0] + (nameParts[1] ? ' ' + nameParts[1] : '');
+        const roleBadge = lang === 'ar'
+          ? (user.role === 'admin' ? 'إشراف عام' : (user.role === 'teacher' ? 'مدرب معتمد' : 'متدرب'))
+          : (lang === 'fr'
+              ? (user.role === 'admin' ? 'Superviseur' : (user.role === 'teacher' ? 'Formateur' : 'Stagiaire'))
+              : (user.role === 'admin' ? 'Supervisor' : (user.role === 'teacher' ? 'Instructor' : 'Trainee')));
 
         headerActions.innerHTML = `
           ${searchBtnHtml}
@@ -207,9 +231,9 @@ class Application {
 
           <!-- User Identity Pill & Direct Logout Button (Always Visible) -->
           <div class="user-header-auth-group" style="display: flex; align-items: center; gap: 6px; flex-shrink: 0;">
-            <a href="${portalRoute}" class="btn-clean btn-sm user-portal-pill" style="font-weight: 700; background: var(--shat-green-tint); color: var(--shat-green); border: 1px solid var(--shat-green-border); padding: 5px 10px; border-radius: var(--radius-xs); display: inline-flex; align-items: center; gap: 6px; text-decoration: none;" title="${user.fullNameAr || user.username} - ${portalLabel}">
+            <a href="${portalRoute}" class="btn-clean btn-sm user-portal-pill" style="font-weight: 700; background: var(--shat-green-tint); color: var(--shat-green); border: 1px solid var(--shat-green-border); padding: 5px 10px; border-radius: var(--radius-xs); display: inline-flex; align-items: center; gap: 6px; text-decoration: none;" title="${rawName} - ${portalLabel}">
               <span class="user-avatar-circle" style="width: 22px; height: 22px; border-radius: 50%; background: var(--shat-green); color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 800;">
-                ${(user.fullNameAr || user.username || 'U')[0]}
+                ${(rawName || 'U')[0]}
               </span>
               <span class="user-short-name" style="font-size: 0.82rem; white-space: nowrap; max-width: 120px; overflow: hidden; text-overflow: ellipsis;">${shortDisplayName}</span>
               <span class="badge" style="background: #FFFFFF; color: var(--shat-navy); font-size: 0.68rem; padding: 1px 6px; border-radius: 10px; font-weight: 800;">${roleBadge}</span>
@@ -234,15 +258,15 @@ class Application {
         if (logoutBtn) {
           logoutBtn.onclick = async () => {
             await api.logout();
-            const msg = this.currentLang === 'ar' 
+            const msg = lang === 'ar' 
               ? 'تم تسجيل الخروج بنجاح من المنصة.' 
-              : (this.currentLang === 'fr' ? 'Déconnexion réussie.' : 'Successfully logged out.');
+              : (lang === 'fr' ? 'Déconnexion réussie.' : 'Successfully logged out.');
             showToast(msg, 'info');
             this.renderRoleSimulator();
             this.renderHeader();
             this.renderMobileDrawer();
             this.renderMobileBottomNav();
-            window.location.hash = '#/home';
+            window.location.hash = `#/${lang}/home`;
           };
         }
 
@@ -263,9 +287,9 @@ class Application {
       } else {
         // Visitor Navigation Header
         const searchBtnHtml = `
-          <button id="btn-spotlight-search" class="btn-clean btn-sm" style="display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: var(--bg-subtle); border: 1px solid var(--border-light); border-radius: var(--radius-xs); color: var(--shat-navy); font-weight: 700; cursor: pointer;" title="البحث الشامل (Ctrl+K)">
+          <button id="btn-spotlight-search" class="btn-clean btn-sm" style="display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: var(--bg-subtle); border: 1px solid var(--border-light); border-radius: var(--radius-xs); color: var(--shat-navy); font-weight: 700; cursor: pointer;" title="${searchTitle}">
             <span style="display: flex; align-items: center;">${icons.search('search-icon', 15)}</span>
-            <span style="font-size: 0.82rem;">${isRtl ? 'بحث...' : 'Search...'}</span>
+            <span style="font-size: 0.82rem;">${searchLabel}</span>
             <kbd style="font-size: 0.65rem; padding: 1px 5px; background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 3px; font-family: var(--font-mono); color: var(--text-muted);">Ctrl+K</kbd>
           </button>
         `;
@@ -273,10 +297,10 @@ class Application {
         headerActions.innerHTML = `
           ${searchBtnHtml}
           ${langPickerHtml}
-          <a href="#/login" class="btn-clean btn-sm" style="background: #FFFFFF; border: 1px solid var(--border-light); color: var(--shat-navy); font-weight: 700;">
+          <a href="#/${lang}/login" class="btn-clean btn-sm" style="background: #FFFFFF; border: 1px solid var(--border-light); color: var(--shat-navy); font-weight: 700;">
             ${nav.login}
           </a>
-          <a href="#/contact" class="btn-clean btn-primary btn-sm">
+          <a href="#/${lang}/contact" class="btn-clean btn-primary btn-sm">
             ${nav.requestConsultation}
           </a>
           <button class="mobile-toggle" id="btn-mobile-menu" aria-label="Menu">
@@ -375,31 +399,31 @@ class Application {
           <button class="btn-clean mobile-lang-btn ${this.currentLang === 'fr' ? 'active' : ''}" data-lang="fr" style="flex: 1; padding: 7px 4px; font-size: 0.82rem; font-weight: 700; border-radius: var(--radius-xs); border: 1px solid ${this.currentLang === 'fr' ? 'var(--shat-green)' : 'var(--border-light)'}; background: ${this.currentLang === 'fr' ? 'var(--shat-green-tint)' : '#FFFFFF'}; color: ${this.currentLang === 'fr' ? 'var(--shat-green)' : 'var(--shat-navy)'};">FR Français</button>
         </div>
 
-        <a href="#/home" class="nav-link">${nav.home}</a>
-        <a href="#/about" class="nav-link">${nav.about}</a>
-        <a href="#/services" class="nav-link">${nav.services}</a>
-        <a href="#/standards" class="nav-link">${nav.standards}</a>
-        <a href="#/projects" class="nav-link">${nav.projects || (this.currentLang === 'fr' ? 'Projets' : 'المشاريع')}</a>
-        <a href="#/toolkits" class="nav-link" style="color: var(--shat-navy); font-weight: 700;">${this.currentLang === 'fr' ? 'Outils & Modèles' : (this.currentLang === 'en' ? 'Toolkits & Templates' : 'الأدلة والنماذج الميدانية')}</a>
-        <a href="#/news" class="nav-link">${nav.news || (this.currentLang === 'fr' ? 'Actualités' : 'الأخبار')}</a>
-        <a href="#/academy" class="nav-link">${nav.academy}</a>
-        <a href="#/forms" class="nav-link" style="color: var(--shat-green); font-weight: 800;">${this.currentLang === 'ar' ? 'استمارات التسجيل المعتمدة' : (this.currentLang === 'fr' ? 'Formulaires d’Inscription' : 'Official Forms')}</a>
-        <a href="#/verify" class="nav-link" style="color: #10B981; font-weight: 800;">${this.currentLang === 'ar' ? 'التحقق من الشهادات والاعتمادات' : (this.currentLang === 'fr' ? 'Vérifier Certificats' : 'Verify Certificates')}</a>
-        <a href="#/contact" class="nav-link">${nav.contact}</a>
+        <a href="#/${this.currentLang}/home" class="nav-link">${nav.home}</a>
+        <a href="#/${this.currentLang}/about" class="nav-link">${nav.about}</a>
+        <a href="#/${this.currentLang}/services" class="nav-link">${nav.services}</a>
+        <a href="#/${this.currentLang}/standards" class="nav-link">${nav.standards}</a>
+        <a href="#/${this.currentLang}/projects" class="nav-link">${nav.projects || (this.currentLang === 'fr' ? 'Projets' : (this.currentLang === 'en' ? 'Projects' : 'المشاريع'))}</a>
+        <a href="#/${this.currentLang}/toolkits" class="nav-link" style="color: var(--shat-navy); font-weight: 700;">${this.currentLang === 'fr' ? 'Outils & Modèles' : (this.currentLang === 'en' ? 'Toolkits & Templates' : 'الأدلة والنماذج الميدانية')}</a>
+        <a href="#/${this.currentLang}/news" class="nav-link">${nav.news || (this.currentLang === 'fr' ? 'Actualités' : (this.currentLang === 'en' ? 'News' : 'الأخبار'))}</a>
+        <a href="#/${this.currentLang}/academy" class="nav-link">${nav.academy}</a>
+        <a href="#/${this.currentLang}/forms" class="nav-link" style="color: var(--shat-green); font-weight: 800;">${this.currentLang === 'ar' ? 'استمارات التسجيل المعتمدة' : (this.currentLang === 'fr' ? 'Formulaires d’Inscription' : 'Official Forms')}</a>
+        <a href="#/${this.currentLang}/verify" class="nav-link" style="color: #10B981; font-weight: 800;">${this.currentLang === 'ar' ? 'التحقق من الشهادات والاعتمادات' : (this.currentLang === 'fr' ? 'Vérifier Certificats' : 'Verify Certificates')}</a>
+        <a href="#/${this.currentLang}/contact" class="nav-link">${nav.contact}</a>
         
         <button type="button" id="btn-mobile-drawer-search" class="btn-clean" style="margin: 8px 0; background: var(--bg-subtle); color: var(--shat-navy); font-weight: 800; width: 100%; justify-content: center; padding: 10px 14px; border-radius: var(--radius-xs); border: 1px solid var(--border-light); cursor: pointer; display: flex; align-items: center; gap: 8px;">
           <span style="display: flex; align-items: center;">${icons.search('mob-search-icon', 16)}</span>
-          <span>${this.currentLang === 'ar' ? 'البحث الذكي الشامل (Ctrl+K)' : 'Spotlight Search (Ctrl+K)'}</span>
+          <span>${this.currentLang === 'ar' ? 'البحث الذكي الشامل (Ctrl+K)' : (this.currentLang === 'fr' ? 'Recherche Intelligente (Ctrl+K)' : 'Spotlight Search (Ctrl+K)')}</span>
         </button>
         <div style="height: 1px; background: var(--border-light); margin: 6px 0;"></div>
         ${user ? `
-          <a href="${user.role === 'teacher' ? '#/teacher' : (user.role === 'admin' ? '#/admin' : '#/student')}" class="nav-link" style="color: var(--shat-green); font-weight: 800;">
-            ${user.fullNameAr || user.username} (${user.roleTitle || user.role})
+          <a href="${user.role === 'teacher' ? `#/${this.currentLang}/teacher` : (user.role === 'admin' ? `#/${this.currentLang}/admin` : `#/${this.currentLang}/student`)}" class="nav-link" style="color: var(--shat-green); font-weight: 800;">
+            ${(this.currentLang === 'ar' ? user.fullNameAr : (user.fullNameEn || user.fullNameAr || user.username))} (${user.roleTitle || user.role})
           </a>
           ${(user.role === 'admin' || user.role === 'supervisor') ? `
             <button type="button" id="btn-mobile-drawer-customizer" class="btn-clean" style="margin-top: 6px; background: var(--shat-navy); color: #FFFFFF; font-weight: 700; width: 100%; justify-content: center; padding: 9px 12px; border-radius: var(--radius-xs); border: 1px solid rgba(255,255,255,0.2); cursor: pointer; display: flex; align-items: center; gap: 6px;">
               <span style="display: flex; align-items: center;">${icons.settings('mob-icon', 15)}</span>
-              <span>${this.currentLang === 'ar' ? 'تخصيص المنصة والمحتوى' : 'Platform Customizer'}</span>
+              <span>${this.currentLang === 'ar' ? 'تخصيص المنصة والمحتوى' : (this.currentLang === 'fr' ? 'Personnalisation du Site' : 'Platform Customizer')}</span>
             </button>
           ` : ''}
           <button type="button" id="btn-mobile-drawer-logout" class="btn-clean" style="margin-top: 8px; background: #DC2626; color: #FFFFFF; font-weight: 700; width: 100%; justify-content: center; padding: 9px 12px; border-radius: var(--radius-xs); border: none; cursor: pointer; display: flex; align-items: center; gap: 6px;">
@@ -407,11 +431,11 @@ class Application {
             <span>${this.currentLang === 'ar' ? 'تسجيل الخروج' : (this.currentLang === 'fr' ? 'Se déconnecter' : 'Logout')}</span>
           </button>
         ` : `
-          <a href="#/login" class="nav-link" style="color: var(--shat-navy); display: flex; align-items: center; gap: 6px;">
+          <a href="#/${this.currentLang}/login" class="nav-link" style="color: var(--shat-navy); display: flex; align-items: center; gap: 6px;">
             <span style="display: flex; align-items: center;">${icons.key('mob-icon', 15)}</span>
             <span>${nav.login}</span>
           </a>
-          <a href="#/contact" class="btn-clean btn-primary btn-sm" style="margin-top: 6px;">${nav.requestConsultation}</a>
+          <a href="#/${this.currentLang}/contact" class="btn-clean btn-primary btn-sm" style="margin-top: 6px;">${nav.requestConsultation}</a>
         `}
       `;
 
@@ -430,7 +454,7 @@ class Application {
           this.renderHeader();
           this.renderMobileDrawer();
           this.renderMobileBottomNav();
-          window.location.hash = '#/home';
+          window.location.hash = `#/${this.currentLang}/home`;
         };
       }
 
@@ -441,7 +465,7 @@ class Application {
           const drawer = document.getElementById('mobile-drawer-nav');
           if (drawer) drawer.style.display = 'none';
           if (window.openSiteCustomizer) {
-            window.openSiteCustomizer();
+            window.openSiteCustomizer(this.currentLang);
           } else {
             showToast('أداة تخصيص المنصة جاهزة للمشرفين', 'info');
           }
@@ -478,88 +502,89 @@ class Application {
     const d = content[this.currentLang] || content.ar;
     const b = d.bottomNav || content.ar.bottomNav;
     const user = api.currentUser;
+    const lang = this.currentLang;
 
     if (!user) {
       // Guest Bottom Navigation: Ergonomic Thumb Reach
       bottomNav.innerHTML = `
-        <a href="#/home" class="mobile-bottom-link">
+        <a href="#/${lang}/home" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">${icons.home('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.home}</span>
         </a>
-        <a href="#/academy" class="mobile-bottom-link">
+        <a href="#/${lang}/academy" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">${icons.academy('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.academy}</span>
         </a>
-        <a href="#/forms" class="mobile-bottom-link" style="color: var(--shat-green);">
+        <a href="#/${lang}/forms" class="mobile-bottom-link" style="color: var(--shat-green);">
           <span class="mobile-bottom-icon">${icons.form('mob-svg-icon', 19)}</span>
-          <span class="mobile-bottom-label">${this.currentLang === 'ar' ? 'الاستمارات' : 'Forms'}</span>
+          <span class="mobile-bottom-label">${lang === 'ar' ? 'الاستمارات' : (lang === 'fr' ? 'Formulaires' : 'Forms')}</span>
         </a>
-        <a href="#/verify" class="mobile-bottom-link" style="color: #10B981;">
+        <a href="#/${lang}/verify" class="mobile-bottom-link" style="color: #10B981;">
           <span class="mobile-bottom-icon">${icons.checkCircle('mob-svg-icon', 19)}</span>
-          <span class="mobile-bottom-label">${this.currentLang === 'ar' ? 'الشهادات' : 'Verify'}</span>
+          <span class="mobile-bottom-label">${lang === 'ar' ? 'الشهادات' : (lang === 'fr' ? 'Vérifier' : 'Verify')}</span>
         </a>
-        <a href="#/login" class="mobile-bottom-link">
+        <a href="#/${lang}/login" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">${icons.key('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.login}</span>
         </a>
       `;
     } else if (user.role === 'student') {
       bottomNav.innerHTML = `
-        <a href="#/home" class="mobile-bottom-link">
+        <a href="#/${lang}/home" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">${icons.home('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.home}</span>
         </a>
-        <a href="#/academy" class="mobile-bottom-link">
+        <a href="#/${lang}/academy" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">${icons.book('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.courses}</span>
         </a>
-        <a href="#/student" class="mobile-bottom-link">
+        <a href="#/${lang}/student" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">${icons.grid('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.myDashboard}</span>
         </a>
-        <a href="#/course/shat-chs-master" class="mobile-bottom-link">
+        <a href="#/${lang}/course/shat-chs-master" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">${icons.award('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.myRoom}</span>
         </a>
-        <a href="#/student" class="mobile-bottom-link">
+        <a href="#/${lang}/student" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">${icons.user('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.profile}</span>
         </a>
       `;
     } else if (user.role === 'teacher') {
       bottomNav.innerHTML = `
-        <a href="#/home" class="mobile-bottom-link">
+        <a href="#/${lang}/home" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">${icons.home('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.home}</span>
         </a>
-        <a href="#/teacher" class="mobile-bottom-link">
+        <a href="#/${lang}/teacher" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">${icons.book('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.courses}</span>
         </a>
-        <a href="#/teacher" class="mobile-bottom-link">
+        <a href="#/${lang}/teacher" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">${icons.clipboardCheck('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.grading}</span>
         </a>
-        <a href="#/academy" class="mobile-bottom-link">
+        <a href="#/${lang}/academy" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">${icons.academy('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.academy}</span>
         </a>
       `;
     } else if (user.role === 'admin') {
       bottomNav.innerHTML = `
-        <a href="#/home" class="mobile-bottom-link">
+        <a href="#/${lang}/home" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">${icons.home('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.home}</span>
         </a>
-        <a href="#/admin" class="mobile-bottom-link">
+        <a href="#/${lang}/admin" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">${icons.fileText('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.content}</span>
         </a>
-        <a href="#/admin" class="mobile-bottom-link">
+        <a href="#/${lang}/admin" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">${icons.users('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.requests}</span>
         </a>
-        <a href="#/admin" class="mobile-bottom-link">
+        <a href="#/${lang}/admin" class="mobile-bottom-link">
           <span class="mobile-bottom-icon">${icons.shield('mob-svg-icon', 19)}</span>
           <span class="mobile-bottom-label">${b.admin}</span>
         </a>
@@ -572,6 +597,7 @@ class Application {
     const c = d.company;
     const nav = d.nav;
     const f = d.footer || content.ar.footer;
+    const lang = this.currentLang;
 
     const footerContainer = document.getElementById('site-footer-content');
     if (footerContainer) {
@@ -597,22 +623,22 @@ class Application {
           <div>
             <div class="footer-title">${f.sectionsTitle}</div>
             <ul class="footer-links">
-              <li><a href="#/home">${nav.home}</a></li>
-              <li><a href="#/about">${nav.about}</a></li>
-              <li><a href="#/services">${nav.services}</a></li>
-              <li><a href="#/standards">${nav.standards}</a></li>
-              <li><a href="#/projects">${nav.projects || (this.currentLang === 'fr' ? 'Projets' : 'المشاريع')}</a></li>
-              <li><a href="#/news">${nav.news || (this.currentLang === 'fr' ? 'Actualités' : 'الأخبار')}</a></li>
+              <li><a href="#/${lang}/home">${nav.home}</a></li>
+              <li><a href="#/${lang}/about">${nav.about}</a></li>
+              <li><a href="#/${lang}/services">${nav.services}</a></li>
+              <li><a href="#/${lang}/standards">${nav.standards}</a></li>
+              <li><a href="#/${lang}/projects">${nav.projects || (lang === 'fr' ? 'Projets' : (lang === 'en' ? 'Projects' : 'المشاريع'))}</a></li>
+              <li><a href="#/${lang}/news">${nav.news || (lang === 'fr' ? 'Actualités' : (lang === 'en' ? 'News' : 'الأخبار'))}</a></li>
             </ul>
           </div>
 
           <div>
             <div class="footer-title">${f.academyTitle}</div>
             <ul class="footer-links">
-              <li><a href="#/academy">${nav.academy}</a></li>
-              <li><a href="#/delivery">${nav.delivery}</a></li>
-              <li><a href="#/contact">${nav.contact}</a></li>
-              <li><a href="#/admin">${nav.admin}</a></li>
+              <li><a href="#/${lang}/academy">${nav.academy}</a></li>
+              <li><a href="#/${lang}/delivery">${nav.delivery}</a></li>
+              <li><a href="#/${lang}/contact">${nav.contact}</a></li>
+              <li><a href="#/${lang}/admin">${nav.admin}</a></li>
               <li><a href="https://wa.me/972592879621" target="_blank" rel="noopener">${f.techSupport}</a></li>
             </ul>
           </div>
@@ -623,15 +649,14 @@ class Application {
               <li style="color: #CBD5E1;">${f.emailLabel} <a href="mailto:${c.email}" style="color: #FFFFFF;">${c.email}</a></li>
               <li style="color: #CBD5E1;">${f.phoneLabel} <a href="https://wa.me/972592879621" target="_blank" rel="noopener" style="color: #4ADE80;">${c.phone}</a></li>
               <li style="margin-top: 10px;">
-                <a href="#/contact" class="btn-clean btn-green btn-sm" style="width: 100%;">
+                <a href="#/${lang}/contact" class="btn-clean btn-green btn-sm" style="width: 100%;">
                   <span>${f.requestConsultBtn}</span>
-                  <span style="display:inline-flex; align-items:center;">${this.currentLang === 'ar' ? icons.arrowLeft('icon-inline', 14) : icons.arrowRight('icon-inline', 14)}</span>
+                  <span style="display:inline-flex; align-items:center;">${lang === 'ar' ? icons.arrowLeft('icon-inline', 14) : icons.arrowRight('icon-inline', 14)}</span>
                 </a>
               </li>
             </ul>
           </div>
         </div>
-
         <div class="footer-bottom" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
           <div>© ${c.year} ${c.name} (${c.nameEn}). ${f.rights}</div>
           <div style="display: flex; gap: 12px; align-items: center;">
@@ -851,6 +876,52 @@ class Application {
     window.openPermissionGuard = (actionTitle = '') => {
       const guard = document.getElementById('modal-permission-guard');
       if (!guard) return;
+
+      const lang = this.currentLang || 'ar';
+      const isAr = lang === 'ar';
+      const txt = (ar, en, fr) => (lang === 'fr' ? fr || en : (lang === 'en' ? en : ar));
+
+      const titleEl = guard.querySelector('.modal-top h3');
+      if (titleEl) {
+        titleEl.textContent = txt('تصريح الوصول مقيّد • مساحة تدريبية معتمدة', 'Access Restricted • Accredited Training Space', 'Accès Restreint • Espace de Formation Homologué');
+      }
+      const closeBtn = document.getElementById('modal-permission-guard-close');
+      if (closeBtn) closeBtn.setAttribute('aria-label', txt('إغلاق', 'Close', 'Fermer'));
+
+      const h4 = guard.querySelector('h4');
+      if (h4) {
+        h4.textContent = actionTitle
+          ? `${txt('تنبيه وصول:', 'Access Notice:', 'Avis d’Accès :')} ${actionTitle}`
+          : txt('هذه المادة مخصصة للكوادر والمتدربين المسجلين', 'This content is reserved for enrolled trainees & staff', 'Ce contenu est réservé aux apprenants et cadres inscrits');
+      }
+
+      const p = guard.querySelector('p');
+      if (p) {
+        p.textContent = txt(
+          'وفق سياسات حوكمة البيانات المعتمدة في شركة شات، يتطلب تحميل المواد التدريبية ودخول قاعات المحاضرات حساباً مفصولاً ونشطاً في الأكاديمية. يمكنك تسجيل الدخول بحسابك أو استخدام المحاكي الفوري للتجربة.',
+          'Under SHAT data governance policies, downloading training materials and accessing lecture rooms requires an active academy account. Log in or use the 1-click simulator to test.',
+          'Conformément aux politiques de gouvernance SHAT, le téléchargement des supports et l’accès aux salles requièrent un compte actif. Connectez-vous ou testez avec le simulateur instantané.'
+        );
+      }
+
+      const goLogin = document.getElementById('btn-guard-go-login');
+      if (goLogin) {
+        goLogin.href = `#/${lang}/login`;
+        const span = goLogin.querySelector('span');
+        if (span) span.textContent = txt('تسجيل الدخول بحساب معتمد', 'Sign in with Accredited Account', 'Se Connecter avec un Compte Homologué');
+      }
+
+      const instantStudent = document.getElementById('btn-guard-instant-student');
+      if (instantStudent) {
+        const span = instantStudent.querySelector('span');
+        if (span) span.textContent = txt('الدخول الفوري بصفة متدرب تجريبي', 'Instant Demo Student Access (1-Click)', 'Accès Immédiat en tant qu’Apprenant Démo');
+      }
+
+      const dismiss = document.getElementById('btn-guard-dismiss');
+      if (dismiss) {
+        dismiss.textContent = txt('إلغاء والمتابعة كزائر', 'Cancel & Continue as Visitor', 'Annuler et Continuer comme Visiteur');
+      }
+
       guard.classList.add('open');
     };
 
@@ -878,13 +949,15 @@ class Application {
           localStorage.setItem('shat_current_user', JSON.stringify(studentRole.user));
           api.currentUser = studentRole.user;
           guardModal.classList.remove('open');
+          const lang = this.currentLang || 'ar';
+          const txt = (ar, en, fr) => (lang === 'fr' ? fr || en : (lang === 'en' ? en : ar));
           showToast(
-            this.currentLang === 'ar' ? 'تم الدخول الفوري بصفة متدرب معتمد.' : 'Instant student access granted.',
+            txt('تم الدخول الفوري بصفة متدرب معتمد.', 'Instant student access granted.', 'Accès étudiant instantané accordé.'),
             'success'
           );
           window.dispatchEvent(new CustomEvent('shat:auth-updated'));
           setTimeout(() => {
-            window.location.hash = '#/student';
+            window.location.hash = `#/${lang}/student`;
           }, 300);
         }
       };
