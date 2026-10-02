@@ -6,7 +6,11 @@ import { examEngine } from '../tools/examEngine.js';
 import { icons } from '../icons.js';
 
 export function renderStudentDashboardView(lang = 'ar') {
-  const user = api.currentUser;
+  const storedUser = JSON.parse(localStorage.getItem('shat_current_user') || 'null');
+  const user = api.currentUser || storedUser;
+  if (!api.currentUser && storedUser) {
+    api.currentUser = storedUser;
+  }
   const isRtl = lang === 'ar';
   const arrowIcon = isRtl ? icons.arrowLeft('icon-inline', 15) : icons.arrowRight('icon-inline', 15);
   const arrow = isRtl ? '←' : '→';

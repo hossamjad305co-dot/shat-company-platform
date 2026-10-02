@@ -305,7 +305,11 @@ export async function bindTeacherEvents() {
   };
 
   // Verify auth
-  const currentUser = api.currentUser;
+  const storedUser = JSON.parse(localStorage.getItem('shat_current_user') || 'null');
+  const currentUser = api.currentUser || storedUser;
+  if (!api.currentUser && storedUser) {
+    api.currentUser = storedUser;
+  }
   if (!currentUser || (currentUser.role !== 'teacher' && currentUser.role !== 'admin')) {
     window.location.hash = '#/login';
     return;
