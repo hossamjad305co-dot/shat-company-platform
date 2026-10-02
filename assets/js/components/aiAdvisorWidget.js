@@ -143,40 +143,9 @@ You can launch the diagnostic tool right now to receive a customized maturity re
   ],
 
   init(lang = 'ar') {
-    if (document.getElementById('shat-ai-advisor-container')) return;
-
-    const isAr = lang === 'ar';
-    const txt = (ar, en, fr) => (lang === 'fr' ? fr || en : (lang === 'en' ? en : ar));
-
-    // Load persisted chat or seed with welcome
-    const saved = localStorage.getItem('shat_advisor_messages');
-    if (saved) {
-      try {
-        this.messages = JSON.parse(saved);
-      } catch (e) {
-        this.messages = [];
-      }
-    }
-
-    if (this.messages.length === 0) {
-      this.messages.push({
-        sender: 'advisor',
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        text: txt(
-          'مرحباً بك! أنا مستشار شات المؤسسي الذكي. كيف يمكنني مساعدتك اليوم في معايير العمل الإنساني (CHS & Sphere)، أطر الحماية وصون السلامة (PSEA)، أو البرامج التدريبية المعتمدة؟',
-          'Hello! I am SHAT AI Institutional Advisor. How can I assist you today with humanitarian standards (CHS & Sphere), safeguarding frameworks (PSEA), or accredited training programs?',
-          'Bonjour ! Je suis le Conseiller Institutionnel IA de SHAT. Comment puis-je vous aider concernant les normes humanitaires (CHS & Sphère), la sauvegarde (PSEA) ou les cursus certifiés ?'
-        ),
-        actions: [
-          { labelAr: 'ما هي معايير CHS 2024؟', labelEn: 'What is CHS 2024?', prompt: 'ما هو المعيار الإنساني الأساسي CHS؟' },
-          { labelAr: 'سياسات صون السلامة PSEA', labelEn: 'PSEA Safeguarding', prompt: 'ما هي سياسة PSEA وصون السلامة؟' },
-          { labelAr: 'مسار مدير الحالة المعتمد', labelEn: 'Case Management Track', prompt: 'ما هي دورة إدارة الحالة؟' },
-          { labelAr: 'فحص الجاهزية المؤسسية', labelEn: 'Diagnostic Tool', prompt: 'أريد فحص جاهزية مؤسستي' }
-        ]
-      });
-    }
-
-    this.renderDOM(lang);
+    const existing = document.getElementById('shat-ai-advisor-container');
+    if (existing) existing.remove();
+    return;
   },
 
   renderDOM(lang = 'ar') {

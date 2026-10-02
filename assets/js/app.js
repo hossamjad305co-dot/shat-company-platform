@@ -17,7 +17,6 @@ import { standardsExplorer } from './tools/standardsExplorer.js';
 import { commandPalette } from './components/commandPalette.js';
 import { initWhatsAppConcierge } from './components/whatsappConcierge.js';
 import { initSyllabusViewer } from './components/syllabusViewer.js';
-import { aiAdvisorWidget } from './components/aiAdvisorWidget.js';
 import { examEngine } from './tools/examEngine.js';
 
 class Application {
@@ -40,14 +39,12 @@ class Application {
     window.commandPalette = commandPalette;
     window.openCommandPalette = () => commandPalette.open();
     window.examEngine = examEngine;
-    window.aiAdvisorWidget = aiAdvisorWidget;
     this.concierge = initWhatsAppConcierge();
     this.syllabusViewer = initSyllabusViewer();
     this.applyLanguage(this.currentLang);
     this.renderRoleSimulator();
     this.renderHeader();
     this.renderMobileDrawer();
-    aiAdvisorWidget.init(this.currentLang);
     this.renderFooter();
     this.renderMobileBottomNav();
     this.bindGlobalEvents();
