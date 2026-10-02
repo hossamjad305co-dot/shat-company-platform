@@ -66,10 +66,10 @@ export async function renderAdminPortalPage() {
           <div style="display: flex; align-items: center; gap: 10px;">
             <a href="#/home" target="_blank" rel="noopener" style="background: rgba(255,255,255,0.12); color: #fff; text-decoration: none; padding: 8px 14px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; border: 1px solid rgba(255,255,255,0.2);">
               <span>معاينة الموقع</span>
-              <span>↗</span>
+              ${icons.externalLink('icon-inline', 14)}
             </a>
             <button type="button" id="btn-admin-logout" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.4); padding: 8px 14px; border-radius: 6px; font-size: 0.85rem; font-weight: 700; cursor: pointer;">
-              → خروج
+              خروج
             </button>
           </div>
         </div>
@@ -79,7 +79,7 @@ export async function renderAdminPortalPage() {
       <nav style="background: #ffffff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 80px; z-index: 90; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
         <div class="container" style="display: flex; gap: 4px; overflow-x: auto; padding: 6px 0;">
           <button type="button" class="admin-tab-btn ${activeAdminTab === 'overview' ? 'active' : ''}" data-tab="overview">
-            ▲ نظرة عامة
+            نظرة عامة
           </button>
           <button type="button" class="admin-tab-btn ${activeAdminTab === 'cms' ? 'active' : ''}" data-tab="cms">
             إدارة المنشورات (${posts.length})
@@ -204,7 +204,7 @@ function renderOverviewPane({ courses, posts, applications, media, settings, pub
             رفع صورة جديدة
           </button>
           <button type="button" class="btn-quick-admin-action" data-action="export-backup" style="padding: 14px; background: #fffbeb; border: 1.5px solid #f59e0b; border-radius: 8px; font-weight: 700; color: #92400e; cursor: pointer; text-align: center;">
-            ↓ تصدير نسخة احتياطية (JSON)
+            <span style="display:inline-flex; align-items:center; gap:6px;">${icons.download('icon-inline', 14)} <span>تصدير نسخة احتياطية (JSON)</span></span>
           </button>
         </div>
       </div>
@@ -262,7 +262,7 @@ function renderCMSPane({ posts }) {
                   </td>
                   <td style="padding: 12px;">
                     <span style="display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; ${isPub ? 'background: #dcfce7; color: #15803d;' : 'background: #f1f5f9; color: #475569;'}">
-                      ${isPub ? '✓ منشور نشط' : (p.status === 'draft' ? 'مسودة' : '⏸️ غير منشور')}
+                      ${isPub ? 'منشور نشط' : (p.status === 'draft' ? 'مسودة' : 'معلق')}
                     </span>
                   </td>
                   <td style="padding: 12px; font-size: 0.82rem; color: #94a3b8;">
@@ -272,15 +272,15 @@ function renderCMSPane({ posts }) {
                     <div style="display: inline-flex; gap: 6px;">
                       <!-- Toggle Publish/Unpublish -->
                       <button type="button" class="btn-toggle-post-status" data-id="${p.id}" data-current="${p.status}" title="${isPub ? 'تعطيل المنشور' : 'نشر وتفعيل'}" style="padding: 6px 10px; border-radius: 6px; border: 1px solid #cbd5e1; background: #fff; font-size: 0.82rem; cursor: pointer; font-weight: 600;">
-                        ${isPub ? '⏸️ تعطيل' : 'نشر'}
+                        ${isPub ? 'تعطيل' : 'نشر'}
                       </button>
                       <!-- Edit -->
-                      <button type="button" class="btn-edit-post" data-id="${p.id}" title="تعديل المنشور" style="padding: 6px 10px; border-radius: 6px; border: 1px solid #cbd5e1; background: #fff; font-size: 0.82rem; cursor: pointer;">
-                        ▪️ تعديل
+                      <button type="button" class="btn-edit-post" data-id="${p.id}" title="تعديل المنشور" style="padding: 6px 10px; border-radius: 6px; border: 1px solid #cbd5e1; background: #fff; font-size: 0.82rem; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
+                        ${icons.edit('icon-inline', 14)} <span>تعديل</span>
                       </button>
                       <!-- Delete -->
-                      <button type="button" class="btn-delete-post" data-id="${p.id}" title="حذف" style="padding: 6px 10px; border-radius: 6px; border: 1px solid #fecaca; background: #fef2f2; color: #dc2626; font-size: 0.82rem; cursor: pointer;">
-                        ✕
+                      <button type="button" class="btn-delete-post" data-id="${p.id}" title="حذف" style="padding: 6px 10px; border-radius: 6px; border: 1px solid #fecaca; background: #fef2f2; color: #dc2626; font-size: 0.82rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;">
+                        ${icons.trash('icon-inline', 14)}
                       </button>
                     </div>
                   </td>
@@ -315,14 +315,14 @@ function renderAdmissionsPane({ applications, settings }) {
         <form id="admin-gform-sync-form" style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px;">
           <input type="url" id="input-admin-gform-url" value="${gformUrl}" placeholder="https://forms.gle/..." required style="flex: 1; min-width: 280px; padding: 12px 14px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem;" dir="ltr">
           <button type="submit" style="background: #0F2E4A; color: #fff; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 700; cursor: pointer;">
-            ✓ حفظ وتوليد الاستمارة
+            حفظ وتوليد الاستمارة
           </button>
         </form>
 
         <!-- Result Box: Generated Internal Link -->
         <div style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 10px; padding: 18px; margin-top: 14px;">
           <div style="display: flex; align-items: center; gap: 8px; color: #166534; font-weight: 800; font-size: 0.95rem; margin-bottom: 8px;">
-            <span>✓</span>
+            <span style="display: inline-flex; align-items: center;">${icons.checkCircle('icon-inline', 16)}</span>
             <span>الاستمارة الداخلية مفعلة ومربوطة بهوية المنصة بنجاح:</span>
           </div>
 
@@ -332,7 +332,7 @@ function renderAdmissionsPane({ applications, settings }) {
               نسخ الرابط للمشاركة
             </button>
             <a href="#/apply" target="_blank" style="background: #ffffff; color: #0F2E4A; border: 1px solid #cbd5e1; padding: 10px 16px; border-radius: 6px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-              <span>معاينة الاستمارة ↗</span>
+              <span>معاينة الاستمارة</span>
             </a>
           </div>
 
@@ -345,7 +345,7 @@ function renderAdmissionsPane({ applications, settings }) {
       <!-- Applications Table -->
       <div style="background: #ffffff; border-radius: 14px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e2e8f0;">
         <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin: 0 0 16px;">
-          ↓ طلبات الالتحاق الواردة (${applications.length})
+          طلبات الالتحاق الواردة (${applications.length})
         </h3>
 
         <div style="overflow-x: auto;">
@@ -371,13 +371,13 @@ function renderAdmissionsPane({ applications, settings }) {
                   <td style="padding: 12px; font-size: 0.85rem;" dir="ltr">${app.phone}</td>
                   <td style="padding: 12px;">
                     <span style="padding: 3px 8px; border-radius: 6px; font-size: 0.78rem; font-weight: 700; ${app.status === 'approved' ? 'background: #dcfce7; color: #166534;' : (app.status === 'rejected' ? 'background: #fee2e2; color: #991b1b;' : 'background: #fef3c7; color: #92400e;')}">
-                      ${app.status === 'approved' ? '✓ مقبول ومعتمد' : (app.status === 'rejected' ? 'مرفوض' : 'جديد')}
+                      ${app.status === 'approved' ? 'مقبول ومعتمد' : (app.status === 'rejected' ? 'مرفوض' : 'جديد')}
                     </span>
                   </td>
                   <td style="padding: 12px; text-align: center;">
                     ${app.status !== 'approved' ? `
                       <button type="button" class="btn-approve-app" data-id="${app.id}" style="background: #10b981; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; font-weight: 700; font-size: 0.82rem; cursor: pointer;">
-                        ✓ قبول واعتماد
+                        قبول واعتماد
                       </button>
                     ` : '<span style="color: #10b981; font-size: 0.85rem; font-weight: 700;">تم التفعيل</span>'}
                   </td>
@@ -418,8 +418,9 @@ function renderCoursesPane({ courses }) {
             </div>
 
             <div style="display: flex; gap: 10px;">
-              <a href="#/course/${c.id}" target="_blank" style="padding: 8px 14px; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; font-weight: 600; text-decoration: none; color: #0f172a;">
-                معاينة المساق ↗
+              <a href="#/course/${c.id}" target="_blank" style="padding: 8px 14px; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; font-weight: 600; text-decoration: none; color: #0f172a; display: inline-flex; align-items: center; gap: 6px;">
+                <span>معاينة المساق</span>
+                ${icons.externalLink('icon-inline', 13)}
               </a>
               <button type="button" class="btn-edit-course-drive" data-id="${c.id}" style="padding: 8px 16px; background: #10b981; color: #fff; border: none; border-radius: 6px; font-size: 0.85rem; font-weight: 700; cursor: pointer;">
                 تعديل رابط Drive المباشر
@@ -451,7 +452,7 @@ function renderMediaPane({ media, settings }) {
         <div>
           <input type="file" id="admin-device-file-input" accept="image/*" style="display: none;">
           <button type="button" id="btn-trigger-device-upload" style="background: #8b5cf6; color: #ffffff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
-            <span>▲ رفع صورة من جهازي</span>
+            <span>${icons.plus('icon-inline', 16)} رفع صورة من جهازي</span>
           </button>
         </div>
       </div>
@@ -568,7 +569,7 @@ function renderSettingsPane({ settings }) {
 
         <div>
           <button type="submit" style="background: #10b981; color: #fff; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 700; cursor: pointer; align-self: flex-start;">
-            ✓ حفظ تعديلات المنصة
+            حفظ تعديلات المنصة
           </button>
         </div>
       </form>
@@ -576,7 +577,7 @@ function renderSettingsPane({ settings }) {
       <!-- Backup Section -->
       <div style="margin-top: 36px; border-top: 1px solid #e2e8f0; padding-top: 24px;">
         <h3 style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin: 0 0 10px;">
-          ✓ إدارة البيانات والنسخ الاحتياطي (Backup & Restore)
+          إدارة البيانات والنسخ الاحتياطي (Backup & Restore)
         </h3>
         <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 16px;">
           تصدير كافة إعدادات المنصة، المقالات، والطلبات في ملف JSON واحد للحفظ أو الاستعادة.
@@ -584,12 +585,12 @@ function renderSettingsPane({ settings }) {
 
         <div style="display: flex; gap: 12px; flex-wrap: wrap;">
           <button type="button" id="btn-export-backup" style="background: #0F2E4A; color: #fff; border: none; padding: 10px 18px; border-radius: 6px; font-weight: 700; cursor: pointer;">
-            ↓ تصدير نسخة احتياطية (JSON)
+            تصدير نسخة احتياطية (JSON)
           </button>
 
           <input type="file" id="input-restore-backup" accept=".json" style="display: none;">
           <button type="button" id="btn-trigger-restore-backup" style="background: #ffffff; color: #0F2E4A; border: 1.5px solid #0F2E4A; padding: 10px 18px; border-radius: 6px; font-weight: 700; cursor: pointer;">
-            ▲ استيراد واستعادة نسخة (JSON)
+            استيراد واستعادة نسخة (JSON)
           </button>
         </div>
       </div>
@@ -640,8 +641,8 @@ function renderAdminLoginGate() {
   return `
     <div style="min-height: 80vh; display: flex; align-items: center; justify-content: center; padding: 24px; background: #f8fafc;" dir="rtl">
       <div style="width: 100%; max-width: 440px; background: #ffffff; border-radius: 16px; padding: 32px 28px; box-shadow: 0 10px 25px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; text-align: center;">
-        <div style="width: 56px; height: 56px; border-radius: 14px; background: rgba(15, 46, 74, 0.08); border: 1.5px solid #0F2E4A; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin: 0 auto 16px;">
-          ◈
+        <div style="width: 56px; height: 56px; border-radius: 14px; background: rgba(15, 46, 74, 0.08); border: 1.5px solid #0F2E4A; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: var(--shat-navy-950);">
+          ${icons.shield('', 28)}
         </div>
 
         <h2 style="font-size: 1.4rem; font-weight: 800; color: #0F2E4A; margin: 0 0 6px;">
@@ -670,7 +671,7 @@ function renderAdminLoginGate() {
         </form>
 
         <div style="margin-top: 20px; font-size: 0.8rem; color: #94a3b8;">
-          <a href="#/home" style="color: #64748b; text-decoration: none;">← العودة للصفحة الرئيسية للموقع</a>
+          <a href="#/home" style="color: #64748b; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">${icons.arrowRight('icon-inline', 14)} <span>العودة للصفحة الرئيسية للموقع</span></a>
         </div>
       </div>
     </div>
@@ -795,7 +796,7 @@ export function initAdminPortalEvents() {
       if (newUrl && newUrl.trim()) {
         const parsed = parseGoogleDriveResource(newUrl.trim());
         localStorage.setItem(`shat_course_drive_${id}`, newUrl.trim());
-        alert(`✓ تم حفظ رابط Google Drive للمساق بنجاح!\n\n• نوع المورد: ${parsed.type}\n• إمكانية التحميل المباشر: ${parsed.canDirectDownload ? 'نعم (تنزيل تلقائي للطالب)' : 'لا (عرض في المتصفح)'}\n• رابط التحميل المشتق: ${parsed.downloadUrl || 'غير متاح'}`);
+        alert(`تم حفظ رابط Google Drive للمساق بنجاح!\n\n• نوع المورد: ${parsed.type}\n• إمكانية التحميل المباشر: ${parsed.canDirectDownload ? 'نعم (تنزيل تلقائي للطالب)' : 'لا (عرض في المتصفح)'}\n• رابط التحميل المشتق: ${parsed.downloadUrl || 'غير متاح'}`);
         window.location.reload();
       }
     });
@@ -808,7 +809,7 @@ export function initAdminPortalEvents() {
       e.preventDefault();
       const val = document.getElementById('input-admin-gform-url').value.trim();
       settingsService.setGoogleFormUrl(val);
-      alert('✓ تم حفظ رابط Google Form وتوليد الاستمارة الداخلية بنجاح!');
+      alert('تم حفظ رابط Google Form وتوليد الاستمارة الداخلية بنجاح!');
       window.location.reload();
     });
   }
@@ -830,7 +831,7 @@ export function initAdminPortalEvents() {
     btn.addEventListener('click', () => {
       const id = btn.getAttribute('data-id');
       applicationService.updateStatus(id, 'approved', 'تم الاعتماد بنجاح');
-      alert('✓ تم قبول واعتماد الطالب وتفعيل حسابه بنجاح!');
+      alert('تم قبول واعتماد الطالب وتفعيل حسابه بنجاح!');
       window.location.reload();
     });
   });
@@ -855,7 +856,7 @@ export function initAdminPortalEvents() {
           size: `${(file.size / 1024).toFixed(1)} KB`,
           type: file.type
         });
-        alert('✓ تم رفع الصورة إلى مكتبة الوسائط بنجاح!');
+        alert('تم رفع الصورة إلى مكتبة الوسائط بنجاح!');
         window.location.reload();
       };
       reader.readAsDataURL(file);
@@ -885,7 +886,7 @@ export function initAdminPortalEvents() {
           email: document.getElementById('cfg-email').value.trim()
         }
       });
-      alert('✓ تم حفظ إعدادات وبيانات المنصة بنجاح!');
+      alert('تم حفظ إعدادات وبيانات المنصة بنجاح!');
       window.location.reload();
     });
   }
@@ -907,7 +908,7 @@ export function initAdminPortalEvents() {
       reader.onload = (event) => {
         const res = settingsService.importFullBackup(event.target.result);
         if (res.success) {
-          alert('✓ تم استعادة النسخة الاحتياطية بنجاح!');
+          alert('تم استعادة النسخة الاحتياطية بنجاح!');
           window.location.reload();
         } else {
           alert('فشل استيراد النسخة: ' + res.error);

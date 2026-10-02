@@ -173,20 +173,22 @@ export function renderFaqSection(lang = 'ar') {
         <!-- Still have questions footer banner -->
         <div style="margin-top: 40px; background: linear-gradient(135deg, #0B1E36 0%, #16365C 100%); color: #FFFFFF; border-radius: 16px; padding: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
           <div>
-            <h4 style="font-size: 1.15rem; font-weight: 800; margin: 0 0 6px;">${txt('هل لديك استفسار آخر لم تجد إجابته هنا؟', 'Still Have More Questions?', 'Vous Avez d\'Autres Questions ?')}</h4>
+            <h3 style="font-size: 1.15rem; font-weight: 800; margin: 0 0 6px;">${txt('هل لديك استفسار آخر لم تجد إجابته هنا؟', 'Still Have More Questions?', 'Vous Avez d\'Autres Questions ?')}</h3>
             <p style="font-size: 0.88rem; color: #CBD5E1; margin: 0;">${txt('فريق الاستشارات والتسجيل متواجد لمساعدتك والإجابة على أي تساؤل فوراً.', 'Our advisory team is available to assist you via instant WhatsApp chat.', 'Notre équipe est disponible pour vous assister via WhatsApp.')}</p>
           </div>
           <a href="https://wa.me/972592879621?text=${encodeURIComponent('مرحباً شركة شات، لدي استفسار إضافي أود طرحه:')}" target="_blank" rel="noopener" class="btn-clean" style="
-            background: #25D366;
+            background: #0F5132;
             color: #FFFFFF;
             font-weight: 800;
             font-size: 0.95rem;
             padding: 12px 24px;
             border-radius: 10px;
-            box-shadow: 0 4px 14px rgba(37,211,102,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 14px rgba(15, 81, 50, 0.4);
             display: inline-flex;
             align-items: center;
             gap: 8px;
+          ">
             <span style="display: inline-flex; align-items: center;">${icons.whatsapp('', 18)}</span>
             <span>${txt('تحدث معنا عبر واتساب الآن', 'Chat via WhatsApp Now', 'Discuter sur WhatsApp')}</span>
           </a>
@@ -232,7 +234,7 @@ function renderFaqItem(item, idx, lang) {
           font-size: 0.85rem;
           color: #94A3B8;
           transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-        ">▼</span>
+        ">${icons.chevronDown('', 14)}</span>
       </button>
 
       <div class="faq-answer-panel" style="

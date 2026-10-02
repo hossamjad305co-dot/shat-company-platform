@@ -2,6 +2,8 @@
 // Executive Digital Certificate Verification Engine for SHAT Development & Growth
 // Provides Instant Cryptographic & Serial Code Verification with Official Seal & QR Simulation
 
+import { icons } from '../icons.js';
+
 export function renderVerifyView(lang = 'ar') {
   const isAr = lang === 'ar';
   const txt = (ar, en, fr) => (lang === 'fr' ? fr || en : (lang === 'en' ? en : ar));
@@ -86,7 +88,8 @@ export function renderVerifyView(lang = 'ar') {
                   gap: 8px;
                   box-shadow: 0 4px 12px rgba(30,126,52,0.25);
                 ">
-                  <span>• ${txt('فحص الشهادة', 'Verify Now', 'Vérifier')}</span>
+                  ${icons.search('icon-inline', 18)}
+                  <span>${txt('فحص الشهادة', 'Verify Now', 'Vérifier')}</span>
                 </button>
               </div>
             </form>
@@ -232,8 +235,8 @@ export function bindVerifyEvents() {
     if (!cert) {
       resultContainer.innerHTML = `
         <div style="background: #FFFFFF; border: 2px dashed #EF4444; border-radius: 16px; padding: 36px 24px; text-align: center;">
-          <div style="width: 60px; height: 60px; background: #FEE2E2; color: #DC2626; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 16px;">
-            ✕
+          <div style="width: 60px; height: 60px; background: #FEE2E2; color: #DC2626; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+            ${icons.x('', 28)}
           </div>
           <h3 style="font-size: 1.3rem; font-weight: 800; color: #991B1B; margin: 0 0 8px;">
             لم يتم العثور على سجل مطابق للرقم المدخل
@@ -270,8 +273,8 @@ export function bindVerifyEvents() {
           gap: 12px;
         ">
           <div style="display: flex; align-items: center; gap: 12px;">
-            <div style="width: 38px; height: 38px; border-radius: 50%; background: #10B981; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
-              ✓
+            <div style="width: 38px; height: 38px; border-radius: 50%; background: #10B981; display: flex; align-items: center; justify-content: center; color: #FFFFFF;">
+              ${icons.check('', 20)}
             </div>
             <div>
               <div style="font-weight: 900; font-size: 1.15rem; color: #ECFDF5;">شهادة أصلية وموثقة في السجلات الرسمية</div>
@@ -348,7 +351,7 @@ export function bindVerifyEvents() {
                 text-align: center;
                 border: 2px solid #D97706;
               ">
-                <span style="font-size: 1.3rem; font-weight: 900;"></span>
+                <span style="display: inline-flex; align-items: center; justify-content: center; margin-bottom: 2px;">${icons.shieldCheck('', 20)}</span>
                 <span>SHAT SEAL</span>
               </div>
 
@@ -370,7 +373,7 @@ export function bindVerifyEvents() {
               align-items: center;
               gap: 8px;
             ">
-              <span>⎙ طباعة إشعار التحقق</span>
+              ${icons.printer('icon-inline', 16)} <span>طباعة إشعار التحقق</span>
             </button>
           </div>
 

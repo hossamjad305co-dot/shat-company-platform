@@ -1,6 +1,8 @@
 // SHAT Platform — Rich Text Content Editor (components/cms/RichTextEditor.js)
 // Lightweight, responsive semantic rich editor with XSS sanitization & mobile toolbar
 
+import { icons } from '../../icons.js';
+
 export function sanitizeHtml(rawHtml) {
   if (!rawHtml) return '';
   // Basic sanitization: strip script, iframe, onload, onerror, javascript:
@@ -32,9 +34,9 @@ export function RichTextEditor({ id = 'cms-rich-editor', initialContent = '', pl
         <button type="button" class="rich-btn" data-command="formatBlock" data-val="blockquote" title="اقتباس">“ اقتباس</button>
         <span class="rich-sep" style="width: 1px; height: 18px; background: var(--border-subtle); margin: 0 4px;"></span>
         <button type="button" class="rich-btn" data-command="createLink" title="إدراج رابط">رابط</button>
-        <button type="button" class="rich-btn" data-command="removeFormat" title="مسح التنسيق">⌫ مسح</button>
-        <button type="button" class="rich-btn" data-command="undo" title="تراجع">↩</button>
-        <button type="button" class="rich-btn" data-command="redo" title="إعادة">↪</button>
+        <button type="button" class="rich-btn" data-command="removeFormat" title="مسح التنسيق">مسح</button>
+        <button type="button" class="rich-btn" data-command="undo" title="تراجع" style="display: inline-flex; align-items: center; justify-content: center;">${icons.undo('', 14)}</button>
+        <button type="button" class="rich-btn" data-command="redo" title="إعادة" style="display: inline-flex; align-items: center; justify-content: center;">${icons.redo('', 14)}</button>
       </div>
 
       <!-- Editable Area -->

@@ -56,7 +56,7 @@ export async function bindNewsEvents() {
 
   const currentLang = localStorage.getItem('shat_platform_lang') || 'ar';
   const isRtl = currentLang === 'ar';
-  const arrow = isRtl ? '←' : '→';
+  const arrow = isRtl ? icons.arrowLeft('icon-inline', 14) : icons.arrowRight('icon-inline', 14);
 
   const txt = (ar, en, fr) => {
     if (currentLang === 'fr') return fr || en;

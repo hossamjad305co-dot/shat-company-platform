@@ -1,5 +1,5 @@
 // assets/js/components/commandPalette.js
-// Executive Spotlight / Command Palette (Ctrl+K / ⌘K) for SHAT Platform
+// Executive Spotlight / Command Palette (Ctrl+K) for SHAT Platform
 // Linear & Apple-Tier Instant Search Across All Courses, Forms, Tools & Pages
 import { icons } from '../icons.js';
 
@@ -426,7 +426,7 @@ export class CommandPalette {
 
           <div style="display: flex; align-items: center; gap: 8px; flex-shrink: 0; margin-inline-start: 12px;">
             ${item.badge ? `<span style="font-size: 0.72rem; font-weight: 700; background: #F1F5F9; color: #475569; padding: 2px 8px; border-radius: 4px;">${item.badge}</span>` : ''}
-            <span style="color: #94A3B8; font-size: 0.85rem;">←</span>
+            <span style="color: #94A3B8; display:inline-flex; align-items:center;">${icons.arrowLeft('icon-inline', 13)}</span>
           </div>
         </div>
       `;

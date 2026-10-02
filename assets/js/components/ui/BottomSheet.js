@@ -1,6 +1,8 @@
 // SHAT Platform — Bottom Sheet Component (components/ui/BottomSheet.js)
 // Mobile-native modal sliding from bottom with drag handle, safe-area support & accessible dismiss
 
+import { icons } from '../../icons.js';
+
 export function BottomSheet({ id = 'shat-bottom-sheet', title = '', children = '', onClose = null } = {}) {
   return `
     <div id="${id}" class="shat-bottom-sheet-overlay" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.7); z-index: 10050; align-items: flex-end; justify-content: center;">
@@ -14,7 +16,7 @@ export function BottomSheet({ id = 'shat-bottom-sheet', title = '', children = '
         <!-- Sheet Header -->
         <div style="padding: 12px 20px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
           <h4 style="margin: 0; font-size: 1.05rem; font-weight: 800; color: var(--shat-navy-950);">${title}</h4>
-          <button type="button" class="btn-close-sheet" style="background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-muted); min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center;">✕</button>
+          <button type="button" class="btn-close-sheet" style="background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-muted); min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center;">${icons.x('', 18)}</button>
         </div>
 
         <!-- Sheet Scrollable Content -->

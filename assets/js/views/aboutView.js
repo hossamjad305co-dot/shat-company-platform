@@ -1,3 +1,4 @@
+import { icons } from '../icons.js';
 // assets/js/views/aboutView.js
 // Pristine About SHAT Page with Double-Bezel Styling & 100% Trilingual Support (AR, EN, FR)
 import { content } from '../content.js';
@@ -8,7 +9,7 @@ export function renderAboutView(lang = 'ar') {
   const c = d.company || {};
   const eq = d.valueEquation || { pillars: [] };
   const isRtl = lang === 'ar';
-  const arrow = isRtl ? '←' : '→';
+  const arrow = isRtl ? icons.arrowLeft('icon-inline', 14) : icons.arrowRight('icon-inline', 14);
 
   return `
     <div class="view-about">

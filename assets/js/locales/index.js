@@ -27,7 +27,7 @@ export const localeBundles = {
     ...enCommon, // Fallback gracefully to international English structure for French where keys align
     dir: 'ltr',
     langName: 'Français',
-    flag: '🇫🇷',
+    flag: 'FR',
     requestConsultation: 'Demander une consultation',
     companyTagline: 'Renforcement des Capacités • Développement Institutionnel • Résultats Durables'
   }

@@ -26,6 +26,25 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
-    sourcemap: false
+    sourcemap: false,
+    chunkSizeWarningLimit: 600,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules/@supabase')) {
+            return 'vendor-supabase';
+          }
+          if (id.includes('assets/js/content.js') || id.includes('assets/js/translations.js')) {
+            return 'i18n-dictionary';
+          }
+          if (id.includes('assets/js/views/adminView.js') || id.includes('assets/js/pages/admin/')) {
+            return 'view-admin';
+          }
+          if (id.includes('assets/js/tools/examEngine.js') || id.includes('assets/js/tools/diagnosticTool.js') || id.includes('assets/js/tools/standardsExplorer.js')) {
+            return 'tools-interactive';
+          }
+        }
+      }
+    }
   }
 });

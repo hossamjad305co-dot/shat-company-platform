@@ -22,7 +22,7 @@ export function renderHomeView(lang = 'ar') {
   const portfolios = d.portfolios.slice(0, 6);
   const stages = d.deliveryModel.stages;
   const isRtl = lang === 'ar';
-  const arrow = isRtl ? '←' : '→';
+  const arrow = isRtl ? icons.arrowLeft('icon-inline', 14) : icons.arrowRight('icon-inline', 14);
 
   const soc = (translations[lang] || translations.ar).socialSection || translations.ar.socialSection;
   const socPosts = soc.posts || [];
@@ -100,10 +100,10 @@ export function renderHomeView(lang = 'ar') {
               </div>
 
               <div class="metric-pill-box">
-                <span style="font-size: 1.5rem; font-weight: 900; color: #10B981;"></span>
+                <span style="font-size: 1.5rem; font-weight: 900; color: #047857;"></span>
                 <div style="text-align: ${isRtl ? 'right' : 'left'};">
-                  <div style="font-size: 1.45rem; font-weight: 900; color: #10B981; font-family: var(--font-mono); line-height: 1.1;">100%</div>
-                  <div style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700;">${txt('امتثال لمعايير CHS & PSEA', 'CHS & PSEA Compliance', 'Conformité CHS & PSEA')}</div>
+                  <div style="font-size: 1.45rem; font-weight: 900; color: #047857; font-family: var(--font-mono); line-height: 1.1;">100%</div>
+                  <div style="font-size: 0.76rem; color: #1E293B; font-weight: 700;">${txt('امتثال لمعايير CHS & PSEA', 'CHS & PSEA Compliance', 'Conformité CHS & PSEA')}</div>
                 </div>
               </div>
             </div>
@@ -124,9 +124,9 @@ export function renderHomeView(lang = 'ar') {
                     <span style="font-size: 0.78rem; font-weight: 800; color: #1E7E34; background: #E8F5E9; padding: 4px 12px; border-radius: 6px;">
                       ${txt('مستكشف البرامج والاستمارات المعتمدة 2026', 'Accredited Programs & Forms Finder 2026', 'Explorateur Rapide')}
                     </span>
-                    <h3 style="font-size: 1.15rem; font-weight: 900; color: var(--shat-navy, #0B1E36); margin: 6px 0 0;">
+                    <h2 style="font-size: 1.15rem; font-weight: 900; color: var(--shat-navy, #0B1E36); margin: 6px 0 0;">
                       ${txt('اختر تخصصك واستعرض استمارة التسجيل الرسمية فوراً', 'Select your domain to access the verified registration form', 'Sélectionnez votre domaine')}
-                    </h3>
+                    </h2>
                   </div>
 
                   <!-- 4 Interactive Tabs -->
@@ -334,7 +334,7 @@ export function renderHomeView(lang = 'ar') {
                       <span class="step-number" style="font-size: 1.3rem;">${st.num}</span>
                       <span class="bento-kicker">${st.en}</span>
                     </div>
-                    <h4 class="bento-title" style="font-size: 1.15rem;">${st.ar || st.title}</h4>
+                    <h3 class="bento-title" style="font-size: 1.15rem;">${st.ar || st.title}</h3>
                     <p class="bento-text" style="line-height: 1.6;">${st.desc}</p>
                   </div>
                 </div>
@@ -386,8 +386,10 @@ export function renderHomeView(lang = 'ar') {
                     ${lang === 'fr' ? 'Livrable Réalisé:' : (isRtl ? 'المخرج المحقق:' : 'Tangible Deliverable:')}
                   </div>
                   <div style="font-size: 0.82rem; color: #F1F5F9; margin-bottom: 12px;">${st.deliverable}</div>
-                  <a href="${st.route}" class="btn-clean btn-sm" style="width: 100%; border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.08); color: #FFFFFF; text-align: center; justify-content: center; font-weight: 700;">
-                    <span>${lang === 'fr' ? 'Parcours & Services Liés' : (isRtl ? 'المسار التدريبي والخدمات المرتبطة' : 'Associated Track & Services')}</span>
+                  <a href="${st.route}" class="btn-clean btn-sm" aria-label="${txt(`استعراض مسار ${st.title} في ${st.route.includes('academy') ? 'الأكاديمية' : 'الخدمات'}`, `Explore ${st.code} track`, `Consulter le parcours ${st.code}`)}" style="width: 100%; border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.08); color: #FFFFFF; text-align: center; justify-content: center; font-weight: 700;">
+                    <span>${st.route && st.route.includes('academy')
+                      ? (lang === 'fr' ? `Parcours Académique: ${st.code}` : (isRtl ? `مسار الأكاديمية: ${st.code}` : `${st.code} Academy Track`))
+                      : (lang === 'fr' ? `Services Conseil: ${st.code}` : (isRtl ? `الخدمات الاستشارية: ${st.code}` : `${st.code} Consulting`))}</span>
                     <span>${arrow}</span>
                   </a>
                 </div>
@@ -424,7 +426,7 @@ export function renderHomeView(lang = 'ar') {
                       <span class="bento-kicker" style="font-size: 0.82rem;">${pf.num}</span>
                       <span class="badge badge-primary">${lang === 'fr' ? 'Module Agréé' : (isRtl ? 'حقيبة معتمدة' : 'Accredited Module')}</span>
                     </div>
-                    <h4 class="bento-title" style="font-size: 1.15rem;">${pf.name}</h4>
+                    <h3 class="bento-title" style="font-size: 1.15rem;">${pf.name}</h3>
                     <div class="bento-en" style="color: var(--text-muted); font-size: 0.78rem; margin-bottom: 8px;">${pf.en}</div>
                     <p class="bento-text" style="font-size: 0.88rem; line-height: 1.6;">${pf.desc}</p>
                   </div>
@@ -516,7 +518,7 @@ export function renderHomeView(lang = 'ar') {
                     <div>
                       <div style="font-weight: 800; font-size: 0.85rem; color: var(--shat-navy); display: flex; align-items: center; gap: 4px;">
                         <span>${c.name}</span>
-                        <span style="color: #1D4ED8; font-size: 0.75rem;" title="Official Verified">✓</span>
+                        <span style="color: #1D4ED8; display: inline-flex; align-items: center;" title="Official Verified">${icons.checkCircle('icon-inline', 14)}</span>
                       </div>
                       <div style="font-size: 0.72rem; color: var(--text-muted);">${post.platform} • ${post.date}</div>
                     </div>
@@ -531,9 +533,9 @@ export function renderHomeView(lang = 'ar') {
                 </div>
 
                 <div class="social-feed-body">
-                  <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--shat-navy); margin-bottom: 8px; line-height: 1.45;">
+                  <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--shat-navy); margin-bottom: 8px; line-height: 1.45;">
                     ${post.title}
-                  </h4>
+                  </h3>
                   <p style="font-size: 0.86rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
                     ${post.excerpt}
                   </p>
@@ -554,14 +556,14 @@ export function renderHomeView(lang = 'ar') {
                   <div style="display: flex; gap: 6px; flex-wrap: wrap;">
                     ${post.formUrl ? `
                       <a href="${post.formUrl}" class="btn-clean btn-sm" style="background: var(--shat-green); color: #FFFFFF; font-weight: 800; font-size: 0.78rem;">
-                        <span>✓ ${isRtl ? 'تسجيل' : 'Register'}</span>
+                        <span>${isRtl ? 'تسجيل' : 'Register'}</span>
                       </a>
                     ` : ''}
                     <button class="btn-clean btn-sm btn-read-social-detail" data-post-id="${post.id}" style="background: var(--bg-subtle); color: var(--shat-navy); font-weight: 700; font-size: 0.78rem;">
                       <span>${lang === 'fr' ? 'Détails' : (isRtl ? 'تفاصيل' : 'Details')}</span>
                     </button>
                     <a href="${post.link}" target="_blank" rel="noopener" class="btn-clean btn-sm" style="background: var(--shat-green-tint); color: var(--shat-green); font-weight: 800; font-size: 0.78rem;">
-                      <span>→ ${post.platform}</span>
+                      <span style="display:inline-flex; align-items:center; gap:4px;"><span>${post.platform}</span> ${icons.externalLink('icon-inline', 12)}</span>
                     </a>
                   </div>
                 </div>
@@ -855,7 +857,7 @@ export function bindHomeEvents() {
             </div>
             <div style="display: flex; justify-content: flex-end; gap: 10px;">
               <a href="${post.link}" target="_blank" rel="noopener" class="btn-clean btn-primary btn-sm">
-                <span>→ ${currentLang === 'fr' ? 'Ouvrir sur' : (currentLang === 'ar' ? 'فتح المنشور على' : 'Open on')} ${post.platform}</span>
+                <span style="display:inline-flex; align-items:center; gap:6px;"><span>${currentLang === 'fr' ? 'Ouvrir sur' : (currentLang === 'ar' ? 'فتح المنشور على' : 'Open on')} ${post.platform}</span> ${icons.externalLink('icon-inline', 14)}</span>
               </a>
             </div>
           </div>

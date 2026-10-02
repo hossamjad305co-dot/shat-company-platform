@@ -7,7 +7,7 @@ let content = fs.readFileSync(filePath, 'utf8');
 // The Academy objects for each language
 const academyData = {
   ar: {
-    navAcademy: "🎓 الأكاديمية",
+    navAcademy: "الأكاديمية",
     badge: "أكاديمية شات للقيادة والتطوير المؤسسي",
     title: "منصة بناء القدرات وإعداد الخبراء والممارسين",
     subtitle: "برامج تدريبية وتطبيقية متقدمة للمنظمات والكوادر الإنسانية والتنموية وفق أعلى المعايير والمواثيق العالمية (CHS, Sphere, OECD DAC, PSEA).",
@@ -164,7 +164,7 @@ const academyData = {
     }
   },
   en: {
-    navAcademy: "🎓 SHAT Academy",
+    navAcademy: "SHAT Academy",
     badge: "SHAT Academy for Leadership & Institutional Growth",
     title: "Executive Capacity Building & Professional Mastery",
     subtitle: "Advanced applied learning programs for humanitarian and institutional development practitioners, aligned with global standards (CHS, Sphere, OECD DAC, PSEA).",
@@ -325,7 +325,7 @@ const academyData = {
 // French, Spanish, Italian mappings follow English with localized labels
 academyData.fr = {
   ...academyData.en,
-  navAcademy: "🎓 Académie SHAT",
+  navAcademy: "Académie SHAT",
   badge: "Académie SHAT pour le Leadership et le Développement Institutionnel",
   title: "Plateforme de Renforcement des Capacités & d'Excellence Professionnelle",
   subtitle: "Programmes appliqués de haut niveau pour les acteurs humanitaires et du développement, conformes aux normes internationales (CHS, Sphere, OECD DAC, PSEA).",
@@ -347,7 +347,7 @@ academyData.fr = {
 
 academyData.es = {
   ...academyData.en,
-  navAcademy: "🎓 Academia SHAT",
+  navAcademy: "Academia SHAT",
   badge: "Academia SHAT para el Liderazgo y Desarrollo Institucional",
   title: "Plataforma de Fortalecimiento de Capacidades y Excelencia",
   subtitle: "Programas avanzados para profesionales humanitarios y de desarrollo, alineados con normas globales (CHS, Sphere, OCDE DAC, PSEA).",
@@ -369,7 +369,7 @@ academyData.es = {
 
 academyData.it = {
   ...academyData.en,
-  navAcademy: "🎓 Accademia SHAT",
+  navAcademy: "Accademia SHAT",
   badge: "Accademia SHAT per la Leadership e lo Sviluppo Istituzionale",
   title: "Piattaforma di Potenziamento delle Capacità ed Eccellenza",
   subtitle: "Programmi avanzati per professionisti umanitari e dello sviluppo, conformi agli standard internazionali (CHS, Sphere, OCSE DAC, PSEA).",

@@ -1,3 +1,4 @@
+import { icons } from '../icons.js';
 // assets/js/views/deliveryView.js
 // 6-Stage Delivery Model View with Double-Bezel Styling & 100% Trilingual Support (AR, EN, FR)
 import { content } from '../content.js';
@@ -6,7 +7,7 @@ export function renderDeliveryView(lang = 'ar') {
   const d = content[lang] || content.ar;
   const dm = d.deliveryModel || { stages: [] };
   const isRtl = lang === 'ar';
-  const arrow = isRtl ? '←' : '→';
+  const arrow = isRtl ? icons.arrowLeft('icon-inline', 14) : icons.arrowRight('icon-inline', 14);
 
   const t = {
     badge: `${dm.slogan || 'من الاحتياج إلى النتائج • From Needs to Results'} • شركة شات للتنمية والتطوير (SHAT Platform)`,
@@ -52,7 +53,7 @@ export function renderDeliveryView(lang = 'ar') {
                   </div>
                   <div style="border-top: 1px dashed var(--border-light); padding-top: 12px; margin-top: 16px; display: flex; justify-content: space-between; align-items: center;">
                     <span style="font-size: 0.76rem; color: var(--shat-green); font-weight: 800;">
-                      ✓ ${isRtl ? `المرحلة التنفيذية 0${idx + 1}` : `Phase 0${idx + 1}`}
+                      ${isRtl ? `المرحلة التنفيذية 0${idx + 1}` : `Phase 0${idx + 1}`}
                     </span>
                     <button type="button" class="btn-clean" onclick="if(window.openToolkitsLibrary) window.openToolkitsLibrary();" style="font-size: 0.74rem; color: var(--shat-navy); font-weight: 700; background: transparent; cursor: pointer; text-decoration: underline;">
                       ${isRtl ? 'الأدوات المقترنة' : 'Matched Toolkits'}

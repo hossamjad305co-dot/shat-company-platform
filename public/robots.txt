@@ -1,0 +1,14 @@
+# SHAT Development & Growth Platform - robots.txt
+# https://shat-company-platform.vercel.app
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /#/admin
+
+# AI Agents & Discovery
+Allow: /llms.txt
+Allow: /manifest.webmanifest
+
+Sitemap: https://shat-company-platform.vercel.app/sitemap.xml

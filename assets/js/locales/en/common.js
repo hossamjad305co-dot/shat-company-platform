@@ -2,7 +2,7 @@
 export default {
   dir: 'ltr',
   langName: 'English',
-  flag: '🇬🇧',
+  flag: 'EN',
   companyName: 'SHAT Development & Growth',
   companyNameEn: 'SHAT Development & Growth',
   companyTagline: 'Building Capacity • Strengthening Institutions • Advancing Results',

@@ -3,6 +3,7 @@
 
 import { cmsService } from '../../services/cms/cmsService.js';
 import { ENV } from '../../config/env.js';
+import { icons } from '../../icons.js';
 
 export function MediaLibraryModal() {
   return `
@@ -15,7 +16,7 @@ export function MediaLibraryModal() {
             <h3 style="margin: 0; font-size: var(--font-size-h3); color: var(--shat-navy-950);">مكتبة الوسائط والصور (Media Library)</h3>
             <p style="margin: 4px 0 0; font-size: var(--font-size-caption); color: var(--text-muted);">إدارة الصور والبوسترات المعتمدة لاستخدامها في المنشورات والأغلفة</p>
           </div>
-          <button type="button" class="btn-close-media-library" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); min-height: 44px; min-width: 44px;">✕</button>
+          <button type="button" class="btn-close-media-library" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); min-height: 44px; min-width: 44px; display: inline-flex; align-items: center; justify-content: center;">${icons.x('', 18)}</button>
         </div>
 
         <!-- Controls: Search & Upload -->
@@ -105,7 +106,7 @@ export function openMediaLibrary({ onSelectImage = null } = {}) {
     if (items.length === 0) {
       grid.innerHTML = `
         <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--text-muted);">
-          <div style="font-size: 2.5rem; margin-bottom: 8px;">◈</div>
+          <div style="margin-bottom: 8px; display: flex; justify-content: center; color: var(--text-muted);">${icons.document('', 40)}</div>
           <p>لا توجد صور مطابقة لعملية البحث</p>
         </div>
       `;
@@ -126,8 +127,8 @@ export function openMediaLibrary({ onSelectImage = null } = {}) {
             <button type="button" class="shat-btn shat-btn-primary shat-btn-sm btn-select-media" data-url="${item.url}" style="flex: 1; padding: 4px 6px; font-size: 0.75rem;">
               اختيار
             </button>
-            <button type="button" class="shat-btn shat-btn-secondary shat-btn-sm btn-copy-media" data-url="${item.url}" title="نسخ الرابط" style="padding: 4px 6px; font-size: 0.75rem;">
-              ▪
+            <button type="button" class="shat-btn shat-btn-secondary shat-btn-sm btn-copy-media" data-url="${item.url}" title="نسخ الرابط" style="padding: 4px 6px; font-size: 0.75rem; display: inline-flex; align-items: center; justify-content: center;">
+              ${icons.copy('', 14)}
             </button>
           </div>
         </div>

@@ -2,6 +2,8 @@
 // Accredited Digital Certificate & Credential Verification Engine
 // Enables trainees, donors, and humanitarian organizations to instantly authenticate SHAT credentials
 
+import { icons } from '../icons.js';
+
 export const certificateValidator = {
   // Authoritative verified records fixture
   records: [
@@ -163,7 +165,7 @@ export const certificateValidator = {
     if (!found) {
       container.innerHTML = `
         <div style="background: #FEF2F2; border: 1px solid #FECACA; border-radius: var(--radius-md); padding: 24px; text-align: center;">
-          <div style="font-size: 2rem; margin-bottom: 8px;">✕</div>
+          <div style="display: flex; justify-content: center; margin-bottom: 8px; color: #DC2626;">${icons.alertCircle('', 36)}</div>
           <h4 style="font-weight: 800; color: #991B1B; margin-bottom: 6px;">
             ${txt('الشهادة غير مسجلة أو الرقم غير مطابق', 'Certificate ID Not Found', 'Identifiant de Certificat Introuvable')}
           </h4>
@@ -202,7 +204,7 @@ export const certificateValidator = {
 
           <div style="text-align: ${isRtl ? 'left' : 'right'};">
             <span class="badge badge-success" style="font-size: 0.82rem; padding: 6px 12px; display: inline-flex; align-items: center; gap: 4px;">
-              <span>✓</span> <span>${txt('شهادة معتمدة وموثقة رسمياً', 'Officially Verified & Authentic', 'Certificat Homologué & Vérifié')}</span>
+              <span style="display: inline-flex; align-items: center;">${icons.checkCircle('icon-inline', 14)}</span> <span>${txt('شهادة معتمدة وموثقة رسمياً', 'Officially Verified & Authentic', 'Certificat Homologué & Vérifié')}</span>
             </span>
             <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; font-weight: 700;">
               ID: ${found.id}
@@ -253,7 +255,7 @@ export const certificateValidator = {
           <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px;">
             ${found.competencies.map(c => `
               <li style="font-size: 0.84rem; color: var(--text-secondary); display: flex; align-items: center; gap: 8px;">
-                <span style="color: var(--shat-green); font-weight: bold;">✔</span>
+                <span style="color: var(--shat-green); display: inline-flex; align-items: center;">${icons.checkCircle('icon-inline', 14)}</span>
                 <span>${c}</span>
               </li>
             `).join('')}
@@ -266,7 +268,7 @@ export const certificateValidator = {
           </div>
           <div style="display: flex; gap: 8px;">
             <button class="btn-clean btn-sm" style="background: var(--shat-navy); color: #FFFFFF;" onclick="window.print();">
-              <span>⎙ ${txt('طباعة إفادة التحقق', 'Print Official Verification', 'Imprimer')}</span>
+              <span style="display: inline-flex; align-items: center; gap: 4px;">${icons.printer('icon-inline', 14)} <span>${txt('طباعة إفادة التحقق', 'Print Official Verification', 'Imprimer')}</span></span>
             </button>
             <a href="#/course/shat-chs-master" class="btn-clean btn-sm" style="background: var(--bg-subtle); border: 1px solid var(--border-medium); color: var(--shat-navy);" onclick="document.getElementById('modal-certificate-validator').classList.remove('open');">
               <span>${txt('استعراض تفاصيل المساق', 'Course Details', 'Détails du Cursus')}</span>

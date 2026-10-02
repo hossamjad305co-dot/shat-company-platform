@@ -61,7 +61,7 @@ export function renderHomePage(t) {
             <div class="hero-emblem-card">
               <div class="hero-emblem-badge-wrapper" style="position: relative;">
                 <img src="${heroBadgeImg.startsWith('http') ? heroBadgeImg : heroBadgeImg.replace(/^\//, '')}" alt="SHAT Development & Growth" class="hero-badge-img" onerror="this.onerror=null; this.src='assets/logo/logo-banner.jpg';">
-                <div class="hero-verified-stamp" title="جهة معتمدة رسمياً">✓</div>
+                <div class="hero-verified-stamp" title="جهة معتمدة رسمياً">${icons.check('', 14)}</div>
               </div>
               ${isAdmin ? `
                 <div style="margin-top: 8px;">
@@ -187,7 +187,7 @@ export function renderHomePage(t) {
                   <!-- Direct Google Form Registration Link for this Specific Course -->
                   <a href="${c.googleFormUrl || 'https://forms.gle/shat-training-register-2026'}" target="_blank" rel="noopener" class="btn-course-form" title="التسجيل المباشر في الدورة">
                     ${icons.form('icon-inline', 16)}
-                    <span>التسجيل في الدورة (Google Form) ↗</span>
+                    <span style="display:inline-flex; align-items:center; gap:6px;">${icons.form('icon-inline', 14)} <span>التسجيل في الدورة (Google Form)</span> ${icons.externalLink('icon-inline', 12)}</span>
                   </a>
 
                   <!-- Permissions Guard Material Download -->
@@ -212,7 +212,7 @@ export function renderHomePage(t) {
         <div style="margin-top: 36px; text-align: center; display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
           <a href="#/academy" class="btn-cta" style="padding: 12px 24px; font-size: 0.95rem;">
             ${icons.academy('icon-inline', 18)}
-            <span>استعراض كافة دبلومات الأكاديمية وكلاس روم (${courses.length} برامج) ←</span>
+            <span style="display:inline-flex; align-items:center; gap:6px;"><span>استعراض كافة دبلومات الأكاديمية وكلاس روم (${courses.length} برامج)</span> ${icons.arrowLeft('icon-inline', 15)}</span>
           </a>
           <a href="#/register-course" class="btn-secondary" style="padding: 12px 24px; font-size: 0.95rem;">
             ${icons.form('icon-inline', 18)}
@@ -288,7 +288,7 @@ export function renderHomePage(t) {
                   <div>
                     <div style="display: flex; align-items: center; gap: 4px;">
                       <strong style="font-size: 0.85rem; color: var(--shat-navy-950);">شركة شات للتنمية</strong>
-                      <span style="color: #0284c7; font-size: 0.78rem;" title="حساب موثق">✓</span>
+                      <span style="color: #0284c7; display: inline-flex; align-items: center;" title="حساب موثق">${icons.checkCircle('icon-inline', 14)}</span>
                     </div>
                     <span style="font-size: 0.72rem; color: var(--text-muted);">${p.date}</span>
                   </div>
@@ -330,10 +330,10 @@ export function renderHomePage(t) {
 
                 <div class="social-card-footer">
                   <button type="button" class="btn-read-post" data-post-id="${p.id}">
-                    <span>${t.socialSection?.readArticle || 'قراءة التقرير والتفاصيل ▪'}</span>
+                    <span>${t.socialSection?.readArticle || 'قراءة التقرير والتفاصيل'}</span>
                   </button>
                   <a href="${p.link}" target="_blank" rel="noopener" class="social-view-link" title="${p.platform}">
-                    <span>${p.platform === 'Instagram' ? (t.socialSection?.viewInsta || 'إنستغرام ↗') : (t.socialSection?.viewFb || 'فيسبوك ↗')}</span>
+                    <span>${p.platform === 'Instagram' ? (t.socialSection?.viewInsta || 'إنستغرام') : (t.socialSection?.viewFb || 'فيسبوك')}</span>
                   </a>
                 </div>
               </div>
@@ -408,7 +408,7 @@ export function renderAboutPage(t) {
           <div style="margin-top: 24px; display: flex; flex-direction: column; gap: 12px;">
             ${a.subsections.whoWeAre.bullets.map(b => `
               <div style="display: flex; align-items: flex-start; gap: 12px;">
-                <span style="color: var(--shat-green-600); font-weight: bold; font-size: 1.2rem;">✓</span>
+                <span style="color: var(--shat-green-600); display: inline-flex; align-items: center; flex-shrink: 0; margin-top: 2px;">${icons.checkCircle('icon-inline', 18)}</span>
                 <span style="color: var(--text-secondary); font-size: 1rem;">${b}</span>
               </div>
             `).join('')}
@@ -452,13 +452,13 @@ export function renderAboutPage(t) {
       </div>
 
       <div class="section-pagination">
-        <a href="#/home" class="page-jump-btn">
-          <span>←</span>
+        <a href="#/home" class="page-jump-btn" style="display:inline-flex; align-items:center; gap:6px;">
+          <span style="display:inline-flex; align-items:center;">${icons.arrowRight('icon-inline', 14)}</span>
           <span>${t.nav.backHome}</span>
         </a>
-        <a href="#/services" class="page-jump-btn">
+        <a href="#/services" class="page-jump-btn" style="display:inline-flex; align-items:center; gap:6px;">
           <span>${t.services.title}</span>
-          <span>→</span>
+          <span style="display:inline-flex; align-items:center;">${icons.arrowLeft('icon-inline', 14)}</span>
         </a>
       </div>
     </div>
@@ -524,12 +524,12 @@ export function renderServicesPage(t) {
 
       <div class="section-pagination">
         <a href="#/about" class="page-jump-btn">
-          <span>←</span>
+          <span style="display:inline-flex; align-items:center;">${icons.arrowRight('icon-inline', 14)}</span>
           <span>${t.about.title}</span>
         </a>
         <a href="#/consulting" class="page-jump-btn">
           <span>${t.consultingSec.title}</span>
-          <span>→</span>
+          <span style="display:inline-flex; align-items:center;">${icons.arrowLeft('icon-inline', 14)}</span>
         </a>
       </div>
     </div>
@@ -572,7 +572,7 @@ export function renderConsultingPage(t) {
           <div style="display: flex; flex-direction: column; gap: 12px;">
             ${c.subsections.protection.items.map(it => `
               <div style="display: flex; align-items: flex-start; gap: 12px;">
-                <span style="color: var(--shat-green-600); font-weight: bold; font-size: 1.2rem;">✓</span>
+                <span style="color: var(--shat-green-600); display: inline-flex; align-items: center; flex-shrink: 0; margin-top: 2px;">${icons.checkCircle('icon-inline', 18)}</span>
                 <span style="color: var(--text-secondary); font-size: 1rem;">${it}</span>
               </div>
             `).join('')}
@@ -601,12 +601,12 @@ export function renderConsultingPage(t) {
 
       <div class="section-pagination">
         <a href="#/services" class="page-jump-btn">
-          <span>←</span>
+          <span style="display:inline-flex; align-items:center;">${icons.arrowRight('icon-inline', 14)}</span>
           <span>${t.services.title}</span>
         </a>
         <a href="#/delivery-model" class="page-jump-btn">
           <span>${t.deliveryModel.title}</span>
-          <span>→</span>
+          <span style="display:inline-flex; align-items:center;">${icons.arrowLeft('icon-inline', 14)}</span>
         </a>
       </div>
     </div>
@@ -647,12 +647,12 @@ export function renderDeliveryModelPage(t) {
 
       <div class="section-pagination">
         <a href="#/consulting" class="page-jump-btn">
-          <span>←</span>
+          <span style="display:inline-flex; align-items:center;">${icons.arrowRight('icon-inline', 14)}</span>
           <span>${t.consultingSec.title}</span>
         </a>
         <a href="#/approach" class="page-jump-btn">
           <span>${t.approach.title}</span>
-          <span>→</span>
+          <span style="display:inline-flex; align-items:center;">${icons.arrowLeft('icon-inline', 14)}</span>
         </a>
       </div>
     </div>
@@ -692,12 +692,12 @@ export function renderApproachPage(t) {
 
       <div class="section-pagination">
         <a href="#/delivery-model" class="page-jump-btn">
-          <span>←</span>
+          <span style="display:inline-flex; align-items:center;">${icons.arrowRight('icon-inline', 14)}</span>
           <span>${t.deliveryModel.title}</span>
         </a>
         <a href="#/references" class="page-jump-btn">
           <span>${t.references.title}</span>
-          <span>→</span>
+          <span style="display:inline-flex; align-items:center;">${icons.arrowLeft('icon-inline', 14)}</span>
         </a>
       </div>
     </div>
@@ -753,7 +753,9 @@ export function renderReferencesPage(t) {
 
               ${st.deliverable ? `
                 <div style="background: #ffffff; border: 1px dashed var(--shat-green-400); border-radius: 6px; padding: 10px 12px; margin-bottom: 14px;">
-                  <div style="font-size: 0.78rem; font-weight: 800; color: var(--shat-green-800); margin-bottom: 2px;">✓ المخرج المؤسسي المحقق:</div>
+                  <div style="font-size: 0.78rem; font-weight: 800; color: var(--shat-green-800); margin-bottom: 2px; display: flex; align-items: center; gap: 4px;">
+                    ${icons.checkCircle('icon-inline', 14)} <span>المخرج المؤسسي المحقق:</span>
+                  </div>
                   <div style="font-size: 0.85rem; color: var(--text-primary); line-height: 1.5;">${st.deliverable}</div>
                 </div>
               ` : ''}
@@ -761,7 +763,7 @@ export function renderReferencesPage(t) {
 
             <div style="padding-top: 12px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
               <a href="${st.route || '#/academy'}" style="font-size: 0.88rem; font-weight: 700; color: var(--shat-green-700); text-decoration: none;">
-                التسجيل بالمساق والبرنامج التدريبي ←
+                <span>التسجيل بالمساق والبرنامج التدريبي</span> ${icons.arrowLeft('icon-inline', 14)}
               </a>
             </div>
           </div>
@@ -770,12 +772,12 @@ export function renderReferencesPage(t) {
 
       <div class="section-pagination">
         <a href="#/approach" class="page-jump-btn">
-          <span>←</span>
+          <span style="display:inline-flex; align-items:center;">${icons.arrowRight('icon-inline', 14)}</span>
           <span>${t.approach.title}</span>
         </a>
         <a href="#/expertise" class="page-jump-btn">
           <span>${t.expertise.title}</span>
-          <span>→</span>
+          <span style="display:inline-flex; align-items:center;">${icons.arrowLeft('icon-inline', 14)}</span>
         </a>
       </div>
     </div>
@@ -811,7 +813,7 @@ export function renderExpertisePage(t) {
             </div>
             <div style="margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--border-subtle);">
               <a href="#/contact" style="font-size: 0.88rem; font-weight: 700; color: var(--shat-navy-800);">
-                ${t.nav.requestConsultation} →
+                <span>${t.nav.requestConsultation}</span> ${icons.arrowLeft('icon-inline', 14)}
               </a>
             </div>
           </div>
@@ -820,12 +822,12 @@ export function renderExpertisePage(t) {
 
       <div class="section-pagination">
         <a href="#/references" class="page-jump-btn">
-          <span>←</span>
+          <span style="display:inline-flex; align-items:center;">${icons.arrowRight('icon-inline', 14)}</span>
           <span>${t.references.title}</span>
         </a>
         <a href="#/value-partnerships" class="page-jump-btn">
           <span>${t.valuePartnerships.title}</span>
-          <span>→</span>
+          <span style="display:inline-flex; align-items:center;">${icons.arrowLeft('icon-inline', 14)}</span>
         </a>
       </div>
     </div>
@@ -901,12 +903,12 @@ export function renderValuePartnershipsPage(t) {
 
       <div class="section-pagination">
         <a href="#/expertise" class="page-jump-btn">
-          <span>←</span>
+          <span style="display:inline-flex; align-items:center;">${icons.arrowRight('icon-inline', 14)}</span>
           <span>${t.expertise.title}</span>
         </a>
         <a href="#/contact" class="page-jump-btn">
           <span>${t.contact.title}</span>
-          <span>→</span>
+          <span style="display:inline-flex; align-items:center;">${icons.arrowLeft('icon-inline', 14)}</span>
         </a>
       </div>
     </div>
@@ -1028,8 +1030,8 @@ export function renderAcademyPage(t) {
       <div class="container" style="padding: 40px 16px 80px; max-width: 860px; margin: 0 auto;">
         <!-- Gated Login Card -->
         <div style="background: #ffffff; border: 1.5px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 40px 24px; text-align: center; box-shadow: var(--shadow-md);">
-          <div style="width: 72px; height: 72px; border-radius: 50%; background: #ecfdf5; border: 2px solid #10b981; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; margin: 0 auto 16px;">
-            ◈
+          <div style="width: 72px; height: 72px; border-radius: 50%; background: #ecfdf5; border: 2px solid #10b981; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: #10b981;">
+            ${icons.lock('', 32)}
           </div>
           <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 8px;">
             تسجيل الدخول إلى منظومة المودل الأكاديمي
@@ -1086,7 +1088,7 @@ export function renderAcademyPage(t) {
             </p>
           </div>
           <a href="#/register-course" class="btn-cta" style="padding: 11px 22px; font-size: 0.92rem; text-decoration: none; border-radius: var(--radius-full);">
-            فتح نموذج التسجيل (Google Form) ↗
+            <span>فتح نموذج التسجيل (Google Form)</span> ${icons.externalLink('icon-inline', 14)}
           </a>
         </div>
       </div>
@@ -1105,8 +1107,8 @@ export function renderAcademyPage(t) {
     <div class="moodle-lms-classroom-header" style="background: #ffffff; border-bottom: 1px solid var(--border-subtle); padding: 14px 0; box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 40;">
       <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
         <div style="display: flex; align-items: center; gap: 14px;">
-          <div style="width: 44px; height: 44px; border-radius: 10px; background: #f0fdf4; border: 1.5px solid #10b981; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
-            ◈
+          <div style="width: 44px; height: 44px; border-radius: 10px; background: #f0fdf4; border: 1.5px solid #10b981; display: flex; align-items: center; justify-content: center; color: #047857;">
+            ${icons.graduationCap('', 24)}
           </div>
           <div>
             <div style="display: flex; align-items: center; gap: 8px;">
@@ -1118,7 +1120,9 @@ export function renderAcademyPage(t) {
             <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 10px; margin-top: 2px;">
               <span>المقرر النشط: <strong>${activeCourse.title || 'دبلوم المعيار الإنساني CHS'}</strong></span>
               <span>•</span>
-              <span style="color: #059669; font-weight: 600;">◈️ متصل بسحابة Google Drive</span>
+              <span style="color: #059669; font-weight: 600; display: inline-flex; align-items: center; gap: 5px;">
+                ${icons.checkCircle('icon-inline', 14)} متصل بسحابة Google Drive
+              </span>
             </div>
           </div>
         </div>
@@ -1150,17 +1154,14 @@ export function renderAcademyPage(t) {
     <div style="background: #ffffff; border-bottom: 2px solid var(--border-subtle);">
       <div class="container" style="display: flex; gap: 4px; overflow-x: auto; padding: 0 16px;">
         <button class="classroom-nav-tab active" data-classroom-tab="stream" style="padding: 14px 18px; font-size: 0.88rem; font-weight: 700; border: none; background: none; cursor: pointer; color: var(--shat-green-700); border-bottom: 3px solid var(--shat-green-600); display: flex; align-items: center; gap: 6px; white-space: nowrap;">
-          
           <span>ساحة المشاركات (Stream)</span>
         </button>
 
         <button class="classroom-nav-tab" data-classroom-tab="classwork" style="padding: 14px 18px; font-size: 0.88rem; font-weight: 600; border: none; background: none; cursor: pointer; color: var(--text-secondary); border-bottom: 3px solid transparent; display: flex; align-items: center; gap: 6px; white-space: nowrap;">
-          
           <span>الواجب الدراسي والمقررات (Classwork)</span>
         </button>
 
         <button class="classroom-nav-tab" data-classroom-tab="drive-folder" style="padding: 14px 18px; font-size: 0.88rem; font-weight: 600; border: none; background: none; cursor: pointer; color: var(--text-secondary); border-bottom: 3px solid transparent; display: flex; align-items: center; gap: 6px; white-space: nowrap;">
-          
           <span>سحابة Google Drive (Class Drive)</span>
         </button>
 
@@ -1176,7 +1177,7 @@ export function renderAcademyPage(t) {
 
         ${userRole === 'instructor' ? `
           <button class="classroom-nav-tab" data-classroom-tab="instructor-upload" style="padding: 14px 18px; font-size: 0.88rem; font-weight: 700; border: none; background: none; cursor: pointer; color: #047857; border-bottom: 3px solid transparent; display: flex; align-items: center; gap: 6px; white-space: nowrap;">
-            <span>▲</span>
+            ${icons.upload('icon-inline', 16)}
             <span>رفع الحقائب لدرايف</span>
           </button>
         ` : ''}
@@ -1225,8 +1226,8 @@ export function renderAcademyPage(t) {
               المدرب الرئيسي: <strong>${activeCourse.instructor || 'د. أسامة المنصور'}</strong> • الساعات المعتمدة: 60 ساعة تدريبية معتمدة دولياً
             </p>
           </div>
-          <div style="position: absolute; left: 24px; bottom: 20px; opacity: 0.15; font-size: 6rem; line-height: 1;">
-            ◈
+          <div style="position: absolute; left: 24px; bottom: 20px; opacity: 0.12; color: #ffffff;">
+            ${icons.graduationCap('', 110)}
           </div>
         </div>
 
@@ -1259,7 +1260,7 @@ export function renderAcademyPage(t) {
                 انقر للتحميل الفعلي المباشر لملف دليل المعيار الإنساني الأساسي بصيغة PDF لجهازك فوراً:
               </p>
               <button class="btn-cta btn-trigger-real-download" data-file="دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf" style="width: 100%; padding: 10px; font-size: 0.84rem; display: flex; align-items: center; justify-content: center; gap: 8px;">
-                <span>↓</span>
+                ${icons.download('icon-inline', 16)}
                 <span>تحميل الدليل المعتمد (PDF)</span>
               </button>
             </div>
@@ -1293,14 +1294,16 @@ export function renderAcademyPage(t) {
                 </p>
                 <div style="border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 12px; display: flex; justify-content: space-between; align-items: center; background: #f8fafc;">
                   <div style="display: flex; align-items: center; gap: 10px;">
-                    <span style="font-size: 1.5rem;">▲</span>
+                    <div style="color: #059669; display: flex; align-items: center;">
+                      ${icons.fileSpreadsheet('', 26)}
+                    </div>
                     <div>
                       <div style="font-weight: 700; font-size: 0.86rem; color: var(--shat-navy-950);">مصفوفة_تقييم_الامتثال_المؤسسي_CHS.xlsx</div>
                       <div style="font-size: 0.74rem; color: var(--text-muted);">Excel Spreadsheet • 1.2 MB • Google Drive</div>
                     </div>
                   </div>
-                  <button class="btn-secondary btn-trigger-real-download" data-file="مصفوفة_تقييم_الامتثال_المؤسسي_CHS.xlsx" style="padding: 6px 12px; font-size: 0.8rem;">
-                    ↓ تحميل مباشر
+                  <button class="btn-secondary btn-trigger-real-download" data-file="مصفوفة_تقييم_الامتثال_المؤسسي_CHS.xlsx" style="padding: 6px 12px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 6px;">
+                    ${icons.download('icon-inline', 14)} <span>تحميل مباشر</span>
                   </button>
                 </div>
               </div>
@@ -1320,17 +1323,23 @@ export function renderAcademyPage(t) {
                 </p>
                 <div style="border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 12px; display: flex; justify-content: space-between; align-items: center; background: #f8fafc;">
                   <div style="display: flex; align-items: center; gap: 10px;">
-                    <span style="font-size: 1.5rem;"></span>
+                    <div style="color: #dc2626; display: flex; align-items: center;">
+                      ${icons.filePdf('', 26)}
+                    </div>
                     <div>
                       <div style="font-weight: 700; font-size: 0.86rem; color: var(--shat-navy-950);">دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf</div>
                       <div style="font-size: 0.74rem; color: var(--text-muted);">PDF Document • 4.8 MB • معتمد</div>
                     </div>
                   </div>
-                  <button class="btn-secondary btn-trigger-real-download" data-file="دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf" style="padding: 6px 12px; font-size: 0.8rem;">
-                    ↓ تحميل مباشر
+                  <button class="btn-secondary btn-trigger-real-download" data-file="دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf" style="padding: 6px 12px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 6px;">
+                    ${icons.download('icon-inline', 14)} <span>تحميل مباشر</span>
                   </button>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
             </div>
           </div>
         </div>
@@ -1343,72 +1352,34 @@ export function renderAcademyPage(t) {
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
           <div>
             <h2 style="font-size: 1.45rem; font-weight: 800; color: var(--shat-navy-950);">موضوعات ووحدات المنهج التدريبي</h2>
-            <p style="font-size: 0.9rem; color: var(--text-muted);">الوحدات الأكاديمية والتكليفات والملفات المباشرة للتحميل لجهازك</p>
-          </div>
-          <div style="display: flex; gap: 10px;">
-            <a href="https://drive.google.com" target="_blank" rel="noopener" class="btn-secondary" style="padding: 8px 14px; font-size: 0.82rem; border-radius: var(--radius-full);">
-              فتح مجلد Drive المشترك ↗
-            </a>
-          </div>
-        </div>
-
-        <div style="display: flex; flex-direction: column; gap: 20px;">
-          <!-- Topic Unit 1 -->
-          <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm);">
-            <div style="background: #f8fafc; padding: 16px 20px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
-              <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--shat-navy-950); margin: 0;">
-                الوحدة الأولى: الإطار المفاهيمي ومعايير الجودة والمساءلة الدولية
-              </h3>
-              <span class="status-pill active">✓ مكتملة (100%)</span>
-            </div>
-            <div style="padding: 18px 20px; display: flex; flex-direction: column; gap: 12px;">
+            <p style="font-size: 0.9rem; color: var(--text-muted);">الوحدات الأكاديمية والتكليفات والم�            <div style="padding: 18px 20px; display: flex; flex-direction: column; gap: 12px;">
               <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);">
                 <div style="display: flex; align-items: center; gap: 10px;">
-                  <span style="font-size: 1.4rem;"></span>
-                  <div>
-                    <div style="font-weight: 700; font-size: 0.88rem; color: var(--shat-navy-950);">دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf</div>
-                    <div style="font-size: 0.74rem; color: var(--text-muted);">المرجع الأساسي للوحدة • PDF • 4.8 MB</div>
+                  <div style="color: #059669; display: flex; align-items: center;">
+                    ${icons.fileSpreadsheet('', 24)}
                   </div>
-                </div>
-                <button class="btn-cta btn-trigger-real-download" data-file="دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf" style="padding: 6px 14px; font-size: 0.8rem;">
-                  ↓ تحميل مباشر
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Topic Unit 2 -->
-          <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm);">
-            <div style="background: #f8fafc; padding: 16px 20px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
-              <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--shat-navy-950); margin: 0;">
-                الوحدة الثانية: أدوات المساءلة للجهات المتضررة (AAP Framework)
-              </h3>
-              <span class="status-pill active">● جارية الآن (75%)</span>
-            </div>
-            <div style="padding: 18px 20px; display: flex; flex-direction: column; gap: 12px;">
-              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);">
-                <div style="display: flex; align-items: center; gap: 10px;">
-                  <span style="font-size: 1.4rem;">▲</span>
                   <div>
                     <div style="font-weight: 700; font-size: 0.88rem; color: var(--shat-navy-950);">مصفوفة_تقييم_الامتثال_المؤسسي_CHS.xlsx</div>
                     <div style="font-size: 0.74rem; color: var(--text-muted);">تمرين تطبيقي على قياس الامتثال • Excel • 1.2 MB</div>
                   </div>
                 </div>
-                <button class="btn-cta btn-trigger-real-download" data-file="مصفوفة_تقييم_الامتثال_المؤسسي_CHS.xlsx" style="padding: 6px 14px; font-size: 0.8rem;">
-                  ↓ تحميل مباشر
+                <button class="btn-cta btn-trigger-real-download" data-file="مصفوفة_تقييم_الامتثال_المؤسسي_CHS.xlsx" style="padding: 6px 14px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 6px;">
+                  ${icons.download('icon-inline', 14)} <span>تحميل مباشر</span>
                 </button>
               </div>
 
               <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);">
                 <div style="display: flex; align-items: center; gap: 10px;">
-                  <span style="font-size: 1.4rem;"></span>
+                  <div style="color: #2563eb; display: flex; align-items: center;">
+                    ${icons.fileDoc('', 24)}
+                  </div>
                   <div>
                     <div style="font-weight: 700; font-size: 0.88rem; color: var(--shat-navy-950);">حقيبة_أدوات_المساءلة_للجهات_المتضررة_AAP.docx</div>
                     <div style="font-size: 0.74rem; color: var(--text-muted);">نماذج وقوائم التحقق الميدانية • Word • 2.4 MB</div>
                   </div>
                 </div>
-                <button class="btn-cta btn-trigger-real-download" data-file="حقيبة_أدوات_المساءلة_للجهات_المتضررة_AAP.docx" style="padding: 6px 14px; font-size: 0.8rem;">
-                  ↓ تحميل مباشر
+                <button class="btn-cta btn-trigger-real-download" data-file="حقيبة_أدوات_المساءلة_للجهات_المتضررة_AAP.docx" style="padding: 6px 14px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 6px;">
+                  ${icons.download('icon-inline', 14)} <span>تحميل مباشر</span>
                 </button>
               </div>
             </div>
@@ -1425,14 +1396,16 @@ export function renderAcademyPage(t) {
             <div style="padding: 18px 20px; display: flex; flex-direction: column; gap: 12px;">
               <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);">
                 <div style="display: flex; align-items: center; gap: 10px;">
-                  <span style="font-size: 1.4rem;"></span>
+                  <div style="color: #dc2626; display: flex; align-items: center;">
+                    ${icons.filePdf('', 24)}
+                  </div>
                   <div>
                     <div style="font-weight: 700; font-size: 0.88rem; color: var(--shat-navy-950);">إطار_سياسات_الحماية_وصون_السلامة_PSEA.pdf</div>
                     <div style="font-size: 0.74rem; color: var(--text-muted);">سياسات وإجراءات الإبلاغ الآمن • PDF • 3.5 MB</div>
                   </div>
                 </div>
-                <button class="btn-cta btn-trigger-real-download" data-file="إطار_سياسات_الحماية_وصون_السلامة_PSEA.pdf" style="padding: 6px 14px; font-size: 0.8rem;">
-                  ↓ تحميل مباشر
+                <button class="btn-cta btn-trigger-real-download" data-file="إطار_سياسات_الحماية_وصون_السلامة_PSEA.pdf" style="padding: 6px 14px; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 6px;">
+                  ${icons.download('icon-inline', 14)} <span>تحميل مباشر</span>
                 </button>
               </div>
             </div>
@@ -1447,7 +1420,9 @@ export function renderAcademyPage(t) {
         <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm); margin-bottom: 24px;">
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 18px;">
             <div style="display: flex; align-items: center; gap: 12px;">
-              <div style="font-size: 2.2rem;">◈️</div>
+              <div style="color: #059669; display: flex; align-items: center;">
+                ${icons.cloud('', 36)}
+              </div>
               <div>
                 <h2 style="font-size: 1.3rem; font-weight: 800; color: var(--shat-navy-950); margin: 0;">
                   مستودع Google Drive المشترك لشركة شات
@@ -1460,7 +1435,7 @@ export function renderAcademyPage(t) {
 
             <!-- Download All Button -->
             <button class="btn-cta btn-trigger-real-download" data-file="الحقيبة_التدريبية_الشاملة_CHS_2026.docx" style="padding: 9px 18px; font-size: 0.86rem; border-radius: var(--radius-full); display: flex; align-items: center; gap: 8px;">
-              
+              ${icons.download('icon-inline', 16)}
               <span>تحميل الحزمة الشاملة فوراً لجهازك</span>
             </button>
           </div>
@@ -1470,7 +1445,9 @@ export function renderAcademyPage(t) {
             <div style="border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 16px; background: #f8fafc; display: flex; flex-direction: column; justify-content: space-between;">
               <div>
                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                  <span style="font-size: 1.5rem;"></span>
+                  <div style="color: #dc2626; display: flex; align-items: center;">
+                    ${icons.filePdf('', 26)}
+                  </div>
                   <span class="status-pill active" style="font-size: 0.7rem; padding: 1px 6px;">PDF معتمد</span>
                 </div>
                 <strong style="font-size: 0.9rem; color: var(--shat-navy-950); display: block; margin-bottom: 4px;">
@@ -1480,8 +1457,8 @@ export function renderAcademyPage(t) {
                   الحجم: 4.8 MB • تم التحقق عبر Google Drive CDN
                 </span>
               </div>
-              <button class="btn-secondary btn-trigger-real-download" data-file="دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf" style="width: 100%; padding: 8px; font-size: 0.82rem; font-weight: 700;">
-                ↓ تحميل مباشر لجهازك
+              <button class="btn-secondary btn-trigger-real-download" data-file="دليل_المعيار_الإنساني_الأساسي_CHS_2026.pdf" style="width: 100%; padding: 8px; font-size: 0.82rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                ${icons.download('icon-inline', 14)} <span>تحميل مباشر لجهازك</span>
               </button>
             </div>
 
@@ -1489,7 +1466,9 @@ export function renderAcademyPage(t) {
             <div style="border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 16px; background: #f8fafc; display: flex; flex-direction: column; justify-content: space-between;">
               <div>
                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                  <span style="font-size: 1.5rem;">▲</span>
+                  <div style="color: #059669; display: flex; align-items: center;">
+                    ${icons.fileSpreadsheet('', 26)}
+                  </div>
                   <span class="status-pill active" style="font-size: 0.7rem; padding: 1px 6px; background: #ecfdf5; color: #047857;">Excel تطبيق</span>
                 </div>
                 <strong style="font-size: 0.9rem; color: var(--shat-navy-950); display: block; margin-bottom: 4px;">
@@ -1499,8 +1478,8 @@ export function renderAcademyPage(t) {
                   الحجم: 1.2 MB • جدول التقييم التفاعلي الكامل
                 </span>
               </div>
-              <button class="btn-secondary btn-trigger-real-download" data-file="مصفوفة_تقييم_الامتثال_المؤسسي_CHS.xlsx" style="width: 100%; padding: 8px; font-size: 0.82rem; font-weight: 700;">
-                ↓ تحميل مباشر لجهازك
+              <button class="btn-secondary btn-trigger-real-download" data-file="مصفوفة_تقييم_الامتثال_المؤسسي_CHS.xlsx" style="width: 100%; padding: 8px; font-size: 0.82rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                ${icons.download('icon-inline', 14)} <span>تحميل مباشر لجهازك</span>
               </button>
             </div>
 
@@ -1508,7 +1487,9 @@ export function renderAcademyPage(t) {
             <div style="border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 16px; background: #f8fafc; display: flex; flex-direction: column; justify-content: space-between;">
               <div>
                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                  <span style="font-size: 1.5rem;"></span>
+                  <div style="color: #2563eb; display: flex; align-items: center;">
+                    ${icons.fileDoc('', 26)}
+                  </div>
                   <span class="status-pill active" style="font-size: 0.7rem; padding: 1px 6px; background: #eff6ff; color: #1e40af;">Word وثيقة</span>
                 </div>
                 <strong style="font-size: 0.9rem; color: var(--shat-navy-950); display: block; margin-bottom: 4px;">
@@ -1518,8 +1499,8 @@ export function renderAcademyPage(t) {
                   الحجم: 2.4 MB • خطة المساءلة المجتمعية المعتمدة
                 </span>
               </div>
-              <button class="btn-secondary btn-trigger-real-download" data-file="حقيبة_أدوات_المساءلة_للجهات_المتضررة_AAP.docx" style="width: 100%; padding: 8px; font-size: 0.82rem; font-weight: 700;">
-                ↓ تحميل مباشر لجهازك
+              <button class="btn-secondary btn-trigger-real-download" data-file="حقيبة_أدوات_المساءلة_للجهات_المتضررة_AAP.docx" style="width: 100%; padding: 8px; font-size: 0.82rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                ${icons.download('icon-inline', 14)} <span>تحميل مباشر لجهازك</span>
               </button>
             </div>
           </div>
@@ -1607,15 +1588,15 @@ export function renderAcademyPage(t) {
             <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.86rem;">
               <div style="display: flex; justify-content: space-between; padding: 10px; background: #f8fafc; border-radius: 6px;">
                 <span>اختبار الوحدة 1 (CHS Foundations)</span>
-                <strong style="color: #047857;">95 / 100 ✓</strong>
+                <strong style="color: #047857;">95 / 100</strong>
               </div>
               <div style="display: flex; justify-content: space-between; padding: 10px; background: #f8fafc; border-radius: 6px;">
                 <span>تمرين مصفوفة المساءلة AAP</span>
-                <strong style="color: #047857;">90 / 100 ✓</strong>
+                <strong style="color: #047857;">90 / 100</strong>
               </div>
               <div style="display: flex; justify-content: space-between; padding: 10px; background: #f8fafc; border-radius: 6px;">
                 <span>نسبة الحضور والتفاعل الحي</span>
-                <strong style="color: #047857;">92% ✓</strong>
+                <strong style="color: #047857;">92%</strong>
               </div>
             </div>
           </div>
@@ -1634,8 +1615,8 @@ export function renderAcademyPage(t) {
                 تمنح هذه الشهادة رسمياً بعد استكمال متطلبات الدورة بنسبة حضور لا تقل عن 80% وتسليم كافة التمارين العملية الميدانية.
               </p>
             </div>
-            <button class="btn-cta btn-trigger-real-download" data-file="شهادة_تخرج_معتمدة_SHAT_2026.pdf" style="width: 100%; padding: 11px; font-weight: 700; font-size: 0.88rem;">
-              ↓ تحميل الشهادة الرسمية بصيغة PDF لجهازك
+            <button class="btn-cta btn-trigger-real-download" data-file="شهادة_تخرج_معتمدة_SHAT_2026.pdf" style="width: 100%; padding: 11px; font-weight: 700; font-size: 0.88rem; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+              ${icons.download('icon-inline', 16)} <span>تحميل الشهادة الرسمية بصيغة PDF لجهازك</span>
             </button>
           </div>
         </div>
@@ -1647,8 +1628,8 @@ export function renderAcademyPage(t) {
       ${userRole === 'instructor' ? `
         <div class="classroom-pane" id="pane-instructor-upload" style="display: none;">
           <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 28px; box-shadow: var(--shadow-sm); max-width: 760px; margin: 0 auto;">
-            <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 6px;">
-              ▲ رفع حقيبة تدريبية جديدة إلى Google Drive والمنصة
+            <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+              ${icons.upload('icon-green', 22)} <span>رفع حقيبة تدريبية جديدة إلى Google Drive والمنصة</span>
             </h2>
             <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
               الملفات المرفوعة يتم حفظها فوراً في سحابة Google Drive التابعة للصف التدريبي وتتاح للطلاب للتنزيل المباشر.
@@ -1670,7 +1651,9 @@ export function renderAcademyPage(t) {
               </div>
 
               <div class="upload-dropzone" id="teacher-dropzone" style="margin-bottom: 16px; border: 2px dashed #10b981; border-radius: var(--radius-md); padding: 28px; text-align: center; cursor: pointer; background: #f0fdf4;">
-                <div style="font-size: 2.2rem; margin-bottom: 6px;">◈️</div>
+                <div style="color: #059669; display: flex; align-items: center; justify-content: center; margin-bottom: 8px;">
+                  ${icons.cloudUpload('', 38)}
+                </div>
                 <div style="font-weight: 700; font-size: 0.95rem; color: var(--shat-navy-950);">اسحب الملف هنا أو انقر للاختيار</div>
                 <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">يتم التخزين والمزامنة السحابية الفورية</div>
                 <input type="file" id="teacher-file-input" style="display: none;">
@@ -1811,7 +1794,7 @@ export function renderAcademyPage(t) {
               <p style="font-size: 0.88rem; color: var(--text-muted);">إدارة وتسكين المتدربين والمنظمات الذين سجلوا عبر نموذج التسجيل السحابي</p>
             </div>
             <a href="#/register-course" target="_blank" class="btn-secondary" style="padding: 8px 16px; font-size: 0.82rem; border-radius: var(--radius-full);">
-              فتح نموذج Google Form المباشر ↗
+              <span>فتح نموذج Google Form المباشر</span> ${icons.externalLink('icon-inline', 13)}
             </a>
           </div>
 
@@ -1847,7 +1830,7 @@ export function renderAcademyPage(t) {
                     </td>
                     <td style="padding: 12px 14px;">
                       <span class="status-pill ${app.status === 'approved' ? 'active' : ''}" style="font-size: 0.72rem; padding: 2px 8px;">
-                        ${app.status === 'approved' ? '✓ مقبول وتم التسكين' : (app.status === 'rejected' ? '✕ مرفوض' : '⏳ قيد المراجعة')}
+                        ${app.status === 'approved' ? 'مقبول وتم التسكين' : (app.status === 'rejected' ? 'مرفوض' : 'قيد المراجعة والتدقيق')}
                       </span>
                     </td>
                     <td style="padding: 12px 14px; text-align: center;">
@@ -1994,11 +1977,11 @@ export function renderAcademyPage(t) {
                         </span>
                       </div>
                       <div style="display: flex; align-items: center; gap: 8px;">
-                        <a href="#/course/${c.id}" class="btn-secondary" style="padding: 6px 12px; font-size: 0.8rem; text-decoration: none;">
-                          ${icons.book('icon-inline', 15)} صفحة الدورة ▪
+                        <a href="#/course/${c.id}" class="btn-secondary" style="padding: 6px 12px; font-size: 0.8rem; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+                          ${icons.book('icon-inline', 15)} <span>صفحة الدورة</span>
                         </a>
-                        <button type="button" class="btn-secondary btn-delete-moodle-course" data-course-id="${c.id}" style="padding: 6px 12px; font-size: 0.8rem; color: #dc2626; border-color: #fecaca; background: #fff5f5;">
-                          ${icons.trash('icon-inline', 15)} حذف
+                        <button type="button" class="btn-secondary btn-delete-moodle-course" data-course-id="${c.id}" style="padding: 6px 12px; font-size: 0.8rem; color: #dc2626; border-color: #fecaca; background: #fff5f5; display: inline-flex; align-items: center; gap: 4px;">
+                          ${icons.trash('icon-inline', 15)} <span>حذف</span>
                         </button>
                       </div>
                     </div>
@@ -2085,7 +2068,7 @@ export function renderAcademyPage(t) {
               </div>
 
               <button type="submit" class="btn-cta" style="width: 100%; padding: 12px; font-weight: 700; font-size: 0.95rem;">
-                ✓ حفظ وتطبيق كافة التعديلات على الموقع فوراً
+                حفظ وتطبيق كافة التعديلات على الموقع فوراً
               </button>
             </form>
           </div>
@@ -2126,7 +2109,7 @@ export function renderGoogleFormRegistration(t) {
           </p>
 
           <div style="padding: 10px 14px; background: #ecfdf5; border-radius: var(--radius-sm); font-size: 0.82rem; color: #047857; display: flex; align-items: center; gap: 8px;">
-            <span>ℹ️</span>
+            <span style="display: inline-flex; align-items: center; color: #047857;">${icons.info('icon-inline', 16)}</span>
             <span>الحقول التي تحمل علامة (*) إلزامية لاستكمال التسجيل.</span>
           </div>
         </div>
@@ -2240,8 +2223,8 @@ export function renderGoogleFormRegistration(t) {
 
         <!-- Confirmation Success Screen (Initially hidden) -->
         <div id="gform-success-receipt" style="display: none; background: #ffffff; border: 1px solid #bbf7d0; border-radius: var(--radius-lg); padding: 36px 28px; box-shadow: var(--shadow-sm); border-top: 6px solid #059669; text-align: center;">
-          <div style="width: 60px; height: 60px; border-radius: 50%; background: #ecfdf5; border: 2px solid #10b981; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 16px; color: #047857;">
-            ✓
+          <div style="width: 60px; height: 60px; border-radius: 50%; background: #ecfdf5; border: 2px solid #10b981; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: #047857;">
+            ${icons.checkCircle('', 32)}
           </div>
           <h2 style="font-size: 1.45rem; font-weight: 800; color: var(--shat-navy-950); margin-bottom: 8px;">
             تم تسجيل استجابتك بنجاح
@@ -2374,14 +2357,14 @@ export function renderCourseDetailPage(t, courseId) {
                 </a>
 
                 <a href="${course.googleFormUrl || 'https://forms.gle/shat-training-register-2026'}" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="padding: 9px; font-size: 0.82rem; text-align: center; justify-content: center; width: 100%; text-decoration: none; margin-bottom: 8px; border-color: var(--border-subtle);" id="course-btn-gform">
-                  <span>أو التقديم عبر Google Form الرسمي ↗</span>
+                  <span style="display:inline-flex; align-items:center; gap:6px;"><span>أو التقديم عبر Google Form الرسمي</span> ${icons.externalLink('icon-inline', 12)}</span>
                 </a>
 
                 <!-- 2. Custom Google Drive Repository (Permission Checked) -->
                 ${canDownload ? `
                   <a href="${course.driveFolderUrl || 'https://drive.google.com/drive/folders/shat-materials'}" target="_blank" rel="noopener" class="btn-course-form" style="padding: 10px; font-size: 0.88rem; justify-content: center;" id="course-btn-drive">
                     ${icons.drive('icon-inline', 18)}
-                    <span>فتح مجلد الدورة على Google Drive ↗</span>
+                    <span style="display:inline-flex; align-items:center; gap:6px;"><span>فتح مجلد الدورة على Google Drive</span> ${icons.externalLink('icon-inline', 12)}</span>
                   </a>
                 ` : `
                   <button type="button" class="btn-course-form btn-guard-drive" data-course-title="${course.title}" style="padding: 10px; font-size: 0.85rem; justify-content: center; width: 100%; border-color: #fde68a; background: #fffbeb; color: #b45309;" id="course-btn-drive">
@@ -2404,7 +2387,7 @@ export function renderCourseDetailPage(t, courseId) {
                 `}
 
                 <div style="font-size: 0.76rem; color: var(--text-muted); text-align: center; line-height: 1.5; margin-top: 4px;">
-                  ✓ تسليم شهادة معتمدة دولياً برقم تسلسلي معتمد عند اجتياز المتطلبات.
+                  تسليم شهادة معتمدة دولياً برقم تسلسلي معتمد عند اجتياز المتطلبات.
                 </div>
               </div>
             </div>
@@ -2498,9 +2481,9 @@ export function renderCourseDetailPage(t, courseId) {
                   </div>
                   <div style="display: flex; align-items: center; gap: 10px;">
                     <span class="status-pill ${m.status === 'completed' ? 'active' : ''}" style="font-size: 0.74rem;">
-                      ${m.status === 'completed' ? '✓ تم الإنجاز' : m.status === 'in-progress' ? 'قيد التنفيذ' : 'الوحدة القادمة'}
+                      ${m.status === 'completed' ? 'تم الإنجاز' : m.status === 'in-progress' ? 'قيد التنفيذ' : 'الوحدة القادمة'}
                     </span>
-                    <span style="color: var(--text-muted); font-size: 0.85rem;">▼</span>
+                    <span style="color: var(--text-muted); display: inline-flex; align-items: center;">${icons.chevronDown('icon-inline', 14)}</span>
                   </div>
                 </div>
                 <div class="module-accordion-body">
@@ -2517,7 +2500,7 @@ export function renderCourseDetailPage(t, courseId) {
                     <div style="margin-top: 14px; padding-top: 10px; border-top: 1px dashed var(--border-subtle); display: flex; justify-content: flex-end;">
                       <a href="#/course/${course.id}/lesson/${m.id || 'chs-lesson-' + (idx + 1) + '-1'}" class="shat-btn shat-btn-primary shat-btn-sm" style="text-decoration: none; padding: 6px 16px; font-size: 0.82rem; border-radius: var(--radius-full); display: inline-flex; align-items: center; gap: 6px;">
                         <span>دخول الدرس التفاعلي</span>
-                        <span>←</span>
+                        <span style="display:inline-flex; align-items:center;">${icons.arrowLeft('icon-inline', 14)}</span>
                       </a>
                     </div>
                   </div>
@@ -2543,7 +2526,7 @@ export function renderCourseDetailPage(t, courseId) {
                 </button>
                 <a href="${course.googleFormUrl || 'https://forms.gle/shat-training-register-2026'}" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="border-color: #10b981; color: #047857; text-decoration: none; display: flex; align-items: center; gap: 8px; padding: 11px 20px;">
                   ${icons.form('icon-inline', 16)}
-                  <span>التسجيل في الدورة (Google Form) ↗</span>
+                  <span style="display:inline-flex; align-items:center; gap:6px;"><span>التسجيل في الدورة (Google Form)</span> ${icons.externalLink('icon-inline', 12)}</span>
                 </a>
                 ${ENV.features.enableDemoQuickFill ? `
                   <button type="button" class="btn-secondary btn-quick-student-login" style="background: #eff6ff; color: #1e40af; border-color: #93c5fd; padding: 11px 20px;">
@@ -2630,7 +2613,7 @@ export function renderCourseDetailPage(t, courseId) {
                       <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 10px;">
                         <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--shat-navy-950); margin: 0;">${a.title}</h4>
                         <span class="status-pill ${a.status === 'graded' ? 'active' : ''}" style="font-size: 0.74rem;">
-                          ${a.status === 'graded' ? `✓ معتمد (${a.score})` : a.status === 'submitted' ? 'قيد التصحيح' : 'بانتظار التسليم'}
+                          ${a.status === 'graded' ? `معتمد (${a.score})` : a.status === 'submitted' ? 'قيد التصحيح' : 'بانتظار التسليم'}
                         </span>
                       </div>
                       <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px;">
@@ -2853,7 +2836,7 @@ export function renderCourseDetailPage(t, courseId) {
                   </div>
                 </div>
                 <button type="button" class="btn-secondary btn-edit-image-trigger" data-img-key="courseCover_${course.id}" data-img-title="تعديل غلاف دورة: ${course.title}" style="padding: 7px 14px; font-size: 0.82rem;">
-                  ${icons.image('icon-inline', 15)} تغيير وتخصيص الغلاف ↗
+                  <span style="display:inline-flex; align-items:center; gap:6px;">${icons.image('icon-inline', 15)} <span>تغيير وتخصيص الغلاف</span> ${icons.externalLink('icon-inline', 12)}</span>
                 </button>
               </div>
 

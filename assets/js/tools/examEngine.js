@@ -3,6 +3,7 @@
 // Fully Trilingual (AR, EN, FR) & WCAG AAA High Contrast Design
 
 import { showToast } from '../components/toast.js';
+import { icons } from '../icons.js';
 
 export const EXAM_REGISTRY = {
   'shat-chs-master': {
@@ -333,13 +334,13 @@ export const examEngine = {
         <div class="modal-window" style="max-width: 780px; max-height: 92vh; display: flex; flex-direction: column;">
           <div class="modal-top no-print" style="border-bottom: 2px solid var(--shat-navy); padding: 18px 24px;">
             <div style="display: flex; align-items: center; gap: 10px;">
-              <span style="font-size: 1.5rem; color: var(--shat-navy);"></span>
+              <span style="display: inline-flex; align-items: center; color: var(--shat-navy);">${icons.award('', 26)}</span>
               <div>
                 <h3 id="modal-exam-title" style="font-size: 1.15rem; font-weight: 900; color: var(--shat-navy); margin: 0;"></h3>
                 <span id="modal-exam-subtitle" style="font-size: 0.78rem; color: var(--shat-green); font-weight: 700;"></span>
               </div>
             </div>
-            <button class="modal-close" id="modal-exam-close" aria-label="Close">✕</button>
+            <button class="modal-close" id="modal-exam-close" aria-label="Close">${icons.x('', 18)}</button>
           </div>
           <div id="modal-exam-body" style="overflow-y: auto; padding: 24px;"></div>
         </div>
@@ -368,12 +369,13 @@ export const examEngine = {
     const txt = (ar, en, fr) => (lang === 'fr' ? fr || en : (lang === 'en' ? en : ar));
 
     container.innerHTML = `
-      <div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 10px; padding: 14px 18px; margin-bottom: 22px; font-size: 0.88rem; color: #1E40AF; line-height: 1.6;">
-        ℹ️ ${txt(
+      <div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 10px; padding: 14px 18px; margin-bottom: 22px; font-size: 0.88rem; color: #1E40AF; line-height: 1.6; display: flex; align-items: flex-start; gap: 8px;">
+        <span style="display: inline-flex; margin-top: 2px;">${icons.info('icon-inline', 16)}</span>
+        <span>${txt(
           'أهلاً بك في نظام التقييم الأكاديمي المعتمد. أجب عن كافة الأسئلة بدقة استناداً للمعايير الدولية. عند تحقيقك درجة 80% فأعلى، سيتم تلقائياً إصدار شهادتك الرقمية المعتمدة رسمياً وتوثيقها بباركود التحقق الفوري.',
           'Welcome to the accredited assessment portal. Answer all questions adhering to international standards. Achieving 80% or higher unlocks your verifiable official digital certificate instantly.',
           'Bienvenue dans l’évaluation officielle. Un score d’au moins 80% génère instantanément votre certificat accrédité vérifiable par QR code.'
-        )}
+        )}</span>
       </div>
 
       <form id="form-interactive-exam" style="display: flex; flex-direction: column; gap: 24px;">
@@ -428,7 +430,7 @@ export const examEngine = {
           </button>
 
           <button type="submit" class="btn-clean btn-primary btn-md" style="background: var(--shat-green); font-weight: 800; padding: 12px 28px; box-shadow: 0 4px 14px rgba(30,126,52,0.3);">
-            <span>✓ ${txt('تسليم الإجابات واحتساب النتيجة', 'Submit & Grade Exam', 'Soumettre et Calculer')}</span>
+            <span>${txt('تسليم الإجابات واحتساب النتيجة', 'Submit & Grade Exam', 'Soumettre et Calculer')}</span>
           </button>
         </div>
       </form>
@@ -488,8 +490,8 @@ export const examEngine = {
 
       container.innerHTML = `
         <div style="text-align: center; padding: 20px 0;">
-          <div style="width: 80px; height: 80px; background: #DCFCE7; color: #16A34A; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 16px; border: 3px solid #86EFAC;">
-            ✓
+          <div style="width: 80px; height: 80px; background: #DCFCE7; color: #16A34A; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; border: 3px solid #86EFAC;">
+            ${icons.checkCircle('', 44)}
           </div>
           <h2 style="font-size: 1.6rem; font-weight: 900; color: var(--shat-navy); margin: 0 0 8px;">
             ${txt('مبارك! تم اجتياز الاختبار بنجاح باهر', 'Congratulations! You Passed Successfully', 'Félicitations ! Examen Réussi')}
@@ -543,14 +545,14 @@ export const examEngine = {
         };
       }
 
-      showToast(txt('✓ تهانينا! تم إصدار وتوثيق شهادتك بنجاح!', '✓ Certificate officially issued and registered!', '✓ Certificat émis et validé avec succès !'), 'success');
+      showToast(txt('تهانينا! تم إصدار وتوثيق شهادتك بنجاح!', 'Certificate officially issued and registered!', 'Certificat émis et validé avec succès !'), 'success');
 
     } else {
       // Failed - Retry Option
       container.innerHTML = `
         <div style="text-align: center; padding: 20px 0;">
-          <div style="width: 72px; height: 72px; background: #FEE2E2; color: #DC2626; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 900; margin: 0 auto 16px;">
-            ▲
+          <div style="width: 72px; height: 72px; background: #FEE2E2; color: #DC2626; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+            ${icons.alertCircle('', 38)}
           </div>
           <h2 style="font-size: 1.4rem; font-weight: 900; color: #991B1B; margin: 0 0 8px;">
             ${txt('لم يتم تحقيق نسبة الاجتياز المطلوبة (80%)', 'Passing score not reached (80%)', 'Seuil de réussite non atteint (80%)')}
@@ -566,9 +568,10 @@ export const examEngine = {
             )}
           </p>
 
-          <div style="display: flex; justify-content: center; gap: 12px;">
-            <button type="button" class="btn-clean btn-primary btn-md" id="btn-retry-exam" style="background: var(--shat-navy); font-weight: 800;">
-              ↻ ${txt('إعادة المحاولة الآن', 'Retake Exam Now', 'Retenter l’Épreuve')}
+          <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+            <button type="button" class="btn-clean btn-primary btn-md" id="btn-retry-exam" style="background: var(--shat-navy); font-weight: 800; display: inline-flex; align-items: center; gap: 8px;">
+              ${icons.redo('icon-inline', 16)}
+              <span>${txt('إعادة المحاولة الآن', 'Retake Exam Now', 'Retenter l’Épreuve')}</span>
             </button>
             <button type="button" class="btn-clean btn-secondary btn-md" id="btn-cancel-retry">
               ${txt('العودة للمنهاج', 'Return to Course', 'Retour au Cursus')}
@@ -661,12 +664,12 @@ export const examEngine = {
         <div class="modal-window" style="max-width: 900px; max-height: 94vh; display: flex; flex-direction: column;">
           <div class="modal-top no-print" style="border-bottom: 2px solid var(--shat-navy); padding: 16px 24px;">
             <div style="display: flex; align-items: center; gap: 10px;">
-              <span style="font-size: 1.4rem;"></span>
+              <span style="display: inline-flex; align-items: center; color: var(--shat-green);">${icons.award('', 24)}</span>
               <h3 style="font-size: 1.15rem; font-weight: 900; color: var(--shat-navy); margin: 0;">
                 ${txt('الشهادة الرقمية المعتمدة رسمياً', 'Officially Accredited Digital Certificate', 'Certificat Numérique Homologué')}
               </h3>
             </div>
-            <button class="modal-close" id="modal-cert-close" aria-label="Close">✕</button>
+            <button class="modal-close" id="modal-cert-close" aria-label="Close">${icons.x('', 18)}</button>
           </div>
           <div id="modal-cert-body" style="overflow-y: auto; padding: 24px;"></div>
         </div>
@@ -820,7 +823,7 @@ export const examEngine = {
               text-align: center;
               padding: 6px;
             ">
-              <span style="font-size: 1.3rem; font-weight: 900;"></span>
+              <span style="display: inline-flex; align-items: center; justify-content: center; margin-bottom: 2px;">${icons.shieldCheck('', 24)}</span>
               <span style="font-size: 0.58rem; font-weight: 900; letter-spacing: 0.5px;">SHAT SEAL</span>
               <span style="font-size: 0.5rem; font-weight: 800;">VERIFIED 2026</span>
             </div>
@@ -853,8 +856,8 @@ export const examEngine = {
           <a href="#/verify" class="btn-clean btn-sm" style="background: var(--bg-subtle); color: var(--shat-navy); border: 1px solid var(--border-light); font-weight: 700;">
             • ${txt('التحقق في البوابة الرقمية', 'Verify Online', 'Vérifier')}
           </a>
-          <button type="button" class="btn-clean btn-primary btn-md allow-print" id="btn-print-official-cert" style="background: var(--shat-navy); font-weight: 800; box-shadow: 0 4px 14px rgba(15,46,74,0.3);">
-            ⎙ ${txt('طباعة الشهادة / حفظ كـ PDF', 'Print / Save Certificate (PDF)', 'Imprimer le Certificat (PDF)')}
+          <button type="button" class="btn-clean btn-primary btn-md allow-print" id="btn-print-official-cert" style="background: var(--shat-navy); font-weight: 800; box-shadow: 0 4px 14px rgba(15,46,74,0.3); display: inline-flex; align-items: center; gap: 6px;">
+            ${icons.printer('icon-inline', 16)} <span>${txt('طباعة الشهادة / حفظ كـ PDF', 'Print / Save Certificate (PDF)', 'Imprimer le Certificat (PDF)')}</span>
           </button>
         </div>
       </div>

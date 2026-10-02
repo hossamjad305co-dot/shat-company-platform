@@ -187,8 +187,8 @@ export const siteCustomizer = {
         <!-- Header -->
         <div style="background: linear-gradient(135deg, var(--shat-navy, #0F2E4A) 0%, #061523 100%); color: #FFFFFF; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--shat-green, #10B981); flex-shrink: 0;">
           <div style="display: flex; align-items: center; gap: 14px;">
-            <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(16,185,129,0.25); border: 1px solid rgba(16,185,129,0.5); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: #10B981; font-weight: 900;">
-              ◈
+            <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(16,185,129,0.25); border: 1px solid rgba(16,185,129,0.5); display: flex; align-items: center; justify-content: center; color: #10B981;">
+              ${icons.settings('', 22)}
             </div>
             <div>
               <div style="display: flex; align-items: center; gap: 8px;">
@@ -202,7 +202,7 @@ export const siteCustomizer = {
               </p>
             </div>
           </div>
-          <button type="button" class="tool-modal-close" id="btn-close-customizer" style="background: rgba(255,255,255,0.12); border: none; color: #FFFFFF; font-size: 1.3rem; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;">✕</button>
+          <button type="button" class="tool-modal-close" id="btn-close-customizer" style="background: rgba(255,255,255,0.12); border: none; color: #FFFFFF; font-size: 1.3rem; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;">${icons.x('', 18)}</button>
         </div>
 
         <!-- Navigation Tabs -->
@@ -483,8 +483,8 @@ export const siteCustomizer = {
                 <button type="button" class="btn-clean" id="btn-cancel-customizer" style="background: #FFFFFF; color: var(--text-main); border: 1px solid var(--border-medium); padding: 9px 18px; font-size: 0.84rem; border-radius: 6px;">
                   <span>${txt('إلغاء التعديل', 'Cancel', 'Annuler')}</span>
                 </button>
-                <button type="submit" class="btn-clean btn-primary" style="padding: 10px 26px; font-size: 0.9rem; font-weight: 800; background: var(--shat-green, #10B981); color: #FFFFFF; border: none; border-radius: 6px; box-shadow: 0 4px 12px rgba(16,185,129,0.35); cursor: pointer;">
-                  <span>✓</span>
+                <button type="submit" class="btn-clean btn-primary" style="padding: 10px 26px; font-size: 0.9rem; font-weight: 800; background: var(--shat-green, #10B981); color: #FFFFFF; border: none; border-radius: 6px; box-shadow: 0 4px 12px rgba(16,185,129,0.35); cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+                  ${icons.check('icon-inline', 16)}
                   <span>${txt('حفظ وتطبيق التغييرات فوراً', 'Save & Apply Live', 'Enregistrer et Appliquer')}</span>
                 </button>
               </div>

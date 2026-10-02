@@ -350,7 +350,7 @@ export const content = {
       serviceLabel: "مجال الاستشارة أو التدريب المطلوب *",
       messageLabel: "تفاصيل الاحتياج أو نطاق العمل المقترح *",
       messagePlaceholder: "يرجى كتابة نبذة عن الاحتياج التدريبي أو الاستشاري، الفئة المستهدفة، والجدول الزمني التقديري...",
-      submitBtn: "إرسال طلب الاستشارة أو التدريب ←",
+      submitBtn: "إرسال طلب الاستشارة أو التدريب",
       whatsappDirect: "تواصل فوري عبر الواتساب المؤسسي"
     },
     login: {
@@ -377,18 +377,18 @@ export const content = {
       nationalIdLabel: "رقم الهوية الوطنية أو الرقم الأكاديمي المعتمد *",
       nationalIdPlaceholder: "مثال: 1098765432 أو 401234567",
       nationalIdHelp: "خاص بالمتدربين والطلاب المسجلين في دورات وأكاديمية شات",
-      nationalIdBtn: "التحقق الفوري وتسجيل الدخول ←",
+      nationalIdBtn: "التحقق الفوري وتسجيل الدخول",
       whatsappPhoneLabel: "رقم هاتف الواتساب المسجل *",
       whatsappPhonePlaceholder: "+972 59 XXX XXXX أو +970 59 XXX XXXX",
       whatsappBtn: "إرسال رمز التحقق الفوري (OTP)",
       whatsappOtpLabel: "رمز التحقق السريع المكون من 4 أرقام:",
-      whatsappVerifyBtn: "تأكيد الرمز والدخول إلى حسابك ←",
+      whatsappVerifyBtn: "تأكيد الرمز والدخول إلى حسابك",
       whatsappSimNote: "خدمة فورية مرتبطة بحساب واتساب المؤسسي المعتمد",
       simulatorTitle: "اختر الدور المطلوب لمعاينته بنقرة واحدة مباشرة:",
       simulatorNote: "يتيح لك محاكي الأدوار استعراض كافة صلاحيات النظام وتجربة واجهات المتدرب، المدرب، والمدير فوراً بدون الحاجة لكتابة كلمات مرور.",
       noAccount: "لا تمتلك حساباً بعد؟",
       applyLink: "تقديم طلب التحاق بدورة تدريبية",
-      backHome: "← العودة إلى واجهة الموقع الرسمية"
+      backHome: "العودة إلى واجهة الموقع الرسمية"
     },
     notifications: {
       title: "الإشعارات والتحديثات المؤسسية",
@@ -805,7 +805,7 @@ export const content = {
       serviceLabel: "Requested Consulting or Training Service *",
       messageLabel: "Project Scope or Capacity Needs *",
       messagePlaceholder: "Briefly describe your training or consulting needs, target group, and estimated timeline...",
-      submitBtn: "Submit Consultation or Training Request ←",
+      submitBtn: "Submit Consultation or Training Request",
       whatsappDirect: "Direct Chat via Corporate WhatsApp"
     },
     login: {
@@ -832,18 +832,18 @@ export const content = {
       nationalIdLabel: "National or Student ID Number *",
       nationalIdPlaceholder: "e.g. 1098765432 or 401234567",
       nationalIdHelp: "For trainees and students enrolled in SHAT academy & courses",
-      nationalIdBtn: "Instant ID Verification Sign In ←",
+      nationalIdBtn: "Instant ID Verification Sign In",
       whatsappPhoneLabel: "Registered WhatsApp Phone Number *",
       whatsappPhonePlaceholder: "+972 59 XXX XXXX or +970 59 XXX XXXX",
       whatsappBtn: "Send Instant Verification Code (OTP)",
       whatsappOtpLabel: "4-Digit Instant Verification Code:",
-      whatsappVerifyBtn: "Verify Code & Sign In ←",
+      whatsappVerifyBtn: "Verify Code & Sign In",
       whatsappSimNote: "Direct verification linked to authorized institutional WhatsApp service",
       simulatorTitle: "Select a role to preview the platform in 1 click:",
       simulatorNote: "The role simulator allows you to experience student, teacher, and administrator interfaces without entering passwords.",
       noAccount: "Don't have an account yet?",
       applyLink: "Apply for a Course Enrollment",
-      backHome: "← Return to Public Corporate Portal"
+      backHome: "Return to Public Corporate Portal"
     },
     notifications: {
       title: "Corporate Notifications & Updates",
@@ -1260,7 +1260,7 @@ export const content = {
       serviceLabel: "Domaine de Service Souhaité *",
       messageLabel: "Détails du Besoin ou Périmètre du Projet *",
       messagePlaceholder: "Décrivez brièvement vos besoins en conseil ou formation, le public cible et le calendrier envisagé...",
-      submitBtn: "Envoyer la Demande de Conseil ou Formation ←",
+      submitBtn: "Envoyer la Demande de Conseil ou Formation",
       whatsappDirect: "Échange Direct via WhatsApp Institutionnel"
     },
     login: {
@@ -1287,18 +1287,18 @@ export const content = {
       nationalIdLabel: "Numéro National ou Carte d'Étudiant Agréé *",
       nationalIdPlaceholder: "ex. : 1098765432 ou 401234567",
       nationalIdHelp: "Réservé aux apprenants et stagiaires inscrits aux formations SHAT",
-      nationalIdBtn: "Vérification Immédiate & Connexion ←",
+      nationalIdBtn: "Vérification Immédiate & Connexion",
       whatsappPhoneLabel: "Numéro de Téléphone WhatsApp Enregistré *",
       whatsappPhonePlaceholder: "+972 59 XXX XXXX ou +970 59 XXX XXXX",
       whatsappBtn: "Envoyer le Code de Vérification Instantané (OTP)",
       whatsappOtpLabel: "Code de Vérification à 4 Chiffres :",
-      whatsappVerifyBtn: "Confirmer le Code & Se Connecter ←",
+      whatsappVerifyBtn: "Confirmer le Code & Se Connecter",
       whatsappSimNote: "Service direct lié au compte WhatsApp officiel de l'institution",
       simulatorTitle: "Choisissez un profil pour tester la plateforme en 1 clic :",
       simulatorNote: "Le simulateur vous permet d'explorer les interfaces apprenant, formateur et administrateur sans saisir de mot de passe.",
       noAccount: "Vous n'avez pas encore de compte ?",
       applyLink: "Déposer une demande d'inscription",
-      backHome: "← Retour au portail public de l'entreprise"
+      backHome: "Retour au portail public de l'entreprise"
     },
     notifications: {
       title: "Notifications et Mises à Jour Institutionnelles",

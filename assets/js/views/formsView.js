@@ -9,6 +9,7 @@ import { icons } from '../icons.js';
 
 export function renderFormsView(lang = 'ar') {
   const isRtl = lang === 'ar';
+  const arrowIcon = isRtl ? icons.arrowLeft('icon-inline', 15) : icons.arrowRight('icon-inline', 15);
   const arrow = isRtl ? '←' : '→';
 
   const txt = (ar, en, fr) => {
@@ -63,7 +64,7 @@ export function renderFormsView(lang = 'ar') {
       <div style="background: #FFFFFF; border-radius: var(--radius-lg, 16px); max-width: 650px; width: 100%; max-height: 85vh; overflow-y: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.25); border: 1px solid var(--border-light, #E2E8F0);">
         <div style="padding: 20px 24px; border-bottom: 1px solid #E2E8F0; display: flex; justify-content: space-between; align-items: center; background: #F8FAFC;">
           <h3 id="submission-modal-title" style="margin: 0; font-size: 1.1rem; font-weight: 800; color: var(--shat-navy, #0B1E36);">تفاصيل طلب التسجيل</h3>
-          <button type="button" id="btn-close-sub-modal" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; color: #64748B;">✕</button>
+          <button type="button" id="btn-close-sub-modal" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; color: #64748B; display: inline-flex; align-items: center; justify-content: center;">${icons.x('', 18)}</button>
         </div>
         <div id="submission-modal-body" style="padding: 24px;"></div>
       </div>
@@ -113,7 +114,7 @@ export async function bindFormsEvents() {
     console.error('Forms binding error:', err);
     container.innerHTML = `
       <div style="background: #FFFFFF; border-radius: var(--radius-md, 12px); padding: 48px; text-align: center; border: 1px solid var(--border-light, #E2E8F0);">
-        <div style="font-size: 2.5rem; margin-bottom: 16px; color: var(--accent-red, #DC2626); font-weight: 900;">▲</div>
+        <div style="margin-bottom: 16px; color: var(--accent-red, #DC2626); display: flex; justify-content: center;">${icons.alertCircle('', 48)}</div>
         <h2 style="font-weight: 800; color: var(--shat-navy, #0B1E36); margin-bottom: 8px;">
           ${txt('تعذر تحميل الاستمارات', 'Failed to load forms', 'Impossible de charger les formulaires')}
         </h2>
@@ -159,7 +160,7 @@ function renderFormsPortal(container, formsList, lang) {
             ${txt('نماذج التسجيل المتاحة', 'Available Forms', 'Formulaires Disponibles')}
           </button>
           <button type="button" id="tab-btn-submissions" class="btn-clean" style="background: rgba(255,255,255,0.15); color: #FFFFFF; font-weight: 700; padding: 10px 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2);">
-            ▲ ${txt('سجل طلبات التسجيل (الإدارة)', 'Submissions Log', 'Registre des Inscriptions')}
+            ${txt('سجل طلبات التسجيل (الإدارة)', 'Submissions Log', 'Registre des Inscriptions')}
           </button>
         </div>
       </div>
@@ -202,14 +203,13 @@ function renderFormsPortal(container, formsList, lang) {
               <!-- Card Action Footer -->
               <div style="padding: 16px 24px; background: #FFFFFF; display: flex; flex-direction: column; gap: 10px;">
                 <a href="#/forms?id=${form.id}" class="btn-clean btn-green" style="width: 100%; text-align: center; justify-content: center; font-weight: 800; padding: 11px 16px; border-radius: 8px;">
-                  <span>✓ ${txt('تعبئة الاستمارة بالموقع', 'Fill Native Form', 'Remplir le Formulaire')}</span>
-                  <span>←</span>
+                  <span>${txt('تعبئة الاستمارة بالموقع', 'Fill Native Form', 'Remplir le Formulaire')}</span>
+                  <span style="display:inline-flex; align-items:center;">${arrowIcon}</span>
                 </a>
 
                 ${form.googleFormSourceUrl ? `
                   <a href="${form.googleFormSourceUrl}" target="_blank" rel="noopener noreferrer" style="font-size: 0.78rem; text-align: center; color: var(--text-muted, #64748B); text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 4px; padding: 4px 0;">
-                    <span>رابط Google Form المباشر</span>
-                    <span>↗</span>
+                    <span style="display:inline-flex; align-items:center; gap:4px;"><span>رابط Google Form المباشر</span> ${icons.externalLink('icon-inline', 12)}</span>
                   </a>
                 ` : ''}
               </div>
@@ -256,7 +256,7 @@ function renderFormsPortal(container, formsList, lang) {
           <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
             <input type="text" id="sub-search-input" placeholder="${txt('بحث بالاسم أو الهاتف...', 'Search name or phone...', 'Rechercher...')}" class="form-input" style="height: 38px; width: 220px; font-size: 0.85rem;">
             <button type="button" id="btn-export-submissions-csv" class="btn-clean" style="background: #107C41; color: #FFFFFF; font-weight: 700; font-size: 0.85rem; padding: 8px 16px; border-radius: 6px;">
-              ↓ ${txt('تصدير Excel / CSV', 'Export CSV', 'Exporter CSV')}
+              <span style="display:inline-flex; align-items:center; gap:6px;">${icons.fileSpreadsheet('icon-inline', 14)} <span>${txt('تصدير Excel / CSV', 'Export CSV', 'Exporter CSV')}</span></span>
             </button>
           </div>
         </div>
@@ -410,7 +410,7 @@ function renderSubmissionsRows(list) {
         <td style="padding: 12px 14px; color: #64748B; font-size: 0.8rem;">${dateFormatted}</td>
         <td style="padding: 12px 14px;">
           <span style="background: #E8F5E9; color: #1E7E34; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
-            ✓ Google Sheets
+            ${icons.check('icon-inline', 12)} Google Sheets
           </span>
         </td>
         <td style="padding: 12px 14px; text-align: center;">
@@ -476,7 +476,7 @@ function openSubmissionModal(sub) {
   bodyEl.innerHTML = `
     <div style="margin-bottom: 16px; padding: 12px; background: #E8F5E9; border-radius: 8px; font-size: 0.84rem; color: #166534; display: flex; justify-content: space-between; align-items: center;">
       <span><strong>تاريخ التقديم:</strong> ${new Date(sub.submittedAt).toLocaleString('ar-EG')}</span>
-      <span style="font-weight: 700;">حالة التوثيق: متزامن مع Google Forms ✓</span>
+      <span style="font-weight: 700; display: inline-flex; align-items: center; gap: 4px;"><span>حالة التوثيق: متزامن مع Google Forms</span> ${icons.check('icon-inline', 14)}</span>
     </div>
     <div style="display: flex; flex-direction: column; gap: 10px;">
       ${entriesHtml}
@@ -582,7 +582,7 @@ function renderSingleForm(container, form, lang, formsList) {
 
         ${form.googleFormSourceUrl ? `
           <a href="${form.googleFormSourceUrl}" target="_blank" rel="noopener noreferrer" style="color: #15803D; font-weight: 700; text-decoration: underline; font-size: 0.8rem;">
-            فتح النموذج في Google Forms ↗
+            <span>فتح النموذج في Google Forms</span> <span style="display:inline-flex; align-items:center;">${icons.externalLink('icon-inline', 13)}</span>
           </a>
         ` : ''}
       </div>
@@ -593,12 +593,12 @@ function renderSingleForm(container, form, lang, formsList) {
           <span style="width: 22px; height: 22px; border-radius: 50%; background: #166534; color: #FFF; display: flex; align-items: center; justify-content: center; font-size: 0.72rem;">1</span>
           <span>البيانات الأساسية</span>
         </div>
-        <span style="color: #CBD5E1;">←</span>
+        <span style="display:inline-flex; align-items:center; color: #94A3B8;">${icons.arrowLeft('icon-inline', 14)}</span>
         <div style="display: flex; align-items: center; gap: 6px; color: #0B1E36;">
           <span style="width: 22px; height: 22px; border-radius: 50%; background: #0B1E36; color: #FFF; display: flex; align-items: center; justify-content: center; font-size: 0.72rem;">2</span>
           <span>التخصص والمؤهل</span>
         </div>
-        <span style="color: #CBD5E1;">←</span>
+        <span style="display:inline-flex; align-items:center; color: #94A3B8;">${icons.arrowLeft('icon-inline', 14)}</span>
         <div style="display: flex; align-items: center; gap: 6px; color: #64748B;">
           <span style="width: 22px; height: 22px; border-radius: 50%; background: #E2E8F0; color: #64748B; display: flex; align-items: center; justify-content: center; font-size: 0.72rem;">3</span>
           <span>المزامنة والاعتماد</span>
@@ -612,7 +612,7 @@ function renderSingleForm(container, form, lang, formsList) {
         <!-- Auto-Draft Banner -->
         <div id="form-draft-notice" style="display: none; background: #FEF3C7; border: 1px solid #FDE68A; padding: 10px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 0.84rem; color: #92400E; justify-content: space-between; align-items: center;">
           <div style="display: flex; align-items: center; gap: 8px;">
-            <span>✓</span>
+            <span style="display: inline-flex; align-items: center;">${icons.checkCircle('icon-inline', 14)}</span>
             <span>تم استعادة مسودتك المحفوظة تلقائياً. يمكنك المتابعة أو مسح المسودة.</span>
           </div>
           <button type="button" id="btn-clear-draft" class="btn-clean" style="font-size: 0.76rem; color: #DC2626; font-weight: 800; text-decoration: underline;">
@@ -661,7 +661,7 @@ function renderSingleForm(container, form, lang, formsList) {
         <!-- Form Submit & Controls -->
         <div style="border-top: 1px solid var(--border-light, #E2E8F0); margin-top: 32px; padding-top: 24px; display: flex; justify-content: space-between; gap: 14px; align-items: center; flex-wrap: wrap;">
           <a href="#/forms" class="btn-clean" style="background: #F1F5F9; color: var(--shat-navy, #0B1E36); border: 1px solid var(--border-light, #E2E8F0); font-weight: 700;">
-            ← استعراض برامج أخرى
+            <span style="display:inline-flex; align-items:center; gap:6px;">${icons.arrowRight('icon-inline', 14)} <span>استعراض برامج أخرى</span></span>
           </a>
 
           <div style="display: flex; gap: 10px;">
@@ -670,7 +670,6 @@ function renderSingleForm(container, form, lang, formsList) {
             </button>
             <button type="submit" id="btn-submit-native-form" class="btn-clean btn-green btn-lg" style="padding: 13px 36px; font-weight: 900; border-radius: 8px; font-size: 1rem; box-shadow: 0 4px 12px rgba(30,126,52,0.25);">
               <span>${txt('تأكيد وإرسال الاستمارة فوراً', 'Submit Application Now', 'Confirmer et Envoyer')}</span>
-              <span>✓</span>
             </button>
           </div>
         </div>
@@ -763,8 +762,8 @@ function renderSingleForm(container, form, lang, formsList) {
         container.innerHTML = `
           <div style="background: #FFFFFF; border-radius: var(--radius-lg, 16px); padding: 48px 36px; text-align: center; border: 1px solid var(--border-light, #E2E8F0); box-shadow: var(--shadow-sm); max-width: 720px; margin: 0 auto;">
             
-            <div style="width: 72px; height: 72px; background: #DCFCE7; color: #166534; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.4rem; margin: 0 auto 20px;">
-              ✓
+            <div style="width: 72px; height: 72px; background: #DCFCE7; color: #166534; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+              ${icons.checkCircle('', 44)}
             </div>
 
             <div style="display: inline-flex; align-items: center; gap: 6px; background: #E8F5E9; color: #1E7E34; padding: 4px 14px; border-radius: 999px; font-size: 0.82rem; font-weight: 800; margin-bottom: 12px;">
@@ -806,7 +805,7 @@ function renderSingleForm(container, form, lang, formsList) {
         showToast(txt('حدث خطأ أثناء الإرسال: ', 'Submission error: ', 'Erreur de soumission : ') + err.message, 'error');
         if (submitBtn) {
           submitBtn.disabled = false;
-          submitBtn.innerHTML = `<span>${txt('تأكيد وإرسال الاستمارة فوراً', 'Submit Application Now', 'Confirmer et Envoyer')}</span><span>✓</span>`;
+          submitBtn.innerHTML = `<span>${txt('تأكيد وإرسال الاستمارة فوراً', 'Submit Application Now', 'Confirmer et Envoyer')}</span>`;
         }
       }
     };

@@ -7,6 +7,7 @@ import { authService } from '../../services/auth/authService.js';
 import { ErrorState, Badge } from '../../components/ui/core.js';
 import { PostEditorModal, openPostEditor } from '../../components/cms/PostEditorModal.js';
 import { MediaLibraryModal, openMediaLibrary } from '../../components/cms/MediaLibraryModal.js';
+import { icons } from '../../icons.js';
 
 export async function renderAdminCMSPage() {
   if (!authService.isAdmin() && !authService.canManagePlatform()) {
@@ -81,7 +82,7 @@ function renderPostsList(posts) {
   if (posts.length === 0) {
     return `
       <div style="text-align: center; padding: 48px 20px; color: var(--text-muted);">
-        <div style="font-size: 3rem; margin-bottom: 12px;">▪</div>
+        <div style="font-size: 3rem; margin-bottom: 12px; display: flex; justify-content: center;">${icons.book ? icons.book('', 48) : ''}</div>
         <h4 style="color: var(--shat-navy-900); margin-bottom: 6px;">لا توجد منشورات حالياً</h4>
         <p style="font-size: var(--font-size-body-sm); margin: 0;">اضغط على "منشور جديد" لإنشاء أول مقال في المنصة</p>
       </div>
@@ -144,8 +145,8 @@ function renderPostsList(posts) {
                       نشر
                     </button>
                   `}
-                  <button type="button" class="shat-btn shat-btn-ghost shat-btn-sm btn-delete-post" data-id="${p.id}" style="color: #dc2626;" title="حذف">
-                    ✕
+                  <button type="button" class="shat-btn shat-btn-ghost shat-btn-sm btn-delete-post" data-id="${p.id}" style="color: #dc2626; display: inline-flex; align-items: center; justify-content: center;" title="حذف">
+                    ${icons.trash('', 16)}
                   </button>
                 </div>
               </td>

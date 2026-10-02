@@ -43,7 +43,7 @@ export async function renderLessonViewPage(courseId, lessonId) {
       <header class="lesson-top-bar" style="position: sticky; top: 0; z-index: var(--z-sticky); background: var(--bg-surface); border-bottom: 1px solid var(--border-subtle); padding: 12px 16px; box-shadow: var(--shadow-sm);">
         <div style="max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 12px;">
           <a href="#/course/${courseId}" class="lesson-back-btn" style="display: flex; align-items: center; gap: 6px; color: var(--shat-navy-900); font-weight: 700; text-decoration: none; font-size: var(--font-size-body-sm); min-height: 44px; padding: 4px 8px; border-radius: var(--radius-sm);">
-            <span style="font-size: 1.2rem;">←</span>
+            <span style="display:inline-flex; align-items:center;">${icons.arrowRight('icon-inline', 14)}</span>
             <span>${lesson.courseTitle || 'المساق'}</span>
           </a>
 
@@ -58,7 +58,7 @@ export async function renderLessonViewPage(courseId, lessonId) {
 
           <div style="display: flex; align-items: center; gap: 6px;">
             <span class="shat-badge ${isCompleted ? 'shat-badge-success' : 'shat-badge-navy'}" style="font-size: 0.72rem;">
-              ${isCompleted ? '✓ مكتمل' : 'قيد الدراسة'}
+              ${isCompleted ? 'مكتمل' : 'قيد الدراسة'}
             </span>
           </div>
         </div>
@@ -76,7 +76,7 @@ export async function renderLessonViewPage(courseId, lessonId) {
             <span>•</span>
             <span>النوع: <strong>${lesson.type === 'video' ? 'محاضرة مرئية' : 'قراءة تفاعلية'}</strong></span>
             <span>•</span>
-            <span>▲ إنجاز المساق: <strong>${progress.progressPercent}%</strong></span>
+            <span style="display: inline-flex; align-items: center; gap: 4px;">${icons.trendingUp('icon-inline', 14)} إنجاز المساق: <strong>${progress.progressPercent}%</strong></span>
           </div>
         </div>
 
@@ -149,7 +149,7 @@ export async function renderLessonViewPage(courseId, lessonId) {
             data-lesson-id="${lesson.id}"
             class="shat-btn ${isCompleted ? 'shat-btn-outline' : 'shat-btn-primary'} shat-btn-lg"
             style="width: 100%; max-width: 420px; min-height: 48px; font-weight: 800; font-size: 1rem;">
-            <span>${isCompleted ? '✓ تم إكمال هذا الدرس بنجاح' : 'تحديد الدرس كمكتمل ومتابعة التقدم ✓'}</span>
+            <span>${isCompleted ? 'تم إكمال هذا الدرس بنجاح' : 'تحديد الدرس كمكتمل ومتابعة التقدم'}</span>
           </button>
         </div>
 
@@ -193,7 +193,7 @@ export function initLessonViewEvents(courseId, lessonId) {
       const res = await progressService.markLessonCompleted(courseId, lessonId, 6);
       if (res.success) {
         btnComplete.className = 'shat-btn shat-btn-secondary';
-        btnComplete.innerHTML = '✓ تم إكمال هذا الدرس بنجاح';
+        btnComplete.innerHTML = 'تم إكمال هذا الدرس بنجاح';
         const progEl = document.getElementById('lesson-header-progress');
         if (progEl) progEl.textContent = `${res.progressPercent}% مكتمل`;
         const barEl = document.getElementById('lesson-header-progress-bar');

@@ -177,7 +177,7 @@ class SimpleRouter {
         } finally {
           if (submitBtn) {
             submitBtn.disabled = false;
-            submitBtn.textContent = txt('إرسال طلب الاستشارة أو التدريب ←', 'Submit Consultation / Training Request →', 'Envoyer la Demande de Consultation / Formation →');
+            submitBtn.textContent = txt('إرسال طلب الاستشارة أو التدريب', 'Submit Consultation / Training Request', 'Envoyer la Demande de Consultation / Formation');
           }
         }
       });

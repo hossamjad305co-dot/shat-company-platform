@@ -99,7 +99,7 @@ export function renderDriveFilesPage() {
                   <td><span class="shat-badge shat-badge-warning" style="font-size: 11px;">NOT CONFIGURED</span></td>
                   <td>
                     <button type="button" class="shat-btn shat-btn-secondary shat-btn-sm" onclick="window.shatDownloadFile('${m.name}')">
-                      <span>↓ طلب التحميل</span>
+                      <span style="display:inline-flex; align-items:center; gap:6px;">${icons.download('icon-inline', 14)} <span>طلب التحميل</span></span>
                     </button>
                   </td>
                 </tr>

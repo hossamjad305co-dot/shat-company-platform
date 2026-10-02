@@ -5,6 +5,7 @@ import { AdminLayout } from '../../layouts/admin/adminLayout.js';
 import { applicationService, ApplicationStatus } from '../../services/applications/applicationService.js';
 import { authService } from '../../services/auth/authService.js';
 import { ErrorState } from '../../components/ui/core.js';
+import { icons } from '../../icons.js';
 
 export async function renderAdminApplicationsPage() {
   if (!authService.isAdmin() && !authService.canManagePlatform()) {
@@ -65,7 +66,7 @@ export async function renderAdminApplicationsPage() {
               <h3 id="review-modal-title" style="margin: 0 0 4px; font-size: 1.2rem; color: var(--shat-navy-950);">مراجعة طلب الالتحاق</h3>
               <span id="review-modal-id" style="font-family: monospace; font-size: 0.85rem; color: var(--text-muted);">#app_101</span>
             </div>
-            <button type="button" id="btn-close-review-modal" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--text-muted); min-height: 44px; min-width: 44px;">✕</button>
+            <button type="button" id="btn-close-review-modal" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--text-muted); min-height: 44px; min-width: 44px; display: inline-flex; align-items: center; justify-content: center;">${icons.x('', 18)}</button>
           </div>
 
           <div id="review-modal-body" style="font-size: 0.92rem; line-height: 1.8; color: var(--text-primary);">
@@ -87,7 +88,7 @@ export async function renderAdminApplicationsPage() {
               تعيين كقيد المراجعة
             </button>
             <button type="button" id="btn-approve-app" class="shat-btn shat-btn-primary">
-              ✓ اعتماد وقبول الطالب (Auto-Enroll)
+              اعتماد وقبول الطالب (Auto-Enroll)
             </button>
           </div>
         </div>
@@ -100,7 +101,7 @@ function renderApplicationsTable(apps) {
   if (apps.length === 0) {
     return `
       <div style="text-align: center; padding: 48px 20px; color: var(--text-muted);">
-        <div style="font-size: 3rem; margin-bottom: 12px;">▪</div>
+        <div style="font-size: 3rem; margin-bottom: 12px; display: flex; justify-content: center;">${icons.users ? icons.users('', 48) : ''}</div>
         <h4 style="color: var(--shat-navy-900); margin-bottom: 6px;">لا توجد طلبات في هذا التصنيف</h4>
         <p style="font-size: var(--font-size-body-sm); margin: 0;">ستظهر الطلبات الجديدة هنا فور تقديمها من المتدربين</p>
       </div>

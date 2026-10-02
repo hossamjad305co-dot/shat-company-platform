@@ -71,7 +71,7 @@ export function renderAdminView(lang = 'ar') {
               <img src="assets/logo/logo-transparent.png" alt="SHAT" style="max-height: 28px; max-width: 28px; object-fit: contain;" onerror="this.onerror=null; this.src='assets/logo/logo-symbol.jpg';">
             </div>
           </div>
-          <button id="btn-close-admin-sidebar" class="mobile-only" style="background: none; border: none; color: #94A3B8; font-size: 1.2rem; cursor: pointer; display: none;">✕</button>
+          <button id="btn-close-admin-sidebar" class="mobile-only" style="background: none; border: none; color: #94A3B8; font-size: 1.2rem; cursor: pointer; display: none; align-items: center; justify-content: center;">${icons.x('', 18)}</button>
         </div>
 
         <!-- Sidebar Navigation Tree -->
@@ -79,7 +79,7 @@ export function renderAdminView(lang = 'ar') {
           
           <!-- Section: Dashboard -->
           <button class="admin-nav-item active" data-target="admin-tab-dashboard">
-            <span>▲</span>
+            <span style="display:inline-flex; align-items:center;">${icons.home('', 16)}</span>
             <span>${t.tabDashboard}</span>
           </button>
 
@@ -88,11 +88,11 @@ export function renderAdminView(lang = 'ar') {
             ${t.groupContent}
           </div>
           <button class="admin-nav-item" data-target="admin-tab-posts">
-            
+            <span style="display:inline-flex; align-items:center;">${icons.fileText('', 16)}</span>
             <span>${t.tabPosts}</span>
           </button>
           <button class="admin-nav-item" data-target="admin-tab-media">
-            
+            <span style="display:inline-flex; align-items:center;">${icons.image('', 16)}</span>
             <span>${t.tabMedia}</span>
           </button>
 
@@ -101,11 +101,11 @@ export function renderAdminView(lang = 'ar') {
             ${t.groupAcademy}
           </div>
           <button class="admin-nav-item" data-target="admin-tab-courses">
-            
+            <span style="display:inline-flex; align-items:center;">${icons.book('', 16)}</span>
             <span>${t.tabCourses}</span>
           </button>
           <button class="admin-nav-item" data-target="admin-tab-roster">
-            
+            <span style="display:inline-flex; align-items:center;">${icons.users('', 16)}</span>
             <span>${t.tabRoster}</span>
           </button>
 
@@ -114,11 +114,11 @@ export function renderAdminView(lang = 'ar') {
             ${t.groupApps}
           </div>
           <button class="admin-nav-item" data-target="admin-tab-applications">
-            <span>↓</span>
+            <span style="display:inline-flex; align-items:center;">${icons.download('', 16)}</span>
             <span>${t.tabApplications}</span>
           </button>
           <button class="admin-nav-item" data-target="admin-tab-forms">
-            
+            <span style="display:inline-flex; align-items:center;">${icons.form('', 16)}</span>
             <span>${t.tabForms}</span>
           </button>
           <button class="admin-nav-item" data-target="admin-tab-inquiries">
@@ -131,7 +131,7 @@ export function renderAdminView(lang = 'ar') {
             ${t.groupSettings}
           </div>
           <button class="admin-nav-item" data-target="admin-tab-health">
-            
+            <span style="display:inline-flex; align-items:center;">${icons.shield('', 16)}</span>
             <span>${t.tabHealth}</span>
           </button>
           <button type="button" class="admin-nav-item" id="btn-admin-customizer-trigger" style="margin-top: 6px; background: rgba(30,126,52,0.18); border: 1px solid rgba(30,126,52,0.4); color: #4ADE80; font-weight: 800;">
@@ -190,7 +190,7 @@ export function renderAdminView(lang = 'ar') {
                   <span>${txt('المركز التنفيذي الموحد • SHAT Executive Management • مباشر 2026', 'Enterprise Control Center • Live', 'Centre de Contrôle')}</span>
                 </div>
                 <h1 style="font-size: 1.85rem; font-weight: 900; color: #FFFFFF; margin: 4px 0 8px 0; line-height: 1.3; letter-spacing: -0.4px;">
-                  ${txt('▲ لوحة المؤشرات والعمليات المركزية (Executive Dashboard)', 'Central Operations & KPI Dashboard', 'Tableau de Bord & Opérations')}
+                  ${txt('لوحة المؤشرات والعمليات المركزية (Executive Dashboard)', 'Central Operations & KPI Dashboard', 'Tableau de Bord & Opérations')}
                 </h1>
                 <p style="color: #CBD5E1; font-size: 0.94rem; margin: 0 0 14px 0; max-width: 680px; line-height: 1.6;">
                   ${txt(
@@ -202,7 +202,7 @@ export function renderAdminView(lang = 'ar') {
                 <div style="display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.76rem; color: #94A3B8;">
                   <span style="background: rgba(255,255,255,0.06); padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);">• زمن الاستجابة: <strong>92ms</strong></span>
                   <span style="background: rgba(255,255,255,0.06); padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);">امتثال CHS: <strong>100%</strong></span>
-                  <span style="background: rgba(255,255,255,0.06); padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);">✓ أمان البيانات: <strong>OWASP Level 3</strong></span>
+                  <span style="background: rgba(255,255,255,0.06); padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);">أمان البيانات: <strong>OWASP Level 3</strong></span>
                 </div>
               </div>
 
@@ -211,7 +211,7 @@ export function renderAdminView(lang = 'ar') {
                   <span>+ ${txt('إضافة منشور جديد', 'New Publication', 'Nouvelle Publication')}</span>
                 </button>
                 <button class="btn-clean btn-sm" id="btn-refresh-dashboard" style="background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.22); font-weight: 700; padding: 10px 16px; border-radius: 8px;">
-                  <span>↻ ${txt('تحديث البيانات', 'Refresh Data', 'Actualiser')}</span>
+                  <span>${txt('تحديث البيانات', 'Refresh Data', 'Actualiser')}</span>
                 </button>
               </div>
             </div>
@@ -235,7 +235,7 @@ export function renderAdminView(lang = 'ar') {
               </div>
               <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; font-size: 0.8rem;">
                 <span style="background: #DCFCE7; color: #15803D; font-weight: 800; font-size: 0.76rem; padding: 3px 10px; border-radius: 999px; border: 1px solid #86EFAC;">
-                  ↑ +12 ${txt('هذا الأسبوع', 'this week', 'cette semaine')}
+                  <span style="display: inline-flex; align-items: center; gap: 4px;">${icons.trendingUp('icon-inline', 13)} +12 ${txt('هذا الأسبوع', 'this week', 'cette semaine')}</span>
                 </span>
                 <span style="color: #047857; font-weight: 700; font-size: 0.76rem;">نشط ومسجل</span>
               </div>
@@ -259,7 +259,7 @@ export function renderAdminView(lang = 'ar') {
               </div>
               <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; font-size: 0.8rem;">
                 <span style="background: #DBEAFE; color: #1D4ED8; font-weight: 800; font-size: 0.76rem; padding: 3px 10px; border-radius: 999px; border: 1px solid #93C5FD;">
-                  ✓ ${txt('كادر استشاري مرخص', 'Licensed Experts', 'Experts Agréés')}
+                  ${txt('كادر استشاري مرخص', 'Licensed Experts', 'Experts Agréés')}
                 </span>
                 <span style="color: #1D4ED8; font-weight: 700; font-size: 0.76rem;">100% تغطية</span>
               </div>
@@ -301,8 +301,8 @@ export function renderAdminView(lang = 'ar') {
                   </span>
                   <div style="font-size: 2.3rem; font-weight: 900; color: #92400E; margin: 4px 0; line-height: 1.1;" id="kpi-pending-apps">1</div>
                 </div>
-                <div style="width: 48px; height: 48px; border-radius: 12px; background: #FEF3C7; border: 1px solid #FDE68A; color: #D97706; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; font-weight: 900;">
-                  ↓
+                <div style="width: 48px; height: 48px; border-radius: 12px; background: #FEF3C7; border: 1px solid #FDE68A; color: #D97706; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  ${icons.form('', 24)}
                 </div>
               </div>
               <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; font-size: 0.8rem;">
@@ -427,7 +427,7 @@ export function renderAdminView(lang = 'ar') {
                   ${txt('طلبات الالتحاق الحديثة (Pending Applications)', 'Recent Course Applications', 'Dernières Candidatures')}
                 </h3>
                 <button class="btn-clean btn-sm" id="btn-view-all-apps" style="color: var(--shat-green); font-weight: 700;">
-                  ${txt('عرض الكل ←', 'View All →', 'Voir Tout →')}
+                  <span style="display:inline-flex; align-items:center; gap:6px;"><span>${txt('عرض الكل', 'View All', 'Voir Tout')}</span> ${isRtl ? icons.arrowLeft('icon-inline', 14) : icons.arrowRight('icon-inline', 14)}</span>
                 </button>
               </div>
 
@@ -493,10 +493,10 @@ export function renderAdminView(lang = 'ar') {
                 <span>+ ${txt('منشور جديد', 'New Post', 'Nouveau')}</span>
               </button>
               <button id="btn-cms-cancel-edit" class="btn-clean btn-sm" style="display: none; background: #F1F5F9; border: 1px solid #CBD5E1; color: var(--text-secondary); font-weight: 700;">
-                <span>✕ ${txt('إلغاء التعديل', 'Cancel Edit', 'Annuler')}</span>
+                <span>${txt('إلغاء التعديل', 'Cancel Edit', 'Annuler')}</span>
               </button>
               <button id="btn-cms-publish" class="btn-clean btn-green btn-sm" style="font-weight: 800;">
-                <span id="btn-cms-publish-text">✓ ${txt('نشر المنشور على الموقع', 'Publish to Website', 'Publier sur le Site')}</span>
+                <span id="btn-cms-publish-text">${txt('نشر المنشور على الموقع', 'Publish to Website', 'Publier sur le Site')}</span>
               </button>
             </div>
           </div>
@@ -564,7 +564,7 @@ export function renderAdminView(lang = 'ar') {
                   </button>
                 </div>
                 <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">
-                  ${txt('✓ يدعم JPG, PNG, WebP ويتم ضغطها وتخزينها محلياً على جهازك لتوفير المساحة وتصفحها أوفلاين.', 'Supports JPG, PNG, WebP with local device compression & caching.', 'Prend en charge JPG, PNG, WebP avec stockage local.')}
+                  ${txt('يدعم JPG, PNG, WebP ويتم ضغطها وتخزينها محلياً على جهازك لتوفير المساحة وتصفحها أوفلاين.', 'Supports JPG, PNG, WebP with local device compression & caching.', 'Prend en charge JPG, PNG, WebP avec stockage local.')}
                 </div>
               </div>
             </div>
@@ -737,9 +737,9 @@ export function renderAdminView(lang = 'ar') {
               </div>
               <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                 <button id="btn-export-apps-csv" class="btn-clean btn-sm" style="background: #10B981; color: #FFFFFF; font-weight: 800; border-radius: 6px; padding: 7px 14px; box-shadow: 0 2px 8px rgba(16,185,129,0.25);">
-                  ↓ ${txt('تصدير كشيت Excel (CSV معتمد)', 'Export Excel / CSV', 'Exporter CSV')}
+                  <span style="display:inline-flex; align-items:center; gap:6px;">${icons.fileSpreadsheet('icon-inline', 14)} <span>${txt('تصدير كشيت Excel (CSV معتمد)', 'Export Excel / CSV', 'Exporter CSV')}</span></span>
                 </button>
-                <button id="btn-refresh-apps-tab" class="btn-clean btn-sm" style="background: var(--bg-subtle); border: 1px solid var(--border-light);">↻ ${txt('تحديث', 'Refresh', 'Actualiser')}</button>
+                <button id="btn-refresh-apps-tab" class="btn-clean btn-sm" style="background: var(--bg-subtle); border: 1px solid var(--border-light);"><span style="display:inline-flex; align-items:center; gap:4px;">${icons.undo('icon-inline', 13)} <span>${txt('تحديث', 'Refresh', 'Actualiser')}</span></span></button>
               </div>
             </div>
             <div style="overflow-x: auto;">
@@ -769,7 +769,7 @@ export function renderAdminView(lang = 'ar') {
           <div style="background: #FFFFFF; border-radius: var(--radius-sm); border: 1px solid var(--border-light); padding: 28px; margin-bottom: 24px;">
             <div style="max-width: 720px;">
               <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                <span style="font-size: 1.2rem; color: var(--shat-green);"></span>
+                <span style="color: var(--shat-green); display:inline-flex; align-items:center;">${icons.form('', 22)}</span>
                 <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--shat-navy); margin: 0;">
                   ${txt('محول استمارات Google Forms إلى نماذج شات الداخلية', 'Google Forms to Native SHAT Forms Importer', 'Convertisseur de Formulaires')}
                 </h3>
@@ -787,8 +787,8 @@ export function renderAdminView(lang = 'ar') {
                   <input type="url" id="google-form-url-input" class="form-input" style="height: 48px;" placeholder="https://docs.google.com/forms/d/e/... أو https://forms.gle/..." required>
                 </div>
                 <button type="submit" class="btn-clean btn-green btn-lg">
-                  <span>↓ ${txt('استيراد وتوليد نموذج SHAT الداخلي', 'Import & Generate Native SHAT Form', 'Générer le Formulaire Natif')}</span>
-                  <span>${isRtl ? '←' : '→'}</span>
+                  <span style="display:inline-flex; align-items:center; gap:6px;">${icons.download('icon-inline', 16)} <span>${txt('استيراد وتوليد نموذج SHAT الداخلي', 'Import & Generate Native SHAT Form', 'Générer le Formulaire Natif')}</span></span>
+                  <span style="display:inline-flex; align-items:center;">${isRtl ? icons.arrowLeft('icon-inline', 14) : icons.arrowRight('icon-inline', 14)}</span>
                 </button>
               </form>
             </div>
@@ -859,7 +859,7 @@ export function renderAdminView(lang = 'ar') {
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
               <div>
                 <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--shat-navy); margin: 0 0 4px 0;">
-                  ✓ ${txt('النسخ الاحتياطي وحفظ بيانات المنصة على جهازك', 'Device Backup & Platform Data Storage', 'Sauvegarde & Export sur Appareil')}
+                  ${txt('النسخ الاحتياطي وحفظ بيانات المنصة على جهازك', 'Device Backup & Platform Data Storage', 'Sauvegarde & Export sur Appareil')}
                 </h3>
                 <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">
                   ${txt(
@@ -872,11 +872,11 @@ export function renderAdminView(lang = 'ar') {
 
               <div style="display: flex; gap: 8px;">
                 <button id="btn-export-backup" class="btn-clean btn-green btn-sm">
-                  <span>↓ ${txt('تصدير نسخة لجهازك (JSON)', 'Export Backup to PC', 'Télécharger Sauvegarde')}</span>
+                  <span style="display:inline-flex; align-items:center; gap:6px;">${icons.download('icon-inline', 14)} <span>${txt('تصدير نسخة لجهازك (JSON)', 'Export Backup to PC', 'Télécharger Sauvegarde')}</span></span>
                 </button>
                 <input type="file" id="import-backup-file-input" accept=".json" style="display: none;">
                 <button id="btn-import-backup-trigger" class="btn-clean btn-sm" style="background: #FFFFFF; border: 1px solid var(--border-light); color: var(--shat-navy); font-weight: 700;">
-                  <span>↑ ${txt('استعادة نسخة من الجهاز', 'Restore from PC', 'Restaurer du PC')}</span>
+                  <span style="display:inline-flex; align-items:center; gap:6px;">${icons.upload('icon-inline', 14)} <span>${txt('استعادة نسخة من الجهاز', 'Restore from PC', 'Restaurer du PC')}</span></span>
                 </button>
               </div>
             </div>
@@ -938,7 +938,7 @@ export function renderAdminView(lang = 'ar') {
       <div class="modal-box" style="max-width: 680px; max-height: 90vh; overflow-y: auto;">
         <div class="modal-header">
           <div class="modal-title" id="course-editor-modal-title">${txt('تعديل بيانات المساق التدريبي الشامل', 'Edit Course Curriculum', 'Modifier le Cursus')}</div>
-          <button type="button" class="modal-close" id="btn-close-course-modal">✕</button>
+          <button type="button" class="modal-close" id="btn-close-course-modal" style="display: inline-flex; align-items: center; justify-content: center;">${icons.x('', 18)}</button>
         </div>
         <form id="form-course-editor" style="padding: 24px;">
           <input type="hidden" id="edit-course-id" value="">
@@ -1033,7 +1033,7 @@ export function renderAdminView(lang = 'ar') {
           <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
             <button type="button" class="btn-clean btn-sm" id="btn-cancel-course-modal" style="background: var(--bg-subtle);">${txt('إلغاء', 'Cancel', 'Annuler')}</button>
             <button type="submit" class="btn-clean btn-green btn-sm" style="font-weight: 800; padding: 10px 20px;">
-              ✓ ${txt('حفظ تعديلات المساق بالكامل', 'Save All Course Changes', 'Enregistrer')}
+              ${txt('حفظ تعديلات المساق بالكامل', 'Save All Course Changes', 'Enregistrer')}
             </button>
           </div>
         </form>
@@ -1058,6 +1058,7 @@ export async function bindAdminEvents() {
   }
 
   const currentLang = localStorage.getItem('shat_platform_lang') || 'ar';
+  const isRtl = currentLang === 'ar';
   const txt = (ar, en, fr) => {
     if (currentLang === 'fr') return fr || en;
     if (currentLang === 'en') return en;
@@ -1225,7 +1226,7 @@ export async function bindAdminEvents() {
         if (previewCover) previewCover.src = compressedBase64;
 
         showToast(
-          txt(`✓ تم رفع الصورة بنجاح من جهازك (${file.name}) وتخزينها محلياً!`, `✓ Image uploaded from device successfully!`, `✓ Image importée de l'appareil avec succès !`),
+          txt(`تم رفع الصورة بنجاح من جهازك (${file.name}) وتخزينها محلياً!`, `Image uploaded from device successfully!`, `Image importée de l'appareil avec succès !`),
           'success'
         );
       } catch (err) {
@@ -1251,7 +1252,7 @@ export async function bindAdminEvents() {
     if (cmsEditorHeading) cmsEditorHeading.textContent = txt('محرر المنشورات والمقالات المعتمدة', 'Publications & Insights Editor', 'Éditeur de Publications');
     if (cmsEditingBadge) cmsEditingBadge.style.display = 'none';
     if (btnCmsCancelEdit) btnCmsCancelEdit.style.display = 'none';
-    if (publishBtnText) publishBtnText.textContent = `✓ ${txt('نشر المنشور على الموقع', 'Publish to Website', 'Publier sur le Site')}`;
+    if (publishBtnText) publishBtnText.textContent = `${txt('نشر المنشور على الموقع', 'Publish to Website', 'Publier sur le Site')}`;
 
     updateLivePreview();
   }
@@ -1280,7 +1281,7 @@ export async function bindAdminEvents() {
       if (cmsEditorHeading) cmsEditorHeading.textContent = `${txt('تعديل المنشور:', 'Edit Post:', 'Modifier :')} ${post.title.substring(0, 35)}...`;
       if (cmsEditingBadge) cmsEditingBadge.style.display = 'inline-block';
       if (btnCmsCancelEdit) btnCmsCancelEdit.style.display = 'inline-block';
-      if (publishBtnText) publishBtnText.textContent = `✓ ${txt('حفظ التعديلات على المنشور', 'Save Post Changes', 'Enregistrer les Modifications')}`;
+      if (publishBtnText) publishBtnText.textContent = `${txt('حفظ التعديلات على المنشور', 'Save Post Changes', 'Enregistrer les Modifications')}`;
 
       updateLivePreview();
 
@@ -1327,11 +1328,11 @@ export async function bindAdminEvents() {
         if (editingId) {
           // UPDATE existing post
           res = await api.updatePost(editingId, postData);
-          showToast(txt('✓ تم حفظ وتحديث المنشور بنجاح في قاعدة البيانات وعلى الموقع!', '✓ Post updated successfully in database and website!', '✓ Publication mise à jour avec succès !'), 'success');
+          showToast(txt('تم حفظ وتحديث المنشور بنجاح في قاعدة البيانات وعلى الموقع!', 'Post updated successfully in database and website!', 'Publication mise à jour avec succès !'), 'success');
         } else {
           // CREATE new post
           res = await api.createPost(postData);
-          showToast(txt('✓ تم نشر المنشور الجديد بنجاح في المنظومة!', '✓ New post published successfully!', '✓ Nouvelle publication ajoutée avec succès !'), 'success');
+          showToast(txt('تم نشر المنشور الجديد بنجاح في المنظومة!', 'New post published successfully!', 'Nouvelle publication ajoutée avec succès !'), 'success');
         }
 
         resetPostEditor();
@@ -1416,7 +1417,7 @@ export async function bindAdminEvents() {
         }
 
         showToast(
-          txt(`✓ تم رفع وتخزين ${files.length} صورة بنجاح في جهازك!`, `✓ Uploaded ${files.length} images to device storage!`, `✓ ${files.length} images importées avec succès !`),
+          txt(`تم رفع وتخزين ${files.length} صورة بنجاح في جهازك!`, `Uploaded ${files.length} images to device storage!`, `${files.length} images importées avec succès !`),
           'success'
         );
         loadMediaLibrary();
@@ -1457,8 +1458,8 @@ export async function bindAdminEvents() {
               ${txt('غلاف', 'Cover', 'Couv')}
             </button>
             ${!item.isDefault ? `
-              <button class="btn-clean btn-sm btn-delete-media" data-id="${item.id}" style="padding: 3px 6px; background: #FEE2E2; color: #991B1B;">
-                ✕
+              <button class="btn-clean btn-sm btn-delete-media" data-id="${item.id}" style="padding: 3px 6px; background: #FEE2E2; color: #991B1B; display: inline-flex; align-items: center; justify-content: center;">
+                ${icons.trash('', 14)}
               </button>
             ` : ''}
           </div>
@@ -1537,8 +1538,8 @@ export async function bindAdminEvents() {
                   <button class="btn-clean btn-sm btn-edit-post" data-post-id="${p.id}" style="background: #F1F5F9; color: var(--shat-navy); border: 1px solid var(--border-light); font-weight: 700;">
                     ${txt('تعديل', 'Edit', 'Modifier')}
                   </button>
-                  <button class="btn-clean btn-sm btn-delete-post" data-post-id="${p.id}" style="background: #FEE2E2; color: #991B1B; border: 1px solid #FCA5A5;">
-                    ✕
+                  <button class="btn-clean btn-sm btn-delete-post" data-post-id="${p.id}" style="background: #FEE2E2; color: #991B1B; border: 1px solid #FCA5A5; display: inline-flex; align-items: center; justify-content: center;">
+                    ${icons.trash('', 14)}
                   </button>
                 </div>
               </td>
@@ -1631,10 +1632,10 @@ export async function bindAdminEvents() {
       try {
         if (courseId) {
           await api.updateCourse(courseId, courseData);
-          showToast(txt('✓ تم حفظ وتحديث المساق بنجاح!', '✓ Course updated successfully!', '✓ Cursus mis à jour !'), 'success');
+          showToast(txt('تم حفظ وتحديث المساق بنجاح!', 'Course updated successfully!', 'Cursus mis à jour !'), 'success');
         } else {
           await api.createCourse(courseData);
-          showToast(txt('✓ تم إنشاء المساق الجديد بنجاح!', '✓ New course created successfully!', '✓ Nouveau cursus créé !'), 'success');
+          showToast(txt('تم إنشاء المساق الجديد بنجاح!', 'New course created successfully!', 'Nouveau cursus créé !'), 'success');
         }
         courseModalBackdrop.classList.remove('open');
         loadCourses();
@@ -1701,8 +1702,8 @@ export async function bindAdminEvents() {
             <a href="#/course/${c.id}" class="btn-clean btn-sm" style="background: var(--bg-subtle); color: var(--text-secondary); text-decoration: none;">
               ${txt('قاعة المساق', 'Course Room', 'Salle')}
             </a>
-            <button class="btn-clean btn-sm btn-delete-course" data-id="${c.id}" style="background: #FEF2F2; color: #DC2626; border: 1px solid #FECACA; font-weight: 700;">
-              ✕
+            <button class="btn-clean btn-sm btn-delete-course" data-id="${c.id}" style="background: #FEF2F2; color: #DC2626; border: 1px solid #FECACA; font-weight: 700; display: inline-flex; align-items: center; justify-content: center;">
+              ${icons.trash('', 14)}
             </button>
           </div>
         </div>
@@ -1759,7 +1760,7 @@ export async function bindAdminEvents() {
   if (btnExportBackup) {
     btnExportBackup.onclick = () => {
       MediaStorageService.exportFullBackup();
-      showToast(txt('✓ تم تصدير وتحميل النسخة الاحتياطية لجهازك بنجاح!', '✓ Backup JSON exported to your computer!', '✓ Sauvegarde exportée sur votre appareil !'), 'success');
+      showToast(txt('تم تصدير وتحميل النسخة الاحتياطية لجهازك بنجاح!', 'Backup JSON exported to your computer!', 'Sauvegarde exportée sur votre appareil !'), 'success');
     };
   }
 
@@ -1774,7 +1775,7 @@ export async function bindAdminEvents() {
       reader.onload = (event) => {
         try {
           MediaStorageService.importFullBackup(event.target.result);
-          showToast(txt('✓ تم استعادة النسخة الاحتياطية بنجاح من جهازك!', '✓ Backup restored successfully from your file!', '✓ Sauvegarde restaurée avec succès !'), 'success');
+          showToast(txt('تم استعادة النسخة الاحتياطية بنجاح من جهازك!', 'Backup restored successfully from your file!', 'Sauvegarde restaurée avec succès !'), 'success');
           loadDashboardData();
           loadPosts();
           loadMediaLibrary();
@@ -1985,7 +1986,7 @@ async function exportApplicationsToCSV(lang = 'ar') {
     URL.revokeObjectURL(url);
 
     showToast(
-      txt(`✓ تم تصدير ${apps.length} طلب إلى ملف Excel (CSV معتمد) بنجاح!`, `✓ Successfully exported ${apps.length} applications to CSV!`, `✓ ${apps.length} candidatures exportées en CSV avec succès !`),
+      txt(`تم تصدير ${apps.length} طلب إلى ملف Excel (CSV معتمد) بنجاح!`, `Successfully exported ${apps.length} applications to CSV!`, `${apps.length} candidatures exportées en CSV avec succès !`),
       'success'
     );
   } catch (err) {
@@ -2006,7 +2007,7 @@ async function loadForms() {
           <td style="padding: 12px 16px;"><span class="badge" style="background: #DCFCE7; color: #166534;">نشط</span></td>
           <td style="padding: 12px 16px; font-family: monospace; font-size: 0.8rem;">#/forms?id=${f.id}</td>
           <td style="padding: 12px 16px; text-align: left;">
-            <a href="#/forms?id=${f.id}" class="btn-clean btn-sm" style="background: var(--bg-subtle);">معاينة ↗</a>
+            <a href="#/forms?id=${f.id}" class="btn-clean btn-sm" style="background: var(--bg-subtle); display:inline-flex; align-items:center; gap:4px;"><span>معاينة</span> ${icons.externalLink('icon-inline', 12)}</a>
           </td>
         </tr>
       `).join('');

@@ -1376,9 +1376,12 @@ class ApiClient {
   }
 
   async getMe() {
+    if (!this.token || this.token === 'null' || this.token === 'undefined') {
+      return null;
+    }
     try {
       const res = await this.request('/api/auth/me');
-      if (res.authenticated && res.user) {
+      if (res && res.authenticated && res.user) {
         this.setSession(this.token, res.user);
         return res.user;
       }

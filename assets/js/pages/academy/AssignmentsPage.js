@@ -2,6 +2,7 @@
 import { AcademyLayout } from '../../layouts/academy/academyLayout.js';
 import { Card, Badge, StatusBadge, Button, EmptyState } from '../../components/ui/core.js';
 import { courseService } from '../../services/courses/courseService.js';
+import { icons } from '../../icons.js';
 
 export async function renderAssignmentsPage() {
   const courses = await courseService.getCourses();
@@ -63,7 +64,7 @@ export async function renderAssignmentsPage() {
             </div>
           </div>
         `).join('') : EmptyState({
-          icon: '▪',
+          icon: icons.book('', 40),
           title: 'لا توجد تكليفات مستحقة حالياً',
           description: 'جميع التكليفات مسلّمة أو لم يقم المدرب بإضافة مهام جديدة بعد.'
         })}

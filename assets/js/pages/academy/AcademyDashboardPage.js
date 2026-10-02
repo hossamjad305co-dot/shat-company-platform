@@ -61,7 +61,7 @@ export async function renderAcademyDashboardPage() {
 
           <a href="#/course/${primaryCourse.id}/lesson/${primaryLessonId}" class="shat-btn shat-btn-primary" style="background: var(--shat-green-600); border-color: var(--shat-green-600); font-weight: 800; padding: 10px 22px; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: var(--radius-full); box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
             <span>استئناف الدرس</span>
-            <span>←</span>
+            <span style="display:inline-flex; align-items:center;">${icons.arrowLeft('icon-inline', 14)}</span>
           </a>
         </div>
 
@@ -109,7 +109,7 @@ export async function renderAcademyDashboardPage() {
         })}
 
         ${Card({
-          title: '◈️ حالة مستودع Google Drive',
+          title: 'حالة مستودع Google Drive',
           subtitle: 'المستودع السحابي المؤسسي (5TB)',
           children: `
             <div style="font-size: var(--font-size-body-sm); color: var(--text-muted); margin-bottom: var(--space-md);">

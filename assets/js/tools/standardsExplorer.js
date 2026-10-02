@@ -190,7 +190,7 @@ export const standardsExplorer = {
               0 / ${item.checklist.length} ${txt('بنود محققة', 'items verified', 'éléments')}
             </div>
             <button type="button" class="btn-clean btn-sm btn-generate-audit-report" style="width: 100%; background: var(--shat-navy); color: #FFFFFF; font-size: 0.74rem; font-weight: 800; padding: 6px 10px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; box-shadow: 0 2px 6px rgba(15,46,74,0.2);">
-              ⎙ ${txt('تصدير تقرير (PDF)', 'Export Audit (PDF)', 'Rapport PDF')}
+              ${icons.printer('icon-inline', 14)} <span>${txt('تصدير تقرير (PDF)', 'Export Audit (PDF)', 'Rapport PDF')}</span>
             </button>
           </div>
         </div>
@@ -222,12 +222,12 @@ export const standardsExplorer = {
           </div>
 
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <button type="button" class="btn-clean btn-sm btn-generate-audit-report" style="background: #10B981; color: #FFFFFF; font-weight: 800; border-radius: 6px; padding: 7px 14px; box-shadow: 0 2px 8px rgba(16,185,129,0.25);">
-              ⎙ ${txt('تصدير تقرير التدقيق المعياري (PDF / طباعة)', 'Export Audit Report (PDF)', 'Rapport de Conformité')}
+            <button type="button" class="btn-clean btn-sm btn-generate-audit-report" style="background: #10B981; color: #FFFFFF; font-weight: 800; border-radius: 6px; padding: 7px 14px; box-shadow: 0 2px 8px rgba(16,185,129,0.25); display: inline-flex; align-items: center; gap: 4px;">
+              ${icons.printer('icon-inline', 14)} <span>${txt('تصدير تقرير التدقيق المعياري (PDF / طباعة)', 'Export Audit Report (PDF)', 'Rapport de Conformité')}</span>
             </button>
             <a href="#/course/${item.linkedCourse}" class="btn-clean btn-sm" style="background: var(--shat-navy); color: #FFFFFF; font-weight: 700;">
               <span>${txt('تصفح المنهاج التدريبي', 'View Curriculum', 'Voir le Programme')}</span>
-              <span>${isRtl ? '←' : '→'}</span>
+              <span style="display:inline-flex; align-items:center;">${isRtl ? icons.arrowLeft('icon-inline', 14) : icons.arrowRight('icon-inline', 14)}</span>
             </a>
             <a href="#/contact" class="btn-clean btn-sm" style="background: var(--shat-green-tint); color: var(--shat-green); border: 1px solid var(--shat-green-border); font-weight: 800;">
               <span>${txt('طلب استشارة مطابقة', 'Request Compliance Advisory', 'Audit de Conformité')}</span>
@@ -387,7 +387,7 @@ export const standardsExplorer = {
         <!-- Section 1: Verified Strengths -->
         <div style="margin-bottom: 24px;">
           <h4 style="font-size: 1rem; font-weight: 800; color: var(--shat-green); display: flex; align-items: center; gap: 8px; margin: 0 0 10px 0;">
-            <span>✓</span>
+            <span style="display: inline-flex; align-items: center;">${icons.checkCircle('icon-inline', 18)}</span>
             <span>${txt('نقاط القوة والبنود الممتثلة الموثقة:', 'Verified Strengths & Satisfied Indicators:', 'Points Forts & Indicateurs Validés :')} (${verifiedItems.length})</span>
           </h4>
           ${verifiedItems.length === 0 ? `
@@ -398,7 +398,7 @@ export const standardsExplorer = {
             <div>
               ${verifiedItems.map((v, i) => `
                 <div class="audit-strength-item" style="display: flex; align-items: center; gap: 10px;">
-                  <span style="font-weight: 800; color: var(--shat-green); font-size: 0.85rem;">✓ 0${i + 1}</span>
+                  <span style="font-weight: 800; color: var(--shat-green); font-size: 0.85rem; display: inline-flex; align-items: center; gap: 2px;">${icons.checkCircle('icon-inline', 14)} 0${i + 1}</span>
                   <span style="font-size: 0.86rem; color: #166534; font-weight: 600;">${isRtl ? v.textAr : v.textEn}</span>
                 </div>
               `).join('')}
@@ -409,18 +409,18 @@ export const standardsExplorer = {
         <!-- Section 2: Critical Compliance Gaps -->
         <div style="margin-bottom: 24px;">
           <h4 style="font-size: 1rem; font-weight: 800; color: #DC2626; display: flex; align-items: center; gap: 8px; margin: 0 0 10px 0;">
-            <span>▲️</span>
+            <span style="display: inline-flex; align-items: center;">${icons.alertCircle('icon-inline', 18)}</span>
             <span>${txt('فجوات الامتثال والمخاطر الميدانية المرصودة:', 'Identified Compliance Gaps & Risks:', 'Écarts de Conformité & Risques Identifiés :')} (${gapItems.length})</span>
           </h4>
           ${gapItems.length === 0 ? `
             <div style="padding: 14px; background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 6px; font-size: 0.85rem; color: #166534; text-align: center; font-weight: 700;">
-              ${txt('✓ امتثال كامل 100% لكافة البنود المعتمدة في هذا المعيار.', '100% full compliance with this standard.', 'Conformité totale 100%.')}
+              ${txt('امتثال كامل 100% لكافة البنود المعتمدة في هذا المعيار.', '100% full compliance with this standard.', 'Conformité totale 100%.')}
             </div>
           ` : `
             <div>
               ${gapItems.map((g, i) => `
                 <div class="audit-gap-item" style="display: flex; align-items: center; gap: 10px;">
-                  <span style="font-weight: 800; color: #DC2626; font-size: 0.85rem;">✕ 0${i + 1}</span>
+                  <span style="font-weight: 800; color: #DC2626; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 2px;">${icons.x('icon-inline', 14)} 0${i + 1}</span>
                   <div style="font-size: 0.86rem; color: #991B1B;">
                     <strong>${isRtl ? g.textAr : g.textEn}</strong>
                     <div style="font-size: 0.76rem; color: #B91C1C; margin-top: 2px;">

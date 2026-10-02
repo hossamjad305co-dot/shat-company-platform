@@ -15,7 +15,7 @@ export function renderLoginView(lang = 'ar') {
   const d = content[lang] || content.ar;
   const l = d.login || content.ar.login;
   const isRtl = lang === 'ar';
-  const arrow = isRtl ? '←' : '→';
+  const arrow = isRtl ? icons.arrowLeft('icon-inline', 14) : icons.arrowRight('icon-inline', 14);
 
   const forgotText = encodeURIComponent(
     lang === 'fr' 
@@ -518,7 +518,7 @@ export function bindLoginEvents() {
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
-          submitBtn.innerHTML = `<span>${content[currentLang]?.login?.nationalIdBtn || 'Instant ID Verification Sign In ←'}</span>`;
+          submitBtn.innerHTML = `<span>${content[currentLang]?.login?.nationalIdBtn || 'Instant ID Verification Sign In'}</span>`;
         }
       }
     });
@@ -599,13 +599,13 @@ export function bindLoginEvents() {
         alertBox.style.background = '#FEE2E2';
         alertBox.style.color = '#991B1B';
         alertBox.style.border = '1px solid #FCA5A5';
-        alertBox.innerHTML = `▲ ${err.message || txt('بيانات الدخول غير صحيحة. يرجى التحقق والمحاولة مجدداً.', 'Invalid credentials. Please verify and retry.', 'Identifiants invalides. Veuillez vérifier et réessayer.')}`;
+        alertBox.innerHTML = `${err.message || txt('بيانات الدخول غير صحيحة. يرجى التحقق والمحاولة مجدداً.', 'Invalid credentials. Please verify and retry.', 'Identifiants invalides. Veuillez vérifier et réessayer.')}`;
       }
       showToast(err.message || txt('فشل تسجيل الدخول', 'Login failed', 'Échec de connexion'), 'error');
     } finally {
       if (submitBtn) {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = `<span>${content[currentLang]?.login?.submitBtn || 'Sign In'}</span><span>${currentLang === 'ar' ? '←' : '→'}</span>`;
+        submitBtn.innerHTML = `<span style="display:inline-flex; align-items:center; gap:6px;"><span>${content[currentLang]?.login?.submitBtn || 'Sign In'}</span> ${currentLang === 'ar' ? icons.arrowLeft('icon-inline', 14) : icons.arrowRight('icon-inline', 14)}</span>`;
       }
     }
   });

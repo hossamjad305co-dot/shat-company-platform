@@ -1,3 +1,4 @@
+import { icons } from '../icons.js';
 // assets/js/views/contactView.js
 // Contact & Consultation Request View with 100% Trilingual Support (AR, EN, FR)
 import { content } from '../content.js';
@@ -6,7 +7,7 @@ export function renderContactView(lang = 'ar') {
   const d = content[lang] || content.ar;
   const c = d.company;
   const isRtl = lang === 'ar';
-  const arrow = isRtl ? '←' : '→';
+  const arrow = isRtl ? icons.arrowLeft('icon-inline', 14) : icons.arrowRight('icon-inline', 14);
 
   const txt = (ar, en, fr) => {
     if (lang === 'fr') return fr || en;

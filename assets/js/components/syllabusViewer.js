@@ -2,6 +2,8 @@
 // Official Syllabus & Course Specification Sheet Viewer for SHAT Academy
 // Renders printable, accredited academic syllabi with SHAT institutional header & competencies
 
+import { icons } from '../icons.js';
+
 export const SYLLABUS_CATALOG = {
   'shat-chs-master': {
     code: 'SHAT-SYL-CHS-101',
@@ -128,9 +130,9 @@ export class SyllabusViewer {
           </div>
           <div style="display: flex; gap: 8px; align-items: center;">
             <button id="btn-print-syllabus" class="btn-clean" style="background: #1E7E34; color: #FFFFFF; font-weight: 700; font-size: 0.82rem; padding: 6px 14px; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px;">
-              <span>⎙ طباعة / حفظ PDF</span>
+              ${icons.printer('icon-inline', 15)} <span>طباعة / حفظ PDF</span>
             </button>
-            <button id="btn-close-syllabus" style="background: transparent; border: none; color: #94A3B8; font-size: 1.3rem; cursor: pointer; padding: 2px 8px;">✕</button>
+            <button id="btn-close-syllabus" style="background: transparent; border: none; color: #94A3B8; font-size: 1.3rem; cursor: pointer; padding: 2px 8px; display: inline-flex; align-items: center;">${icons.x('', 18)}</button>
           </div>
         </div>
 
@@ -260,9 +262,9 @@ export class SyllabusViewer {
           <div style="font-size: 0.84rem; color: #64748B;">
             للاستفسار عن الدفعات القادمة: <a href="https://wa.me/972592879621" target="_blank" style="color: #1E7E34; font-weight: 700;">+972 59 287 9621</a>
           </div>
-          <a href="${s.formUrl}" class="btn-clean btn-green" style="font-weight: 800; padding: 10px 22px; border-radius: 8px;">
-            <span>✓ فتح استمارة التسجيل الرسمية</span>
-            <span>←</span>
+          <a href="${s.formUrl}" class="btn-clean btn-green" style="font-weight: 800; padding: 10px 22px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px;">
+            ${icons.check('icon-inline', 16)} <span>فتح استمارة التسجيل الرسمية</span>
+            <span style="display:inline-flex; align-items:center;">${icons.arrowLeft('icon-inline', 14)}</span>
           </a>
         </div>
 

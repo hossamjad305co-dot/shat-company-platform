@@ -1,3 +1,4 @@
+import { icons } from '../icons.js';
 // assets/js/views/standardsView.js
 // Deep Dive International & Humanitarian Standards Guide with Direct Interactive Tool Integration
 // 100% Trilingual Support (AR, EN, FR) & WCAG AAA High Contrast Design
@@ -8,7 +9,7 @@ export function renderStandardsView(lang = 'ar') {
   const d = content[lang] || content.ar;
   const list = d.standards || [];
   const isRtl = lang === 'ar';
-  const arrow = isRtl ? '←' : '→';
+  const arrow = isRtl ? icons.arrowLeft('icon-inline', 14) : icons.arrowRight('icon-inline', 14);
 
   const t = {
     badge: lang === 'fr' ? 'Normes & Référentiels Mondiaux' : (isRtl ? 'المرجعيات والمواثيق الدولية المعتمدة' : 'Global Norms & Standards'),
@@ -27,7 +28,7 @@ export function renderStandardsView(lang = 'ar') {
 
     whyTitle: lang === 'fr' ? 'Portée et valeur pour les organisations:' : (isRtl ? 'ما هو المعيار وما قيمته للمؤسسات؟' : 'Why It Matters to Institutions:'),
     howTitle: lang === 'fr' ? 'كيف تطبقه شركة شات ميدانياً؟' : (isRtl ? 'كيف تطبقه شركة شات ميدانياً؟' : 'How SHAT Implements It:'),
-    delivTitle: lang === 'fr' ? '✓ Livrable Institutionnel Réalisé:' : (isRtl ? '✓ المخرج المؤسسي المحقق:' : '✓ Tangible Institutional Deliverable:'),
+    delivTitle: lang === 'fr' ? 'Livrable Institutionnel Réalisé:' : (isRtl ? 'المخرج المؤسسي المحقق:' : 'Tangible Institutional Deliverable:'),
     
     btnInteractiveCheck: lang === 'fr' ? 'Explorer la Liste de Contrôle Interactive' : (isRtl ? 'فحص قائمة التحقق التفاعلية' : 'Interactive Compliance Checklist'),
     btnExploreCourse: lang === 'fr' ? 'Consulter le Cursus Certifié' : (isRtl ? 'استعراض المساق التدريبي المعتمد' : 'View Accredited Track'),

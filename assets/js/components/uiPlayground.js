@@ -27,7 +27,7 @@ export function renderUIPlayground() {
               ⇄ تبديل الاتجاه (RTL ⇄ LTR)
             </button>
             <a href="#/home" class="btn btn-primary">
-              العودة للرئيسية ↗
+              <span style="display:inline-flex; align-items:center; gap:4px;"><span>العودة للرئيسية</span> ${icons.home('icon-inline', 14)}</span>
             </a>
           </div>
         </div>
@@ -177,7 +177,7 @@ export function renderUIPlayground() {
             <div class="form-group">
               <label class="form-label">رقم الهوية الوطنية (National ID) <span class="required-mark">*</span></label>
               <input type="text" class="form-input has-error" placeholder="9 أرقام" value="400123">
-              <span class="form-error-msg">✕ رقم الهوية يجب أن يتكون من 9 أرقام صحيحة</span>
+              <span class="form-error-msg">رقم الهوية يجب أن يتكون من 9 أرقام صحيحة</span>
             </div>
 
             <div class="form-group">
@@ -205,9 +205,9 @@ export function renderUIPlayground() {
         </h2>
         <div class="card">
           <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-            <button class="btn btn-outline" onclick="window.dispatchPlaygroundToast('success')">✓ تجربة إشعار نجاح (Success)</button>
-            <button class="btn btn-outline" onclick="window.dispatchPlaygroundToast('warning')">▲ تجربة إشعار تحذير (Warning)</button>
-            <button class="btn btn-outline" onclick="window.dispatchPlaygroundToast('error')">✕ تجربة إشعار خطأ (Error)</button>
+            <button class="btn btn-outline" onclick="window.dispatchPlaygroundToast('success')">تجربة إشعار نجاح (Success)</button>
+            <button class="btn btn-outline" onclick="window.dispatchPlaygroundToast('warning')">تجربة إشعار تحذير (Warning)</button>
+            <button class="btn btn-outline" onclick="window.dispatchPlaygroundToast('error')">تجربة إشعار خطأ (Error)</button>
             <button class="btn btn-outline" onclick="window.dispatchPlaygroundToast('info')">تجربة إشعار معلومات (Info)</button>
           </div>
         </div>
@@ -261,15 +261,15 @@ window.dispatchPlaygroundToast = function(type) {
   toast.className = `toast toast-${type}`;
   
   const messages = {
-    success: '✓ تم حفظ التعديلات في مسودة المحتوى بنجاح.',
-    warning: '▲ مساحة التخزين السحابية بلغت 80% من سعة 5TB المخصصة.',
-    error: '✕ حدث خطأ في المصادقة. يرجى التأكد من الرمز المدخل.',
+    success: 'تم حفظ التعديلات في مسودة المحتوى بنجاح.',
+    warning: 'مساحة التخزين السحابية بلغت 80% من سعة 5TB المخصصة.',
+    error: 'حدث خطأ في المصادقة. يرجى التأكد من الرمز المدخل.',
     info: 'ستبدأ جلسة الاختبار الفصلي بعد 15 دقيقة.'
   };
 
   toast.innerHTML = `
     <div style="flex: 1; font-size: 0.88rem; font-weight: 600;">${messages[type]}</div>
-    <button style="background: none; border: none; font-size: 1rem; cursor: pointer; color: var(--text-muted);" onclick="this.parentElement.remove()">✕</button>
+    <button style="background: none; border: none; font-size: 1rem; cursor: pointer; color: var(--text-muted); display: inline-flex; align-items: center;" onclick="this.parentElement.remove()">${icons.x('', 16)}</button>
   `;
 
   container.appendChild(toast);

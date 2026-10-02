@@ -2,10 +2,11 @@
 // Production Teacher Management & Grading Workspace for SHAT Academy with 100% Trilingual Support (AR, EN, FR)
 import { api } from '../services/api/apiClient.js';
 import { showToast } from '../components/toast.js';
+import { icons } from '../icons.js';
 
 export function renderTeacherDashboardView(lang = 'ar') {
   const isRtl = lang === 'ar';
-  const arrow = isRtl ? '←' : '→';
+  const arrowIcon = isRtl ? icons.arrowLeft('icon-inline', 15) : icons.arrowRight('icon-inline', 15);
 
   const txt = (ar, en, fr) => {
     if (lang === 'fr') return fr || en;
@@ -22,8 +23,8 @@ export function renderTeacherDashboardView(lang = 'ar') {
       'Monitor trainee performance, evaluate field deliverables, and submit institutional feedback aligned with international standards.',
       'Suivi des dossiers académiques, évaluation des devoirs de terrain et enregistrement des rétroactions pédagogiques conformes aux normes internationales.'
     ),
-    btnBackAcademy: txt('← العودة للأكاديمية', '← Back to Academy', '← Retour à l’Académie'),
-    btnRefresh: txt('↻ تحديث البيانات', '↻ Refresh Data', '↻ Actualiser'),
+    btnBackAcademy: txt('العودة للأكاديمية', 'Back to Academy', 'Retour à l’Académie'),
+    btnRefresh: txt('تحديث البيانات', 'Refresh Data', 'Actualiser'),
     courseSelectLabel: txt('المساق التدريبي النشط:', 'Active Course Track:', 'Cursus Actif :'),
     courseSyncing: txt('جاري مزامنة بيانات المساق...', 'Syncing course data...', 'Synchronisation du cursus...'),
     kpiCourses: txt('المساقات المكلف بها (My Courses)', 'Assigned Courses', 'Cursus Assignés'),
@@ -68,10 +69,12 @@ export function renderTeacherDashboardView(lang = 'ar') {
             </div>
 
             <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-              <a href="#/academy" class="btn-clean btn-secondary btn-sm" style="color: #FFFFFF; border-color: rgba(255,255,255,0.25);">
+              <a href="#/academy" class="btn-clean btn-secondary btn-sm" style="color: #FFFFFF; border-color: rgba(255,255,255,0.25); display: inline-flex; align-items: center; gap: 6px;">
+                <span style="display: inline-flex; align-items: center;">${isRtl ? icons.arrowRight('icon-inline', 14) : icons.arrowLeft('icon-inline', 14)}</span>
                 <span>${t.btnBackAcademy}</span>
               </a>
-              <button id="btn-teacher-refresh" class="btn-clean btn-green btn-sm">
+              <button id="btn-teacher-refresh" class="btn-clean btn-green btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+                <span style="display: inline-flex; align-items: center;">${icons.undo('icon-inline', 14)}</span>
                 <span>${t.btnRefresh}</span>
               </button>
             </div>
@@ -308,7 +311,7 @@ export async function bindTeacherEvents() {
               <td style="padding: 16px 20px;">
                 ${latestSub ? (
                   latestSub.status === 'graded'
-                    ? `<span style="font-weight: 800; color: var(--shat-green); font-size: 0.88rem;">✓ ${txt('تم الرصد', 'Graded', 'Noté')} (${latestSub.grade}/100)</span>`
+                    ? `<span style="font-weight: 800; color: var(--shat-green); font-size: 0.88rem;">${txt('تم الرصد', 'Graded', 'Noté')} (${latestSub.grade}/100)</span>`
                     : `<span style="font-weight: 800; color: #D97706; font-size: 0.88rem;">${txt('بانتظار التقييم', 'Pending Review', 'En attente')}</span>`
                 ) : `<span style="color: var(--text-muted); font-size: 0.84rem;">${txt('لم يسلّم بعد', 'Not submitted', 'Non remis')}</span>`}
               </td>
@@ -324,7 +327,7 @@ export async function bindTeacherEvents() {
                       data-file-name="${latestSub.fileName}"
                       data-grade="${latestSub.grade || ''}"
                       data-feedback="${encodeURIComponent(latestSub.instructorFeedback || '')}">
-                      <span>✓ ${txt('تقييم', 'Grade', 'Noter')}</span>
+                      <span>${txt('تقييم', 'Grade', 'Noter')}</span>
                     </button>
                   ` : ''}
                 </div>
@@ -400,11 +403,11 @@ export async function bindTeacherEvents() {
           </h4>
           <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-xs); overflow: hidden;">
             <div style="padding: 10px 14px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; font-size: 0.84rem;">
-              <span>✓ ${txt('الفصل 1: الإطار التأسيسي للمعيار الإنساني CHS', 'Chapter 1: CHS Conceptual Framework', 'Chapitre 1: Cadre Conceptuel CHS')}</span>
+              <span>${txt('الفصل 1: الإطار التأسيسي للمعيار الإنساني CHS', 'Chapter 1: CHS Conceptual Framework', 'Chapitre 1: Cadre Conceptuel CHS')}</span>
               <span style="color: var(--shat-green); font-weight: 700;">${txt('مكتمل 100%', '100% Completed', '100% Validé')}</span>
             </div>
             <div style="padding: 10px 14px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; font-size: 0.84rem;">
-              <span>✓ ${txt('الفصل 2: آليات المساءلة المجتمعية (AAP) والشكاوى الحساسة', 'Chapter 2: AAP & CFRM Accountability Mechanisms', 'Chapitre 2: Mécanismes de Redevabilité AAP/CFRM')}</span>
+              <span>${txt('الفصل 2: آليات المساءلة المجتمعية (AAP) والشكاوى الحساسة', 'Chapter 2: AAP & CFRM Accountability Mechanisms', 'Chapitre 2: Mécanismes de Redevabilité AAP/CFRM')}</span>
               <span style="color: var(--shat-green); font-weight: 700;">${txt('مكتمل 100%', '100% Completed', '100% Validé')}</span>
             </div>
             <div style="padding: 10px 14px; display: flex; justify-content: space-between; font-size: 0.84rem; background: var(--bg-subtle);">
@@ -482,7 +485,7 @@ export async function bindTeacherEvents() {
             <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; align-items: center; justify-content: space-between;">
               <span>${txt('الملف المرفوع:', 'Submitted File:', 'Fichier Déposé :')} <strong>${fileName}</strong></span>
               <a href="/api/files/download/${subId}-file" target="_blank" class="btn-clean btn-secondary btn-sm" download="${fileName}">
-                <span>${txt('تنزيل الملف الميداني ↓', 'Download Deliverable ↓', 'Télécharger le Devoir ↓')}</span>
+                <span style="display: inline-flex; align-items: center; gap: 6px;">${icons.download('icon-inline', 14)} <span>${txt('تنزيل الملف الميداني', 'Download Deliverable', 'Télécharger le Devoir')}</span></span>
               </a>
             </div>
           </div>
@@ -500,7 +503,6 @@ export async function bindTeacherEvents() {
 
             <button type="submit" id="btn-save-grade" class="btn-clean btn-green btn-lg" style="width: 100%; justify-content: center;">
               <span>${txt('تأكيد وحفظ الدرجة في قاعدة البيانات الرسمية', 'Save Grade to Official Database', 'Enregistrer la Note en Base Officielle')}</span>
-              <span>✓</span>
             </button>
           </form>
         `;
@@ -530,7 +532,7 @@ export async function bindTeacherEvents() {
               showToast(txt('تعذر حفظ التقييم: ', 'Failed to save grade: ', 'Échec de l’enregistrement : ') + err.message, 'error');
               if (saveBtn) {
                 saveBtn.disabled = false;
-                saveBtn.innerHTML = `<span>${txt('تأكيد وحفظ الدرجة', 'Save Grade', 'Enregistrer')}</span><span>✓</span>`;
+                saveBtn.innerHTML = `<span>${txt('تأكيد وحفظ الدرجة', 'Save Grade', 'Enregistrer')}</span>`;
               }
             }
           });

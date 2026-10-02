@@ -1,5 +1,5 @@
 // assets/js/tools/globalSearch.js
-// Production Global Spotlight Search Engine (Ctrl+K / ⌘K)
+// Production Global Spotlight Search Engine (Ctrl+K)
 // Indexes all Courses, Services, Standards, Projects, and Tools across the SHAT Platform
 
 import { content } from '../content.js';
@@ -18,24 +18,21 @@ export const globalSearch = {
         typeLabel: txt('أداة تفاعلية', 'Interactive Tool', 'Outil Interactif'),
         title: txt('أداة التقييم والتشخيص المؤسسي (Readiness Diagnostic)', 'Institutional Readiness Diagnostic Tool', 'Diagnostic Institutionnel'),
         desc: txt('تقييم فوري لجاهزية المؤسسة وفق معايير CHS, PSEA, MEAL وخارطة الطريق.', 'Assess readiness across CHS, PSEA, MEAL and get tailored roadmaps.', 'Évaluez la maturité organisationnelle.'),
-        action: 'open_diagnostic',
-        icon: '◈'
+        action: 'open_diagnostic'
       },
       {
         type: 'tool',
         typeLabel: txt('أداة تفاعلية', 'Interactive Tool', 'Outil Interactif'),
         title: txt('أداة التحقق من الشهادات الرقمية المعتمدة (Certificate Verification)', 'Digital Certificate Verification Tool', 'Vérification de Certificat'),
         desc: txt('التحقق الفوري من صحة الشهادات الصادرة من شركة شات وسجل الساعات والجدارات.', 'Instant verification of SHAT issued diplomas, hours and competencies.', 'Vérification en direct des diplômes.'),
-        action: 'open_cert',
-        icon: '▪'
+        action: 'open_cert'
       },
       {
         type: 'tool',
         typeLabel: txt('أداة تفاعلية', 'Interactive Tool', 'Outil Interactif'),
         title: txt('مكتبة الحقائب الميدانية والنماذج التشغيلية (Field Toolkits)', 'Field Toolkits & Templates Hub', 'Boîte à Outils Institutionnelle'),
         desc: txt('نماذج MEAL, PSEA, CFRM, وميثاق المشروع الجاهزة للتطبيق الفوري.', 'Downloadable MEAL, PSEA, CFRM, and Project Charter templates.', 'Modèles opérationnels téléchargeables.'),
-        action: 'open_toolkits',
-        icon: '◈'
+        action: 'open_toolkits'
       },
 
       // Courses
@@ -44,24 +41,21 @@ export const globalSearch = {
         typeLabel: txt('دبلوم تدريبي', 'Academic Course', 'Formation Certifiante'),
         title: txt('دبلوم المعيار الإنساني الأساسي (CHS) وإدارة الاستجابة', 'Core Humanitarian Standard (CHS) Master Diploma', 'Diplôme Norme CHS'),
         desc: txt('حوكمة الالتزامات التسعة وآليات المساءلة للمتأثرين (AAP) وقنوات الشكاوى (CFRM).', 'Governing the 9 CHS commitments, AAP mechanisms and CFRM.', 'Gouvernance des 9 engagements CHS et redevabilité.'),
-        route: '#/course/shat-chs-master',
-        icon: '★'
+        route: '#/course/shat-chs-master'
       },
       {
         type: 'course',
         typeLabel: txt('دبلوم تدريبي', 'Academic Course', 'Formation Certifiante'),
         title: txt('البرنامج التنفيذي في استشارات الحماية وصون السلامة (PSEA)', 'Executive Program in Safeguarding & PSEA Advisory', 'Programme Exécutif PSEA'),
         desc: txt('مأسسة سياسات عدم التسامح مطلقاً وتأسيس وحدات التحقيق ومسارات الإحالة الآمنة.', 'Institutionalizing zero-tolerance, internal investigations and safe referrals.', 'Politiques de sauvegarde et circuits de signalement.'),
-        route: '#/course/shat-psea-expert',
-        icon: '◈'
+        route: '#/course/shat-psea-expert'
       },
       {
         type: 'course',
         typeLabel: txt('دبلوم تدريبي', 'Academic Course', 'Formation Certifiante'),
         title: txt('الشهادة الاحترافية في التقييم التنموي المستقل (OECD DAC)', 'Professional Certificate in Independent Evaluation (OECD DAC)', 'Certificat Évaluation OCDE CAD'),
         desc: txt('المعايير الستة المعتمدة لقياس الأثر التنموي والاستدامة ونظرية التغيير.', 'The 6 criteria for evaluating development impact, sustainability and theory of change.', 'Évaluation d\'impact selon les 6 critères OCDE.'),
-        route: '#/course/shat-oecd-eval',
-        icon: '▲'
+        route: '#/course/shat-oecd-eval'
       },
 
       // Standards
@@ -70,16 +64,14 @@ export const globalSearch = {
         typeLabel: txt('معيار دولي', 'Global Standard', 'Norme Internationale'),
         title: txt('المعيار الإنساني الأساسي للجودة والمساءلة (CHS)', 'Core Humanitarian Standard (CHS)', 'Norme Humanitaire Fondamentale CHS'),
         desc: txt('الالتزامات التسعة للجودة والمساءلة في العمل الإنساني والتنموي.', 'Nine commitments for quality and accountability in aid.', '9 engagements pour la qualité et la redevabilité.'),
-        route: '#/standards',
-        icon: '◈'
+        route: '#/standards'
       },
       {
         type: 'standard',
         typeLabel: txt('معيار دولي', 'Global Standard', 'Norme Internationale'),
         title: txt('معايير مشروع إسفير للاستجابة الإنسانية (Sphere Handbook)', 'The Sphere Handbook Minimum Standards', 'Le Manuel Sphère'),
         desc: txt('المعايير الفنية الدنيا في المياه والإصحاح والمأوى والصحة والأمن الغذائي.', 'Minimum technical standards in WASH, shelter, health, food.', 'Standards minimums en eau, abri, santé, nutrition.'),
-        route: '#/standards',
-        icon: '▪'
+        route: '#/standards'
       },
 
       // Services & Portfolios
@@ -88,16 +80,14 @@ export const globalSearch = {
         typeLabel: txt('خدمة استشارية', 'Advisory Service', 'Service de Conseil'),
         title: txt('منظومة الاستشارات المؤسسية والحوكمة', 'Institutional Consulting & Governance System', 'Système de Conseil & Gouvernance'),
         desc: txt('مساعدة المؤسسات على فهم الواقع، تحليل الفجوات، وبناء اللوائح والسياسات.', 'Assisting organizations in gap analysis and SOP policy formulation.', 'Audit organisationnel et élaboration des politiques.'),
-        route: '#/services',
-        icon: '◈'
+        route: '#/services'
       },
       {
         type: 'service',
         typeLabel: txt('حقيبة معتمدة', 'Training Portfolio', 'Portefeuille de Formation'),
         title: txt('الحقائب التدريبية المتخصصة الثماني (8 Portfolios)', 'Eight Specialized Training Portfolios', 'Huit Portefeuilles de Formation'),
         desc: txt('إدارة المشاريع التنموية، المتابعة والتقييم، الحوكمة، القيادة، والتحول الرقمي.', 'Project management, MEAL, governance, leadership, and digital transformation.', 'Gestion de projets, MEAL, gouvernance, leadership.'),
-        route: '#/services',
-        icon: '▪'
+        route: '#/services'
       },
 
       // Projects
@@ -106,16 +96,14 @@ export const globalSearch = {
         typeLabel: txt('مشروع ميداني', 'Field Project', 'Projet de Terrain'),
         title: txt('مشروع حوكمة وتطبيق معيار CHS لمنظمات المجتمع المدني', 'CHS Governance & Implementation for CSOs', 'Déploiement Norme CHS pour ONG'),
         desc: txt('تأهيل 42 كادراً وصياغة 14 دليلاً تشغيلياً للشكاوى والحماية.', 'Trained 42 leaders and drafted 14 CFRM operational manuals.', 'Formation de 42 cadres et 14 manuels CFRM.'),
-        route: '#/projects',
-        icon: '★'
+        route: '#/projects'
       },
       {
         type: 'project',
         typeLabel: txt('مشروع ميداني', 'Field Project', 'Projet de Terrain'),
         title: txt('مشروع أطر الحماية وصون السلامة ومنع الاستغلال (PSEA)', 'Protection & Safeguarding (PSEA) Frameworks', 'Cadre de Sauvegarde PSEA'),
         desc: txt('اعتماد سياسات الحماية وتأسيس لجان التحقيق الداخلي لـ 8 مؤسسات.', 'Policy adoption and investigation committees established across 8 entities.', 'Adoption de politiques PSEA dans 8 institutions.'),
-        route: '#/projects',
-        icon: '◈'
+        route: '#/projects'
       }
     ];
   },

@@ -2,6 +2,7 @@
 // Corporate Projects & Field Interventions View with M&E Live Indicators & Interactive Briefs
 // 100% Trilingual Support (AR, EN, FR) & WCAG AAA High Contrast Design
 import { api } from '../services/api/apiClient.js';
+import { icons } from '../icons.js';
 
 export const PROJECTS_REGISTRY = [
   {
@@ -248,7 +249,7 @@ export const PROJECTS_REGISTRY = [
 
 export function renderProjectsView(lang = 'ar') {
   const isRtl = lang === 'ar';
-  const arrow = isRtl ? '←' : '→';
+  const arrow = isRtl ? icons.arrowLeft('icon-inline', 14) : icons.arrowRight('icon-inline', 14);
 
   const txt = (ar, en, fr) => {
     if (lang === 'fr') return fr || en;
@@ -303,7 +304,7 @@ export function renderProjectsView(lang = 'ar') {
           <div style="background: linear-gradient(135deg, #071527 0%, #0F2E4A 60%, #16426C 100%); color: #FFFFFF; border-radius: 16px; padding: clamp(20px, 3vw, 32px); margin-top: 32px; box-shadow: 0 10px 25px rgba(15,46,74,0.18); border: 1px solid rgba(255,255,255,0.1);">
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 14px;">
               <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="font-size: 1.3rem; font-weight: 900; color: #6EE7B7;">▲</span>
+                <span style="color: #6EE7B7; display: inline-flex; align-items: center;">${icons.dashboard ? icons.dashboard('', 22) : ''}</span>
                 <div>
                   <h2 style="font-size: 1.15rem; font-weight: 900; margin: 0; color: #FFFFFF;">
                     ${txt('لوحة المؤشرات التنموية الحية وإدارة الأثر (M&E Live Impact Dashboard)', 'Live M&E & Impact Telemetry Dashboard', 'Tableau de Bord M&E et Impact')}
@@ -431,7 +432,7 @@ export function renderProjectsView(lang = 'ar') {
                       <!-- M&E Indicator Tracking Table (ITT) Widget -->
                       <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 12px 14px; margin-bottom: 16px;">
                         <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.76rem; font-weight: 800; color: var(--shat-navy); margin-bottom: 8px;">
-                          <span>▲ ${txt('مؤشر الامتثال والأداء الميداني (M&E Indicator):', 'M&E Key Indicator Matrix:', 'Indicateur M&E :')}</span>
+                          <span>${txt('مؤشر الامتثال والأداء الميداني (M&E Indicator):', 'M&E Key Indicator Matrix:', 'Indicateur M&E :')}</span>
                           <span style="color: var(--shat-green);">${stage}</span>
                         </div>
                         
@@ -453,7 +454,7 @@ export function renderProjectsView(lang = 'ar') {
                         <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0;">
                           ${outcomes.map(o => `
                             <li style="font-size: 0.88rem; color: var(--text-main); display: flex; align-items: flex-start; gap: 8px; line-height: 1.5;">
-                              <span style="color: var(--shat-green); font-weight: bold; flex-shrink: 0;">✓</span>
+                              <span style="color: var(--shat-green); display: inline-flex; align-items: center; flex-shrink: 0; margin-top: 2px;">${icons.checkCircle('icon-inline', 14)}</span>
                               <span>${o}</span>
                             </li>
                           `).join('')}
@@ -468,7 +469,7 @@ export function renderProjectsView(lang = 'ar') {
                           ${t.btnViewBrief}
                         </button>
                         <button type="button" class="btn-clean btn-download-case" data-project="${p.code}" style="background: #F1F5F9; color: var(--shat-navy); border: 1px solid var(--border-light); font-size: 0.8rem; font-weight: 700; padding: 6px 12px; border-radius: var(--radius-xs);">
-                          ↓ ${t.btnDownloadSummary}
+                          <span style="display:inline-flex; align-items:center; gap:4px;">${icons.download('icon-inline', 13)} <span>${t.btnDownloadSummary}</span></span>
                         </button>
                       </div>
 
@@ -590,7 +591,7 @@ function openProjectBriefModal(project, lang = 'ar') {
               ${txt('وثيقة ملخص التدخل الميداني المعتمد', 'Official Project Brief & Evaluation Sheet', 'Fiche Synthèse de Projet Homologué')}
             </h3>
           </div>
-          <button class="modal-close" id="modal-project-brief-close" aria-label="Close">✕</button>
+          <button class="modal-close" id="modal-project-brief-close" aria-label="Close">${icons.x('', 18)}</button>
         </div>
         <div id="modal-project-brief-body" style="overflow-y: auto; padding: 24px;"></div>
       </div>
@@ -684,7 +685,7 @@ function openProjectBriefModal(project, lang = 'ar') {
         <div style="display: flex; flex-direction: column; gap: 8px;">
           ${outcomes.map(o => `
             <div style="display: flex; align-items: center; gap: 10px; background: #F1F5F9; padding: 10px 14px; border-radius: 6px; font-size: 0.88rem; color: #1E293B;">
-              <span style="color: #10B981; font-weight: 900;">✓</span>
+              <span style="color: #10B981; display: inline-flex; align-items: center; flex-shrink: 0;">${icons.checkCircle('icon-inline', 14)}</span>
               <span>${o}</span>
             </div>
           `).join('')}
@@ -711,8 +712,8 @@ function openProjectBriefModal(project, lang = 'ar') {
         ${txt('إغلاق', 'Close', 'Fermer')}
       </button>
 
-      <button type="button" class="btn-clean btn-primary btn-md allow-print" id="btn-print-brief" style="background: var(--shat-navy); font-weight: 800; box-shadow: 0 4px 14px rgba(15,46,74,0.3);">
-        ⎙ ${txt('طباعة الملخص / حفظ كـ PDF', 'Print / Save as PDF', 'Imprimer le Document (PDF)')}
+      <button type="button" class="btn-clean btn-primary btn-md allow-print" id="btn-print-brief" style="background: var(--shat-navy); font-weight: 800; box-shadow: 0 4px 14px rgba(15,46,74,0.3); display: inline-flex; align-items: center; gap: 6px;">
+        ${icons.printer('icon-inline', 14)} <span>${txt('طباعة الملخص / حفظ كـ PDF', 'Print / Save as PDF', 'Imprimer le Document (PDF)')}</span>
       </button>
     </div>
   `;

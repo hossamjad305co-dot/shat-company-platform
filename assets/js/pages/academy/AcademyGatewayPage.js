@@ -20,7 +20,7 @@ export async function renderAcademyGatewayPage() {
       <div class="container" style="padding-top: var(--space-md); padding-bottom: var(--space-xs); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
         ${Breadcrumbs({ items: breadcrumbs })}
         <a href="#/home" style="text-decoration: none; font-weight: 700; color: var(--shat-navy-950); font-size: 0.88rem; display: inline-flex; align-items: center; gap: 6px;">
-          <span>← العودة للصفحة الرئيسية</span>
+          <span style="display:inline-flex; align-items:center; gap:6px;">${icons.arrowRight('icon-inline', 14)} <span>العودة للصفحة الرئيسية</span></span>
         </a>
       </div>
 
@@ -48,7 +48,8 @@ export async function renderAcademyGatewayPage() {
             </button>
 
             <a href="#/apply" class="shat-btn" style="background: rgba(255, 255, 255, 0.12); color: #ffffff; font-weight: 700; font-size: 1rem; padding: 14px 28px; border-radius: var(--radius-md); border: 1.5px solid rgba(255, 255, 255, 0.3); text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
-              <span>استمارة التسجيل والالتحاق ↗</span>
+              <span>استمارة التسجيل والالتحاق</span>
+              ${icons.externalLink('icon-inline', 15)}
             </a>
           </div>
 
@@ -73,7 +74,7 @@ export async function renderAcademyGatewayPage() {
           </div>
           <a href="#/apply" style="color: var(--shat-green-700); font-weight: 700; text-decoration: none; font-size: 0.92rem; display: flex; align-items: center; gap: 6px;">
             <span>تقديم استمارة التحاق عامة</span>
-            <span>←</span>
+            <span style="display:inline-flex; align-items:center;">${icons.arrowLeft('icon-inline', 14)}</span>
           </a>
         </div>
 
@@ -107,7 +108,7 @@ export async function renderAcademyGatewayPage() {
                       <strong>${c.modules ? c.modules.length : 6} فصول تعليمية</strong>
                     </div>
                     <div style="display: flex; align-items: center; gap: 6px;">
-                      <span>◈️ المواد التعليمية:</span>
+                      <span style="display: inline-flex; align-items: center; gap: 4px;">${icons.book('icon-inline', 14)} المواد التعليمية:</span>
                       <span>حقائب PDF + قوالب Excel تطبيقية</span>
                     </div>
                   </div>

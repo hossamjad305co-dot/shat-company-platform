@@ -7,7 +7,7 @@ import { icons } from '../icons.js';
 
 export function renderCourseDetailView(lang = 'ar') {
   const isRtl = lang === 'ar';
-  const arrow = isRtl ? '←' : '→';
+  const arrowIcon = isRtl ? icons.arrowLeft('icon-inline', 15) : icons.arrowRight('icon-inline', 15);
 
   const txt = (ar, en, fr) => {
     if (lang === 'fr') return fr || en;
@@ -18,7 +18,7 @@ export function renderCourseDetailView(lang = 'ar') {
   const t = {
     academyLabel: txt('أكاديمية شركة شات (SHAT)', 'SHAT Academy', 'Académie SHAT'),
     courseTrackLabel: txt('المساق التدريبي المعتمد', 'Accredited Course Track', 'Cursus Professionnel Certifié'),
-    btnBackDashboard: txt('← العودة للوحة التعلم', '← Back to Learning Dashboard', '← Retour au Tableau de Bord'),
+    btnBackDashboard: txt('العودة للوحة التعلم', 'Back to Learning Dashboard', 'Retour au Tableau de Bord'),
     btnAllCourses: txt('دليل كافة المساقات', 'All Courses Catalog', 'Catalogue des Cursus'),
     loading: txt('جاري تحميل تفاصيل المساق والمنهاج المعتمد...', 'Loading course curriculum from server...', 'Chargement du cursus en cours...'),
     modalTitle: txt('تسليم التكليف الدراسي المعتمد', 'Submit Course Assignment', 'Soumettre le Devoir Certifié')
@@ -37,7 +37,8 @@ export function renderCourseDetailView(lang = 'ar') {
           </div>
 
           <div style="display: flex; gap: 10px;">
-            <a href="#/student" class="btn-clean" style="background: #FFFFFF; border: 1px solid var(--border-light); color: var(--shat-navy);">
+            <a href="#/student" class="btn-clean" style="background: #FFFFFF; border: 1px solid var(--border-light); color: var(--shat-navy); display: inline-flex; align-items: center; gap: 6px;">
+              <span style="display: inline-flex; align-items: center;">${isRtl ? icons.arrowRight('icon-inline', 14) : icons.arrowLeft('icon-inline', 14)}</span>
               <span>${t.btnBackDashboard}</span>
             </a>
             <a href="#/academy" class="btn-clean" style="background: #FFFFFF; border: 1px solid var(--border-light); color: var(--text-muted);">
@@ -77,7 +78,7 @@ export async function bindCourseDetailEvents() {
 
   const currentLang = localStorage.getItem('shat_platform_lang') || 'ar';
   const isRtl = currentLang === 'ar';
-  const arrow = isRtl ? '←' : '→';
+  const arrowIcon = isRtl ? icons.arrowLeft('icon-inline', 15) : icons.arrowRight('icon-inline', 15);
 
   const txt = (ar, en, fr) => {
     if (currentLang === 'fr') return fr || en;
@@ -126,16 +127,16 @@ export async function bindCourseDetailEvents() {
               <span class="badge" style="background: rgba(30, 166, 114, 0.25); color: #4ADE80; border: 1px solid rgba(74, 222, 128, 0.3); font-family: var(--font-mono);">${c.code}</span>
               <span class="badge" style="background: rgba(255, 255, 255, 0.12); color: #F8FAFC;">${c.track}</span>
               <span class="badge" style="background: rgba(245, 158, 11, 0.2); color: #FBBF24;">${c.level}</span>
-              ${c.fee ? `<span class="badge" style="background: rgba(217, 119, 6, 0.25); color: #FCD34D; border: 1px solid rgba(252, 211, 77, 0.4); font-weight: 800;"><span class="pro-symbol-badge"></span> ${c.fee}</span>` : ''}
+              ${c.fee ? `<span class="badge" style="background: rgba(217, 119, 6, 0.25); color: #FCD34D; border: 1px solid rgba(252, 211, 77, 0.4); font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">${icons.award('icon-inline', 14)} ${c.fee}</span>` : ''}
             </div>
             <h1 style="font-size: 1.85rem; font-weight: 900; line-height: 1.4; margin-bottom: 14px; color: #FFFFFF;">${courseTitle}</h1>
             <p style="color: #CBD5E1; font-size: 0.96rem; line-height: 1.7; margin-bottom: 20px;">
               ${c.overview || c.summary || ''}
             </p>
             <div style="display: flex; gap: 20px; flex-wrap: wrap; font-size: 0.88rem; color: #94A3B8;">
-              <div style="display: flex; align-items: center; gap: 6px;"><span class="pro-symbol-badge"></span> ${txt('المدرب المعتمد:', 'Master Trainer:', 'Formateur Expert :')} <strong style="color: #FFFFFF;">${c.instructorName || 'أ. حسام جاد الله'}</strong></div>
-              <div style="display: flex; align-items: center; gap: 6px;"><span class="pro-symbol-badge"></span> ${txt('الساعات المعتمدة:', 'Accredited Hours:', 'Heures Certifiées :')} <strong style="color: #FFFFFF;">${c.hours || '30 ساعة'}</strong></div>
-              <div style="display: flex; align-items: center; gap: 6px;"><span class="pro-symbol-badge"></span> ${txt('المواعيد:', 'Schedule:', 'Horaires :')} <strong style="color: #FFFFFF;">${c.schedule || 'مرن / أسبوعي'}</strong></div>
+              <div style="display: flex; align-items: center; gap: 6px;"><span style="color: #4ADE80; display: inline-flex; align-items: center;">${icons.user('icon-inline', 15)}</span> ${txt('المدرب المعتمد:', 'Master Trainer:', 'Formateur Expert :')} <strong style="color: #FFFFFF;">${c.instructorName || 'أ. حسام جاد الله'}</strong></div>
+              <div style="display: flex; align-items: center; gap: 6px;"><span style="color: #4ADE80; display: inline-flex; align-items: center;">${icons.clock('icon-inline', 15)}</span> ${txt('الساعات المعتمدة:', 'Accredited Hours:', 'Heures Certifiées :')} <strong style="color: #FFFFFF;">${c.hours || '30 ساعة'}</strong></div>
+              <div style="display: flex; align-items: center; gap: 6px;"><span style="color: #4ADE80; display: inline-flex; align-items: center;">${icons.calendar('icon-inline', 15)}</span> ${txt('المواعيد:', 'Schedule:', 'Horaires :')} <strong style="color: #FFFFFF;">${c.schedule || 'مرن / أسبوعي'}</strong></div>
             </div>
           </div>
 
@@ -152,36 +153,36 @@ export async function bindCourseDetailEvents() {
 
             ${currentUser ? `
               <div style="font-weight: 800; color: #4ADE80; font-size: 1.05rem; margin-bottom: 14px;">
-                ✓ ${txt('متاح للتسجيل والتعلم في حسابك', 'Active & Enrolled in Your Account', 'Accessible & Validé dans Votre Compte')}
+                ${txt('متاح للتسجيل والتعلم في حسابك', 'Active & Enrolled in Your Account', 'Accessible & Validé dans Votre Compte')}
               </div>
               <a href="#/student" class="btn-clean btn-green" style="width: 100%; justify-content: center; margin-bottom: 8px; text-decoration: none; font-weight: 700;">
                 <span>${txt('الانتقال للمقرر في لوحتي', 'Open in My Dashboard', 'Ouvrir dans Mon Espace')}</span>
               </a>
               ${(c.driveFolderUrl || c.driveUrl) ? `
                 <a href="${c.driveFolderUrl || c.driveUrl}" target="_blank" rel="noopener noreferrer" class="btn-clean" style="width: 100%; justify-content: center; margin-bottom: 8px; background: rgba(59, 130, 246, 0.2); color: #93C5FD; border: 1px solid rgba(147, 197, 253, 0.4); text-decoration: none; font-weight: 700; font-size: 0.85rem;">
+                  <span style="display: inline-flex; align-items: center;">${icons.drive('icon-inline', 15)}</span>
                   <span>${txt('فتح مجلد Google Drive للمساق', 'Open Google Drive Materials', 'Ouvrir Dossier Google Drive')}</span>
-                  <span>↗</span>
+                  <span style="display: inline-flex; align-items: center;">${icons.externalLink('icon-inline', 13)}</span>
                 </a>
               ` : ''}
             ` : `
               <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px;">
                 ${c.googleFormUrl ? `
                   <a href="${c.googleFormUrl}" target="_blank" rel="noopener noreferrer" class="btn-clean" style="width: 100%; justify-content: center; background: #D97706; color: #FFFFFF; font-weight: 800; font-size: 0.88rem; padding: 10px; border-radius: 8px; text-decoration: none; box-shadow: 0 4px 12px rgba(217,119,6,0.25); display: flex; align-items: center; gap: 6px;">
-                    <span class="pro-symbol-badge"></span>
+                    <span style="display: inline-flex; align-items: center;">${icons.form('icon-inline', 16)}</span>
                     <span>${txt('التسجيل عبر Google Form الرسمي', 'Register via Official Google Form', 'Inscription via Google Form')}</span>
-                    <span style="font-size: 0.8rem;">↗</span>
+                    <span style="display: inline-flex; align-items: center;">${icons.externalLink('icon-inline', 13)}</span>
                   </a>
                 ` : ''}
 
                 <button class="btn-clean btn-primary btn-open-reg-modal" data-course="${c.id}" style="width: 100%; justify-content: center; font-size: 0.88rem; padding: 10px; font-weight: 800;">
-                  <span class="pro-symbol-badge">✓</span>
                   <span>${txt('التسجيل الفوري باستمارة المنصة', 'Quick Platform Registration', 'Inscription Rapide Plateforme')}</span>
-                  <span>${arrow}</span>
+                  <span style="display: inline-flex; align-items: center;">${arrowIcon}</span>
                 </button>
 
                 ${(c.driveFolderUrl || c.driveUrl) ? `
                   <button type="button" class="btn-clean btn-intercept-download" data-file="حقيبة المساق التدريبية على Google Drive" style="width: 100%; justify-content: center; background: rgba(59, 130, 246, 0.15); color: #93C5FD; border: 1px solid rgba(147, 197, 253, 0.3); font-weight: 700; font-size: 0.82rem; padding: 8px; border-radius: 6px; cursor: pointer;">
-                    <span>${txt('حقيبة Google Drive (يتطلب تسجيلاً)', 'Drive Materials (Enroll to Access)', 'Dossier Drive (Connexion Requise)')}</span>
+                    <span style="display: inline-flex; align-items: center; margin-inline-end: 6px;">${icons.drive('icon-inline', 14)}</span><span>${txt('حقيبة Google Drive (يتطلب تسجيلاً)', 'Drive Materials (Enroll to Access)', 'Dossier Drive (Connexion Requise)')}</span>
                   </button>
                 ` : ''}
               </div>
@@ -201,7 +202,7 @@ export async function bindCourseDetailEvents() {
                 align-items: center;
                 gap: 8px;
               ">
-                <span class="pro-symbol-badge"></span>
+                <span style="display: inline-flex; align-items: center;">${icons.book('icon-inline', 16)}</span>
                 <span>${txt('تحميل / استعراض الخطة (Syllabus)', 'Accredited Syllabus (PDF)', 'Syllabus Officiel (PDF)')}</span>
               </button>
               <div style="font-size: 0.78rem; color: #94A3B8;">
@@ -269,7 +270,7 @@ export async function bindCourseDetailEvents() {
                                   
                                   ${currentUser ? `
                                     <a href="/api/files/download/${m.id}" class="btn-clean btn-sm" style="background: #F1F5F9; color: var(--shat-navy); border: 1px solid var(--border-light); font-weight: 700;">
-                                      <span>↓ ${txt('تنزيل مباشر', 'Direct Download', 'Télécharger')}</span>
+                                      <span style="display: inline-flex; align-items: center; gap: 4px;">${icons.download('icon-inline', 14)} <span>${txt('تنزيل مباشر', 'Direct Download', 'Télécharger')}</span></span>
                                     </a>
                                   ` : `
                                     <button type="button" class="btn-clean btn-sm btn-intercept-download" data-file="${m.name}" style="background: #F8FAFC; color: var(--shat-navy); border: 1px solid var(--border-medium); font-size: 0.8rem; font-weight: 700; cursor: pointer;">
@@ -299,19 +300,19 @@ export async function bindCourseDetailEvents() {
             </h3>
             <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.88rem; color: var(--text-main); display: flex; flex-direction: column; gap: 12px;">
               <li style="display: flex; align-items: center; gap: 8px;">
-                <span style="color: var(--shat-green); font-weight: 800;">✓</span>
+                <span style="color: var(--shat-green); display: inline-flex; align-items: center;">${icons.checkCircle('icon-inline', 14)}</span>
                 ${txt('شهادة إتمام معتمدة رسمياً وموثقة برقم ترخيص مهني', 'Accredited completion certificate with digital verification ID', 'Certificat d’achèvement officiel avec identifiant vérifié')}
               </li>
               <li style="display: flex; align-items: center; gap: 8px;">
-                <span style="color: var(--shat-green); font-weight: 800;">✓</span>
+                <span style="color: var(--shat-green); display: inline-flex; align-items: center;">${icons.checkCircle('icon-inline', 14)}</span>
                 ${txt('دراسات حالة حية مأخوذة من قطاع العمل الإنساني والتنموي', 'Real-world humanitarian & development field case studies', 'Études de cas réelles issues du secteur humanitaire')}
               </li>
               <li style="display: flex; align-items: center; gap: 8px;">
-                <span style="color: var(--shat-green); font-weight: 800;">✓</span>
+                <span style="color: var(--shat-green); display: inline-flex; align-items: center;">${icons.checkCircle('icon-inline', 14)}</span>
                 ${txt('تغذية راجعة فردية مباشرة من خبير التدريب المعتمد', 'Individualized feedback from accredited Master Trainer', 'Rétroaction personnalisée du formateur expert')}
               </li>
               <li style="display: flex; align-items: center; gap: 8px;">
-                <span style="color: var(--shat-green); font-weight: 800;">✓</span>
+                <span style="color: var(--shat-green); display: inline-flex; align-items: center;">${icons.checkCircle('icon-inline', 14)}</span>
                 ${txt('حفظ وتسليم كافة التكليفات في المستودع الأكاديمي المباشر', 'In-platform direct task submission & repository storage', 'Dépôt et archivage des devoirs sur la plateforme')}
               </li>
             </ul>
@@ -334,10 +335,10 @@ export async function bindCourseDetailEvents() {
             </p>
             <div style="display: flex; flex-direction: column; gap: 8px;">
               <button type="button" class="btn-clean" id="btn-take-course-exam" style="background: #10B981; color: #FFFFFF; font-weight: 800; padding: 10px 14px; border-radius: 8px; justify-content: center; box-shadow: 0 4px 12px rgba(16,185,129,0.3); cursor: pointer;">
-                <span>✓ ${txt('خوض الاختبار النهائي المعتمد', 'Take Final Accredited Exam', 'Passer l’Examen Final')}</span>
+                <span style="display: inline-flex; align-items: center; gap: 6px;">${icons.award('icon-inline', 16)} <span>${txt('خوض الاختبار النهائي المعتمد', 'Take Final Accredited Exam', 'Passer l’Examen Final')}</span></span>
               </button>
               <button type="button" class="btn-clean btn-sm" id="btn-view-course-cert-quick" style="background: rgba(255,255,255,0.12); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.25); justify-content: center; padding: 8px; border-radius: 6px; font-weight: 700; cursor: pointer;">
-                <span>${txt('استعراض شهاداتي المكتسبة', 'View My Earned Certificates', 'Mes Certificats')}</span>
+                <span style="display: inline-flex; align-items: center; gap: 6px;">${icons.award('icon-inline', 14)} <span>${txt('استعراض شهاداتي المكتسبة', 'View My Earned Certificates', 'Mes Certificats')}</span></span>
               </button>
             </div>
           </div>
@@ -352,13 +353,13 @@ export async function bindCourseDetailEvents() {
             </h4>
             <div style="display: flex; flex-direction: column; gap: 8px;">
               <button type="button" class="btn-clean btn-sm" onclick="if(window.openCertificateValidator) window.openCertificateValidator();" style="background: rgba(255,255,255,0.1); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.2); justify-content: flex-start; padding: 8px 12px; border-radius: 6px;">
-                <span>• ${txt('التحقق من الشهادات الرقمية الصادرة', 'Verify Digital Certificates', 'Vérifier Certificats')}</span>
+                <span style="display: inline-flex; align-items: center; gap: 6px;">${icons.shieldCheck('icon-inline', 14)} <span>${txt('التحقق من الشهادات الرقمية الصادرة', 'Verify Digital Certificates', 'Vérifier Certificats')}</span></span>
               </button>
               <button type="button" class="btn-clean btn-sm" onclick="if(window.openStandardsExplorer) window.openStandardsExplorer('${c.code || 'CHS'}');" style="background: rgba(255,255,255,0.1); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.2); justify-content: flex-start; padding: 8px 12px; border-radius: 6px;">
-                <span>${txt('قوائم التحقق والامتثال للمعايير', 'Standards Compliance Explorer', 'Normes & Référentiels')}</span>
+                <span style="display: inline-flex; align-items: center; gap: 6px;">${icons.clipboardCheck('icon-inline', 14)} <span>${txt('قوائم التحقق والامتثال للمعايير', 'Standards Compliance Explorer', 'Normes & Référentiels')}</span></span>
               </button>
               <button type="button" class="btn-clean btn-sm" onclick="if(window.openToolkitsLibrary) window.openToolkitsLibrary();" style="background: rgba(255,255,255,0.1); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.2); justify-content: flex-start; padding: 8px 12px; border-radius: 6px;">
-                <span>${txt('مكتبة القوالب والمصفوفات الميدانية', 'Field Toolkits & Matrices Hub', 'Modèles & Outils')}</span>
+                <span style="display: inline-flex; align-items: center; gap: 6px;">${icons.folder('icon-inline', 14)} <span>${txt('مكتبة القوالب والمصفوفات الميدانية', 'Field Toolkits & Matrices Hub', 'Modèles & Outils')}</span></span>
               </button>
             </div>
           </div>
@@ -435,7 +436,7 @@ export async function bindCourseDetailEvents() {
   } catch (err) {
     container.innerHTML = `
       <div style="background: #FFFFFF; border-radius: var(--radius-md); padding: 48px; text-align: center; border: 1px solid var(--border-light);">
-        <div style="font-size: 2.5rem; margin-bottom: 16px; color: var(--accent-red);">✕</div>
+        <div style="margin-bottom: 16px; color: var(--accent-red); display: flex; justify-content: center;">${icons.alertCircle('', 48)}</div>
         <h2 style="font-weight: 800; color: var(--shat-navy); margin-bottom: 8px;">
           ${txt('خطأ في الاتصال بالخادم', 'Server Connection Notice', 'Avis de Connexion Serveur')}
         </h2>

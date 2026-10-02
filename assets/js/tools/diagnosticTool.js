@@ -167,8 +167,9 @@ export const diagnosticTool = {
             <button type="button" class="btn-clean btn-secondary btn-sm" id="btn-diagnostic-sample" style="padding: 10px 16px;">
               <span>${txt('تعبئة تجريبية سريعة', 'Quick Sample Data', 'Remplissage Rapide')}</span>
             </button>
-            <button type="submit" class="btn-clean btn-primary btn-lg" style="padding: 12px 28px;">
-              <span>▲ ${txt('تحليل النتيجة وإصدار خارطة الطريق', 'Analyze & Generate Roadmap', 'Analyser et Générer la Feuille de Route')}</span>
+            <button type="submit" class="btn-clean btn-primary btn-lg" style="padding: 12px 28px; display: inline-flex; align-items: center; gap: 8px;">
+              ${icons.trendingUp('icon-inline', 18)}
+              <span>${txt('تحليل النتيجة وإصدار خارطة الطريق', 'Analyze & Generate Roadmap', 'Analyser et Générer la Feuille de Route')}</span>
             </button>
           </div>
         </form>

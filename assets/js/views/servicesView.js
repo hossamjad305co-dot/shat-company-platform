@@ -1,3 +1,4 @@
+import { icons } from '../icons.js';
 // assets/js/views/servicesView.js
 // Training & Consulting Systems, Interactive Diagnostic Launcher & Interconnected Portfolios
 // 100% Trilingual Support (AR, EN, FR) adhering to WCAG AAA High Contrast Standards
@@ -10,7 +11,7 @@ export function renderServicesView(lang = 'ar') {
   const pf = d.portfolios || [];
   const sp = d.specializedConsulting || {};
   const isRtl = lang === 'ar';
-  const arrow = isRtl ? '←' : '→';
+  const arrow = isRtl ? icons.arrowLeft('icon-inline', 14) : icons.arrowRight('icon-inline', 14);
 
   const t = {
     badge: lang === 'fr' ? 'Ce que nous offrons' : (isRtl ? 'منظومة الخدمات والحلول المؤسسية' : 'Institutional Services & Advisory'),
@@ -182,7 +183,7 @@ export function renderServicesView(lang = 'ar') {
                     <p class="bento-text" style="font-size: 0.92rem; line-height: 1.7; color: var(--text-secondary);">${st.desc}</p>
                   </div>
                   <div style="border-top: 1px dashed var(--border-light); padding-top: 10px; margin-top: 14px; font-size: 0.78rem; color: var(--shat-green); font-weight: 700;">
-                    ✓ ${isRtl ? 'مخرج تطبيقي موثق' : 'Verifiable Output'}
+                    ${isRtl ? 'مخرج تطبيقي موثق' : 'Verifiable Output'}
                   </div>
                 </div>
               </div>

@@ -1,5 +1,6 @@
 // assets/js/components/toast.js
 // Production In-App Toast Notification Engine for SHAT Platform
+import { icons } from '../icons.js';
 
 let toastContainer = null;
 
@@ -33,14 +34,16 @@ function ensureToastContainer() {
 export function showToast(message, type = 'info', duration = 4000) {
   ensureToastContainer();
 
+  const cleanMessage = typeof message === 'string' ? message.replace(/^[✓✕ℹ️▪️▲\s]+/, '') : message;
+
   const toast = document.createElement('div');
   toast.className = `shat-toast shat-toast-${type}`;
 
   const colors = {
-    success: { bg: '#0F2E4A', border: '#4B8834', icon: '✓', text: '#FFFFFF', iconColor: '#4ADE80' },
-    error: { bg: '#450A0A', border: '#EF4444', icon: '✕', text: '#FFFFFF', iconColor: '#F87171' },
-    warning: { bg: '#451A03', border: '#F59E0B', icon: '▲', text: '#FFFFFF', iconColor: '#FBBF24' },
-    info: { bg: '#0F2E4A', border: '#3B82F6', icon: 'ℹ', text: '#FFFFFF', iconColor: '#60A5FA' }
+    success: { bg: '#0F2E4A', border: '#4B8834', icon: icons.checkCircle('', 16), text: '#FFFFFF', iconColor: '#4ADE80' },
+    error: { bg: '#450A0A', border: '#EF4444', icon: icons.alertCircle('', 16), text: '#FFFFFF', iconColor: '#F87171' },
+    warning: { bg: '#451A03', border: '#F59E0B', icon: icons.alertCircle('', 16), text: '#FFFFFF', iconColor: '#FBBF24' },
+    info: { bg: '#0F2E4A', border: '#3B82F6', icon: icons.info('', 16), text: '#FFFFFF', iconColor: '#60A5FA' }
   };
 
   const style = colors[type] || colors.info;
@@ -68,12 +71,12 @@ export function showToast(message, type = 'info', duration = 4000) {
 
   toast.innerHTML = `
     <div style="display: flex; align-items: center; gap: 10px;">
-      <span style="display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: rgba(255,255,255,0.15); color: ${style.iconColor}; font-weight: 900; font-size: 0.85rem;">
+      <span style="display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: rgba(255,255,255,0.15); color: ${style.iconColor}; flex-shrink: 0;">
         ${style.icon}
       </span>
-      <span>${message}</span>
+      <span>${cleanMessage}</span>
     </div>
-    <button style="background: none; border: none; color: #94A3B8; cursor: pointer; font-size: 1.1rem; line-height: 1; padding: 2px 6px;" aria-label="إغلاق">✕</button>
+    <button style="background: none; border: none; color: #94A3B8; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 2px 6px;" aria-label="إغلاق">${icons.x('', 16)}</button>
   `;
 
   toastContainer.appendChild(toast);

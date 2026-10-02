@@ -1,3 +1,4 @@
+import { icons } from '../../icons.js';
 // SHAT Platform — Employee CMS Management Page (pages/employee/EmployeeCMSPage.js)
 import { AdminLayout } from '../../layouts/admin/adminLayout.js';
 import { Card, Button, Badge, Input, ErrorState } from '../../components/ui/core.js';
@@ -38,7 +39,7 @@ export async function renderEmployeeCMSPage() {
           </button>
         </div>
         <div style="font-size: var(--font-size-caption); color: var(--text-muted);">
-          خط التدفق: مسودة (Draft) ← معاينة متجاوبة (Preview) ← نشر رسمي (Publish)
+          خط التدفق: مسودة (Draft) ${icons.arrowLeft('icon-inline', 12)} معاينة متجاوبة (Preview) ${icons.arrowLeft('icon-inline', 12)} نشر رسمي (Publish)
         </div>
       </div>
 

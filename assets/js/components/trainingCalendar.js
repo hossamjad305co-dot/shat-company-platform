@@ -1,6 +1,7 @@
 // assets/js/components/trainingCalendar.js
 // Executive Training Calendar & Upcoming Cohorts Schedule for SHAT Platform (2026)
 // Provides interactive cohort filtering, seat urgency status, and direct Google Form enrollment
+import { icons } from '../icons.js';
 
 export const UPCOMING_COHORTS = [
   {
@@ -46,7 +47,7 @@ export const UPCOMING_COHORTS = [
     fee: 'رسوم تفضيلية',
     formUrl: '#/forms?id=presentation-skills-2026',
     badge: 'الدفعة 3 • يغلق التسجيل قريباً',
-    badgeColor: '#D97706',
+    badgeColor: '#92400E',
     badgeBg: '#FEF3C7'
   },
   {
@@ -201,7 +202,7 @@ export function renderTrainingCalendarSection(lang = 'ar') {
             </div>
           </div>
           <a href="#/verify" class="btn-clean" style="background: #FFFFFF; border: 1px solid #CBD5E1; color: var(--shat-navy, #0B1E36); font-weight: 700; padding: 8px 18px; border-radius: 8px; font-size: 0.86rem;">
-            <span>✓ ${txt('بوابة فحص الشهادات', 'Certificate Verification Portal', 'Portail de Vérification')}</span>
+            <span>${txt('بوابة فحص الشهادات', 'Certificate Verification Portal', 'Portail de Vérification')}</span>
           </a>
         </div>
 
@@ -295,8 +296,8 @@ function renderCohortCard(c, lang) {
           box-shadow: 0 4px 12px rgba(30,126,52,0.2);
           text-align: center;
         ">
-          <span>✓ ${txt('التسجيل الفوري في هذه الدفعة', 'Enroll in this Cohort', 'S\'inscrire à cette Session')}</span>
-          <span>${isRtl ? '←' : '→'}</span>
+          <span>${txt('التسجيل الفوري في هذه الدفعة', 'Enroll in this Cohort', 'S\'inscrire à cette Session')}</span>
+          <span style="display:inline-flex; align-items:center;">${isRtl ? icons.arrowLeft('icon-inline', 14) : icons.arrowRight('icon-inline', 14)}</span>
         </a>
       </div>
     </div>

@@ -258,11 +258,11 @@ You can launch the diagnostic tool right now to receive a customized maturity re
           </div>
 
           <div style="display: flex; gap: 6px;">
-            <button id="btn-advisor-clear" title="${txt('مسح المحادثة', 'Clear Chat', 'Effacer')}" style="background: rgba(255,255,255,0.1); border: none; color: #CBD5E1; font-size: 0.9rem; width: 28px; height: 28px; border-radius: 6px; cursor: pointer;">
-              ↻
+            <button id="btn-advisor-clear" title="${txt('مسح المحادثة', 'Clear Chat', 'Effacer')}" style="background: rgba(255,255,255,0.1); border: none; color: #CBD5E1; display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 6px; cursor: pointer;">
+              ${icons.undo('', 14)}
             </button>
-            <button id="btn-advisor-close" title="${txt('إغلاق', 'Close', 'Fermer')}" style="background: rgba(255,255,255,0.1); border: none; color: #FFFFFF; font-size: 1rem; width: 28px; height: 28px; border-radius: 6px; cursor: pointer;">
-              ✕
+            <button id="btn-advisor-close" title="${txt('إغلاق', 'Close', 'Fermer')}" style="background: rgba(255,255,255,0.1); border: none; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 6px; cursor: pointer;">
+              ${icons.x('', 16)}
             </button>
           </div>
         </div>
@@ -306,7 +306,7 @@ You can launch the diagnostic tool right now to receive a customized maturity re
               cursor: pointer;
               box-shadow: 0 2px 8px rgba(30,126,52,0.25);
             ">
-              <span>→</span>
+              <span style="display:inline-flex; align-items:center;">${icons.arrowLeft('icon-inline', 14)}</span>
             </button>
           </form>
 

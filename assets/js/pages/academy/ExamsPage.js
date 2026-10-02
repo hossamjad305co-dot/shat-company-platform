@@ -2,6 +2,7 @@
 import { AcademyLayout } from '../../layouts/academy/academyLayout.js';
 import { Card, Badge, StatusBadge, Button, EmptyState } from '../../components/ui/core.js';
 import { courseService } from '../../services/courses/courseService.js';
+import { icons } from '../../icons.js';
 
 export async function renderExamsPage() {
   const courses = await courseService.getCourses();
@@ -32,7 +33,7 @@ export async function renderExamsPage() {
       <!-- Security Notice on Exam Timers -->
       <div class="shat-card" style="background: var(--shat-green-100); border-color: var(--shat-green-200); margin-bottom: var(--space-xl);">
         <div style="display: flex; gap: 12px; align-items: flex-start;">
-          <span style="font-size: 1.5rem;">⏱️</span>
+          <span style="color: var(--shat-green-950); display: flex; align-items: center; margin-top: 2px;">${icons.clock('icon-inline', 24)}</span>
           <div>
             <h4 style="color: var(--shat-green-950); margin: 0 0 4px 0; font-size: var(--font-size-h4);">
               معيار الأمان وضبط التوقيت الأكاديمي
@@ -78,7 +79,7 @@ export async function renderExamsPage() {
             </div>
           </div>
         `).join('') : EmptyState({
-          icon: '⏱️',
+          icon: icons.clock('', 40),
           title: 'لا توجد اختبارات مجدولة حالياً',
           description: 'لم يتم فتح فترة تقييم جديدة لهذا المساق، يرجى مراجعة مواعيد المحاضرات.'
         })}

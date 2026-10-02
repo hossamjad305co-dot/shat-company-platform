@@ -6,10 +6,11 @@ import { api } from '../services/api/apiClient.js';
 import { academyTranslations } from '../academyTranslations.js';
 import { renderTrainingCalendarSection, bindTrainingCalendarEvents } from '../components/trainingCalendar.js';
 import { renderFaqSection, bindFaqEvents } from '../components/faqSection.js';
+import { icons } from '../icons.js';
 
 export function renderAcademyView(lang = 'ar') {
   const isRtl = lang === 'ar';
-  const arrow = isRtl ? '←' : '→';
+  const arrowIcon = isRtl ? icons.arrowLeft('icon-inline', 15) : icons.arrowRight('icon-inline', 15);
 
   const at = academyTranslations[lang] || academyTranslations.ar;
   const d = content[lang] || content.ar;
@@ -44,7 +45,7 @@ export function renderAcademyView(lang = 'ar') {
       : (isRtl ? 'برامج تدريبية تخصصية وتطبيقية تعتمد على الجدارات وتحاكي المعايير الإنسانية والدولية (CHS, Sphere, PSEA, OECD DAC) لربط التعلم بالأداء الفعلي.' : 'Specialized competency-based training programs aligned with global standards (CHS, Sphere, PSEA, OECD DAC) to bridge knowledge with field performance.'),
     
     // Quick tool actions
-    verifyBtn: lang === 'fr' ? '✓ Vérifier un Certificat' : (isRtl ? '✓ التحقق من شهادة رقمية' : '✓ Verify Digital Certificate'),
+    verifyBtn: lang === 'fr' ? 'Vérifier un Certificat' : (isRtl ? 'التحقق من شهادة رقمية' : 'Verify Digital Certificate'),
     toolkitsBtn: lang === 'fr' ? 'Boîtes à Outils de Terrain' : (isRtl ? 'مكتبة الأدوات الميدانية' : 'Field Toolkits Hub'),
     diagBtn: lang === 'fr' ? 'Test de Préparation' : (isRtl ? 'تقييم الجاهزية المؤسسية' : 'Readiness Diagnostic'),
 
@@ -79,7 +80,7 @@ export function renderAcademyView(lang = 'ar') {
             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
               <button type="button" class="btn-clean btn-primary btn-island btn-open-reg-modal" data-course="general">
                 <span>${t.btnApplyGeneral}</span>
-                <span>${arrow}</span>
+                <span style="display: inline-flex; align-items: center;">${arrowIcon}</span>
               </button>
             </div>
           </div>
@@ -110,8 +111,8 @@ export function renderAcademyView(lang = 'ar') {
                 placeholder="${t.searchPlaceholder}" 
                 style="width: 100%; padding: 14px 20px; font-size: 0.95rem; border-radius: var(--radius-sm); border: 1px solid var(--border-medium); background: #FFFFFF; color: var(--text-main); font-family: var(--font-primary); box-shadow: 0 2px 8px rgba(0,0,0,0.04); outline: none;"
               />
-              <span style="position: absolute; ${isRtl ? 'left' : 'right'}: 16px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; color: var(--text-muted); pointer-events: none;">
-                ◈
+              <span style="position: absolute; ${isRtl ? 'left' : 'right'}: 16px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; display: flex; align-items: center;">
+                ${icons.search('', 18)}
               </span>
             </div>
 
@@ -165,8 +166,9 @@ export function renderAcademyView(lang = 'ar') {
                       <span style="color: var(--text-secondary); font-weight: 600;">${c.instructorName || c.instructor || 'د. أسامة المنصور'}</span>
                       ${c.fee ? `
                         <span style="color: var(--text-muted);">•</span>
-                        <span class="pro-symbol-badge" style="background: var(--shat-green-tint); color: var(--shat-green); border-color: var(--shat-green-border); font-weight: 800;">
-                          ${c.fee}
+                        <span class="badge" style="background: var(--shat-green-tint); color: var(--shat-green); border: 1px solid var(--shat-green-border); font-weight: 800; display: inline-flex; align-items: center; gap: 4px;">
+                          ${icons.award('icon-inline', 13)}
+                          <span>${c.fee}</span>
                         </span>
                       ` : ''}
                     </div>
@@ -183,7 +185,7 @@ export function renderAcademyView(lang = 'ar') {
                       <ul style="list-style: none; display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0;">
                         ${(Array.isArray(c.syllabus) ? c.syllabus : []).map(s => `
                           <li style="font-size: 0.86rem; color: var(--text-main); display: flex; align-items: flex-start; gap: 8px; line-height: 1.5;">
-                            <span style="color: var(--shat-green); font-weight: bold; flex-shrink: 0;">✓</span>
+                            <span style="color: var(--shat-green); display: inline-flex; align-items: center; flex-shrink: 0;">${icons.checkCircle('icon-inline', 14)}</span>
                             <span>${s}</span>
                           </li>
                         `).join('')}
@@ -195,18 +197,18 @@ export function renderAcademyView(lang = 'ar') {
                   <div style="display: flex; gap: 8px; justify-content: flex-start; align-items: center; flex-wrap: wrap; padding-top: 14px; border-top: 1px solid var(--border-light);">
                     ${c.googleFormUrl ? `
                       <a href="${c.googleFormUrl}" target="_blank" rel="noopener" class="btn-clean btn-sm btn-google-form" style="padding: 7px 12px; font-size: 0.82rem;" title="التسجيل المباشر عبر Google Form">
-                        <span>Google Form</span>
+                        <span style="display: inline-flex; align-items: center; gap: 4px;">${icons.form('icon-inline', 13)} <span>Google Form</span></span>
                       </a>
                     ` : ''}
 
                     <button type="button" class="btn-clean btn-green btn-sm btn-island btn-open-reg-modal" data-course="${c.id}" style="padding: 7px 14px; font-size: 0.82rem;">
-                      <span>✓ ${t.btnRegisterCourse}</span>
-                      <span>${arrow}</span>
+                      <span>${t.btnRegisterCourse}</span>
+                      <span style="display: inline-flex; align-items: center;">${arrowIcon}</span>
                     </button>
 
                     ${c.driveFolderUrl ? `
                       <a href="${c.driveFolderUrl}" target="_blank" rel="noopener" class="btn-clean btn-sm btn-drive-folder" style="padding: 7px 12px; font-size: 0.82rem;" title="ملفات وحقيبة المساق على Google Drive">
-                        <span>Drive</span>
+                        <span style="display: inline-flex; align-items: center; gap: 4px;">${icons.drive('icon-inline', 13)} <span>Drive</span></span>
                       </a>
                     ` : ''}
 
@@ -220,7 +222,9 @@ export function renderAcademyView(lang = 'ar') {
           </div>
 
           <div id="academy-empty-state" style="display: none; padding: 60px; text-align: center; color: var(--text-muted); background: var(--bg-subtle); border-radius: var(--radius-md); border: 1px solid var(--border-light);">
-            <div style="font-size: 2.2rem; margin-bottom: 12px; color: var(--shat-navy);">◈</div>
+            <div style="margin-bottom: 12px; color: var(--shat-navy); display: flex; align-items: center; justify-content: center;">
+              ${icons.search('', 40)}
+            </div>
             <div style="font-size: 1.1rem; font-weight: 700; color: var(--shat-navy); margin-bottom: 6px;">${t.emptySearch}</div>
           </div>
         </div>

@@ -2,6 +2,8 @@
 // Field Toolkits & Operational Templates Hub for SHAT Platform
 // Provides standardized, institutional-grade downloadable frameworks and templates
 
+import { icons } from '../icons.js';
+
 export const toolkitsLibrary = {
   toolkits: [
     {
@@ -145,7 +147,7 @@ export const toolkitsLibrary = {
           <div>
             <a href="#/contact" class="btn-clean btn-secondary btn-sm">
               <span>${txt('طلب حقيبة مخصصة لمؤسستكم', 'Request Custom Toolkit', 'Demander une Boîte sur Mesure')}</span>
-              <span>${isRtl ? '←' : '→'}</span>
+              <span style="display:inline-flex; align-items:center;">${isRtl ? icons.arrowLeft('icon-inline', 14) : icons.arrowRight('icon-inline', 14)}</span>
             </a>
           </div>
         </div>
@@ -189,8 +191,8 @@ export const toolkitsLibrary = {
               </div>
 
               <div class="bento-footer" style="display: flex; gap: 10px; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-light); padding-top: 14px; margin-top: 8px;">
-                <span class="badge" style="background: #F0FDF4; color: #166534; font-size: 0.74rem;">
-                  ✓ ${isRtl ? tk.badge : tk.badgeEn}
+                <span class="badge" style="background: #F0FDF4; color: #166534; font-size: 0.74rem; display: inline-flex; align-items: center; gap: 4px;">
+                  ${icons.checkCircle('icon-inline', 13)} <span>${isRtl ? tk.badge : tk.badgeEn}</span>
                 </span>
 
                 <button class="btn-clean btn-primary btn-sm btn-open-toolkit-preview" data-toolkit="${tk.id}">
@@ -263,11 +265,11 @@ export const toolkitsLibrary = {
           </button>
           
           <div style="display: flex; gap: 8px;">
-            <button type="button" class="btn-clean btn-sm allow-print" onclick="window.print();" style="background: var(--bg-subtle); color: var(--shat-navy); border: 1px solid var(--border-light); font-weight: 700;">
-              ⎙ ${txt('طباعة القائمة', 'Print Checklist', 'Imprimer')}
+            <button type="button" class="btn-clean btn-sm allow-print" onclick="window.print();" style="background: var(--bg-subtle); color: var(--shat-navy); border: 1px solid var(--border-light); font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
+              ${icons.printer('icon-inline', 14)} <span>${txt('طباعة القائمة', 'Print Checklist', 'Imprimer')}</span>
             </button>
-            <button type="button" class="btn-clean btn-primary btn-sm btn-download-tk-direct" data-title="${isRtl ? tk.titleAr : tk.titleEn}">
-              <span>↓ ${txt('تحميل الحقيبة الرسمية', 'Download Toolkit', 'Télécharger')}</span>
+            <button type="button" class="btn-clean btn-primary btn-sm btn-download-tk-direct" data-title="${isRtl ? tk.titleAr : tk.titleEn}" style="display: inline-flex; align-items: center; gap: 4px;">
+              ${icons.download('icon-inline', 14)} <span>${txt('تحميل الحقيبة الرسمية', 'Download Toolkit', 'Télécharger')}</span>
             </button>
           </div>
         </div>
@@ -292,7 +294,7 @@ export const toolkitsLibrary = {
       btnDown.onclick = () => {
         const user = localStorage.getItem('shat_platform_current_user');
         if (user) {
-          alert(txt('✓ جاري بدء تنزيل حزمة النموذج المعتمدة...', '✓ Downloading accredited toolkit package...', '✓ Téléchargement du pack officiel en cours...'));
+          alert(txt('جاري بدء تنزيل حزمة النموذج المعتمدة...', 'Downloading accredited toolkit package...', 'Téléchargement du pack officiel en cours...'));
         } else {
           if (window.openPermissionGuard) {
             window.openPermissionGuard(isRtl ? tk.titleAr : tk.titleEn, 'student');

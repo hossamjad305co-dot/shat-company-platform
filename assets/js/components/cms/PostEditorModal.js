@@ -5,6 +5,7 @@ import { cmsService, CMSPostStatus } from '../../services/cms/cmsService.js';
 import { RichTextEditor, initRichTextEditor, sanitizeHtml } from './RichTextEditor.js';
 import { openMediaLibrary } from './MediaLibraryModal.js';
 import { ENV } from '../../config/env.js';
+import { icons } from '../../icons.js';
 
 let isDirty = false;
 let autosaveTimer = null;
@@ -33,13 +34,13 @@ export function PostEditorModal() {
           <!-- Controls -->
           <div style="display: flex; align-items: center; gap: 8px;">
             <button type="button" id="btn-save-draft" class="shat-btn shat-btn-secondary shat-btn-sm">
-              ✓ حفظ كمسودة
+              حفظ كمسودة
             </button>
             <button type="button" id="btn-publish-post" class="shat-btn shat-btn-primary shat-btn-sm">
               نشر المنشور
             </button>
-            <button type="button" id="btn-close-editor" class="shat-btn shat-btn-ghost shat-btn-sm" style="min-width: 44px; min-height: 44px; font-size: 1.2rem;">
-              ✕
+            <button type="button" id="btn-close-editor" class="shat-btn shat-btn-ghost shat-btn-sm" style="min-width: 44px; min-height: 44px; font-size: 1.2rem; display: inline-flex; align-items: center; justify-content: center;">
+              ${icons.x('', 18)}
             </button>
           </div>
         </div>
@@ -388,7 +389,7 @@ export function openPostEditor(post = null, onSaved = null) {
     isDirty = false;
     const ind = document.getElementById('post-autosave-indicator');
     if (ind) {
-      ind.textContent = data.status === CMSPostStatus.PUBLISHED ? 'منشور الآن ✓' : 'محفوظ كمسودة ✓';
+      ind.textContent = data.status === CMSPostStatus.PUBLISHED ? 'منشور الآن' : 'محفوظ كمسودة';
       ind.style.color = '#059669';
     }
     if (typeof onSaved === 'function') onSaved(saved);

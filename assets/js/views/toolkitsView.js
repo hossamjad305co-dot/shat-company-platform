@@ -7,7 +7,7 @@ import { icons } from '../icons.js';
 
 export function renderToolkitsView(lang = 'ar') {
   const isRtl = lang === 'ar';
-  const arrow = isRtl ? '←' : '→';
+  const arrow = isRtl ? icons.arrowLeft('icon-inline', 14) : icons.arrowRight('icon-inline', 14);
 
   const txt = (ar, en, fr) => {
     if (lang === 'fr') return fr || en;
@@ -48,7 +48,7 @@ export function renderToolkitsView(lang = 'ar') {
           <!-- Feature Highlights Grid -->
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 32px;">
             <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 12px; padding: 18px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow-sm);">
-              <span style="font-size: 1.5rem; font-weight: 900; color: #166534;">▲</span>
+              <span style="display: inline-flex; align-items: center; color: #166534;">${icons.dashboard('', 24)}</span>
               <div>
                 <div style="font-weight: 800; font-size: 0.95rem; color: var(--shat-navy);">مصفوفات MEAL الذكية</div>
                 <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">مؤشرات أداء وجداول جمع بيانات</div>

@@ -3,10 +3,12 @@
 import { api } from '../services/api/apiClient.js';
 import { showToast } from '../components/toast.js';
 import { examEngine } from '../tools/examEngine.js';
+import { icons } from '../icons.js';
 
 export function renderStudentDashboardView(lang = 'ar') {
   const user = api.currentUser;
   const isRtl = lang === 'ar';
+  const arrowIcon = isRtl ? icons.arrowLeft('icon-inline', 15) : icons.arrowRight('icon-inline', 15);
   const arrow = isRtl ? '←' : '→';
 
   const txt = (ar, en, fr) => {
@@ -37,7 +39,7 @@ export function renderStudentDashboardView(lang = 'ar') {
           </a>
           <div style="margin-top: 16px;">
             <a href="#/academy" style="font-size: 0.88rem; color: var(--shat-green); font-weight: 600;">
-              ${txt('تصفح دليل المساقات العامة ←', 'Browse Course Catalog →', 'Consulter le catalogue des cours →')}
+              <span style="display: inline-flex; align-items: center; gap: 6px;"><span>${txt('تصفح دليل المساقات العامة', 'Browse Course Catalog', 'Consulter le catalogue des cours')}</span> ${arrowIcon}</span>
             </a>
           </div>
         </div>
@@ -54,7 +56,7 @@ export function renderStudentDashboardView(lang = 'ar') {
     trainingId: txt('الرقم التدريبي:', 'Trainee ID:', 'Matricule :'),
     btnClassroom: txt('قاعة المحاضرات الحالية', 'Open Classroom', 'Salle de Cours'),
     btnLogout: txt('تسجيل الخروج', 'Sign Out', 'Déconnexion'),
-    continueBadge: txt('▶ تابع من حيث توقفت • Continue Learning', '▶ Continue Learning', '▶ Reprendre la Formation'),
+    continueBadge: txt('تابع من حيث توقفت • Continue Learning', 'Continue Learning', 'Reprendre la Formation'),
     courseTitle: txt(
       'دبلوم المعيار الإنساني الأساسي (CHS) وتصميم التدخلات',
       'Core Humanitarian Standard (CHS) Diploma & Intervention Design',
@@ -80,7 +82,7 @@ export function renderStudentDashboardView(lang = 'ar') {
     assignmentsSectionKicker: txt('المهام الأكاديمية والتطبيقية', 'Academic & Applied Tasks', 'Travaux Pratiques & Évaluations'),
     assignmentsSectionTitle: txt('الواجبات والتكليفات الميدانية (Assignments)', 'Field Assignments & Submissions', 'Devoirs de Terrain & Livrables'),
     assignmentsSectionBadge: txt('2 واجبات بانتظار التسليم', '2 Tasks Awaiting Submission', '2 Devoirs à Soumettre'),
-    task1Badge: txt('✓ تم التصحيح والاعتماد', '✓ Graded & Approved', '✓ Corrigé & Homologué'),
+    task1Badge: txt('تم التصحيح والاعتماد', 'Graded & Approved', 'Corrigé & Homologué'),
     task1Due: txt('الموعد: 15 سبتمبر 2026', 'Due: Sept 15, 2026', 'Échéance : 15 Septembre 2026'),
     task1Title: txt(
       'التكليف #1: تصميم مسار المساءلة المجتمعية (AAP) لمنظمة محلية',
@@ -106,7 +108,7 @@ export function renderStudentDashboardView(lang = 'ar') {
       'Applying institutional self-assessment tools on emergency response scenarios to identify accountability gaps.',
       'Application des outils d’auto-évaluation sur un scénario d’urgence pour diagnostiquer les écarts de redevabilité.'
     ),
-    task2Btn: txt('تسليم الحل الميداني الآن ↑', 'Submit Solution Now ↑', 'Déposer la Solution ↑'),
+    task2Btn: txt('تسليم الحل الميداني الآن', 'Submit Solution Now', 'Déposer la Solution'),
     driveTitle: txt(
       'الحقائب التدريبية والمراجع المعتمدة (تنزيل سحابي مباشر وآمن)',
       'Accredited Course Packages & Materials (Secure Direct Cloud Download)',
@@ -140,13 +142,13 @@ export function renderStudentDashboardView(lang = 'ar') {
 
             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
               <button id="btn-student-view-cert" class="btn-clean btn-sm" style="background: rgba(16, 185, 129, 0.22); color: #6EE7B7; border: 1px solid rgba(52, 211, 153, 0.4); font-weight: 800; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
-                <span>${txt('شهاداتي المعتمدة', 'My Certificates', 'Mes Certificats')}</span>
+                <span style="display: inline-flex; align-items: center; gap: 6px;">${icons.award('icon-inline', 15)} <span>${txt('شهاداتي المعتمدة', 'My Certificates', 'Mes Certificats')}</span></span>
               </button>
               <button id="btn-student-id-card" class="btn-clean btn-sm" style="background: rgba(255, 255, 255, 0.16); color: #FFFFFF; border: 1px solid rgba(255, 255, 255, 0.28); font-weight: 800; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
-                <span>${txt('بطاقة الحضور والباركود الرقمي', 'Digital Admission Pass', 'Pass Numérique')}</span>
+                <span style="display: inline-flex; align-items: center; gap: 6px;">${icons.idCard('icon-inline', 15)} <span>${txt('بطاقة الحضور والباركود الرقمي', 'Digital Admission Pass', 'Pass Numérique')}</span></span>
               </button>
               <a href="#/course/shat-chs-master" class="btn-clean btn-green btn-sm">
-                <span>${t.btnClassroom}</span>
+                <span style="display: inline-flex; align-items: center; gap: 6px;">${icons.graduationCap('icon-inline', 15)} <span>${t.btnClassroom}</span></span>
               </a>
               <button id="btn-student-logout" class="btn-clean btn-sm" style="background: rgba(239, 68, 68, 0.15); color: #FCA5A5; border: 1px solid rgba(239, 68, 68, 0.3);">
                 <span>${t.btnLogout}</span>
@@ -192,7 +194,7 @@ export function renderStudentDashboardView(lang = 'ar') {
               </div>
               <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                 <button type="button" id="btn-hero-take-exam" class="btn-clean btn-sm" style="background: var(--shat-green); color: #FFFFFF; font-weight: 800; border-radius: 6px; padding: 8px 16px; box-shadow: 0 3px 10px rgba(30,126,52,0.25);">
-                  <span>✓ ${txt('الاختبار والشهادة المعتمدة', 'Exam & Certificate', 'Examen & Certificat')}</span>
+                  <span>${txt('الاختبار والشهادة المعتمدة', 'Exam & Certificate', 'Examen & Certificat')}</span>
                 </button>
                 <a href="#/course/shat-chs-master" class="btn-clean btn-primary btn-md" style="font-weight: 700;">
                   <span>${t.btnResume}</span>
@@ -308,8 +310,7 @@ export function renderStudentDashboardView(lang = 'ar') {
                   <div style="font-size: 0.78rem; color: var(--text-muted);">4.8 MB • ${txt('وثيقة معتمدة', 'Accredited Document', 'Document Homologué')}</div>
                 </div>
                 <a href="/api/files/download/file-chs-01" class="btn-clean btn-green btn-sm" download="CHS_Handbook.pdf">
-                  <span>${t.downloadBtn}</span>
-                  <span>↓</span>
+                  <span style="display: inline-flex; align-items: center; gap: 4px;">${icons.download('icon-inline', 14)} <span>${t.downloadBtn}</span></span>
                 </a>
               </div>
 
@@ -320,8 +321,7 @@ export function renderStudentDashboardView(lang = 'ar') {
                   <div style="font-size: 0.78rem; color: var(--text-muted);">12.3 MB • ${txt('عرض تقديمي للمحاضرات', 'Lecture Slides', 'Présentation Didactique')}</div>
                 </div>
                 <a href="/api/files/download/file-chs-02" class="btn-clean btn-green btn-sm" download="AAP_Toolkit.pptx">
-                  <span>${t.downloadBtn}</span>
-                  <span>↓</span>
+                  <span style="display: inline-flex; align-items: center; gap: 4px;">${icons.download('icon-inline', 14)} <span>${t.downloadBtn}</span></span>
                 </a>
               </div>
 
@@ -332,8 +332,7 @@ export function renderStudentDashboardView(lang = 'ar') {
                   <div style="font-size: 0.78rem; color: var(--text-muted);">1.2 MB • ${txt('جداول إلكترونية للتدقيق', 'Audit Spreadsheet', 'Tableur d’Audit')}</div>
                 </div>
                 <a href="/api/files/download/file-chs-03" class="btn-clean btn-green btn-sm" download="CHS_Matrix.xlsx">
-                  <span>${t.downloadBtn}</span>
-                  <span>↓</span>
+                  <span style="display: inline-flex; align-items: center; gap: 4px;">${icons.download('icon-inline', 14)} <span>${t.downloadBtn}</span></span>
                 </a>
               </div>
             </div>
@@ -428,8 +427,7 @@ export function bindStudentEvents() {
           </div>
 
           <button type="submit" id="btn-confirm-submission" class="btn-clean btn-primary btn-lg" style="width: 100%; justify-content: center;">
-            <span>${txt('تأكيد ورفع التسليم للمدرب الأكاديمي', 'Confirm & Upload Submission', 'Confirmer et Déposer le Devoir')}</span>
-            <span>↑</span>
+            <span style="display: inline-flex; align-items: center; gap: 6px;">${icons.upload('icon-inline', 16)} <span>${txt('تأكيد ورفع التسليم للمدرب الأكاديمي', 'Confirm & Upload Submission', 'Confirmer et Déposer le Devoir')}</span></span>
           </button>
         </form>
       `;
@@ -466,7 +464,7 @@ export function bindStudentEvents() {
             showToast(txt('تعذر إتمام التسليم: ', 'Failed to submit assignment: ', 'Échec de la soumission : ') + e.message, 'error');
             if (btnConfirm) {
               btnConfirm.disabled = false;
-              btnConfirm.innerHTML = `<span>${txt('تأكيد ورفع التسليم للمدرب الأكاديمي', 'Confirm & Upload Submission', 'Confirmer et Déposer le Devoir')}</span><span>↑</span>`;
+              btnConfirm.innerHTML = `<span style="display: inline-flex; align-items: center; gap: 6px;">${icons.upload('icon-inline', 16)} <span>${txt('تأكيد ورفع التسليم للمدرب الأكاديمي', 'Confirm & Upload Submission', 'Confirmer et Déposer le Devoir')}</span></span>`;
             }
           }
         });
@@ -677,8 +675,8 @@ function openStudentPassModal(lang = 'ar') {
         ${txt('إغلاق', 'Close', 'Fermer')}
       </button>
 
-      <button type="button" class="btn-clean btn-primary btn-md allow-print" id="btn-trigger-print-pass" style="background: var(--shat-navy); font-weight: 800; box-shadow: 0 4px 14px rgba(15,46,74,0.3);">
-        ⎙ ${txt('طباعة البطاقة / حفظ كـ PDF', 'Print / Save Pass (PDF)', 'Imprimer le Pass (PDF)')}
+      <button type="button" class="btn-clean btn-primary btn-md allow-print" id="btn-trigger-print-pass" style="background: var(--shat-navy); font-weight: 800; box-shadow: 0 4px 14px rgba(15,46,74,0.3); display: inline-flex; align-items: center; gap: 6px;">
+        ${icons.printer('icon-inline', 16)} <span>${txt('طباعة البطاقة / حفظ كـ PDF', 'Print / Save Pass (PDF)', 'Imprimer le Pass (PDF)')}</span>
       </button>
     </div>
   `;

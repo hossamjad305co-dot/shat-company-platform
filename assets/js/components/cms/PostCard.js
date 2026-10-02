@@ -1,3 +1,4 @@
+import { icons } from '../../icons.js';
 // SHAT Platform — CMS Post Card Component (components/cms/PostCard.js)
 import { Badge } from '../ui/core.js';
 
@@ -33,7 +34,7 @@ export function PostCard({ post }) {
         <div style="padding-top: var(--space-sm); border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
           <a href="#/post/${post.id}" style="font-size: var(--font-size-body-sm); font-weight: 600; color: var(--shat-green-700); text-decoration: none; display: flex; align-items: center; gap: 4px;">
             <span>قراءة التفاصيل والتقرير</span>
-            <span class="shat-icon-directional">←</span>
+            <span class="shat-icon-directional" style="display:inline-flex; align-items:center;">${icons.arrowLeft('icon-inline', 14)}</span>
           </a>
         </div>
       </div>

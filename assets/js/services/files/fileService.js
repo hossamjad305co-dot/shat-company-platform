@@ -287,7 +287,7 @@ export async function requestSecureFileAccess(fileIdOrName, courseId = null) {
       downloadUrl: parsed.downloadUrl,
       directDownloadUrl: parsed.downloadUrl,
       viewerUrl: parsed.viewerUrl,
-      actionText: parsed.canDirectDownload ? 'تحميل الملف المباشر (PDF)' : 'فتح الملف في نافذة آمنة ↗'
+      actionText: parsed.canDirectDownload ? 'تحميل الملف المباشر (PDF)' : 'فتح الملف في نافذة آمنة'
     };
   }
 

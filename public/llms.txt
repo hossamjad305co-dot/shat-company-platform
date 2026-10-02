@@ -1,0 +1,18 @@
+# SHAT Development & Growth Platform (شركة شات للتنمية والتطوير)
+
+> SHAT Development & Growth is an international consulting and executive training house specializing in capacity building, institutional strengthening, and results advancement aligned with global humanitarian standards (CHS, PSEA, OECD DAC, Sphere, INEE).
+
+## Core Capabilities & Services
+- [Corporate Home & Overview](https://shat-company-platform.vercel.app/#/home): Executive introduction, mission, pillars, and operational framework.
+- [Training Academy & LMS Portal](https://shat-company-platform.vercel.app/#/academy): Accredited training programs, Case Management, Core Humanitarian Standard (CHS) Master Diploma, and field practitioner certifications.
+- [Institutional Consulting & Advisory](https://shat-company-platform.vercel.app/#/services): Organizational development, MEAL systems, third-party monitoring, evaluation, and policy design.
+- [International Standards Matrix](https://shat-company-platform.vercel.app/#/standards): Compliance frameworks covering CHS Alliance, PSEA, OECD DAC, Sphere, and Do No Harm.
+- [Field Projects & Interventions](https://shat-company-platform.vercel.app/#/projects): Portfolio of delivered capacity-strengthening projects and community interventions.
+- [Digital Verification & Certification](https://shat-company-platform.vercel.app/#/verify): Secure QR and code validator for accredited certificates.
+- [Institutional Readiness Diagnostic](https://shat-company-platform.vercel.app/#/toolkits): Interactive multi-axis institutional health checker for NGOs and companies.
+- [Corporate Contact & Inquiries](https://shat-company-platform.vercel.app/#/contact): Official communication channels, advisory consultation requests, and direct WhatsApp support.
+
+## Official Contact
+- WhatsApp: +972 59 287 9621
+- Official Email: shat.company26@gmail.com
+- Location: Palestine & International Remote Hub

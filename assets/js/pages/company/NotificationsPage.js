@@ -34,7 +34,7 @@ export function renderNotificationsPage() {
 
           ${unreadCount > 0 ? `
             <button type="button" id="btn-mark-all-read" class="shat-btn shat-btn-outline shat-btn-sm" style="font-size: 0.8rem;">
-              ✓ تعيين الكل كمقروء
+              تعيين الكل كمقروء
             </button>
           ` : ''}
         </div>
@@ -43,7 +43,7 @@ export function renderNotificationsPage() {
         <div class="notifications-container" style="display: flex; flex-direction: column; gap: 12px;">
           ${notifications.length === 0 ? `
             <div style="text-align: center; padding: 48px 20px; background: #ffffff; border-radius: var(--radius-xl); border: 1px solid var(--border-subtle); color: var(--text-muted);">
-              <div style="font-size: 2.8rem; margin-bottom: 8px;">◈</div>
+              <div style="margin-bottom: 8px; display: flex; justify-content: center; color: var(--text-muted);">${icons.bell('', 44)}</div>
               <h3 style="color: var(--shat-navy-900); margin-bottom: 4px; font-size: 1.1rem;">لا توجد إشعارات حالياً</h3>
               <p style="font-size: 0.88rem; margin: 0;">ستصلك إشعارات حالة طلبات التسجيل، مواعيد التكليفات والدروس الجديدة هنا.</p>
             </div>
@@ -72,7 +72,7 @@ export function renderNotificationsPage() {
                 ${n.link ? `
                   <a href="${n.link}" class="shat-btn shat-btn-sm shat-btn-secondary notif-action-link" data-id="${n.id}" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px; font-size: 0.8rem; padding: 4px 10px;">
                     <span>عرض التفاصيل</span>
-                    <span>←</span>
+                    <span style="display:inline-flex; align-items:center;">${icons.arrowLeft('icon-inline', 14)}</span>
                   </a>
                 ` : ''}
               </div>

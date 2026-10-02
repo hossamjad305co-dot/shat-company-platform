@@ -4,6 +4,7 @@
 import { applicationService, RegistrationMode } from '../../services/applications/applicationService.js';
 import { courseService } from '../../services/courses/courseService.js';
 import { BaseLayout } from '../../layouts/baseLayout.js';
+import { icons } from '../../icons.js';
 
 export async function renderCourseRegistrationPage(selectedCourseId = '') {
   const settings = applicationService.getSettings();
@@ -25,11 +26,11 @@ export async function renderCourseRegistrationPage(selectedCourseId = '') {
         <!-- Back Navigation Bar -->
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 12px;">
           <a href="#/academy" style="text-decoration: none; font-weight: 700; color: var(--shat-navy-950); display: inline-flex; align-items: center; gap: 6px; font-size: 0.92rem;">
-            <span style="font-size: 1.1rem;">←</span>
+            ${icons.arrowRight('icon-inline', 14)}
             <span>العودة للأكاديمية والمساقات</span>
           </a>
           <a href="#/home" style="text-decoration: none; font-weight: 600; color: var(--text-muted); font-size: 0.85rem;">
-            الرئيسية ↗
+            <span style="display:inline-flex; align-items:center; gap:4px;"><span>الرئيسية</span> ${icons.home('icon-inline', 14)}</span>
           </a>
         </div>
         <div style="text-align: center; margin-bottom: 32px;">
@@ -56,7 +57,7 @@ export async function renderCourseRegistrationPage(selectedCourseId = '') {
               </span>
             </div>
             <a href="${selectedCourse.googleFormUrl || settings.defaultGoogleFormUrl}" target="_blank" rel="noopener noreferrer" class="shat-btn shat-btn-outline" style="border-color: #3b82f6; color: #1d4ed8; text-decoration: none; white-space: nowrap;">
-              فتح Google Form ↗
+              <span style="display:inline-flex; align-items:center; gap:6px;">${icons.form('icon-inline', 14)} <span>فتح Google Form</span> ${icons.externalLink('icon-inline', 12)}</span>
             </a>
           </div>
         ` : ''}
@@ -127,8 +128,8 @@ export async function renderCourseRegistrationPage(selectedCourseId = '') {
 
           <!-- Success Card (Hidden by default) -->
           <div id="application-success-view" style="display: none; text-align: center; padding: 24px 12px;">
-            <div style="width: 72px; height: 72px; background: #ecfdf5; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 2.2rem; color: #059669;">
-              ✓
+            <div style="width: 72px; height: 72px; background: #ecfdf5; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: #059669;">
+              ${icons.checkCircle('', 44)}
             </div>
             <h2 style="color: var(--shat-navy-950); margin: 0 0 10px; font-weight: 800;">
               تم استلام طلب التسجيل بنجاح!

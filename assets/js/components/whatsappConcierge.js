@@ -60,7 +60,7 @@ export class WhatsAppConcierge {
                 </div>
               </div>
             </div>
-            <button id="btn-close-concierge" style="background: transparent; border: none; color: #94A3B8; font-size: 1.2rem; cursor: pointer; padding: 2px 6px;">✕</button>
+            <button id="btn-close-concierge" style="background: transparent; border: none; color: #94A3B8; cursor: pointer; padding: 2px 6px; display: inline-flex; align-items: center; justify-content: center;" aria-label="إغلاق">${icons.x('', 16)}</button>
           </div>
           <p style="font-size: 0.82rem; color: #CBD5E1; margin: 12px 0 0; line-height: 1.5;">
             مرحباً بك! اختر موضوع استفسارك للتواصل الفوري والمباشر مع المستشار المختص عبر واتساب:

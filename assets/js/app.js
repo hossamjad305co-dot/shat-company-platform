@@ -53,12 +53,14 @@ class Application {
     this.bindGlobalEvents();
     router.init();
 
-    // Verify session with server silently on boot
-    api.getMe().then(() => {
-      this.renderRoleSimulator();
-      this.renderHeader();
-      this.renderMobileDrawer();
-      this.renderMobileBottomNav();
+    // Verify session with server silently on boot (only re-render if user exists)
+    api.getMe().then((user) => {
+      if (user) {
+        this.renderRoleSimulator();
+        this.renderHeader();
+        this.renderMobileDrawer();
+        this.renderMobileBottomNav();
+      }
     }).catch(() => {});
   }
 
@@ -150,7 +152,7 @@ class Application {
         <button id="btn-lang-selector" class="btn-clean btn-secondary btn-sm" style="display: flex; align-items: center; gap: 6px; font-weight: 700; padding: 6px 12px; border-radius: var(--radius-xs);" title="اختيار اللغة / Select Language / Choisir la langue">
           <span style="display: flex; align-items: center;">${icons.globe('lang-globe', 16)}</span>
           <span>${langLabel}</span>
-          <span style="font-size: 0.65rem; opacity: 0.7;">▼</span>
+          <span style="display:inline-flex; align-items:center; opacity: 0.7;">${icons.chevronDown('', 12)}</span>
         </button>
         <div id="lang-dropdown-menu" style="display: none; position: absolute; top: calc(100% + 4px); ${isRtl ? 'left: 0;' : 'right: 0;'} background: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-xs); box-shadow: var(--shadow-md); z-index: 1000; min-width: 140px; overflow: hidden; padding: 4px 0;">
           <button class="btn-clean lang-option-btn ${this.currentLang === 'ar' ? 'active' : ''}" data-lang="ar" style="width: 100%; text-align: ${isRtl ? 'right' : 'left'}; padding: 8px 14px; font-size: 0.85rem; font-weight: ${this.currentLang === 'ar' ? '800' : '600'}; color: ${this.currentLang === 'ar' ? 'var(--shat-green)' : 'var(--shat-navy)'}; display: flex; align-items: center; gap: 8px; border: none; background: ${this.currentLang === 'ar' ? 'var(--bg-subtle)' : 'transparent'};">
@@ -187,7 +189,7 @@ class Application {
           <button id="btn-spotlight-search" class="btn-clean btn-sm" style="display: flex; align-items: center; gap: 5px; padding: 6px 10px; background: var(--bg-subtle); border: 1px solid var(--border-light); border-radius: var(--radius-xs); color: var(--shat-navy); font-weight: 700; cursor: pointer; flex-shrink: 0;" title="البحث الشامل (Ctrl+K)">
             <span style="display: flex; align-items: center; color: var(--shat-navy);">${icons.search('search-icon', 15)}</span>
             <span class="search-text-label" style="font-size: 0.80rem;">${isRtl ? 'بحث...' : 'Search...'}</span>
-            <kbd class="search-kbd-hint" style="font-size: 0.65rem; padding: 1px 4px; background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 3px; font-family: var(--font-mono); color: var(--text-muted);">⌘K</kbd>
+            <kbd class="search-kbd-hint" style="font-size: 0.65rem; padding: 1px 4px; background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 3px; font-family: var(--font-mono); color: var(--text-muted);">Ctrl+K</kbd>
           </button>
         `;
 
@@ -267,7 +269,7 @@ class Application {
           <button id="btn-spotlight-search" class="btn-clean btn-sm" style="display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: var(--bg-subtle); border: 1px solid var(--border-light); border-radius: var(--radius-xs); color: var(--shat-navy); font-weight: 700; cursor: pointer;" title="البحث الشامل (Ctrl+K)">
             <span style="display: flex; align-items: center;">${icons.search('search-icon', 15)}</span>
             <span style="font-size: 0.82rem;">${isRtl ? 'بحث...' : 'Search...'}</span>
-            <kbd style="font-size: 0.65rem; padding: 1px 5px; background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 3px; font-family: var(--font-mono); color: var(--text-muted);">⌘K</kbd>
+            <kbd style="font-size: 0.65rem; padding: 1px 5px; background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 3px; font-family: var(--font-mono); color: var(--text-muted);">Ctrl+K</kbd>
           </button>
         `;
 
@@ -581,11 +583,14 @@ class Application {
           <div>
             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-direction: row;">
               <span style="font-weight: 900; font-size: 1.1rem; color: #FFFFFF;">${c.name}</span>
-              <img src="assets/logo/logo-transparent.png" alt="SHAT" style="height: 38px;" onerror="this.onerror=null; this.src='assets/logo/logo-symbol.jpg';">
+              <picture>
+                <source srcset="assets/logo/logo-transparent-sm.webp" type="image/webp">
+                <img src="assets/logo/logo-transparent.png" alt="SHAT" class="footer-logo-img" width="54" height="38" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='assets/logo/logo-symbol.jpg';">
+              </picture>
             </div>
             <p style="font-size: 0.9rem; color: #94A3B8; line-height: 1.7; margin-bottom: 16px;">
               ${c.motto}<br>
-              <span style="font-family: var(--font-latin); font-size: 0.8rem; color: #64748B;">${c.subMottoEn || c.subMotto}</span>
+              <span style="font-family: var(--font-latin); font-size: 0.8rem; color: #94A3B8;">${c.subMottoEn || c.subMotto}</span>
             </p>
             <div style="font-size: 0.85rem; color: #CBD5E1;">
               ${f.scope}
@@ -623,7 +628,7 @@ class Application {
               <li style="margin-top: 10px;">
                 <a href="#/contact" class="btn-clean btn-green btn-sm" style="width: 100%;">
                   <span>${f.requestConsultBtn}</span>
-                  <span>${this.currentLang === 'ar' ? '←' : '→'}</span>
+                  <span style="display:inline-flex; align-items:center;">${this.currentLang === 'ar' ? icons.arrowLeft('icon-inline', 14) : icons.arrowRight('icon-inline', 14)}</span>
                 </a>
               </li>
             </ul>
@@ -732,7 +737,7 @@ class Application {
 
           <button type="submit" class="btn-clean btn-primary btn-lg" style="width: 100%;">
             <span>${m.submit}</span>
-            <span>${this.currentLang === 'ar' ? '←' : '→'}</span>
+            <span style="display:inline-flex; align-items:center;">${this.currentLang === 'ar' ? icons.arrowLeft('icon-inline', 14) : icons.arrowRight('icon-inline', 14)}</span>
           </button>
         </form>
       `;
@@ -768,7 +773,7 @@ class Application {
           } finally {
             if (submitBtn) {
               submitBtn.disabled = false;
-              submitBtn.innerHTML = `<span>${m.submit}</span><span>${this.currentLang === 'ar' ? '←' : '→'}</span>`;
+              submitBtn.innerHTML = `<span>${m.submit}</span><span style="display:inline-flex; align-items:center;">${this.currentLang === 'ar' ? icons.arrowLeft('icon-inline', 14) : icons.arrowRight('icon-inline', 14)}</span>`;
             }
           }
         });

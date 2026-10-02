@@ -219,7 +219,7 @@ export async function renderCompanyHomePage() {
               <div style="display: flex; gap: var(--space-md); flex-wrap: wrap;">
                 <a href="#/academy" class="shat-btn shat-btn-primary shat-btn-lg" style="text-decoration: none;">
                   <span>دخول منصة التعلم والأكاديمية</span>
-                  <span class="shat-icon-directional">←</span>
+                  <span class="shat-icon-directional" style="display:inline-flex; align-items:center;">${icons.arrowLeft('icon-inline', 16)}</span>
                 </a>
                 <a href="#/tracks" class="shat-btn shat-btn-secondary shat-btn-lg" style="text-decoration: none;">
                   <span>استكشف المسارات الاستشارية</span>
@@ -260,13 +260,13 @@ export async function renderCompanyHomePage() {
             </div>
             <div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px; font-weight: 800; font-size: clamp(1rem, 2.5vw, 1.35rem); color: #ffffff; margin-bottom: 12px;">
               <span style="background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 8px;">المعرفة (Knowledge)</span>
-              <span style="color: var(--shat-green-400);">←</span>
+              <span style="color: var(--shat-green-400); display:inline-flex; align-items:center;">${icons.arrowLeft('icon-inline', 16)}</span>
               <span style="background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 8px;">القدرة (Capacity)</span>
-              <span style="color: var(--shat-green-400);">←</span>
+              <span style="color: var(--shat-green-400); display:inline-flex; align-items:center;">${icons.arrowLeft('icon-inline', 16)}</span>
               <span style="background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 8px;">الممارسة (Practice)</span>
-              <span style="color: var(--shat-green-400);">←</span>
+              <span style="color: var(--shat-green-400); display:inline-flex; align-items:center;">${icons.arrowLeft('icon-inline', 16)}</span>
               <span style="background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 8px;">الأداء (Performance)</span>
-              <span style="color: var(--shat-green-400);">←</span>
+              <span style="color: var(--shat-green-400); display:inline-flex; align-items:center;">${icons.arrowLeft('icon-inline', 16)}</span>
               <span style="background: var(--shat-green-600); color: #ffffff; padding: 6px 14px; border-radius: 8px;">النتائج (Results)</span>
             </div>
             <p style="font-size: 0.95rem; color: var(--shat-navy-200); margin: 0; line-height: 1.6;">
@@ -290,7 +290,7 @@ export async function renderCompanyHomePage() {
 
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-xl);">
             <div class="shat-card" style="border-inline-start: 5px solid var(--shat-navy-900); padding: var(--space-xl);">
-              <div style="font-size: 2.2rem; margin-bottom: var(--space-sm);">◈</div>
+              <div style="color: var(--shat-navy-900); margin-bottom: var(--space-sm);">${icons.shield('', 32)}</div>
               <h3 style="font-size: var(--font-size-h3); color: var(--shat-navy-950); margin-bottom: var(--space-xs);">
                 الركيزة الأولى: الاستشارات والتطوير المؤسسي
               </h3>
@@ -298,12 +298,12 @@ export async function renderCompanyHomePage() {
                 مساعدة المؤسسات والمنظمات على فهم الواقع المؤسسي، وتحديد الفجوات، وبناء الأنظمة والسياسات، وإجراء مهمات التقييم الخارجي المستقل وفق معايير OECD DAC و UNEG.
               </p>
               <div style="font-size: 0.88rem; color: var(--shat-navy-800); font-weight: 700; background: var(--shat-navy-50); padding: 10px 14px; border-radius: 8px;">
-                ✓ الانتقال من التشخيص إلى التطوير • ومن التوصية إلى التطبيق المستمر
+                الانتقال من التشخيص إلى التطوير • ومن التوصية إلى التطبيق المستمر
               </div>
             </div>
 
             <div class="shat-card" style="border-inline-start: 5px solid var(--shat-green-700); padding: var(--space-xl);">
-              <div style="font-size: 2.2rem; margin-bottom: var(--space-sm);">◈</div>
+              <div style="color: var(--shat-green-700); margin-bottom: var(--space-sm);">${icons.academy('', 32)}</div>
               <h3 style="font-size: var(--font-size-h3); color: var(--shat-navy-950); margin-bottom: var(--space-xs);">
                 الركيزة الثانية: التدريب وبناء القدرات المتخصصة
               </h3>
@@ -311,7 +311,7 @@ export async function renderCompanyHomePage() {
                 برامج تدريبية متخصصة وتطبيقية مبنية على تحليل الاحتياجات الفعلي والتعلم القائم على الكفاءات، والمصممة وفق معايير CHS وإسفير، وربط مخرجات التعلم بالأداء الفعلي.
               </p>
               <div style="font-size: 0.88rem; color: var(--shat-green-900); font-weight: 700; background: var(--shat-green-50); padding: 10px 14px; border-radius: 8px;">
-                ✓ برامج تطبيقية مبنية على الكفاءات • قياس دقيق لمخرجات التعلم والأداء
+                برامج تطبيقية مبنية على الكفاءات • قياس دقيق لمخرجات التعلم والأداء
               </div>
             </div>
           </div>
@@ -406,8 +406,8 @@ export async function renderCompanyHomePage() {
 
                   <!-- Tangible Deliverable -->
                   <div style="background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.25); padding: 10px 12px; border-radius: 6px; margin-bottom: var(--space-md);">
-                    <div style="font-size: 0.78rem; font-weight: 800; color: #86efac; margin-bottom: 2px;">
-                      ✓ المخرج المؤسسي المحقق:
+                    <div style="font-size: 0.78rem; font-weight: 800; color: #86efac; margin-bottom: 2px; display: flex; align-items: center; gap: 6px;">
+                      ${icons.checkCircle('icon-inline', 14)} <span>المخرج المؤسسي المحقق:</span>
                     </div>
                     <div style="font-size: 0.85rem; color: #f1f5f9; line-height: 1.5;">
                       ${st.deliverable}
@@ -419,7 +419,7 @@ export async function renderCompanyHomePage() {
                 <div style="padding-top: var(--space-xs); border-top: 1px solid rgba(255,255,255,0.08);">
                   <a href="${st.route}" style="font-size: 0.85rem; font-weight: 700; color: #4ade80; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
                     <span>استكشف المسار والبرنامج التدريبي</span>
-                    <span>←</span>
+                    <span style="display:inline-flex; align-items:center;">${icons.arrowLeft('icon-inline', 14)}</span>
                   </a>
                 </div>
               </div>
@@ -463,7 +463,7 @@ export async function renderCompanyHomePage() {
                 </div>
                 <div style="margin-top: var(--space-md); padding-top: var(--space-xs); border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
                   <a href="#/apply" style="font-size: var(--font-size-caption); font-weight: 700; color: var(--shat-green-700); text-decoration: none;">
-                    تسجيل في المساق ←
+                    <span style="display:inline-flex; align-items:center; gap:6px;"><span>تسجيل في المساق</span> ${icons.arrowLeft('icon-inline', 13)}</span>
                   </a>
                   <a href="#/academy" style="font-size: var(--font-size-caption); color: var(--text-muted); text-decoration: none;">
                     عرض التفاصيل
@@ -523,7 +523,7 @@ export async function renderCompanyHomePage() {
               </p>
             </div>
             <a href="https://www.facebook.com/shat.development.growth/" target="_blank" rel="noopener" class="shat-btn shat-btn-outline shat-btn-sm" style="text-decoration: none;">
-              <span>صفحتنا على فيسبوك ↗</span>
+              <span style="display:inline-flex; align-items:center; gap:6px;"><span>صفحتنا على فيسبوك</span> ${icons.externalLink('icon-inline', 13)}</span>
             </a>
           </div>
 
