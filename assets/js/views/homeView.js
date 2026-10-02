@@ -65,7 +65,7 @@ export function renderHomeView(lang = 'ar') {
               </a>
               <button type="button" class="btn-island btn-island-secondary btn-open-diagnostic">
                 <span>${txt('أداة التشخيص المؤسسي الفوري', 'Instant Readiness Diagnostic', 'Diagnostic Institutionnel')}</span>
-                <span class="icon-circle">🔍</span>
+                <span class="icon-circle">${icons.search('', 14)}</span>
               </button>
               <a href="#/${lang}/services" class="btn-island btn-island-secondary" style="background: transparent; color: var(--shat-navy); border-color: var(--border-medium);">
                 <span>${h.exploreServices}</span>

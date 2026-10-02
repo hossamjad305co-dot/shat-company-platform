@@ -51,13 +51,13 @@ export function renderNewsView(lang = 'ar') {
                 ${txt('جميع المنشورات', 'All Publications', 'Toutes les publications')}
               </button>
               <button type="button" class="btn-clean btn-sm news-lang-pill" data-lang-filter="ar" style="border-radius: var(--radius-full); padding: 5px 14px; font-weight: 700; font-size: 0.8rem; background: var(--bg-subtle); color: var(--text-secondary); border: 1px solid var(--border-light); cursor: pointer; transition: all 0.2s ease;">
-                🇸🇦 ${txt('العربية', 'Arabic', 'Arabe')}
+                ${txt('العربية', 'Arabic', 'Arabe')}
               </button>
               <button type="button" class="btn-clean btn-sm news-lang-pill" data-lang-filter="en" style="border-radius: var(--radius-full); padding: 5px 14px; font-weight: 700; font-size: 0.8rem; background: var(--bg-subtle); color: var(--text-secondary); border: 1px solid var(--border-light); cursor: pointer; transition: all 0.2s ease;">
-                🇬🇧 English
+                English
               </button>
               <button type="button" class="btn-clean btn-sm news-lang-pill" data-lang-filter="fr" style="border-radius: var(--radius-full); padding: 5px 14px; font-weight: 700; font-size: 0.8rem; background: var(--bg-subtle); color: var(--text-secondary); border: 1px solid var(--border-light); cursor: pointer; transition: all 0.2s ease;">
-                🇫🇷 Français
+                Français
               </button>
             </div>
             
@@ -146,17 +146,17 @@ export async function bindNewsEvents() {
 
         let langBadgeHtml = '';
         if (p.lang === 'all') {
-          langBadgeHtml = `<span class="badge" style="background: #E0E7FF; color: #3730A3; font-size: 0.72rem; font-weight: 800;">🌐 AR • EN • FR</span>`;
+          langBadgeHtml = `<span class="badge" style="background: #E0E7FF; color: #3730A3; font-size: 0.72rem; font-weight: 800;">AR • EN • FR</span>`;
         } else if (p.lang === 'ar_en') {
-          langBadgeHtml = `<span class="badge" style="background: #E0F2FE; color: #0369A1; font-size: 0.72rem; font-weight: 800;">🌐 AR • EN</span>`;
+          langBadgeHtml = `<span class="badge" style="background: #E0F2FE; color: #0369A1; font-size: 0.72rem; font-weight: 800;">AR • EN</span>`;
         } else if (p.lang === 'ar_fr') {
-          langBadgeHtml = `<span class="badge" style="background: #E0F2FE; color: #0369A1; font-size: 0.72rem; font-weight: 800;">🌐 AR • FR</span>`;
+          langBadgeHtml = `<span class="badge" style="background: #E0F2FE; color: #0369A1; font-size: 0.72rem; font-weight: 800;">AR • FR</span>`;
         } else if (p.lang === 'en') {
-          langBadgeHtml = `<span class="badge" style="background: #FEF3C7; color: #92400E; font-size: 0.72rem; font-weight: 800;">🇬🇧 EN</span>`;
+          langBadgeHtml = `<span class="badge" style="background: #FEF3C7; color: #92400E; font-size: 0.72rem; font-weight: 800;">EN</span>`;
         } else if (p.lang === 'fr') {
-          langBadgeHtml = `<span class="badge" style="background: #FCE7F3; color: #9D174D; font-size: 0.72rem; font-weight: 800;">🇫🇷 FR</span>`;
+          langBadgeHtml = `<span class="badge" style="background: #FCE7F3; color: #9D174D; font-size: 0.72rem; font-weight: 800;">FR</span>`;
         } else {
-          langBadgeHtml = `<span class="badge" style="background: #F1F5F9; color: #475569; font-size: 0.72rem; font-weight: 800;">🇸🇦 AR</span>`;
+          langBadgeHtml = `<span class="badge" style="background: #F1F5F9; color: #475569; font-size: 0.72rem; font-weight: 800;">AR</span>`;
         }
 
         return `
@@ -225,8 +225,8 @@ export async function bindNewsEvents() {
                 <img src="${post.coverImage || 'assets/logo/logo-banner.jpg'}" alt="${modalPostTitle}" style="width: 100%; max-height: 280px; object-fit: cover; border-radius: var(--radius-xs); margin-bottom: 14px;" onerror="this.onerror=null; this.src='assets/logo/logo-banner.jpg';">
                 <div style="display: flex; gap: 12px; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px; flex-wrap: wrap;">
                   <span class="badge" style="background: var(--shat-green-tint); color: var(--shat-green); font-weight: 700;">${modalPostCat}</span>
-                  <span>📅 ${new Date(post.createdAt || Date.now()).toLocaleDateString(currentLang === 'ar' ? 'ar-EG' : (currentLang === 'fr' ? 'fr-FR' : 'en-US'))}</span>
-                  <span>✍️ ${modalPostAuthor}</span>
+                  <span>${new Date(post.createdAt || Date.now()).toLocaleDateString(currentLang === 'ar' ? 'ar-EG' : (currentLang === 'fr' ? 'fr-FR' : 'en-US'))}</span>
+                  <span>${modalPostAuthor}</span>
                 </div>
                 <div style="font-size: 0.95rem; line-height: 1.85; color: var(--text-main); white-space: pre-wrap;">
                   ${modalPostContent}

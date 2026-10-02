@@ -254,7 +254,7 @@ export function renderStudentDashboardView(lang = 'ar') {
 
                   <!-- Step 1: Completed -->
                   <div class="roadmap-timeline-step completed">
-                    <div class="roadmap-timeline-node">✓</div>
+                    <div class="roadmap-timeline-node">${icons.check('', 12)}</div>
                     <div>
                       <div style="font-weight: 800; font-size: 0.84rem; color: #166534;">${txt('الفصل 1: الإطار التأسيسي', 'Ch. 1: Conceptual Framework', 'Ch. 1: Cadre Conceptuel')}</div>
                       <div style="font-size: 0.72rem; color: #64748B;">100% • ${txt('تم الإنجاز بالكامل', 'Fully Completed', 'Validé à 100%')}</div>
@@ -350,7 +350,7 @@ export function renderStudentDashboardView(lang = 'ar') {
                 <span style="font-size: 0.78rem; font-weight: 800; color: #047857; text-transform: uppercase; letter-spacing: 0.5px;">${t.kpiGrade}</span>
                 <div style="font-size: 2.2rem; font-weight: 900; color: #059669; margin: 4px 0; font-family: var(--font-mono);">94 / 100</div>
                 <p style="font-size: 0.84rem; color: #166534; margin: 0; font-weight: 700;">
-                  ★ ${t.kpiGradeDesc}
+                  ${t.kpiGradeDesc}
                 </p>
               </div>
               <div style="font-size: 0.76rem; color: #047857; font-weight: 700; margin-top: 14px; border-top: 1px solid #F1F5F9; padding-top: 8px;">
@@ -375,7 +375,7 @@ export function renderStudentDashboardView(lang = 'ar') {
           </div>
 
           <!-- Section: Assignments & Field Tasks (Elevated Agency Cards) -->
-          <div class="bento-card" style="margin-bottom: 36px; padding: 28px; border-radius: 18px; border: 1px solid #E2E8F0; box-shadow: 0 4px 20px rgba(11,30,54,0.05);">
+          <div class="bento-card" style="margin-bottom: 36px; padding: 28px; border-radius: 18px; border: 1px solid #E2E8F0; box-shadow: none;">
             <div class="bento-header" style="border-bottom: 1px solid var(--border-light); padding-bottom: 16px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
               <div>
                 <span class="bento-kicker">${t.assignmentsSectionKicker}</span>
@@ -391,11 +391,11 @@ export function renderStudentDashboardView(lang = 'ar') {
             <div class="assignments-list-wrapper" style="display: flex; flex-direction: column; gap: 18px;">
               
               <!-- Assignment Card 1: Graded -->
-              <div class="assignment-item-card" style="background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%); border-radius: 14px; border: 1px solid #E2E8F0; padding: 22px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+              <div class="assignment-item-card" style="background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%); border-radius: 14px; border: 1px solid #E2E8F0; padding: 22px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 18px; box-shadow: none;">
                 <div style="flex: 1; min-width: 260px;">
                   <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap;">
                     <span class="badge" style="background: #DCFCE7; color: #166534; font-weight: 800; font-size: 0.78rem; padding: 3px 10px; border-radius: 999px; border: 1px solid #86EFAC;">
-                      ✓ ${t.task1Badge}
+                      ${t.task1Badge}
                     </span>
                     <span style="font-size: 0.82rem; color: #64748B; font-weight: 600;">${t.task1Due}</span>
                   </div>

@@ -287,7 +287,7 @@ export const toolkitsLibrary = {
                   <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px;">
                     ${outlines.map(item => `
                       <li style="font-size: 0.8rem; color: var(--text-secondary); display: flex; align-items: flex-start; gap: 6px;">
-                        <span style="color: var(--shat-green);">✓</span>
+                        <span style="color: var(--shat-green); display: inline-flex; align-items: center; margin-top: 2px;">${icons.check('', 12)}</span>
                         <span>${item}</span>
                       </li>
                     `).join('')}

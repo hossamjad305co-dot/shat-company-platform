@@ -90,7 +90,7 @@ export const roleSimulator = {
         <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
           
           <div style="display: flex; align-items: center; gap: 8px;">
-            <span class="live-pulse-dot" style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10B981; box-shadow: 0 0 8px #10B981;"></span>
+            <span class="live-pulse-dot" style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10B981;"></span>
             <span style="font-weight: 700; color: #E2E8F0;">
               ${txt('محاكي الصلاحيات التفاعلي:', 'Interactive Role Simulator:', 'Simulateur de Rôles :')}
             </span>

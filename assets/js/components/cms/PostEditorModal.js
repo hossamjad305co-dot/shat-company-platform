@@ -73,12 +73,12 @@ export function PostEditorModal() {
                 <div class="shat-form-group">
                   <label class="shat-form-label">لغة المنشور *</label>
                   <select id="post-select-lang" class="shat-form-input" style="font-weight: 700; color: var(--shat-navy-950);">
-                    <option value="all" selected>🌐 3 لغات (AR + EN + FR)</option>
-                    <option value="ar_en">🌐 لغتان (العربية + EN)</option>
-                    <option value="ar_fr">🌐 لغتان (العربية + FR)</option>
-                    <option value="ar">🇸🇦 العربية فقط</option>
-                    <option value="en">🇬🇧 English فقط</option>
-                    <option value="fr">🇫🇷 Français فقط</option>
+                    <option value="all" selected>3 لغات (AR + EN + FR)</option>
+                    <option value="ar_en">لغتان (العربية + EN)</option>
+                    <option value="ar_fr">لغتان (العربية + FR)</option>
+                    <option value="ar">العربية فقط</option>
+                    <option value="en">English فقط</option>
+                    <option value="fr">Français فقط</option>
                   </select>
                 </div>
                 <div class="shat-form-group">
@@ -340,7 +340,7 @@ export function openPostEditor(post = null, onSaved = null) {
       else if (langCode === 'fr') langMsg = 'لغة واحدة (الفرنسية فقط)';
       else langMsg = 'لغة واحدة (العربية فقط)';
 
-      const confirmPublish = confirm(`⚠️ تنبيه تأكيد لغة النشر:\nتم إعداد هذا المنشور بـ [${langMsg}].\n\nهل ترغب بالمتابعة واعتماد نشر المنشور الآن؟`);
+      const confirmPublish = confirm(`تنبيه تأكيد لغة النشر:\nتم إعداد هذا المنشور بـ [${langMsg}].\n\nهل ترغب بالمتابعة واعتماد نشر المنشور الآن؟`);
       if (!confirmPublish) return;
 
       await savePost(data);

@@ -169,7 +169,7 @@ export function renderTeacherDashboardView(lang = 'ar') {
               <div style="font-size: 0.8rem; color: #B45309; font-weight: 700;">${t.kpiPendingMeta}</div>
             </div>
             <div style="font-size: 0.78rem; color: #92400E; margin-top: 14px; border-top: 1px solid #F1F5F9; padding-top: 8px; font-weight: 700;">
-              ⚡ ${txt('مطلوب الرصد خلال 48 ساعة', 'Grading required within 48h', 'Notation requise sous 48h')}
+              ${txt('مطلوب الرصد خلال 48 ساعة', 'Grading required within 48h', 'Notation requise sous 48h')}
             </div>
           </div>
 
@@ -462,8 +462,8 @@ export async function bindTeacherEvents() {
                 <td style="padding: 16px 20px;">
                   ${latestSub ? (
                     latestSub.status === 'graded'
-                      ? `<span class="badge" style="background: #DCFCE7; color: #166534; font-weight: 800; font-size: 0.78rem; padding: 4px 10px; border-radius: 999px; border: 1px solid #86EFAC;">✓ ${txt('تم الرصد', 'Graded', 'Noté')} (${latestSub.grade}/100)</span>`
-                      : `<span class="badge" style="background: #FEF3C7; color: #B45309; font-weight: 800; font-size: 0.78rem; padding: 4px 10px; border-radius: 999px; border: 1px solid #FCD34D;">⏳ ${txt('بانتظار التقييم', 'Pending Review', 'En attente')}</span>`
+                      ? `<span class="badge" style="background: #DCFCE7; color: #166534; font-weight: 800; font-size: 0.78rem; padding: 4px 10px; border-radius: 999px; border: 1px solid #86EFAC;">${txt('تم الرصد', 'Graded', 'Noté')} (${latestSub.grade}/100)</span>`
+                      : `<span class="badge" style="background: #FEF3C7; color: #B45309; font-weight: 800; font-size: 0.78rem; padding: 4px 10px; border-radius: 999px; border: 1px solid #FCD34D;">${txt('بانتظار التقييم', 'Pending Review', 'En attente')}</span>`
                   ) : `<span class="badge" style="background: #F1F5F9; color: #64748B; font-weight: 700; font-size: 0.78rem; padding: 4px 10px; border-radius: 999px;">${txt('لم يسلّم بعد', 'Not submitted', 'Non remis')}</span>`}
                 </td>
                 <td style="padding: 16px 20px; text-align: ${isRtl ? 'left' : 'right'};">

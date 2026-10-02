@@ -40,21 +40,21 @@
   background: var(--shat-green-700);
   color: var(--shat-white);
   border-color: var(--shat-green-700);
-  box-shadow: 0 2px 4px rgba(75, 136, 52, 0.2);
+  box-shadow: none;
 }
 
 .btn-primary:hover:not(:disabled) {
   background: var(--shat-green-800);
   border-color: var(--shat-green-800);
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(75, 136, 52, 0.25);
+  box-shadow: none;
 }
 
 .btn-secondary {
   background: var(--shat-navy-900);
   color: var(--shat-white);
   border-color: var(--shat-navy-900);
-  box-shadow: 0 2px 4px rgba(15, 46, 74, 0.2);
+  box-shadow: none;
 }
 
 .btn-secondary:hover:not(:disabled) {
@@ -155,7 +155,7 @@
   border-radius: 50%;
   display: inline-block;
 }
-.status-badge.connected .status-dot { background: #10b981; box-shadow: 0 0 6px rgba(16, 185, 129, 0.6); }
+.status-badge.connected .status-dot { background: #10b981; box-shadow: none; }
 .status-badge.not-configured .status-dot { background: #94a3b8; }
 .status-badge.error .status-dot { background: #ef4444; }
 
@@ -165,17 +165,18 @@
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   padding: var(--space-lg);
-  box-shadow: var(--shadow-sm);
+  box-shadow: none;
   transition: all var(--transition-normal);
 }
 
 .card-elevated {
-  box-shadow: var(--shadow-md);
+  box-shadow: none;
+  border-color: var(--border-prominent);
 }
 
 .card-interactive:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: none;
   border-color: var(--shat-green-600);
 }
 
@@ -212,7 +213,7 @@
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   color: var(--text-primary);
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  transition: border-color var(--transition-fast);
   text-align: start;
 }
 
@@ -221,7 +222,7 @@
 .form-textarea:focus {
   outline: none;
   border-color: var(--shat-green-700);
-  box-shadow: 0 0 0 3px rgba(75, 136, 52, 0.15);
+  box-shadow: none;
 }
 
 .form-input.has-error {
@@ -229,7 +230,7 @@
 }
 
 .form-input.has-error:focus {
-  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+  box-shadow: none;
 }
 
 .form-helper {
@@ -348,7 +349,7 @@
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   padding: 12px 16px;
-  box-shadow: var(--shadow-lg);
+  box-shadow: none;
   display: flex;
   align-items: center;
   gap: 10px;

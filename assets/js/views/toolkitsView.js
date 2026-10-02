@@ -55,16 +55,16 @@ export function renderToolkitsView(lang = 'ar') {
               </div>
             </div>
 
-            <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 12px; padding: 18px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow-sm);">
-              <span style="font-size: 1.5rem; font-weight: 900; color: #0F2E4A;">🛡️</span>
+            <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 12px; padding: 18px; display: flex; align-items: center; gap: 12px; box-shadow: none;">
+              <span style="display: inline-flex; align-items: center; color: #0F2E4A;">${icons.shield('', 24)}</span>
               <div>
                 <div style="font-weight: 800; font-size: 0.95rem; color: var(--shat-navy);">${txt('سياسات PSEA وصون السلامة', 'PSEA & Safeguarding Policies', 'Politiques PSEA & Sauvegarde')}</div>
                 <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">${txt('مسارات إحالة وتدقيق مسبق معتمد', 'Accredited referral pathways & screening', 'Circuits de référencement & audit')}</div>
               </div>
             </div>
 
-            <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 12px; padding: 18px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow-sm);">
-              <span style="font-size: 1.5rem; font-weight: 900; color: #D97706;">📋</span>
+            <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 12px; padding: 18px; display: flex; align-items: center; gap: 12px; box-shadow: none;">
+              <span style="display: inline-flex; align-items: center; color: #D97706;">${icons.fileText('', 24)}</span>
               <div>
                 <div style="font-weight: 800; font-size: 0.95rem; color: var(--shat-navy);">${txt('ملفات ونماذج إدارة الحالة', 'Case Management Protocols & Forms', 'Formulaires & Protocoles de Gestion de Cas')}</div>
                 <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">${txt('استمارات تقييم وموافقة مستنيرة', 'Assessment & informed consent tools', 'Évaluations & consentement éclairé')}</div>

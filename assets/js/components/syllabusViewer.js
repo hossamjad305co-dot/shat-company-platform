@@ -243,7 +243,7 @@ export class SyllabusViewer {
         <!-- Top Toolbar -->
         <div id="shat-syllabus-toolbar" style="background: var(--shat-navy, #0B1E36); color: #FFFFFF; padding: 14px 24px; display: flex; justify-content: space-between; align-items: center;">
           <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 1.1rem; color: var(--shat-green);">📄</span>
+            <span style="display: inline-flex; align-items: center; color: var(--shat-green);">${icons.fileText('', 18)}</span>
             <span id="shat-syl-title-label" style="font-weight: 800; font-size: 0.95rem;">الخطة التدريبية المعتمدة • Course Syllabus</span>
           </div>
           <div style="display: flex; gap: 8px; align-items: center;">

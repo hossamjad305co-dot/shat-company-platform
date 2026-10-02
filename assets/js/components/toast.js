@@ -56,7 +56,7 @@ export function showToast(message, type = 'info', duration = 4000) {
     border-right: 5px solid ${style.border};
     border-radius: 8px;
     padding: 14px 18px;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+    box-shadow: none;
     display: flex;
     align-items: center;
     justify-content: space-between;

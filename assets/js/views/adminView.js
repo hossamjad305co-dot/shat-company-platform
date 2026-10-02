@@ -517,12 +517,12 @@ export function renderAdminView(lang = 'ar') {
                 <div class="form-group">
                   <label class="form-label">${txt('لغة المنشور المستهدفة *', 'Target Language *', 'Langue Cible *')}</label>
                   <select id="post-lang-input" class="form-input" style="font-weight: 700; color: var(--shat-navy);">
-                    <option value="all" selected>🌐 ${txt('3 لغات (العربية + EN + FR)', '3 Languages (AR + EN + FR)', '3 Langues (AR + EN + FR)')}</option>
-                    <option value="ar_en">🌐 ${txt('لغتان (العربية + English)', '2 Languages (AR + EN)', '2 Langues (AR + EN)')}</option>
-                    <option value="ar_fr">🌐 ${txt('لغتان (العربية + Français)', '2 Languages (AR + FR)', '2 Langues (AR + FR)')}</option>
-                    <option value="ar">🇸🇦 ${txt('لغة واحدة: العربية فقط', '1 Language: Arabic Only', '1 Langue : Arabe Uniquement')}</option>
-                    <option value="en">🇬🇧 ${txt('لغة واحدة: English فقط', '1 Language: English Only', '1 Langue : Anglais Uniquement')}</option>
-                    <option value="fr">🇫🇷 ${txt('لغة واحدة: Français فقط', '1 Language: French Only', '1 Langue : Français Uniquement')}</option>
+                    <option value="all" selected>${txt('3 لغات (العربية + EN + FR)', '3 Languages (AR + EN + FR)', '3 Langues (AR + EN + FR)')}</option>
+                    <option value="ar_en">${txt('لغتان (العربية + English)', '2 Languages (AR + EN)', '2 Langues (AR + EN)')}</option>
+                    <option value="ar_fr">${txt('لغتان (العربية + Français)', '2 Languages (AR + FR)', '2 Langues (AR + FR)')}</option>
+                    <option value="ar">${txt('لغة واحدة: العربية فقط', '1 Language: Arabic Only', '1 Langue : Arabe Uniquement')}</option>
+                    <option value="en">${txt('لغة واحدة: English فقط', '1 Language: English Only', '1 Langue : Anglais Uniquement')}</option>
+                    <option value="fr">${txt('لغة واحدة: Français فقط', '1 Language: French Only', '1 Langue : Français Uniquement')}</option>
                   </select>
                 </div>
                 <div class="form-group">
@@ -538,27 +538,27 @@ export function renderAdminView(lang = 'ar') {
               <!-- Custom Localized Fields for English & French (Collapsible) -->
               <details id="post-translations-details" style="margin-bottom: 16px; background: var(--bg-subtle); border: 1px solid var(--border-light); border-radius: var(--radius-xs); padding: 10px 14px;">
                 <summary style="font-weight: 700; color: var(--shat-navy); cursor: pointer; display: flex; align-items: center; justify-content: space-between; font-size: 0.88rem;">
-                  <span>🌐 ${txt('تخصيص الترجمة الإنجليزية والفرنسية (اختياري)', 'English & French Custom Translations (Optional)', 'Traductions Anglaise & Française (Optionnel)')}</span>
+                  <span>${txt('تخصيص الترجمة الإنجليزية والفرنسية (اختياري)', 'English & French Custom Translations (Optional)', 'Traductions Anglaise & Française (Optionnel)')}</span>
                   <span class="badge" style="background: #E0E7FF; color: #3730A3; font-size: 0.72rem;">Multi-Lang</span>
                 </summary>
                 <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 10px;">
                   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                     <div>
-                      <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary); display: block; margin-bottom: 4px;">🇬🇧 English Title</label>
+                      <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary); display: block; margin-bottom: 4px;">English Title</label>
                       <input type="text" id="post-title-en-input" class="form-input" style="font-size: 0.88rem;" placeholder="English Title...">
                     </div>
                     <div>
-                      <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary); display: block; margin-bottom: 4px;">🇫🇷 Titre Français</label>
+                      <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary); display: block; margin-bottom: 4px;">Titre Français</label>
                       <input type="text" id="post-title-fr-input" class="form-input" style="font-size: 0.88rem;" placeholder="Titre en français...">
                     </div>
                   </div>
                   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                     <div>
-                      <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary); display: block; margin-bottom: 4px;">🇬🇧 English Excerpt</label>
+                      <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary); display: block; margin-bottom: 4px;">English Excerpt</label>
                       <textarea id="post-excerpt-en-input" class="form-input" style="min-height: 48px; font-size: 0.82rem;" placeholder="English short excerpt..."></textarea>
                     </div>
                     <div>
-                      <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary); display: block; margin-bottom: 4px;">🇫🇷 Extrait Français</label>
+                      <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary); display: block; margin-bottom: 4px;">Extrait Français</label>
                       <textarea id="post-excerpt-fr-input" class="form-input" style="min-height: 48px; font-size: 0.82rem;" placeholder="Extrait court en français..."></textarea>
                     </div>
                   </div>
@@ -767,13 +767,13 @@ export function renderAdminView(lang = 'ar') {
                   ${txt('كافة المستخدمين', 'All Users', 'Tous les Utilisateurs')} (<span id="user-count-all">0</span>)
                 </button>
                 <button type="button" class="btn-clean btn-sm user-filter-pill" data-filter="student" style="padding: 6px 14px; font-weight: 700; font-size: 0.82rem; border-radius: 999px; background: #FFFFFF; border: 1px solid var(--border-light); color: var(--text-main); cursor: pointer;">
-                  👨‍🎓 ${txt('الطلاب والمتدربون', 'Students', 'Étudiants')} (<span id="user-count-students">0</span>)
+                  ${txt('الطلاب والمتدربون', 'Students', 'Étudiants')} (<span id="user-count-students">0</span>)
                 </button>
                 <button type="button" class="btn-clean btn-sm user-filter-pill" data-filter="teacher" style="padding: 6px 14px; font-weight: 700; font-size: 0.82rem; border-radius: 999px; background: #FFFFFF; border: 1px solid var(--border-light); color: var(--text-main); cursor: pointer;">
-                  👨‍🏫 ${txt('المعلمون والمدربون', 'Teachers & Instructors', 'Formateurs')} (<span id="user-count-teachers">0</span>)
+                  ${txt('المعلمون والمدربون', 'Teachers & Instructors', 'Formateurs')} (<span id="user-count-teachers">0</span>)
                 </button>
                 <button type="button" class="btn-clean btn-sm user-filter-pill" data-filter="admin" style="padding: 6px 14px; font-weight: 700; font-size: 0.82rem; border-radius: 999px; background: #FFFFFF; border: 1px solid var(--border-light); color: var(--text-main); cursor: pointer;">
-                  🛡️ ${txt('الإدارة العليا', 'Admins', 'Administration')} (<span id="user-count-admins">0</span>)
+                  ${txt('الإدارة العليا', 'Admins', 'Administration')} (<span id="user-count-admins">0</span>)
                 </button>
               </div>
 
@@ -1133,7 +1133,6 @@ export function renderAdminView(lang = 'ar') {
         
         <div style="padding: 18px 24px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; background: var(--bg-subtle);">
           <div style="display: flex; align-items: center; gap: 8px;">
-            <span style="font-size: 1.3rem;">👤</span>
             <h3 style="margin: 0; font-size: 1.15rem; font-weight: 900; color: var(--shat-navy);">
               ${txt('إنشاء وتعيين حساب مستخدم جديد (طالب أو معلم)', 'Create & Assign New User (Student or Teacher)', 'Créer un Nouvel Utilisateur')}
             </h3>
@@ -1151,19 +1150,19 @@ export function renderAdminView(lang = 'ar') {
             <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;" id="new-user-role-grid">
               <label class="user-role-card" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 12px 8px; border: 2px solid #10B981; background: #ECFDF5; border-radius: var(--radius-xs); cursor: pointer; transition: all 0.2s ease;">
                 <input type="radio" name="new-user-role-radio" value="student" checked style="margin-bottom: 6px;">
-                <span style="font-weight: 800; font-size: 0.88rem; color: #065F46;">👨‍🎓 ${txt('طالب / متدرب', 'Student / Trainee', 'Étudiant')}</span>
+                <span style="font-weight: 800; font-size: 0.88rem; color: #065F46;">${txt('طالب / متدرب', 'Student / Trainee', 'Étudiant')}</span>
                 <span style="font-size: 0.72rem; color: #047857; margin-top: 2px;">${txt('تسليم تكاليف وشهادات', 'Assignments & Certificates', 'Devoirs & Certificats')}</span>
               </label>
 
               <label class="user-role-card" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 12px 8px; border: 2px solid #CBD5E1; background: #FFFFFF; border-radius: var(--radius-xs); cursor: pointer; transition: all 0.2s ease;">
                 <input type="radio" name="new-user-role-radio" value="teacher" style="margin-bottom: 6px;">
-                <span style="font-weight: 800; font-size: 0.88rem; color: #1E40AF;">👨‍🏫 ${txt('معلم / مدرب', 'Teacher / Trainer', 'Formateur')}</span>
+                <span style="font-weight: 800; font-size: 0.88rem; color: #1E40AF;">${txt('معلم / مدرب', 'Teacher / Trainer', 'Formateur')}</span>
                 <span style="font-size: 0.72rem; color: #3B82F6; margin-top: 2px;">${txt('تدريس ورصد درجات', 'Teaching & Grading', 'Enseignement & Notation')}</span>
               </label>
 
               <label class="user-role-card" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 12px 8px; border: 2px solid #CBD5E1; background: #FFFFFF; border-radius: var(--radius-xs); cursor: pointer; transition: all 0.2s ease;">
                 <input type="radio" name="new-user-role-radio" value="admin" style="margin-bottom: 6px;">
-                <span style="font-weight: 800; font-size: 0.88rem; color: var(--shat-navy);">🛡️ ${txt('مدير تنفيذي', 'Admin / Manager', 'Admin')}</span>
+                <span style="font-weight: 800; font-size: 0.88rem; color: var(--shat-navy);">${txt('مدير تنفيذي', 'Admin / Manager', 'Admin')}</span>
                 <span style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">${txt('صلاحيات كاملة', 'Full Permissions', 'Plein Accès')}</span>
               </label>
             </div>
@@ -1241,7 +1240,6 @@ export function renderAdminView(lang = 'ar') {
         
         <div style="padding: 18px 24px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; background: var(--bg-subtle);">
           <div style="display: flex; align-items: center; gap: 8px;">
-            <span style="font-size: 1.3rem;">⚙️</span>
             <h3 style="margin: 0; font-size: 1.15rem; font-weight: 900; color: var(--shat-navy);">
               ${txt('تعديل بيانات وتغيير دور المستخدم', 'Edit User & Change Role', 'Modifier le Rôle de l\'Utilisateur')}
             </h3>
@@ -1255,12 +1253,12 @@ export function renderAdminView(lang = 'ar') {
           <!-- Role Selector -->
           <div class="form-group" style="margin-bottom: 18px; padding: 14px; background: #EFF6FF; border-radius: var(--radius-xs); border: 1px solid #BFDBFE;">
             <label class="form-label" style="font-weight: 800; color: #1E40AF; margin-bottom: 6px;">
-              🔄 ${txt('تغيير الدور المؤسسي (ترقية / تبديل الدور فورياً) *', 'Change Institutional Role (Instant Role Switch) *', 'Changer de Rôle *')}
+              ${txt('تغيير الدور المؤسسي (ترقية / تبديل الدور فورياً) *', 'Change Institutional Role (Instant Role Switch) *', 'Changer de Rôle *')}
             </label>
             <select id="edit-user-role" class="form-input" style="font-weight: 800; color: var(--shat-navy); font-size: 0.95rem;">
-              <option value="student">👨‍🎓 ${txt('طالب / متدرب معتمد (Student)', 'Student / Trainee', 'Étudiant')}</option>
-              <option value="teacher">👨‍🏫 ${txt('معلم / مدرب ومحاضر معتمد (Teacher / Instructor)', 'Teacher / Instructor', 'Formateur')}</option>
-              <option value="admin">🛡️ ${txt('مدير تنفيذي / مسؤول نظام (Admin)', 'Executive Admin', 'Administrateur')}</option>
+              <option value="student">${txt('طالب / متدرب معتمد (Student)', 'Student / Trainee', 'Étudiant')}</option>
+              <option value="teacher">${txt('معلم / مدرب ومحاضر معتمد (Teacher / Instructor)', 'Teacher / Instructor', 'Formateur')}</option>
+              <option value="admin">${txt('مدير تنفيذي / مسؤول نظام (Admin)', 'Executive Admin', 'Administrateur')}</option>
             </select>
             <div style="font-size: 0.78rem; color: #1D4ED8; margin-top: 6px; line-height: 1.5;">
               ${txt('عند تغيير دور المستخدم (مثلاً من طالب إلى معلم)، يحصل فورياً على كافة صلاحيات هذا الدور دون الحاجة لإنشاء حساب جديد.', 'Changing role immediately grants the user all associated portal permissions without re-registering.', 'Le changement de rôle accorde immédiatement les autorisations correspondantes.')}
@@ -1617,7 +1615,7 @@ export async function bindAdminEvents() {
       langTitleFr = '3 Langues (Arabe + Anglais + Français)';
       badgeBg = '#DCFCE7';
       badgeColor = '#166534';
-      badgeText = '🌐 ' + txt('منشور بـ 3 لغات كاملة', 'Trilingual Post (3 Languages)', 'Publication en 3 Langues');
+      badgeText = txt('منشور بـ 3 لغات كاملة', 'Trilingual Post (3 Languages)', 'Publication en 3 Langues');
     } else if (langCode === 'ar_en') {
       langCount = 2;
       langTitleAr = 'لغتان (العربية + الإنجليزية)';
@@ -1625,7 +1623,7 @@ export async function bindAdminEvents() {
       langTitleFr = '2 Langues (Arabe + Anglais)';
       badgeBg = '#E0F2FE';
       badgeColor = '#0369A1';
-      badgeText = '🌐 ' + txt('منشور بلغتين (AR + EN)', 'Bilingual Post (AR + EN)', 'Publication Bilingue (AR + EN)');
+      badgeText = txt('منشور بلغتين (AR + EN)', 'Bilingual Post (AR + EN)', 'Publication Bilingue (AR + EN)');
     } else if (langCode === 'ar_fr') {
       langCount = 2;
       langTitleAr = 'لغتان (العربية + الفرنسية)';
@@ -1633,7 +1631,7 @@ export async function bindAdminEvents() {
       langTitleFr = '2 Langues (Arabe + Français)';
       badgeBg = '#E0F2FE';
       badgeColor = '#0369A1';
-      badgeText = '🌐 ' + txt('منشور بلغتين (AR + FR)', 'Bilingual Post (AR + FR)', 'Publication Bilingue (AR + FR)');
+      badgeText = txt('منشور بلغتين (AR + FR)', 'Bilingual Post (AR + FR)', 'Publication Bilingue (AR + FR)');
     } else if (langCode === 'en') {
       langCount = 1;
       langTitleAr = 'لغة واحدة: الإنجليزية فقط';
@@ -1641,7 +1639,7 @@ export async function bindAdminEvents() {
       langTitleFr = '1 Langue : Anglais uniquement';
       badgeBg = '#FEF3C7';
       badgeColor = '#92400E';
-      badgeText = '⚠️ ' + txt('منشور بلغة واحدة: English فقط', '1 Language Only: English', '1 Langue Seule : Anglais');
+      badgeText = txt('منشور بلغة واحدة: English فقط', '1 Language Only: English', '1 Langue Seule : Anglais');
     } else if (langCode === 'fr') {
       langCount = 1;
       langTitleAr = 'لغة واحدة: الفرنسية فقط';
@@ -1649,7 +1647,7 @@ export async function bindAdminEvents() {
       langTitleFr = '1 Langue : Français uniquement';
       badgeBg = '#FCE7F3';
       badgeColor = '#9D174D';
-      badgeText = '⚠️ ' + txt('منشور بلغة واحدة: الفرنسية فقط', '1 Language Only: French', '1 Langue Seule : Français');
+      badgeText = txt('منشور بلغة واحدة: الفرنسية فقط', '1 Language Only: French', '1 Langue Seule : Français');
     } else {
       langCount = 1;
       langTitleAr = 'لغة واحدة: العربية فقط';
@@ -1657,7 +1655,7 @@ export async function bindAdminEvents() {
       langTitleFr = '1 Langue : Arabe uniquement';
       badgeBg = '#FEF3C7';
       badgeColor = '#92400E';
-      badgeText = '⚠️ ' + txt('منشور بلغة واحدة: العربية فقط', '1 Language Only: Arabic', '1 Langue Seule : Arabe');
+      badgeText = txt('منشور بلغة واحدة: العربية فقط', '1 Language Only: Arabic', '1 Langue Seule : Arabe');
     }
 
     const modalId = 'shat-post-lang-confirm-modal';
@@ -1681,9 +1679,8 @@ export async function bindAdminEvents() {
     const langName = txt(langTitleAr, langTitleEn, langTitleFr);
 
     overlay.innerHTML = `
-      <div style="background: #FFFFFF; border-radius: var(--radius-md); max-width: 520px; width: 100%; box-shadow: var(--shadow-xl); border: 1px solid var(--border-light); overflow: hidden; animation: fadeIn 0.2s ease;">
+      <div style="background: #FFFFFF; border-radius: var(--radius-md); max-width: 520px; width: 100%; box-shadow: none; border: 1px solid var(--border-light); overflow: hidden; animation: fadeIn 0.2s ease;">
         <div style="padding: 18px 24px; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; gap: 10px; background: var(--bg-subtle);">
-          <span style="font-size: 1.4rem;">⚠️</span>
           <h3 style="margin: 0; font-size: 1.15rem; font-weight: 900; color: var(--shat-navy);">
             ${txt('تأكيد لغات النشر قبل الاعتماد', 'Pre-Publication Language Confirmation', 'Confirmation des Langues de Publication')}
           </h3>
@@ -1978,17 +1975,17 @@ export async function bindAdminEvents() {
           tbody.innerHTML = res.posts.map(p => {
             let langBadge = '';
             if (p.lang === 'all') {
-              langBadge = `<span class="badge" style="background: #E0E7FF; color: #3730A3; font-size: 0.74rem; font-weight: 800;">🌐 3 ${txt('لغات', 'Langs', 'Langues')}</span>`;
+              langBadge = `<span class="badge" style="background: #E0E7FF; color: #3730A3; font-size: 0.74rem; font-weight: 800;">3 ${txt('لغات', 'Langs', 'Langues')}</span>`;
             } else if (p.lang === 'ar_en') {
-              langBadge = `<span class="badge" style="background: #E0F2FE; color: #0369A1; font-size: 0.74rem; font-weight: 800;">🌐 AR + EN</span>`;
+              langBadge = `<span class="badge" style="background: #E0F2FE; color: #0369A1; font-size: 0.74rem; font-weight: 800;">AR + EN</span>`;
             } else if (p.lang === 'ar_fr') {
-              langBadge = `<span class="badge" style="background: #E0F2FE; color: #0369A1; font-size: 0.74rem; font-weight: 800;">🌐 AR + FR</span>`;
+              langBadge = `<span class="badge" style="background: #E0F2FE; color: #0369A1; font-size: 0.74rem; font-weight: 800;">AR + FR</span>`;
             } else if (p.lang === 'en') {
-              langBadge = `<span class="badge" style="background: #FEF3C7; color: #92400E; font-size: 0.74rem; font-weight: 800;">🇬🇧 EN Only</span>`;
+              langBadge = `<span class="badge" style="background: #FEF3C7; color: #92400E; font-size: 0.74rem; font-weight: 800;">EN Only</span>`;
             } else if (p.lang === 'fr') {
-              langBadge = `<span class="badge" style="background: #FCE7F3; color: #9D174D; font-size: 0.74rem; font-weight: 800;">🇫🇷 FR Only</span>`;
+              langBadge = `<span class="badge" style="background: #FCE7F3; color: #9D174D; font-size: 0.74rem; font-weight: 800;">FR Only</span>`;
             } else {
-              langBadge = `<span class="badge" style="background: #F1F5F9; color: #475569; font-size: 0.74rem; font-weight: 800;">🇸🇦 AR Only</span>`;
+              langBadge = `<span class="badge" style="background: #F1F5F9; color: #475569; font-size: 0.74rem; font-weight: 800;">AR Only</span>`;
             }
 
             return `
@@ -2684,18 +2681,15 @@ function renderAdminUsersTable() {
 
     let roleBadgeBg = '#FEF3C7';
     let roleBadgeColor = '#92400E';
-    let roleIcon = '👨‍🎓';
     let roleName = txt('طالب / متدرب معتمد', 'Student / Trainee', 'Étudiant');
 
     if (isTeacher) {
       roleBadgeBg = '#DBEAFE';
       roleBadgeColor = '#1D4ED8';
-      roleIcon = '👨‍🏫';
       roleName = txt('معلم / مدرب معتمد', 'Teacher / Trainer', 'Formateur');
     } else if (isAdmin) {
       roleBadgeBg = '#F3E8FF';
       roleBadgeColor = '#6B21A8';
-      roleIcon = '🛡️';
       roleName = txt('المدير التنفيذي', 'Administrator', 'Administrateur');
     }
 
@@ -2713,11 +2707,11 @@ function renderAdminUsersTable() {
 
     const quickSwitchBtn = isStudent ? `
       <button type="button" class="btn-clean btn-sm btn-quick-role-switch" data-id="${u.id}" data-new-role="teacher" style="padding: 5px 9px; font-size: 0.74rem; font-weight: 700; background: #EFF6FF; color: #1D4ED8; border: 1px solid #BFDBFE; border-radius: 4px; cursor: pointer;">
-        👨‍🏫 ${txt('ترقية لمعلم', 'Make Teacher', 'Promouvoir Formateur')}
+        ${txt('ترقية إلى معلم', 'Make Teacher', 'Promouvoir Formateur')}
       </button>
     ` : (isTeacher ? `
       <button type="button" class="btn-clean btn-sm btn-quick-role-switch" data-id="${u.id}" data-new-role="student" style="padding: 5px 9px; font-size: 0.74rem; font-weight: 700; background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; border-radius: 4px; cursor: pointer;">
-        👨‍🎓 ${txt('تحويل لطالب', 'Make Student', 'Changer en Étudiant')}
+        ${txt('تحويل إلى طالب', 'Make Student', 'Changer en Étudiant')}
       </button>
     ` : '');
 
@@ -2731,7 +2725,7 @@ function renderAdminUsersTable() {
       <tr style="border-bottom: 1px solid var(--border-light); transition: background 0.15s ease;">
         <td style="padding: 12px 16px;">
           <div style="display: flex; align-items: center; gap: 10px;">
-            <div style="width: 38px; height: 38px; border-radius: 50%; background: ${avatarBg}; color: #FFFFFF; font-weight: 800; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <div style="width: 38px; height: 38px; border-radius: 50%; background: ${avatarBg}; color: #FFFFFF; font-weight: 800; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: none;">
               ${initials || 'SH'}
             </div>
             <div>
@@ -2748,7 +2742,7 @@ function renderAdminUsersTable() {
         </td>
         <td style="padding: 12px 16px;">
           <span class="badge" style="background: ${roleBadgeBg}; color: ${roleBadgeColor}; font-weight: 800; font-size: 0.82rem; padding: 4px 10px;">
-            ${roleIcon} ${roleName}
+            ${roleName}
           </span>
         </td>
         <td style="padding: 12px 16px;">
@@ -2761,7 +2755,7 @@ function renderAdminUsersTable() {
         <td style="padding: 12px 16px; text-align: ${isRtl ? 'left' : 'right'};">
           <div style="display: inline-flex; gap: 6px; align-items: center; flex-wrap: wrap;">
             <button type="button" class="btn-clean btn-sm btn-open-edit-user" data-id="${u.id}" style="padding: 5px 12px; font-weight: 800; font-size: 0.78rem; background: var(--bg-subtle); color: var(--shat-navy); border: 1px solid var(--border-light); border-radius: 4px; cursor: pointer;">
-              ✏️ ${txt('تعديل الدور', 'Edit Role', 'Modifier')}
+              ${txt('تعديل الدور', 'Edit Role', 'Modifier')}
             </button>
             ${quickSwitchBtn}
             ${deleteBtn}
