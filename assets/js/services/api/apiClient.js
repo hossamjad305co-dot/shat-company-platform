@@ -66,98 +66,189 @@ const DEFAULT_INITIAL_POSTS = [
   {
     id: 'post-case-manager-2026',
     title: 'إطلاق دورة إعداد وتأهيل مدير حالة Case Management (د. محمد إسليم)',
+    titleEn: 'Launch of Case Management Professional Qualification Course (Dr. Mohammed Isleem)',
+    titleFr: 'Lancement de la Formation Certifiante de Gestionnaire de Cas (Dr. Mohammed Isleem)',
     excerpt: 'برنامج تدريبي تخصصي معتمد (30 ساعة) لبناء مهارات تحديد وتقييم الحالات وتصميم خطط التدخل والإحالة الآمنة.',
+    excerptEn: 'Accredited 30-hour professional program developing skills in case identification, assessment, intervention planning, and safe referrals.',
+    excerptFr: 'Programme homologué de 30 heures développant les compétences d’évaluation, de planification d’intervention et de référencement sûr.',
     content: 'يسر شركة شات للتنمية والتطوير الإعلان عن فتح باب التسجيل في دورة إعداد وتأهيل مدير حالة Case Management بقيادة د. محمد إسليم - خبير برامج حماية الطفولة وإدارة الحالة. يهدف البرنامج إلى تزويد المشاركين بالمهارات الإجرائية المتقدمة لتحديد وتقييم الحالات الأكثر هشاشة، وتصميم خطط التدخل الفردية، والإحالة الآمنة متعددة القطاعات وفق موجهات المعيار الإنساني الأساسي وحماية المستفيدين. رسوم الدورة 300 شيكل مع شهادة إتمام معتمدة.',
+    contentEn: 'SHAT Development & Growth is pleased to announce direct registration for the Case Management Professional Qualification Course led by Dr. Mohammed Isleem, child protection and case management specialist. The course equips practitioners with standard procedural skills in vulnerable case identification, individualized care planning, multi-sector safe referrals, and confidentiality protocols under Core Humanitarian Standard guidelines.',
+    contentFr: 'La Société SHAT pour le Développement annonce l’ouverture des inscriptions à la formation certifiante de gestionnaire de cas animée par le Dr. Mohammed Isleem. Ce cursus fournit aux praticiens les compétences méthodologiques pour l’identification des cas vulnérables, les plans d’accompagnement individuels et le référencement sécurisé.',
     category: 'humanitarian',
     categoryLabel: 'إدارة الحالة وحماية الطفل',
+    categoryLabelEn: 'Case Management & Protection',
+    categoryLabelFr: 'Gestion de Cas & Protection',
     status: 'published',
+    lang: 'all',
     coverImage: 'assets/images/posts/post-case-management.svg',
     author: 'د. محمد إسليم',
+    authorEn: 'Dr. Mohammed Isleem',
+    authorFr: 'Dr. Mohammed Isleem',
     authorRole: 'استشاري الحماية وإدارة الحالة',
+    authorRoleEn: 'Protection & Case Management Consultant',
+    authorRoleFr: 'Consultant Protection & Gestion de Cas',
     createdAt: '2026-10-01T08:00:00Z',
     viewsCount: 480
   },
   {
     id: 'post-presentation-skills-2026',
     title: 'دورة تدريبية متقدمة في مهارات العرض والتقديم (م. مهدي الملاحي)',
+    titleEn: 'Advanced Public Speaking & Executive Presentation Mastery (Eng. Mahdi Al-Mallahi)',
+    titleFr: 'Maîtrise de la Prise de Parole et Présentations Professionnelles (Ing. Mahdi Al-Mallahi)',
     excerpt: 'تطوير مهارات الإلقاء والتحدث الجماهيري وصياغة العروض التقديمية الاحترافية وإقناع المانحين والشركاء (12 ساعة).',
+    excerptEn: 'Developing executive public speaking, compelling narrative structures, slide deck design, and donor persuasion techniques (12 Hours).',
+    excerptFr: 'Développement de l’art oratoire, structuration d’argumentaires d’impact et persuasion des partenaires et bailleurs (12 h).',
     content: 'أطلقت شركة شات للتنمية والتطوير بالتعاون مع الاستشاري م. مهدي الملاحي برنامج مهارات العرض والتقديم المتقدم للمهنيين ومديري المشاريع وممثلي المنظمات. يركز البرنامج على لغة الجسد، وإدارة منصات العرض، وتصميم الشرائح المؤثرة وإقناع المانحين والشركاء (4 لقاءات تفاعلية بقاعة شات، رسوم 120 شيكل فقط مع شهادة معتمدة).',
+    contentEn: 'SHAT Development & Growth, in collaboration with executive consultant Eng. Mahdi Al-Mallahi, has launched the Advanced Presentation & Pitching Masterclass for professionals and project managers. The curriculum emphasizes body language, stage management, high-impact slide architecture, and donor communication.',
+    contentFr: 'SHAT pour le Développement, en collaboration avec l’Ing. Mahdi Al-Mallahi, déploie un programme avancé de prise de parole et présentation destiné aux gestionnaires de projet et cadres d’ONG.',
     category: 'institutional',
     categoryLabel: 'مهارات الاتصال والتأثير',
+    categoryLabelEn: 'Communication & Impact',
+    categoryLabelFr: 'Communication & Influence',
     status: 'published',
+    lang: 'all',
     coverImage: 'assets/images/posts/post-presentation-skills.svg',
     author: 'م. مهدي الملاحي',
+    authorEn: 'Eng. Mahdi Al-Mallahi',
+    authorFr: 'Ing. Mahdi Al-Mallahi',
     authorRole: 'مستشار الاتصال المؤسسي',
+    authorRoleEn: 'Corporate Communications Consultant',
+    authorRoleFr: 'Consultant Communication Institutionnelle',
     createdAt: '2026-09-28T09:30:00Z',
     viewsCount: 395
   },
   {
     id: 'post-humanitarian-worker-2026',
     title: 'دبلوم تأهيل عامل في المجال الإنساني «من المبادئ إلى الممارسة» (142 ساعة)',
+    titleEn: 'Humanitarian Worker Professional Diploma «From Principles to Practice» (142 Hours)',
+    titleFr: 'Diplôme Professionnel de Travailleur Humanitaire « Des Principes à la Pratique » (142 h)',
     excerpt: 'برنامج دبلوم متكامل لمدة 3 أشهر يشمل 13 دورة تخصصية بمشاركة أكثر من 10 مدربين دوليين مع تقسيط ميسر للرسوم.',
+    excerptEn: 'Comprehensive 3-month diploma program encompassing 13 specialized courses with over 10 international trainers.',
+    excerptFr: 'Programme diplômant complet de 3 mois regroupant 13 modules spécialisés avec 10 formateurs internationaux.',
     content: 'تعلن شركة شات للتنمية والتطوير عن فتح باب القبول في دبلوم تأهيل عامل في المجال الإنساني: من المبادئ إلى الممارسة. يغطي البرنامج كافة معايير Sphere، CHS، PSEA، إدارة دورة المشروع، المتابعة والتقييم MEAL، واللوجستيات وسلاسل الإمداد، وإدارة المخيمات والملاجئ، مع تطبيقات عملية وحالات دراسية ميدانية تؤهل الخريجين للانخراط الفوري في العمل الإغاثي والتنموي.',
+    contentEn: 'SHAT Development & Growth announces direct admissions for the Humanitarian Worker Diploma: From Principles to Practice. The curriculum covers Sphere Standards, CHS, PSEA, Project Cycle Management (PCM), MEAL, Logistics & Supply Chain, and Camp Coordination with hands-on field practicum.',
+    contentFr: 'La Société SHAT annonce l’ouverture des inscriptions au Diplôme de Travailleur Humanitaire : des principes à la pratique. Le cursus englobe les normes Sphere, CHS, PSEA, le cycle de projet, le MEAL, la logistique et la coordination de camps.',
     category: 'humanitarian',
     categoryLabel: 'دبلومات العمل الإنساني',
+    categoryLabelEn: 'Humanitarian Diplomas',
+    categoryLabelFr: 'Diplômes Humanitaires',
     status: 'published',
+    lang: 'all',
     coverImage: 'assets/images/posts/post-humanitarian-worker.svg',
     author: 'أكاديمية شات للتدريب',
+    authorEn: 'SHAT Training Academy',
+    authorFr: 'Académie de Formation SHAT',
     authorRole: 'عمادة البرامج المهنية',
+    authorRoleEn: 'Deanship of Professional Programs',
+    authorRoleFr: 'Direction des Programmes Professionnels',
     createdAt: '2026-09-25T11:00:00Z',
     viewsCount: 620
   },
   {
     id: 'post-01',
     title: 'إطلاق برامج التقييم الخارجي المستقل وتطوير الحوكمة لمؤسسات المجتمع المدني',
+    titleEn: 'Launch of Independent External Evaluation & Governance Capacity Programs for CSOs',
+    titleFr: 'Lancement des Programmes d’Évaluation Externe Indépendante et de Gouvernance des OSC',
     excerpt: 'ضمن استراتيجية شركة شات لتعزيز كفاءة المنظمات غير الحكومية وتطبيق معايير المساءلة للمتأثرين.',
+    excerptEn: 'Part of SHAT strategic initiative to strengthen NGO operational capacity and affected population accountability.',
+    excerptFr: 'Dans le cadre de la stratégie de SHAT pour renforcer la redevabilité et la performance des ONG.',
     content: 'أعلنت شركة شات للتنمية والتطوير عن إطلاق حزمة استشارية متكاملة لتقييم التدخلات الإنسانية والتنموية وفق المعايير التسعة للمعيار الإنساني الأساسي (CHS) ومعايير OECD DAC. تشمل الحزمة بناء قدرات الكوادر الميدانية وإعداد تقارير التقييم المستقلة المعتمدة لدى الجهات المانحة الدولية.',
+    contentEn: 'SHAT Development & Growth announced an integrated advisory suite for evaluating humanitarian and development interventions under the 9 CHS commitments and OECD DAC criteria. The service includes field team coaching and accredited, donor-ready independent evaluation reports.',
+    contentFr: 'SHAT annonce le déploiement d’un dispositif de conseil complet pour l’évaluation des projets selon les 9 engagements de la norme CHS et les critères du CAD de l’OCDE, avec production de rapports d’évaluation indépendants homologués.',
     category: 'evaluation',
     categoryLabel: 'تقييم ومتابعة (OECD DAC)',
+    categoryLabelEn: 'Evaluation & Monitoring (OECD DAC)',
+    categoryLabelFr: 'Évaluation & Suivi (CAD OCDE)',
     status: 'published',
+    lang: 'all',
     coverImage: 'assets/images/posts/post-oecd-evaluation.svg',
     author: 'أ. حسام جاد الله',
+    authorEn: 'Hossam Jadallah',
+    authorFr: 'Hossam Jadallah',
     authorRole: 'المدير العام (Super Admin)',
+    authorRoleEn: 'General Director (Super Admin)',
+    authorRoleFr: 'Directeur Général (Super Admin)',
     createdAt: '2026-03-25T10:00:00Z',
     viewsCount: 342
   },
   {
     id: 'post-02',
     title: 'اعتماد ورقة الموقف المؤسسي حول سياسات صون السلامة ومنع الاستغلال (PSEA)',
+    titleEn: 'Adoption of Institutional Position Paper on Safeguarding & PSEA Policies',
+    titleFr: 'Adoption de la Note de Cadrage sur la Sauvegarde et la Prévention PSEA',
     excerpt: 'تأصيل وتفعيل آليات الإبلاغ والمساءلة وحماية الفئات الأكثر هشاشة في كافة التدخلات الميدانية.',
+    excerptEn: 'Institutionalizing safe reporting, victim-centered referral pathways, and vulnerability protection across all field actions.',
+    excerptFr: 'Consolidation des mécanismes d’alerte, de signalement confidentiel et de protection des personnes vulnérables.',
     content: 'اعتمد مجلس إدارة شركة شات للتنمية والتطوير الإطار المرجعي لحماية الكوادر والمستفيدين وبناء مسارات الإحالة السرية والآمنة. يأتي ذلك استجابة للالتزامات الأخلاقية والإنسانية الصارمة، وضمان خلو كافة بيئات العمل والتدريب من أي شكل من أشكال الاستغلال والانتهاك.',
+    contentEn: 'The Executive Board of SHAT has officially adopted the institutional safeguarding framework to protect frontline personnel and affected communities, ensuring safe and confidential referral pathways and zero tolerance for abuse.',
+    contentFr: 'Le conseil d’administration de SHAT a validé le cadre normatif de sauvegarde pour garantir des interventions exemptes de tout abus ou exploitation et consolider les circuits d’orientation confidentiels.',
     category: 'institutional',
     categoryLabel: 'حوكمة واستشارات',
+    categoryLabelEn: 'Governance & Consulting',
+    categoryLabelFr: 'Gouvernance & Conseil',
     status: 'published',
+    lang: 'all',
     coverImage: 'assets/images/posts/post-psea-protection.svg',
     author: 'د. أسامة المنصور',
+    authorEn: 'Dr. Osama Al-Mansour',
+    authorFr: 'Dr. Osama Al-Mansour',
     authorRole: 'المدرب المعتمد (Master Trainer)',
+    authorRoleEn: 'Certified Master Trainer',
+    authorRoleFr: 'Formateur Principal Homologué',
     createdAt: '2026-03-20T14:30:00Z',
     viewsCount: 289
   },
   {
     id: 'post-03',
     title: 'فتح باب القبول في الدفعة الثالثة من دبلوم المعيار الإنساني الأساسي (CHS)',
+    titleEn: 'Admissions Open for Third Cohort of Core Humanitarian Standard (CHS) Master Diploma',
+    titleFr: 'Ouverture des Inscriptions pour la 3ème Promotion du Diplôme Supérieur CHS',
     excerpt: 'برنامج تنفيذي مكثف (40 ساعة) لبناء مهارات تصميم التدخلات والمساءلة الميدانية للمنظمات الدولية.',
+    excerptEn: 'Intensive 40-hour executive certification building intervention design and field accountability competencies.',
+    excerptFr: 'Programme exécutif intensif de 40 heures dédié à la conception des interventions et à la redevabilité humanitaire.',
     content: 'يسر أكاديمية شات الإعلان عن فتح باب الالتحاق المباشر ببرنامج دبلوم المعيار الإنساني الأساسي (CHS) وتصميم التدخلات. يركز البرنامج على التطبيق العملي، ومراجعة مؤشرات الامتثال، وتصميم قنوات الشكاوى والمقترحات المجتمعية الفعالة مع شهادة معتمدة دولياً.',
+    contentEn: 'SHAT Academy announces direct admissions for the 3rd cohort of the Core Humanitarian Standard (CHS) Master Diploma. The curriculum focuses on applied compliance indicators, community feedback mechanism design (CFRM), and international accreditation.',
+    contentFr: 'L’Académie SHAT ouvre les admissions pour le diplôme supérieur CHS axé sur les indicateurs de conformité, les mécanismes de plainte CFRM et la certification internationale.',
     category: 'humanitarian',
     categoryLabel: 'إنساني وتطويري',
+    categoryLabelEn: 'Humanitarian & Development',
+    categoryLabelFr: 'Humanitaire & Développement',
     status: 'published',
+    lang: 'all',
     coverImage: 'assets/images/posts/post-chs-workshop.svg',
     author: 'أ. مريم النجار',
+    authorEn: 'Mariam Al-Najjar',
+    authorFr: 'Mariam Al-Najjar',
     authorRole: 'مسؤول القبول والتسجيل',
+    authorRoleEn: 'Admissions & Registration Officer',
+    authorRoleFr: 'Responsable des Admissions',
     createdAt: '2026-03-15T09:15:00Z',
     viewsCount: 512
   },
   {
     id: 'post-04',
     title: 'تقرير الأثر الميداني: تدريب 120 كادراً محلياً على منهجيات عدم الإضرار (Do No Harm)',
+    titleEn: 'Field Impact Report: 120 Local Practitioners Trained on «Do No Harm» Methodologies',
+    titleFr: 'Rapport d’Impact Terrain : 120 Cadres Locaux Formés à la Méthodologie « Ne Pas Nuire »',
     excerpt: 'نتائج برامج تعزيز حساسية النزاع وبناء التماسك المجتمعي في بيئات العمل المعقدة.',
+    excerptEn: 'Outcomes of conflict-sensitive programming and community cohesion initiatives in fragile environments.',
+    excerptFr: 'Résultats des programmes de sensibilité aux conflits et de renforcement de la cohésion sociale.',
     content: 'استكملت شركة شات سلسلة ورش العمل التخصصية في تعزيز حساسية النزاع وضمان الحياد المؤسسي الكامل. شمل التدريب 120 ممارساً ومسؤول برامج من مختلف المنظمات المحلية والدولية، مع تقييمات ميدانية أظهرت تحسناً بنسبة 88% في كفاءة التخطيط الميداني الحساس للنزاع.',
+    contentEn: 'SHAT has concluded a series of specialized field workshops on conflict sensitivity and humanitarian neutrality, training 120 practitioners with an 88% recorded efficiency gain in conflict-sensitive planning.',
+    contentFr: 'SHAT a clôturé son cycle d’ateliers sur le principe « Do No Harm » ayant bénéficié à 120 professionnels avec une amélioration de 88% de l’efficacité opérationnelle.',
     category: 'partnerships',
     categoryLabel: 'شراكات دولية',
+    categoryLabelEn: 'International Partnerships',
+    categoryLabelFr: 'Partenariats Internationaux',
     status: 'published',
+    lang: 'all',
     coverImage: 'assets/images/posts/post-partnerships.svg',
     author: 'سارة عبد الله',
+    authorEn: 'Sara Abdullah',
+    authorFr: 'Sara Abdullah',
     authorRole: 'مسؤول المحتوى والنشر',
+    authorRoleEn: 'Content & Publishing Officer',
+    authorRoleFr: 'Chargée de Contenu & Publication',
     createdAt: '2026-03-05T12:00:00Z',
     viewsCount: 198
   }
@@ -777,20 +868,35 @@ class ApiClient {
 
       if (method === 'POST') {
         const posts = this.getStoredPosts();
+        const selectedLang = body.lang || 'ar';
         const newPost = {
           id: `post-${Date.now()}`,
           title: body.title || 'منشور جديد',
+          titleEn: body.titleEn || body.title || 'Official Announcement',
+          titleFr: body.titleFr || body.title || 'Publication Officielle',
           excerpt: body.excerpt || '',
+          excerptEn: body.excerptEn || body.excerpt || '',
+          excerptFr: body.excerptFr || body.excerpt || '',
           content: body.content || '',
+          contentEn: body.contentEn || body.content || '',
+          contentFr: body.contentFr || body.content || '',
           category: body.category || 'humanitarian',
           categoryLabel: body.categoryLabel || 'إنساني وتطويري',
+          categoryLabelEn: body.categoryLabelEn || 'Humanitarian & Development',
+          categoryLabelFr: body.categoryLabelFr || 'Humanitaire & Développement',
+          lang: selectedLang,
+          languages: body.languages || (selectedLang === 'all' ? ['ar', 'en', 'fr'] : (selectedLang === 'ar_en' ? ['ar', 'en'] : (selectedLang === 'ar_fr' ? ['ar', 'fr'] : [selectedLang]))),
           status: body.status || 'published',
           coverImage: body.coverImage || 'assets/logo/logo-banner.jpg',
           author: this.currentUser?.fullNameAr || 'أ. حسام جاد الله',
+          authorEn: this.currentUser?.fullNameEn || 'Mr. Hossam Jadallah',
+          authorFr: this.currentUser?.fullNameFr || 'M. Hossam Jadallah',
           authorRole: this.currentUser?.roleTitle || 'إدارة شات',
           createdAt: new Date().toISOString(),
-          viewsCount: 1
+          viewsCount: 1,
+          ...body
         };
+        newPost.id = `post-${Date.now()}`;
         posts.unshift(newPost);
         this.saveStoredPosts(posts);
         return { success: true, message: 'تم نشر الخبر بنجاح في المنظومة!', post: newPost };
@@ -981,9 +1087,32 @@ class ApiClient {
       if (data) {
         const parsed = JSON.parse(data);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          // Auto-migrate any cached posts with placeholder logo images to dedicated SVGs
+          // Auto-migrate any cached posts with placeholder logo images and enrich with trilingual fields
           let changed = false;
           const updated = parsed.map(p => {
+            const def = DEFAULT_INITIAL_POSTS.find(d => d.id === p.id);
+            if (def) {
+              if (!p.titleEn || !p.titleFr || !p.lang || p.lang !== def.lang) {
+                changed = true;
+                p.titleEn = def.titleEn;
+                p.titleFr = def.titleFr;
+                p.excerptEn = def.excerptEn;
+                p.excerptFr = def.excerptFr;
+                p.contentEn = def.contentEn;
+                p.contentFr = def.contentFr;
+                p.categoryLabelEn = def.categoryLabelEn;
+                p.categoryLabelFr = def.categoryLabelFr;
+                p.authorEn = def.authorEn;
+                p.authorFr = def.authorFr;
+                p.authorRoleEn = def.authorRoleEn;
+                p.authorRoleFr = def.authorRoleFr;
+                p.lang = def.lang || 'all';
+              }
+            } else if (!p.lang) {
+              changed = true;
+              p.lang = 'ar';
+            }
+
             if (!p.coverImage || p.coverImage.includes('logo-banner') || p.coverImage.includes('logo-circle')) {
               changed = true;
               if (p.id.includes('case-manager')) p.coverImage = 'assets/images/posts/post-case-management.svg';

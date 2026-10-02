@@ -13,6 +13,8 @@ export const standardsExplorer = {
       descEn: "Global unified framework safeguarding humanitarian quality, affected populations dignity, and agency accountability.",
       linkedCourse: "shat-chs-master",
       linkedCourseTitleAr: "دبلوم المعيار الإنساني الأساسي (CHS)",
+      linkedCourseTitleEn: "Core Humanitarian Standard (CHS) Master Diploma",
+      linkedCourseTitleFr: "Diplôme Supérieur de la Norme CHS",
       checklist: [
         { id: "c1", textAr: "الاستجابة الإنسانية ملائمة وتلبي الاحتياجات الفعلية المستمرة.", textEn: "Humanitarian response is appropriate and relevant." },
         { id: "c2", textAr: "الاستجابة فعالة وتقدم في التوقيت المناسب دون تأخير.", textEn: "Response is effective and timely." },
@@ -36,6 +38,8 @@ export const standardsExplorer = {
       descEn: "Zero tolerance policies ensuring absolute safeguarding of affected populations and safe working environments.",
       linkedCourse: "shat-psea-expert",
       linkedCourseTitleAr: "البرنامج التنفيذي في استشارات الحماية PSEA",
+      linkedCourseTitleEn: "Executive Certification in Safeguarding & PSEA",
+      linkedCourseTitleFr: "Certification Exécutive en Sauvegarde et PSEA",
       checklist: [
         { id: "p1", textAr: "توقيع مدونة سلوك إلزامية مع ملحق PSEA الصريح لجميع العاملين والشركاء.", textEn: "Mandatory code of conduct signed by all personnel and contractors." },
         { id: "p2", textAr: "إجراء فحوصات وتدقيق مسبق في سجلات التوظيف (Safe Recruitment Vetting).", textEn: "Rigorous background checks and safe recruitment vetting." },
@@ -55,6 +59,8 @@ export const standardsExplorer = {
       descEn: "Global gold standard for evaluating humanitarian and development aid interventions.",
       linkedCourse: "shat-oecd-eval",
       linkedCourseTitleAr: "الشهادة الاحترافية في التقييم التنموي المستقل",
+      linkedCourseTitleEn: "Professional Certificate in Independent Evaluation (OECD DAC)",
+      linkedCourseTitleFr: "Certificat Professionnel en Évaluation Indépendante (CAD OCDE)",
       checklist: [
         { id: "o1", textAr: "الملاءمة (Relevance): مدى استجابة التدخل لأولويات واحتياجات المستفيدين.", textEn: "Relevance: Is the intervention doing the right things?" },
         { id: "o2", textAr: "التماسك (Coherence): مدى توافق وتكامل التدخل مع السياسات والبرامج الأخرى.", textEn: "Coherence: How well does the intervention fit?" },
@@ -75,6 +81,8 @@ export const standardsExplorer = {
       descEn: "Standard technical minimums in WASH, food security, shelter, and health in emergencies.",
       linkedCourse: "shat-chs-master",
       linkedCourseTitleAr: "دبلوم المعيار الإنساني الأساسي (CHS)",
+      linkedCourseTitleEn: "Core Humanitarian Standard (CHS) Master Diploma",
+      linkedCourseTitleFr: "Diplôme Supérieur de la Norme CHS",
       checklist: [
         { id: "s1", textAr: "الحق في الحياة بكرامة والحصول على المساعدة الإنسانية الأساسية.", textEn: "The right to life with dignity and humanitarian assistance." },
         { id: "s2", textAr: "الالتزام بالحد الأدنى من مياه الشرب النظيفة (15 لتراً للفرد يومياً).", textEn: "Minimum clean water supply (15L per person per day)." },
@@ -217,7 +225,7 @@ export const standardsExplorer = {
             <span style="font-size: 1.1rem; color: var(--shat-green);"></span>
             <div>
               <div style="font-size: 0.74rem; color: var(--text-muted); font-weight: 700;">${txt('المسار الأكاديمي المرتبط:', 'Associated Academy Track:', 'Cursus Lié :')}</div>
-              <div style="font-weight: 800; font-size: 0.88rem; color: var(--shat-navy);">${item.linkedCourseTitleAr}</div>
+              <div style="font-weight: 800; font-size: 0.88rem; color: var(--shat-navy);">${lang === 'fr' ? (item.linkedCourseTitleFr || item.linkedCourseTitleEn) : (lang === 'en' ? item.linkedCourseTitleEn : item.linkedCourseTitleAr)}</div>
             </div>
           </div>
 
@@ -225,11 +233,11 @@ export const standardsExplorer = {
             <button type="button" class="btn-clean btn-sm btn-generate-audit-report" style="background: #10B981; color: #FFFFFF; font-weight: 800; border-radius: 6px; padding: 7px 14px; box-shadow: 0 2px 8px rgba(16,185,129,0.25); display: inline-flex; align-items: center; gap: 4px;">
               ${icons.printer('icon-inline', 14)} <span>${txt('تصدير تقرير التدقيق المعياري (PDF / طباعة)', 'Export Audit Report (PDF)', 'Rapport de Conformité')}</span>
             </button>
-            <a href="#/course/${item.linkedCourse}" class="btn-clean btn-sm" style="background: var(--shat-navy); color: #FFFFFF; font-weight: 700;">
+            <a href="#/${lang}/course/${item.linkedCourse}" class="btn-clean btn-sm" style="background: var(--shat-navy); color: #FFFFFF; font-weight: 700;">
               <span>${txt('تصفح المنهاج التدريبي', 'View Curriculum', 'Voir le Programme')}</span>
               <span style="display:inline-flex; align-items:center;">${isRtl ? icons.arrowLeft('icon-inline', 14) : icons.arrowRight('icon-inline', 14)}</span>
             </a>
-            <a href="#/contact" class="btn-clean btn-sm" style="background: var(--shat-green-tint); color: var(--shat-green); border: 1px solid var(--shat-green-border); font-weight: 800;">
+            <a href="#/${lang}/contact" class="btn-clean btn-sm" style="background: var(--shat-green-tint); color: var(--shat-green); border: 1px solid var(--shat-green-border); font-weight: 800;">
               <span>${txt('طلب استشارة مطابقة', 'Request Compliance Advisory', 'Audit de Conformité')}</span>
             </a>
           </div>
@@ -341,16 +349,16 @@ export const standardsExplorer = {
           <div style="display: flex; align-items: center; gap: 14px;">
             <img src="assets/logo/logo-transparent.png" alt="SHAT" style="width: 52px; height: 52px; object-fit: contain;" onerror="this.onerror=null; this.src='assets/logo/logo-circle.jpg';">
             <div>
-              <div style="font-size: 1.15rem; font-weight: 900; color: var(--shat-navy);">شركة شات للتنمية والتطوير</div>
+              <div style="font-size: 1.15rem; font-weight: 900; color: var(--shat-navy);">${txt('شركة شات للتنمية والتطوير', 'SHAT Development & Growth Platform', 'Société SHAT pour le Développement')}</div>
               <div style="font-size: 0.78rem; font-weight: 700; color: var(--shat-green);">SHAT DEVELOPMENT & GROWTH • CONSULTING & AUDIT</div>
-              <div style="font-size: 0.72rem; color: #64748B;">وحدة التدقيق والمعايير المؤسسية المستقلة • Institutional Standards Unit</div>
+              <div style="font-size: 0.72rem; color: #64748B;">${txt('وحدة التدقيق والمعايير المؤسسية المستقلة', 'Independent Institutional Audit & Standards Unit', 'Unité d’Audit et Normes Institutionnelles')}</div>
             </div>
           </div>
 
           <div style="text-align: ${isRtl ? 'left' : 'right'}; font-size: 0.8rem; color: #475569;">
             <div><strong>${txt('الرقم المرجعي:', 'Ref Number:', 'Réf :')}</strong> <span style="font-family: var(--font-mono); color: var(--shat-navy);">${refNumber}</span></div>
             <div><strong>${txt('تاريخ التقييم:', 'Audit Date:', 'Date :')}</strong> ${reportDate}</div>
-            <div><span class="badge" style="background: #EFF6FF; color: #1D4ED8; font-size: 0.72rem; margin-top: 4px;">وثيقة تدقيق معتمدة • Official Audit</span></div>
+            <div><span class="badge" style="background: #EFF6FF; color: #1D4ED8; font-size: 0.72rem; margin-top: 4px;">${txt('وثيقة تدقيق معتمدة', 'Official Audit Document', 'Document d’Audit Homologué')}</span></div>
           </div>
         </div>
 
@@ -446,12 +454,12 @@ export const standardsExplorer = {
           </div>
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
             <div>
-              <div style="font-size: 1rem; font-weight: 800; color: var(--shat-navy);">${item.linkedCourseTitleAr}</div>
+              <div style="font-size: 1rem; font-weight: 800; color: var(--shat-navy);">${lang === 'fr' ? (item.linkedCourseTitleFr || item.linkedCourseTitleEn) : (lang === 'en' ? item.linkedCourseTitleEn : item.linkedCourseTitleAr)}</div>
               <div style="font-size: 0.82rem; color: #475569; margin-top: 2px;">
                 ${txt('برنامج مهني تطبيقي مكثف يغطي بنود الامتثال وسد الفجوات مع شهادة معتمدة دولياً.', 'Professional applied program addressing compliance gaps with accredited credential.', 'Formation certifiante couvrant les lacunes de conformité.')}
               </div>
             </div>
-            <a href="#/course/${item.linkedCourse}" class="btn-clean btn-sm no-print" style="background: var(--shat-green); color: #FFFFFF; font-weight: 800; border-radius: 6px; padding: 8px 14px;">
+            <a href="#/${lang}/course/${item.linkedCourse}" class="btn-clean btn-sm no-print" style="background: var(--shat-green); color: #FFFFFF; font-weight: 800; border-radius: 6px; padding: 8px 14px;">
               ${txt('التسجيل بالمساق الآن', 'Enroll in Course', 'S\'inscrire')}
             </a>
           </div>
@@ -460,15 +468,15 @@ export const standardsExplorer = {
         <!-- Official Sign-off & Seal Block -->
         <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; border-top: 2px solid #E2E8F0; padding-top: 20px;">
           <div>
-            <div style="font-size: 0.8rem; font-weight: 800; color: var(--shat-navy);">وحدة الاستشارات وتطوير المعايير المؤسسية</div>
-            <div style="font-size: 0.74rem; color: #64748B;">شركة شات للتنمية والتطوير — فرع الشرق الأوسط وفلسطين</div>
-            <div style="font-size: 0.74rem; color: #64748B; margin-top: 4px;">الاعتماد: إطار المعايير الإنسانية الدولية (CHS & OECD DAC)</div>
+            <div style="font-size: 0.8rem; font-weight: 800; color: var(--shat-navy);">${txt('وحدة الاستشارات وتطوير المعايير المؤسسية', 'Advisory & Institutional Standards Unit', 'Unité de Conseil et Normes Institutionnelles')}</div>
+            <div style="font-size: 0.74rem; color: #64748B;">${txt('شركة شات للتنمية والتطوير — فرع الشرق الأوسط وفلسطين', 'SHAT Development & Growth — Middle East & Palestine', 'SHAT Développement & Croissance — Moyen-Orient')}</div>
+            <div style="font-size: 0.74rem; color: #64748B; margin-top: 4px;">${txt('الاعتماد: إطار المعايير الإنسانية الدولية (CHS & OECD DAC)', 'Accreditation: International Standards Framework (CHS & OECD DAC)', 'Homologation : Cadre des Normes Internationales (CHS & CAD OCDE)')}</div>
           </div>
 
           <div class="audit-seal-box">
             <div style="display: flex; justify-content: center; margin-bottom: 4px; color: var(--shat-navy);">${icons.shield('', 24)}</div>
             <div style="font-size: 0.75rem; font-weight: 900; color: var(--shat-navy); letter-spacing: 0.5px;">SHAT VERIFIED AUDIT</div>
-            <div style="font-size: 0.68rem; color: var(--shat-green); font-weight: 800;">معتمد • تدقيق رسمي</div>
+            <div style="font-size: 0.68rem; color: var(--shat-green); font-weight: 800;">${txt('معتمد • تدقيق رسمي', 'Accredited • Official Audit', 'Homologué • Audit Officiel')}</div>
             <div style="font-size: 0.64rem; font-family: var(--font-mono); color: #94A3B8; margin-top: 2px;">${refNumber}</div>
           </div>
         </div>
@@ -482,7 +490,7 @@ export const standardsExplorer = {
         </button>
 
         <div style="display: flex; gap: 10px;">
-          <a href="#/contact" class="btn-clean btn-sm" style="background: var(--bg-subtle); color: var(--shat-navy); border: 1px solid var(--border-light); font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
+          <a href="#/${lang}/contact" class="btn-clean btn-sm" style="background: var(--bg-subtle); color: var(--shat-navy); border: 1px solid var(--border-light); font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
             <span style="display: inline-flex; align-items: center;">${icons.chat('', 16)}</span>
             <span>${txt('طلب استشارة تنفيذية مخصصة', 'Request Advisory', 'Demande de Conseil')}</span>
           </a>

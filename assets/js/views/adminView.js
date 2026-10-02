@@ -504,7 +504,7 @@ export function renderAdminView(lang = 'ar') {
                 <input type="text" id="post-title-input" class="form-input" style="font-size: 1rem; font-weight: 700;" placeholder="${txt('عنوان المقال أو الإعلان الرسمي', 'Publication title...', 'Titre de l\'article...')}" value="">
               </div>
 
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+              <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
                 <div class="form-group">
                   <label class="form-label">${txt('التصنيف المؤسسي', 'Category', 'Catégorie')}</label>
                   <select id="post-category-input" class="form-input">
@@ -512,6 +512,17 @@ export function renderAdminView(lang = 'ar') {
                     <option value="institutional">${txt('حوكمة واستشارات', 'Governance & Consulting', 'Gouvernance & Conseil')}</option>
                     <option value="evaluation">${txt('تقييم ومتابعة (OECD DAC)', 'Evaluation & Monitoring', 'Évaluation & Suivi')}</option>
                     <option value="partnerships">${txt('شراكات دولية', 'International Partnerships', 'Partenariats')}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">${txt('لغة المنشور المستهدفة *', 'Target Language *', 'Langue Cible *')}</label>
+                  <select id="post-lang-input" class="form-input" style="font-weight: 700; color: var(--shat-navy);">
+                    <option value="all" selected>🌐 ${txt('3 لغات (العربية + EN + FR)', '3 Languages (AR + EN + FR)', '3 Langues (AR + EN + FR)')}</option>
+                    <option value="ar_en">🌐 ${txt('لغتان (العربية + English)', '2 Languages (AR + EN)', '2 Langues (AR + EN)')}</option>
+                    <option value="ar_fr">🌐 ${txt('لغتان (العربية + Français)', '2 Languages (AR + FR)', '2 Langues (AR + FR)')}</option>
+                    <option value="ar">🇸🇦 ${txt('لغة واحدة: العربية فقط', '1 Language: Arabic Only', '1 Langue : Arabe Uniquement')}</option>
+                    <option value="en">🇬🇧 ${txt('لغة واحدة: English فقط', '1 Language: English Only', '1 Langue : Anglais Uniquement')}</option>
+                    <option value="fr">🇫🇷 ${txt('لغة واحدة: Français فقط', '1 Language: French Only', '1 Langue : Français Uniquement')}</option>
                   </select>
                 </div>
                 <div class="form-group">
@@ -523,6 +534,36 @@ export function renderAdminView(lang = 'ar') {
                   </select>
                 </div>
               </div>
+
+              <!-- Custom Localized Fields for English & French (Collapsible) -->
+              <details id="post-translations-details" style="margin-bottom: 16px; background: var(--bg-subtle); border: 1px solid var(--border-light); border-radius: var(--radius-xs); padding: 10px 14px;">
+                <summary style="font-weight: 700; color: var(--shat-navy); cursor: pointer; display: flex; align-items: center; justify-content: space-between; font-size: 0.88rem;">
+                  <span>🌐 ${txt('تخصيص الترجمة الإنجليزية والفرنسية (اختياري)', 'English & French Custom Translations (Optional)', 'Traductions Anglaise & Française (Optionnel)')}</span>
+                  <span class="badge" style="background: #E0E7FF; color: #3730A3; font-size: 0.72rem;">Multi-Lang</span>
+                </summary>
+                <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 10px;">
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div>
+                      <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary); display: block; margin-bottom: 4px;">🇬🇧 English Title</label>
+                      <input type="text" id="post-title-en-input" class="form-input" style="font-size: 0.88rem;" placeholder="English Title...">
+                    </div>
+                    <div>
+                      <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary); display: block; margin-bottom: 4px;">🇫🇷 Titre Français</label>
+                      <input type="text" id="post-title-fr-input" class="form-input" style="font-size: 0.88rem;" placeholder="Titre en français...">
+                    </div>
+                  </div>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div>
+                      <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary); display: block; margin-bottom: 4px;">🇬🇧 English Excerpt</label>
+                      <textarea id="post-excerpt-en-input" class="form-input" style="min-height: 48px; font-size: 0.82rem;" placeholder="English short excerpt..."></textarea>
+                    </div>
+                    <div>
+                      <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary); display: block; margin-bottom: 4px;">🇫🇷 Extrait Français</label>
+                      <textarea id="post-excerpt-fr-input" class="form-input" style="min-height: 48px; font-size: 0.82rem;" placeholder="Extrait court en français..."></textarea>
+                    </div>
+                  </div>
+                </div>
+              </details>
 
               <div class="form-group">
                 <label class="form-label">${txt('المقتطف التعريفي الموجز', 'Summary / Excerpt', 'Extrait / Résumé')}</label>
@@ -614,13 +655,14 @@ export function renderAdminView(lang = 'ar') {
                     <th style="padding: 12px 16px;">${txt('الغلاف', 'Cover', 'Image')}</th>
                     <th style="padding: 12px 16px;">${txt('العنوان', 'Title', 'Titre')}</th>
                     <th style="padding: 12px 16px;">${txt('التصنيف', 'Category', 'Catégorie')}</th>
+                    <th style="padding: 12px 16px;">${txt('اللغة', 'Language', 'Langue')}</th>
                     <th style="padding: 12px 16px;">${txt('الحالة', 'Status', 'Statut')}</th>
                     <th style="padding: 12px 16px;">${txt('التاريخ', 'Date', 'Date')}</th>
                     <th style="padding: 12px 16px; text-align: ${isRtl ? 'left' : 'right'};">${txt('الإجراءات', 'Actions', 'Actions')}</th>
                   </tr>
                 </thead>
                 <tbody id="posts-table-tbody">
-                  <tr><td colspan="6" style="padding: 24px; text-align: center; color: var(--text-muted);">${txt('جاري تحميل المنشورات...', 'Loading posts...', 'Chargement...')}</td></tr>
+                  <tr><td colspan="7" style="padding: 24px; text-align: center; color: var(--text-muted);">${txt('جاري تحميل المنشورات...', 'Loading posts...', 'Chargement...')}</td></tr>
                 </tbody>
               </table>
             </div>
@@ -1161,12 +1203,18 @@ export async function bindAdminEvents() {
   const postEditingIdInput = document.getElementById('post-editing-id');
   const postTitleInput = document.getElementById('post-title-input');
   const postCategoryInput = document.getElementById('post-category-input');
+  const postLangInput = document.getElementById('post-lang-input');
   const postStatusInput = document.getElementById('post-status-input');
   const postExcerptInput = document.getElementById('post-excerpt-input');
   const postBodyInput = document.getElementById('post-body-input');
   const postCoverInput = document.getElementById('post-cover-input');
   const postCoverFileInput = document.getElementById('post-cover-file-input');
   const btnTriggerPostUpload = document.getElementById('btn-trigger-post-upload');
+
+  const postTitleEnInput = document.getElementById('post-title-en-input');
+  const postExcerptEnInput = document.getElementById('post-excerpt-en-input');
+  const postTitleFrInput = document.getElementById('post-title-fr-input');
+  const postExcerptFrInput = document.getElementById('post-excerpt-fr-input');
 
   const cmsEditorHeading = document.getElementById('cms-editor-heading');
   const cmsEditingBadge = document.getElementById('cms-editing-badge');
@@ -1190,7 +1238,7 @@ export async function bindAdminEvents() {
     if (previewCover && postCoverInput) previewCover.src = postCoverInput.value || 'assets/logo/logo-banner.jpg';
   }
 
-  [postTitleInput, postCategoryInput, postStatusInput, postExcerptInput, postBodyInput, postCoverInput].forEach(el => {
+  [postTitleInput, postCategoryInput, postLangInput, postStatusInput, postExcerptInput, postBodyInput, postCoverInput].forEach(el => {
     if (el) el.addEventListener('input', updateLivePreview);
   });
 
@@ -1237,7 +1285,12 @@ export async function bindAdminEvents() {
     if (postBodyInput) postBodyInput.value = '';
     if (postCoverInput) postCoverInput.value = 'assets/logo/logo-banner.jpg';
     if (postCategoryInput) postCategoryInput.selectedIndex = 0;
+    if (postLangInput) postLangInput.value = 'all';
     if (postStatusInput) postStatusInput.value = 'published';
+    if (postTitleEnInput) postTitleEnInput.value = '';
+    if (postExcerptEnInput) postExcerptEnInput.value = '';
+    if (postTitleFrInput) postTitleFrInput.value = '';
+    if (postExcerptFrInput) postExcerptFrInput.value = '';
 
     if (cmsEditorHeading) cmsEditorHeading.textContent = txt('محرر المنشورات والمقالات المعتمدة', 'Publications & Insights Editor', 'Éditeur de Publications');
     if (cmsEditingBadge) cmsEditingBadge.style.display = 'none';
@@ -1266,7 +1319,13 @@ export async function bindAdminEvents() {
       if (postBodyInput) postBodyInput.value = post.content || '';
       if (postCoverInput) postCoverInput.value = post.coverImage || 'assets/logo/logo-banner.jpg';
       if (postCategoryInput) postCategoryInput.value = post.category || 'humanitarian';
+      if (postLangInput) postLangInput.value = post.lang || 'ar';
       if (postStatusInput) postStatusInput.value = post.status || 'published';
+
+      if (postTitleEnInput) postTitleEnInput.value = post.titleEn || '';
+      if (postExcerptEnInput) postExcerptEnInput.value = post.excerptEn || '';
+      if (postTitleFrInput) postTitleFrInput.value = post.titleFr || '';
+      if (postExcerptFrInput) postExcerptFrInput.value = post.excerptFr || '';
 
       if (cmsEditorHeading) cmsEditorHeading.textContent = `${txt('تعديل المنشور:', 'Edit Post:', 'Modifier :')} ${post.title.substring(0, 35)}...`;
       if (cmsEditingBadge) cmsEditingBadge.style.display = 'inline-block';
@@ -1288,6 +1347,145 @@ export async function bindAdminEvents() {
     }
   }
 
+  // Pre-Publish Interactive Language Confirmation Warning Modal
+  function showLanguagePublishWarning({ langCode, onConfirm, onCancel }) {
+    let langCount = 1;
+    let langTitleAr = '';
+    let langTitleEn = '';
+    let langTitleFr = '';
+    let badgeColor = '';
+    let badgeBg = '';
+    let badgeText = '';
+
+    if (langCode === 'all') {
+      langCount = 3;
+      langTitleAr = '3 لغات (العربية + الإنجليزية + الفرنسية)';
+      langTitleEn = '3 Languages (Arabic + English + French)';
+      langTitleFr = '3 Langues (Arabe + Anglais + Français)';
+      badgeBg = '#DCFCE7';
+      badgeColor = '#166534';
+      badgeText = '🌐 ' + txt('منشور بـ 3 لغات كاملة', 'Trilingual Post (3 Languages)', 'Publication en 3 Langues');
+    } else if (langCode === 'ar_en') {
+      langCount = 2;
+      langTitleAr = 'لغتان (العربية + الإنجليزية)';
+      langTitleEn = '2 Languages (Arabic + English)';
+      langTitleFr = '2 Langues (Arabe + Anglais)';
+      badgeBg = '#E0F2FE';
+      badgeColor = '#0369A1';
+      badgeText = '🌐 ' + txt('منشور بلغتين (AR + EN)', 'Bilingual Post (AR + EN)', 'Publication Bilingue (AR + EN)');
+    } else if (langCode === 'ar_fr') {
+      langCount = 2;
+      langTitleAr = 'لغتان (العربية + الفرنسية)';
+      langTitleEn = '2 Languages (Arabic + French)';
+      langTitleFr = '2 Langues (Arabe + Français)';
+      badgeBg = '#E0F2FE';
+      badgeColor = '#0369A1';
+      badgeText = '🌐 ' + txt('منشور بلغتين (AR + FR)', 'Bilingual Post (AR + FR)', 'Publication Bilingue (AR + FR)');
+    } else if (langCode === 'en') {
+      langCount = 1;
+      langTitleAr = 'لغة واحدة: الإنجليزية فقط';
+      langTitleEn = '1 Language: English Only';
+      langTitleFr = '1 Langue : Anglais uniquement';
+      badgeBg = '#FEF3C7';
+      badgeColor = '#92400E';
+      badgeText = '⚠️ ' + txt('منشور بلغة واحدة: English فقط', '1 Language Only: English', '1 Langue Seule : Anglais');
+    } else if (langCode === 'fr') {
+      langCount = 1;
+      langTitleAr = 'لغة واحدة: الفرنسية فقط';
+      langTitleEn = '1 Language: French Only';
+      langTitleFr = '1 Langue : Français uniquement';
+      badgeBg = '#FCE7F3';
+      badgeColor = '#9D174D';
+      badgeText = '⚠️ ' + txt('منشور بلغة واحدة: الفرنسية فقط', '1 Language Only: French', '1 Langue Seule : Français');
+    } else {
+      langCount = 1;
+      langTitleAr = 'لغة واحدة: العربية فقط';
+      langTitleEn = '1 Language: Arabic Only';
+      langTitleFr = '1 Langue : Arabe uniquement';
+      badgeBg = '#FEF3C7';
+      badgeColor = '#92400E';
+      badgeText = '⚠️ ' + txt('منشور بلغة واحدة: العربية فقط', '1 Language Only: Arabic', '1 Langue Seule : Arabe');
+    }
+
+    const modalId = 'shat-post-lang-confirm-modal';
+    const oldModal = document.getElementById(modalId);
+    if (oldModal) oldModal.remove();
+
+    const overlay = document.createElement('div');
+    overlay.id = modalId;
+    overlay.style.cssText = `
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(4px);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    `;
+
+    const langName = txt(langTitleAr, langTitleEn, langTitleFr);
+
+    overlay.innerHTML = `
+      <div style="background: #FFFFFF; border-radius: var(--radius-md); max-width: 520px; width: 100%; box-shadow: var(--shadow-xl); border: 1px solid var(--border-light); overflow: hidden; animation: fadeIn 0.2s ease;">
+        <div style="padding: 18px 24px; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; gap: 10px; background: var(--bg-subtle);">
+          <span style="font-size: 1.4rem;">⚠️</span>
+          <h3 style="margin: 0; font-size: 1.15rem; font-weight: 900; color: var(--shat-navy);">
+            ${txt('تأكيد لغات النشر قبل الاعتماد', 'Pre-Publication Language Confirmation', 'Confirmation des Langues de Publication')}
+          </h3>
+        </div>
+
+        <div style="padding: 24px;">
+          <div style="display: inline-block; padding: 6px 14px; background: ${badgeBg}; color: ${badgeColor}; border-radius: 999px; font-weight: 800; font-size: 0.85rem; margin-bottom: 16px;">
+            ${badgeText}
+          </div>
+
+          <div style="font-size: 1rem; font-weight: 700; color: var(--shat-navy); margin-bottom: 12px; line-height: 1.5;">
+            ${txt(
+              `تنبيه: تم إعداد هذا المنشور بـ ${langCount === 1 ? 'لغة واحدة فقط' : (langCount === 2 ? 'لغتين' : '3 لغات')} وهي:`,
+              `Notice: This publication is configured for ${langCount === 1 ? '1 language only' : (langCount === 2 ? '2 languages' : '3 languages')}, which is:`,
+              `Avis : Cette publication est configurée pour ${langCount === 1 ? '1 seule langue' : (langCount === 2 ? '2 langues' : '3 langues')} :`
+            )}
+            <div style="font-size: 1.05rem; color: #1D4ED8; margin-top: 8px; padding: 10px 14px; background: #EFF6FF; border-radius: var(--radius-xs); border: 1px solid #BFDBFE;">
+              ${langName}
+            </div>
+          </div>
+
+          <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 22px;">
+            ${langCount === 1 
+              ? txt('هذا يعني أن المنشور سيظهر للمستخدمين بهذه اللغة فقط، ولن يظهر للمتصفحين باللغات الأخرى تلقائياً. هل ترغب باعتماد النشر والمتابعة؟', 'This means this post is published in this language only and will not appear by default for visitors on other language sub-sites. Do you wish to confirm and publish?', 'Cet article s\'affichera uniquement dans cette langue. Souhaitez-vous confirmer la publication ?')
+              : txt('سيظهر هذا المنشور لزوار الموقع بهذه اللغات المحددة. هل تؤكد رغبتك في النشر الفوري؟', 'This publication will be visible to visitors across these selected languages. Do you confirm publishing now?', 'Cette publication sera visible dans les langues sélectionnées. Confirmez-vous la publication ?')}
+          </p>
+
+          <div style="display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap;">
+            <button type="button" id="btn-cancel-lang-confirm" class="btn-clean btn-sm" style="background: #F1F5F9; border: 1px solid #CBD5E1; color: var(--text-main); font-weight: 700; padding: 10px 18px; cursor: pointer;">
+              ${txt('مراجعة وتعديل اللغة', 'Change / Review Language', 'Modifier la Langue')}
+            </button>
+            <button type="button" id="btn-proceed-lang-confirm" class="btn-clean btn-green btn-sm" style="font-weight: 800; padding: 10px 22px; cursor: pointer;">
+              ${txt('نعم، تابع واعتمد النشر', 'Yes, Confirm & Publish', 'Oui, Confirmer et Publier')}
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    const btnProceed = document.getElementById('btn-proceed-lang-confirm');
+    const btnCancel = document.getElementById('btn-cancel-lang-confirm');
+
+    btnProceed.onclick = () => {
+      overlay.remove();
+      if (typeof onConfirm === 'function') onConfirm();
+    };
+
+    btnCancel.onclick = () => {
+      overlay.remove();
+      if (typeof onCancel === 'function') onCancel();
+    };
+  }
+
   // Publish / Save Post Button
   if (publishBtn) {
     publishBtn.onclick = async () => {
@@ -1300,39 +1498,57 @@ export async function bindAdminEvents() {
         return;
       }
 
-      const postData = {
-        title,
-        excerpt: postExcerptInput?.value || '',
-        content: contentText,
-        category: postCategoryInput?.value || 'humanitarian',
-        categoryLabel: postCategoryInput?.options[postCategoryInput.selectedIndex].text,
-        status: postStatusInput?.value || 'published',
-        coverImage: postCoverInput?.value || 'assets/logo/logo-banner.jpg'
-      };
+      const selectedLang = postLangInput?.value || 'ar';
 
-      publishBtn.disabled = true;
-      publishBtn.innerHTML = `<span>${txt('جاري الحفظ في قاعدة البيانات...', 'Saving to database...', 'Enregistrement...')}</span>`;
+      // PRE-PUBLISH LANGUAGE CONFIRMATION WARNING
+      showLanguagePublishWarning({
+        langCode: selectedLang,
+        onCancel: () => {
+          postLangInput?.focus();
+        },
+        onConfirm: async () => {
+          const postData = {
+            title,
+            titleEn: postTitleEnInput?.value?.trim() || title,
+            titleFr: postTitleFrInput?.value?.trim() || title,
+            excerpt: postExcerptInput?.value || '',
+            excerptEn: postExcerptEnInput?.value?.trim() || postExcerptInput?.value || '',
+            excerptFr: postExcerptFrInput?.value?.trim() || postExcerptInput?.value || '',
+            content: contentText,
+            contentEn: contentText,
+            contentFr: contentText,
+            category: postCategoryInput?.value || 'humanitarian',
+            categoryLabel: postCategoryInput?.options[postCategoryInput.selectedIndex].text,
+            lang: selectedLang,
+            status: postStatusInput?.value || 'published',
+            coverImage: postCoverInput?.value || 'assets/logo/logo-banner.jpg'
+          };
 
-      try {
-        let res;
-        if (editingId) {
-          // UPDATE existing post
-          res = await api.updatePost(editingId, postData);
-          showToast(txt('تم حفظ وتحديث المنشور بنجاح في قاعدة البيانات وعلى الموقع!', 'Post updated successfully in database and website!', 'Publication mise à jour avec succès !'), 'success');
-        } else {
-          // CREATE new post
-          res = await api.createPost(postData);
-          showToast(txt('تم نشر المنشور الجديد بنجاح في المنظومة!', 'New post published successfully!', 'Nouvelle publication ajoutée avec succès !'), 'success');
+          publishBtn.disabled = true;
+          publishBtn.innerHTML = `<span>${txt('جاري الحفظ في قاعدة البيانات...', 'Saving to database...', 'Enregistrement...')}</span>`;
+
+          try {
+            let res;
+            if (editingId) {
+              // UPDATE existing post
+              res = await api.updatePost(editingId, postData);
+              showToast(txt('تم حفظ وتحديث المنشور بنجاح في قاعدة البيانات وعلى الموقع!', 'Post updated successfully in database and website!', 'Publication mise à jour avec succès !'), 'success');
+            } else {
+              // CREATE new post
+              res = await api.createPost(postData);
+              showToast(txt('تم نشر المنشور الجديد بنجاح في المنظومة!', 'New post published successfully!', 'Nouvelle publication ajoutée avec succès !'), 'success');
+            }
+
+            resetPostEditor();
+            loadPosts();
+          } catch (err) {
+            showToast(txt('فشل في حفظ المنشور: ', 'Failed to save post: ', 'Échec d\'enregistrement : ') + err.message, 'error');
+          } finally {
+            publishBtn.disabled = false;
+            publishBtn.innerHTML = `<span>${publishBtnText ? publishBtnText.textContent : 'Save'}</span>`;
+          }
         }
-
-        resetPostEditor();
-        loadPosts();
-      } catch (err) {
-        showToast(txt('فشل في حفظ المنشور: ', 'Failed to save post: ', 'Échec d\'enregistrement : ') + err.message, 'error');
-      } finally {
-        publishBtn.disabled = false;
-        publishBtn.innerHTML = `<span>${publishBtnText ? publishBtnText.textContent : 'Save'}</span>`;
-      }
+      });
     };
   }
 
@@ -1502,11 +1718,27 @@ export async function bindAdminEvents() {
         if (badge) badge.textContent = `${res.posts.length} ${txt('منشور', 'posts', 'publications')}`;
         if (tbody) {
           if (res.posts.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="6" style="padding: 24px; text-align: center; color: var(--text-muted);">${txt('لا توجد منشورات حالياً. استخدم المحرر أعلاه لإنشاء منشورك الأول!', 'No posts yet. Create your first post above!', 'Aucune publication.')}</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="7" style="padding: 24px; text-align: center; color: var(--text-muted);">${txt('لا توجد منشورات حالياً. استخدم المحرر أعلاه لإنشاء منشورك الأول!', 'No posts yet. Create your first post above!', 'Aucune publication.')}</td></tr>`;
             return;
           }
 
-          tbody.innerHTML = res.posts.map(p => `
+          tbody.innerHTML = res.posts.map(p => {
+            let langBadge = '';
+            if (p.lang === 'all') {
+              langBadge = `<span class="badge" style="background: #E0E7FF; color: #3730A3; font-size: 0.74rem; font-weight: 800;">🌐 3 ${txt('لغات', 'Langs', 'Langues')}</span>`;
+            } else if (p.lang === 'ar_en') {
+              langBadge = `<span class="badge" style="background: #E0F2FE; color: #0369A1; font-size: 0.74rem; font-weight: 800;">🌐 AR + EN</span>`;
+            } else if (p.lang === 'ar_fr') {
+              langBadge = `<span class="badge" style="background: #E0F2FE; color: #0369A1; font-size: 0.74rem; font-weight: 800;">🌐 AR + FR</span>`;
+            } else if (p.lang === 'en') {
+              langBadge = `<span class="badge" style="background: #FEF3C7; color: #92400E; font-size: 0.74rem; font-weight: 800;">🇬🇧 EN Only</span>`;
+            } else if (p.lang === 'fr') {
+              langBadge = `<span class="badge" style="background: #FCE7F3; color: #9D174D; font-size: 0.74rem; font-weight: 800;">🇫🇷 FR Only</span>`;
+            } else {
+              langBadge = `<span class="badge" style="background: #F1F5F9; color: #475569; font-size: 0.74rem; font-weight: 800;">🇸🇦 AR Only</span>`;
+            }
+
+            return `
             <tr style="border-bottom: 1px solid var(--border-light);">
               <td style="padding: 10px 16px;">
                 <img src="${p.coverImage || 'assets/logo/logo-banner.jpg'}" alt="${p.title}" style="width: 50px; height: 35px; object-fit: cover; border-radius: var(--radius-xs);" onerror="this.onerror=null; this.src='assets/logo/logo-banner.jpg';">
@@ -1516,6 +1748,9 @@ export async function bindAdminEvents() {
               </td>
               <td style="padding: 12px 16px;">
                 <span class="badge" style="background: #EFF6FF; color: #1D4ED8; font-size: 0.76rem;">${p.categoryLabel || p.category}</span>
+              </td>
+              <td style="padding: 12px 16px;">
+                ${langBadge}
               </td>
               <td style="padding: 12px 16px;">
                 <span class="badge" style="background: ${p.status === 'published' ? '#DCFCE7' : '#FEF3C7'}; color: ${p.status === 'published' ? '#166534' : '#92400E'}; font-size: 0.76rem;">
@@ -1534,7 +1769,8 @@ export async function bindAdminEvents() {
                 </div>
               </td>
             </tr>
-          `).join('');
+          `;
+        }).join('');
 
           // Bind Edit button to load post in editor
           tbody.querySelectorAll('.btn-edit-post').forEach(b => {

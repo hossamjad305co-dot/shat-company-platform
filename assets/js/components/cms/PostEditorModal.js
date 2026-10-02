@@ -59,8 +59,8 @@ export function PostEditorModal() {
                 <input type="text" id="post-input-title" class="shat-form-input" placeholder="أدخل عنواناً جذاباً ودقيقاً..." required />
               </div>
 
-              <!-- Category & Platform -->
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;" class="form-row-mobile">
+              <!-- Category, Platform & Language -->
+              <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 14px;" class="form-row-mobile">
                 <div class="shat-form-group">
                   <label class="shat-form-label">التصنيف</label>
                   <select id="post-select-category" class="shat-form-input">
@@ -68,6 +68,17 @@ export function PostEditorModal() {
                     <option value="protection">استشارات الحماية</option>
                     <option value="evaluation">تقييم وأثر مؤسسي</option>
                     <option value="general">أخبار وتحديثات عامة</option>
+                  </select>
+                </div>
+                <div class="shat-form-group">
+                  <label class="shat-form-label">لغة المنشور *</label>
+                  <select id="post-select-lang" class="shat-form-input" style="font-weight: 700; color: var(--shat-navy-950);">
+                    <option value="all" selected>🌐 3 لغات (AR + EN + FR)</option>
+                    <option value="ar_en">🌐 لغتان (العربية + EN)</option>
+                    <option value="ar_fr">🌐 لغتان (العربية + FR)</option>
+                    <option value="ar">🇸🇦 العربية فقط</option>
+                    <option value="en">🇬🇧 English فقط</option>
+                    <option value="fr">🇫🇷 Français فقط</option>
                   </select>
                 </div>
                 <div class="shat-form-group">
@@ -201,6 +212,7 @@ export function openPostEditor(post = null, onSaved = null) {
   const idEl = document.getElementById('post-form-id');
   const titleInput = document.getElementById('post-input-title');
   const catSelect = document.getElementById('post-select-category');
+  const langSelect = document.getElementById('post-select-lang');
   const platSelect = document.getElementById('post-select-platform');
   const imgInput = document.getElementById('post-input-img');
   const excerptInput = document.getElementById('post-input-excerpt');
@@ -215,6 +227,7 @@ export function openPostEditor(post = null, onSaved = null) {
     idEl.value = post.id;
     titleInput.value = post.title || '';
     catSelect.value = post.category || 'training';
+    if (langSelect) langSelect.value = post.lang || 'all';
     platSelect.value = post.platform || 'Website';
     imgInput.value = post.img || post.cover_image_url || 'assets/logo/logo-banner.jpg';
     excerptInput.value = post.excerpt || '';
@@ -227,6 +240,7 @@ export function openPostEditor(post = null, onSaved = null) {
     idEl.value = '';
     titleInput.value = '';
     catSelect.value = 'training';
+    if (langSelect) langSelect.value = 'all';
     platSelect.value = 'Website';
     imgInput.value = 'assets/logo/logo-banner.jpg';
     excerptInput.value = '';
@@ -316,6 +330,19 @@ export function openPostEditor(post = null, onSaved = null) {
         alert('يرجى استكمال العنوان والموجز لنشر المنشور.');
         return;
       }
+
+      const langCode = data.lang || 'all';
+      let langMsg = '';
+      if (langCode === 'all') langMsg = '3 لغات (العربية + الإنجليزية + الفرنسية)';
+      else if (langCode === 'ar_en') langMsg = 'لغتان (العربية + الإنجليزية)';
+      else if (langCode === 'ar_fr') langMsg = 'لغتان (العربية + الفرنسية)';
+      else if (langCode === 'en') langMsg = 'لغة واحدة (الإنجليزية فقط)';
+      else if (langCode === 'fr') langMsg = 'لغة واحدة (الفرنسية فقط)';
+      else langMsg = 'لغة واحدة (العربية فقط)';
+
+      const confirmPublish = confirm(`⚠️ تنبيه تأكيد لغة النشر:\nتم إعداد هذا المنشور بـ [${langMsg}].\n\nهل ترغب بالمتابعة واعتماد نشر المنشور الآن؟`);
+      if (!confirmPublish) return;
+
       await savePost(data);
     };
   }
@@ -367,6 +394,7 @@ export function openPostEditor(post = null, onSaved = null) {
       category: catSelect.value,
       categoryLabel: catSelect.options[catSelect.selectedIndex].text,
       platform: platSelect.value,
+      lang: langSelect ? langSelect.value : 'all',
       img: imgInput.value.trim(),
       excerpt: excerptInput.value.trim(),
       fullText: richEditor ? richEditor.innerText.trim() : '',
