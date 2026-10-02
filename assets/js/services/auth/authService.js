@@ -233,13 +233,30 @@ class AuthService {
     else if (key === 'student' || key === 'ahmed@shat.com') matchedProfile = DEV_PROFILES.student;
     else if (key === 'employee' || key === 'content@shat.com') matchedProfile = DEV_PROFILES.employee;
 
-    // Check if custom user was created in local storage
+    // Check if custom user was created in local storage (Admin created user)
     if (!matchedProfile && typeof localStorage !== 'undefined') {
       try {
-        const customUsers = JSON.parse(localStorage.getItem('shat_custom_users') || '[]');
-        const found = customUsers.find(u => (u.email && u.email.toLowerCase() === key) || (u.username && u.username.toLowerCase() === key));
+        const storedUsers = JSON.parse(localStorage.getItem('shat_platform_users') || localStorage.getItem('shat_custom_users') || '[]');
+        const found = storedUsers.find(u => 
+          (u.email && u.email.toLowerCase() === key) || 
+          (u.username && u.username.toLowerCase() === key) ||
+          (u.nationalId && u.nationalId === key)
+        );
         if (found) {
-          matchedProfile = found;
+          const userRole = found.role || 'student';
+          matchedProfile = {
+            id: found.id || `usr-${Date.now()}`,
+            username: found.username,
+            name: found.fullNameAr || found.fullNameEn || found.name || 'مستخدم معتمد',
+            fullNameAr: found.fullNameAr || found.name,
+            fullNameEn: found.fullNameEn || found.name,
+            email: found.email,
+            role: userRole,
+            roleTitle: found.roleTitle || (userRole === 'teacher' ? 'مدرب ومحاضر معتمد' : (userRole === 'admin' ? 'المدير التنفيذي' : 'طالب / متدرب معتمد')),
+            phone: found.phone || '',
+            maskedNationalId: found.maskedNationalId || 'ID-***-0000',
+            permissions: found.permissions || (userRole === 'admin' ? ['all'] : (userRole === 'teacher' ? ['courses.view', 'materials.download', 'assignments.grade', 'courses.edit'] : ['courses.view', 'materials.download', 'assignments.submit', 'grades.view_own']))
+          };
         }
       } catch (e) {}
     }

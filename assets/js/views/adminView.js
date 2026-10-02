@@ -730,26 +730,79 @@ export function renderAdminView(lang = 'ar') {
         </div>
 
         <div id="admin-tab-roster" class="admin-view-pane" style="display: none;">
-          <div style="background: #FFFFFF; border-radius: var(--radius-sm); border: 1px solid var(--border-light); padding: 24px;">
-            <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--shat-navy); margin: 0 0 16px 0;">
-              ${txt('دليل المستخدمين المعتمدين (الكادر التدريسي والطلاب)', 'Staff & Student Directory', 'Annuaire des Utilisateurs')}
-            </h3>
-            <div style="overflow-x: auto;">
+          <div style="background: #FFFFFF; border-radius: var(--radius-sm); border: 1px solid var(--border-light); padding: 24px; box-shadow: var(--shadow-sm); margin-bottom: 24px;">
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 14px;">
+              <div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <span style="display: inline-flex; width: 36px; height: 36px; border-radius: 8px; background: #EFF6FF; color: #1D4ED8; align-items: center; justify-content: center; flex-shrink: 0;">
+                    ${icons.users('', 20)}
+                  </span>
+                  <h3 style="font-size: 1.25rem; font-weight: 900; color: var(--shat-navy); margin: 0;">
+                    ${txt('إدارة الطلاب والمعلمين والصلاحيات (Staff & Student Directory)', 'Staff & Student Directory & Roles', 'Gestion des Étudiants et Formateurs')}
+                  </h3>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin: 6px 0 0 0; line-height: 1.5;">
+                  ${txt(
+                    'إنشاء وتعيين حسابات جديدة للطلاب والمدربين، وتعديل الأدوار المؤسسية فورياً (ترقية طالب إلى معلم أو العكس)، مع منح الصلاحيات.',
+                    'Create, assign, and manage student & trainer accounts. Instant role updates (promote student to teacher or vice versa).',
+                    'Créez et gérez les comptes étudiants et formateurs, changez les rôles institutionnels en direct.'
+                  )}
+                </p>
+              </div>
+
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <button type="button" id="btn-open-create-user" class="btn-clean btn-green btn-sm" style="font-weight: 800; display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; cursor: pointer;">
+                  <span>+ ${txt('إنشاء مستخدم جديد (طالب أو معلم)', 'Add User (Student or Teacher)', 'Nouveau Compte')}</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Role Filter Pills & Live Search -->
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; padding: 14px 16px; background: var(--bg-subtle); border-radius: var(--radius-xs); border: 1px solid var(--border-light);">
+              
+              <!-- Role Tabs -->
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;" id="admin-user-role-filters">
+                <button type="button" class="btn-clean btn-sm user-filter-pill active" data-filter="all" style="padding: 6px 14px; font-weight: 800; font-size: 0.82rem; border-radius: 999px; background: var(--shat-navy); color: #FFFFFF; cursor: pointer;">
+                  ${txt('كافة المستخدمين', 'All Users', 'Tous les Utilisateurs')} (<span id="user-count-all">0</span>)
+                </button>
+                <button type="button" class="btn-clean btn-sm user-filter-pill" data-filter="student" style="padding: 6px 14px; font-weight: 700; font-size: 0.82rem; border-radius: 999px; background: #FFFFFF; border: 1px solid var(--border-light); color: var(--text-main); cursor: pointer;">
+                  👨‍🎓 ${txt('الطلاب والمتدربون', 'Students', 'Étudiants')} (<span id="user-count-students">0</span>)
+                </button>
+                <button type="button" class="btn-clean btn-sm user-filter-pill" data-filter="teacher" style="padding: 6px 14px; font-weight: 700; font-size: 0.82rem; border-radius: 999px; background: #FFFFFF; border: 1px solid var(--border-light); color: var(--text-main); cursor: pointer;">
+                  👨‍🏫 ${txt('المعلمون والمدربون', 'Teachers & Instructors', 'Formateurs')} (<span id="user-count-teachers">0</span>)
+                </button>
+                <button type="button" class="btn-clean btn-sm user-filter-pill" data-filter="admin" style="padding: 6px 14px; font-weight: 700; font-size: 0.82rem; border-radius: 999px; background: #FFFFFF; border: 1px solid var(--border-light); color: var(--text-main); cursor: pointer;">
+                  🛡️ ${txt('الإدارة العليا', 'Admins', 'Administration')} (<span id="user-count-admins">0</span>)
+                </button>
+              </div>
+
+              <!-- Search Input -->
+              <div style="min-width: 260px; flex: 1; max-width: 360px;">
+                <input type="text" id="admin-users-search-input" class="form-input" style="font-size: 0.85rem; padding: 7px 12px; background: #FFFFFF;" placeholder="${txt('بحث بالاسم أو البريد أو اسم المستخدم...', 'Search by name, email, or username...', 'Rechercher par nom, email...')}">
+              </div>
+
+            </div>
+
+            <!-- Users Table -->
+            <div style="overflow-x: auto; border: 1px solid var(--border-light); border-radius: var(--radius-xs);">
               <table style="width: 100%; border-collapse: collapse; text-align: ${isRtl ? 'right' : 'left'}; font-size: 0.9rem;" id="admin-users-table">
                 <thead>
                   <tr style="background: var(--bg-subtle); color: var(--shat-navy); border-bottom: 2px solid var(--border-light);">
-                    <th style="padding: 12px 16px;">${txt('الاسم الكامل', 'Full Name', 'Nom')}</th>
-                    <th style="padding: 12px 16px;">${txt('البريد الإلكتروني', 'Email', 'Courriel')}</th>
+                    <th style="padding: 12px 16px;">${txt('المستخدم / الهوية', 'User & Identity', 'Utilisateur')}</th>
+                    <th style="padding: 12px 16px;">${txt('بيانات الدخول', 'Login Credentials', 'Identifiants')}</th>
                     <th style="padding: 12px 16px;">${txt('الدور المؤسسي', 'Role', 'Rôle')}</th>
-                    <th style="padding: 12px 16px;">${txt('الهاتف', 'Phone', 'Téléphone')}</th>
+                    <th style="padding: 12px 16px;">${txt('المساق / الهاتف', 'Course / Phone', 'Cursus / Téléphone')}</th>
                     <th style="padding: 12px 16px;">${txt('الحالة', 'Status', 'Statut')}</th>
+                    <th style="padding: 12px 16px; text-align: ${isRtl ? 'left' : 'right'};">${txt('تغيير الدور والإجراءات', 'Role Actions', 'Actions')}</th>
                   </tr>
                 </thead>
                 <tbody id="admin-users-tbody">
-                  <tr><td colspan="5" style="padding: 24px; text-align: center; color: var(--text-muted);">${txt('جاري تحميل المستخدمين...', 'Loading users...', 'Chargement...')}</td></tr>
+                  <tr><td colspan="6" style="padding: 24px; text-align: center; color: var(--text-muted);">${txt('جاري تحميل المستخدمين...', 'Loading users...', 'Chargement...')}</td></tr>
                 </tbody>
               </table>
             </div>
+
           </div>
         </div>
 
@@ -1068,6 +1121,206 @@ export function renderAdminView(lang = 'ar') {
               ${txt('حفظ تعديلات المساق بالكامل', 'Save All Course Changes', 'Enregistrer')}
             </button>
           </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- MODAL: CREATE NEW USER (STUDENT OR TEACHER OR ADMIN) -->
+    <!-- ======================================================== -->
+    <div id="shat-modal-create-user" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(4px); z-index: 99999; align-items: center; justify-content: center; padding: 16px;">
+      <div style="background: #FFFFFF; border-radius: var(--radius-md); max-width: 620px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-xl); border: 1px solid var(--border-light); animation: fadeIn 0.2s ease;">
+        
+        <div style="padding: 18px 24px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; background: var(--bg-subtle);">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.3rem;">👤</span>
+            <h3 style="margin: 0; font-size: 1.15rem; font-weight: 900; color: var(--shat-navy);">
+              ${txt('إنشاء وتعيين حساب مستخدم جديد (طالب أو معلم)', 'Create & Assign New User (Student or Teacher)', 'Créer un Nouvel Utilisateur')}
+            </h3>
+          </div>
+          <button type="button" id="btn-close-create-user-modal" class="btn-clean" style="font-size: 1.2rem; cursor: pointer; color: var(--text-muted);">✕</button>
+        </div>
+
+        <form id="shat-create-user-form" style="padding: 24px;">
+          
+          <!-- Role Selector Cards -->
+          <div class="form-group" style="margin-bottom: 18px;">
+            <label class="form-label" style="font-weight: 800; color: var(--shat-navy); margin-bottom: 8px;">
+              ${txt('الدور المؤسسي للحساب *', 'User Role *', 'Rôle de l\'Utilisateur *')}
+            </label>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;" id="new-user-role-grid">
+              <label class="user-role-card" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 12px 8px; border: 2px solid #10B981; background: #ECFDF5; border-radius: var(--radius-xs); cursor: pointer; transition: all 0.2s ease;">
+                <input type="radio" name="new-user-role-radio" value="student" checked style="margin-bottom: 6px;">
+                <span style="font-weight: 800; font-size: 0.88rem; color: #065F46;">👨‍🎓 ${txt('طالب / متدرب', 'Student / Trainee', 'Étudiant')}</span>
+                <span style="font-size: 0.72rem; color: #047857; margin-top: 2px;">${txt('تسليم تكاليف وشهادات', 'Assignments & Certificates', 'Devoirs & Certificats')}</span>
+              </label>
+
+              <label class="user-role-card" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 12px 8px; border: 2px solid #CBD5E1; background: #FFFFFF; border-radius: var(--radius-xs); cursor: pointer; transition: all 0.2s ease;">
+                <input type="radio" name="new-user-role-radio" value="teacher" style="margin-bottom: 6px;">
+                <span style="font-weight: 800; font-size: 0.88rem; color: #1E40AF;">👨‍🏫 ${txt('معلم / مدرب', 'Teacher / Trainer', 'Formateur')}</span>
+                <span style="font-size: 0.72rem; color: #3B82F6; margin-top: 2px;">${txt('تدريس ورصد درجات', 'Teaching & Grading', 'Enseignement & Notation')}</span>
+              </label>
+
+              <label class="user-role-card" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 12px 8px; border: 2px solid #CBD5E1; background: #FFFFFF; border-radius: var(--radius-xs); cursor: pointer; transition: all 0.2s ease;">
+                <input type="radio" name="new-user-role-radio" value="admin" style="margin-bottom: 6px;">
+                <span style="font-weight: 800; font-size: 0.88rem; color: var(--shat-navy);">🛡️ ${txt('مدير تنفيذي', 'Admin / Manager', 'Admin')}</span>
+                <span style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">${txt('صلاحيات كاملة', 'Full Permissions', 'Plein Accès')}</span>
+              </label>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label">${txt('الاسم الكامل بالعربية *', 'Full Name (Arabic) *', 'Nom Complet (Arabe) *')}</label>
+              <input type="text" id="new-user-fullname-ar" class="form-input" required placeholder="${txt('مثال: أحمد خليل', 'e.g. Ahmed Khalil', 'ex. Ahmed Khalil')}">
+            </div>
+            <div class="form-group">
+              <label class="form-label">${txt('الاسم بالإنجليزية (للشهادات)', 'Full Name (English)', 'Nom Complet (Anglais)')}</label>
+              <input type="text" id="new-user-fullname-en" class="form-input" placeholder="${txt('مثال: Ahmed Khalil', 'e.g. Ahmed Khalil', 'ex. Ahmed Khalil')}">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label">${txt('البريد الإلكتروني الرسمي *', 'Official Email *', 'Adresse E-mail *')}</label>
+              <input type="email" id="new-user-email" class="form-input" required placeholder="user@shat.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label">${txt('اسم المستخدم / رقم الهوية *', 'Username / ID *', 'Identifiant / N° Pièce *')}</label>
+              <input type="text" id="new-user-username" class="form-input" required placeholder="${txt('اسم دخول فريد أو رقم الهوية', 'Unique username or ID', 'Identifiant')}">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label">${txt('رقم الهاتف / واتساب', 'Phone / WhatsApp', 'Téléphone / WhatsApp')}</label>
+              <input type="tel" id="new-user-phone" class="form-input" placeholder="+972 59 000 0000">
+            </div>
+            <div class="form-group">
+              <label class="form-label">${txt('كلمة المرور الابتدائية *', 'Initial Password *', 'Mot de passe initial *')}</label>
+              <input type="text" id="new-user-password" class="form-input" value="password123" required>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label">${txt('المساق التدريبي المرتبط (اختياري)', 'Assigned Course', 'Cursus Assigné')}</label>
+              <select id="new-user-course" class="form-input">
+                <option value="">${txt('-- بدون تعيين مساق محدد --', '-- No Specific Course --', '-- Aucun --')}</option>
+                <option value="shat-chs-master">${txt('دبلوم المعيار الإنساني الأساسي (CHS Master)', 'Core Humanitarian Standard (CHS) Master Diploma', 'Diplôme Supérieur CHS')}</option>
+                <option value="shat-psea-expert">${txt('دبلوم صون السلامة والحماية من الاستغلال (PSEA)', 'Safeguarding & PSEA Policies Diploma', 'Diplôme Politiques PSEA')}</option>
+                <option value="shat-oecd-evaluation">${txt('برنامج التقييم الخارجي المستقل (OECD DAC)', 'Independent Evaluation Program (OECD DAC)', 'Programme d\'Évaluation Indépendante (OECD DAC)')}</option>
+                <option value="shat-ngo-governance">${txt('دبلوم حوكمة وإدارة المنظمات غير الحكومية (NGO Governance)', 'NGO Governance & Operational Leadership Diploma', 'Diplôme de Gouvernance des ONG')}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">${txt('حالة الحساب', 'Account Status', 'Statut')}</label>
+              <select id="new-user-status" class="form-input">
+                <option value="active" selected>${txt('نشط ومفعل', 'Active', 'Actif')}</option>
+                <option value="inactive">${txt('معطل مؤقتاً', 'Inactive', 'Inactif')}</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-light);">
+            <button type="button" id="btn-cancel-create-user" class="btn-clean btn-sm" style="background: var(--bg-subtle);">${txt('إلغاء', 'Cancel', 'Annuler')}</button>
+            <button type="submit" id="btn-submit-create-user" class="btn-clean btn-green btn-sm" style="font-weight: 800; padding: 10px 22px;">
+              ${txt('حفظ وإنشاء الحساب فورياً', 'Create & Activate User', 'Créer le Compte')}
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- MODAL: EDIT USER & CHANGE ROLE (INSTANT SWITCH / UPDATE) -->
+    <!-- ======================================================== -->
+    <div id="shat-modal-edit-user" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(4px); z-index: 99999; align-items: center; justify-content: center; padding: 16px;">
+      <div style="background: #FFFFFF; border-radius: var(--radius-md); max-width: 600px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-xl); border: 1px solid var(--border-light); animation: fadeIn 0.2s ease;">
+        
+        <div style="padding: 18px 24px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; background: var(--bg-subtle);">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.3rem;">⚙️</span>
+            <h3 style="margin: 0; font-size: 1.15rem; font-weight: 900; color: var(--shat-navy);">
+              ${txt('تعديل بيانات وتغيير دور المستخدم', 'Edit User & Change Role', 'Modifier le Rôle de l\'Utilisateur')}
+            </h3>
+          </div>
+          <button type="button" id="btn-close-edit-user-modal" class="btn-clean" style="font-size: 1.2rem; cursor: pointer; color: var(--text-muted);">✕</button>
+        </div>
+
+        <form id="shat-edit-user-form" style="padding: 24px;">
+          <input type="hidden" id="edit-user-id" value="">
+
+          <!-- Role Selector -->
+          <div class="form-group" style="margin-bottom: 18px; padding: 14px; background: #EFF6FF; border-radius: var(--radius-xs); border: 1px solid #BFDBFE;">
+            <label class="form-label" style="font-weight: 800; color: #1E40AF; margin-bottom: 6px;">
+              🔄 ${txt('تغيير الدور المؤسسي (ترقية / تبديل الدور فورياً) *', 'Change Institutional Role (Instant Role Switch) *', 'Changer de Rôle *')}
+            </label>
+            <select id="edit-user-role" class="form-input" style="font-weight: 800; color: var(--shat-navy); font-size: 0.95rem;">
+              <option value="student">👨‍🎓 ${txt('طالب / متدرب معتمد (Student)', 'Student / Trainee', 'Étudiant')}</option>
+              <option value="teacher">👨‍🏫 ${txt('معلم / مدرب ومحاضر معتمد (Teacher / Instructor)', 'Teacher / Instructor', 'Formateur')}</option>
+              <option value="admin">🛡️ ${txt('مدير تنفيذي / مسؤول نظام (Admin)', 'Executive Admin', 'Administrateur')}</option>
+            </select>
+            <div style="font-size: 0.78rem; color: #1D4ED8; margin-top: 6px; line-height: 1.5;">
+              ${txt('عند تغيير دور المستخدم (مثلاً من طالب إلى معلم)، يحصل فورياً على كافة صلاحيات هذا الدور دون الحاجة لإنشاء حساب جديد.', 'Changing role immediately grants the user all associated portal permissions without re-registering.', 'Le changement de rôle accorde immédiatement les autorisations correspondantes.')}
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label">${txt('الاسم الكامل بالعربية *', 'Full Name (Arabic) *', 'Nom Complet (Arabe) *')}</label>
+              <input type="text" id="edit-user-fullname-ar" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">${txt('الاسم بالإنجليزية', 'Full Name (English)', 'Nom Complet (Anglais)')}</label>
+              <input type="text" id="edit-user-fullname-en" class="form-input">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label">${txt('البريد الإلكتروني *', 'Email *', 'Adresse E-mail *')}</label>
+              <input type="email" id="edit-user-email" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">${txt('رقم الهاتف / واتساب', 'Phone / WhatsApp', 'Téléphone / WhatsApp')}</label>
+              <input type="tel" id="edit-user-phone" class="form-input">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label">${txt('إعادة تعيين كلمة المرور (اختياري)', 'Reset Password (Optional)', 'Changer Mot de Passe')}</label>
+              <input type="text" id="edit-user-password" class="form-input" placeholder="${txt('اتركه فارغاً للإبقاء على الحالية', 'Leave blank to keep current', 'Laisser vide')}">
+            </div>
+            <div class="form-group">
+              <label class="form-label">${txt('حالة الحساب', 'Account Status', 'Statut')}</label>
+              <select id="edit-user-status" class="form-input">
+                <option value="active">${txt('نشط ومفعل', 'Active', 'Actif')}</option>
+                <option value="inactive">${txt('معطل مؤقتاً', 'Inactive', 'Inactif')}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">${txt('المساق التدريبي المرتبط', 'Assigned Course', 'Cursus Assigné')}</label>
+            <select id="edit-user-course" class="form-input">
+              <option value="">${txt('-- بدون تعيين مساق محدد --', '-- No Specific Course --', '-- Aucun --')}</option>
+              <option value="shat-chs-master">${txt('دبلوم المعيار الإنساني الأساسي (CHS Master)', 'Core Humanitarian Standard (CHS) Master Diploma', 'Diplôme Supérieur CHS')}</option>
+              <option value="shat-psea-expert">${txt('دبلوم صون السلامة والحماية من الاستغلال (PSEA)', 'Safeguarding & PSEA Policies Diploma', 'Diplôme Politiques PSEA')}</option>
+              <option value="shat-oecd-evaluation">${txt('برنامج التقييم الخارجي المستقل (OECD DAC)', 'Independent Evaluation Program (OECD DAC)', 'Programme d\'Évaluation Indépendante (OECD DAC)')}</option>
+              <option value="shat-ngo-governance">${txt('دبلوم حوكمة وإدارة المنظمات غير الحكومية (NGO Governance)', 'NGO Governance & Operational Leadership Diploma', 'Diplôme de Gouvernance des ONG')}</option>
+            </select>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-light);">
+            <button type="button" id="btn-cancel-edit-user" class="btn-clean btn-sm" style="background: var(--bg-subtle);">${txt('إلغاء', 'Cancel', 'Annuler')}</button>
+            <button type="submit" id="btn-submit-edit-user" class="btn-clean btn-green btn-sm" style="font-weight: 800; padding: 10px 22px;">
+              ${txt('حفظ التعديلات وتحديث الدور', 'Save Changes & Update Role', 'Enregistrer')}
+            </button>
+          </div>
+
         </form>
       </div>
     </div>
@@ -2030,6 +2283,9 @@ export async function bindAdminEvents() {
     };
   }
 
+  // Initialize User & Role Management Handlers
+  initAdminUserManagement();
+
   // Initial Load on Entry
   loadDashboardData();
   loadPosts();
@@ -2094,23 +2350,497 @@ async function loadDashboardData() {
   } catch (e) {}
 }
 
+// ========================================================
+// USER & ROLE MANAGEMENT ENGINE (STUDENTS, TEACHERS, ADMINS)
+// ========================================================
+let adminCachedUsers = [];
+let currentAdminUserRoleFilter = 'all';
+let currentAdminUserSearchQuery = '';
+
+function initAdminUserManagement() {
+  const currentLang = localStorage.getItem('shat_platform_lang') || 'ar';
+  const txt = (ar, en, fr) => {
+    if (currentLang === 'fr') return fr || en;
+    if (currentLang === 'en') return en;
+    return ar;
+  };
+
+  // --- Create User Modal Triggers ---
+  const btnOpenCreate = document.getElementById('btn-open-create-user');
+  const modalCreate = document.getElementById('shat-modal-create-user');
+  const btnCloseCreate = document.getElementById('btn-close-create-user-modal');
+  const btnCancelCreate = document.getElementById('btn-cancel-create-user');
+  const formCreate = document.getElementById('shat-create-user-form');
+
+  if (btnOpenCreate && modalCreate) {
+    btnOpenCreate.onclick = () => {
+      formCreate?.reset();
+      // Reset role radio highlight
+      document.querySelectorAll('#new-user-role-grid .user-role-card').forEach((card, idx) => {
+        if (idx === 0) {
+          card.style.borderColor = '#10B981';
+          card.style.background = '#ECFDF5';
+          const r = card.querySelector('input[type="radio"]');
+          if (r) r.checked = true;
+        } else {
+          card.style.borderColor = '#CBD5E1';
+          card.style.background = '#FFFFFF';
+        }
+      });
+      modalCreate.style.display = 'flex';
+      document.getElementById('new-user-fullname-ar')?.focus();
+    };
+  }
+
+  const closeCreateModal = () => {
+    if (modalCreate) modalCreate.style.display = 'none';
+  };
+  if (btnCloseCreate) btnCloseCreate.onclick = closeCreateModal;
+  if (btnCancelCreate) btnCancelCreate.onclick = closeCreateModal;
+
+  // Role card selection highlight
+  const roleCards = document.querySelectorAll('#new-user-role-grid .user-role-card');
+  roleCards.forEach(card => {
+    card.onclick = () => {
+      roleCards.forEach(c => {
+        c.style.borderColor = '#CBD5E1';
+        c.style.background = '#FFFFFF';
+      });
+      const radio = card.querySelector('input[type="radio"]');
+      if (radio) {
+        radio.checked = true;
+        if (radio.value === 'student') {
+          card.style.borderColor = '#10B981';
+          card.style.background = '#ECFDF5';
+        } else if (radio.value === 'teacher') {
+          card.style.borderColor = '#3B82F6';
+          card.style.background = '#EFF6FF';
+        } else {
+          card.style.borderColor = '#6366F1';
+          card.style.background = '#EEF2FF';
+        }
+      }
+    };
+  });
+
+  // Submit Create User Form
+  if (formCreate) {
+    formCreate.onsubmit = async (e) => {
+      e.preventDefault();
+      const roleRadio = formCreate.querySelector('input[name="new-user-role-radio"]:checked');
+      const role = roleRadio ? roleRadio.value : 'student';
+      const fullNameAr = document.getElementById('new-user-fullname-ar')?.value.trim();
+      const fullNameEn = document.getElementById('new-user-fullname-en')?.value.trim();
+      const email = document.getElementById('new-user-email')?.value.trim();
+      const username = document.getElementById('new-user-username')?.value.trim();
+      const phone = document.getElementById('new-user-phone')?.value.trim();
+      const password = document.getElementById('new-user-password')?.value.trim();
+      const course = document.getElementById('new-user-course')?.value;
+      const status = document.getElementById('new-user-status')?.value || 'active';
+
+      if (!fullNameAr || !email || !username) {
+        showToast(txt('يرجى ملء الحقول الإلزامية المطلوبة.', 'Please fill all required fields.', 'Veuillez remplir les champs obligatoires.'), 'warning');
+        return;
+      }
+
+      const submitBtn = document.getElementById('btn-submit-create-user');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = txt('جاري إنشاء الحساب...', 'Creating account...', 'Création en cours...');
+      }
+
+      try {
+        const payload = {
+          role,
+          fullNameAr,
+          fullNameEn: fullNameEn || fullNameAr,
+          name: fullNameAr,
+          email,
+          username,
+          phone,
+          password: password || 'password123',
+          assignedCourse: course || null,
+          assignedCourses: course ? [course] : [],
+          status
+        };
+
+        const res = await api.createUser(payload);
+        if (res && res.success === false) {
+          throw new Error(res.error || txt('حدث خطأ أثناء إنشاء المستخدم', 'Failed to create user', 'Échec de la création'));
+        }
+
+        const roleName = role === 'teacher' 
+          ? txt('معلم ومدرب معتمد', 'Teacher & Trainer', 'Formateur')
+          : (role === 'admin' ? txt('مدير تنفيذي', 'Admin', 'Admin') : txt('طالب ومتدرب معتمد', 'Student Trainee', 'Étudiant'));
+
+        showToast(txt(`تم إنشاء وتفعيل حساب ${roleName} (${fullNameAr}) بنجاح!`, `${roleName} account created successfully!`, `Compte créé avec succès !`), 'success');
+        closeCreateModal();
+        await loadUsers();
+      } catch (err) {
+        showToast(err.message, 'error');
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = txt('حفظ وإنشاء الحساب فورياً', 'Create & Activate User', 'Créer le Compte');
+        }
+      }
+    };
+  }
+
+  // --- Edit User Modal Triggers ---
+  const modalEdit = document.getElementById('shat-modal-edit-user');
+  const btnCloseEdit = document.getElementById('btn-close-edit-user-modal');
+  const btnCancelEdit = document.getElementById('btn-cancel-edit-user');
+  const formEdit = document.getElementById('shat-edit-user-form');
+
+  const closeEditModal = () => {
+    if (modalEdit) modalEdit.style.display = 'none';
+  };
+  if (btnCloseEdit) btnCloseEdit.onclick = closeEditModal;
+  if (btnCancelEdit) btnCancelEdit.onclick = closeEditModal;
+
+  // Submit Edit User Form
+  if (formEdit) {
+    formEdit.onsubmit = async (e) => {
+      e.preventDefault();
+      const id = document.getElementById('edit-user-id')?.value;
+      const role = document.getElementById('edit-user-role')?.value;
+      const fullNameAr = document.getElementById('edit-user-fullname-ar')?.value.trim();
+      const fullNameEn = document.getElementById('edit-user-fullname-en')?.value.trim();
+      const email = document.getElementById('edit-user-email')?.value.trim();
+      const phone = document.getElementById('edit-user-phone')?.value.trim();
+      const password = document.getElementById('edit-user-password')?.value.trim();
+      const status = document.getElementById('edit-user-status')?.value || 'active';
+      const course = document.getElementById('edit-user-course')?.value;
+
+      if (!id || !fullNameAr || !email) {
+        showToast(txt('يرجى ملء الحقول الإلزامية.', 'Please fill required fields.', 'Veuillez remplir les champs obligatoires.'), 'warning');
+        return;
+      }
+
+      const submitBtn = document.getElementById('btn-submit-edit-user');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = txt('جاري حفظ التعديلات...', 'Saving changes...', 'Enregistrement...');
+      }
+
+      try {
+        const updateData = {
+          role,
+          fullNameAr,
+          fullNameEn: fullNameEn || fullNameAr,
+          name: fullNameAr,
+          email,
+          phone,
+          status,
+          assignedCourse: course || null,
+          assignedCourses: course ? [course] : []
+        };
+        if (password) {
+          updateData.password = password;
+        }
+
+        const res = await api.updateUser(id, updateData);
+        if (res && res.success === false) {
+          throw new Error(res.error || txt('فشل في حفظ التعديلات', 'Failed to update user', 'Échec de la mise à jour'));
+        }
+
+        const roleTitle = role === 'teacher' 
+          ? txt('معلم ومدرب معتمد', 'Teacher & Trainer', 'Formateur')
+          : (role === 'admin' ? txt('مدير تنفيذي', 'Admin', 'Admin') : txt('طالب ومتدرب معتمد', 'Student Trainee', 'Étudiant'));
+
+        showToast(txt(`تم تحديث بيانات ودور "${fullNameAr}" إلى [${roleTitle}] بنجاح!`, `User updated to [${roleTitle}] successfully!`, `Utilisateur mis à jour !`), 'success');
+        closeEditModal();
+        await loadUsers();
+      } catch (err) {
+        showToast(err.message, 'error');
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = txt('حفظ التعديلات وتحديث الدور', 'Save Changes & Update Role', 'Enregistrer');
+        }
+      }
+    };
+  }
+
+  // --- Role Filter Pills ---
+  const filterPills = document.querySelectorAll('#admin-user-role-filters .user-filter-pill');
+  filterPills.forEach(pill => {
+    pill.onclick = () => {
+      filterPills.forEach(p => {
+        p.classList.remove('active');
+        p.style.background = '#FFFFFF';
+        p.style.color = 'var(--text-main)';
+        p.style.border = '1px solid var(--border-light)';
+      });
+      pill.classList.add('active');
+      pill.style.background = 'var(--shat-navy)';
+      pill.style.color = '#FFFFFF';
+      pill.style.border = 'none';
+
+      currentAdminUserRoleFilter = pill.getAttribute('data-filter') || 'all';
+      renderAdminUsersTable();
+    };
+  });
+
+  // --- Live Search ---
+  const searchInput = document.getElementById('admin-users-search-input');
+  if (searchInput) {
+    searchInput.oninput = (e) => {
+      currentAdminUserSearchQuery = e.target.value.trim();
+      renderAdminUsersTable();
+    };
+  }
+}
+
+function openEditUserModal(user) {
+  const modal = document.getElementById('shat-modal-edit-user');
+  if (!modal || !user) return;
+
+  const idInput = document.getElementById('edit-user-id');
+  const roleInput = document.getElementById('edit-user-role');
+  const nameArInput = document.getElementById('edit-user-fullname-ar');
+  const nameEnInput = document.getElementById('edit-user-fullname-en');
+  const emailInput = document.getElementById('edit-user-email');
+  const phoneInput = document.getElementById('edit-user-phone');
+  const pwdInput = document.getElementById('edit-user-password');
+  const statusInput = document.getElementById('edit-user-status');
+  const courseInput = document.getElementById('edit-user-course');
+
+  if (idInput) idInput.value = user.id;
+  if (roleInput) roleInput.value = user.role || 'student';
+  if (nameArInput) nameArInput.value = user.fullNameAr || user.name || '';
+  if (nameEnInput) nameEnInput.value = user.fullNameEn || user.fullNameAr || '';
+  if (emailInput) emailInput.value = user.email || '';
+  if (phoneInput) phoneInput.value = user.phone || '';
+  if (pwdInput) pwdInput.value = '';
+  if (statusInput) statusInput.value = user.status || 'active';
+  if (courseInput) courseInput.value = (user.assignedCourses && user.assignedCourses[0]) || '';
+
+  modal.style.display = 'flex';
+}
+
+function renderAdminUsersTable() {
+  const tbody = document.getElementById('admin-users-tbody');
+  if (!tbody) return;
+
+  const currentLang = localStorage.getItem('shat_platform_lang') || 'ar';
+  const isRtl = currentLang === 'ar';
+  const txt = (ar, en, fr) => {
+    if (currentLang === 'fr') return fr || en;
+    if (currentLang === 'en') return en;
+    return ar;
+  };
+
+  let filtered = adminCachedUsers.slice();
+
+  // Role Filter
+  if (currentAdminUserRoleFilter !== 'all') {
+    filtered = filtered.filter(u => u.role === currentAdminUserRoleFilter);
+  }
+
+  // Search Filter
+  if (currentAdminUserSearchQuery) {
+    const q = currentAdminUserSearchQuery.toLowerCase();
+    filtered = filtered.filter(u => 
+      (u.fullNameAr && u.fullNameAr.toLowerCase().includes(q)) ||
+      (u.fullNameEn && u.fullNameEn.toLowerCase().includes(q)) ||
+      (u.name && u.name.toLowerCase().includes(q)) ||
+      (u.email && u.email.toLowerCase().includes(q)) ||
+      (u.username && u.username.toLowerCase().includes(q)) ||
+      (u.phone && u.phone.includes(q))
+    );
+  }
+
+  // Update counts
+  const countAll = document.getElementById('user-count-all');
+  const countStudents = document.getElementById('user-count-students');
+  const countTeachers = document.getElementById('user-count-teachers');
+  const countAdmins = document.getElementById('user-count-admins');
+
+  const studentsList = adminCachedUsers.filter(u => u.role === 'student');
+  const teachersList = adminCachedUsers.filter(u => u.role === 'teacher');
+  const adminsList = adminCachedUsers.filter(u => u.role === 'admin' || u.role === 'super_admin');
+
+  if (countAll) countAll.textContent = adminCachedUsers.length;
+  if (countStudents) countStudents.textContent = studentsList.length;
+  if (countTeachers) countTeachers.textContent = teachersList.length;
+  if (countAdmins) countAdmins.textContent = adminsList.length;
+
+  const kpiStudents = document.getElementById('kpi-students-count');
+  const kpiTeachers = document.getElementById('kpi-teachers-count');
+  if (kpiStudents) kpiStudents.textContent = studentsList.length + 240;
+  if (kpiTeachers) kpiTeachers.textContent = teachersList.length + 16;
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="6" style="padding: 32px; text-align: center; color: var(--text-muted); font-size: 0.95rem;">${txt('لا يوجد مستخدمون يطابقون خيارات البحث أو التصفية.', 'No users match your search or filter criteria.', 'Aucun utilisateur ne correspond à vos critères.')}</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = filtered.map(u => {
+    const isStudent = u.role === 'student';
+    const isTeacher = u.role === 'teacher';
+    const isAdmin = u.role === 'admin' || u.role === 'super_admin';
+
+    let roleBadgeBg = '#FEF3C7';
+    let roleBadgeColor = '#92400E';
+    let roleIcon = '👨‍🎓';
+    let roleName = txt('طالب / متدرب معتمد', 'Student / Trainee', 'Étudiant');
+
+    if (isTeacher) {
+      roleBadgeBg = '#DBEAFE';
+      roleBadgeColor = '#1D4ED8';
+      roleIcon = '👨‍🏫';
+      roleName = txt('معلم / مدرب معتمد', 'Teacher / Trainer', 'Formateur');
+    } else if (isAdmin) {
+      roleBadgeBg = '#F3E8FF';
+      roleBadgeColor = '#6B21A8';
+      roleIcon = '🛡️';
+      roleName = txt('المدير التنفيذي', 'Administrator', 'Administrateur');
+    }
+
+    const displayName = isRtl ? (u.fullNameAr || u.name || u.fullNameEn || u.username) : (u.fullNameEn || u.name || u.fullNameAr || u.username);
+    const initials = displayName.split(' ').map(w => w[0]).filter(Boolean).slice(0, 2).join('');
+    const avatarBg = isTeacher ? '#2563EB' : (isAdmin ? '#7C3AED' : '#059669');
+
+    const courseInfo = (u.assignedCourses && u.assignedCourses.length > 0) 
+      ? u.assignedCourses.map(c => `<span class="badge" style="background:#F1F5F9; color:#475569; font-size:0.72rem; margin-bottom:2px;">${c}</span>`).join(' ') 
+      : `<span style="font-size:0.8rem; color:var(--text-muted);">${txt('عام', 'General', 'Général')}</span>`;
+
+    const statusBadge = (u.status === 'inactive')
+      ? `<span class="badge" style="background: #FEE2E2; color: #DC2626;">${txt('معطل', 'Inactive', 'Inactif')}</span>`
+      : `<span class="badge" style="background: #DCFCE7; color: #166534;">${txt('نشط ومفعل', 'Active', 'Actif')}</span>`;
+
+    const quickSwitchBtn = isStudent ? `
+      <button type="button" class="btn-clean btn-sm btn-quick-role-switch" data-id="${u.id}" data-new-role="teacher" style="padding: 5px 9px; font-size: 0.74rem; font-weight: 700; background: #EFF6FF; color: #1D4ED8; border: 1px solid #BFDBFE; border-radius: 4px; cursor: pointer;">
+        👨‍🏫 ${txt('ترقية لمعلم', 'Make Teacher', 'Promouvoir Formateur')}
+      </button>
+    ` : (isTeacher ? `
+      <button type="button" class="btn-clean btn-sm btn-quick-role-switch" data-id="${u.id}" data-new-role="student" style="padding: 5px 9px; font-size: 0.74rem; font-weight: 700; background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; border-radius: 4px; cursor: pointer;">
+        👨‍🎓 ${txt('تحويل لطالب', 'Make Student', 'Changer en Étudiant')}
+      </button>
+    ` : '');
+
+    const deleteBtn = (u.id !== 'admin-01' && u.username !== 'admin') ? `
+      <button type="button" class="btn-clean btn-sm btn-delete-user-entry" data-id="${u.id}" style="padding: 5px 8px; font-size: 0.78rem; background: #FEE2E2; color: #DC2626; border: 1px solid #FECACA; border-radius: 4px; cursor: pointer;" title="${txt('حذف المستخدم', 'Delete User', 'Supprimer')}">
+        ✕
+      </button>
+    ` : '';
+
+    return `
+      <tr style="border-bottom: 1px solid var(--border-light); transition: background 0.15s ease;">
+        <td style="padding: 12px 16px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 38px; height: 38px; border-radius: 50%; background: ${avatarBg}; color: #FFFFFF; font-weight: 800; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+              ${initials || 'SH'}
+            </div>
+            <div>
+              <div style="font-weight: 800; color: var(--shat-navy); font-size: 0.95rem;">${displayName}</div>
+              <div style="font-size: 0.74rem; color: var(--text-muted); font-family: var(--font-mono); margin-top: 2px;">
+                ${u.maskedNationalId || 'ID-***-0000'}
+              </div>
+            </div>
+          </div>
+        </td>
+        <td style="padding: 12px 16px;">
+          <div style="font-weight: 700; font-size: 0.88rem; color: var(--text-main); font-family: var(--font-mono);">${u.username}</div>
+          <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">${u.email}</div>
+        </td>
+        <td style="padding: 12px 16px;">
+          <span class="badge" style="background: ${roleBadgeBg}; color: ${roleBadgeColor}; font-weight: 800; font-size: 0.82rem; padding: 4px 10px;">
+            ${roleIcon} ${roleName}
+          </span>
+        </td>
+        <td style="padding: 12px 16px;">
+          <div>${courseInfo}</div>
+          <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 2px;">${u.phone || '-'}</div>
+        </td>
+        <td style="padding: 12px 16px;">
+          ${statusBadge}
+        </td>
+        <td style="padding: 12px 16px; text-align: ${isRtl ? 'left' : 'right'};">
+          <div style="display: inline-flex; gap: 6px; align-items: center; flex-wrap: wrap;">
+            <button type="button" class="btn-clean btn-sm btn-open-edit-user" data-id="${u.id}" style="padding: 5px 12px; font-weight: 800; font-size: 0.78rem; background: var(--bg-subtle); color: var(--shat-navy); border: 1px solid var(--border-light); border-radius: 4px; cursor: pointer;">
+              ✏️ ${txt('تعديل الدور', 'Edit Role', 'Modifier')}
+            </button>
+            ${quickSwitchBtn}
+            ${deleteBtn}
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join('');
+
+  // Attach Table Action Listeners
+  document.querySelectorAll('.btn-open-edit-user').forEach(btn => {
+    btn.onclick = () => {
+      const id = btn.getAttribute('data-id');
+      const user = adminCachedUsers.find(u => u.id === id);
+      if (user) openEditUserModal(user);
+    };
+  });
+
+  document.querySelectorAll('.btn-quick-role-switch').forEach(btn => {
+    btn.onclick = async () => {
+      const id = btn.getAttribute('data-id');
+      const newRole = btn.getAttribute('data-new-role');
+      const user = adminCachedUsers.find(u => u.id === id);
+      if (!user) return;
+
+      btn.disabled = true;
+      try {
+        await api.updateUser(id, { role: newRole });
+        const roleLabel = newRole === 'teacher' 
+          ? txt('معلم ومدرب معتمد', 'Teacher & Trainer', 'Formateur')
+          : txt('طالب ومتدرب', 'Student & Trainee', 'Étudiant');
+        showToast(txt(`تم تغيير دور ${user.fullNameAr || user.username} إلى ${roleLabel} بنجاح!`, `Role updated to ${roleLabel} successfully!`, `Rôle mis à jour !`), 'success');
+        await loadUsers();
+      } catch (err) {
+        showToast(err.message, 'error');
+        btn.disabled = false;
+      }
+    };
+  });
+
+  document.querySelectorAll('.btn-delete-user-entry').forEach(btn => {
+    btn.onclick = async () => {
+      const id = btn.getAttribute('data-id');
+      const user = adminCachedUsers.find(u => u.id === id);
+      if (!user) return;
+
+      const confirmMsg = txt(
+        `هل أنت متأكد من رغبتك في حذف حساب "${user.fullNameAr || user.username}" نهائياً من قاعدة البيانات؟`,
+        `Are you sure you want to permanently delete user "${user.fullNameEn || user.username}"?`,
+        `Êtes-vous sûr de vouloir supprimer cet utilisateur ?`
+      );
+
+      if (window.confirm(confirmMsg)) {
+        btn.disabled = true;
+        try {
+          await api.deleteUser(id);
+          showToast(txt('تم حذف المستخدم بنجاح من قاعدة البيانات.', 'User deleted successfully.', 'Utilisateur supprimé.'), 'info');
+          await loadUsers();
+        } catch (err) {
+          showToast(err.message, 'error');
+          btn.disabled = false;
+        }
+      }
+    };
+  });
+}
+
 async function loadUsers() {
   const tbody = document.getElementById('admin-users-tbody');
   if (!tbody) return;
   try {
     const res = await api.getUsers();
     if (res && res.users) {
-      tbody.innerHTML = res.users.map(u => `
-        <tr style="border-bottom: 1px solid var(--border-light);">
-          <td style="padding: 12px 16px; font-weight: 700; color: var(--shat-navy);">${u.fullNameAr || u.fullNameEn}</td>
-          <td style="padding: 12px 16px; color: var(--text-muted); font-size: 0.85rem;">${u.email}</td>
-          <td style="padding: 12px 16px;"><span class="badge" style="background: var(--bg-subtle); color: var(--shat-navy);">${u.roleTitle || u.role}</span></td>
-          <td style="padding: 12px 16px; font-size: 0.85rem;">${u.phone || '-'}</td>
-          <td style="padding: 12px 16px;"><span class="badge" style="background: #DCFCE7; color: #166534;">نشط</span></td>
-        </tr>
-      `).join('');
+      adminCachedUsers = res.users;
+      renderAdminUsersTable();
     }
-  } catch (e) {}
+  } catch (e) {
+    console.error('Error loading users:', e);
+  }
 }
 
 async function loadApplications() {

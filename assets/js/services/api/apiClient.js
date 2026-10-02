@@ -597,7 +597,9 @@ class ApiClient {
         localStorage.setItem('shat_current_user', JSON.stringify(user));
       }
     } catch (e) {}
-    window.dispatchEvent(new CustomEvent('shat:auth-updated', { detail: user }));
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('shat:auth-updated', { detail: user }));
+    }
   }
 
   clearSession() {
@@ -609,7 +611,9 @@ class ApiClient {
       localStorage.removeItem('shat_current_user');
       localStorage.removeItem('shat_simulated_role');
     } catch (e) {}
-    window.dispatchEvent(new CustomEvent('shat:auth-updated', { detail: null }));
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('shat:auth-updated', { detail: null }));
+    }
   }
 
   async logout() {
@@ -944,6 +948,85 @@ class ApiClient {
       ];
     }
 
+    // K2. Users Management (Full CRUD for Admin)
+    if (path === '/api/users') {
+      if (method === 'GET') {
+        return { success: true, users: this.getStoredUsers() };
+      }
+      if (method === 'POST') {
+        const users = this.getStoredUsers();
+        const role = body.role || 'student';
+        const rawUsername = body.username || (body.email ? body.email.split('@')[0] : `user_${Date.now()}`);
+        const cleanUsername = rawUsername.toLowerCase().trim();
+        const cleanEmail = (body.email || `${cleanUsername}@shat.com`).toLowerCase().trim();
+
+        if (cleanEmail && users.some(u => u.email && u.email.toLowerCase() === cleanEmail)) {
+          return { success: false, error: 'البريد الإلكتروني مسجل مسبقاً لمستخدم آخر.' };
+        }
+        if (users.some(u => u.username && u.username.toLowerCase() === cleanUsername)) {
+          return { success: false, error: 'اسم المستخدم مسجل مسبقاً.' };
+        }
+
+        const newUser = {
+          id: `usr-${Date.now()}`,
+          username: cleanUsername,
+          email: cleanEmail,
+          fullNameAr: body.fullNameAr || body.name || 'مستخدم جديد',
+          fullNameEn: body.fullNameEn || body.fullNameAr || 'New User',
+          name: body.fullNameAr || body.name || 'مستخدم جديد',
+          role: role,
+          roleTitle: body.roleTitle || (role === 'teacher' ? 'مدرب ومحاضر معتمد (Master Trainer)' : (role === 'admin' ? 'مدير تنفيذي (Admin)' : 'متدرب معتمد (Student)')),
+          phone: body.phone || '+972 59 000 0000',
+          nationalId: body.nationalId || '',
+          maskedNationalId: body.nationalId ? `ID-***-${body.nationalId.slice(-4)}` : `ID-***-${Math.floor(1000 + Math.random() * 9000)}`,
+          status: body.status || 'active',
+          assignedCourses: Array.isArray(body.assignedCourses) ? body.assignedCourses : (body.assignedCourse ? [body.assignedCourse] : []),
+          password: body.password || 'password123',
+          permissions: role === 'admin' ? ['all'] : (role === 'teacher' ? ['courses.view', 'materials.download', 'assignments.grade', 'courses.edit'] : ['courses.view', 'materials.download', 'assignments.submit', 'grades.view_own']),
+          createdAt: new Date().toISOString()
+        };
+        users.unshift(newUser);
+        this.saveStoredUsers(users);
+        return { success: true, message: 'تم إنشاء المستخدم بنجاح واعتماده في المنظومة!', user: newUser };
+      }
+    }
+
+    if (path.startsWith('/api/users/') && method === 'PUT') {
+      const userId = path.replace('/api/users/', '').trim();
+      const users = this.getStoredUsers();
+      const idx = users.findIndex(u => u.id === userId || u.username === userId);
+      if (idx !== -1) {
+        const current = users[idx];
+        const newRole = body.role || current.role;
+        const updatedRoleTitle = body.roleTitle || (newRole === 'teacher' ? 'مدرب ومحاضر معتمد (Master Trainer)' : (newRole === 'admin' ? 'مدير تنفيذي (Admin)' : 'متدرب معتمد (Student)'));
+        const updatedPermissions = newRole === 'admin' ? ['all'] : (newRole === 'teacher' ? ['courses.view', 'materials.download', 'assignments.grade', 'courses.edit'] : ['courses.view', 'materials.download', 'assignments.submit', 'grades.view_own']);
+        
+        users[idx] = {
+          ...current,
+          ...body,
+          role: newRole,
+          roleTitle: updatedRoleTitle,
+          permissions: updatedPermissions,
+          assignedCourses: body.assignedCourses || (body.assignedCourse ? [body.assignedCourse] : current.assignedCourses || []),
+          updatedAt: new Date().toISOString()
+        };
+        this.saveStoredUsers(users);
+        return { success: true, message: 'تم تحديث بيانات ودور المستخدم بنجاح!', user: users[idx] };
+      }
+      return { success: false, error: 'المستخدم غير موجود' };
+    }
+
+    if (path.startsWith('/api/users/') && method === 'DELETE') {
+      const userId = path.replace('/api/users/', '').trim();
+      const users = this.getStoredUsers();
+      if (userId === 'admin-01' || userId === 'admin') {
+        return { success: false, error: 'لا يمكن حذف حساب المدير العام الأساسي.' };
+      }
+      const updated = users.filter(u => u.id !== userId && u.username !== userId);
+      this.saveStoredUsers(updated);
+      return { success: true, message: 'تم حذف المستخدم بنجاح من قاعدة البيانات.' };
+    }
+
     // L. System Health & Audit
     if (path === '/api/health') {
       return {
@@ -1043,12 +1126,14 @@ class ApiClient {
 
     const cleanInput = usernameOrEmail.trim().toLowerCase();
     
-    // Find matching user from authoritative identity accounts
-    const user = FALLBACK_USERS.find(u => 
-      u.username.toLowerCase() === cleanInput || 
-      u.email.toLowerCase() === cleanInput ||
-      (cleanInput === 'teacher' && u.username === 'osama') ||
-      (cleanInput === 'student' && u.username === '1098765432') ||
+    // Find matching user from authoritative identity accounts and custom created users
+    const allUsers = this.getStoredUsers();
+    const user = allUsers.find(u => 
+      (u.username && u.username.toLowerCase() === cleanInput) || 
+      (u.email && u.email.toLowerCase() === cleanInput) ||
+      (u.nationalId && u.nationalId === cleanInput) ||
+      (cleanInput === 'teacher' && (u.username === 'osama' || u.role === 'teacher')) ||
+      (cleanInput === 'student' && (u.username === '1098765432' || u.role === 'student')) ||
       (cleanInput === 'employee' && u.username === 'content')
     );
 
@@ -1060,8 +1145,9 @@ class ApiClient {
       ));
     }
 
-    // Verify password against standard platform credentials
-    if (password !== 'password123' && password !== 'admin123') {
+    // Verify password against user password or standard platform credentials
+    const expectedPassword = user.password || 'password123';
+    if (password !== expectedPassword && password !== 'password123' && password !== 'admin123') {
       throw new Error(txt(
         'كلمة المرور غير صحيحة. يرجى التأكد والمحاولة مجدداً.',
         'Invalid password. Please check and try again.',
@@ -1349,6 +1435,42 @@ class ApiClient {
       localStorage.setItem('shat_platform_courses', JSON.stringify(courses));
     } catch (e) {
       console.warn('LocalStorage save error for courses:', e);
+    }
+  }
+
+  getStoredUsers() {
+    try {
+      const data = localStorage.getItem('shat_platform_users');
+      if (data) {
+        const parsed = JSON.parse(data);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch (e) {}
+
+    // Check shat_custom_users if any exist
+    let initial = [...FALLBACK_USERS];
+    try {
+      const custom = JSON.parse(localStorage.getItem('shat_custom_users') || '[]');
+      if (Array.isArray(custom) && custom.length > 0) {
+        custom.forEach(cu => {
+          if (!initial.some(u => u.id === cu.id || u.username === cu.username || u.email === cu.email)) {
+            initial.push(cu);
+          }
+        });
+      }
+    } catch (e) {}
+
+    this.saveStoredUsers(initial);
+    return initial;
+  }
+
+  saveStoredUsers(users) {
+    try {
+      localStorage.setItem('shat_platform_users', JSON.stringify(users));
+      // Keep shat_custom_users synchronized for authService compatibility
+      localStorage.setItem('shat_custom_users', JSON.stringify(users));
+    } catch (e) {
+      console.warn('LocalStorage save error for users:', e);
     }
   }
 
@@ -1744,9 +1866,29 @@ class ApiClient {
     return this.request(`/api/teacher/courses/${courseId}/roster`);
   }
 
-  // --- User Management ---
+  // --- User Management (Full CRUD) ---
   async getUsers() {
     return this.request('/api/users');
+  }
+
+  async createUser(userData) {
+    return this.request('/api/users', {
+      method: 'POST',
+      body: JSON.stringify(userData)
+    });
+  }
+
+  async updateUser(id, userData) {
+    return this.request(`/api/users/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(userData)
+    });
+  }
+
+  async deleteUser(id) {
+    return this.request(`/api/users/${id}`, {
+      method: 'DELETE'
+    });
   }
 
   // --- System Health & Telemetry ---
