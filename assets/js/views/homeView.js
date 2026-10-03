@@ -7,7 +7,6 @@ import { content } from '../content.js';
 import { translations } from '../translations.js';
 import { icons } from '../icons.js';
 import { showToast } from '../components/toast.js';
-import { standardsExplorer } from '../tools/standardsExplorer.js';
 import { toolkitsLibrary } from '../tools/toolkitsLibrary.js';
 import { renderTrainingCalendarSection, bindTrainingCalendarEvents } from '../components/trainingCalendar.js';
 import { renderFaqSection, bindFaqEvents } from '../components/faqSection.js';
@@ -267,11 +266,6 @@ export function renderHomeView(lang = 'ar') {
               </div>
             </div>
 
-          </div>
-
-          <!-- Embedded Interactive Standards Explorer Checklist -->
-          <div style="margin-top: 48px;">
-            ${standardsExplorer.renderSection(lang)}
           </div>
 
         </div>
@@ -629,7 +623,6 @@ export function bindHomeEvents() {
   const posts = soc.posts || [];
 
   // 1. Initialize Embedded Tools
-  standardsExplorer.init(currentLang);
   toolkitsLibrary.bindEvents(currentLang);
 
   // Fast Track Program Finder Engine

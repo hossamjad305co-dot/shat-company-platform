@@ -3,7 +3,6 @@ import { icons } from '../icons.js';
 // Deep Dive International & Humanitarian Standards Guide with Direct Interactive Tool Integration
 // 100% Trilingual Support (AR, EN, FR) & WCAG AAA High Contrast Design
 import { content } from '../content.js';
-import { standardsExplorer } from '../tools/standardsExplorer.js';
 
 export function renderStandardsView(lang = 'ar') {
   const d = content[lang] || content.ar;
@@ -114,12 +113,7 @@ export function renderStandardsView(lang = 'ar') {
         </div>
       </section>
 
-      <!-- Live Interactive Standards Checklist & Audit Report Engine -->
-      <section class="section" style="padding-top: 48px; padding-bottom: 24px;">
-        <div class="container">
-          ${standardsExplorer.renderSection(lang)}
-        </div>
-      </section>
+
 
       <!-- Standards Bento Grid -->
       <section class="section" style="padding-top: 24px;">
@@ -196,13 +190,9 @@ export function renderStandardsView(lang = 'ar') {
                       </div>
                     </div>
 
-                    <!-- Dual Action Footer -->
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                      <button type="button" class="btn-clean btn-green btn-island" onclick="if(window.openStandardsExplorer) window.openStandardsExplorer('${st.code}');" style="flex: 1; justify-content: center; font-size: 0.84rem;">
-                        <span>${t.btnInteractiveCheck}</span>
-                        
-                      </button>
-                      <a href="#/course/${rel.courseId}" class="btn-clean btn-secondary btn-sm" style="background: #FFFFFF; color: var(--shat-navy); border: 1px solid var(--border-medium); font-weight: 700;">
+                    <!-- Action Footer -->
+                    <div>
+                      <a href="#/course/${rel.courseId}" class="btn-clean btn-primary btn-sm" style="width: 100%; justify-content: center; font-weight: 700;">
                         <span>${t.btnExploreCourse}</span>
                         <span>${arrow}</span>
                       </a>
@@ -219,7 +209,6 @@ export function renderStandardsView(lang = 'ar') {
 }
 
 export function bindStandardsEvents() {
-  const currentLang = localStorage.getItem('shat_platform_lang') || 'ar';
-  standardsExplorer.init(currentLang);
+  // Standards view events
 }
 
